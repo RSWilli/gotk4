@@ -12,7 +12,7 @@ type Record struct {
 	Doc
 	BaseType
 
-	gir gir.Record
+	gir *gir.Record
 
 	Fields []*Field
 
@@ -43,7 +43,7 @@ type Record struct {
 	Properties []*struct{}
 }
 
-func DeclareRecord(e *env, v gir.Record) *Record {
+func DeclareRecord(e *env, v *gir.Record) *Record {
 	e = e.sub("record", v.CType)
 
 	if !v.IsIntrospectable() {
@@ -203,6 +203,10 @@ func (r *Record) ParentTypeStruct() *CouldBeForeign[*Record] {
 
 // minPointersRequired implements Type.
 func (a *Record) minPointersRequired() int {
+	if a.gir == nil {
+		return 0 // probably a manual type
+	}
+
 	if a.gir.Foreign || a.gir.Disguised {
 		return 1
 	}

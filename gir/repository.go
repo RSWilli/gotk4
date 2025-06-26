@@ -3,8 +3,6 @@ package gir
 import (
 	"encoding/xml"
 	"fmt"
-	"io"
-	"os"
 )
 
 // Repository represents a GObject Introspection Repository, which contains the
@@ -16,30 +14,22 @@ type Repository struct {
 	CIdentifierPrefixes string  `xml:"http://www.gtk.org/introspection/c/1.0 identifier-prefixes,attr"`
 	CSymbolPrefixes     string  `xml:"http://www.gtk.org/introspection/c/1.0 symbol-prefixes,attr"`
 
-	Includes   []Include   `xml:"http://www.gtk.org/introspection/core/1.0 include"`
-	CIncludes  []CInclude  `xml:"http://www.gtk.org/introspection/c/1.0 include"`
-	Packages   []Package   `xml:"http://www.gtk.org/introspection/core/1.0 package"`
-	Namespaces []Namespace `xml:"http://www.gtk.org/introspection/core/1.0 namespace"`
+	Includes   []*Include   `xml:"http://www.gtk.org/introspection/core/1.0 include"`
+	CIncludes  []*CInclude  `xml:"http://www.gtk.org/introspection/c/1.0 include"`
+	Packages   []*Package   `xml:"http://www.gtk.org/introspection/core/1.0 package"`
+	Namespaces []*Namespace `xml:"http://www.gtk.org/introspection/core/1.0 namespace"`
 }
 
-// ParseRepository parses a repository from the given file path.
-func ParseRepository(file string) (*Repository, error) {
-	f, err := os.Open(file)
-	if err != nil {
-		return nil, fmt.Errorf("failed to open file: %w", err)
-	}
-	defer f.Close()
-
-	return ParseRepositoryFromReader(f)
-}
-
-// ParseRepositoryFromReader parses a repository from the given reader.
-func ParseRepositoryFromReader(r io.Reader) (*Repository, error) {
-	var repo Repository
-
-	if err := xml.NewDecoder(r).Decode(&repo); err != nil {
-		return nil, fmt.Errorf("failed to decode gir XML: %w", err)
+// ParseAll parses the given XML data into a Repository.
+func ParseAll(raw RawFiles) (Repositories, error) {
+	repos := make(Repositories)
+	for name, data := range raw {
+		var repo Repository
+		if err := xml.Unmarshal(data, &repo); err != nil {
+			return nil, fmt.Errorf("failed to parse gir XML for %s: %w", name, err)
+		}
+		repos[name] = &repo
 	}
 
-	return &repo, nil
+	return repos, nil
 }

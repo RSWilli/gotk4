@@ -35,7 +35,6 @@ const InterfaceInstanceStructFieldName = "Instance"
 
 func (g *InterfaceGenerator) Generate(w *file.Package) {
 	w.GoImport("unsafe")
-	w.GoImport("runtime")
 
 	w.GoImportNamespace(g.Parent.Namespace)
 

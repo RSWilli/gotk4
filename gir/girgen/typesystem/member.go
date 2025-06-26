@@ -19,7 +19,7 @@ type Member struct {
 	Value string
 }
 
-func GetMembers(e *env, parent Type, ms []gir.Member) []*Member {
+func GetMembers(e *env, parent Type, ms []*gir.Member) []*Member {
 	var mems []*Member
 
 	for _, girM := range ms {
@@ -31,7 +31,7 @@ func GetMembers(e *env, parent Type, ms []gir.Member) []*Member {
 	return mems
 }
 
-func NewMember(e *env, parent Type, m gir.Member) *Member {
+func NewMember(e *env, parent Type, m *gir.Member) *Member {
 	if !m.IsIntrospectable() {
 		return nil
 	}
@@ -65,7 +65,7 @@ var numberMap = map[rune]string{
 }
 
 // formatMember returns the enum member's Go name.
-func formatMember(member gir.Member) string {
+func formatMember(member *gir.Member) string {
 	// Pop the namespace off. Probably works only most of the time.
 	if parts := strings.SplitN(member.CIdentifier, "_", 2); len(parts) == 2 {
 		member.CIdentifier = parts[1]

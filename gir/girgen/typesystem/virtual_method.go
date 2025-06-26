@@ -33,7 +33,7 @@ type VirtualMethod struct {
 	*Parameters
 }
 
-func NewVirtualMethod(e *env, parent ConvertibleType, typestruct *Record, v gir.VirtualMethod) *VirtualMethod {
+func NewVirtualMethod(e *env, parent ConvertibleType, typestruct *Record, v *gir.VirtualMethod) *VirtualMethod {
 	if !v.IsIntrospectable() {
 		return nil
 	}
@@ -90,7 +90,7 @@ func NewVirtualMethod(e *env, parent ConvertibleType, typestruct *Record, v gir.
 	}
 }
 
-func findTypeStructField(virtual gir.VirtualMethod, ts *Record) *Field {
+func findTypeStructField(virtual *gir.VirtualMethod, ts *Record) *Field {
 	name := virtual.Name
 	// if virtual.Invoker != "" {
 	// 	name = virtual.Invoker

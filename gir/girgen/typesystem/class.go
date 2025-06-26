@@ -49,7 +49,7 @@ type Class struct {
 	Final bool
 
 	// gir is used to resolve the class and it's nested definitions after it has been declared
-	gir gir.Class
+	gir *gir.Class
 
 	TypeStruct *Record
 	Parent     CouldBeForeign[*Class]
@@ -89,7 +89,7 @@ func (a *Class) maxPointersAllowed() int {
 	return 1
 }
 
-func DeclareClass(e *env, v gir.Class) *Class {
+func DeclareClass(e *env, v *gir.Class) *Class {
 	e = e.sub("class", v.CType)
 
 	if !v.IsIntrospectable() {

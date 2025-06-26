@@ -3,6 +3,8 @@ package typesystem
 import (
 	"fmt"
 	"log"
+	"maps"
+	"slices"
 
 	"github.com/diamondburned/gotk4/gir"
 )
@@ -15,11 +17,12 @@ type namespaceWithIncludes struct {
 	includes      map[string]*namespaceWithIncludes
 
 	repository *gir.Repository
-	gir.Namespace
+	*gir.Namespace
 }
 
 type repoWithIncludes struct {
-	gir.PkgRepository
+	filename string
+	*gir.Repository
 
 	namespaces []*namespaceWithIncludes
 }
@@ -37,11 +40,12 @@ func resolveNamespaceIncludes(repos gir.Repositories) []*repoWithIncludes {
 	namespacesByName := make(map[versionedName]*namespaceWithIncludes)
 	outRepos := make([]*repoWithIncludes, 0, len(repos))
 
-	for _, repo := range repos {
-		includes := repoPrefilledIncludes(repo.Repository)
+	for filename, repo := range repos {
+		includes := repoPrefilledIncludes(repo)
 
 		outRepo := &repoWithIncludes{
-			PkgRepository: repo,
+			filename:   filename,
+			Repository: repo,
 		}
 
 		for _, ns := range repo.Namespaces {
@@ -54,7 +58,7 @@ func resolveNamespaceIncludes(repos gir.Repositories) []*repoWithIncludes {
 				versionedName: versioned,
 				includes:      includes,
 
-				repository: &repo.Repository,
+				repository: repo,
 				Namespace:  ns,
 			}
 
@@ -65,40 +69,78 @@ func resolveNamespaceIncludes(repos gir.Repositories) []*repoWithIncludes {
 		outRepos = append(outRepos, outRepo)
 	}
 
-	// we need to loop again to resolve the includes correctly:
-	for _, ns := range namespacesByName {
-		for name, i := range ns.includes {
-			included, ok := namespacesByName[i.versionedName]
+	// here we populate the includes, and also the transitively included namespaces
+	// we want to have pointers to the actual namespaces, not just the name and version
+	// so we resolve the entire include tree
 
-			if !ok {
-				log.Printf("%s included namespace %s which wasn't found, ignoring for now\n", ns.versionedName, i.versionedName)
-				delete(ns.includes, name)
+	// keep track of visited namespaces for the include resolution
+	visited := make(map[versionedName]struct{})
+
+	var collectIncludes func(n *namespaceWithIncludes) map[string]*namespaceWithIncludes
+
+	collectIncludes = func(n *namespaceWithIncludes) map[string]*namespaceWithIncludes {
+		if _, ok := visited[n.versionedName]; ok {
+			return n.includes // includes are already resolved
+		}
+		visited[n.versionedName] = struct{}{}
+
+		// the includes are still only prefilled, meaning we have the name and version,
+		// but not the actual pointer to the namespace
+
+		resolvedIncludes := make(map[string]*namespaceWithIncludes, len(n.includes))
+
+		for _, inc := range n.includes {
+			if incNs, ok := namespacesByName[inc.versionedName]; ok {
+				resolvedIncludes[inc.versionedName.name] = incNs
+
+				transitiveIncludes := collectIncludes(incNs)
+
+				maps.Copy(resolvedIncludes, transitiveIncludes)
 			} else {
-				ns.includes[name] = included
+				log.Printf("warning: include %s not found in repositories", inc.versionedName)
 			}
 		}
+
+		n.includes = resolvedIncludes
+
+		return resolvedIncludes
 	}
 
-	// and one more time for transitive includes:
-	//
-	// we are using the repos in the given order, which means we hopefully get all transitive imports
-	// in a single loop, given all depended repos come before
-	for _, repo := range outRepos {
-		for _, ns := range repo.namespaces {
-			for _, incl := range ns.includes {
-				for name, transIncl := range incl.includes {
-					ns.includes[name] = transIncl
+	for _, namespace := range namespacesByName {
+		collectIncludes(namespace)
+	}
+
+	// to make further processing easier we sort the repositories in a way that moves the base dependencies
+	// to the front, so that we can resolve them first. Since we have the transitive includes resolved, we can just look at the includes
+
+	slices.SortFunc(outRepos, func(a, b *repoWithIncludes) int {
+		// if any namespace in b includes a namespace in a, then a should come first
+		for _, nsA := range a.namespaces {
+			for _, nsB := range b.namespaces {
+				if _, ok := nsB.includes[nsA.versionedName.name]; ok {
+					return -1 // a comes before b
 				}
 			}
 		}
-	}
+
+		// if any namespace in a includes a namespace in b, then b should come first
+		for _, nsB := range b.namespaces {
+			for _, nsA := range a.namespaces {
+				if _, ok := nsA.includes[nsB.versionedName.name]; ok {
+					return 1 // b comes before a
+				}
+			}
+		}
+
+		return 0
+	})
 
 	return outRepos
 }
 
 // repoPrefilledIncludes prefills the includes with namespaces name and version, to
 // be able to later set it to the actual pointer to the foreign namespace
-func repoPrefilledIncludes(r gir.Repository) map[string]*namespaceWithIncludes {
+func repoPrefilledIncludes(r *gir.Repository) map[string]*namespaceWithIncludes {
 	m := make(map[string]*namespaceWithIncludes)
 	for _, v := range r.Includes {
 		m[v.Name] = &namespaceWithIncludes{

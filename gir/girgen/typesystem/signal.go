@@ -33,7 +33,7 @@ type Signal struct {
 	Return        *Param
 }
 
-func NewSignal(e *env, parent Type, v gir.Signal) *Signal {
+func NewSignal(e *env, parent Type, v *gir.Signal) *Signal {
 	e = e.sub("signal", v.Name)
 
 	if e.skip(parent, v) {

@@ -12,7 +12,7 @@ type CallableSignature struct {
 	*Parameters
 }
 
-func DeclareFunction(e *env, v gir.CallableAttrs) *CallableSignature {
+func DeclareFunction(e *env, v *gir.CallableAttrs) *CallableSignature {
 	e = e.sub("function", v.CIdentifier)
 
 	if !v.IsIntrospectable() {
@@ -95,7 +95,7 @@ func (c *PrefixedIdentifier) GoIndentifier() string {
 
 var _ Identifier = &PrefixedIdentifier{}
 
-func DeclarePrefixedFunction(e *env, parent Type, v gir.CallableAttrs) *CallableSignature {
+func DeclarePrefixedFunction(e *env, parent Type, v *gir.CallableAttrs) *CallableSignature {
 	e = e.sub("function", v.CIdentifier)
 
 	if !v.IsIntrospectable() {
@@ -133,7 +133,7 @@ func DeclarePrefixedFunction(e *env, parent Type, v gir.CallableAttrs) *Callable
 	}
 }
 
-func DeclareMethod(e *env, parent Type, v gir.Method) *CallableSignature {
+func DeclareMethod(e *env, parent Type, v *gir.Method) *CallableSignature {
 	e = e.sub("method", v.CIdentifier)
 
 	if !v.IsIntrospectable() {

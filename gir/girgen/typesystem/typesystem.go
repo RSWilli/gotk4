@@ -23,7 +23,7 @@ func FromRepositories(cfg Config, repos gir.Repositories) *Registry {
 
 	for _, repoTmp := range withIncludes {
 		repo := &Repository{
-			Pkg: repoTmp.Pkg,
+			Filename: repoTmp.filename,
 		}
 
 		for _, nsTmp := range repoTmp.namespaces {

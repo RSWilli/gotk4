@@ -107,39 +107,39 @@ func infoFromAnyGir(girAny any) (string, gir.InfoAttrs, gir.InfoElements) {
 	}
 
 	switch t := girAny.(type) {
-	case gir.Class:
+	case *gir.Class:
 		return t.Name, attrs, elements
-	case gir.Interface:
+	case *gir.Interface:
 		return t.Name, attrs, elements
-	case gir.Callback:
+	case *gir.Callback:
 		return t.Name, attrs, elements
-	case gir.Field:
+	case *gir.Field:
 		return t.Name, attrs, elements
-	case gir.Enum:
+	case *gir.Enum:
 		return t.Name, attrs, elements
-	case gir.Bitfield:
+	case *gir.Bitfield:
 		return t.Name, attrs, elements
-	case gir.Member:
+	case *gir.Member:
 		return t.Name(), attrs, elements
-	case gir.Record:
+	case *gir.Record:
 		return t.Name, attrs, elements
-	case gir.Constant:
+	case *gir.Constant:
 		return t.Name, attrs, elements
-	case gir.Constructor:
+	case *gir.Constructor:
 		return t.Name, attrs, elements
-	case gir.CallableAttrs:
+	case *gir.CallableAttrs:
 		return t.Name, attrs, elements
-	case gir.Method:
+	case *gir.Method:
 		return t.Name, attrs, elements
-	case gir.VirtualMethod:
+	case *gir.VirtualMethod:
 		return t.Name, attrs, elements
-	case gir.Union:
+	case *gir.Union:
 		return t.Name, attrs, elements
-	case gir.Alias:
+	case *gir.Alias:
 		return t.Name, attrs, elements
-	case gir.Function:
+	case *gir.Function:
 		return t.Name, attrs, elements
-	case gir.Signal:
+	case *gir.Signal:
 		return t.Name, attrs, elements
 	default:
 		panic(fmt.Sprintf("received unhandled type: %T", t))

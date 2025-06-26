@@ -66,15 +66,20 @@ func _gotk4_goMarshal(
 	// Call closure with args. If the callback returns one or more
 	// values, save the GValue equivalent of the first.
 	rv := fValue.Call(args)
+
+	if len(rv) > 1 {
+		// C does not support multiple return values from closures
+		panic(fmt.Sprintf("callback function returned %d values, but only one is supported", len(rv)))
+	}
+
 	if retValue != nil && len(rv) > 0 {
-		g := NewValue(rv[0].Interface())
+		ret := ValueFromNative(unsafe.Pointer(retValue))
 
-		C.g_value_copy(g.native(), retValue)
-
+		ret.SetGoValue(rv[0].Interface())
 	}
 }
 
 //export _gotk4_removeClosure
-func _gotk4_removeClosure(obj *C.GObject, gclosure *C.GClosure) {
+func _gotk4_removeClosure(_ *C.GObject, gclosure *C.GClosure) {
 	closure.Delete(unsafe.Pointer(gclosure))
 }

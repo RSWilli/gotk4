@@ -60,11 +60,28 @@ type Bitfield struct {
 	GLibTypeName string `xml:"http://www.gtk.org/introspection/glib/1.0 type-name,attr"`
 	GLibGetType  string `xml:"http://www.gtk.org/introspection/glib/1.0 get-type,attr"`
 
-	Members   []Member   `xml:"http://www.gtk.org/introspection/core/1.0 member"`
-	Functions []Function `xml:"http://www.gtk.org/introspection/core/1.0 function"`
+	Members   []*Member   `xml:"http://www.gtk.org/introspection/core/1.0 member"`
+	Functions []*Function `xml:"http://www.gtk.org/introspection/core/1.0 function"`
 
 	InfoAttrs
 	InfoElements
+}
+
+// Find implements Searchable.
+func (b Bitfield) Find(typ string) any {
+	for _, member := range b.Members {
+		if member.Name() == typ || member.CIdentifier == typ || member.GLibName() == typ {
+			return member
+		}
+	}
+
+	for _, function := range b.Functions {
+		if function.Name == typ {
+			return function
+		}
+	}
+
+	return nil
 }
 
 type Boxed struct{}
@@ -87,10 +104,20 @@ type CallableAttrs struct {
 	InfoElements
 }
 
+func (c *CallableAttrs) FindParameter(name string) *Parameter {
+	for _, param := range c.Parameters.Parameters {
+		if param.Name == name {
+			return param
+		}
+	}
+
+	return nil
+}
+
 type Callback struct {
 	XMLName xml.Name `xml:"http://www.gtk.org/introspection/core/1.0 callback"`
 	CType   string   `xml:"http://www.gtk.org/introspection/c/1.0 type,attr"`
-	CallableAttrs
+	*CallableAttrs
 }
 
 type Class struct {
@@ -109,13 +136,54 @@ type Class struct {
 	InfoAttrs
 	InfoElements
 
-	Functions      []Function      `xml:"http://www.gtk.org/introspection/core/1.0 function"`
-	Implements     []Implements    `xml:"http://www.gtk.org/introspection/core/1.0 implements"`
-	Constructors   []Constructor   `xml:"http://www.gtk.org/introspection/core/1.0 constructor"`
-	Methods        []Method        `xml:"http://www.gtk.org/introspection/core/1.0 method"`
-	VirtualMethods []VirtualMethod `xml:"http://www.gtk.org/introspection/core/1.0 virtual-method"`
-	Fields         []Field         `xml:"http://www.gtk.org/introspection/core/1.0 field"`
-	Signals        []Signal        `xml:"http://www.gtk.org/introspection/glib/1.0 signal"`
+	Functions      []*Function      `xml:"http://www.gtk.org/introspection/core/1.0 function"`
+	Implements     []*Implements    `xml:"http://www.gtk.org/introspection/core/1.0 implements"`
+	Constructors   []*Constructor   `xml:"http://www.gtk.org/introspection/core/1.0 constructor"`
+	Methods        []*Method        `xml:"http://www.gtk.org/introspection/core/1.0 method"`
+	VirtualMethods []*VirtualMethod `xml:"http://www.gtk.org/introspection/core/1.0 virtual-method"`
+	Fields         []*Field         `xml:"http://www.gtk.org/introspection/core/1.0 field"`
+	Signals        []*Signal        `xml:"http://www.gtk.org/introspection/glib/1.0 signal"`
+}
+
+// Find implements Searchable.
+func (c Class) Find(ident string) any {
+	for _, method := range c.Methods {
+		if method.Name == ident {
+			return method
+		}
+	}
+
+	for _, virtualMethod := range c.VirtualMethods {
+		if virtualMethod.Name == ident {
+			return virtualMethod
+		}
+	}
+
+	for _, function := range c.Functions {
+		if function.Name == ident {
+			return function
+		}
+	}
+
+	for _, signal := range c.Signals {
+		if signal.Name == ident {
+			return signal
+		}
+	}
+
+	for _, field := range c.Fields {
+		if field.Name == ident {
+			return field
+		}
+	}
+
+	for _, conststructor := range c.Constructors {
+		if conststructor.Name == ident {
+			return conststructor
+		}
+	}
+
+	return nil
 }
 
 type Constant struct {
@@ -132,7 +200,7 @@ type Constant struct {
 
 type Constructor struct {
 	XMLName xml.Name `xml:"http://www.gtk.org/introspection/core/1.0 constructor"`
-	CallableAttrs
+	*CallableAttrs
 }
 
 type Doc struct {
@@ -162,11 +230,28 @@ type Enum struct {
 	GLibGetType     string `xml:"http://www.gtk.org/introspection/glib/1.0 get-type,attr"`
 	GLibErrorDomain string `xml:"http://www.gtk.org/introspection/glib/1.0 error-domain,attr"`
 
-	Members   []Member   `xml:"http://www.gtk.org/introspection/core/1.0 member"`
-	Functions []Function `xml:"http://www.gtk.org/introspection/core/1.0 function"`
+	Members   []*Member   `xml:"http://www.gtk.org/introspection/core/1.0 member"`
+	Functions []*Function `xml:"http://www.gtk.org/introspection/core/1.0 function"`
 
 	InfoAttrs
 	InfoElements
+}
+
+// Find implements Searchable.
+func (e Enum) Find(typ string) any {
+	for _, member := range e.Members {
+		if member.Name() == typ || member.CIdentifier == typ || member.GLibName() == typ {
+			return member
+		}
+	}
+
+	for _, function := range e.Functions {
+		if function.Name == typ {
+			return function
+		}
+	}
+
+	return nil
 }
 
 type Field struct {
@@ -188,7 +273,7 @@ func (f Field) IsReadable() bool {
 
 type Function struct {
 	XMLName xml.Name `xml:"http://www.gtk.org/introspection/core/1.0 function"`
-	CallableAttrs
+	*CallableAttrs
 }
 
 type Implements struct {
@@ -252,6 +337,11 @@ func (v Version) LessEqual(other Version) bool {
 	}
 
 	return v.Patch <= other.Patch
+}
+
+// Greater implements the greater than relation
+func (v Version) Greater(other Version) bool {
+	return !v.LessEqual(other)
 }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
@@ -334,14 +424,43 @@ type Interface struct {
 	GLibGetType    string `xml:"http://www.gtk.org/introspection/glib/1.0 get-type,attr"`
 	GLibTypeStruct string `xml:"http://www.gtk.org/introspection/glib/1.0 type-struct,attr"`
 
-	Functions      []Function      `xml:"http://www.gtk.org/introspection/core/1.0 function"`
-	Methods        []Method        `xml:"http://www.gtk.org/introspection/core/1.0 method"`
-	VirtualMethods []VirtualMethod `xml:"http://www.gtk.org/introspection/core/1.0 virtual-method"`
-	Prerequisites  []Prerequisite  `xml:"http://www.gtk.org/introspection/core/1.0 prerequisite"`
-	Signals        []Signal        `xml:"http://www.gtk.org/introspection/glib/1.0 signal"`
+	Functions      []*Function      `xml:"http://www.gtk.org/introspection/core/1.0 function"`
+	Methods        []*Method        `xml:"http://www.gtk.org/introspection/core/1.0 method"`
+	VirtualMethods []*VirtualMethod `xml:"http://www.gtk.org/introspection/core/1.0 virtual-method"`
+	Prerequisites  []*Prerequisite  `xml:"http://www.gtk.org/introspection/core/1.0 prerequisite"`
+	Signals        []*Signal        `xml:"http://www.gtk.org/introspection/glib/1.0 signal"`
 
 	InfoAttrs
 	InfoElements
+}
+
+// Find implements Searchable.
+func (i Interface) Find(ident string) any {
+	for _, method := range i.Methods {
+		if method.Name == ident {
+			return method
+		}
+	}
+
+	for _, virtualMethod := range i.VirtualMethods {
+		if virtualMethod.Name == ident {
+			return virtualMethod
+		}
+	}
+
+	for _, function := range i.Functions {
+		if function.Name == ident {
+			return function
+		}
+	}
+
+	for _, signal := range i.Signals {
+		if signal.Name == ident {
+			return signal
+		}
+	}
+
+	return nil
 }
 
 type Member struct {
@@ -375,31 +494,7 @@ func (m Member) nameAttr(name xml.Name) string {
 
 type Method struct {
 	XMLName xml.Name `xml:"http://www.gtk.org/introspection/core/1.0 method"`
-	CallableAttrs
-}
-
-type Namespace struct {
-	XMLName xml.Name `xml:"http://www.gtk.org/introspection/core/1.0 namespace"`
-
-	Name                string  `xml:"name,attr"`
-	Version             Version `xml:"version,attr"`
-	CIdentifierPrefixes string  `xml:"http://www.gtk.org/introspection/c/1.0 identifier-prefixes,attr"`
-	CSymbolPrefixes     string  `xml:"http://www.gtk.org/introspection/c/1.0 symbol-prefixes,attr"`
-	Prefix              string  `xml:"http://www.gtk.org/introspection/c/1.0 prefix,attr"`
-	SharedLibrary       string  `xml:"shared-library,attr"`
-
-	Aliases     []Alias      `xml:"http://www.gtk.org/introspection/core/1.0 alias"`
-	Classes     []Class      `xml:"http://www.gtk.org/introspection/core/1.0 class"`
-	Interfaces  []Interface  `xml:"http://www.gtk.org/introspection/core/1.0 interface"`
-	Records     []Record     `xml:"http://www.gtk.org/introspection/core/1.0 record"`
-	Enums       []Enum       `xml:"http://www.gtk.org/introspection/core/1.0 enumeration"`
-	Functions   []Function   `xml:"http://www.gtk.org/introspection/core/1.0 function"`
-	Unions      []Union      `xml:"http://www.gtk.org/introspection/core/1.0 union"`
-	Bitfields   []Bitfield   `xml:"http://www.gtk.org/introspection/core/1.0 bitfield"`
-	Callbacks   []Callback   `xml:"http://www.gtk.org/introspection/core/1.0 callback"`
-	Constants   []Constant   `xml:"http://www.gtk.org/introspection/core/1.0 constant"`
-	Annotations []Annotation `xml:"http://www.gtk.org/introspection/core/1.0 attribute"`
-	Boxeds      []Boxed      `xml:"http://www.gtk.org/introspection/core/1.0 boxed"`
+	*CallableAttrs
 }
 
 type Package struct {
@@ -431,7 +526,7 @@ type ParameterAttrs struct {
 type Parameters struct {
 	XMLName           xml.Name           `xml:"http://www.gtk.org/introspection/core/1.0 parameters"`
 	InstanceParameter *InstanceParameter `xml:"http://www.gtk.org/introspection/core/1.0 instance-parameter"`
-	Parameters        []Parameter        `xml:"http://www.gtk.org/introspection/core/1.0 parameter"`
+	Parameters        []*Parameter       `xml:"http://www.gtk.org/introspection/core/1.0 parameter"`
 }
 
 type Prerequisite struct {
@@ -452,15 +547,51 @@ type Record struct {
 	Disguised            bool     `xml:"disguised,attr"`
 	Foreign              bool     `xml:"foreign,attr"`
 
-	Fields       []Field       `xml:"http://www.gtk.org/introspection/core/1.0 field"`
-	Functions    []Function    `xml:"http://www.gtk.org/introspection/core/1.0 function"`
-	Unions       []Union       `xml:"http://www.gtk.org/introspection/core/1.0 union"`
-	Methods      []Method      `xml:"http://www.gtk.org/introspection/core/1.0 method"`
-	Constructors []Constructor `xml:"http://www.gtk.org/introspection/core/1.0 constructor"`
-	Properties   []Property    `xml:"http://www.gtk.org/introspection/core/1.0 property"`
+	Fields       []*Field       `xml:"http://www.gtk.org/introspection/core/1.0 field"`
+	Functions    []*Function    `xml:"http://www.gtk.org/introspection/core/1.0 function"`
+	Unions       []*Union       `xml:"http://www.gtk.org/introspection/core/1.0 union"`
+	Methods      []*Method      `xml:"http://www.gtk.org/introspection/core/1.0 method"`
+	Constructors []*Constructor `xml:"http://www.gtk.org/introspection/core/1.0 constructor"`
+	Properties   []*Property    `xml:"http://www.gtk.org/introspection/core/1.0 property"`
 
 	InfoAttrs
 	InfoElements
+}
+
+// Find implements Searchable.
+func (r Record) Find(typ string) any {
+	for _, field := range r.Fields {
+		if field.Name == typ {
+			return field
+		}
+	}
+	for _, function := range r.Functions {
+		if function.Name == typ {
+			return function
+		}
+	}
+	for _, method := range r.Methods {
+		if method.Name == typ {
+			return method
+		}
+	}
+	for _, constructor := range r.Constructors {
+		if constructor.Name == typ {
+			return constructor
+		}
+	}
+	for _, union := range r.Unions {
+		if union.Name == typ {
+			return union
+		}
+	}
+	// TODO: properties
+	// for _, property := range r.Properties {
+	// 	if property.Name == typ {
+	// 		return property
+	// 	}
+	// }
+	return nil
 }
 
 type ReturnValue struct {
@@ -518,7 +649,7 @@ type Type struct {
 
 	DocElements
 	// Types is the type's inner types. e.g. generic types of container types
-	Types []Type `xml:"http://www.gtk.org/introspection/core/1.0 type"`
+	Types []*Type `xml:"http://www.gtk.org/introspection/core/1.0 type"`
 }
 
 func (typ Type) IsIntrospectable() bool {
@@ -537,11 +668,11 @@ type Union struct {
 	InfoAttrs
 	InfoElements
 
-	Fields       []Field       `xml:"http://www.gtk.org/introspection/core/1.0 field"`
-	Constructors []Constructor `xml:"http://www.gtk.org/introspection/core/1.0 constructor"`
-	Methods      []Method      `xml:"http://www.gtk.org/introspection/core/1.0 method"`
-	Functions    []Function    `xml:"http://www.gtk.org/introspection/core/1.0 function"`
-	Records      []Record      `xml:"http://www.gtk.org/introspection/core/1.0 record"`
+	Fields       []*Field       `xml:"http://www.gtk.org/introspection/core/1.0 field"`
+	Constructors []*Constructor `xml:"http://www.gtk.org/introspection/core/1.0 constructor"`
+	Methods      []*Method      `xml:"http://www.gtk.org/introspection/core/1.0 method"`
+	Functions    []*Function    `xml:"http://www.gtk.org/introspection/core/1.0 function"`
+	Records      []*Record      `xml:"http://www.gtk.org/introspection/core/1.0 record"`
 }
 
 type VarArgs struct {
@@ -552,5 +683,5 @@ type VirtualMethod struct {
 	XMLName xml.Name `xml:"http://www.gtk.org/introspection/core/1.0 virtual-method"`
 
 	Invoker string `xml:"invoker,attr"`
-	CallableAttrs
+	*CallableAttrs
 }

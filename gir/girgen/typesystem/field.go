@@ -24,7 +24,7 @@ type Field struct {
 	Bits int
 }
 
-func NewField(e *env, parent Type, v gir.Field) *Field {
+func NewField(e *env, parent Type, v *gir.Field) *Field {
 	e = e.sub("field", v.Name)
 
 	if e.skip(parent, v) {

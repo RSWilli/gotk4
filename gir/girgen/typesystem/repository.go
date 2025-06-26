@@ -1,6 +1,6 @@
 package typesystem
 
 type Repository struct {
-	Pkg        string
+	Filename   string
 	Namespaces []*Namespace
 }

@@ -8,7 +8,7 @@ import (
 type Union struct {
 	BaseType
 	Marshaler
-	gir gir.Union
+	gir *gir.Union
 
 	Doc Doc
 
@@ -20,7 +20,7 @@ type Union struct {
 	Fields       []*Field
 }
 
-func DeclareUnion(e *env, v gir.Union) *Union {
+func DeclareUnion(e *env, v *gir.Union) *Union {
 	if !v.IsIntrospectable() {
 		return nil
 	}

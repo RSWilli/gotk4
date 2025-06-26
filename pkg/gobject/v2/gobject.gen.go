@@ -119,24 +119,24 @@ const VALUE_NOCOPY_CONTENTS = 134217728
 type BindingFlags C.gint
 
 const (
-	// BindingDefault wraps G_BINDING_DEFAULT
+	// BindingDefault wraps BINDING_DEFAULT
 	//
 	// The default binding; if the source property
 	//   changes, the target property is updated with its value.
 	BindingDefault BindingFlags = 0
-	// BindingBidirectional wraps G_BINDING_BIDIRECTIONAL
+	// BindingBidirectional wraps BINDING_BIDIRECTIONAL
 	//
 	// Bidirectional binding; if either the
 	//   property of the source or the property of the target changes,
 	//   the other is updated.
 	BindingBidirectional BindingFlags = 1
-	// BindingSyncCreate wraps G_BINDING_SYNC_CREATE
+	// BindingSyncCreate wraps BINDING_SYNC_CREATE
 	//
 	// Synchronize the values of the source and
 	//   target properties when creating the binding; the direction of
 	//   the synchronization is always from the source to the target.
 	BindingSyncCreate BindingFlags = 2
-	// BindingInvertBoolean wraps G_BINDING_INVERT_BOOLEAN
+	// BindingInvertBoolean wraps BINDING_INVERT_BOOLEAN
 	//
 	// If the two properties being bound are
 	//   booleans, setting one to %TRUE will result in the other being
@@ -192,17 +192,17 @@ func (f BindingFlags) String() string {
 type ConnectFlags C.gint
 
 const (
-	// ConnectDefault wraps G_CONNECT_DEFAULT
+	// ConnectDefault wraps CONNECT_DEFAULT
 	//
 	// Default behaviour (no special flags). Since: 2.74
 	ConnectDefault ConnectFlags = 0
-	// ConnectAfter wraps G_CONNECT_AFTER
+	// ConnectAfter wraps CONNECT_AFTER
 	//
 	// If set, the handler should be called after the
 	//  default handler of the signal. Normally, the handler is called before
 	//  the default handler.
 	ConnectAfter ConnectFlags = 1
-	// ConnectSwapped wraps G_CONNECT_SWAPPED
+	// ConnectSwapped wraps CONNECT_SWAPPED
 	//
 	// If set, the instance and data should be swapped when
 	//  calling the handler; see g_signal_connect_swapped() for an example.
@@ -236,17 +236,17 @@ func (f ConnectFlags) String() string {
 type IOCondition C.gint
 
 const (
-	// IOIn wraps G_IO_IN
+	// IOIn wraps IO_IN
 	IOIn IOCondition = 1
-	// IOOut wraps G_IO_OUT
+	// IOOut wraps IO_OUT
 	IOOut IOCondition = 4
-	// IOPri wraps G_IO_PRI
+	// IOPri wraps IO_PRI
 	IOPri IOCondition = 2
-	// IOErr wraps G_IO_ERR
+	// IOErr wraps IO_ERR
 	IOErr IOCondition = 8
-	// IOHup wraps G_IO_HUP
+	// IOHup wraps IO_HUP
 	IOHup IOCondition = 16
-	// IONval wraps G_IO_NVAL
+	// IONval wraps IO_NVAL
 	IONval IOCondition = 32
 )
 
@@ -304,66 +304,66 @@ func (f IOCondition) String() string {
 type ParamFlags C.gint
 
 const (
-	// ParamReadable wraps G_PARAM_READABLE
+	// ParamReadable wraps PARAM_READABLE
 	//
 	// the parameter is readable
 	ParamReadable ParamFlags = 1
-	// ParamWritable wraps G_PARAM_WRITABLE
+	// ParamWritable wraps PARAM_WRITABLE
 	//
 	// the parameter is writable
 	ParamWritable ParamFlags = 2
-	// ParamReadwrite wraps G_PARAM_READWRITE
+	// ParamReadwrite wraps PARAM_READWRITE
 	//
 	// alias for %G_PARAM_READABLE | %G_PARAM_WRITABLE
 	ParamReadwrite ParamFlags = 3
-	// ParamConstruct wraps G_PARAM_CONSTRUCT
+	// ParamConstruct wraps PARAM_CONSTRUCT
 	//
 	// the parameter will be set upon object construction.
 	//   See [vfunc@Object.constructed] for more details
 	ParamConstruct ParamFlags = 4
-	// ParamConstructOnly wraps G_PARAM_CONSTRUCT_ONLY
+	// ParamConstructOnly wraps PARAM_CONSTRUCT_ONLY
 	//
 	// the parameter can only be set upon object construction.
 	//   See [vfunc@Object.constructed] for more details
 	ParamConstructOnly ParamFlags = 8
-	// ParamLaxValidation wraps G_PARAM_LAX_VALIDATION
+	// ParamLaxValidation wraps PARAM_LAX_VALIDATION
 	//
 	// upon parameter conversion (see g_param_value_convert())
 	//  strict validation is not required
 	ParamLaxValidation ParamFlags = 16
-	// ParamStaticName wraps G_PARAM_STATIC_NAME
+	// ParamStaticName wraps PARAM_STATIC_NAME
 	//
 	// the string used as name when constructing the
 	//  parameter is guaranteed to remain valid and
 	//  unmodified for the lifetime of the parameter.
 	//  Since 2.8
 	ParamStaticName ParamFlags = 32
-	// ParamPrivate wraps G_PARAM_PRIVATE
+	// ParamPrivate wraps PARAM_PRIVATE
 	//
 	// internal
 	ParamPrivate ParamFlags = 32
-	// ParamStaticNick wraps G_PARAM_STATIC_NICK
+	// ParamStaticNick wraps PARAM_STATIC_NICK
 	//
 	// the string used as nick when constructing the
 	//  parameter is guaranteed to remain valid and
 	//  unmmodified for the lifetime of the parameter.
 	//  Since 2.8
 	ParamStaticNick ParamFlags = 64
-	// ParamStaticBlurb wraps G_PARAM_STATIC_BLURB
+	// ParamStaticBlurb wraps PARAM_STATIC_BLURB
 	//
 	// the string used as blurb when constructing the
 	//  parameter is guaranteed to remain valid and
 	//  unmodified for the lifetime of the parameter.
 	//  Since 2.8
 	ParamStaticBlurb ParamFlags = 128
-	// ParamExplicitNotify wraps G_PARAM_EXPLICIT_NOTIFY
+	// ParamExplicitNotify wraps PARAM_EXPLICIT_NOTIFY
 	//
 	// calls to g_object_set_property() for this
 	//   property will not automatically result in a "notify" signal being
 	//   emitted: the implementation must call g_object_notify() themselves
 	//   in case the property actually changes.  Since: 2.42.
 	ParamExplicitNotify ParamFlags = 1073741824
-	// ParamDeprecated wraps G_PARAM_DEPRECATED
+	// ParamDeprecated wraps PARAM_DEPRECATED
 	//
 	// the parameter is deprecated and will be removed
 	//  in a future version. A warning will be generated if it is used
@@ -428,30 +428,30 @@ func (f ParamFlags) String() string {
 type SignalFlags C.gint
 
 const (
-	// SignalRunFirst wraps G_SIGNAL_RUN_FIRST
+	// SignalRunFirst wraps SIGNAL_RUN_FIRST
 	//
 	// Invoke the object method handler in the first emission stage.
 	SignalRunFirst SignalFlags = 1
-	// SignalRunLast wraps G_SIGNAL_RUN_LAST
+	// SignalRunLast wraps SIGNAL_RUN_LAST
 	//
 	// Invoke the object method handler in the third emission stage.
 	SignalRunLast SignalFlags = 2
-	// SignalRunCleanup wraps G_SIGNAL_RUN_CLEANUP
+	// SignalRunCleanup wraps SIGNAL_RUN_CLEANUP
 	//
 	// Invoke the object method handler in the last emission stage.
 	SignalRunCleanup SignalFlags = 4
-	// SignalNoRecurse wraps G_SIGNAL_NO_RECURSE
+	// SignalNoRecurse wraps SIGNAL_NO_RECURSE
 	//
 	// Signals being emitted for an object while currently being in
 	//  emission for this very object will not be emitted recursively,
 	//  but instead cause the first emission to be restarted.
 	SignalNoRecurse SignalFlags = 8
-	// SignalDetailed wraps G_SIGNAL_DETAILED
+	// SignalDetailed wraps SIGNAL_DETAILED
 	//
 	// This signal supports "::detail" appendices to the signal name
 	//  upon handler connections and emissions.
 	SignalDetailed SignalFlags = 16
-	// SignalAction wraps G_SIGNAL_ACTION
+	// SignalAction wraps SIGNAL_ACTION
 	//
 	// Action signals are signals that may freely be emitted on alive
 	//  objects from user code via g_signal_emit() and friends, without
@@ -460,23 +460,23 @@ const (
 	//  of as object methods which can be called generically by
 	//  third-party code.
 	SignalAction SignalFlags = 32
-	// SignalNoHooks wraps G_SIGNAL_NO_HOOKS
+	// SignalNoHooks wraps SIGNAL_NO_HOOKS
 	//
 	// No emissions hooks are supported for this signal.
 	SignalNoHooks SignalFlags = 64
-	// SignalMustCollect wraps G_SIGNAL_MUST_COLLECT
+	// SignalMustCollect wraps SIGNAL_MUST_COLLECT
 	//
 	// Varargs signal emission will always collect the arguments, even if there
 	// are no signal handlers connected.
 	SignalMustCollect SignalFlags = 128
-	// SignalDeprecated wraps G_SIGNAL_DEPRECATED
+	// SignalDeprecated wraps SIGNAL_DEPRECATED
 	//
 	// The signal is deprecated and will be removed in a future version.
 	// 
 	// A warning will be generated if it is connected while running with
 	// `G_ENABLE_DIAGNOSTIC=1`.
 	SignalDeprecated SignalFlags = 256
-	// SignalAccumulatorFirstRun wraps G_SIGNAL_ACCUMULATOR_FIRST_RUN
+	// SignalAccumulatorFirstRun wraps SIGNAL_ACCUMULATOR_FIRST_RUN
 	//
 	// The signal accumulator was invoked for the first time.
 	// 
@@ -538,27 +538,27 @@ func (f SignalFlags) String() string {
 type SignalMatchType C.gint
 
 const (
-	// SignalMatchID wraps G_SIGNAL_MATCH_ID
+	// SignalMatchID wraps SIGNAL_MATCH_ID
 	//
 	// The signal id must be equal.
 	SignalMatchID SignalMatchType = 1
-	// SignalMatchDetail wraps G_SIGNAL_MATCH_DETAIL
+	// SignalMatchDetail wraps SIGNAL_MATCH_DETAIL
 	//
 	// The signal detail must be equal.
 	SignalMatchDetail SignalMatchType = 2
-	// SignalMatchClosure wraps G_SIGNAL_MATCH_CLOSURE
+	// SignalMatchClosure wraps SIGNAL_MATCH_CLOSURE
 	//
 	// The closure must be the same.
 	SignalMatchClosure SignalMatchType = 4
-	// SignalMatchFunc wraps G_SIGNAL_MATCH_FUNC
+	// SignalMatchFunc wraps SIGNAL_MATCH_FUNC
 	//
 	// The C closure callback must be the same.
 	SignalMatchFunc SignalMatchType = 8
-	// SignalMatchData wraps G_SIGNAL_MATCH_DATA
+	// SignalMatchData wraps SIGNAL_MATCH_DATA
 	//
 	// The closure data must be the same.
 	SignalMatchData SignalMatchType = 16
-	// SignalMatchUnblocked wraps G_SIGNAL_MATCH_UNBLOCKED
+	// SignalMatchUnblocked wraps SIGNAL_MATCH_UNBLOCKED
 	//
 	// Only unblocked signals may be matched.
 	SignalMatchUnblocked SignalMatchType = 32
@@ -602,27 +602,27 @@ func (f SignalMatchType) String() string {
 type TypeFlags C.gint
 
 const (
-	// TypeFlagNone wraps G_TYPE_FLAG_NONE
+	// TypeFlagNone wraps TYPE_FLAG_NONE
 	//
 	// No special flags. Since: 2.74
 	TypeFlagNone TypeFlags = 0
-	// TypeFlagAbstract wraps G_TYPE_FLAG_ABSTRACT
+	// TypeFlagAbstract wraps TYPE_FLAG_ABSTRACT
 	//
 	// Indicates an abstract type. No instances can be
 	//  created for an abstract type
 	TypeFlagAbstract TypeFlags = 16
-	// TypeFlagValueAbstract wraps G_TYPE_FLAG_VALUE_ABSTRACT
+	// TypeFlagValueAbstract wraps TYPE_FLAG_VALUE_ABSTRACT
 	//
 	// Indicates an abstract value type, i.e. a type
 	//  that introduces a value table, but can't be used for
 	//  g_value_init()
 	TypeFlagValueAbstract TypeFlags = 32
-	// TypeFlagFinal wraps G_TYPE_FLAG_FINAL
+	// TypeFlagFinal wraps TYPE_FLAG_FINAL
 	//
 	// Indicates a final type. A final type is a non-derivable
 	//  leaf node in a deep derivable type hierarchy tree. Since: 2.70
 	TypeFlagFinal TypeFlags = 64
-	// TypeFlagDeprecated wraps G_TYPE_FLAG_DEPRECATED
+	// TypeFlagDeprecated wraps TYPE_FLAG_DEPRECATED
 	//
 	// The type is deprecated and may be removed in a
 	//  future version. A warning will be emitted if it is instantiated while
@@ -666,19 +666,19 @@ func (f TypeFlags) String() string {
 type TypeFundamentalFlags C.gint
 
 const (
-	// TypeFlagClassed wraps G_TYPE_FLAG_CLASSED
+	// TypeFlagClassed wraps TYPE_FLAG_CLASSED
 	//
 	// Indicates a classed type
 	TypeFlagClassed TypeFundamentalFlags = 1
-	// TypeFlagInstantiatable wraps G_TYPE_FLAG_INSTANTIATABLE
+	// TypeFlagInstantiatable wraps TYPE_FLAG_INSTANTIATABLE
 	//
 	// Indicates an instantiatable type (implies classed)
 	TypeFlagInstantiatable TypeFundamentalFlags = 2
-	// TypeFlagDerivable wraps G_TYPE_FLAG_DERIVABLE
+	// TypeFlagDerivable wraps TYPE_FLAG_DERIVABLE
 	//
 	// Indicates a flat derivable type
 	TypeFlagDerivable TypeFundamentalFlags = 4
-	// TypeFlagDeepDerivable wraps G_TYPE_FLAG_DEEP_DERIVABLE
+	// TypeFlagDeepDerivable wraps TYPE_FLAG_DEEP_DERIVABLE
 	//
 	// Indicates a deep derivable type (implies derivable)
 	TypeFlagDeepDerivable TypeFundamentalFlags = 8
@@ -715,9 +715,9 @@ func (f TypeFundamentalFlags) String() string {
 // The function takes the following parameters:
 // 
 // 	- gEnumType Type: the type identifier of the type being completed 
-// 	- constValues *EnumValue: An array of #GEnumValue structs for the possible
-//  enumeration values. The array is terminated by a struct with all
-//  members being 0. 
+// 	- constValues []EnumValue: An array of #GEnumValue
+//  structs for the possible enumeration values. The array is terminated
+//  by a struct with all members being 0. 
 // 
 // The function returns the following values:
 // 
@@ -743,13 +743,15 @@ func (f TypeFundamentalFlags) String() string {
 //   g_enum_complete_type_info (type, info, values);
 // }
 // ]|
-func EnumCompleteTypeInfo(gEnumType Type, constValues *EnumValue) TypeInfo {
+func EnumCompleteTypeInfo(gEnumType Type, constValues []EnumValue) TypeInfo {
 	var carg1 C.GType       // in, none, casted, alias
-	var carg3 *C.GEnumValue // in, none, converted
+	var carg3 *C.GEnumValue // in, transfer: none, C Pointers: 1, Name: array[EnumValue], array (inner: *typesystem.Record, zero-terminated)
 	var carg2 C.GTypeInfo   // out, transfer: full, C Pointers: 0, Name: TypeInfo
 
 	carg1 = C.GType(gEnumType)
-	carg3 = (*C.GEnumValue)(UnsafeEnumValueToGlibNone(constValues))
+	_ = constValues
+	_ = carg3
+	panic("unimplemented conversion of []EnumValue (const GEnumValue*)")
 
 	C.g_enum_complete_type_info(carg1, &carg2, carg3)
 	runtime.KeepAlive(gEnumType)
@@ -917,7 +919,7 @@ func EnumRegisterStatic(name string, constStaticValues []EnumValue) Type {
 // 
 // 	- goret string 
 //
-// Pretty-prints @value in the form of the enum’s name.
+// Pretty-prints @value in the form of the enum&#x2019;s name.
 // 
 // This is intended to be used for debugging purposes. The format of the output
 // may change in the future.
@@ -946,9 +948,9 @@ func EnumToString(gEnumType Type, value int32) string {
 // The function takes the following parameters:
 // 
 // 	- gFlagsType Type: the type identifier of the type being completed 
-// 	- constValues *FlagsValue: An array of #GFlagsValue structs for the possible
-//  enumeration values. The array is terminated by a struct with all
-//  members being 0. 
+// 	- constValues []FlagsValue: An array of #GFlagsValue
+//  structs for the possible enumeration values. The array is terminated
+//  by a struct with all members being 0. 
 // 
 // The function returns the following values:
 // 
@@ -957,13 +959,15 @@ func EnumToString(gEnumType Type, value int32) string {
 // This function is meant to be called from the complete_type_info()
 // function of a #GTypePlugin implementation, see the example for
 // g_enum_complete_type_info() above.
-func FlagsCompleteTypeInfo(gFlagsType Type, constValues *FlagsValue) TypeInfo {
+func FlagsCompleteTypeInfo(gFlagsType Type, constValues []FlagsValue) TypeInfo {
 	var carg1 C.GType        // in, none, casted, alias
-	var carg3 *C.GFlagsValue // in, none, converted
+	var carg3 *C.GFlagsValue // in, transfer: none, C Pointers: 1, Name: array[FlagsValue], array (inner: *typesystem.Record, zero-terminated)
 	var carg2 C.GTypeInfo    // out, transfer: full, C Pointers: 0, Name: TypeInfo
 
 	carg1 = C.GType(gFlagsType)
-	carg3 = (*C.GFlagsValue)(UnsafeFlagsValueToGlibNone(constValues))
+	_ = constValues
+	_ = carg3
+	panic("unimplemented conversion of []FlagsValue (const GFlagsValue*)")
 
 	C.g_flags_complete_type_info(carg1, &carg2, carg3)
 	runtime.KeepAlive(gFlagsType)
@@ -4587,7 +4591,7 @@ func UnsafeTypeValueTableToGlibFull(t *TypeValueTable) unsafe.Pointer {
 // objects.
 // 
 // If the object's #GObjectClass.dispose method results in additional
-// references to the object being held (‘re-referencing’), any #GWeakRefs taken
+// references to the object being held (&#x2018;re-referencing&#x2019;), any #GWeakRefs taken
 // before it was disposed will continue to point to %NULL.  Any #GWeakRefs taken
 // during disposal and after re-referencing, or after disposal has returned due
 // to the re-referencing, will continue to point to the object until its refcount

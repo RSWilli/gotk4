@@ -13,7 +13,7 @@ type Callback struct {
 	TrampolineName string
 
 	// gir is used to resolve the parameters after the callback has been declared
-	gir gir.Callback
+	gir *gir.Callback
 
 	*Parameters
 
@@ -24,7 +24,7 @@ var _ checkedParameterType = (*Callback)(nil)
 
 // DeclareCallback declares a new callback. This way the type can be resolved by others, but the referenced parameters
 // have to be resolved later, because the callback params could be referencing other record types
-func DeclareCallback(e *env, v gir.Callback) *Callback {
+func DeclareCallback(e *env, v *gir.Callback) *Callback {
 	e = e.sub("callback", v.CType)
 
 	if !v.IsIntrospectable() {

@@ -11,14 +11,14 @@ type Bitfield struct {
 	Doc
 	Marshaler
 
-	gir gir.Bitfield
+	gir *gir.Bitfield
 
 	Members []*Member
 
 	Functions []*CallableSignature
 }
 
-func DeclareBitfield(e *env, v gir.Bitfield) *Bitfield {
+func DeclareBitfield(e *env, v *gir.Bitfield) *Bitfield {
 	e = e.sub("bitfield", v.CType)
 
 	if !v.IsIntrospectable() {

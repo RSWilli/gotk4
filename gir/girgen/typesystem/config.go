@@ -27,6 +27,11 @@ type NamespaceConfig struct {
 	// type resolution. Everything that is deprecated longer than this version will be ignored.
 	MinVersion string
 
+	// MaxVersion declares the maximal version that should be supported in
+	// type resolution. Everything that is introduced after this version will be ignored.
+	// If this is not set, then all versions are supported.
+	MaxVersion string
+
 	IgnoredDefinitions []IgnoreFunc
 
 	// ManualTypes contains the gir name to a manual type override that will not be generated. Themanual type
@@ -42,20 +47,30 @@ func (cfg Config) getNamespaceEnv(namespace *Namespace) *env {
 	}
 
 	var err error
-	var v gir.Version
+	var minV gir.Version
+	var maxV gir.Version
 
 	if nsCfg.MinVersion != "" {
-		v, err = gir.ParseVersion(nsCfg.MinVersion)
+		minV, err = gir.ParseVersion(nsCfg.MinVersion)
 
 		if err != nil {
 			panic(err)
 		}
 	}
 
+	if nsCfg.MaxVersion != "" {
+		maxV, err = gir.ParseVersion(nsCfg.MaxVersion)
+		if err != nil {
+			panic(err)
+		}
+
+	}
+
 	return &env{
 		cfg:        cfg,
 		nsCfg:      nsCfg,
-		minVersion: v,
+		minVersion: minV,
+		maxVersion: maxV,
 		ignore:     ignoreOr(nsCfg.IgnoredDefinitions...),
 		namespace:  namespace,
 		logger:     slog.Default().With(slog.String("namespace", namespace.v.String())),

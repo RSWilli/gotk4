@@ -99,6 +99,49 @@ func _gotk4_glib2_SourceOnceFunc(carg1 C.gpointer) {
 	fn()
 }
 
+//export _gotk4_glib2_TestDataFunc
+func _gotk4_glib2_TestDataFunc(carg1 C.gconstpointer) {
+	var fn TestDataFunc
+	{
+		v := userdata.Load(unsafe.Pointer(carg1))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TestDataFunc)
+	}
+
+	fn()
+}
+
+//export _gotk4_glib2_TestLogFatalFunc
+func _gotk4_glib2_TestLogFatalFunc(carg1 *C.gchar, carg2 C.GLogLevelFlags, carg3 *C.gchar, carg4 C.gpointer) (cret C.gboolean) {
+	var fn TestLogFatalFunc
+	{
+		v := userdata.Load(unsafe.Pointer(carg4))
+		if v == nil {
+			panic(`callback not found`)
+		}
+		fn = v.(TestLogFatalFunc)
+	}
+
+	var logDomain string        // in, none, string
+	var logLevel  LogLevelFlags // in, none, casted
+	var message   string        // in, none, string
+	var goret     bool          // return
+
+	logDomain = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+	logLevel = LogLevelFlags(carg2)
+	message = C.GoString((*C.char)(unsafe.Pointer(carg3)))
+
+	goret = fn(logDomain, logLevel, message)
+
+	if goret {
+		cret = C.TRUE
+	}
+
+	return cret
+}
+
 //export _gotk4_glib2_ChildWatchFunc
 func _gotk4_glib2_ChildWatchFunc(carg1 C.GPid, carg2 C.gint, carg3 C.gpointer) {
 	var fn ChildWatchFunc

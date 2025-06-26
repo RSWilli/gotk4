@@ -2,7 +2,6 @@ package typesystem
 
 import (
 	"regexp"
-	"strings"
 
 	"github.com/diamondburned/gotk4/gir"
 )
@@ -45,15 +44,5 @@ func IgnoreByRegex(pattern string) IgnoreFunc {
 		}
 
 		return re.Match([]byte(parent + "." + self))
-	}
-}
-
-func IgnoreByFileNameSubstring(substr string) IgnoreFunc {
-	return func(parent, self string, attrs gir.InfoAttrs, elements gir.InfoElements) bool {
-		if elements.SourcePosition == nil {
-			return false
-		}
-
-		return strings.Contains(elements.SourcePosition.Filename, substr)
 	}
 }

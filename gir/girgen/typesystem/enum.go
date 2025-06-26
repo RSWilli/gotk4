@@ -10,14 +10,14 @@ type Enum struct {
 	Doc
 	Marshaler
 
-	gir gir.Enum
+	gir *gir.Enum
 
 	Members Members
 
 	Functions []*CallableSignature
 }
 
-func DeclareEnum(e *env, v gir.Enum) *Enum {
+func DeclareEnum(e *env, v *gir.Enum) *Enum {
 	e = e.sub("enum", v.Name)
 
 	if !v.IsIntrospectable() {

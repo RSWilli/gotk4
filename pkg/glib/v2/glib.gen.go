@@ -22,11 +22,56 @@ import (
 import "C"
 
 
+// ANALYZER_ANALYZING wraps G_ANALYZER_ANALYZING
+const ANALYZER_ANALYZING = 1
+// ASCII_DTOSTR_BUF_SIZE wraps G_ASCII_DTOSTR_BUF_SIZE
+//
+// A good size for a buffer to be passed into [func@GLib.ascii_dtostr].
+// It is guaranteed to be enough for all output of that function
+// on systems with 64bit IEEE-compatible doubles.
+// 
+// The typical usage would be something like:
+// ```C
+// char buf[G_ASCII_DTOSTR_BUF_SIZE];
+// 
+// fprintf (out, "value=%s\n", g_ascii_dtostr (buf, sizeof (buf), value));
+// ```
+const ASCII_DTOSTR_BUF_SIZE = 39
 // BIG_ENDIAN wraps G_BIG_ENDIAN
 //
 // Specifies one of the possible types of byte order.
 // See %G_BYTE_ORDER.
 const BIG_ENDIAN = 4321
+// C_STD_VERSION wraps G_C_STD_VERSION
+//
+// The C standard version the code is compiling against, it's normally
+// defined with the same value of `__STDC_VERSION__` for C standard
+// compatible compilers, while it uses the lowest standard version
+// in pure MSVC, given that in such compiler the definition depends on
+// a compilation flag.
+// 
+// This is granted to be undefined when compiling with a C++ compiler.
+// 
+// See also: %G_C_STD_CHECK_VERSION and %G_CXX_STD_VERSION
+const C_STD_VERSION = 199000
+// DATALIST_FLAGS_MASK wraps G_DATALIST_FLAGS_MASK
+//
+// A bitmask that restricts the possible flags passed to
+// g_datalist_set_flags(). Passing a flags value where
+// flags &amp; ~G_DATALIST_FLAGS_MASK != 0 is an error.
+const DATALIST_FLAGS_MASK = 3
+// DATE_BAD_DAY wraps G_DATE_BAD_DAY
+//
+// Represents an invalid #GDateDay.
+const DATE_BAD_DAY = 0
+// DATE_BAD_JULIAN wraps G_DATE_BAD_JULIAN
+//
+// Represents an invalid Julian day number.
+const DATE_BAD_JULIAN = 0
+// DATE_BAD_YEAR wraps G_DATE_BAD_YEAR
+//
+// Represents an invalid year.
+const DATE_BAD_YEAR = 0
 // DIR_SEPARATOR wraps G_DIR_SEPARATOR
 //
 // The directory separator character.
@@ -41,10 +86,21 @@ const E = 2.718282
 const HAVE_GINT64 = 1
 // HAVE_GNUC_VARARGS wraps G_HAVE_GNUC_VARARGS
 const HAVE_GNUC_VARARGS = 1
+// HAVE_GNUC_VISIBILITY wraps G_HAVE_GNUC_VISIBILITY
+//
+// Defined to 1 if gcc-style visibility handling is supported.
+const HAVE_GNUC_VISIBILITY = 1
 // HAVE_GROWING_STACK wraps G_HAVE_GROWING_STACK
 const HAVE_GROWING_STACK = 0
 // HAVE_ISO_VARARGS wraps G_HAVE_ISO_VARARGS
 const HAVE_ISO_VARARGS = 1
+// HOOK_FLAG_USER_SHIFT wraps G_HOOK_FLAG_USER_SHIFT
+//
+// The position of the first bit which is not reserved for internal
+// use be the #GHook implementation, i.e.
+// `1 &lt;&lt; G_HOOK_FLAG_USER_SHIFT` is the first
+// bit which can be used for application-defined flags.
+const HOOK_FLAG_USER_SHIFT = 4
 // IEEE754_DOUBLE_BIAS wraps G_IEEE754_DOUBLE_BIAS
 //
 // The bias by which exponents in double-precision floats are offset.
@@ -139,7 +195,7 @@ const MAXUINT8 = 255
 // Like #gtk_micro_version, but from the headers used at
 // application compile time, rather than from the library
 // linked against at application run time.
-const MICRO_VERSION = 2
+const MICRO_VERSION = 1
 // MININT16 wraps G_MININT16
 //
 // The minimum value which can be held in a #gint16.
@@ -163,7 +219,7 @@ const MININT8 = -128
 // Like #gtk_minor_version, but from the headers used at
 // application compile time, rather than from the library
 // linked against at application run time.
-const MINOR_VERSION = 84
+const MINOR_VERSION = 85
 // PDP_ENDIAN wraps G_PDP_ENDIAN
 //
 // Specifies one of the possible types of byte order
@@ -217,6 +273,27 @@ const PRIORITY_HIGH_IDLE = 100
 // 
 // It is not used within GLib or GTK.
 const PRIORITY_LOW = 300
+// REF_COUNT_INIT wraps G_REF_COUNT_INIT
+//
+// Evaluates to the initial reference count for `grefcount`.
+// 
+// This macro is useful for initializing `grefcount` fields inside
+// structures, for instance:
+// 
+// |[&lt;!-- language="C" --&gt;
+// typedef struct {
+//   grefcount ref_count;
+//   char *name;
+//   char *address;
+// } Person;
+// 
+// static const Person default_person = {
+//   .ref_count = G_REF_COUNT_INIT,
+//   .name = "Default name",
+//   .address = "Default address",
+// };
+// ]|
+const REF_COUNT_INIT = -1
 // SEARCHPATH_SEPARATOR wraps G_SEARCHPATH_SEPARATOR
 //
 // The search path separator character.
@@ -297,6 +374,12 @@ const VA_COPY_AS_ARRAY = 1
 const VERSION_MIN_REQUIRED = 2
 // WIN32_MSG_HANDLE wraps G_WIN32_MSG_HANDLE
 const WIN32_MSG_HANDLE = 19981206
+// macro__has_attribute___noreturn__ wraps g_macro__has_attribute___noreturn__
+const macro__has_attribute___noreturn__ = 0
+// macro__has_attribute_ifunc wraps g_macro__has_attribute_ifunc
+const macro__has_attribute_ifunc = 0
+// macro__has_attribute_no_sanitize_address wraps g_macro__has_attribute_no_sanitize_address
+const macro__has_attribute_no_sanitize_address = 0
 // Pid wraps GPid
 //
 // A type which is used to hold a process identification.
@@ -336,6 +419,16 @@ type Pid = int32
 // strings is that they can be compared for equality by a simple
 // pointer comparison, rather than using `strcmp()`.
 type Quark = uint32
+// RefString wraps GRefString
+//
+// A typedef for a reference-counted string. A pointer to a #GRefString can be
+// treated like a standard `char*` array by all code, but can additionally have
+// `g_ref_string_*()` methods called on it. `g_ref_string_*()` methods cannot be
+// called on `char*` arrays not allocated using g_ref_string_new().
+// 
+// If using #GRefString with autocleanups, g_autoptr() must be used rather than
+// g_autofree(), so that the reference counting metadata is also freed.
+type RefString = byte
 // TimeSpan wraps GTimeSpan
 //
 // A value representing an interval of time, in microseconds.
@@ -346,37 +439,37 @@ type TimeSpan = int64
 type BookmarkFileError C.int
 
 const (
-	// BookmarkFileErrorInvalidURI wraps G_BOOKMARK_FILE_ERROR_INVALID_URI
+	// BookmarkFileErrorInvalidURI wraps BOOKMARK_FILE_ERROR_INVALID_URI
 	//
 	// URI was ill-formed
 	BookmarkFileErrorInvalidURI BookmarkFileError = 0
-	// BookmarkFileErrorInvalidValue wraps G_BOOKMARK_FILE_ERROR_INVALID_VALUE
+	// BookmarkFileErrorInvalidValue wraps BOOKMARK_FILE_ERROR_INVALID_VALUE
 	//
 	// a requested field was not found
 	BookmarkFileErrorInvalidValue BookmarkFileError = 1
-	// BookmarkFileErrorAppNotRegistered wraps G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED
+	// BookmarkFileErrorAppNotRegistered wraps BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED
 	//
 	// a requested application did
 	//     not register a bookmark
 	BookmarkFileErrorAppNotRegistered BookmarkFileError = 2
-	// BookmarkFileErrorURINotFound wraps G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND
+	// BookmarkFileErrorURINotFound wraps BOOKMARK_FILE_ERROR_URI_NOT_FOUND
 	//
 	// a requested URI was not found
 	BookmarkFileErrorURINotFound BookmarkFileError = 3
-	// BookmarkFileErrorRead wraps G_BOOKMARK_FILE_ERROR_READ
+	// BookmarkFileErrorRead wraps BOOKMARK_FILE_ERROR_READ
 	//
 	// document was ill formed
 	BookmarkFileErrorRead BookmarkFileError = 4
-	// BookmarkFileErrorUnknownEncoding wraps G_BOOKMARK_FILE_ERROR_UNKNOWN_ENCODING
+	// BookmarkFileErrorUnknownEncoding wraps BOOKMARK_FILE_ERROR_UNKNOWN_ENCODING
 	//
 	// the text being parsed was
 	//     in an unknown encoding
 	BookmarkFileErrorUnknownEncoding BookmarkFileError = 5
-	// BookmarkFileErrorWrite wraps G_BOOKMARK_FILE_ERROR_WRITE
+	// BookmarkFileErrorWrite wraps BOOKMARK_FILE_ERROR_WRITE
 	//
 	// an error occurred while writing
 	BookmarkFileErrorWrite BookmarkFileError = 6
-	// BookmarkFileErrorFileNotFound wraps G_BOOKMARK_FILE_ERROR_FILE_NOT_FOUND
+	// BookmarkFileErrorFileNotFound wraps BOOKMARK_FILE_ERROR_FILE_NOT_FOUND
 	//
 	// requested file was not found
 	BookmarkFileErrorFileNotFound BookmarkFileError = 7
@@ -407,23 +500,23 @@ func (e BookmarkFileError) String() string {
 type ChecksumType C.int
 
 const (
-	// ChecksumMD5 wraps G_CHECKSUM_MD5
+	// ChecksumMD5 wraps CHECKSUM_MD5
 	//
 	// Use the MD5 hashing algorithm
 	ChecksumMD5 ChecksumType = 0
-	// ChecksumSHA1 wraps G_CHECKSUM_SHA1
+	// ChecksumSHA1 wraps CHECKSUM_SHA1
 	//
 	// Use the SHA-1 hashing algorithm
 	ChecksumSHA1 ChecksumType = 1
-	// ChecksumSHA256 wraps G_CHECKSUM_SHA256
+	// ChecksumSHA256 wraps CHECKSUM_SHA256
 	//
 	// Use the SHA-256 hashing algorithm
 	ChecksumSHA256 ChecksumType = 2
-	// ChecksumSHA512 wraps G_CHECKSUM_SHA512
+	// ChecksumSHA512 wraps CHECKSUM_SHA512
 	//
 	// Use the SHA-512 hashing algorithm (Since: 2.36)
 	ChecksumSHA512 ChecksumType = 3
-	// ChecksumSHA384 wraps G_CHECKSUM_SHA384
+	// ChecksumSHA384 wraps CHECKSUM_SHA384
 	//
 	// Use the SHA-384 hashing algorithm (Since: 2.51)
 	ChecksumSHA384 ChecksumType = 4
@@ -447,38 +540,38 @@ func (e ChecksumType) String() string {
 type ConvertError C.int
 
 const (
-	// ConvertErrorNoConversion wraps G_CONVERT_ERROR_NO_CONVERSION
+	// ConvertErrorNoConversion wraps CONVERT_ERROR_NO_CONVERSION
 	//
 	// Conversion between the requested character
 	//     sets is not supported.
 	ConvertErrorNoConversion ConvertError = 0
-	// ConvertErrorIllegalSequence wraps G_CONVERT_ERROR_ILLEGAL_SEQUENCE
+	// ConvertErrorIllegalSequence wraps CONVERT_ERROR_ILLEGAL_SEQUENCE
 	//
 	// Invalid byte sequence in conversion input;
 	//    or the character sequence could not be represented in the target
 	//    character set.
 	ConvertErrorIllegalSequence ConvertError = 1
-	// ConvertErrorFailed wraps G_CONVERT_ERROR_FAILED
+	// ConvertErrorFailed wraps CONVERT_ERROR_FAILED
 	//
 	// Conversion failed for some reason.
 	ConvertErrorFailed ConvertError = 2
-	// ConvertErrorPartialInput wraps G_CONVERT_ERROR_PARTIAL_INPUT
+	// ConvertErrorPartialInput wraps CONVERT_ERROR_PARTIAL_INPUT
 	//
 	// Partial character sequence at end of input.
 	ConvertErrorPartialInput ConvertError = 3
-	// ConvertErrorBadURI wraps G_CONVERT_ERROR_BAD_URI
+	// ConvertErrorBadURI wraps CONVERT_ERROR_BAD_URI
 	//
 	// URI is invalid.
 	ConvertErrorBadURI ConvertError = 4
-	// ConvertErrorNotAbsolutePath wraps G_CONVERT_ERROR_NOT_ABSOLUTE_PATH
+	// ConvertErrorNotAbsolutePath wraps CONVERT_ERROR_NOT_ABSOLUTE_PATH
 	//
 	// Pathname is not an absolute path.
 	ConvertErrorNotAbsolutePath ConvertError = 5
-	// ConvertErrorNoMemory wraps G_CONVERT_ERROR_NO_MEMORY
+	// ConvertErrorNoMemory wraps CONVERT_ERROR_NO_MEMORY
 	//
 	// No memory available. Since: 2.40
 	ConvertErrorNoMemory ConvertError = 6
-	// ConvertErrorEmbeddedNUL wraps G_CONVERT_ERROR_EMBEDDED_NUL
+	// ConvertErrorEmbeddedNUL wraps CONVERT_ERROR_EMBEDDED_NUL
 	//
 	// An embedded NUL character is present in
 	//     conversion output where a NUL-terminated string is expected.
@@ -508,35 +601,35 @@ func (e ConvertError) String() string {
 type ErrorType C.int
 
 const (
-	// ErrUnknown wraps G_ERR_UNKNOWN
+	// ErrUnknown wraps ERR_UNKNOWN
 	//
 	// unknown error
 	ErrUnknown ErrorType = 0
-	// ErrUnexpEOF wraps G_ERR_UNEXP_EOF
+	// ErrUnexpEOF wraps ERR_UNEXP_EOF
 	//
 	// unexpected end of file
 	ErrUnexpEOF ErrorType = 1
-	// ErrUnexpEOFInString wraps G_ERR_UNEXP_EOF_IN_STRING
+	// ErrUnexpEOFInString wraps ERR_UNEXP_EOF_IN_STRING
 	//
 	// unterminated string constant
 	ErrUnexpEOFInString ErrorType = 2
-	// ErrUnexpEOFInComment wraps G_ERR_UNEXP_EOF_IN_COMMENT
+	// ErrUnexpEOFInComment wraps ERR_UNEXP_EOF_IN_COMMENT
 	//
 	// unterminated comment
 	ErrUnexpEOFInComment ErrorType = 3
-	// ErrNonDigitInConst wraps G_ERR_NON_DIGIT_IN_CONST
+	// ErrNonDigitInConst wraps ERR_NON_DIGIT_IN_CONST
 	//
 	// non-digit character in a number
 	ErrNonDigitInConst ErrorType = 4
-	// ErrDigitRadix wraps G_ERR_DIGIT_RADIX
+	// ErrDigitRadix wraps ERR_DIGIT_RADIX
 	//
 	// digit beyond radix in a number
 	ErrDigitRadix ErrorType = 5
-	// ErrFloatRadix wraps G_ERR_FLOAT_RADIX
+	// ErrFloatRadix wraps ERR_FLOAT_RADIX
 	//
 	// non-decimal floating point number
 	ErrFloatRadix ErrorType = 6
-	// ErrFloatMalformed wraps G_ERR_FLOAT_MALFORMED
+	// ErrFloatMalformed wraps ERR_FLOAT_MALFORMED
 	//
 	// malformed floating point number
 	ErrFloatMalformed ErrorType = 7
@@ -574,38 +667,38 @@ func (e ErrorType) String() string {
 type FileError C.int
 
 const (
-	// FileErrorExist wraps G_FILE_ERROR_EXIST
+	// FileErrorExist wraps FILE_ERROR_EXIST
 	//
 	// Operation not permitted; only the owner of
 	//     the file (or other resource) or processes with special privileges
 	//     can perform the operation.
 	FileErrorExist FileError = 0
-	// FileErrorIsdir wraps G_FILE_ERROR_ISDIR
+	// FileErrorIsdir wraps FILE_ERROR_ISDIR
 	//
 	// File is a directory; you cannot open a directory
 	//     for writing, or create or remove hard links to it.
 	FileErrorIsdir FileError = 1
-	// FileErrorAcces wraps G_FILE_ERROR_ACCES
+	// FileErrorAcces wraps FILE_ERROR_ACCES
 	//
 	// Permission denied; the file permissions do not
 	//     allow the attempted operation.
 	FileErrorAcces FileError = 2
-	// FileErrorNametoolong wraps G_FILE_ERROR_NAMETOOLONG
+	// FileErrorNametoolong wraps FILE_ERROR_NAMETOOLONG
 	//
 	// Filename too long.
 	FileErrorNametoolong FileError = 3
-	// FileErrorNoent wraps G_FILE_ERROR_NOENT
+	// FileErrorNoent wraps FILE_ERROR_NOENT
 	//
 	// No such file or directory. This is a "file
 	//     doesn't exist" error for ordinary files that are referenced in
 	//     contexts where they are expected to already exist.
 	FileErrorNoent FileError = 4
-	// FileErrorNotdir wraps G_FILE_ERROR_NOTDIR
+	// FileErrorNotdir wraps FILE_ERROR_NOTDIR
 	//
 	// A file that isn't a directory was specified when
 	//     a directory is required.
 	FileErrorNotdir FileError = 5
-	// FileErrorNxio wraps G_FILE_ERROR_NXIO
+	// FileErrorNxio wraps FILE_ERROR_NXIO
 	//
 	// No such device or address. The system tried to
 	//     use the device represented by a file you specified, and it
@@ -613,66 +706,66 @@ const (
 	//     installed incorrectly, or that the physical device is missing or
 	//     not correctly attached to the computer.
 	FileErrorNxio FileError = 6
-	// FileErrorNodev wraps G_FILE_ERROR_NODEV
+	// FileErrorNodev wraps FILE_ERROR_NODEV
 	//
 	// The underlying file system of the specified file
 	//     does not support memory mapping.
 	FileErrorNodev FileError = 7
-	// FileErrorRofs wraps G_FILE_ERROR_ROFS
+	// FileErrorRofs wraps FILE_ERROR_ROFS
 	//
 	// The directory containing the new link can't be
 	//     modified because it's on a read-only file system.
 	FileErrorRofs FileError = 8
-	// FileErrorTxtbsy wraps G_FILE_ERROR_TXTBSY
+	// FileErrorTxtbsy wraps FILE_ERROR_TXTBSY
 	//
 	// Text file busy.
 	FileErrorTxtbsy FileError = 9
-	// FileErrorFault wraps G_FILE_ERROR_FAULT
+	// FileErrorFault wraps FILE_ERROR_FAULT
 	//
 	// You passed in a pointer to bad memory.
 	//     (GLib won't reliably return this, don't pass in pointers to bad
 	//     memory.)
 	FileErrorFault FileError = 10
-	// FileErrorLoop wraps G_FILE_ERROR_LOOP
+	// FileErrorLoop wraps FILE_ERROR_LOOP
 	//
 	// Too many levels of symbolic links were encountered
 	//     in looking up a file name. This often indicates a cycle of symbolic
 	//     links.
 	FileErrorLoop FileError = 11
-	// FileErrorNospc wraps G_FILE_ERROR_NOSPC
+	// FileErrorNospc wraps FILE_ERROR_NOSPC
 	//
 	// No space left on device; write operation on a
 	//     file failed because the disk is full.
 	FileErrorNospc FileError = 12
-	// FileErrorNOMEM wraps G_FILE_ERROR_NOMEM
+	// FileErrorNOMEM wraps FILE_ERROR_NOMEM
 	//
 	// No memory available. The system cannot allocate
 	//     more virtual memory because its capacity is full.
 	FileErrorNOMEM FileError = 13
-	// FileErrorMfile wraps G_FILE_ERROR_MFILE
+	// FileErrorMfile wraps FILE_ERROR_MFILE
 	//
 	// The current process has too many files open and
 	//     can't open any more. Duplicate descriptors do count toward this
 	//     limit.
 	FileErrorMfile FileError = 14
-	// FileErrorNfile wraps G_FILE_ERROR_NFILE
+	// FileErrorNfile wraps FILE_ERROR_NFILE
 	//
 	// There are too many distinct file openings in the
 	//     entire system.
 	FileErrorNfile FileError = 15
-	// FileErrorBadf wraps G_FILE_ERROR_BADF
+	// FileErrorBadf wraps FILE_ERROR_BADF
 	//
 	// Bad file descriptor; for example, I/O on a
 	//     descriptor that has been closed or reading from a descriptor open
 	//     only for writing (or vice versa).
 	FileErrorBadf FileError = 16
-	// FileErrorInval wraps G_FILE_ERROR_INVAL
+	// FileErrorInval wraps FILE_ERROR_INVAL
 	//
 	// Invalid argument. This is used to indicate
 	//     various kinds of problems with passing the wrong argument to a
 	//     library function.
 	FileErrorInval FileError = 17
-	// FileErrorPipe wraps G_FILE_ERROR_PIPE
+	// FileErrorPipe wraps FILE_ERROR_PIPE
 	//
 	// Broken pipe; there is no process reading from the
 	//     other end of a pipe. Every library function that returns this
@@ -681,35 +774,35 @@ const (
 	//     program will never actually see this code unless it has handled
 	//     or blocked 'SIGPIPE'.
 	FileErrorPipe FileError = 18
-	// FileErrorAgain wraps G_FILE_ERROR_AGAIN
+	// FileErrorAgain wraps FILE_ERROR_AGAIN
 	//
 	// Resource temporarily unavailable; the call might
 	//     work if you try again later.
 	FileErrorAgain FileError = 19
-	// FileErrorIntr wraps G_FILE_ERROR_INTR
+	// FileErrorIntr wraps FILE_ERROR_INTR
 	//
 	// Interrupted function call; an asynchronous signal
 	//     occurred and prevented completion of the call. When this
 	//     happens, you should try the call again.
 	FileErrorIntr FileError = 20
-	// FileErrorIO wraps G_FILE_ERROR_IO
+	// FileErrorIO wraps FILE_ERROR_IO
 	//
 	// Input/output error; usually used for physical read
 	//    or write errors. i.e. the disk or other physical device hardware
 	//    is returning errors.
 	FileErrorIO FileError = 21
-	// FileErrorPerm wraps G_FILE_ERROR_PERM
+	// FileErrorPerm wraps FILE_ERROR_PERM
 	//
 	// Operation not permitted; only the owner of the
 	//    file (or other resource) or processes with special privileges can
 	//    perform the operation.
 	FileErrorPerm FileError = 22
-	// FileErrorNosys wraps G_FILE_ERROR_NOSYS
+	// FileErrorNosys wraps FILE_ERROR_NOSYS
 	//
 	// Function not implemented; this indicates that
 	//    the system is missing some functionality.
 	FileErrorNosys FileError = 23
-	// FileErrorFailed wraps G_FILE_ERROR_FAILED
+	// FileErrorFailed wraps FILE_ERROR_FAILED
 	//
 	// Does not correspond to a UNIX error code; this
 	//    is the standard "failed for unspecified reason" error code present
@@ -756,39 +849,39 @@ func (e FileError) String() string {
 type IOChannelError C.int
 
 const (
-	// IOChannelErrorFbig wraps G_IO_CHANNEL_ERROR_FBIG
+	// IOChannelErrorFbig wraps IO_CHANNEL_ERROR_FBIG
 	//
 	// File too large.
 	IOChannelErrorFbig IOChannelError = 0
-	// IOChannelErrorInval wraps G_IO_CHANNEL_ERROR_INVAL
+	// IOChannelErrorInval wraps IO_CHANNEL_ERROR_INVAL
 	//
 	// Invalid argument.
 	IOChannelErrorInval IOChannelError = 1
-	// IOChannelErrorIO wraps G_IO_CHANNEL_ERROR_IO
+	// IOChannelErrorIO wraps IO_CHANNEL_ERROR_IO
 	//
 	// IO error.
 	IOChannelErrorIO IOChannelError = 2
-	// IOChannelErrorIsdir wraps G_IO_CHANNEL_ERROR_ISDIR
+	// IOChannelErrorIsdir wraps IO_CHANNEL_ERROR_ISDIR
 	//
 	// File is a directory.
 	IOChannelErrorIsdir IOChannelError = 3
-	// IOChannelErrorNospc wraps G_IO_CHANNEL_ERROR_NOSPC
+	// IOChannelErrorNospc wraps IO_CHANNEL_ERROR_NOSPC
 	//
 	// No space left on device.
 	IOChannelErrorNospc IOChannelError = 4
-	// IOChannelErrorNxio wraps G_IO_CHANNEL_ERROR_NXIO
+	// IOChannelErrorNxio wraps IO_CHANNEL_ERROR_NXIO
 	//
 	// No such device or address.
 	IOChannelErrorNxio IOChannelError = 5
-	// IOChannelErrorOverflow wraps G_IO_CHANNEL_ERROR_OVERFLOW
+	// IOChannelErrorOverflow wraps IO_CHANNEL_ERROR_OVERFLOW
 	//
 	// Value too large for defined datatype.
 	IOChannelErrorOverflow IOChannelError = 6
-	// IOChannelErrorPipe wraps G_IO_CHANNEL_ERROR_PIPE
+	// IOChannelErrorPipe wraps IO_CHANNEL_ERROR_PIPE
 	//
 	// Broken pipe.
 	IOChannelErrorPipe IOChannelError = 7
-	// IOChannelErrorFailed wraps G_IO_CHANNEL_ERROR_FAILED
+	// IOChannelErrorFailed wraps IO_CHANNEL_ERROR_FAILED
 	//
 	// Some other error.
 	IOChannelErrorFailed IOChannelError = 8
@@ -817,19 +910,19 @@ func (e IOChannelError) String() string {
 type IOError C.int
 
 const (
-	// IOErrorNone wraps G_IO_ERROR_NONE
+	// IOErrorNone wraps IO_ERROR_NONE
 	//
 	// no error
 	IOErrorNone IOError = 0
-	// IOErrorAgain wraps G_IO_ERROR_AGAIN
+	// IOErrorAgain wraps IO_ERROR_AGAIN
 	//
 	// an EAGAIN error occurred
 	IOErrorAgain IOError = 1
-	// IOErrorInval wraps G_IO_ERROR_INVAL
+	// IOErrorInval wraps IO_ERROR_INVAL
 	//
 	// an EINVAL error occurred
 	IOErrorInval IOError = 2
-	// IOErrorUnknown wraps G_IO_ERROR_UNKNOWN
+	// IOErrorUnknown wraps IO_ERROR_UNKNOWN
 	//
 	// another error occurred
 	IOErrorUnknown IOError = 3
@@ -852,19 +945,19 @@ func (e IOError) String() string {
 type IOStatus C.int
 
 const (
-	// IOStatusError wraps G_IO_STATUS_ERROR
+	// IOStatusError wraps IO_STATUS_ERROR
 	//
 	// An error occurred.
 	IOStatusError IOStatus = 0
-	// IOStatusNormal wraps G_IO_STATUS_NORMAL
+	// IOStatusNormal wraps IO_STATUS_NORMAL
 	//
 	// Success.
 	IOStatusNormal IOStatus = 1
-	// IOStatusEOF wraps G_IO_STATUS_EOF
+	// IOStatusEOF wraps IO_STATUS_EOF
 	//
 	// End of file.
 	IOStatusEOF IOStatus = 2
-	// IOStatusAgain wraps G_IO_STATUS_AGAIN
+	// IOStatusAgain wraps IO_STATUS_AGAIN
 	//
 	// Resource temporarily unavailable.
 	IOStatusAgain IOStatus = 3
@@ -887,28 +980,28 @@ func (e IOStatus) String() string {
 type KeyFileError C.int
 
 const (
-	// KeyFileErrorUnknownEncoding wraps G_KEY_FILE_ERROR_UNKNOWN_ENCODING
+	// KeyFileErrorUnknownEncoding wraps KEY_FILE_ERROR_UNKNOWN_ENCODING
 	//
 	// the text being parsed was in
 	//   an unknown encoding
 	KeyFileErrorUnknownEncoding KeyFileError = 0
-	// KeyFileErrorParse wraps G_KEY_FILE_ERROR_PARSE
+	// KeyFileErrorParse wraps KEY_FILE_ERROR_PARSE
 	//
 	// document was ill-formed
 	KeyFileErrorParse KeyFileError = 1
-	// KeyFileErrorNotFound wraps G_KEY_FILE_ERROR_NOT_FOUND
+	// KeyFileErrorNotFound wraps KEY_FILE_ERROR_NOT_FOUND
 	//
 	// the file was not found
 	KeyFileErrorNotFound KeyFileError = 2
-	// KeyFileErrorKeyNotFound wraps G_KEY_FILE_ERROR_KEY_NOT_FOUND
+	// KeyFileErrorKeyNotFound wraps KEY_FILE_ERROR_KEY_NOT_FOUND
 	//
 	// a requested key was not found
 	KeyFileErrorKeyNotFound KeyFileError = 3
-	// KeyFileErrorGroupNotFound wraps G_KEY_FILE_ERROR_GROUP_NOT_FOUND
+	// KeyFileErrorGroupNotFound wraps KEY_FILE_ERROR_GROUP_NOT_FOUND
 	//
 	// a requested group was not found
 	KeyFileErrorGroupNotFound KeyFileError = 4
-	// KeyFileErrorInvalidValue wraps G_KEY_FILE_ERROR_INVALID_VALUE
+	// KeyFileErrorInvalidValue wraps KEY_FILE_ERROR_INVALID_VALUE
 	//
 	// a value could not be parsed
 	KeyFileErrorInvalidValue KeyFileError = 5
@@ -938,11 +1031,11 @@ func (e KeyFileError) String() string {
 type LogWriterOutput C.int
 
 const (
-	// LogWriterHandled wraps G_LOG_WRITER_HANDLED
+	// LogWriterHandled wraps LOG_WRITER_HANDLED
 	//
 	// Log writer has handled the log entry.
 	LogWriterHandled LogWriterOutput = 1
-	// LogWriterUnhandled wraps G_LOG_WRITER_UNHANDLED
+	// LogWriterUnhandled wraps LOG_WRITER_UNHANDLED
 	//
 	// Log writer could not handle the log entry.
 	LogWriterUnhandled LogWriterOutput = 0
@@ -963,34 +1056,34 @@ func (e LogWriterOutput) String() string {
 type MarkupError C.int
 
 const (
-	// MarkupErrorBadUTF8 wraps G_MARKUP_ERROR_BAD_UTF8
+	// MarkupErrorBadUTF8 wraps MARKUP_ERROR_BAD_UTF8
 	//
 	// text being parsed was not valid UTF-8
 	MarkupErrorBadUTF8 MarkupError = 0
-	// MarkupErrorEmpty wraps G_MARKUP_ERROR_EMPTY
+	// MarkupErrorEmpty wraps MARKUP_ERROR_EMPTY
 	//
 	// document contained nothing, or only whitespace
 	MarkupErrorEmpty MarkupError = 1
-	// MarkupErrorParse wraps G_MARKUP_ERROR_PARSE
+	// MarkupErrorParse wraps MARKUP_ERROR_PARSE
 	//
 	// document was ill-formed
 	MarkupErrorParse MarkupError = 2
-	// MarkupErrorUnknownElement wraps G_MARKUP_ERROR_UNKNOWN_ELEMENT
+	// MarkupErrorUnknownElement wraps MARKUP_ERROR_UNKNOWN_ELEMENT
 	//
 	// error should be set by #GMarkupParser
 	//     functions; element wasn't known
 	MarkupErrorUnknownElement MarkupError = 3
-	// MarkupErrorUnknownAttribute wraps G_MARKUP_ERROR_UNKNOWN_ATTRIBUTE
+	// MarkupErrorUnknownAttribute wraps MARKUP_ERROR_UNKNOWN_ATTRIBUTE
 	//
 	// error should be set by #GMarkupParser
 	//     functions; attribute wasn't known
 	MarkupErrorUnknownAttribute MarkupError = 4
-	// MarkupErrorInvalidContent wraps G_MARKUP_ERROR_INVALID_CONTENT
+	// MarkupErrorInvalidContent wraps MARKUP_ERROR_INVALID_CONTENT
 	//
 	// error should be set by #GMarkupParser
 	//     functions; content was invalid
 	MarkupErrorInvalidContent MarkupError = 5
-	// MarkupErrorMissingAttribute wraps G_MARKUP_ERROR_MISSING_ATTRIBUTE
+	// MarkupErrorMissingAttribute wraps MARKUP_ERROR_MISSING_ATTRIBUTE
 	//
 	// error should be set by #GMarkupParser
 	//     functions; a required attribute was missing
@@ -1021,25 +1114,25 @@ func (e MarkupError) String() string {
 type NormalizeMode C.int
 
 const (
-	// NormalizeDefault wraps G_NORMALIZE_DEFAULT
+	// NormalizeDefault wraps NORMALIZE_DEFAULT
 	//
 	// standardize differences that do not affect the
 	//     text content, such as the above-mentioned accent representation
 	NormalizeDefault NormalizeMode = 0
-	// NormalizeNFD wraps G_NORMALIZE_NFD
+	// NormalizeNFD wraps NORMALIZE_NFD
 	//
 	// another name for %G_NORMALIZE_DEFAULT
 	NormalizeNFD NormalizeMode = 0
-	// NormalizeDefaultCompose wraps G_NORMALIZE_DEFAULT_COMPOSE
+	// NormalizeDefaultCompose wraps NORMALIZE_DEFAULT_COMPOSE
 	//
 	// like %G_NORMALIZE_DEFAULT, but with
 	//     composed forms rather than a maximally decomposed form
 	NormalizeDefaultCompose NormalizeMode = 1
-	// NormalizeNFC wraps G_NORMALIZE_NFC
+	// NormalizeNFC wraps NORMALIZE_NFC
 	//
 	// another name for %G_NORMALIZE_DEFAULT_COMPOSE
 	NormalizeNFC NormalizeMode = 1
-	// NormalizeAll wraps G_NORMALIZE_ALL
+	// NormalizeAll wraps NORMALIZE_ALL
 	//
 	// beyond %G_NORMALIZE_DEFAULT also standardize the
 	//     "compatibility" characters in Unicode, such as SUPERSCRIPT THREE
@@ -1047,16 +1140,16 @@ const (
 	//     information may be lost but for most text operations such
 	//     characters should be considered the same
 	NormalizeAll NormalizeMode = 2
-	// NormalizeNFKD wraps G_NORMALIZE_NFKD
+	// NormalizeNFKD wraps NORMALIZE_NFKD
 	//
 	// another name for %G_NORMALIZE_ALL
 	NormalizeNFKD NormalizeMode = 2
-	// NormalizeAllCompose wraps G_NORMALIZE_ALL_COMPOSE
+	// NormalizeAllCompose wraps NORMALIZE_ALL_COMPOSE
 	//
 	// like %G_NORMALIZE_ALL, but with composed
 	//     forms rather than a maximally decomposed form
 	NormalizeAllCompose NormalizeMode = 3
-	// NormalizeNFKC wraps G_NORMALIZE_NFKC
+	// NormalizeNFKC wraps NORMALIZE_NFKC
 	//
 	// another name for %G_NORMALIZE_ALL_COMPOSE
 	NormalizeNFKC NormalizeMode = 3
@@ -1073,6 +1166,62 @@ func (e NormalizeMode) String() string {
 	}
 }
 
+// NumberParserError wraps GNumberParserError
+//
+// Error codes returned by functions converting a string to a number.
+type NumberParserError C.int
+
+const (
+	// NumberParserErrorInvalid wraps NUMBER_PARSER_ERROR_INVALID
+	//
+	// string was not a valid number
+	NumberParserErrorInvalid NumberParserError = 0
+	// NumberParserErrorOutOfBounds wraps NUMBER_PARSER_ERROR_OUT_OF_BOUNDS
+	//
+	// string was a number, but out of bounds
+	NumberParserErrorOutOfBounds NumberParserError = 1
+)
+
+
+func (e NumberParserError) String() string {
+	switch e {
+		case NumberParserErrorInvalid: return "NumberParserErrorInvalid"
+		case NumberParserErrorOutOfBounds: return "NumberParserErrorOutOfBounds"
+		default: return fmt.Sprintf("NumberParserError(%d)", e)
+	}
+}
+
+// OnceStatus wraps GOnceStatus
+//
+// The possible statuses of a one-time initialization function
+// controlled by a #GOnce struct.
+type OnceStatus C.int
+
+const (
+	// OnceStatusNotcalled wraps ONCE_STATUS_NOTCALLED
+	//
+	// the function has not been called yet.
+	OnceStatusNotcalled OnceStatus = 0
+	// OnceStatusProgress wraps ONCE_STATUS_PROGRESS
+	//
+	// the function call is currently in progress.
+	OnceStatusProgress OnceStatus = 1
+	// OnceStatusReady wraps ONCE_STATUS_READY
+	//
+	// the function has been called.
+	OnceStatusReady OnceStatus = 2
+)
+
+
+func (e OnceStatus) String() string {
+	switch e {
+		case OnceStatusNotcalled: return "OnceStatusNotcalled"
+		case OnceStatusProgress: return "OnceStatusProgress"
+		case OnceStatusReady: return "OnceStatusReady"
+		default: return fmt.Sprintf("OnceStatus(%d)", e)
+	}
+}
+
 // OptionArg wraps GOptionArg
 //
 // The #GOptionArg enum values determine which type of extra argument the
@@ -1082,45 +1231,45 @@ func (e NormalizeMode) String() string {
 type OptionArg C.int
 
 const (
-	// OptionArgNone wraps G_OPTION_ARG_NONE
+	// OptionArgNone wraps OPTION_ARG_NONE
 	//
 	// No extra argument. This is useful for simple flags or booleans.
 	OptionArgNone OptionArg = 0
-	// OptionArgString wraps G_OPTION_ARG_STRING
+	// OptionArgString wraps OPTION_ARG_STRING
 	//
 	// The option takes a UTF-8 string argument.
 	OptionArgString OptionArg = 1
-	// OptionArgInt wraps G_OPTION_ARG_INT
+	// OptionArgInt wraps OPTION_ARG_INT
 	//
 	// The option takes an integer argument.
 	OptionArgInt OptionArg = 2
-	// OptionArgCallback wraps G_OPTION_ARG_CALLBACK
+	// OptionArgCallback wraps OPTION_ARG_CALLBACK
 	//
 	// The option provides a callback (of type #GOptionArgFunc)
 	//   to parse the extra argument.
 	OptionArgCallback OptionArg = 3
-	// OptionArgFilename wraps G_OPTION_ARG_FILENAME
+	// OptionArgFilename wraps OPTION_ARG_FILENAME
 	//
 	// The option takes a filename as argument, which will
 	//      be in the GLib filename encoding rather than UTF-8.
 	OptionArgFilename OptionArg = 4
-	// OptionArgStringArray wraps G_OPTION_ARG_STRING_ARRAY
+	// OptionArgStringArray wraps OPTION_ARG_STRING_ARRAY
 	//
 	// The option takes a string argument, multiple
 	//   uses of the option are collected into an array of strings.
 	OptionArgStringArray OptionArg = 5
-	// OptionArgFilenameArray wraps G_OPTION_ARG_FILENAME_ARRAY
+	// OptionArgFilenameArray wraps OPTION_ARG_FILENAME_ARRAY
 	//
 	// The option takes a filename as argument,
 	//   multiple uses of the option are collected into an array of strings.
 	OptionArgFilenameArray OptionArg = 6
-	// OptionArgDouble wraps G_OPTION_ARG_DOUBLE
+	// OptionArgDouble wraps OPTION_ARG_DOUBLE
 	//
 	// The option takes a double argument. The argument
 	//   can be formatted either for the user's locale or for the "C" locale.
 	//   Since 2.12
 	OptionArgDouble OptionArg = 7
-	// OptionArgInt64 wraps G_OPTION_ARG_INT64
+	// OptionArgInt64 wraps OPTION_ARG_INT64
 	//
 	// The option takes a 64-bit integer. Like
 	//   %G_OPTION_ARG_INT but for larger numbers. The number can be in
@@ -1151,17 +1300,17 @@ func (e OptionArg) String() string {
 type OptionError C.int
 
 const (
-	// OptionErrorUnknownOption wraps G_OPTION_ERROR_UNKNOWN_OPTION
+	// OptionErrorUnknownOption wraps OPTION_ERROR_UNKNOWN_OPTION
 	//
 	// An option was not known to the parser.
 	//  This error will only be reported, if the parser hasn't been instructed
 	//  to ignore unknown options, see g_option_context_set_ignore_unknown_options().
 	OptionErrorUnknownOption OptionError = 0
-	// OptionErrorBadValue wraps G_OPTION_ERROR_BAD_VALUE
+	// OptionErrorBadValue wraps OPTION_ERROR_BAD_VALUE
 	//
 	// A value couldn't be parsed.
 	OptionErrorBadValue OptionError = 1
-	// OptionErrorFailed wraps G_OPTION_ERROR_FAILED
+	// OptionErrorFailed wraps OPTION_ERROR_FAILED
 	//
 	// A #GOptionArgFunc callback failed.
 	OptionErrorFailed OptionError = 2
@@ -1183,273 +1332,273 @@ func (e OptionError) String() string {
 type RegexError C.int
 
 const (
-	// RegexErrorCompile wraps G_REGEX_ERROR_COMPILE
+	// RegexErrorCompile wraps REGEX_ERROR_COMPILE
 	//
 	// Compilation of the regular expression failed.
 	RegexErrorCompile RegexError = 0
-	// RegexErrorOptimize wraps G_REGEX_ERROR_OPTIMIZE
+	// RegexErrorOptimize wraps REGEX_ERROR_OPTIMIZE
 	//
 	// Optimization of the regular expression failed.
 	RegexErrorOptimize RegexError = 1
-	// RegexErrorReplace wraps G_REGEX_ERROR_REPLACE
+	// RegexErrorReplace wraps REGEX_ERROR_REPLACE
 	//
 	// Replacement failed due to an ill-formed replacement
 	//     string.
 	RegexErrorReplace RegexError = 2
-	// RegexErrorMatch wraps G_REGEX_ERROR_MATCH
+	// RegexErrorMatch wraps REGEX_ERROR_MATCH
 	//
 	// The match process failed.
 	RegexErrorMatch RegexError = 3
-	// RegexErrorInternal wraps G_REGEX_ERROR_INTERNAL
+	// RegexErrorInternal wraps REGEX_ERROR_INTERNAL
 	//
 	// Internal error of the regular expression engine.
 	//     Since 2.16
 	RegexErrorInternal RegexError = 4
-	// RegexErrorStrayBackslash wraps G_REGEX_ERROR_STRAY_BACKSLASH
+	// RegexErrorStrayBackslash wraps REGEX_ERROR_STRAY_BACKSLASH
 	//
 	// "\\" at end of pattern. Since 2.16
 	RegexErrorStrayBackslash RegexError = 101
-	// RegexErrorMissingControlChar wraps G_REGEX_ERROR_MISSING_CONTROL_CHAR
+	// RegexErrorMissingControlChar wraps REGEX_ERROR_MISSING_CONTROL_CHAR
 	//
 	// "\\c" at end of pattern. Since 2.16
 	RegexErrorMissingControlChar RegexError = 102
-	// RegexErrorUnrecognizedEscape wraps G_REGEX_ERROR_UNRECOGNIZED_ESCAPE
+	// RegexErrorUnrecognizedEscape wraps REGEX_ERROR_UNRECOGNIZED_ESCAPE
 	//
 	// Unrecognized character follows "\\".
 	//     Since 2.16
 	RegexErrorUnrecognizedEscape RegexError = 103
-	// RegexErrorQuantifiersOutOfOrder wraps G_REGEX_ERROR_QUANTIFIERS_OUT_OF_ORDER
+	// RegexErrorQuantifiersOutOfOrder wraps REGEX_ERROR_QUANTIFIERS_OUT_OF_ORDER
 	//
 	// Numbers out of order in "{}"
 	//     quantifier. Since 2.16
 	RegexErrorQuantifiersOutOfOrder RegexError = 104
-	// RegexErrorQuantifierTooBig wraps G_REGEX_ERROR_QUANTIFIER_TOO_BIG
+	// RegexErrorQuantifierTooBig wraps REGEX_ERROR_QUANTIFIER_TOO_BIG
 	//
 	// Number too big in "{}" quantifier.
 	//     Since 2.16
 	RegexErrorQuantifierTooBig RegexError = 105
-	// RegexErrorUnterminatedCharacterClass wraps G_REGEX_ERROR_UNTERMINATED_CHARACTER_CLASS
+	// RegexErrorUnterminatedCharacterClass wraps REGEX_ERROR_UNTERMINATED_CHARACTER_CLASS
 	//
 	// Missing terminating "]" for
 	//     character class. Since 2.16
 	RegexErrorUnterminatedCharacterClass RegexError = 106
-	// RegexErrorInvalidEscapeInCharacterClass wraps G_REGEX_ERROR_INVALID_ESCAPE_IN_CHARACTER_CLASS
+	// RegexErrorInvalidEscapeInCharacterClass wraps REGEX_ERROR_INVALID_ESCAPE_IN_CHARACTER_CLASS
 	//
 	// Invalid escape sequence
 	//     in character class. Since 2.16
 	RegexErrorInvalidEscapeInCharacterClass RegexError = 107
-	// RegexErrorRangeOutOfOrder wraps G_REGEX_ERROR_RANGE_OUT_OF_ORDER
+	// RegexErrorRangeOutOfOrder wraps REGEX_ERROR_RANGE_OUT_OF_ORDER
 	//
 	// Range out of order in character class.
 	//     Since 2.16
 	RegexErrorRangeOutOfOrder RegexError = 108
-	// RegexErrorNothingToRepeat wraps G_REGEX_ERROR_NOTHING_TO_REPEAT
+	// RegexErrorNothingToRepeat wraps REGEX_ERROR_NOTHING_TO_REPEAT
 	//
 	// Nothing to repeat. Since 2.16
 	RegexErrorNothingToRepeat RegexError = 109
-	// RegexErrorUnrecognizedCharacter wraps G_REGEX_ERROR_UNRECOGNIZED_CHARACTER
+	// RegexErrorUnrecognizedCharacter wraps REGEX_ERROR_UNRECOGNIZED_CHARACTER
 	//
 	// Unrecognized character after "(?",
 	//     "(?&lt;" or "(?P". Since 2.16
 	RegexErrorUnrecognizedCharacter RegexError = 112
-	// RegexErrorPosixNamedClassOutsideClass wraps G_REGEX_ERROR_POSIX_NAMED_CLASS_OUTSIDE_CLASS
+	// RegexErrorPosixNamedClassOutsideClass wraps REGEX_ERROR_POSIX_NAMED_CLASS_OUTSIDE_CLASS
 	//
 	// POSIX named classes are
 	//     supported only within a class. Since 2.16
 	RegexErrorPosixNamedClassOutsideClass RegexError = 113
-	// RegexErrorUnmatchedParenthesis wraps G_REGEX_ERROR_UNMATCHED_PARENTHESIS
+	// RegexErrorUnmatchedParenthesis wraps REGEX_ERROR_UNMATCHED_PARENTHESIS
 	//
 	// Missing terminating ")" or ")"
 	//     without opening "(". Since 2.16
 	RegexErrorUnmatchedParenthesis RegexError = 114
-	// RegexErrorInexistentSubpatternReference wraps G_REGEX_ERROR_INEXISTENT_SUBPATTERN_REFERENCE
+	// RegexErrorInexistentSubpatternReference wraps REGEX_ERROR_INEXISTENT_SUBPATTERN_REFERENCE
 	//
 	// Reference to non-existent
 	//     subpattern. Since 2.16
 	RegexErrorInexistentSubpatternReference RegexError = 115
-	// RegexErrorUnterminatedComment wraps G_REGEX_ERROR_UNTERMINATED_COMMENT
+	// RegexErrorUnterminatedComment wraps REGEX_ERROR_UNTERMINATED_COMMENT
 	//
 	// Missing terminating ")" after comment.
 	//     Since 2.16
 	RegexErrorUnterminatedComment RegexError = 118
-	// RegexErrorExpressionTooLarge wraps G_REGEX_ERROR_EXPRESSION_TOO_LARGE
+	// RegexErrorExpressionTooLarge wraps REGEX_ERROR_EXPRESSION_TOO_LARGE
 	//
 	// Regular expression too large.
 	//     Since 2.16
 	RegexErrorExpressionTooLarge RegexError = 120
-	// RegexErrorMemoryError wraps G_REGEX_ERROR_MEMORY_ERROR
+	// RegexErrorMemoryError wraps REGEX_ERROR_MEMORY_ERROR
 	//
 	// Failed to get memory. Since 2.16
 	RegexErrorMemoryError RegexError = 121
-	// RegexErrorVariableLengthLookbehind wraps G_REGEX_ERROR_VARIABLE_LENGTH_LOOKBEHIND
+	// RegexErrorVariableLengthLookbehind wraps REGEX_ERROR_VARIABLE_LENGTH_LOOKBEHIND
 	//
 	// Lookbehind assertion is not
 	//     fixed length. Since 2.16
 	RegexErrorVariableLengthLookbehind RegexError = 125
-	// RegexErrorMalformedCondition wraps G_REGEX_ERROR_MALFORMED_CONDITION
+	// RegexErrorMalformedCondition wraps REGEX_ERROR_MALFORMED_CONDITION
 	//
 	// Malformed number or name after "(?(".
 	//     Since 2.16
 	RegexErrorMalformedCondition RegexError = 126
-	// RegexErrorTooManyConditionalBranches wraps G_REGEX_ERROR_TOO_MANY_CONDITIONAL_BRANCHES
+	// RegexErrorTooManyConditionalBranches wraps REGEX_ERROR_TOO_MANY_CONDITIONAL_BRANCHES
 	//
 	// Conditional group contains
 	//     more than two branches. Since 2.16
 	RegexErrorTooManyConditionalBranches RegexError = 127
-	// RegexErrorAssertionExpected wraps G_REGEX_ERROR_ASSERTION_EXPECTED
+	// RegexErrorAssertionExpected wraps REGEX_ERROR_ASSERTION_EXPECTED
 	//
 	// Assertion expected after "(?(".
 	//     Since 2.16
 	RegexErrorAssertionExpected RegexError = 128
-	// RegexErrorUnknownPosixClassName wraps G_REGEX_ERROR_UNKNOWN_POSIX_CLASS_NAME
+	// RegexErrorUnknownPosixClassName wraps REGEX_ERROR_UNKNOWN_POSIX_CLASS_NAME
 	//
 	// Unknown POSIX class name.
 	//     Since 2.16
 	RegexErrorUnknownPosixClassName RegexError = 130
-	// RegexErrorPosixCollatingElementsNotSupported wraps G_REGEX_ERROR_POSIX_COLLATING_ELEMENTS_NOT_SUPPORTED
+	// RegexErrorPosixCollatingElementsNotSupported wraps REGEX_ERROR_POSIX_COLLATING_ELEMENTS_NOT_SUPPORTED
 	//
 	// POSIX collating
 	//     elements are not supported. Since 2.16
 	RegexErrorPosixCollatingElementsNotSupported RegexError = 131
-	// RegexErrorHexCodeTooLarge wraps G_REGEX_ERROR_HEX_CODE_TOO_LARGE
+	// RegexErrorHexCodeTooLarge wraps REGEX_ERROR_HEX_CODE_TOO_LARGE
 	//
 	// Character value in "\\x{...}" sequence
 	//     is too large. Since 2.16
 	RegexErrorHexCodeTooLarge RegexError = 134
-	// RegexErrorInvalidCondition wraps G_REGEX_ERROR_INVALID_CONDITION
+	// RegexErrorInvalidCondition wraps REGEX_ERROR_INVALID_CONDITION
 	//
 	// Invalid condition "(?(0)". Since 2.16
 	RegexErrorInvalidCondition RegexError = 135
-	// RegexErrorSingleByteMatchInLookbehind wraps G_REGEX_ERROR_SINGLE_BYTE_MATCH_IN_LOOKBEHIND
+	// RegexErrorSingleByteMatchInLookbehind wraps REGEX_ERROR_SINGLE_BYTE_MATCH_IN_LOOKBEHIND
 	//
 	// \\C not allowed in
 	//     lookbehind assertion. Since 2.16
 	RegexErrorSingleByteMatchInLookbehind RegexError = 136
-	// RegexErrorInfiniteLoop wraps G_REGEX_ERROR_INFINITE_LOOP
+	// RegexErrorInfiniteLoop wraps REGEX_ERROR_INFINITE_LOOP
 	//
 	// Recursive call could loop indefinitely.
 	//     Since 2.16
 	RegexErrorInfiniteLoop RegexError = 140
-	// RegexErrorMissingSubpatternNameTerminator wraps G_REGEX_ERROR_MISSING_SUBPATTERN_NAME_TERMINATOR
+	// RegexErrorMissingSubpatternNameTerminator wraps REGEX_ERROR_MISSING_SUBPATTERN_NAME_TERMINATOR
 	//
 	// Missing terminator
 	//     in subpattern name. Since 2.16
 	RegexErrorMissingSubpatternNameTerminator RegexError = 142
-	// RegexErrorDuplicateSubpatternName wraps G_REGEX_ERROR_DUPLICATE_SUBPATTERN_NAME
+	// RegexErrorDuplicateSubpatternName wraps REGEX_ERROR_DUPLICATE_SUBPATTERN_NAME
 	//
 	// Two named subpatterns have
 	//     the same name. Since 2.16
 	RegexErrorDuplicateSubpatternName RegexError = 143
-	// RegexErrorMalformedProperty wraps G_REGEX_ERROR_MALFORMED_PROPERTY
+	// RegexErrorMalformedProperty wraps REGEX_ERROR_MALFORMED_PROPERTY
 	//
 	// Malformed "\\P" or "\\p" sequence.
 	//     Since 2.16
 	RegexErrorMalformedProperty RegexError = 146
-	// RegexErrorUnknownProperty wraps G_REGEX_ERROR_UNKNOWN_PROPERTY
+	// RegexErrorUnknownProperty wraps REGEX_ERROR_UNKNOWN_PROPERTY
 	//
 	// Unknown property name after "\\P" or
 	//     "\\p". Since 2.16
 	RegexErrorUnknownProperty RegexError = 147
-	// RegexErrorSubpatternNameTooLong wraps G_REGEX_ERROR_SUBPATTERN_NAME_TOO_LONG
+	// RegexErrorSubpatternNameTooLong wraps REGEX_ERROR_SUBPATTERN_NAME_TOO_LONG
 	//
 	// Subpattern name is too long
 	//     (maximum 32 characters). Since 2.16
 	RegexErrorSubpatternNameTooLong RegexError = 148
-	// RegexErrorTooManySubpatterns wraps G_REGEX_ERROR_TOO_MANY_SUBPATTERNS
+	// RegexErrorTooManySubpatterns wraps REGEX_ERROR_TOO_MANY_SUBPATTERNS
 	//
 	// Too many named subpatterns (maximum
 	//     10,000). Since 2.16
 	RegexErrorTooManySubpatterns RegexError = 149
-	// RegexErrorInvalidOctalValue wraps G_REGEX_ERROR_INVALID_OCTAL_VALUE
+	// RegexErrorInvalidOctalValue wraps REGEX_ERROR_INVALID_OCTAL_VALUE
 	//
 	// Octal value is greater than "\\377".
 	//     Since 2.16
 	RegexErrorInvalidOctalValue RegexError = 151
-	// RegexErrorTooManyBranchesInDefine wraps G_REGEX_ERROR_TOO_MANY_BRANCHES_IN_DEFINE
+	// RegexErrorTooManyBranchesInDefine wraps REGEX_ERROR_TOO_MANY_BRANCHES_IN_DEFINE
 	//
 	// "DEFINE" group contains more
 	//     than one branch. Since 2.16
 	RegexErrorTooManyBranchesInDefine RegexError = 154
-	// RegexErrorDefineRepetion wraps G_REGEX_ERROR_DEFINE_REPETION
+	// RegexErrorDefineRepetion wraps REGEX_ERROR_DEFINE_REPETION
 	//
 	// Repeating a "DEFINE" group is not allowed.
 	//     This error is never raised. Since: 2.16 Deprecated: 2.34
 	RegexErrorDefineRepetion RegexError = 155
-	// RegexErrorInconsistentNewlineOptions wraps G_REGEX_ERROR_INCONSISTENT_NEWLINE_OPTIONS
+	// RegexErrorInconsistentNewlineOptions wraps REGEX_ERROR_INCONSISTENT_NEWLINE_OPTIONS
 	//
 	// Inconsistent newline options.
 	//     Since 2.16
 	RegexErrorInconsistentNewlineOptions RegexError = 156
-	// RegexErrorMissingBackReference wraps G_REGEX_ERROR_MISSING_BACK_REFERENCE
+	// RegexErrorMissingBackReference wraps REGEX_ERROR_MISSING_BACK_REFERENCE
 	//
 	// "\\g" is not followed by a braced,
 	//      angle-bracketed, or quoted name or number, or by a plain number. Since: 2.16
 	RegexErrorMissingBackReference RegexError = 157
-	// RegexErrorInvalidRelativeReference wraps G_REGEX_ERROR_INVALID_RELATIVE_REFERENCE
+	// RegexErrorInvalidRelativeReference wraps REGEX_ERROR_INVALID_RELATIVE_REFERENCE
 	//
 	// relative reference must not be zero. Since: 2.34
 	RegexErrorInvalidRelativeReference RegexError = 158
-	// RegexErrorBacktrackingControlVerbArgumentForbidden wraps G_REGEX_ERROR_BACKTRACKING_CONTROL_VERB_ARGUMENT_FORBIDDEN
+	// RegexErrorBacktrackingControlVerbArgumentForbidden wraps REGEX_ERROR_BACKTRACKING_CONTROL_VERB_ARGUMENT_FORBIDDEN
 	//
 	// the backtracing
 	//     control verb used does not allow an argument. Since: 2.34
 	RegexErrorBacktrackingControlVerbArgumentForbidden RegexError = 159
-	// RegexErrorUnknownBacktrackingControlVerb wraps G_REGEX_ERROR_UNKNOWN_BACKTRACKING_CONTROL_VERB
+	// RegexErrorUnknownBacktrackingControlVerb wraps REGEX_ERROR_UNKNOWN_BACKTRACKING_CONTROL_VERB
 	//
 	// unknown backtracing
 	//     control verb. Since: 2.34
 	RegexErrorUnknownBacktrackingControlVerb RegexError = 160
-	// RegexErrorNumberTooBig wraps G_REGEX_ERROR_NUMBER_TOO_BIG
+	// RegexErrorNumberTooBig wraps REGEX_ERROR_NUMBER_TOO_BIG
 	//
 	// number is too big in escape sequence. Since: 2.34
 	RegexErrorNumberTooBig RegexError = 161
-	// RegexErrorMissingSubpatternName wraps G_REGEX_ERROR_MISSING_SUBPATTERN_NAME
+	// RegexErrorMissingSubpatternName wraps REGEX_ERROR_MISSING_SUBPATTERN_NAME
 	//
 	// Missing subpattern name. Since: 2.34
 	RegexErrorMissingSubpatternName RegexError = 162
-	// RegexErrorMissingDigit wraps G_REGEX_ERROR_MISSING_DIGIT
+	// RegexErrorMissingDigit wraps REGEX_ERROR_MISSING_DIGIT
 	//
 	// Missing digit. Since 2.34
 	RegexErrorMissingDigit RegexError = 163
-	// RegexErrorInvalidDataCharacter wraps G_REGEX_ERROR_INVALID_DATA_CHARACTER
+	// RegexErrorInvalidDataCharacter wraps REGEX_ERROR_INVALID_DATA_CHARACTER
 	//
 	// In JavaScript compatibility mode,
 	//     "[" is an invalid data character. Since: 2.34
 	RegexErrorInvalidDataCharacter RegexError = 164
-	// RegexErrorExtraSubpatternName wraps G_REGEX_ERROR_EXTRA_SUBPATTERN_NAME
+	// RegexErrorExtraSubpatternName wraps REGEX_ERROR_EXTRA_SUBPATTERN_NAME
 	//
 	// different names for subpatterns of the
 	//     same number are not allowed. Since: 2.34
 	RegexErrorExtraSubpatternName RegexError = 165
-	// RegexErrorBacktrackingControlVerbArgumentRequired wraps G_REGEX_ERROR_BACKTRACKING_CONTROL_VERB_ARGUMENT_REQUIRED
+	// RegexErrorBacktrackingControlVerbArgumentRequired wraps REGEX_ERROR_BACKTRACKING_CONTROL_VERB_ARGUMENT_REQUIRED
 	//
 	// the backtracing control
 	//     verb requires an argument. Since: 2.34
 	RegexErrorBacktrackingControlVerbArgumentRequired RegexError = 166
-	// RegexErrorInvalidControlChar wraps G_REGEX_ERROR_INVALID_CONTROL_CHAR
+	// RegexErrorInvalidControlChar wraps REGEX_ERROR_INVALID_CONTROL_CHAR
 	//
 	// "\\c" must be followed by an ASCII
 	//     character. Since: 2.34
 	RegexErrorInvalidControlChar RegexError = 168
-	// RegexErrorMissingName wraps G_REGEX_ERROR_MISSING_NAME
+	// RegexErrorMissingName wraps REGEX_ERROR_MISSING_NAME
 	//
 	// "\\k" is not followed by a braced, angle-bracketed, or
 	//     quoted name. Since: 2.34
 	RegexErrorMissingName RegexError = 169
-	// RegexErrorNotSupportedInClass wraps G_REGEX_ERROR_NOT_SUPPORTED_IN_CLASS
+	// RegexErrorNotSupportedInClass wraps REGEX_ERROR_NOT_SUPPORTED_IN_CLASS
 	//
 	// "\\N" is not supported in a class. Since: 2.34
 	RegexErrorNotSupportedInClass RegexError = 171
-	// RegexErrorTooManyForwardReferences wraps G_REGEX_ERROR_TOO_MANY_FORWARD_REFERENCES
+	// RegexErrorTooManyForwardReferences wraps REGEX_ERROR_TOO_MANY_FORWARD_REFERENCES
 	//
 	// too many forward references. Since: 2.34
 	RegexErrorTooManyForwardReferences RegexError = 172
-	// RegexErrorNameTooLong wraps G_REGEX_ERROR_NAME_TOO_LONG
+	// RegexErrorNameTooLong wraps REGEX_ERROR_NAME_TOO_LONG
 	//
 	// the name is too long in "(*MARK)", "(*PRUNE)",
 	//     "(*SKIP)", or "(*THEN)". Since: 2.34
 	RegexErrorNameTooLong RegexError = 175
-	// RegexErrorCharacterValueTooLarge wraps G_REGEX_ERROR_CHARACTER_VALUE_TOO_LARGE
+	// RegexErrorCharacterValueTooLarge wraps REGEX_ERROR_CHARACTER_VALUE_TOO_LARGE
 	//
 	// the character value in the \\u sequence is
 	//     too large. Since: 2.34
@@ -1527,15 +1676,15 @@ func (e RegexError) String() string {
 type SeekType C.int
 
 const (
-	// SeekCur wraps G_SEEK_CUR
+	// SeekCur wraps SEEK_CUR
 	//
 	// the current position in the file.
 	SeekCur SeekType = 0
-	// SeekSet wraps G_SEEK_SET
+	// SeekSet wraps SEEK_SET
 	//
 	// the start of the file.
 	SeekSet SeekType = 1
-	// SeekEnd wraps G_SEEK_END
+	// SeekEnd wraps SEEK_END
 	//
 	// the end of the file.
 	SeekEnd SeekType = 2
@@ -1557,15 +1706,15 @@ func (e SeekType) String() string {
 type ShellError C.int
 
 const (
-	// ShellErrorBadQuoting wraps G_SHELL_ERROR_BAD_QUOTING
+	// ShellErrorBadQuoting wraps SHELL_ERROR_BAD_QUOTING
 	//
 	// Mismatched or otherwise mangled quoting.
 	ShellErrorBadQuoting ShellError = 0
-	// ShellErrorEmptyString wraps G_SHELL_ERROR_EMPTY_STRING
+	// ShellErrorEmptyString wraps SHELL_ERROR_EMPTY_STRING
 	//
 	// String to be parsed was empty.
 	ShellErrorEmptyString ShellError = 1
-	// ShellErrorFailed wraps G_SHELL_ERROR_FAILED
+	// ShellErrorFailed wraps SHELL_ERROR_FAILED
 	//
 	// Some other error.
 	ShellErrorFailed ShellError = 2
@@ -1581,93 +1730,124 @@ func (e ShellError) String() string {
 	}
 }
 
+// SliceConfig wraps GSliceConfig
+type SliceConfig C.int
+
+const (
+	// SliceConfigAlwaysMalloc wraps SLICE_CONFIG_ALWAYS_MALLOC
+	SliceConfigAlwaysMalloc SliceConfig = 1
+	// SliceConfigBypassMagazines wraps SLICE_CONFIG_BYPASS_MAGAZINES
+	SliceConfigBypassMagazines SliceConfig = 2
+	// SliceConfigWorkingSetMsecs wraps SLICE_CONFIG_WORKING_SET_MSECS
+	SliceConfigWorkingSetMsecs SliceConfig = 3
+	// SliceConfigColorIncrement wraps SLICE_CONFIG_COLOR_INCREMENT
+	SliceConfigColorIncrement SliceConfig = 4
+	// SliceConfigChunkSizes wraps SLICE_CONFIG_CHUNK_SIZES
+	SliceConfigChunkSizes SliceConfig = 5
+	// SliceConfigContentionCounter wraps SLICE_CONFIG_CONTENTION_COUNTER
+	SliceConfigContentionCounter SliceConfig = 6
+)
+
+
+func (e SliceConfig) String() string {
+	switch e {
+		case SliceConfigAlwaysMalloc: return "SliceConfigAlwaysMalloc"
+		case SliceConfigBypassMagazines: return "SliceConfigBypassMagazines"
+		case SliceConfigChunkSizes: return "SliceConfigChunkSizes"
+		case SliceConfigColorIncrement: return "SliceConfigColorIncrement"
+		case SliceConfigContentionCounter: return "SliceConfigContentionCounter"
+		case SliceConfigWorkingSetMsecs: return "SliceConfigWorkingSetMsecs"
+		default: return fmt.Sprintf("SliceConfig(%d)", e)
+	}
+}
+
 // SpawnError wraps GSpawnError
 //
 // Error codes returned by spawning processes.
 type SpawnError C.int
 
 const (
-	// SpawnErrorFork wraps G_SPAWN_ERROR_FORK
+	// SpawnErrorFork wraps SPAWN_ERROR_FORK
 	//
 	// Fork failed due to lack of memory.
 	SpawnErrorFork SpawnError = 0
-	// SpawnErrorRead wraps G_SPAWN_ERROR_READ
+	// SpawnErrorRead wraps SPAWN_ERROR_READ
 	//
 	// Read or select on pipes failed.
 	SpawnErrorRead SpawnError = 1
-	// SpawnErrorChdir wraps G_SPAWN_ERROR_CHDIR
+	// SpawnErrorChdir wraps SPAWN_ERROR_CHDIR
 	//
 	// Changing to working directory failed.
 	SpawnErrorChdir SpawnError = 2
-	// SpawnErrorAcces wraps G_SPAWN_ERROR_ACCES
+	// SpawnErrorAcces wraps SPAWN_ERROR_ACCES
 	//
 	// execv() returned `EACCES`
 	SpawnErrorAcces SpawnError = 3
-	// SpawnErrorPerm wraps G_SPAWN_ERROR_PERM
+	// SpawnErrorPerm wraps SPAWN_ERROR_PERM
 	//
 	// execv() returned `EPERM`
 	SpawnErrorPerm SpawnError = 4
-	// SpawnErrorTooBig wraps G_SPAWN_ERROR_TOO_BIG
+	// SpawnErrorTooBig wraps SPAWN_ERROR_TOO_BIG
 	//
 	// execv() returned `E2BIG`
 	SpawnErrorTooBig SpawnError = 5
-	// SpawnError2Big wraps G_SPAWN_ERROR_2BIG
+	// SpawnError2Big wraps SPAWN_ERROR_2BIG
 	//
 	// deprecated alias for %G_SPAWN_ERROR_TOO_BIG (deprecated since GLib 2.32)
 	SpawnError2Big SpawnError = 5
-	// SpawnErrorNoexec wraps G_SPAWN_ERROR_NOEXEC
+	// SpawnErrorNoexec wraps SPAWN_ERROR_NOEXEC
 	//
 	// execv() returned `ENOEXEC`
 	SpawnErrorNoexec SpawnError = 6
-	// SpawnErrorNametoolong wraps G_SPAWN_ERROR_NAMETOOLONG
+	// SpawnErrorNametoolong wraps SPAWN_ERROR_NAMETOOLONG
 	//
 	// execv() returned `ENAMETOOLONG`
 	SpawnErrorNametoolong SpawnError = 7
-	// SpawnErrorNoent wraps G_SPAWN_ERROR_NOENT
+	// SpawnErrorNoent wraps SPAWN_ERROR_NOENT
 	//
 	// execv() returned `ENOENT`
 	SpawnErrorNoent SpawnError = 8
-	// SpawnErrorNOMEM wraps G_SPAWN_ERROR_NOMEM
+	// SpawnErrorNOMEM wraps SPAWN_ERROR_NOMEM
 	//
 	// execv() returned `ENOMEM`
 	SpawnErrorNOMEM SpawnError = 9
-	// SpawnErrorNotdir wraps G_SPAWN_ERROR_NOTDIR
+	// SpawnErrorNotdir wraps SPAWN_ERROR_NOTDIR
 	//
 	// execv() returned `ENOTDIR`
 	SpawnErrorNotdir SpawnError = 10
-	// SpawnErrorLoop wraps G_SPAWN_ERROR_LOOP
+	// SpawnErrorLoop wraps SPAWN_ERROR_LOOP
 	//
 	// execv() returned `ELOOP`
 	SpawnErrorLoop SpawnError = 11
-	// SpawnErrorTxtbusy wraps G_SPAWN_ERROR_TXTBUSY
+	// SpawnErrorTxtbusy wraps SPAWN_ERROR_TXTBUSY
 	//
 	// execv() returned `ETXTBUSY`
 	SpawnErrorTxtbusy SpawnError = 12
-	// SpawnErrorIO wraps G_SPAWN_ERROR_IO
+	// SpawnErrorIO wraps SPAWN_ERROR_IO
 	//
 	// execv() returned `EIO`
 	SpawnErrorIO SpawnError = 13
-	// SpawnErrorNfile wraps G_SPAWN_ERROR_NFILE
+	// SpawnErrorNfile wraps SPAWN_ERROR_NFILE
 	//
 	// execv() returned `ENFILE`
 	SpawnErrorNfile SpawnError = 14
-	// SpawnErrorMfile wraps G_SPAWN_ERROR_MFILE
+	// SpawnErrorMfile wraps SPAWN_ERROR_MFILE
 	//
 	// execv() returned `EMFILE`
 	SpawnErrorMfile SpawnError = 15
-	// SpawnErrorInval wraps G_SPAWN_ERROR_INVAL
+	// SpawnErrorInval wraps SPAWN_ERROR_INVAL
 	//
 	// execv() returned `EINVAL`
 	SpawnErrorInval SpawnError = 16
-	// SpawnErrorIsdir wraps G_SPAWN_ERROR_ISDIR
+	// SpawnErrorIsdir wraps SPAWN_ERROR_ISDIR
 	//
 	// execv() returned `EISDIR`
 	SpawnErrorIsdir SpawnError = 17
-	// SpawnErrorLibbad wraps G_SPAWN_ERROR_LIBBAD
+	// SpawnErrorLibbad wraps SPAWN_ERROR_LIBBAD
 	//
 	// execv() returned `ELIBBAD`
 	SpawnErrorLibbad SpawnError = 18
-	// SpawnErrorFailed wraps G_SPAWN_ERROR_FAILED
+	// SpawnErrorFailed wraps SPAWN_ERROR_FAILED
 	//
 	// Some other fatal failure,
 	//   `error-&gt;message` should explain.
@@ -1701,6 +1881,142 @@ func (e SpawnError) String() string {
 	}
 }
 
+// TestFileType wraps GTestFileType
+//
+// The type of file to return the filename for, when used with
+// [func@GLib.test_build_filename].
+// 
+// These two options correspond rather directly to the 'dist' and
+// 'built' terminology that automake uses and are explicitly used to
+// distinguish between the 'srcdir' and 'builddir' being separate. All
+// files in your project should either be dist (in the `EXTRA_DIST` or
+// `dist_schema_DATA` sense, in which case they will always be in the
+// srcdir) or built (in the `BUILT_SOURCES` sense, in which case they
+// will always be in the builddir).
+// 
+// Note: As a general rule of automake, files that are generated only as
+// part of the build-from-git process (but then are distributed with the
+// tarball) always go in srcdir (even if doing a srcdir != builddir
+// build from git) and are considered as distributed files.
+// 
+// The same principles apply for other build systems, such as meson.
+type TestFileType C.int
+
+const (
+	// TestDist wraps TEST_DIST
+	//
+	// a file that was included in the distribution tarball
+	TestDist TestFileType = 0
+	// TestBuilt wraps TEST_BUILT
+	//
+	// a file that was built on the compiling machine
+	TestBuilt TestFileType = 1
+)
+
+
+func (e TestFileType) String() string {
+	switch e {
+		case TestBuilt: return "TestBuilt"
+		case TestDist: return "TestDist"
+		default: return fmt.Sprintf("TestFileType(%d)", e)
+	}
+}
+
+// TestLogType wraps GTestLogType
+type TestLogType C.int
+
+const (
+	// TestLogNone wraps TEST_LOG_NONE
+	TestLogNone TestLogType = 0
+	// TestLogError wraps TEST_LOG_ERROR
+	TestLogError TestLogType = 1
+	// TestLogStartBinary wraps TEST_LOG_START_BINARY
+	TestLogStartBinary TestLogType = 2
+	// TestLogListCase wraps TEST_LOG_LIST_CASE
+	TestLogListCase TestLogType = 3
+	// TestLogSkipCase wraps TEST_LOG_SKIP_CASE
+	TestLogSkipCase TestLogType = 4
+	// TestLogStartCase wraps TEST_LOG_START_CASE
+	TestLogStartCase TestLogType = 5
+	// TestLogStopCase wraps TEST_LOG_STOP_CASE
+	TestLogStopCase TestLogType = 6
+	// TestLogMinResult wraps TEST_LOG_MIN_RESULT
+	TestLogMinResult TestLogType = 7
+	// TestLogMaxResult wraps TEST_LOG_MAX_RESULT
+	TestLogMaxResult TestLogType = 8
+	// TestLogMessage wraps TEST_LOG_MESSAGE
+	TestLogMessage TestLogType = 9
+	// TestLogStartSuite wraps TEST_LOG_START_SUITE
+	TestLogStartSuite TestLogType = 10
+	// TestLogStopSuite wraps TEST_LOG_STOP_SUITE
+	TestLogStopSuite TestLogType = 11
+)
+
+
+func (e TestLogType) String() string {
+	switch e {
+		case TestLogError: return "TestLogError"
+		case TestLogListCase: return "TestLogListCase"
+		case TestLogMaxResult: return "TestLogMaxResult"
+		case TestLogMessage: return "TestLogMessage"
+		case TestLogMinResult: return "TestLogMinResult"
+		case TestLogNone: return "TestLogNone"
+		case TestLogSkipCase: return "TestLogSkipCase"
+		case TestLogStartBinary: return "TestLogStartBinary"
+		case TestLogStartCase: return "TestLogStartCase"
+		case TestLogStartSuite: return "TestLogStartSuite"
+		case TestLogStopCase: return "TestLogStopCase"
+		case TestLogStopSuite: return "TestLogStopSuite"
+		default: return fmt.Sprintf("TestLogType(%d)", e)
+	}
+}
+
+// TestResult wraps GTestResult
+type TestResult C.int
+
+const (
+	// TestRunSuccess wraps TEST_RUN_SUCCESS
+	TestRunSuccess TestResult = 0
+	// TestRunSkipped wraps TEST_RUN_SKIPPED
+	TestRunSkipped TestResult = 1
+	// TestRunFailure wraps TEST_RUN_FAILURE
+	TestRunFailure TestResult = 2
+	// TestRunIncomplete wraps TEST_RUN_INCOMPLETE
+	TestRunIncomplete TestResult = 3
+)
+
+
+func (e TestResult) String() string {
+	switch e {
+		case TestRunFailure: return "TestRunFailure"
+		case TestRunIncomplete: return "TestRunIncomplete"
+		case TestRunSkipped: return "TestRunSkipped"
+		case TestRunSuccess: return "TestRunSuccess"
+		default: return fmt.Sprintf("TestResult(%d)", e)
+	}
+}
+
+// ThreadError wraps GThreadError
+//
+// Possible errors of thread related functions.
+type ThreadError C.int
+
+const (
+	// ThreadErrorAgain wraps THREAD_ERROR_AGAIN
+	//
+	// a thread couldn't be created due to resource
+	//                        shortage. Try again later.
+	ThreadErrorAgain ThreadError = 0
+)
+
+
+func (e ThreadError) String() string {
+	switch e {
+		case ThreadErrorAgain: return "ThreadErrorAgain"
+		default: return fmt.Sprintf("ThreadError(%d)", e)
+	}
+}
+
 // TimeType wraps GTimeType
 //
 // Disambiguates a given time in two ways.
@@ -1714,15 +2030,15 @@ func (e SpawnError) String() string {
 type TimeType C.int
 
 const (
-	// TimeTypeStandard wraps G_TIME_TYPE_STANDARD
+	// TimeTypeStandard wraps TIME_TYPE_STANDARD
 	//
 	// the time is in local standard time
 	TimeTypeStandard TimeType = 0
-	// TimeTypeDaylight wraps G_TIME_TYPE_DAYLIGHT
+	// TimeTypeDaylight wraps TIME_TYPE_DAYLIGHT
 	//
 	// the time is in local daylight time
 	TimeTypeDaylight TimeType = 1
-	// TimeTypeUniversal wraps G_TIME_TYPE_UNIVERSAL
+	// TimeTypeUniversal wraps TIME_TYPE_UNIVERSAL
 	//
 	// the time is in UTC
 	TimeTypeUniversal TimeType = 2
@@ -1745,95 +2061,95 @@ func (e TimeType) String() string {
 type TokenType C.int
 
 const (
-	// TokenEOF wraps G_TOKEN_EOF
+	// TokenEOF wraps TOKEN_EOF
 	//
 	// the end of the file
 	TokenEOF TokenType = 0
-	// TokenLeftParen wraps G_TOKEN_LEFT_PAREN
+	// TokenLeftParen wraps TOKEN_LEFT_PAREN
 	//
 	// a '(' character
 	TokenLeftParen TokenType = 40
-	// TokenRightParen wraps G_TOKEN_RIGHT_PAREN
+	// TokenRightParen wraps TOKEN_RIGHT_PAREN
 	//
 	// a ')' character
 	TokenRightParen TokenType = 41
-	// TokenLeftCurly wraps G_TOKEN_LEFT_CURLY
+	// TokenLeftCurly wraps TOKEN_LEFT_CURLY
 	//
 	// a '{' character
 	TokenLeftCurly TokenType = 123
-	// TokenRightCurly wraps G_TOKEN_RIGHT_CURLY
+	// TokenRightCurly wraps TOKEN_RIGHT_CURLY
 	//
 	// a '}' character
 	TokenRightCurly TokenType = 125
-	// TokenLeftBrace wraps G_TOKEN_LEFT_BRACE
+	// TokenLeftBrace wraps TOKEN_LEFT_BRACE
 	//
 	// a '[' character
 	TokenLeftBrace TokenType = 91
-	// TokenRightBrace wraps G_TOKEN_RIGHT_BRACE
+	// TokenRightBrace wraps TOKEN_RIGHT_BRACE
 	//
 	// a ']' character
 	TokenRightBrace TokenType = 93
-	// TokenEqualSign wraps G_TOKEN_EQUAL_SIGN
+	// TokenEqualSign wraps TOKEN_EQUAL_SIGN
 	//
 	// a '=' character
 	TokenEqualSign TokenType = 61
-	// TokenComma wraps G_TOKEN_COMMA
+	// TokenComma wraps TOKEN_COMMA
 	//
 	// a ',' character
 	TokenComma TokenType = 44
-	// TokenNone wraps G_TOKEN_NONE
+	// TokenNone wraps TOKEN_NONE
 	//
 	// not a token
 	TokenNone TokenType = 256
-	// TokenError wraps G_TOKEN_ERROR
+	// TokenError wraps TOKEN_ERROR
 	//
 	// an error occurred
 	TokenError TokenType = 257
-	// TokenChar wraps G_TOKEN_CHAR
+	// TokenChar wraps TOKEN_CHAR
 	//
 	// a character
 	TokenChar TokenType = 258
-	// TokenBinary wraps G_TOKEN_BINARY
+	// TokenBinary wraps TOKEN_BINARY
 	//
 	// a binary integer
 	TokenBinary TokenType = 259
-	// TokenOctal wraps G_TOKEN_OCTAL
+	// TokenOctal wraps TOKEN_OCTAL
 	//
 	// an octal integer
 	TokenOctal TokenType = 260
-	// TokenInt wraps G_TOKEN_INT
+	// TokenInt wraps TOKEN_INT
 	//
 	// an integer
 	TokenInt TokenType = 261
-	// TokenHex wraps G_TOKEN_HEX
+	// TokenHex wraps TOKEN_HEX
 	//
 	// a hex integer
 	TokenHex TokenType = 262
-	// TokenFloat wraps G_TOKEN_FLOAT
+	// TokenFloat wraps TOKEN_FLOAT
 	//
 	// a floating point number
 	TokenFloat TokenType = 263
-	// TokenString wraps G_TOKEN_STRING
+	// TokenString wraps TOKEN_STRING
 	//
 	// a string
 	TokenString TokenType = 264
-	// TokenSymbol wraps G_TOKEN_SYMBOL
+	// TokenSymbol wraps TOKEN_SYMBOL
 	//
 	// a symbol
 	TokenSymbol TokenType = 265
-	// TokenIdentifier wraps G_TOKEN_IDENTIFIER
+	// TokenIdentifier wraps TOKEN_IDENTIFIER
 	//
 	// an identifier
 	TokenIdentifier TokenType = 266
-	// TokenIdentifierNull wraps G_TOKEN_IDENTIFIER_NULL
+	// TokenIdentifierNull wraps TOKEN_IDENTIFIER_NULL
 	//
 	// a null identifier
 	TokenIdentifierNull TokenType = 267
-	// TokenCommentSingle wraps G_TOKEN_COMMENT_SINGLE
+	// TokenCommentSingle wraps TOKEN_COMMENT_SINGLE
 	//
 	// one line comment
 	TokenCommentSingle TokenType = 268
-	// TokenCommentMulti wraps G_TOKEN_COMMENT_MULTI
+	// TokenCommentMulti wraps TOKEN_COMMENT_MULTI
 	//
 	// multi line comment
 	TokenCommentMulti TokenType = 269
@@ -1907,22 +2223,22 @@ func (e TokenType) String() string {
 type TraverseType C.int
 
 const (
-	// InOrder wraps G_IN_ORDER
+	// InOrder wraps IN_ORDER
 	//
 	// visits a node's left child first, then the node itself,
 	//              then its right child. This is the one to use if you
 	//              want the output sorted according to the compare
 	//              function.
 	InOrder TraverseType = 0
-	// PreOrder wraps G_PRE_ORDER
+	// PreOrder wraps PRE_ORDER
 	//
 	// visits a node, then its children.
 	PreOrder TraverseType = 1
-	// PostOrder wraps G_POST_ORDER
+	// PostOrder wraps POST_ORDER
 	//
 	// visits the node's children, then the node itself.
 	PostOrder TraverseType = 2
-	// LevelOrder wraps G_LEVEL_ORDER
+	// LevelOrder wraps LEVEL_ORDER
 	//
 	// is not implemented for
 	//              [balanced binary trees](data-structures.html#binary-trees).
@@ -1955,199 +2271,199 @@ func (e TraverseType) String() string {
 type UnicodeBreakType C.int
 
 const (
-	// UnicodeBreakMandatory wraps G_UNICODE_BREAK_MANDATORY
+	// UnicodeBreakMandatory wraps UNICODE_BREAK_MANDATORY
 	//
 	// Mandatory Break (BK)
 	UnicodeBreakMandatory UnicodeBreakType = 0
-	// UnicodeBreakCarriageReturn wraps G_UNICODE_BREAK_CARRIAGE_RETURN
+	// UnicodeBreakCarriageReturn wraps UNICODE_BREAK_CARRIAGE_RETURN
 	//
 	// Carriage Return (CR)
 	UnicodeBreakCarriageReturn UnicodeBreakType = 1
-	// UnicodeBreakLineFeed wraps G_UNICODE_BREAK_LINE_FEED
+	// UnicodeBreakLineFeed wraps UNICODE_BREAK_LINE_FEED
 	//
 	// Line Feed (LF)
 	UnicodeBreakLineFeed UnicodeBreakType = 2
-	// UnicodeBreakCombiningMark wraps G_UNICODE_BREAK_COMBINING_MARK
+	// UnicodeBreakCombiningMark wraps UNICODE_BREAK_COMBINING_MARK
 	//
 	// Attached Characters and Combining Marks (CM)
 	UnicodeBreakCombiningMark UnicodeBreakType = 3
-	// UnicodeBreakSurrogate wraps G_UNICODE_BREAK_SURROGATE
+	// UnicodeBreakSurrogate wraps UNICODE_BREAK_SURROGATE
 	//
 	// Surrogates (SG)
 	UnicodeBreakSurrogate UnicodeBreakType = 4
-	// UnicodeBreakZeroWidthSpace wraps G_UNICODE_BREAK_ZERO_WIDTH_SPACE
+	// UnicodeBreakZeroWidthSpace wraps UNICODE_BREAK_ZERO_WIDTH_SPACE
 	//
 	// Zero Width Space (ZW)
 	UnicodeBreakZeroWidthSpace UnicodeBreakType = 5
-	// UnicodeBreakInseparable wraps G_UNICODE_BREAK_INSEPARABLE
+	// UnicodeBreakInseparable wraps UNICODE_BREAK_INSEPARABLE
 	//
 	// Inseparable (IN)
 	UnicodeBreakInseparable UnicodeBreakType = 6
-	// UnicodeBreakNonBreakingGlue wraps G_UNICODE_BREAK_NON_BREAKING_GLUE
+	// UnicodeBreakNonBreakingGlue wraps UNICODE_BREAK_NON_BREAKING_GLUE
 	//
 	// Non-breaking ("Glue") (GL)
 	UnicodeBreakNonBreakingGlue UnicodeBreakType = 7
-	// UnicodeBreakContingent wraps G_UNICODE_BREAK_CONTINGENT
+	// UnicodeBreakContingent wraps UNICODE_BREAK_CONTINGENT
 	//
 	// Contingent Break Opportunity (CB)
 	UnicodeBreakContingent UnicodeBreakType = 8
-	// UnicodeBreakSpace wraps G_UNICODE_BREAK_SPACE
+	// UnicodeBreakSpace wraps UNICODE_BREAK_SPACE
 	//
 	// Space (SP)
 	UnicodeBreakSpace UnicodeBreakType = 9
-	// UnicodeBreakAfter wraps G_UNICODE_BREAK_AFTER
+	// UnicodeBreakAfter wraps UNICODE_BREAK_AFTER
 	//
 	// Break Opportunity After (BA)
 	UnicodeBreakAfter UnicodeBreakType = 10
-	// UnicodeBreakBefore wraps G_UNICODE_BREAK_BEFORE
+	// UnicodeBreakBefore wraps UNICODE_BREAK_BEFORE
 	//
 	// Break Opportunity Before (BB)
 	UnicodeBreakBefore UnicodeBreakType = 11
-	// UnicodeBreakBeforeAndAfter wraps G_UNICODE_BREAK_BEFORE_AND_AFTER
+	// UnicodeBreakBeforeAndAfter wraps UNICODE_BREAK_BEFORE_AND_AFTER
 	//
 	// Break Opportunity Before and After (B2)
 	UnicodeBreakBeforeAndAfter UnicodeBreakType = 12
-	// UnicodeBreakHyphen wraps G_UNICODE_BREAK_HYPHEN
+	// UnicodeBreakHyphen wraps UNICODE_BREAK_HYPHEN
 	//
 	// Hyphen (HY)
 	UnicodeBreakHyphen UnicodeBreakType = 13
-	// UnicodeBreakNonStarter wraps G_UNICODE_BREAK_NON_STARTER
+	// UnicodeBreakNonStarter wraps UNICODE_BREAK_NON_STARTER
 	//
 	// Nonstarter (NS)
 	UnicodeBreakNonStarter UnicodeBreakType = 14
-	// UnicodeBreakOpenPunctuation wraps G_UNICODE_BREAK_OPEN_PUNCTUATION
+	// UnicodeBreakOpenPunctuation wraps UNICODE_BREAK_OPEN_PUNCTUATION
 	//
 	// Opening Punctuation (OP)
 	UnicodeBreakOpenPunctuation UnicodeBreakType = 15
-	// UnicodeBreakClosePunctuation wraps G_UNICODE_BREAK_CLOSE_PUNCTUATION
+	// UnicodeBreakClosePunctuation wraps UNICODE_BREAK_CLOSE_PUNCTUATION
 	//
 	// Closing Punctuation (CL)
 	UnicodeBreakClosePunctuation UnicodeBreakType = 16
-	// UnicodeBreakQuotation wraps G_UNICODE_BREAK_QUOTATION
+	// UnicodeBreakQuotation wraps UNICODE_BREAK_QUOTATION
 	//
 	// Ambiguous Quotation (QU)
 	UnicodeBreakQuotation UnicodeBreakType = 17
-	// UnicodeBreakExclamation wraps G_UNICODE_BREAK_EXCLAMATION
+	// UnicodeBreakExclamation wraps UNICODE_BREAK_EXCLAMATION
 	//
 	// Exclamation/Interrogation (EX)
 	UnicodeBreakExclamation UnicodeBreakType = 18
-	// UnicodeBreakIdeographic wraps G_UNICODE_BREAK_IDEOGRAPHIC
+	// UnicodeBreakIdeographic wraps UNICODE_BREAK_IDEOGRAPHIC
 	//
 	// Ideographic (ID)
 	UnicodeBreakIdeographic UnicodeBreakType = 19
-	// UnicodeBreakNumeric wraps G_UNICODE_BREAK_NUMERIC
+	// UnicodeBreakNumeric wraps UNICODE_BREAK_NUMERIC
 	//
 	// Numeric (NU)
 	UnicodeBreakNumeric UnicodeBreakType = 20
-	// UnicodeBreakInfixSeparator wraps G_UNICODE_BREAK_INFIX_SEPARATOR
+	// UnicodeBreakInfixSeparator wraps UNICODE_BREAK_INFIX_SEPARATOR
 	//
 	// Infix Separator (Numeric) (IS)
 	UnicodeBreakInfixSeparator UnicodeBreakType = 21
-	// UnicodeBreakSymbol wraps G_UNICODE_BREAK_SYMBOL
+	// UnicodeBreakSymbol wraps UNICODE_BREAK_SYMBOL
 	//
 	// Symbols Allowing Break After (SY)
 	UnicodeBreakSymbol UnicodeBreakType = 22
-	// UnicodeBreakAlphabetic wraps G_UNICODE_BREAK_ALPHABETIC
+	// UnicodeBreakAlphabetic wraps UNICODE_BREAK_ALPHABETIC
 	//
 	// Ordinary Alphabetic and Symbol Characters (AL)
 	UnicodeBreakAlphabetic UnicodeBreakType = 23
-	// UnicodeBreakPrefix wraps G_UNICODE_BREAK_PREFIX
+	// UnicodeBreakPrefix wraps UNICODE_BREAK_PREFIX
 	//
 	// Prefix (Numeric) (PR)
 	UnicodeBreakPrefix UnicodeBreakType = 24
-	// UnicodeBreakPostfix wraps G_UNICODE_BREAK_POSTFIX
+	// UnicodeBreakPostfix wraps UNICODE_BREAK_POSTFIX
 	//
 	// Postfix (Numeric) (PO)
 	UnicodeBreakPostfix UnicodeBreakType = 25
-	// UnicodeBreakComplexContext wraps G_UNICODE_BREAK_COMPLEX_CONTEXT
+	// UnicodeBreakComplexContext wraps UNICODE_BREAK_COMPLEX_CONTEXT
 	//
 	// Complex Content Dependent (South East Asian) (SA)
 	UnicodeBreakComplexContext UnicodeBreakType = 26
-	// UnicodeBreakAmbiguous wraps G_UNICODE_BREAK_AMBIGUOUS
+	// UnicodeBreakAmbiguous wraps UNICODE_BREAK_AMBIGUOUS
 	//
 	// Ambiguous (Alphabetic or Ideographic) (AI)
 	UnicodeBreakAmbiguous UnicodeBreakType = 27
-	// UnicodeBreakUnknown wraps G_UNICODE_BREAK_UNKNOWN
+	// UnicodeBreakUnknown wraps UNICODE_BREAK_UNKNOWN
 	//
 	// Unknown (XX)
 	UnicodeBreakUnknown UnicodeBreakType = 28
-	// UnicodeBreakNextLine wraps G_UNICODE_BREAK_NEXT_LINE
+	// UnicodeBreakNextLine wraps UNICODE_BREAK_NEXT_LINE
 	//
 	// Next Line (NL)
 	UnicodeBreakNextLine UnicodeBreakType = 29
-	// UnicodeBreakWordJoiner wraps G_UNICODE_BREAK_WORD_JOINER
+	// UnicodeBreakWordJoiner wraps UNICODE_BREAK_WORD_JOINER
 	//
 	// Word Joiner (WJ)
 	UnicodeBreakWordJoiner UnicodeBreakType = 30
-	// UnicodeBreakHangulLJamo wraps G_UNICODE_BREAK_HANGUL_L_JAMO
+	// UnicodeBreakHangulLJamo wraps UNICODE_BREAK_HANGUL_L_JAMO
 	//
 	// Hangul L Jamo (JL)
 	UnicodeBreakHangulLJamo UnicodeBreakType = 31
-	// UnicodeBreakHangulVJamo wraps G_UNICODE_BREAK_HANGUL_V_JAMO
+	// UnicodeBreakHangulVJamo wraps UNICODE_BREAK_HANGUL_V_JAMO
 	//
 	// Hangul V Jamo (JV)
 	UnicodeBreakHangulVJamo UnicodeBreakType = 32
-	// UnicodeBreakHangulTJamo wraps G_UNICODE_BREAK_HANGUL_T_JAMO
+	// UnicodeBreakHangulTJamo wraps UNICODE_BREAK_HANGUL_T_JAMO
 	//
 	// Hangul T Jamo (JT)
 	UnicodeBreakHangulTJamo UnicodeBreakType = 33
-	// UnicodeBreakHangulLvSyllable wraps G_UNICODE_BREAK_HANGUL_LV_SYLLABLE
+	// UnicodeBreakHangulLvSyllable wraps UNICODE_BREAK_HANGUL_LV_SYLLABLE
 	//
 	// Hangul LV Syllable (H2)
 	UnicodeBreakHangulLvSyllable UnicodeBreakType = 34
-	// UnicodeBreakHangulLvtSyllable wraps G_UNICODE_BREAK_HANGUL_LVT_SYLLABLE
+	// UnicodeBreakHangulLvtSyllable wraps UNICODE_BREAK_HANGUL_LVT_SYLLABLE
 	//
 	// Hangul LVT Syllable (H3)
 	UnicodeBreakHangulLvtSyllable UnicodeBreakType = 35
-	// UnicodeBreakCloseParanthesis wraps G_UNICODE_BREAK_CLOSE_PARANTHESIS
+	// UnicodeBreakCloseParanthesis wraps UNICODE_BREAK_CLOSE_PARANTHESIS
 	//
 	// Closing Parenthesis (CP). Since 2.28. Deprecated: 2.70: Use %G_UNICODE_BREAK_CLOSE_PARENTHESIS instead.
 	UnicodeBreakCloseParanthesis UnicodeBreakType = 36
-	// UnicodeBreakCloseParenthesis wraps G_UNICODE_BREAK_CLOSE_PARENTHESIS
+	// UnicodeBreakCloseParenthesis wraps UNICODE_BREAK_CLOSE_PARENTHESIS
 	//
 	// Closing Parenthesis (CP). Since 2.70
 	UnicodeBreakCloseParenthesis UnicodeBreakType = 36
-	// UnicodeBreakConditionalJapaneseStarter wraps G_UNICODE_BREAK_CONDITIONAL_JAPANESE_STARTER
+	// UnicodeBreakConditionalJapaneseStarter wraps UNICODE_BREAK_CONDITIONAL_JAPANESE_STARTER
 	//
 	// Conditional Japanese Starter (CJ). Since: 2.32
 	UnicodeBreakConditionalJapaneseStarter UnicodeBreakType = 37
-	// UnicodeBreakHebrewLetter wraps G_UNICODE_BREAK_HEBREW_LETTER
+	// UnicodeBreakHebrewLetter wraps UNICODE_BREAK_HEBREW_LETTER
 	//
 	// Hebrew Letter (HL). Since: 2.32
 	UnicodeBreakHebrewLetter UnicodeBreakType = 38
-	// UnicodeBreakRegionalIndicator wraps G_UNICODE_BREAK_REGIONAL_INDICATOR
+	// UnicodeBreakRegionalIndicator wraps UNICODE_BREAK_REGIONAL_INDICATOR
 	//
 	// Regional Indicator (RI). Since: 2.36
 	UnicodeBreakRegionalIndicator UnicodeBreakType = 39
-	// UnicodeBreakEmojiBase wraps G_UNICODE_BREAK_EMOJI_BASE
+	// UnicodeBreakEmojiBase wraps UNICODE_BREAK_EMOJI_BASE
 	//
 	// Emoji Base (EB). Since: 2.50
 	UnicodeBreakEmojiBase UnicodeBreakType = 40
-	// UnicodeBreakEmojiModifier wraps G_UNICODE_BREAK_EMOJI_MODIFIER
+	// UnicodeBreakEmojiModifier wraps UNICODE_BREAK_EMOJI_MODIFIER
 	//
 	// Emoji Modifier (EM). Since: 2.50
 	UnicodeBreakEmojiModifier UnicodeBreakType = 41
-	// UnicodeBreakZeroWidthJoiner wraps G_UNICODE_BREAK_ZERO_WIDTH_JOINER
+	// UnicodeBreakZeroWidthJoiner wraps UNICODE_BREAK_ZERO_WIDTH_JOINER
 	//
 	// Zero Width Joiner (ZWJ). Since: 2.50
 	UnicodeBreakZeroWidthJoiner UnicodeBreakType = 42
-	// UnicodeBreakAksara wraps G_UNICODE_BREAK_AKSARA
+	// UnicodeBreakAksara wraps UNICODE_BREAK_AKSARA
 	//
 	// Aksara (AK). Since: 2.80
 	UnicodeBreakAksara UnicodeBreakType = 43
-	// UnicodeBreakAksaraPreBase wraps G_UNICODE_BREAK_AKSARA_PRE_BASE
+	// UnicodeBreakAksaraPreBase wraps UNICODE_BREAK_AKSARA_PRE_BASE
 	//
 	// Aksara Pre-Base (AP). Since: 2.80
 	UnicodeBreakAksaraPreBase UnicodeBreakType = 44
-	// UnicodeBreakAksaraStart wraps G_UNICODE_BREAK_AKSARA_START
+	// UnicodeBreakAksaraStart wraps UNICODE_BREAK_AKSARA_START
 	//
 	// Aksara Start (AS). Since: 2.80
 	UnicodeBreakAksaraStart UnicodeBreakType = 45
-	// UnicodeBreakViramaFinal wraps G_UNICODE_BREAK_VIRAMA_FINAL
+	// UnicodeBreakViramaFinal wraps UNICODE_BREAK_VIRAMA_FINAL
 	//
 	// Virama Final (VF). Since: 2.80
 	UnicodeBreakViramaFinal UnicodeBreakType = 46
-	// UnicodeBreakVirama wraps G_UNICODE_BREAK_VIRAMA
+	// UnicodeBreakVirama wraps UNICODE_BREAK_VIRAMA
 	//
 	// Virama (VI). Since: 2.80
 	UnicodeBreakVirama UnicodeBreakType = 47
@@ -2221,696 +2537,696 @@ func (e UnicodeBreakType) String() string {
 type UnicodeScript C.int
 
 const (
-	// UnicodeScriptInvalidCode wraps G_UNICODE_SCRIPT_INVALID_CODE
+	// UnicodeScriptInvalidCode wraps UNICODE_SCRIPT_INVALID_CODE
 	//
 	// a value never returned from g_unichar_get_script()
 	UnicodeScriptInvalidCode UnicodeScript = -1
-	// UnicodeScriptCommon wraps G_UNICODE_SCRIPT_COMMON
+	// UnicodeScriptCommon wraps UNICODE_SCRIPT_COMMON
 	//
 	// a character used by multiple different scripts
 	UnicodeScriptCommon UnicodeScript = 0
-	// UnicodeScriptInherited wraps G_UNICODE_SCRIPT_INHERITED
+	// UnicodeScriptInherited wraps UNICODE_SCRIPT_INHERITED
 	//
 	// a mark glyph that takes its script from the
 	//                               base glyph to which it is attached
 	UnicodeScriptInherited UnicodeScript = 1
-	// UnicodeScriptArabic wraps G_UNICODE_SCRIPT_ARABIC
+	// UnicodeScriptArabic wraps UNICODE_SCRIPT_ARABIC
 	//
 	// Arabic
 	UnicodeScriptArabic UnicodeScript = 2
-	// UnicodeScriptArmenian wraps G_UNICODE_SCRIPT_ARMENIAN
+	// UnicodeScriptArmenian wraps UNICODE_SCRIPT_ARMENIAN
 	//
 	// Armenian
 	UnicodeScriptArmenian UnicodeScript = 3
-	// UnicodeScriptBengali wraps G_UNICODE_SCRIPT_BENGALI
+	// UnicodeScriptBengali wraps UNICODE_SCRIPT_BENGALI
 	//
 	// Bengali
 	UnicodeScriptBengali UnicodeScript = 4
-	// UnicodeScriptBopomofo wraps G_UNICODE_SCRIPT_BOPOMOFO
+	// UnicodeScriptBopomofo wraps UNICODE_SCRIPT_BOPOMOFO
 	//
 	// Bopomofo
 	UnicodeScriptBopomofo UnicodeScript = 5
-	// UnicodeScriptCherokee wraps G_UNICODE_SCRIPT_CHEROKEE
+	// UnicodeScriptCherokee wraps UNICODE_SCRIPT_CHEROKEE
 	//
 	// Cherokee
 	UnicodeScriptCherokee UnicodeScript = 6
-	// UnicodeScriptCoptic wraps G_UNICODE_SCRIPT_COPTIC
+	// UnicodeScriptCoptic wraps UNICODE_SCRIPT_COPTIC
 	//
 	// Coptic
 	UnicodeScriptCoptic UnicodeScript = 7
-	// UnicodeScriptCyrillic wraps G_UNICODE_SCRIPT_CYRILLIC
+	// UnicodeScriptCyrillic wraps UNICODE_SCRIPT_CYRILLIC
 	//
 	// Cyrillic
 	UnicodeScriptCyrillic UnicodeScript = 8
-	// UnicodeScriptDeseret wraps G_UNICODE_SCRIPT_DESERET
+	// UnicodeScriptDeseret wraps UNICODE_SCRIPT_DESERET
 	//
 	// Deseret
 	UnicodeScriptDeseret UnicodeScript = 9
-	// UnicodeScriptDevanagari wraps G_UNICODE_SCRIPT_DEVANAGARI
+	// UnicodeScriptDevanagari wraps UNICODE_SCRIPT_DEVANAGARI
 	//
 	// Devanagari
 	UnicodeScriptDevanagari UnicodeScript = 10
-	// UnicodeScriptEthiopic wraps G_UNICODE_SCRIPT_ETHIOPIC
+	// UnicodeScriptEthiopic wraps UNICODE_SCRIPT_ETHIOPIC
 	//
 	// Ethiopic
 	UnicodeScriptEthiopic UnicodeScript = 11
-	// UnicodeScriptGeorgian wraps G_UNICODE_SCRIPT_GEORGIAN
+	// UnicodeScriptGeorgian wraps UNICODE_SCRIPT_GEORGIAN
 	//
 	// Georgian
 	UnicodeScriptGeorgian UnicodeScript = 12
-	// UnicodeScriptGothic wraps G_UNICODE_SCRIPT_GOTHIC
+	// UnicodeScriptGothic wraps UNICODE_SCRIPT_GOTHIC
 	//
 	// Gothic
 	UnicodeScriptGothic UnicodeScript = 13
-	// UnicodeScriptGreek wraps G_UNICODE_SCRIPT_GREEK
+	// UnicodeScriptGreek wraps UNICODE_SCRIPT_GREEK
 	//
 	// Greek
 	UnicodeScriptGreek UnicodeScript = 14
-	// UnicodeScriptGujarati wraps G_UNICODE_SCRIPT_GUJARATI
+	// UnicodeScriptGujarati wraps UNICODE_SCRIPT_GUJARATI
 	//
 	// Gujarati
 	UnicodeScriptGujarati UnicodeScript = 15
-	// UnicodeScriptGurmukhi wraps G_UNICODE_SCRIPT_GURMUKHI
+	// UnicodeScriptGurmukhi wraps UNICODE_SCRIPT_GURMUKHI
 	//
 	// Gurmukhi
 	UnicodeScriptGurmukhi UnicodeScript = 16
-	// UnicodeScriptHan wraps G_UNICODE_SCRIPT_HAN
+	// UnicodeScriptHan wraps UNICODE_SCRIPT_HAN
 	//
 	// Han
 	UnicodeScriptHan UnicodeScript = 17
-	// UnicodeScriptHangul wraps G_UNICODE_SCRIPT_HANGUL
+	// UnicodeScriptHangul wraps UNICODE_SCRIPT_HANGUL
 	//
 	// Hangul
 	UnicodeScriptHangul UnicodeScript = 18
-	// UnicodeScriptHebrew wraps G_UNICODE_SCRIPT_HEBREW
+	// UnicodeScriptHebrew wraps UNICODE_SCRIPT_HEBREW
 	//
 	// Hebrew
 	UnicodeScriptHebrew UnicodeScript = 19
-	// UnicodeScriptHiragana wraps G_UNICODE_SCRIPT_HIRAGANA
+	// UnicodeScriptHiragana wraps UNICODE_SCRIPT_HIRAGANA
 	//
 	// Hiragana
 	UnicodeScriptHiragana UnicodeScript = 20
-	// UnicodeScriptKannada wraps G_UNICODE_SCRIPT_KANNADA
+	// UnicodeScriptKannada wraps UNICODE_SCRIPT_KANNADA
 	//
 	// Kannada
 	UnicodeScriptKannada UnicodeScript = 21
-	// UnicodeScriptKatakana wraps G_UNICODE_SCRIPT_KATAKANA
+	// UnicodeScriptKatakana wraps UNICODE_SCRIPT_KATAKANA
 	//
 	// Katakana
 	UnicodeScriptKatakana UnicodeScript = 22
-	// UnicodeScriptKhmer wraps G_UNICODE_SCRIPT_KHMER
+	// UnicodeScriptKhmer wraps UNICODE_SCRIPT_KHMER
 	//
 	// Khmer
 	UnicodeScriptKhmer UnicodeScript = 23
-	// UnicodeScriptLao wraps G_UNICODE_SCRIPT_LAO
+	// UnicodeScriptLao wraps UNICODE_SCRIPT_LAO
 	//
 	// Lao
 	UnicodeScriptLao UnicodeScript = 24
-	// UnicodeScriptLatin wraps G_UNICODE_SCRIPT_LATIN
+	// UnicodeScriptLatin wraps UNICODE_SCRIPT_LATIN
 	//
 	// Latin
 	UnicodeScriptLatin UnicodeScript = 25
-	// UnicodeScriptMalayalam wraps G_UNICODE_SCRIPT_MALAYALAM
+	// UnicodeScriptMalayalam wraps UNICODE_SCRIPT_MALAYALAM
 	//
 	// Malayalam
 	UnicodeScriptMalayalam UnicodeScript = 26
-	// UnicodeScriptMongolian wraps G_UNICODE_SCRIPT_MONGOLIAN
+	// UnicodeScriptMongolian wraps UNICODE_SCRIPT_MONGOLIAN
 	//
 	// Mongolian
 	UnicodeScriptMongolian UnicodeScript = 27
-	// UnicodeScriptMyanmar wraps G_UNICODE_SCRIPT_MYANMAR
+	// UnicodeScriptMyanmar wraps UNICODE_SCRIPT_MYANMAR
 	//
 	// Myanmar
 	UnicodeScriptMyanmar UnicodeScript = 28
-	// UnicodeScriptOgham wraps G_UNICODE_SCRIPT_OGHAM
+	// UnicodeScriptOgham wraps UNICODE_SCRIPT_OGHAM
 	//
 	// Ogham
 	UnicodeScriptOgham UnicodeScript = 29
-	// UnicodeScriptOldItalic wraps G_UNICODE_SCRIPT_OLD_ITALIC
+	// UnicodeScriptOldItalic wraps UNICODE_SCRIPT_OLD_ITALIC
 	//
 	// Old Italic
 	UnicodeScriptOldItalic UnicodeScript = 30
-	// UnicodeScriptOriya wraps G_UNICODE_SCRIPT_ORIYA
+	// UnicodeScriptOriya wraps UNICODE_SCRIPT_ORIYA
 	//
 	// Oriya
 	UnicodeScriptOriya UnicodeScript = 31
-	// UnicodeScriptRunic wraps G_UNICODE_SCRIPT_RUNIC
+	// UnicodeScriptRunic wraps UNICODE_SCRIPT_RUNIC
 	//
 	// Runic
 	UnicodeScriptRunic UnicodeScript = 32
-	// UnicodeScriptSinhala wraps G_UNICODE_SCRIPT_SINHALA
+	// UnicodeScriptSinhala wraps UNICODE_SCRIPT_SINHALA
 	//
 	// Sinhala
 	UnicodeScriptSinhala UnicodeScript = 33
-	// UnicodeScriptSyriac wraps G_UNICODE_SCRIPT_SYRIAC
+	// UnicodeScriptSyriac wraps UNICODE_SCRIPT_SYRIAC
 	//
 	// Syriac
 	UnicodeScriptSyriac UnicodeScript = 34
-	// UnicodeScriptTamil wraps G_UNICODE_SCRIPT_TAMIL
+	// UnicodeScriptTamil wraps UNICODE_SCRIPT_TAMIL
 	//
 	// Tamil
 	UnicodeScriptTamil UnicodeScript = 35
-	// UnicodeScriptTelugu wraps G_UNICODE_SCRIPT_TELUGU
+	// UnicodeScriptTelugu wraps UNICODE_SCRIPT_TELUGU
 	//
 	// Telugu
 	UnicodeScriptTelugu UnicodeScript = 36
-	// UnicodeScriptThaana wraps G_UNICODE_SCRIPT_THAANA
+	// UnicodeScriptThaana wraps UNICODE_SCRIPT_THAANA
 	//
 	// Thaana
 	UnicodeScriptThaana UnicodeScript = 37
-	// UnicodeScriptThai wraps G_UNICODE_SCRIPT_THAI
+	// UnicodeScriptThai wraps UNICODE_SCRIPT_THAI
 	//
 	// Thai
 	UnicodeScriptThai UnicodeScript = 38
-	// UnicodeScriptTibetan wraps G_UNICODE_SCRIPT_TIBETAN
+	// UnicodeScriptTibetan wraps UNICODE_SCRIPT_TIBETAN
 	//
 	// Tibetan
 	UnicodeScriptTibetan UnicodeScript = 39
-	// UnicodeScriptCanadianAboriginal wraps G_UNICODE_SCRIPT_CANADIAN_ABORIGINAL
+	// UnicodeScriptCanadianAboriginal wraps UNICODE_SCRIPT_CANADIAN_ABORIGINAL
 	//
 	// Canadian Aboriginal
 	UnicodeScriptCanadianAboriginal UnicodeScript = 40
-	// UnicodeScriptYi wraps G_UNICODE_SCRIPT_YI
+	// UnicodeScriptYi wraps UNICODE_SCRIPT_YI
 	//
 	// Yi
 	UnicodeScriptYi UnicodeScript = 41
-	// UnicodeScriptTagalog wraps G_UNICODE_SCRIPT_TAGALOG
+	// UnicodeScriptTagalog wraps UNICODE_SCRIPT_TAGALOG
 	//
 	// Tagalog
 	UnicodeScriptTagalog UnicodeScript = 42
-	// UnicodeScriptHanunoo wraps G_UNICODE_SCRIPT_HANUNOO
+	// UnicodeScriptHanunoo wraps UNICODE_SCRIPT_HANUNOO
 	//
 	// Hanunoo
 	UnicodeScriptHanunoo UnicodeScript = 43
-	// UnicodeScriptBuhid wraps G_UNICODE_SCRIPT_BUHID
+	// UnicodeScriptBuhid wraps UNICODE_SCRIPT_BUHID
 	//
 	// Buhid
 	UnicodeScriptBuhid UnicodeScript = 44
-	// UnicodeScriptTagbanwa wraps G_UNICODE_SCRIPT_TAGBANWA
+	// UnicodeScriptTagbanwa wraps UNICODE_SCRIPT_TAGBANWA
 	//
 	// Tagbanwa
 	UnicodeScriptTagbanwa UnicodeScript = 45
-	// UnicodeScriptBraille wraps G_UNICODE_SCRIPT_BRAILLE
+	// UnicodeScriptBraille wraps UNICODE_SCRIPT_BRAILLE
 	//
 	// Braille
 	UnicodeScriptBraille UnicodeScript = 46
-	// UnicodeScriptCypriot wraps G_UNICODE_SCRIPT_CYPRIOT
+	// UnicodeScriptCypriot wraps UNICODE_SCRIPT_CYPRIOT
 	//
 	// Cypriot
 	UnicodeScriptCypriot UnicodeScript = 47
-	// UnicodeScriptLimbu wraps G_UNICODE_SCRIPT_LIMBU
+	// UnicodeScriptLimbu wraps UNICODE_SCRIPT_LIMBU
 	//
 	// Limbu
 	UnicodeScriptLimbu UnicodeScript = 48
-	// UnicodeScriptOsmanya wraps G_UNICODE_SCRIPT_OSMANYA
+	// UnicodeScriptOsmanya wraps UNICODE_SCRIPT_OSMANYA
 	//
 	// Osmanya
 	UnicodeScriptOsmanya UnicodeScript = 49
-	// UnicodeScriptShavian wraps G_UNICODE_SCRIPT_SHAVIAN
+	// UnicodeScriptShavian wraps UNICODE_SCRIPT_SHAVIAN
 	//
 	// Shavian
 	UnicodeScriptShavian UnicodeScript = 50
-	// UnicodeScriptLinearB wraps G_UNICODE_SCRIPT_LINEAR_B
+	// UnicodeScriptLinearB wraps UNICODE_SCRIPT_LINEAR_B
 	//
 	// Linear B
 	UnicodeScriptLinearB UnicodeScript = 51
-	// UnicodeScriptTaiLe wraps G_UNICODE_SCRIPT_TAI_LE
+	// UnicodeScriptTaiLe wraps UNICODE_SCRIPT_TAI_LE
 	//
 	// Tai Le
 	UnicodeScriptTaiLe UnicodeScript = 52
-	// UnicodeScriptUgaritic wraps G_UNICODE_SCRIPT_UGARITIC
+	// UnicodeScriptUgaritic wraps UNICODE_SCRIPT_UGARITIC
 	//
 	// Ugaritic
 	UnicodeScriptUgaritic UnicodeScript = 53
-	// UnicodeScriptNewTaiLue wraps G_UNICODE_SCRIPT_NEW_TAI_LUE
+	// UnicodeScriptNewTaiLue wraps UNICODE_SCRIPT_NEW_TAI_LUE
 	//
 	// New Tai Lue
 	UnicodeScriptNewTaiLue UnicodeScript = 54
-	// UnicodeScriptBuginese wraps G_UNICODE_SCRIPT_BUGINESE
+	// UnicodeScriptBuginese wraps UNICODE_SCRIPT_BUGINESE
 	//
 	// Buginese
 	UnicodeScriptBuginese UnicodeScript = 55
-	// UnicodeScriptGlagolitic wraps G_UNICODE_SCRIPT_GLAGOLITIC
+	// UnicodeScriptGlagolitic wraps UNICODE_SCRIPT_GLAGOLITIC
 	//
 	// Glagolitic
 	UnicodeScriptGlagolitic UnicodeScript = 56
-	// UnicodeScriptTifinagh wraps G_UNICODE_SCRIPT_TIFINAGH
+	// UnicodeScriptTifinagh wraps UNICODE_SCRIPT_TIFINAGH
 	//
 	// Tifinagh
 	UnicodeScriptTifinagh UnicodeScript = 57
-	// UnicodeScriptSylotiNagri wraps G_UNICODE_SCRIPT_SYLOTI_NAGRI
+	// UnicodeScriptSylotiNagri wraps UNICODE_SCRIPT_SYLOTI_NAGRI
 	//
 	// Syloti Nagri
 	UnicodeScriptSylotiNagri UnicodeScript = 58
-	// UnicodeScriptOldPersian wraps G_UNICODE_SCRIPT_OLD_PERSIAN
+	// UnicodeScriptOldPersian wraps UNICODE_SCRIPT_OLD_PERSIAN
 	//
 	// Old Persian
 	UnicodeScriptOldPersian UnicodeScript = 59
-	// UnicodeScriptKharoshthi wraps G_UNICODE_SCRIPT_KHAROSHTHI
+	// UnicodeScriptKharoshthi wraps UNICODE_SCRIPT_KHAROSHTHI
 	//
 	// Kharoshthi
 	UnicodeScriptKharoshthi UnicodeScript = 60
-	// UnicodeScriptUnknown wraps G_UNICODE_SCRIPT_UNKNOWN
+	// UnicodeScriptUnknown wraps UNICODE_SCRIPT_UNKNOWN
 	//
 	// an unassigned code point
 	UnicodeScriptUnknown UnicodeScript = 61
-	// UnicodeScriptBalinese wraps G_UNICODE_SCRIPT_BALINESE
+	// UnicodeScriptBalinese wraps UNICODE_SCRIPT_BALINESE
 	//
 	// Balinese
 	UnicodeScriptBalinese UnicodeScript = 62
-	// UnicodeScriptCuneiform wraps G_UNICODE_SCRIPT_CUNEIFORM
+	// UnicodeScriptCuneiform wraps UNICODE_SCRIPT_CUNEIFORM
 	//
 	// Cuneiform
 	UnicodeScriptCuneiform UnicodeScript = 63
-	// UnicodeScriptPhoenician wraps G_UNICODE_SCRIPT_PHOENICIAN
+	// UnicodeScriptPhoenician wraps UNICODE_SCRIPT_PHOENICIAN
 	//
 	// Phoenician
 	UnicodeScriptPhoenician UnicodeScript = 64
-	// UnicodeScriptPhagsPa wraps G_UNICODE_SCRIPT_PHAGS_PA
+	// UnicodeScriptPhagsPa wraps UNICODE_SCRIPT_PHAGS_PA
 	//
 	// Phags-pa
 	UnicodeScriptPhagsPa UnicodeScript = 65
-	// UnicodeScriptNko wraps G_UNICODE_SCRIPT_NKO
+	// UnicodeScriptNko wraps UNICODE_SCRIPT_NKO
 	//
 	// N'Ko
 	UnicodeScriptNko UnicodeScript = 66
-	// UnicodeScriptKayahLi wraps G_UNICODE_SCRIPT_KAYAH_LI
+	// UnicodeScriptKayahLi wraps UNICODE_SCRIPT_KAYAH_LI
 	//
 	// Kayah Li. Since 2.16.3
 	UnicodeScriptKayahLi UnicodeScript = 67
-	// UnicodeScriptLepcha wraps G_UNICODE_SCRIPT_LEPCHA
+	// UnicodeScriptLepcha wraps UNICODE_SCRIPT_LEPCHA
 	//
 	// Lepcha. Since 2.16.3
 	UnicodeScriptLepcha UnicodeScript = 68
-	// UnicodeScriptRejang wraps G_UNICODE_SCRIPT_REJANG
+	// UnicodeScriptRejang wraps UNICODE_SCRIPT_REJANG
 	//
 	// Rejang. Since 2.16.3
 	UnicodeScriptRejang UnicodeScript = 69
-	// UnicodeScriptSundanese wraps G_UNICODE_SCRIPT_SUNDANESE
+	// UnicodeScriptSundanese wraps UNICODE_SCRIPT_SUNDANESE
 	//
 	// Sundanese. Since 2.16.3
 	UnicodeScriptSundanese UnicodeScript = 70
-	// UnicodeScriptSaurashtra wraps G_UNICODE_SCRIPT_SAURASHTRA
+	// UnicodeScriptSaurashtra wraps UNICODE_SCRIPT_SAURASHTRA
 	//
 	// Saurashtra. Since 2.16.3
 	UnicodeScriptSaurashtra UnicodeScript = 71
-	// UnicodeScriptCham wraps G_UNICODE_SCRIPT_CHAM
+	// UnicodeScriptCham wraps UNICODE_SCRIPT_CHAM
 	//
 	// Cham. Since 2.16.3
 	UnicodeScriptCham UnicodeScript = 72
-	// UnicodeScriptOlChiki wraps G_UNICODE_SCRIPT_OL_CHIKI
+	// UnicodeScriptOlChiki wraps UNICODE_SCRIPT_OL_CHIKI
 	//
 	// Ol Chiki. Since 2.16.3
 	UnicodeScriptOlChiki UnicodeScript = 73
-	// UnicodeScriptVai wraps G_UNICODE_SCRIPT_VAI
+	// UnicodeScriptVai wraps UNICODE_SCRIPT_VAI
 	//
 	// Vai. Since 2.16.3
 	UnicodeScriptVai UnicodeScript = 74
-	// UnicodeScriptCarian wraps G_UNICODE_SCRIPT_CARIAN
+	// UnicodeScriptCarian wraps UNICODE_SCRIPT_CARIAN
 	//
 	// Carian. Since 2.16.3
 	UnicodeScriptCarian UnicodeScript = 75
-	// UnicodeScriptLycian wraps G_UNICODE_SCRIPT_LYCIAN
+	// UnicodeScriptLycian wraps UNICODE_SCRIPT_LYCIAN
 	//
 	// Lycian. Since 2.16.3
 	UnicodeScriptLycian UnicodeScript = 76
-	// UnicodeScriptLydian wraps G_UNICODE_SCRIPT_LYDIAN
+	// UnicodeScriptLydian wraps UNICODE_SCRIPT_LYDIAN
 	//
 	// Lydian. Since 2.16.3
 	UnicodeScriptLydian UnicodeScript = 77
-	// UnicodeScriptAvestan wraps G_UNICODE_SCRIPT_AVESTAN
+	// UnicodeScriptAvestan wraps UNICODE_SCRIPT_AVESTAN
 	//
 	// Avestan. Since 2.26
 	UnicodeScriptAvestan UnicodeScript = 78
-	// UnicodeScriptBamum wraps G_UNICODE_SCRIPT_BAMUM
+	// UnicodeScriptBamum wraps UNICODE_SCRIPT_BAMUM
 	//
 	// Bamum. Since 2.26
 	UnicodeScriptBamum UnicodeScript = 79
-	// UnicodeScriptEgyptianHieroglyphs wraps G_UNICODE_SCRIPT_EGYPTIAN_HIEROGLYPHS
+	// UnicodeScriptEgyptianHieroglyphs wraps UNICODE_SCRIPT_EGYPTIAN_HIEROGLYPHS
 	//
 	// Egyptian Hieroglpyhs. Since 2.26
 	UnicodeScriptEgyptianHieroglyphs UnicodeScript = 80
-	// UnicodeScriptImperialAramaic wraps G_UNICODE_SCRIPT_IMPERIAL_ARAMAIC
+	// UnicodeScriptImperialAramaic wraps UNICODE_SCRIPT_IMPERIAL_ARAMAIC
 	//
 	// Imperial Aramaic. Since 2.26
 	UnicodeScriptImperialAramaic UnicodeScript = 81
-	// UnicodeScriptInscriptionalPahlavi wraps G_UNICODE_SCRIPT_INSCRIPTIONAL_PAHLAVI
+	// UnicodeScriptInscriptionalPahlavi wraps UNICODE_SCRIPT_INSCRIPTIONAL_PAHLAVI
 	//
 	// Inscriptional Pahlavi. Since 2.26
 	UnicodeScriptInscriptionalPahlavi UnicodeScript = 82
-	// UnicodeScriptInscriptionalParthian wraps G_UNICODE_SCRIPT_INSCRIPTIONAL_PARTHIAN
+	// UnicodeScriptInscriptionalParthian wraps UNICODE_SCRIPT_INSCRIPTIONAL_PARTHIAN
 	//
 	// Inscriptional Parthian. Since 2.26
 	UnicodeScriptInscriptionalParthian UnicodeScript = 83
-	// UnicodeScriptJavanese wraps G_UNICODE_SCRIPT_JAVANESE
+	// UnicodeScriptJavanese wraps UNICODE_SCRIPT_JAVANESE
 	//
 	// Javanese. Since 2.26
 	UnicodeScriptJavanese UnicodeScript = 84
-	// UnicodeScriptKaithi wraps G_UNICODE_SCRIPT_KAITHI
+	// UnicodeScriptKaithi wraps UNICODE_SCRIPT_KAITHI
 	//
 	// Kaithi. Since 2.26
 	UnicodeScriptKaithi UnicodeScript = 85
-	// UnicodeScriptLisu wraps G_UNICODE_SCRIPT_LISU
+	// UnicodeScriptLisu wraps UNICODE_SCRIPT_LISU
 	//
 	// Lisu. Since 2.26
 	UnicodeScriptLisu UnicodeScript = 86
-	// UnicodeScriptMeeteiMayek wraps G_UNICODE_SCRIPT_MEETEI_MAYEK
+	// UnicodeScriptMeeteiMayek wraps UNICODE_SCRIPT_MEETEI_MAYEK
 	//
 	// Meetei Mayek. Since 2.26
 	UnicodeScriptMeeteiMayek UnicodeScript = 87
-	// UnicodeScriptOldSouthArabian wraps G_UNICODE_SCRIPT_OLD_SOUTH_ARABIAN
+	// UnicodeScriptOldSouthArabian wraps UNICODE_SCRIPT_OLD_SOUTH_ARABIAN
 	//
 	// Old South Arabian. Since 2.26
 	UnicodeScriptOldSouthArabian UnicodeScript = 88
-	// UnicodeScriptOldTurkic wraps G_UNICODE_SCRIPT_OLD_TURKIC
+	// UnicodeScriptOldTurkic wraps UNICODE_SCRIPT_OLD_TURKIC
 	//
 	// Old Turkic. Since 2.28
 	UnicodeScriptOldTurkic UnicodeScript = 89
-	// UnicodeScriptSamaritan wraps G_UNICODE_SCRIPT_SAMARITAN
+	// UnicodeScriptSamaritan wraps UNICODE_SCRIPT_SAMARITAN
 	//
 	// Samaritan. Since 2.26
 	UnicodeScriptSamaritan UnicodeScript = 90
-	// UnicodeScriptTaiTham wraps G_UNICODE_SCRIPT_TAI_THAM
+	// UnicodeScriptTaiTham wraps UNICODE_SCRIPT_TAI_THAM
 	//
 	// Tai Tham. Since 2.26
 	UnicodeScriptTaiTham UnicodeScript = 91
-	// UnicodeScriptTaiViet wraps G_UNICODE_SCRIPT_TAI_VIET
+	// UnicodeScriptTaiViet wraps UNICODE_SCRIPT_TAI_VIET
 	//
 	// Tai Viet. Since 2.26
 	UnicodeScriptTaiViet UnicodeScript = 92
-	// UnicodeScriptBatak wraps G_UNICODE_SCRIPT_BATAK
+	// UnicodeScriptBatak wraps UNICODE_SCRIPT_BATAK
 	//
 	// Batak. Since 2.28
 	UnicodeScriptBatak UnicodeScript = 93
-	// UnicodeScriptBrahmi wraps G_UNICODE_SCRIPT_BRAHMI
+	// UnicodeScriptBrahmi wraps UNICODE_SCRIPT_BRAHMI
 	//
 	// Brahmi. Since 2.28
 	UnicodeScriptBrahmi UnicodeScript = 94
-	// UnicodeScriptMandaic wraps G_UNICODE_SCRIPT_MANDAIC
+	// UnicodeScriptMandaic wraps UNICODE_SCRIPT_MANDAIC
 	//
 	// Mandaic. Since 2.28
 	UnicodeScriptMandaic UnicodeScript = 95
-	// UnicodeScriptChakma wraps G_UNICODE_SCRIPT_CHAKMA
+	// UnicodeScriptChakma wraps UNICODE_SCRIPT_CHAKMA
 	//
 	// Chakma. Since: 2.32
 	UnicodeScriptChakma UnicodeScript = 96
-	// UnicodeScriptMeroiticCursive wraps G_UNICODE_SCRIPT_MEROITIC_CURSIVE
+	// UnicodeScriptMeroiticCursive wraps UNICODE_SCRIPT_MEROITIC_CURSIVE
 	//
 	// Meroitic Cursive. Since: 2.32
 	UnicodeScriptMeroiticCursive UnicodeScript = 97
-	// UnicodeScriptMeroiticHieroglyphs wraps G_UNICODE_SCRIPT_MEROITIC_HIEROGLYPHS
+	// UnicodeScriptMeroiticHieroglyphs wraps UNICODE_SCRIPT_MEROITIC_HIEROGLYPHS
 	//
 	// Meroitic Hieroglyphs. Since: 2.32
 	UnicodeScriptMeroiticHieroglyphs UnicodeScript = 98
-	// UnicodeScriptMiao wraps G_UNICODE_SCRIPT_MIAO
+	// UnicodeScriptMiao wraps UNICODE_SCRIPT_MIAO
 	//
 	// Miao. Since: 2.32
 	UnicodeScriptMiao UnicodeScript = 99
-	// UnicodeScriptSharada wraps G_UNICODE_SCRIPT_SHARADA
+	// UnicodeScriptSharada wraps UNICODE_SCRIPT_SHARADA
 	//
 	// Sharada. Since: 2.32
 	UnicodeScriptSharada UnicodeScript = 100
-	// UnicodeScriptSoraSompeng wraps G_UNICODE_SCRIPT_SORA_SOMPENG
+	// UnicodeScriptSoraSompeng wraps UNICODE_SCRIPT_SORA_SOMPENG
 	//
 	// Sora Sompeng. Since: 2.32
 	UnicodeScriptSoraSompeng UnicodeScript = 101
-	// UnicodeScriptTakri wraps G_UNICODE_SCRIPT_TAKRI
+	// UnicodeScriptTakri wraps UNICODE_SCRIPT_TAKRI
 	//
 	// Takri. Since: 2.32
 	UnicodeScriptTakri UnicodeScript = 102
-	// UnicodeScriptBassaVah wraps G_UNICODE_SCRIPT_BASSA_VAH
+	// UnicodeScriptBassaVah wraps UNICODE_SCRIPT_BASSA_VAH
 	//
 	// Bassa. Since: 2.42
 	UnicodeScriptBassaVah UnicodeScript = 103
-	// UnicodeScriptCaucasianAlbanian wraps G_UNICODE_SCRIPT_CAUCASIAN_ALBANIAN
+	// UnicodeScriptCaucasianAlbanian wraps UNICODE_SCRIPT_CAUCASIAN_ALBANIAN
 	//
 	// Caucasian Albanian. Since: 2.42
 	UnicodeScriptCaucasianAlbanian UnicodeScript = 104
-	// UnicodeScriptDuployan wraps G_UNICODE_SCRIPT_DUPLOYAN
+	// UnicodeScriptDuployan wraps UNICODE_SCRIPT_DUPLOYAN
 	//
 	// Duployan. Since: 2.42
 	UnicodeScriptDuployan UnicodeScript = 105
-	// UnicodeScriptElbasan wraps G_UNICODE_SCRIPT_ELBASAN
+	// UnicodeScriptElbasan wraps UNICODE_SCRIPT_ELBASAN
 	//
 	// Elbasan. Since: 2.42
 	UnicodeScriptElbasan UnicodeScript = 106
-	// UnicodeScriptGrantha wraps G_UNICODE_SCRIPT_GRANTHA
+	// UnicodeScriptGrantha wraps UNICODE_SCRIPT_GRANTHA
 	//
 	// Grantha. Since: 2.42
 	UnicodeScriptGrantha UnicodeScript = 107
-	// UnicodeScriptKhojki wraps G_UNICODE_SCRIPT_KHOJKI
+	// UnicodeScriptKhojki wraps UNICODE_SCRIPT_KHOJKI
 	//
 	// Kjohki. Since: 2.42
 	UnicodeScriptKhojki UnicodeScript = 108
-	// UnicodeScriptKhudawadi wraps G_UNICODE_SCRIPT_KHUDAWADI
+	// UnicodeScriptKhudawadi wraps UNICODE_SCRIPT_KHUDAWADI
 	//
 	// Khudawadi, Sindhi. Since: 2.42
 	UnicodeScriptKhudawadi UnicodeScript = 109
-	// UnicodeScriptLinearA wraps G_UNICODE_SCRIPT_LINEAR_A
+	// UnicodeScriptLinearA wraps UNICODE_SCRIPT_LINEAR_A
 	//
 	// Linear A. Since: 2.42
 	UnicodeScriptLinearA UnicodeScript = 110
-	// UnicodeScriptMahajani wraps G_UNICODE_SCRIPT_MAHAJANI
+	// UnicodeScriptMahajani wraps UNICODE_SCRIPT_MAHAJANI
 	//
 	// Mahajani. Since: 2.42
 	UnicodeScriptMahajani UnicodeScript = 111
-	// UnicodeScriptManichaean wraps G_UNICODE_SCRIPT_MANICHAEAN
+	// UnicodeScriptManichaean wraps UNICODE_SCRIPT_MANICHAEAN
 	//
 	// Manichaean. Since: 2.42
 	UnicodeScriptManichaean UnicodeScript = 112
-	// UnicodeScriptMendeKikakui wraps G_UNICODE_SCRIPT_MENDE_KIKAKUI
+	// UnicodeScriptMendeKikakui wraps UNICODE_SCRIPT_MENDE_KIKAKUI
 	//
 	// Mende Kikakui. Since: 2.42
 	UnicodeScriptMendeKikakui UnicodeScript = 113
-	// UnicodeScriptModi wraps G_UNICODE_SCRIPT_MODI
+	// UnicodeScriptModi wraps UNICODE_SCRIPT_MODI
 	//
 	// Modi. Since: 2.42
 	UnicodeScriptModi UnicodeScript = 114
-	// UnicodeScriptMro wraps G_UNICODE_SCRIPT_MRO
+	// UnicodeScriptMro wraps UNICODE_SCRIPT_MRO
 	//
 	// Mro. Since: 2.42
 	UnicodeScriptMro UnicodeScript = 115
-	// UnicodeScriptNabataean wraps G_UNICODE_SCRIPT_NABATAEAN
+	// UnicodeScriptNabataean wraps UNICODE_SCRIPT_NABATAEAN
 	//
 	// Nabataean. Since: 2.42
 	UnicodeScriptNabataean UnicodeScript = 116
-	// UnicodeScriptOldNorthArabian wraps G_UNICODE_SCRIPT_OLD_NORTH_ARABIAN
+	// UnicodeScriptOldNorthArabian wraps UNICODE_SCRIPT_OLD_NORTH_ARABIAN
 	//
 	// Old North Arabian. Since: 2.42
 	UnicodeScriptOldNorthArabian UnicodeScript = 117
-	// UnicodeScriptOldPermic wraps G_UNICODE_SCRIPT_OLD_PERMIC
+	// UnicodeScriptOldPermic wraps UNICODE_SCRIPT_OLD_PERMIC
 	//
 	// Old Permic. Since: 2.42
 	UnicodeScriptOldPermic UnicodeScript = 118
-	// UnicodeScriptPahawhHmong wraps G_UNICODE_SCRIPT_PAHAWH_HMONG
+	// UnicodeScriptPahawhHmong wraps UNICODE_SCRIPT_PAHAWH_HMONG
 	//
 	// Pahawh Hmong. Since: 2.42
 	UnicodeScriptPahawhHmong UnicodeScript = 119
-	// UnicodeScriptPalmyrene wraps G_UNICODE_SCRIPT_PALMYRENE
+	// UnicodeScriptPalmyrene wraps UNICODE_SCRIPT_PALMYRENE
 	//
 	// Palmyrene. Since: 2.42
 	UnicodeScriptPalmyrene UnicodeScript = 120
-	// UnicodeScriptPauCinHau wraps G_UNICODE_SCRIPT_PAU_CIN_HAU
+	// UnicodeScriptPauCinHau wraps UNICODE_SCRIPT_PAU_CIN_HAU
 	//
 	// Pau Cin Hau. Since: 2.42
 	UnicodeScriptPauCinHau UnicodeScript = 121
-	// UnicodeScriptPsalterPahlavi wraps G_UNICODE_SCRIPT_PSALTER_PAHLAVI
+	// UnicodeScriptPsalterPahlavi wraps UNICODE_SCRIPT_PSALTER_PAHLAVI
 	//
 	// Psalter Pahlavi. Since: 2.42
 	UnicodeScriptPsalterPahlavi UnicodeScript = 122
-	// UnicodeScriptSiddham wraps G_UNICODE_SCRIPT_SIDDHAM
+	// UnicodeScriptSiddham wraps UNICODE_SCRIPT_SIDDHAM
 	//
 	// Siddham. Since: 2.42
 	UnicodeScriptSiddham UnicodeScript = 123
-	// UnicodeScriptTirhuta wraps G_UNICODE_SCRIPT_TIRHUTA
+	// UnicodeScriptTirhuta wraps UNICODE_SCRIPT_TIRHUTA
 	//
 	// Tirhuta. Since: 2.42
 	UnicodeScriptTirhuta UnicodeScript = 124
-	// UnicodeScriptWarangCiti wraps G_UNICODE_SCRIPT_WARANG_CITI
+	// UnicodeScriptWarangCiti wraps UNICODE_SCRIPT_WARANG_CITI
 	//
 	// Warang Citi. Since: 2.42
 	UnicodeScriptWarangCiti UnicodeScript = 125
-	// UnicodeScriptAhom wraps G_UNICODE_SCRIPT_AHOM
+	// UnicodeScriptAhom wraps UNICODE_SCRIPT_AHOM
 	//
 	// Ahom. Since: 2.48
 	UnicodeScriptAhom UnicodeScript = 126
-	// UnicodeScriptAnatolianHieroglyphs wraps G_UNICODE_SCRIPT_ANATOLIAN_HIEROGLYPHS
+	// UnicodeScriptAnatolianHieroglyphs wraps UNICODE_SCRIPT_ANATOLIAN_HIEROGLYPHS
 	//
 	// Anatolian Hieroglyphs. Since: 2.48
 	UnicodeScriptAnatolianHieroglyphs UnicodeScript = 127
-	// UnicodeScriptHatran wraps G_UNICODE_SCRIPT_HATRAN
+	// UnicodeScriptHatran wraps UNICODE_SCRIPT_HATRAN
 	//
 	// Hatran. Since: 2.48
 	UnicodeScriptHatran UnicodeScript = 128
-	// UnicodeScriptMultani wraps G_UNICODE_SCRIPT_MULTANI
+	// UnicodeScriptMultani wraps UNICODE_SCRIPT_MULTANI
 	//
 	// Multani. Since: 2.48
 	UnicodeScriptMultani UnicodeScript = 129
-	// UnicodeScriptOldHungarian wraps G_UNICODE_SCRIPT_OLD_HUNGARIAN
+	// UnicodeScriptOldHungarian wraps UNICODE_SCRIPT_OLD_HUNGARIAN
 	//
 	// Old Hungarian. Since: 2.48
 	UnicodeScriptOldHungarian UnicodeScript = 130
-	// UnicodeScriptSignwriting wraps G_UNICODE_SCRIPT_SIGNWRITING
+	// UnicodeScriptSignwriting wraps UNICODE_SCRIPT_SIGNWRITING
 	//
 	// Signwriting. Since: 2.48
 	UnicodeScriptSignwriting UnicodeScript = 131
-	// UnicodeScriptAdlam wraps G_UNICODE_SCRIPT_ADLAM
+	// UnicodeScriptAdlam wraps UNICODE_SCRIPT_ADLAM
 	//
 	// Adlam. Since: 2.50
 	UnicodeScriptAdlam UnicodeScript = 132
-	// UnicodeScriptBhaiksuki wraps G_UNICODE_SCRIPT_BHAIKSUKI
+	// UnicodeScriptBhaiksuki wraps UNICODE_SCRIPT_BHAIKSUKI
 	//
 	// Bhaiksuki. Since: 2.50
 	UnicodeScriptBhaiksuki UnicodeScript = 133
-	// UnicodeScriptMarchen wraps G_UNICODE_SCRIPT_MARCHEN
+	// UnicodeScriptMarchen wraps UNICODE_SCRIPT_MARCHEN
 	//
 	// Marchen. Since: 2.50
 	UnicodeScriptMarchen UnicodeScript = 134
-	// UnicodeScriptNewa wraps G_UNICODE_SCRIPT_NEWA
+	// UnicodeScriptNewa wraps UNICODE_SCRIPT_NEWA
 	//
 	// Newa. Since: 2.50
 	UnicodeScriptNewa UnicodeScript = 135
-	// UnicodeScriptOsage wraps G_UNICODE_SCRIPT_OSAGE
+	// UnicodeScriptOsage wraps UNICODE_SCRIPT_OSAGE
 	//
 	// Osage. Since: 2.50
 	UnicodeScriptOsage UnicodeScript = 136
-	// UnicodeScriptTangut wraps G_UNICODE_SCRIPT_TANGUT
+	// UnicodeScriptTangut wraps UNICODE_SCRIPT_TANGUT
 	//
 	// Tangut. Since: 2.50
 	UnicodeScriptTangut UnicodeScript = 137
-	// UnicodeScriptMasaramGondi wraps G_UNICODE_SCRIPT_MASARAM_GONDI
+	// UnicodeScriptMasaramGondi wraps UNICODE_SCRIPT_MASARAM_GONDI
 	//
 	// Masaram Gondi. Since: 2.54
 	UnicodeScriptMasaramGondi UnicodeScript = 138
-	// UnicodeScriptNushu wraps G_UNICODE_SCRIPT_NUSHU
+	// UnicodeScriptNushu wraps UNICODE_SCRIPT_NUSHU
 	//
 	// Nushu. Since: 2.54
 	UnicodeScriptNushu UnicodeScript = 139
-	// UnicodeScriptSoyombo wraps G_UNICODE_SCRIPT_SOYOMBO
+	// UnicodeScriptSoyombo wraps UNICODE_SCRIPT_SOYOMBO
 	//
 	// Soyombo. Since: 2.54
 	UnicodeScriptSoyombo UnicodeScript = 140
-	// UnicodeScriptZanabazarSquare wraps G_UNICODE_SCRIPT_ZANABAZAR_SQUARE
+	// UnicodeScriptZanabazarSquare wraps UNICODE_SCRIPT_ZANABAZAR_SQUARE
 	//
 	// Zanabazar Square. Since: 2.54
 	UnicodeScriptZanabazarSquare UnicodeScript = 141
-	// UnicodeScriptDogra wraps G_UNICODE_SCRIPT_DOGRA
+	// UnicodeScriptDogra wraps UNICODE_SCRIPT_DOGRA
 	//
 	// Dogra. Since: 2.58
 	UnicodeScriptDogra UnicodeScript = 142
-	// UnicodeScriptGunjalaGondi wraps G_UNICODE_SCRIPT_GUNJALA_GONDI
+	// UnicodeScriptGunjalaGondi wraps UNICODE_SCRIPT_GUNJALA_GONDI
 	//
 	// Gunjala Gondi. Since: 2.58
 	UnicodeScriptGunjalaGondi UnicodeScript = 143
-	// UnicodeScriptHanifiRohingya wraps G_UNICODE_SCRIPT_HANIFI_ROHINGYA
+	// UnicodeScriptHanifiRohingya wraps UNICODE_SCRIPT_HANIFI_ROHINGYA
 	//
 	// Hanifi Rohingya. Since: 2.58
 	UnicodeScriptHanifiRohingya UnicodeScript = 144
-	// UnicodeScriptMakasar wraps G_UNICODE_SCRIPT_MAKASAR
+	// UnicodeScriptMakasar wraps UNICODE_SCRIPT_MAKASAR
 	//
 	// Makasar. Since: 2.58
 	UnicodeScriptMakasar UnicodeScript = 145
-	// UnicodeScriptMedefaidrin wraps G_UNICODE_SCRIPT_MEDEFAIDRIN
+	// UnicodeScriptMedefaidrin wraps UNICODE_SCRIPT_MEDEFAIDRIN
 	//
 	// Medefaidrin. Since: 2.58
 	UnicodeScriptMedefaidrin UnicodeScript = 146
-	// UnicodeScriptOldSogdian wraps G_UNICODE_SCRIPT_OLD_SOGDIAN
+	// UnicodeScriptOldSogdian wraps UNICODE_SCRIPT_OLD_SOGDIAN
 	//
 	// Old Sogdian. Since: 2.58
 	UnicodeScriptOldSogdian UnicodeScript = 147
-	// UnicodeScriptSogdian wraps G_UNICODE_SCRIPT_SOGDIAN
+	// UnicodeScriptSogdian wraps UNICODE_SCRIPT_SOGDIAN
 	//
 	// Sogdian. Since: 2.58
 	UnicodeScriptSogdian UnicodeScript = 148
-	// UnicodeScriptElymaic wraps G_UNICODE_SCRIPT_ELYMAIC
+	// UnicodeScriptElymaic wraps UNICODE_SCRIPT_ELYMAIC
 	//
 	// Elym. Since: 2.62
 	UnicodeScriptElymaic UnicodeScript = 149
-	// UnicodeScriptNandinagari wraps G_UNICODE_SCRIPT_NANDINAGARI
+	// UnicodeScriptNandinagari wraps UNICODE_SCRIPT_NANDINAGARI
 	//
 	// Nand. Since: 2.62
 	UnicodeScriptNandinagari UnicodeScript = 150
-	// UnicodeScriptNyiakengPuachueHmong wraps G_UNICODE_SCRIPT_NYIAKENG_PUACHUE_HMONG
+	// UnicodeScriptNyiakengPuachueHmong wraps UNICODE_SCRIPT_NYIAKENG_PUACHUE_HMONG
 	//
 	// Rohg. Since: 2.62
 	UnicodeScriptNyiakengPuachueHmong UnicodeScript = 151
-	// UnicodeScriptWancho wraps G_UNICODE_SCRIPT_WANCHO
+	// UnicodeScriptWancho wraps UNICODE_SCRIPT_WANCHO
 	//
 	// Wcho. Since: 2.62
 	UnicodeScriptWancho UnicodeScript = 152
-	// UnicodeScriptChorasmian wraps G_UNICODE_SCRIPT_CHORASMIAN
+	// UnicodeScriptChorasmian wraps UNICODE_SCRIPT_CHORASMIAN
 	//
 	// Chorasmian. Since: 2.66
 	UnicodeScriptChorasmian UnicodeScript = 153
-	// UnicodeScriptDivesAkuru wraps G_UNICODE_SCRIPT_DIVES_AKURU
+	// UnicodeScriptDivesAkuru wraps UNICODE_SCRIPT_DIVES_AKURU
 	//
 	// Dives Akuru. Since: 2.66
 	UnicodeScriptDivesAkuru UnicodeScript = 154
-	// UnicodeScriptKhitanSmallScript wraps G_UNICODE_SCRIPT_KHITAN_SMALL_SCRIPT
+	// UnicodeScriptKhitanSmallScript wraps UNICODE_SCRIPT_KHITAN_SMALL_SCRIPT
 	//
 	// Khitan small script. Since: 2.66
 	UnicodeScriptKhitanSmallScript UnicodeScript = 155
-	// UnicodeScriptYezidi wraps G_UNICODE_SCRIPT_YEZIDI
+	// UnicodeScriptYezidi wraps UNICODE_SCRIPT_YEZIDI
 	//
 	// Yezidi. Since: 2.66
 	UnicodeScriptYezidi UnicodeScript = 156
-	// UnicodeScriptCyproMinoan wraps G_UNICODE_SCRIPT_CYPRO_MINOAN
+	// UnicodeScriptCyproMinoan wraps UNICODE_SCRIPT_CYPRO_MINOAN
 	//
 	// Cypro-Minoan. Since: 2.72
 	UnicodeScriptCyproMinoan UnicodeScript = 157
-	// UnicodeScriptOldUyghur wraps G_UNICODE_SCRIPT_OLD_UYGHUR
+	// UnicodeScriptOldUyghur wraps UNICODE_SCRIPT_OLD_UYGHUR
 	//
 	// Old Uyghur. Since: 2.72
 	UnicodeScriptOldUyghur UnicodeScript = 158
-	// UnicodeScriptTangsa wraps G_UNICODE_SCRIPT_TANGSA
+	// UnicodeScriptTangsa wraps UNICODE_SCRIPT_TANGSA
 	//
 	// Tangsa. Since: 2.72
 	UnicodeScriptTangsa UnicodeScript = 159
-	// UnicodeScriptToto wraps G_UNICODE_SCRIPT_TOTO
+	// UnicodeScriptToto wraps UNICODE_SCRIPT_TOTO
 	//
 	// Toto. Since: 2.72
 	UnicodeScriptToto UnicodeScript = 160
-	// UnicodeScriptVithkuqi wraps G_UNICODE_SCRIPT_VITHKUQI
+	// UnicodeScriptVithkuqi wraps UNICODE_SCRIPT_VITHKUQI
 	//
 	// Vithkuqi. Since: 2.72
 	UnicodeScriptVithkuqi UnicodeScript = 161
-	// UnicodeScriptMath wraps G_UNICODE_SCRIPT_MATH
+	// UnicodeScriptMath wraps UNICODE_SCRIPT_MATH
 	//
 	// Mathematical notation. Since: 2.72
 	UnicodeScriptMath UnicodeScript = 162
-	// UnicodeScriptKawi wraps G_UNICODE_SCRIPT_KAWI
+	// UnicodeScriptKawi wraps UNICODE_SCRIPT_KAWI
 	//
 	// Kawi. Since 2.74
 	UnicodeScriptKawi UnicodeScript = 163
-	// UnicodeScriptNagMundari wraps G_UNICODE_SCRIPT_NAG_MUNDARI
+	// UnicodeScriptNagMundari wraps UNICODE_SCRIPT_NAG_MUNDARI
 	//
 	// Nag Mundari. Since 2.74
 	UnicodeScriptNagMundari UnicodeScript = 164
-	// UnicodeScriptTodhri wraps G_UNICODE_SCRIPT_TODHRI
+	// UnicodeScriptTodhri wraps UNICODE_SCRIPT_TODHRI
 	//
 	// Todhri. Since: 2.84
 	UnicodeScriptTodhri UnicodeScript = 165
-	// UnicodeScriptGaray wraps G_UNICODE_SCRIPT_GARAY
+	// UnicodeScriptGaray wraps UNICODE_SCRIPT_GARAY
 	//
 	// Garay. Since: 2.84
 	UnicodeScriptGaray UnicodeScript = 166
-	// UnicodeScriptTuluTigalari wraps G_UNICODE_SCRIPT_TULU_TIGALARI
+	// UnicodeScriptTuluTigalari wraps UNICODE_SCRIPT_TULU_TIGALARI
 	//
 	// Tulu-Tigalari. Since: 2.84
 	UnicodeScriptTuluTigalari UnicodeScript = 167
-	// UnicodeScriptSunuwar wraps G_UNICODE_SCRIPT_SUNUWAR
+	// UnicodeScriptSunuwar wraps UNICODE_SCRIPT_SUNUWAR
 	//
 	// Sunuwar. Since: 2.84
 	UnicodeScriptSunuwar UnicodeScript = 168
-	// UnicodeScriptGurungKhema wraps G_UNICODE_SCRIPT_GURUNG_KHEMA
+	// UnicodeScriptGurungKhema wraps UNICODE_SCRIPT_GURUNG_KHEMA
 	//
 	// Gurung Khema. Since: 2.84
 	UnicodeScriptGurungKhema UnicodeScript = 169
-	// UnicodeScriptKiratRai wraps G_UNICODE_SCRIPT_KIRAT_RAI
+	// UnicodeScriptKiratRai wraps UNICODE_SCRIPT_KIRAT_RAI
 	//
 	// Kirat Rai. Since: 2.84
 	UnicodeScriptKiratRai UnicodeScript = 170
-	// UnicodeScriptOlOnal wraps G_UNICODE_SCRIPT_OL_ONAL
+	// UnicodeScriptOlOnal wraps UNICODE_SCRIPT_OL_ONAL
 	//
 	// Ol Onal. Since: 2.84
 	UnicodeScriptOlOnal UnicodeScript = 171
@@ -3174,123 +3490,123 @@ func UnicodeScriptToISO15924(script UnicodeScript) uint32 {
 type UnicodeType C.int
 
 const (
-	// UnicodeControl wraps G_UNICODE_CONTROL
+	// UnicodeControl wraps UNICODE_CONTROL
 	//
 	// General category "Other, Control" (Cc)
 	UnicodeControl UnicodeType = 0
-	// UnicodeFormat wraps G_UNICODE_FORMAT
+	// UnicodeFormat wraps UNICODE_FORMAT
 	//
 	// General category "Other, Format" (Cf)
 	UnicodeFormat UnicodeType = 1
-	// UnicodeUnassigned wraps G_UNICODE_UNASSIGNED
+	// UnicodeUnassigned wraps UNICODE_UNASSIGNED
 	//
 	// General category "Other, Not Assigned" (Cn)
 	UnicodeUnassigned UnicodeType = 2
-	// UnicodePrivateUse wraps G_UNICODE_PRIVATE_USE
+	// UnicodePrivateUse wraps UNICODE_PRIVATE_USE
 	//
 	// General category "Other, Private Use" (Co)
 	UnicodePrivateUse UnicodeType = 3
-	// UnicodeSurrogate wraps G_UNICODE_SURROGATE
+	// UnicodeSurrogate wraps UNICODE_SURROGATE
 	//
 	// General category "Other, Surrogate" (Cs)
 	UnicodeSurrogate UnicodeType = 4
-	// UnicodeLowercaseLetter wraps G_UNICODE_LOWERCASE_LETTER
+	// UnicodeLowercaseLetter wraps UNICODE_LOWERCASE_LETTER
 	//
 	// General category "Letter, Lowercase" (Ll)
 	UnicodeLowercaseLetter UnicodeType = 5
-	// UnicodeModifierLetter wraps G_UNICODE_MODIFIER_LETTER
+	// UnicodeModifierLetter wraps UNICODE_MODIFIER_LETTER
 	//
 	// General category "Letter, Modifier" (Lm)
 	UnicodeModifierLetter UnicodeType = 6
-	// UnicodeOtherLetter wraps G_UNICODE_OTHER_LETTER
+	// UnicodeOtherLetter wraps UNICODE_OTHER_LETTER
 	//
 	// General category "Letter, Other" (Lo)
 	UnicodeOtherLetter UnicodeType = 7
-	// UnicodeTitlecaseLetter wraps G_UNICODE_TITLECASE_LETTER
+	// UnicodeTitlecaseLetter wraps UNICODE_TITLECASE_LETTER
 	//
 	// General category "Letter, Titlecase" (Lt)
 	UnicodeTitlecaseLetter UnicodeType = 8
-	// UnicodeUppercaseLetter wraps G_UNICODE_UPPERCASE_LETTER
+	// UnicodeUppercaseLetter wraps UNICODE_UPPERCASE_LETTER
 	//
 	// General category "Letter, Uppercase" (Lu)
 	UnicodeUppercaseLetter UnicodeType = 9
-	// UnicodeSpacingMark wraps G_UNICODE_SPACING_MARK
+	// UnicodeSpacingMark wraps UNICODE_SPACING_MARK
 	//
 	// General category "Mark, Spacing" (Mc)
 	UnicodeSpacingMark UnicodeType = 10
-	// UnicodeEnclosingMark wraps G_UNICODE_ENCLOSING_MARK
+	// UnicodeEnclosingMark wraps UNICODE_ENCLOSING_MARK
 	//
 	// General category "Mark, Enclosing" (Me)
 	UnicodeEnclosingMark UnicodeType = 11
-	// UnicodeNonSpacingMark wraps G_UNICODE_NON_SPACING_MARK
+	// UnicodeNonSpacingMark wraps UNICODE_NON_SPACING_MARK
 	//
 	// General category "Mark, Nonspacing" (Mn)
 	UnicodeNonSpacingMark UnicodeType = 12
-	// UnicodeDecimalNumber wraps G_UNICODE_DECIMAL_NUMBER
+	// UnicodeDecimalNumber wraps UNICODE_DECIMAL_NUMBER
 	//
 	// General category "Number, Decimal Digit" (Nd)
 	UnicodeDecimalNumber UnicodeType = 13
-	// UnicodeLetterNumber wraps G_UNICODE_LETTER_NUMBER
+	// UnicodeLetterNumber wraps UNICODE_LETTER_NUMBER
 	//
 	// General category "Number, Letter" (Nl)
 	UnicodeLetterNumber UnicodeType = 14
-	// UnicodeOtherNumber wraps G_UNICODE_OTHER_NUMBER
+	// UnicodeOtherNumber wraps UNICODE_OTHER_NUMBER
 	//
 	// General category "Number, Other" (No)
 	UnicodeOtherNumber UnicodeType = 15
-	// UnicodeConnectPunctuation wraps G_UNICODE_CONNECT_PUNCTUATION
+	// UnicodeConnectPunctuation wraps UNICODE_CONNECT_PUNCTUATION
 	//
 	// General category "Punctuation, Connector" (Pc)
 	UnicodeConnectPunctuation UnicodeType = 16
-	// UnicodeDashPunctuation wraps G_UNICODE_DASH_PUNCTUATION
+	// UnicodeDashPunctuation wraps UNICODE_DASH_PUNCTUATION
 	//
 	// General category "Punctuation, Dash" (Pd)
 	UnicodeDashPunctuation UnicodeType = 17
-	// UnicodeClosePunctuation wraps G_UNICODE_CLOSE_PUNCTUATION
+	// UnicodeClosePunctuation wraps UNICODE_CLOSE_PUNCTUATION
 	//
 	// General category "Punctuation, Close" (Pe)
 	UnicodeClosePunctuation UnicodeType = 18
-	// UnicodeFinalPunctuation wraps G_UNICODE_FINAL_PUNCTUATION
+	// UnicodeFinalPunctuation wraps UNICODE_FINAL_PUNCTUATION
 	//
 	// General category "Punctuation, Final quote" (Pf)
 	UnicodeFinalPunctuation UnicodeType = 19
-	// UnicodeInitialPunctuation wraps G_UNICODE_INITIAL_PUNCTUATION
+	// UnicodeInitialPunctuation wraps UNICODE_INITIAL_PUNCTUATION
 	//
 	// General category "Punctuation, Initial quote" (Pi)
 	UnicodeInitialPunctuation UnicodeType = 20
-	// UnicodeOtherPunctuation wraps G_UNICODE_OTHER_PUNCTUATION
+	// UnicodeOtherPunctuation wraps UNICODE_OTHER_PUNCTUATION
 	//
 	// General category "Punctuation, Other" (Po)
 	UnicodeOtherPunctuation UnicodeType = 21
-	// UnicodeOpenPunctuation wraps G_UNICODE_OPEN_PUNCTUATION
+	// UnicodeOpenPunctuation wraps UNICODE_OPEN_PUNCTUATION
 	//
 	// General category "Punctuation, Open" (Ps)
 	UnicodeOpenPunctuation UnicodeType = 22
-	// UnicodeCurrencySymbol wraps G_UNICODE_CURRENCY_SYMBOL
+	// UnicodeCurrencySymbol wraps UNICODE_CURRENCY_SYMBOL
 	//
 	// General category "Symbol, Currency" (Sc)
 	UnicodeCurrencySymbol UnicodeType = 23
-	// UnicodeModifierSymbol wraps G_UNICODE_MODIFIER_SYMBOL
+	// UnicodeModifierSymbol wraps UNICODE_MODIFIER_SYMBOL
 	//
 	// General category "Symbol, Modifier" (Sk)
 	UnicodeModifierSymbol UnicodeType = 24
-	// UnicodeMathSymbol wraps G_UNICODE_MATH_SYMBOL
+	// UnicodeMathSymbol wraps UNICODE_MATH_SYMBOL
 	//
 	// General category "Symbol, Math" (Sm)
 	UnicodeMathSymbol UnicodeType = 25
-	// UnicodeOtherSymbol wraps G_UNICODE_OTHER_SYMBOL
+	// UnicodeOtherSymbol wraps UNICODE_OTHER_SYMBOL
 	//
 	// General category "Symbol, Other" (So)
 	UnicodeOtherSymbol UnicodeType = 26
-	// UnicodeLineSeparator wraps G_UNICODE_LINE_SEPARATOR
+	// UnicodeLineSeparator wraps UNICODE_LINE_SEPARATOR
 	//
 	// General category "Separator, Line" (Zl)
 	UnicodeLineSeparator UnicodeType = 27
-	// UnicodeParagraphSeparator wraps G_UNICODE_PARAGRAPH_SEPARATOR
+	// UnicodeParagraphSeparator wraps UNICODE_PARAGRAPH_SEPARATOR
 	//
 	// General category "Separator, Paragraph" (Zp)
 	UnicodeParagraphSeparator UnicodeType = 28
-	// UnicodeSpaceSeparator wraps G_UNICODE_SPACE_SEPARATOR
+	// UnicodeSpaceSeparator wraps UNICODE_SPACE_SEPARATOR
 	//
 	// General category "Separator, Space" (Zs)
 	UnicodeSpaceSeparator UnicodeType = 29
@@ -3339,44 +3655,44 @@ func (e UnicodeType) String() string {
 type URIError C.int
 
 const (
-	// URIErrorFailed wraps G_URI_ERROR_FAILED
+	// URIErrorFailed wraps URI_ERROR_FAILED
 	//
 	// Generic error if no more specific error is available.
 	//     See the error message for details.
 	URIErrorFailed URIError = 0
-	// URIErrorBadScheme wraps G_URI_ERROR_BAD_SCHEME
+	// URIErrorBadScheme wraps URI_ERROR_BAD_SCHEME
 	//
 	// The scheme of a URI could not be parsed.
 	URIErrorBadScheme URIError = 1
-	// URIErrorBadUser wraps G_URI_ERROR_BAD_USER
+	// URIErrorBadUser wraps URI_ERROR_BAD_USER
 	//
 	// The user/userinfo of a URI could not be parsed.
 	URIErrorBadUser URIError = 2
-	// URIErrorBadPassword wraps G_URI_ERROR_BAD_PASSWORD
+	// URIErrorBadPassword wraps URI_ERROR_BAD_PASSWORD
 	//
 	// The password of a URI could not be parsed.
 	URIErrorBadPassword URIError = 3
-	// URIErrorBadAuthParams wraps G_URI_ERROR_BAD_AUTH_PARAMS
+	// URIErrorBadAuthParams wraps URI_ERROR_BAD_AUTH_PARAMS
 	//
 	// The authentication parameters of a URI could not be parsed.
 	URIErrorBadAuthParams URIError = 4
-	// URIErrorBadHost wraps G_URI_ERROR_BAD_HOST
+	// URIErrorBadHost wraps URI_ERROR_BAD_HOST
 	//
 	// The host of a URI could not be parsed.
 	URIErrorBadHost URIError = 5
-	// URIErrorBadPort wraps G_URI_ERROR_BAD_PORT
+	// URIErrorBadPort wraps URI_ERROR_BAD_PORT
 	//
 	// The port of a URI could not be parsed.
 	URIErrorBadPort URIError = 6
-	// URIErrorBadPath wraps G_URI_ERROR_BAD_PATH
+	// URIErrorBadPath wraps URI_ERROR_BAD_PATH
 	//
 	// The path of a URI could not be parsed.
 	URIErrorBadPath URIError = 7
-	// URIErrorBadQuery wraps G_URI_ERROR_BAD_QUERY
+	// URIErrorBadQuery wraps URI_ERROR_BAD_QUERY
 	//
 	// The query of a URI could not be parsed.
 	URIErrorBadQuery URIError = 8
-	// URIErrorBadFragment wraps G_URI_ERROR_BAD_FRAGMENT
+	// URIErrorBadFragment wraps URI_ERROR_BAD_FRAGMENT
 	//
 	// The fragment of a URI could not be parsed.
 	URIErrorBadFragment URIError = 9
@@ -3411,39 +3727,39 @@ func (e URIError) String() string {
 type UserDirectory C.int
 
 const (
-	// UserDirectoryDesktop wraps G_USER_DIRECTORY_DESKTOP
+	// UserDirectoryDesktop wraps USER_DIRECTORY_DESKTOP
 	//
 	// the user's Desktop directory
 	UserDirectoryDesktop UserDirectory = 0
-	// UserDirectoryDocuments wraps G_USER_DIRECTORY_DOCUMENTS
+	// UserDirectoryDocuments wraps USER_DIRECTORY_DOCUMENTS
 	//
 	// the user's Documents directory
 	UserDirectoryDocuments UserDirectory = 1
-	// UserDirectoryDownload wraps G_USER_DIRECTORY_DOWNLOAD
+	// UserDirectoryDownload wraps USER_DIRECTORY_DOWNLOAD
 	//
 	// the user's Downloads directory
 	UserDirectoryDownload UserDirectory = 2
-	// UserDirectoryMusic wraps G_USER_DIRECTORY_MUSIC
+	// UserDirectoryMusic wraps USER_DIRECTORY_MUSIC
 	//
 	// the user's Music directory
 	UserDirectoryMusic UserDirectory = 3
-	// UserDirectoryPictures wraps G_USER_DIRECTORY_PICTURES
+	// UserDirectoryPictures wraps USER_DIRECTORY_PICTURES
 	//
 	// the user's Pictures directory
 	UserDirectoryPictures UserDirectory = 4
-	// UserDirectoryPublicShare wraps G_USER_DIRECTORY_PUBLIC_SHARE
+	// UserDirectoryPublicShare wraps USER_DIRECTORY_PUBLIC_SHARE
 	//
 	// the user's shared directory
 	UserDirectoryPublicShare UserDirectory = 5
-	// UserDirectoryTemplates wraps G_USER_DIRECTORY_TEMPLATES
+	// UserDirectoryTemplates wraps USER_DIRECTORY_TEMPLATES
 	//
 	// the user's Templates directory
 	UserDirectoryTemplates UserDirectory = 6
-	// UserDirectoryVideos wraps G_USER_DIRECTORY_VIDEOS
+	// UserDirectoryVideos wraps USER_DIRECTORY_VIDEOS
 	//
 	// the user's Movies directory
 	UserDirectoryVideos UserDirectory = 7
-	// UserNDirectories wraps G_USER_N_DIRECTORIES
+	// UserNDirectories wraps USER_N_DIRECTORIES
 	//
 	// the number of enum values
 	UserNDirectories UserDirectory = 8
@@ -3471,77 +3787,77 @@ func (e UserDirectory) String() string {
 type VariantClass C.int
 
 const (
-	// VariantClassBoolean wraps G_VARIANT_CLASS_BOOLEAN
+	// VariantClassBoolean wraps VARIANT_CLASS_BOOLEAN
 	//
 	// The #GVariant is a boolean.
 	VariantClassBoolean VariantClass = 98
-	// VariantClassByte wraps G_VARIANT_CLASS_BYTE
+	// VariantClassByte wraps VARIANT_CLASS_BYTE
 	//
 	// The #GVariant is a byte.
 	VariantClassByte VariantClass = 121
-	// VariantClassInt16 wraps G_VARIANT_CLASS_INT16
+	// VariantClassInt16 wraps VARIANT_CLASS_INT16
 	//
 	// The #GVariant is a signed 16 bit integer.
 	VariantClassInt16 VariantClass = 110
-	// VariantClassUint16 wraps G_VARIANT_CLASS_UINT16
+	// VariantClassUint16 wraps VARIANT_CLASS_UINT16
 	//
 	// The #GVariant is an unsigned 16 bit integer.
 	VariantClassUint16 VariantClass = 113
-	// VariantClassInt32 wraps G_VARIANT_CLASS_INT32
+	// VariantClassInt32 wraps VARIANT_CLASS_INT32
 	//
 	// The #GVariant is a signed 32 bit integer.
 	VariantClassInt32 VariantClass = 105
-	// VariantClassUint32 wraps G_VARIANT_CLASS_UINT32
+	// VariantClassUint32 wraps VARIANT_CLASS_UINT32
 	//
 	// The #GVariant is an unsigned 32 bit integer.
 	VariantClassUint32 VariantClass = 117
-	// VariantClassInt64 wraps G_VARIANT_CLASS_INT64
+	// VariantClassInt64 wraps VARIANT_CLASS_INT64
 	//
 	// The #GVariant is a signed 64 bit integer.
 	VariantClassInt64 VariantClass = 120
-	// VariantClassUint64 wraps G_VARIANT_CLASS_UINT64
+	// VariantClassUint64 wraps VARIANT_CLASS_UINT64
 	//
 	// The #GVariant is an unsigned 64 bit integer.
 	VariantClassUint64 VariantClass = 116
-	// VariantClassHandle wraps G_VARIANT_CLASS_HANDLE
+	// VariantClassHandle wraps VARIANT_CLASS_HANDLE
 	//
 	// The #GVariant is a file handle index.
 	VariantClassHandle VariantClass = 104
-	// VariantClassDouble wraps G_VARIANT_CLASS_DOUBLE
+	// VariantClassDouble wraps VARIANT_CLASS_DOUBLE
 	//
 	// The #GVariant is a double precision floating
 	//                          point value.
 	VariantClassDouble VariantClass = 100
-	// VariantClassString wraps G_VARIANT_CLASS_STRING
+	// VariantClassString wraps VARIANT_CLASS_STRING
 	//
 	// The #GVariant is a normal string.
 	VariantClassString VariantClass = 115
-	// VariantClassObjectPath wraps G_VARIANT_CLASS_OBJECT_PATH
+	// VariantClassObjectPath wraps VARIANT_CLASS_OBJECT_PATH
 	//
 	// The #GVariant is a D-Bus object path
 	//                               string.
 	VariantClassObjectPath VariantClass = 111
-	// VariantClassSignature wraps G_VARIANT_CLASS_SIGNATURE
+	// VariantClassSignature wraps VARIANT_CLASS_SIGNATURE
 	//
 	// The #GVariant is a D-Bus signature string.
 	VariantClassSignature VariantClass = 103
-	// VariantClassVariant wraps G_VARIANT_CLASS_VARIANT
+	// VariantClassVariant wraps VARIANT_CLASS_VARIANT
 	//
 	// The #GVariant is a variant.
 	VariantClassVariant VariantClass = 118
-	// VariantClassMaybe wraps G_VARIANT_CLASS_MAYBE
+	// VariantClassMaybe wraps VARIANT_CLASS_MAYBE
 	//
 	// The #GVariant is a maybe-typed value.
 	VariantClassMaybe VariantClass = 109
-	// VariantClassArray wraps G_VARIANT_CLASS_ARRAY
+	// VariantClassArray wraps VARIANT_CLASS_ARRAY
 	//
 	// The #GVariant is an array.
 	VariantClassArray VariantClass = 97
-	// VariantClassTuple wraps G_VARIANT_CLASS_TUPLE
+	// VariantClassTuple wraps VARIANT_CLASS_TUPLE
 	//
 	// The #GVariant is a tuple.
 	VariantClassTuple VariantClass = 40
-	// VariantClassDictEntry wraps G_VARIANT_CLASS_DICT_ENTRY
+	// VariantClassDictEntry wraps VARIANT_CLASS_DICT_ENTRY
 	//
 	// The #GVariant is a dictionary entry.
 	VariantClassDictEntry VariantClass = 123
@@ -3578,79 +3894,79 @@ func (e VariantClass) String() string {
 type VariantParseError C.int
 
 const (
-	// VariantParseErrorFailed wraps G_VARIANT_PARSE_ERROR_FAILED
+	// VariantParseErrorFailed wraps VARIANT_PARSE_ERROR_FAILED
 	//
 	// generic error (unused)
 	VariantParseErrorFailed VariantParseError = 0
-	// VariantParseErrorBasicTypeExpected wraps G_VARIANT_PARSE_ERROR_BASIC_TYPE_EXPECTED
+	// VariantParseErrorBasicTypeExpected wraps VARIANT_PARSE_ERROR_BASIC_TYPE_EXPECTED
 	//
 	// a non-basic #GVariantType was given where a basic type was expected
 	VariantParseErrorBasicTypeExpected VariantParseError = 1
-	// VariantParseErrorCannotInferType wraps G_VARIANT_PARSE_ERROR_CANNOT_INFER_TYPE
+	// VariantParseErrorCannotInferType wraps VARIANT_PARSE_ERROR_CANNOT_INFER_TYPE
 	//
 	// cannot infer the #GVariantType
 	VariantParseErrorCannotInferType VariantParseError = 2
-	// VariantParseErrorDefiniteTypeExpected wraps G_VARIANT_PARSE_ERROR_DEFINITE_TYPE_EXPECTED
+	// VariantParseErrorDefiniteTypeExpected wraps VARIANT_PARSE_ERROR_DEFINITE_TYPE_EXPECTED
 	//
 	// an indefinite #GVariantType was given where a definite type was expected
 	VariantParseErrorDefiniteTypeExpected VariantParseError = 3
-	// VariantParseErrorInputNotAtEnd wraps G_VARIANT_PARSE_ERROR_INPUT_NOT_AT_END
+	// VariantParseErrorInputNotAtEnd wraps VARIANT_PARSE_ERROR_INPUT_NOT_AT_END
 	//
 	// extra data after parsing finished
 	VariantParseErrorInputNotAtEnd VariantParseError = 4
-	// VariantParseErrorInvalidCharacter wraps G_VARIANT_PARSE_ERROR_INVALID_CHARACTER
+	// VariantParseErrorInvalidCharacter wraps VARIANT_PARSE_ERROR_INVALID_CHARACTER
 	//
 	// invalid character in number or unicode escape
 	VariantParseErrorInvalidCharacter VariantParseError = 5
-	// VariantParseErrorInvalidFormatString wraps G_VARIANT_PARSE_ERROR_INVALID_FORMAT_STRING
+	// VariantParseErrorInvalidFormatString wraps VARIANT_PARSE_ERROR_INVALID_FORMAT_STRING
 	//
 	// not a valid #GVariant format string
 	VariantParseErrorInvalidFormatString VariantParseError = 6
-	// VariantParseErrorInvalidObjectPath wraps G_VARIANT_PARSE_ERROR_INVALID_OBJECT_PATH
+	// VariantParseErrorInvalidObjectPath wraps VARIANT_PARSE_ERROR_INVALID_OBJECT_PATH
 	//
 	// not a valid object path
 	VariantParseErrorInvalidObjectPath VariantParseError = 7
-	// VariantParseErrorInvalidSignature wraps G_VARIANT_PARSE_ERROR_INVALID_SIGNATURE
+	// VariantParseErrorInvalidSignature wraps VARIANT_PARSE_ERROR_INVALID_SIGNATURE
 	//
 	// not a valid type signature
 	VariantParseErrorInvalidSignature VariantParseError = 8
-	// VariantParseErrorInvalidTypeString wraps G_VARIANT_PARSE_ERROR_INVALID_TYPE_STRING
+	// VariantParseErrorInvalidTypeString wraps VARIANT_PARSE_ERROR_INVALID_TYPE_STRING
 	//
 	// not a valid #GVariant type string
 	VariantParseErrorInvalidTypeString VariantParseError = 9
-	// VariantParseErrorNoCommonType wraps G_VARIANT_PARSE_ERROR_NO_COMMON_TYPE
+	// VariantParseErrorNoCommonType wraps VARIANT_PARSE_ERROR_NO_COMMON_TYPE
 	//
 	// could not find a common type for array entries
 	VariantParseErrorNoCommonType VariantParseError = 10
-	// VariantParseErrorNumberOutOfRange wraps G_VARIANT_PARSE_ERROR_NUMBER_OUT_OF_RANGE
+	// VariantParseErrorNumberOutOfRange wraps VARIANT_PARSE_ERROR_NUMBER_OUT_OF_RANGE
 	//
 	// the numerical value is out of range of the given type
 	VariantParseErrorNumberOutOfRange VariantParseError = 11
-	// VariantParseErrorNumberTooBig wraps G_VARIANT_PARSE_ERROR_NUMBER_TOO_BIG
+	// VariantParseErrorNumberTooBig wraps VARIANT_PARSE_ERROR_NUMBER_TOO_BIG
 	//
 	// the numerical value is out of range for any type
 	VariantParseErrorNumberTooBig VariantParseError = 12
-	// VariantParseErrorTypeError wraps G_VARIANT_PARSE_ERROR_TYPE_ERROR
+	// VariantParseErrorTypeError wraps VARIANT_PARSE_ERROR_TYPE_ERROR
 	//
 	// cannot parse as variant of the specified type
 	VariantParseErrorTypeError VariantParseError = 13
-	// VariantParseErrorUnexpectedToken wraps G_VARIANT_PARSE_ERROR_UNEXPECTED_TOKEN
+	// VariantParseErrorUnexpectedToken wraps VARIANT_PARSE_ERROR_UNEXPECTED_TOKEN
 	//
 	// an unexpected token was encountered
 	VariantParseErrorUnexpectedToken VariantParseError = 14
-	// VariantParseErrorUnknownKeyword wraps G_VARIANT_PARSE_ERROR_UNKNOWN_KEYWORD
+	// VariantParseErrorUnknownKeyword wraps VARIANT_PARSE_ERROR_UNKNOWN_KEYWORD
 	//
 	// an unknown keyword was encountered
 	VariantParseErrorUnknownKeyword VariantParseError = 15
-	// VariantParseErrorUnterminatedStringConstant wraps G_VARIANT_PARSE_ERROR_UNTERMINATED_STRING_CONSTANT
+	// VariantParseErrorUnterminatedStringConstant wraps VARIANT_PARSE_ERROR_UNTERMINATED_STRING_CONSTANT
 	//
 	// unterminated string constant
 	VariantParseErrorUnterminatedStringConstant VariantParseError = 16
-	// VariantParseErrorValueExpected wraps G_VARIANT_PARSE_ERROR_VALUE_EXPECTED
+	// VariantParseErrorValueExpected wraps VARIANT_PARSE_ERROR_VALUE_EXPECTED
 	//
 	// no value given
 	VariantParseErrorValueExpected VariantParseError = 17
-	// VariantParseErrorRecursion wraps G_VARIANT_PARSE_ERROR_RECURSION
+	// VariantParseErrorRecursion wraps VARIANT_PARSE_ERROR_RECURSION
 	//
 	// variant was too deeply nested; #GVariant is only guaranteed to handle nesting up to 64 levels (Since: 2.64)
 	VariantParseErrorRecursion VariantParseError = 18
@@ -3682,6 +3998,81 @@ func (e VariantParseError) String() string {
 	}
 }
 
+// ASCIIType wraps GAsciiType
+type ASCIIType C.gint
+
+const (
+	// ASCIIAlnum wraps ASCII_ALNUM
+	ASCIIAlnum ASCIIType = 1
+	// ASCIIAlpha wraps ASCII_ALPHA
+	ASCIIAlpha ASCIIType = 2
+	// ASCIICntrl wraps ASCII_CNTRL
+	ASCIICntrl ASCIIType = 4
+	// ASCIIDigit wraps ASCII_DIGIT
+	ASCIIDigit ASCIIType = 8
+	// ASCIIGraph wraps ASCII_GRAPH
+	ASCIIGraph ASCIIType = 16
+	// ASCIILower wraps ASCII_LOWER
+	ASCIILower ASCIIType = 32
+	// ASCIIPrint wraps ASCII_PRINT
+	ASCIIPrint ASCIIType = 64
+	// ASCIIPunct wraps ASCII_PUNCT
+	ASCIIPunct ASCIIType = 128
+	// ASCIISpace wraps ASCII_SPACE
+	ASCIISpace ASCIIType = 256
+	// ASCIIUpper wraps ASCII_UPPER
+	ASCIIUpper ASCIIType = 512
+	// ASCIIXDigit wraps ASCII_XDIGIT
+	ASCIIXDigit ASCIIType = 1024
+)
+
+// Has returns true if a contains other
+func (a ASCIIType) Has(other ASCIIType) bool {
+	return (a & other) == other
+}
+
+func (f ASCIIType) String() string {
+	if f == 0 {
+		return "ASCIIType(0)"
+	}
+
+	var parts []string
+	if (f & ASCIIAlnum) != 0 {
+		parts = append(parts, "ASCIIAlnum")
+	}
+	if (f & ASCIIAlpha) != 0 {
+		parts = append(parts, "ASCIIAlpha")
+	}
+	if (f & ASCIICntrl) != 0 {
+		parts = append(parts, "ASCIICntrl")
+	}
+	if (f & ASCIIDigit) != 0 {
+		parts = append(parts, "ASCIIDigit")
+	}
+	if (f & ASCIIGraph) != 0 {
+		parts = append(parts, "ASCIIGraph")
+	}
+	if (f & ASCIILower) != 0 {
+		parts = append(parts, "ASCIILower")
+	}
+	if (f & ASCIIPrint) != 0 {
+		parts = append(parts, "ASCIIPrint")
+	}
+	if (f & ASCIIPunct) != 0 {
+		parts = append(parts, "ASCIIPunct")
+	}
+	if (f & ASCIISpace) != 0 {
+		parts = append(parts, "ASCIISpace")
+	}
+	if (f & ASCIIUpper) != 0 {
+		parts = append(parts, "ASCIIUpper")
+	}
+	if (f & ASCIIXDigit) != 0 {
+		parts = append(parts, "ASCIIXDigit")
+	}
+	return "ASCIIType(" + strings.Join(parts, "|") + ")"
+}
+
 // FileSetContentsFlags wraps GFileSetContentsFlags
 //
 // Flags to pass to g_file_set_contents_full() to affect its safety and
@@ -3689,12 +4080,12 @@ func (e VariantParseError) String() string {
 type FileSetContentsFlags C.gint
 
 const (
-	// FileSetContentsNone wraps G_FILE_SET_CONTENTS_NONE
+	// FileSetContentsNone wraps FILE_SET_CONTENTS_NONE
 	//
 	// No guarantees about file consistency or durability.
 	//   The most dangerous setting, which is slightly faster than other settings.
 	FileSetContentsNone FileSetContentsFlags = 0
-	// FileSetContentsConsistent wraps G_FILE_SET_CONTENTS_CONSISTENT
+	// FileSetContentsConsistent wraps FILE_SET_CONTENTS_CONSISTENT
 	//
 	// Guarantee file consistency: after a crash,
 	//   either the old version of the file or the new version of the file will be
@@ -3702,7 +4093,7 @@ const (
 	//   on the file and use of an atomic `rename()` of the new version of the file
 	//   over the old.
 	FileSetContentsConsistent FileSetContentsFlags = 1
-	// FileSetContentsDurable wraps G_FILE_SET_CONTENTS_DURABLE
+	// FileSetContentsDurable wraps FILE_SET_CONTENTS_DURABLE
 	//
 	// Guarantee file durability: after a crash, the
 	//   new version of the file will be available. On Unix systems this equates to
@@ -3710,11 +4101,11 @@ const (
 	//   the effects of %G_FILE_SET_CONTENTS_CONSISTENT plus an `fsync()` on the
 	//   directory containing the file after calling `rename()`.
 	FileSetContentsDurable FileSetContentsFlags = 2
-	// FileSetContentsOnlyExisting wraps G_FILE_SET_CONTENTS_ONLY_EXISTING
+	// FileSetContentsOnlyExisting wraps FILE_SET_CONTENTS_ONLY_EXISTING
 	//
 	// Only apply consistency and durability
 	//   guarantees if the file already exists. This may speed up file operations
-	//   if the file doesn’t currently exist, but may result in a corrupted version
+	//   if the file doesn&#x2019;t currently exist, but may result in a corrupted version
 	//   of the new file if the system crashes while writing it.
 	FileSetContentsOnlyExisting FileSetContentsFlags = 4
 )
@@ -3751,25 +4142,25 @@ func (f FileSetContentsFlags) String() string {
 type FileTest C.gint
 
 const (
-	// FileTestIsRegular wraps G_FILE_TEST_IS_REGULAR
+	// FileTestIsRegular wraps FILE_TEST_IS_REGULAR
 	//
 	// %TRUE if the file is a regular file
 	//     (not a directory). Note that this test will also return %TRUE
 	//     if the tested file is a symlink to a regular file.
 	FileTestIsRegular FileTest = 1
-	// FileTestIsSymlink wraps G_FILE_TEST_IS_SYMLINK
+	// FileTestIsSymlink wraps FILE_TEST_IS_SYMLINK
 	//
 	// %TRUE if the file is a symlink.
 	FileTestIsSymlink FileTest = 2
-	// FileTestIsDir wraps G_FILE_TEST_IS_DIR
+	// FileTestIsDir wraps FILE_TEST_IS_DIR
 	//
 	// %TRUE if the file is a directory.
 	FileTestIsDir FileTest = 4
-	// FileTestIsExecutable wraps G_FILE_TEST_IS_EXECUTABLE
+	// FileTestIsExecutable wraps FILE_TEST_IS_EXECUTABLE
 	//
 	// %TRUE if the file is executable.
 	FileTestIsExecutable FileTest = 8
-	// FileTestExists wraps G_FILE_TEST_EXISTS
+	// FileTestExists wraps FILE_TEST_EXISTS
 	//
 	// %TRUE if the file exists. It may or may not
 	//     be a regular file.
@@ -3811,34 +4202,34 @@ func (f FileTest) String() string {
 type FormatSizeFlags C.gint
 
 const (
-	// FormatSizeDefault wraps G_FORMAT_SIZE_DEFAULT
+	// FormatSizeDefault wraps FORMAT_SIZE_DEFAULT
 	//
 	// behave the same as g_format_size()
 	FormatSizeDefault FormatSizeFlags = 0
-	// FormatSizeLongFormat wraps G_FORMAT_SIZE_LONG_FORMAT
+	// FormatSizeLongFormat wraps FORMAT_SIZE_LONG_FORMAT
 	//
 	// include the exact number of bytes as part
 	//     of the returned string.  For example, "45.6 kB (45,612 bytes)".
 	FormatSizeLongFormat FormatSizeFlags = 1
-	// FormatSizeIecUnits wraps G_FORMAT_SIZE_IEC_UNITS
+	// FormatSizeIecUnits wraps FORMAT_SIZE_IEC_UNITS
 	//
 	// use IEC (base 1024) units with "KiB"-style
 	//     suffixes. IEC units should only be used for reporting things with
 	//     a strong "power of 2" basis, like RAM sizes or RAID stripe sizes.
 	//     Network and storage sizes should be reported in the normal SI units.
 	FormatSizeIecUnits FormatSizeFlags = 2
-	// FormatSizeBits wraps G_FORMAT_SIZE_BITS
+	// FormatSizeBits wraps FORMAT_SIZE_BITS
 	//
 	// set the size as a quantity in bits, rather than
-	//     bytes, and return units in bits. For example, ‘Mbit’ rather than ‘MB’.
+	//     bytes, and return units in bits. For example, &#x2018;Mbit&#x2019; rather than &#x2018;MB&#x2019;.
 	FormatSizeBits FormatSizeFlags = 4
-	// FormatSizeOnlyValue wraps G_FORMAT_SIZE_ONLY_VALUE
+	// FormatSizeOnlyValue wraps FORMAT_SIZE_ONLY_VALUE
 	//
 	// return only value, without unit; this should
 	//     not be used together with @G_FORMAT_SIZE_LONG_FORMAT
 	//     nor @G_FORMAT_SIZE_ONLY_UNIT. Since: 2.74
 	FormatSizeOnlyValue FormatSizeFlags = 8
-	// FormatSizeOnlyUnit wraps G_FORMAT_SIZE_ONLY_UNIT
+	// FormatSizeOnlyUnit wraps FORMAT_SIZE_ONLY_UNIT
 	//
 	// return only unit, without value; this should
 	//     not be used together with @G_FORMAT_SIZE_LONG_FORMAT
@@ -3885,28 +4276,28 @@ func (f FormatSizeFlags) String() string {
 type IOCondition C.gint
 
 const (
-	// IOIn wraps G_IO_IN
+	// IOIn wraps IO_IN
 	//
 	// There is data to read.
 	IOIn IOCondition = 1
-	// IOOut wraps G_IO_OUT
+	// IOOut wraps IO_OUT
 	//
 	// Data can be written (without blocking).
 	IOOut IOCondition = 4
-	// IOPri wraps G_IO_PRI
+	// IOPri wraps IO_PRI
 	//
 	// There is urgent data to read.
 	IOPri IOCondition = 2
-	// IOErr wraps G_IO_ERR
+	// IOErr wraps IO_ERR
 	//
 	// Error condition.
 	IOErr IOCondition = 8
-	// IOHup wraps G_IO_HUP
+	// IOHup wraps IO_HUP
 	//
 	// Hung up (the connection has been broken, usually for
 	//            pipes and sockets).
 	IOHup IOCondition = 16
-	// IONval wraps G_IO_NVAL
+	// IONval wraps IO_NVAL
 	//
 	// Invalid request. The file descriptor is not open.
 	IONval IOCondition = 32
@@ -3952,53 +4343,53 @@ func (f IOCondition) String() string {
 type IOFlags C.gint
 
 const (
-	// IOFlagNone wraps G_IO_FLAG_NONE
+	// IOFlagNone wraps IO_FLAG_NONE
 	//
 	// no special flags set. Since: 2.74
 	IOFlagNone IOFlags = 0
-	// IOFlagAppend wraps G_IO_FLAG_APPEND
+	// IOFlagAppend wraps IO_FLAG_APPEND
 	//
 	// turns on append mode, corresponds to %O_APPEND
 	//     (see the documentation of the UNIX open() syscall)
 	IOFlagAppend IOFlags = 1
-	// IOFlagNonblock wraps G_IO_FLAG_NONBLOCK
+	// IOFlagNonblock wraps IO_FLAG_NONBLOCK
 	//
 	// turns on nonblocking mode, corresponds to
 	//     %O_NONBLOCK/%O_NDELAY (see the documentation of the UNIX open()
 	//     syscall)
 	IOFlagNonblock IOFlags = 2
-	// IOFlagIsReadable wraps G_IO_FLAG_IS_READABLE
+	// IOFlagIsReadable wraps IO_FLAG_IS_READABLE
 	//
 	// indicates that the io channel is readable.
 	//     This flag cannot be changed.
 	IOFlagIsReadable IOFlags = 4
-	// IOFlagIsWritable wraps G_IO_FLAG_IS_WRITABLE
+	// IOFlagIsWritable wraps IO_FLAG_IS_WRITABLE
 	//
 	// indicates that the io channel is writable.
 	//     This flag cannot be changed.
 	IOFlagIsWritable IOFlags = 8
-	// IOFlagIsWriteable wraps G_IO_FLAG_IS_WRITEABLE
+	// IOFlagIsWriteable wraps IO_FLAG_IS_WRITEABLE
 	//
 	// a misspelled version of @G_IO_FLAG_IS_WRITABLE
 	//     that existed before the spelling was fixed in GLib 2.30. It is kept
 	//     here for compatibility reasons. Deprecated since 2.30
 	IOFlagIsWriteable IOFlags = 8
-	// IOFlagIsSeekable wraps G_IO_FLAG_IS_SEEKABLE
+	// IOFlagIsSeekable wraps IO_FLAG_IS_SEEKABLE
 	//
 	// indicates that the io channel is seekable,
 	//     i.e. that g_io_channel_seek_position() can be used on it.
 	//     This flag cannot be changed.
 	IOFlagIsSeekable IOFlags = 16
-	// IOFlagMask wraps G_IO_FLAG_MASK
+	// IOFlagMask wraps IO_FLAG_MASK
 	//
 	// the mask that specifies all the valid flags.
 	IOFlagMask IOFlags = 31
-	// IOFlagGetMask wraps G_IO_FLAG_GET_MASK
+	// IOFlagGetMask wraps IO_FLAG_GET_MASK
 	//
 	// the mask of the flags that are returned from
 	//     g_io_channel_get_flags()
 	IOFlagGetMask IOFlags = 31
-	// IOFlagSetMask wraps G_IO_FLAG_SET_MASK
+	// IOFlagSetMask wraps IO_FLAG_SET_MASK
 	//
 	// the mask of the flags that the user can modify
 	//     with g_io_channel_set_flags()
@@ -4055,18 +4446,18 @@ func (f IOFlags) String() string {
 type KeyFileFlags C.gint
 
 const (
-	// KeyFileNone wraps G_KEY_FILE_NONE
+	// KeyFileNone wraps KEY_FILE_NONE
 	//
 	// No flags, default behaviour
 	KeyFileNone KeyFileFlags = 0
-	// KeyFileKeepComments wraps G_KEY_FILE_KEEP_COMMENTS
+	// KeyFileKeepComments wraps KEY_FILE_KEEP_COMMENTS
 	//
 	// Use this flag if you plan to write the
 	//   (possibly modified) contents of the key file back to a file;
 	//   otherwise all comments will be lost when the key file is
 	//   written back.
 	KeyFileKeepComments KeyFileFlags = 1
-	// KeyFileKeepTranslations wraps G_KEY_FILE_KEEP_TRANSLATIONS
+	// KeyFileKeepTranslations wraps KEY_FILE_KEEP_TRANSLATIONS
 	//
 	// Use this flag if you plan to write the
 	//   (possibly modified) contents of the key file back to a file;
@@ -4107,42 +4498,42 @@ func (f KeyFileFlags) String() string {
 type LogLevelFlags C.gint
 
 const (
-	// LogFlagRecursion wraps G_LOG_FLAG_RECURSION
+	// LogFlagRecursion wraps LOG_FLAG_RECURSION
 	//
 	// internal flag
 	LogFlagRecursion LogLevelFlags = 1
-	// LogFlagFatal wraps G_LOG_FLAG_FATAL
+	// LogFlagFatal wraps LOG_FLAG_FATAL
 	//
 	// internal flag
 	LogFlagFatal LogLevelFlags = 2
-	// LogLevelError wraps G_LOG_LEVEL_ERROR
+	// LogLevelError wraps LOG_LEVEL_ERROR
 	//
 	// log level for errors, see [func@GLib.error].
 	//   This level is also used for messages produced by [func@GLib.assert].
 	LogLevelError LogLevelFlags = 4
-	// LogLevelCritical wraps G_LOG_LEVEL_CRITICAL
+	// LogLevelCritical wraps LOG_LEVEL_CRITICAL
 	//
 	// log level for critical warning messages, see
 	//   [func@GLib.critical]. This level is also used for messages produced by
 	//   [func@GLib.return_if_fail] and [func@GLib.return_val_if_fail].
 	LogLevelCritical LogLevelFlags = 8
-	// LogLevelWarning wraps G_LOG_LEVEL_WARNING
+	// LogLevelWarning wraps LOG_LEVEL_WARNING
 	//
 	// log level for warnings, see [func@GLib.warning]
 	LogLevelWarning LogLevelFlags = 16
-	// LogLevelMessage wraps G_LOG_LEVEL_MESSAGE
+	// LogLevelMessage wraps LOG_LEVEL_MESSAGE
 	//
 	// log level for messages, see [func@GLib.message]
 	LogLevelMessage LogLevelFlags = 32
-	// LogLevelInfo wraps G_LOG_LEVEL_INFO
+	// LogLevelInfo wraps LOG_LEVEL_INFO
 	//
 	// log level for informational messages, see [func@GLib.info]
 	LogLevelInfo LogLevelFlags = 64
-	// LogLevelDebug wraps G_LOG_LEVEL_DEBUG
+	// LogLevelDebug wraps LOG_LEVEL_DEBUG
 	//
 	// log level for debug messages, see [func@GLib.debug]
 	LogLevelDebug LogLevelFlags = 128
-	// LogLevelMask wraps G_LOG_LEVEL_MASK
+	// LogLevelMask wraps LOG_LEVEL_MASK
 	//
 	// a mask including all log levels
 	LogLevelMask LogLevelFlags = -4
@@ -4196,11 +4587,11 @@ func (f LogLevelFlags) String() string {
 type MainContextFlags C.gint
 
 const (
-	// MainContextFlagsNone wraps G_MAIN_CONTEXT_FLAGS_NONE
+	// MainContextFlagsNone wraps MAIN_CONTEXT_FLAGS_NONE
 	//
 	// Default behaviour.
 	MainContextFlagsNone MainContextFlags = 0
-	// MainContextFlagsOwnerlessPolling wraps G_MAIN_CONTEXT_FLAGS_OWNERLESS_POLLING
+	// MainContextFlagsOwnerlessPolling wraps MAIN_CONTEXT_FLAGS_OWNERLESS_POLLING
 	//
 	// Assume that polling for events will
 	// free the thread to process other jobs. That's useful if you're using
@@ -4240,25 +4631,25 @@ func (f MainContextFlags) String() string {
 type MarkupCollectType C.gint
 
 const (
-	// MarkupCollectInvalid wraps G_MARKUP_COLLECT_INVALID
+	// MarkupCollectInvalid wraps MARKUP_COLLECT_INVALID
 	//
 	// used to terminate the list of attributes
 	//     to collect
 	MarkupCollectInvalid MarkupCollectType = 0
-	// MarkupCollectString wraps G_MARKUP_COLLECT_STRING
+	// MarkupCollectString wraps MARKUP_COLLECT_STRING
 	//
 	// collect the string pointer directly from
 	//     the attribute_values[] array. Expects a parameter of type (const
 	//     char **). If %G_MARKUP_COLLECT_OPTIONAL is specified and the
 	//     attribute isn't present then the pointer will be set to %NULL
 	MarkupCollectString MarkupCollectType = 1
-	// MarkupCollectStrdup wraps G_MARKUP_COLLECT_STRDUP
+	// MarkupCollectStrdup wraps MARKUP_COLLECT_STRDUP
 	//
 	// as with %G_MARKUP_COLLECT_STRING, but
 	//     expects a parameter of type (char **) and g_strdup()s the
 	//     returned pointer. The pointer must be freed with g_free()
 	MarkupCollectStrdup MarkupCollectType = 2
-	// MarkupCollectBoolean wraps G_MARKUP_COLLECT_BOOLEAN
+	// MarkupCollectBoolean wraps MARKUP_COLLECT_BOOLEAN
 	//
 	// expects a parameter of type (`gboolean *`)
 	//     and parses the attribute value as a boolean. Sets %FALSE if the
@@ -4266,14 +4657,14 @@ const (
 	//     (case-insensitive) "false", "f", "no", "n", "0" and "true", "t",
 	//     "yes", "y", "1"
 	MarkupCollectBoolean MarkupCollectType = 3
-	// MarkupCollectTristate wraps G_MARKUP_COLLECT_TRISTATE
+	// MarkupCollectTristate wraps MARKUP_COLLECT_TRISTATE
 	//
 	// as with %G_MARKUP_COLLECT_BOOLEAN, but
 	//     in the case of a missing attribute a value is set that compares
 	//     equal to neither %FALSE nor %TRUE %G_MARKUP_COLLECT_OPTIONAL is
 	//     implied
 	MarkupCollectTristate MarkupCollectType = 4
-	// MarkupCollectOptional wraps G_MARKUP_COLLECT_OPTIONAL
+	// MarkupCollectOptional wraps MARKUP_COLLECT_OPTIONAL
 	//
 	// can be bitwise ORed with the other fields.
 	//     If present, allows the attribute not to appear. A default value
@@ -4319,15 +4710,15 @@ func (f MarkupCollectType) String() string {
 type MarkupParseFlags C.gint
 
 const (
-	// MarkupDefaultFlags wraps G_MARKUP_DEFAULT_FLAGS
+	// MarkupDefaultFlags wraps MARKUP_DEFAULT_FLAGS
 	//
 	// No special behaviour. Since: 2.74
 	MarkupDefaultFlags MarkupParseFlags = 0
-	// MarkupDoNotUseThisUnsupportedFlag wraps G_MARKUP_DO_NOT_USE_THIS_UNSUPPORTED_FLAG
+	// MarkupDoNotUseThisUnsupportedFlag wraps MARKUP_DO_NOT_USE_THIS_UNSUPPORTED_FLAG
 	//
 	// flag you should not use
 	MarkupDoNotUseThisUnsupportedFlag MarkupParseFlags = 1
-	// MarkupTreatCdataAsText wraps G_MARKUP_TREAT_CDATA_AS_TEXT
+	// MarkupTreatCdataAsText wraps MARKUP_TREAT_CDATA_AS_TEXT
 	//
 	// When this flag is set, CDATA marked
 	//     sections are not passed literally to the @passthrough function of
@@ -4335,7 +4726,7 @@ const (
 	//     `&lt;![CDATA[` and `]]&gt;`) is
 	//     passed to the @text function. This flag was added in GLib 2.12
 	MarkupTreatCdataAsText MarkupParseFlags = 2
-	// MarkupPrefixErrorPosition wraps G_MARKUP_PREFIX_ERROR_POSITION
+	// MarkupPrefixErrorPosition wraps MARKUP_PREFIX_ERROR_POSITION
 	//
 	// Normally errors caught by GMarkup
 	//     itself have line/column information prefixed to them to let the
@@ -4343,7 +4734,7 @@ const (
 	//     location information is also prefixed to errors generated by the
 	//     #GMarkupParser implementation functions
 	MarkupPrefixErrorPosition MarkupParseFlags = 4
-	// MarkupIgnoreQualified wraps G_MARKUP_IGNORE_QUALIFIED
+	// MarkupIgnoreQualified wraps MARKUP_IGNORE_QUALIFIED
 	//
 	// Ignore (don't report) qualified
 	//     attributes and tags, along with their contents.  A qualified
@@ -4387,45 +4778,45 @@ func (f MarkupParseFlags) String() string {
 type OptionFlags C.gint
 
 const (
-	// OptionFlagNone wraps G_OPTION_FLAG_NONE
+	// OptionFlagNone wraps OPTION_FLAG_NONE
 	//
 	// No flags.
 	OptionFlagNone OptionFlags = 0
-	// OptionFlagHidden wraps G_OPTION_FLAG_HIDDEN
+	// OptionFlagHidden wraps OPTION_FLAG_HIDDEN
 	//
 	// The option doesn't appear in `--help` output.
 	OptionFlagHidden OptionFlags = 1
-	// OptionFlagInMain wraps G_OPTION_FLAG_IN_MAIN
+	// OptionFlagInMain wraps OPTION_FLAG_IN_MAIN
 	//
 	// The option appears in the main section of the
 	//   `--help` output, even if it is defined in a group.
 	OptionFlagInMain OptionFlags = 2
-	// OptionFlagReverse wraps G_OPTION_FLAG_REVERSE
+	// OptionFlagReverse wraps OPTION_FLAG_REVERSE
 	//
 	// For options of the %G_OPTION_ARG_NONE kind, this
 	//   flag indicates that the sense of the option is reversed. i.e. %FALSE will
 	//   be stored into the argument rather than %TRUE.
 	OptionFlagReverse OptionFlags = 4
-	// OptionFlagNoArg wraps G_OPTION_FLAG_NO_ARG
+	// OptionFlagNoArg wraps OPTION_FLAG_NO_ARG
 	//
 	// For options of the %G_OPTION_ARG_CALLBACK kind,
 	//   this flag indicates that the callback does not take any argument
 	//   (like a %G_OPTION_ARG_NONE option). Since 2.8
 	OptionFlagNoArg OptionFlags = 8
-	// OptionFlagFilename wraps G_OPTION_FLAG_FILENAME
+	// OptionFlagFilename wraps OPTION_FLAG_FILENAME
 	//
 	// For options of the %G_OPTION_ARG_CALLBACK
 	//   kind, this flag indicates that the argument should be passed to the
 	//   callback in the GLib filename encoding rather than UTF-8. Since 2.8
 	OptionFlagFilename OptionFlags = 16
-	// OptionFlagOptionalArg wraps G_OPTION_FLAG_OPTIONAL_ARG
+	// OptionFlagOptionalArg wraps OPTION_FLAG_OPTIONAL_ARG
 	//
 	// For options of the %G_OPTION_ARG_CALLBACK
 	//   kind, this flag indicates that the argument supply is optional.
 	//   If no argument is given then data of %GOptionParseFunc will be
 	//   set to NULL. Since 2.8
 	OptionFlagOptionalArg OptionFlags = 32
-	// OptionFlagNoalias wraps G_OPTION_FLAG_NOALIAS
+	// OptionFlagNoalias wraps OPTION_FLAG_NOALIAS
 	//
 	// This flag turns off the automatic conflict
 	//   resolution which prefixes long option names with `groupname-` if
@@ -4434,7 +4825,7 @@ const (
 	//   It is not safe to use this option, unless all option groups are under
 	//   your direct control. Since 2.8.
 	OptionFlagNoalias OptionFlags = 64
-	// OptionFlagDeprecated wraps G_OPTION_FLAG_DEPRECATED
+	// OptionFlagDeprecated wraps OPTION_FLAG_DEPRECATED
 	//
 	// This flag marks the option as deprecated in the `--help`.
 	// 
@@ -4491,17 +4882,17 @@ func (f OptionFlags) String() string {
 type RegexCompileFlags C.gint
 
 const (
-	// RegexDefault wraps G_REGEX_DEFAULT
+	// RegexDefault wraps REGEX_DEFAULT
 	//
 	// No special options set. Since: 2.74
 	RegexDefault RegexCompileFlags = 0
-	// RegexCaseless wraps G_REGEX_CASELESS
+	// RegexCaseless wraps REGEX_CASELESS
 	//
 	// Letters in the pattern match both upper- and
 	//     lowercase letters. This option can be changed within a pattern
 	//     by a "(?i)" option setting.
 	RegexCaseless RegexCompileFlags = 1
-	// RegexMultiline wraps G_REGEX_MULTILINE
+	// RegexMultiline wraps REGEX_MULTILINE
 	//
 	// By default, GRegex treats the strings as consisting
 	//     of a single line of characters (even if it actually contains
@@ -4515,13 +4906,13 @@ const (
 	//     and end. This can be changed within a pattern by a "(?m)" option
 	//     setting.
 	RegexMultiline RegexCompileFlags = 2
-	// RegexDotall wraps G_REGEX_DOTALL
+	// RegexDotall wraps REGEX_DOTALL
 	//
 	// A dot metacharacter (".") in the pattern matches all
 	//     characters, including newlines. Without it, newlines are excluded.
 	//     This option can be changed within a pattern by a ("?s") option setting.
 	RegexDotall RegexCompileFlags = 4
-	// RegexExtended wraps G_REGEX_EXTENDED
+	// RegexExtended wraps REGEX_EXTENDED
 	//
 	// Whitespace data characters in the pattern are
 	//     totally ignored except when escaped or inside a character class.
@@ -4530,7 +4921,7 @@ const (
 	//     the next newline character, inclusive, are also ignored. This can
 	//     be changed within a pattern by a "(?x)" option setting.
 	RegexExtended RegexCompileFlags = 8
-	// RegexAnchored wraps G_REGEX_ANCHORED
+	// RegexAnchored wraps REGEX_ANCHORED
 	//
 	// The pattern is forced to be "anchored", that is,
 	//     it is constrained to match only at the first matching point in the
@@ -4538,7 +4929,7 @@ const (
 	//     appropriate constructs in the pattern itself such as the "^"
 	//     metacharacter.
 	RegexAnchored RegexCompileFlags = 16
-	// RegexDollarEndonly wraps G_REGEX_DOLLAR_ENDONLY
+	// RegexDollarEndonly wraps REGEX_DOLLAR_ENDONLY
 	//
 	// A dollar metacharacter ("$") in the pattern
 	//     matches only at the end of the string. Without this option, a
@@ -4546,18 +4937,18 @@ const (
 	//     it is a newline (but not before any other newlines). This option
 	//     is ignored if %G_REGEX_MULTILINE is set.
 	RegexDollarEndonly RegexCompileFlags = 32
-	// RegexUngreedy wraps G_REGEX_UNGREEDY
+	// RegexUngreedy wraps REGEX_UNGREEDY
 	//
 	// Inverts the "greediness" of the quantifiers so that
 	//     they are not greedy by default, but become greedy if followed by "?".
 	//     It can also be set by a "(?U)" option setting within the pattern.
 	RegexUngreedy RegexCompileFlags = 512
-	// RegexRaw wraps G_REGEX_RAW
+	// RegexRaw wraps REGEX_RAW
 	//
 	// Usually strings must be valid UTF-8 strings, using this
 	//     flag they are considered as a raw sequence of bytes.
 	RegexRaw RegexCompileFlags = 2048
-	// RegexNoAutoCapture wraps G_REGEX_NO_AUTO_CAPTURE
+	// RegexNoAutoCapture wraps REGEX_NO_AUTO_CAPTURE
 	//
 	// Disables the use of numbered capturing
 	//     parentheses in the pattern. Any opening parenthesis that is not
@@ -4565,7 +4956,7 @@ const (
 	//     parentheses can still be used for capturing (and they acquire numbers
 	//     in the usual way).
 	RegexNoAutoCapture RegexCompileFlags = 4096
-	// RegexOptimize wraps G_REGEX_OPTIMIZE
+	// RegexOptimize wraps REGEX_OPTIMIZE
 	//
 	// Since 2.74 and the port to pcre2, requests JIT
 	//     compilation, which, if the just-in-time compiler is available, further
@@ -4575,49 +4966,49 @@ const (
 	//     compiled pattern is used for matching many times. Before 2.74 this
 	//     option used the built-in non-JIT optimizations in pcre1.
 	RegexOptimize RegexCompileFlags = 8192
-	// RegexFirstline wraps G_REGEX_FIRSTLINE
+	// RegexFirstline wraps REGEX_FIRSTLINE
 	//
 	// Limits an unanchored pattern to match before (or at) the
 	//     first newline. Since: 2.34
 	RegexFirstline RegexCompileFlags = 262144
-	// RegexDupnames wraps G_REGEX_DUPNAMES
+	// RegexDupnames wraps REGEX_DUPNAMES
 	//
 	// Names used to identify capturing subpatterns need not
 	//     be unique. This can be helpful for certain types of pattern when it
 	//     is known that only one instance of the named subpattern can ever be
 	//     matched.
 	RegexDupnames RegexCompileFlags = 524288
-	// RegexNewlineCr wraps G_REGEX_NEWLINE_CR
+	// RegexNewlineCr wraps REGEX_NEWLINE_CR
 	//
 	// Usually any newline character or character sequence is
 	//     recognized. If this option is set, the only recognized newline character
 	//     is '\r'.
 	RegexNewlineCr RegexCompileFlags = 1048576
-	// RegexNewlineLf wraps G_REGEX_NEWLINE_LF
+	// RegexNewlineLf wraps REGEX_NEWLINE_LF
 	//
 	// Usually any newline character or character sequence is
 	//     recognized. If this option is set, the only recognized newline character
 	//     is '\n'.
 	RegexNewlineLf RegexCompileFlags = 2097152
-	// RegexNewlineCrlf wraps G_REGEX_NEWLINE_CRLF
+	// RegexNewlineCrlf wraps REGEX_NEWLINE_CRLF
 	//
 	// Usually any newline character or character sequence is
 	//     recognized. If this option is set, the only recognized newline character
 	//     sequence is '\r\n'.
 	RegexNewlineCrlf RegexCompileFlags = 3145728
-	// RegexNewlineAnycrlf wraps G_REGEX_NEWLINE_ANYCRLF
+	// RegexNewlineAnycrlf wraps REGEX_NEWLINE_ANYCRLF
 	//
 	// Usually any newline character or character sequence
 	//     is recognized. If this option is set, the only recognized newline character
 	//     sequences are '\r', '\n', and '\r\n'. Since: 2.34
 	RegexNewlineAnycrlf RegexCompileFlags = 5242880
-	// RegexBsrAnycrlf wraps G_REGEX_BSR_ANYCRLF
+	// RegexBsrAnycrlf wraps REGEX_BSR_ANYCRLF
 	//
 	// Usually any newline character or character sequence
 	//     is recognised. If this option is set, then "\R" only recognizes the newline
 	//    characters '\r', '\n' and '\r\n'. Since: 2.34
 	RegexBsrAnycrlf RegexCompileFlags = 8388608
-	// RegexJavascriptCompat wraps G_REGEX_JAVASCRIPT_COMPAT
+	// RegexJavascriptCompat wraps REGEX_JAVASCRIPT_COMPAT
 	//
 	// Changes behaviour so that it is compatible with
 	//     JavaScript rather than PCRE. Since GLib 2.74 this is no longer supported,
@@ -4702,11 +5093,11 @@ func (f RegexCompileFlags) String() string {
 type RegexMatchFlags C.gint
 
 const (
-	// RegexMatchDefault wraps G_REGEX_MATCH_DEFAULT
+	// RegexMatchDefault wraps REGEX_MATCH_DEFAULT
 	//
 	// No special options set. Since: 2.74
 	RegexMatchDefault RegexMatchFlags = 0
-	// RegexMatchAnchored wraps G_REGEX_MATCH_ANCHORED
+	// RegexMatchAnchored wraps REGEX_MATCH_ANCHORED
 	//
 	// The pattern is forced to be "anchored", that is,
 	//     it is constrained to match only at the first matching point in the
@@ -4714,7 +5105,7 @@ const (
 	//     appropriate constructs in the pattern itself such as the "^"
 	//     metacharacter.
 	RegexMatchAnchored RegexMatchFlags = 16
-	// RegexMatchNotbol wraps G_REGEX_MATCH_NOTBOL
+	// RegexMatchNotbol wraps REGEX_MATCH_NOTBOL
 	//
 	// Specifies that first character of the string is
 	//     not the beginning of a line, so the circumflex metacharacter should
@@ -4723,7 +5114,7 @@ const (
 	//     only the behaviour of the circumflex metacharacter, it does not
 	//     affect "\A".
 	RegexMatchNotbol RegexMatchFlags = 128
-	// RegexMatchNoteol wraps G_REGEX_MATCH_NOTEOL
+	// RegexMatchNoteol wraps REGEX_MATCH_NOTEOL
 	//
 	// Specifies that the end of the subject string is
 	//     not the end of a line, so the dollar metacharacter should not match
@@ -4732,7 +5123,7 @@ const (
 	//     dollar never to match. This option affects only the behaviour of
 	//     the dollar metacharacter, it does not affect "\Z" or "\z".
 	RegexMatchNoteol RegexMatchFlags = 256
-	// RegexMatchNotempty wraps G_REGEX_MATCH_NOTEMPTY
+	// RegexMatchNotempty wraps REGEX_MATCH_NOTEMPTY
 	//
 	// An empty string is not considered to be a valid
 	//     match if this option is set. If there are alternatives in the pattern,
@@ -4743,27 +5134,27 @@ const (
 	//     valid, so GRegex searches further into the string for occurrences
 	//     of "a" or "b".
 	RegexMatchNotempty RegexMatchFlags = 1024
-	// RegexMatchPartial wraps G_REGEX_MATCH_PARTIAL
+	// RegexMatchPartial wraps REGEX_MATCH_PARTIAL
 	//
 	// Turns on the partial matching feature, for more
 	//     documentation on partial matching see g_match_info_is_partial_match().
 	RegexMatchPartial RegexMatchFlags = 32768
-	// RegexMatchNewlineCr wraps G_REGEX_MATCH_NEWLINE_CR
+	// RegexMatchNewlineCr wraps REGEX_MATCH_NEWLINE_CR
 	//
 	// Overrides the newline definition set when
 	//     creating a new #GRegex, setting the '\r' character as line terminator.
 	RegexMatchNewlineCr RegexMatchFlags = 1048576
-	// RegexMatchNewlineLf wraps G_REGEX_MATCH_NEWLINE_LF
+	// RegexMatchNewlineLf wraps REGEX_MATCH_NEWLINE_LF
 	//
 	// Overrides the newline definition set when
 	//     creating a new #GRegex, setting the '\n' character as line terminator.
 	RegexMatchNewlineLf RegexMatchFlags = 2097152
-	// RegexMatchNewlineCrlf wraps G_REGEX_MATCH_NEWLINE_CRLF
+	// RegexMatchNewlineCrlf wraps REGEX_MATCH_NEWLINE_CRLF
 	//
 	// Overrides the newline definition set when
 	//     creating a new #GRegex, setting the '\r\n' characters sequence as line terminator.
 	RegexMatchNewlineCrlf RegexMatchFlags = 3145728
-	// RegexMatchNewlineAny wraps G_REGEX_MATCH_NEWLINE_ANY
+	// RegexMatchNewlineAny wraps REGEX_MATCH_NEWLINE_ANY
 	//
 	// Overrides the newline definition set when
 	//     creating a new #GRegex, any Unicode newline sequence
@@ -4772,19 +5163,19 @@ const (
 	//     U+0085 NEXT LINE (NEL), U+2028 LINE SEPARATOR and
 	//     U+2029 PARAGRAPH SEPARATOR.
 	RegexMatchNewlineAny RegexMatchFlags = 4194304
-	// RegexMatchNewlineAnycrlf wraps G_REGEX_MATCH_NEWLINE_ANYCRLF
+	// RegexMatchNewlineAnycrlf wraps REGEX_MATCH_NEWLINE_ANYCRLF
 	//
 	// Overrides the newline definition set when
 	//     creating a new #GRegex; any '\r', '\n', or '\r\n' character sequence
 	//     is recognized as a newline. Since: 2.34
 	RegexMatchNewlineAnycrlf RegexMatchFlags = 5242880
-	// RegexMatchBsrAnycrlf wraps G_REGEX_MATCH_BSR_ANYCRLF
+	// RegexMatchBsrAnycrlf wraps REGEX_MATCH_BSR_ANYCRLF
 	//
 	// Overrides the newline definition for "\R" set when
 	//     creating a new #GRegex; only '\r', '\n', or '\r\n' character sequences
 	//     are recognized as a newline by "\R". Since: 2.34
 	RegexMatchBsrAnycrlf RegexMatchFlags = 8388608
-	// RegexMatchBsrAny wraps G_REGEX_MATCH_BSR_ANY
+	// RegexMatchBsrAny wraps REGEX_MATCH_BSR_ANY
 	//
 	// Overrides the newline definition for "\R" set when
 	//     creating a new #GRegex; any Unicode newline character or character sequence
@@ -4793,18 +5184,18 @@ const (
 	//     U+0085 NEXT LINE (NEL), U+2028 LINE SEPARATOR and
 	//     U+2029 PARAGRAPH SEPARATOR. Since: 2.34
 	RegexMatchBsrAny RegexMatchFlags = 16777216
-	// RegexMatchPartialSoft wraps G_REGEX_MATCH_PARTIAL_SOFT
+	// RegexMatchPartialSoft wraps REGEX_MATCH_PARTIAL_SOFT
 	//
 	// An alias for %G_REGEX_MATCH_PARTIAL. Since: 2.34
 	RegexMatchPartialSoft RegexMatchFlags = 32768
-	// RegexMatchPartialHard wraps G_REGEX_MATCH_PARTIAL_HARD
+	// RegexMatchPartialHard wraps REGEX_MATCH_PARTIAL_HARD
 	//
 	// Turns on the partial matching feature. In contrast to
 	//     to %G_REGEX_MATCH_PARTIAL_SOFT, this stops matching as soon as a partial match
 	//     is found, without continuing to search for a possible complete match. See
 	//     g_match_info_is_partial_match() for more information. Since: 2.34
 	RegexMatchPartialHard RegexMatchFlags = 134217728
-	// RegexMatchNotemptyAtstart wraps G_REGEX_MATCH_NOTEMPTY_ATSTART
+	// RegexMatchNotemptyAtstart wraps REGEX_MATCH_NOTEMPTY_ATSTART
 	//
 	// Like %G_REGEX_MATCH_NOTEMPTY, but only applied to
 	//     the start of the matched string. For anchored
@@ -4880,68 +5271,68 @@ func (f RegexMatchFlags) String() string {
 type SpawnFlags C.gint
 
 const (
-	// SpawnDefault wraps G_SPAWN_DEFAULT
+	// SpawnDefault wraps SPAWN_DEFAULT
 	//
 	// no flags, default behaviour
 	SpawnDefault SpawnFlags = 0
-	// SpawnLeaveDescriptorsOpen wraps G_SPAWN_LEAVE_DESCRIPTORS_OPEN
+	// SpawnLeaveDescriptorsOpen wraps SPAWN_LEAVE_DESCRIPTORS_OPEN
 	//
 	// the parent's open file descriptors will
 	//     be inherited by the child; otherwise all descriptors except stdin,
 	//     stdout and stderr will be closed before calling exec() in the child.
 	SpawnLeaveDescriptorsOpen SpawnFlags = 1
-	// SpawnDoNotReapChild wraps G_SPAWN_DO_NOT_REAP_CHILD
+	// SpawnDoNotReapChild wraps SPAWN_DO_NOT_REAP_CHILD
 	//
 	// the child will not be automatically reaped;
 	//     you must use g_child_watch_add() yourself (or call waitpid() or handle
 	//     `SIGCHLD` yourself), or the child will become a zombie.
 	SpawnDoNotReapChild SpawnFlags = 2
-	// SpawnSearchPath wraps G_SPAWN_SEARCH_PATH
+	// SpawnSearchPath wraps SPAWN_SEARCH_PATH
 	//
 	// `argv[0]` need not be an absolute path, it will be
 	//     looked for in the user's `PATH`.
 	SpawnSearchPath SpawnFlags = 4
-	// SpawnStdoutToDevNull wraps G_SPAWN_STDOUT_TO_DEV_NULL
+	// SpawnStdoutToDevNull wraps SPAWN_STDOUT_TO_DEV_NULL
 	//
 	// the child's standard output will be discarded,
 	//     instead of going to the same location as the parent's standard output.
 	SpawnStdoutToDevNull SpawnFlags = 8
-	// SpawnStderrToDevNull wraps G_SPAWN_STDERR_TO_DEV_NULL
+	// SpawnStderrToDevNull wraps SPAWN_STDERR_TO_DEV_NULL
 	//
 	// the child's standard error will be discarded.
 	SpawnStderrToDevNull SpawnFlags = 16
-	// SpawnChildInheritsStdin wraps G_SPAWN_CHILD_INHERITS_STDIN
+	// SpawnChildInheritsStdin wraps SPAWN_CHILD_INHERITS_STDIN
 	//
 	// the child will inherit the parent's standard
 	//     input (by default, the child's standard input is attached to `/dev/null`).
 	SpawnChildInheritsStdin SpawnFlags = 32
-	// SpawnFileAndArgvZero wraps G_SPAWN_FILE_AND_ARGV_ZERO
+	// SpawnFileAndArgvZero wraps SPAWN_FILE_AND_ARGV_ZERO
 	//
 	// the first element of `argv` is the file to
 	//     execute, while the remaining elements are the actual argument vector
 	//     to pass to the file. Normally g_spawn_async_with_pipes() uses `argv[0]`
 	//     as the file to execute, and passes all of `argv` to the child.
 	SpawnFileAndArgvZero SpawnFlags = 64
-	// SpawnSearchPathFromEnvp wraps G_SPAWN_SEARCH_PATH_FROM_ENVP
+	// SpawnSearchPathFromEnvp wraps SPAWN_SEARCH_PATH_FROM_ENVP
 	//
 	// if `argv[0]` is not an absolute path,
 	//     it will be looked for in the `PATH` from the passed child environment.
 	//     Since: 2.34
 	SpawnSearchPathFromEnvp SpawnFlags = 128
-	// SpawnCloexecPipes wraps G_SPAWN_CLOEXEC_PIPES
+	// SpawnCloexecPipes wraps SPAWN_CLOEXEC_PIPES
 	//
 	// create all pipes with the `O_CLOEXEC` flag set.
 	//     Since: 2.40
 	SpawnCloexecPipes SpawnFlags = 256
-	// SpawnChildInheritsStdout wraps G_SPAWN_CHILD_INHERITS_STDOUT
+	// SpawnChildInheritsStdout wraps SPAWN_CHILD_INHERITS_STDOUT
 	//
 	// The child will inherit the parent's standard output.
 	SpawnChildInheritsStdout SpawnFlags = 512
-	// SpawnChildInheritsStderr wraps G_SPAWN_CHILD_INHERITS_STDERR
+	// SpawnChildInheritsStderr wraps SPAWN_CHILD_INHERITS_STDERR
 	//
 	// The child will inherit the parent's standard error.
 	SpawnChildInheritsStderr SpawnFlags = 1024
-	// SpawnStdinFromDevNull wraps G_SPAWN_STDIN_FROM_DEV_NULL
+	// SpawnStdinFromDevNull wraps SPAWN_STDIN_FROM_DEV_NULL
 	//
 	// The child's standard input is attached to `/dev/null`.
 	SpawnStdinFromDevNull SpawnFlags = 2048
@@ -5000,6 +5391,68 @@ func (f SpawnFlags) String() string {
 	return "SpawnFlags(" + strings.Join(parts, "|") + ")"
 }
 
+// TestSubprocessFlags wraps GTestSubprocessFlags
+//
+// Flags to pass to [func@GLib.test_trap_subprocess] to control input and output.
+// 
+// Note that in contrast with [func@GLib.test_trap_fork], the default
+// behavior of [func@GLib.test_trap_subprocess] is to not show stdout
+// and stderr.
+type TestSubprocessFlags C.gint
+
+const (
+	// TestSubprocessDefault wraps TEST_SUBPROCESS_DEFAULT
+	//
+	// Default behaviour. Since: 2.74
+	TestSubprocessDefault TestSubprocessFlags = 0
+	// TestSubprocessInheritStdin wraps TEST_SUBPROCESS_INHERIT_STDIN
+	//
+	// If this flag is given, the child
+	//   process will inherit the parent's stdin. Otherwise, the child's
+	//   stdin is redirected to `/dev/null`.
+	TestSubprocessInheritStdin TestSubprocessFlags = 1
+	// TestSubprocessInheritStdout wraps TEST_SUBPROCESS_INHERIT_STDOUT
+	//
+	// If this flag is given, the child
+	//   process will inherit the parent's stdout. Otherwise, the child's
+	//   stdout will not be visible, but it will be captured to allow
+	//   later tests with [func@GLib.test_trap_assert_stdout].
+	TestSubprocessInheritStdout TestSubprocessFlags = 2
+	// TestSubprocessInheritStderr wraps TEST_SUBPROCESS_INHERIT_STDERR
+	//
+	// If this flag is given, the child
+	//   process will inherit the parent's stderr. Otherwise, the child's
+	//   stderr will not be visible, but it will be captured to allow
+	//   later tests with [func@GLib.test_trap_assert_stderr].
+	TestSubprocessInheritStderr TestSubprocessFlags = 4
+)
+
+// Has returns true if t contains other
+func (t TestSubprocessFlags) Has(other TestSubprocessFlags) bool {
+	return (t & other) == other
+}
+
+func (f TestSubprocessFlags) String() string {
+	if f == 0 {
+		return "TestSubprocessFlags(0)"
+	}
+
+	var parts []string
+	if (f & TestSubprocessDefault) != 0 {
+		parts = append(parts, "TestSubprocessDefault")
+	}
+	if (f & TestSubprocessInheritStdin) != 0 {
+		parts = append(parts, "TestSubprocessInheritStdin")
+	}
+	if (f & TestSubprocessInheritStdout) != 0 {
+		parts = append(parts, "TestSubprocessInheritStdout")
+	}
+	if (f & TestSubprocessInheritStderr) != 0 {
+		parts = append(parts, "TestSubprocessInheritStderr")
+	}
+	return "TestSubprocessFlags(" + strings.Join(parts, "|") + ")"
+}
+
 // TraverseFlags wraps GTraverseFlags
 //
 // Specifies which nodes are visited during several of the tree
@@ -5007,31 +5460,31 @@ func (f SpawnFlags) String() string {
 type TraverseFlags C.gint
 
 const (
-	// TraverseLeaves wraps G_TRAVERSE_LEAVES
+	// TraverseLeaves wraps TRAVERSE_LEAVES
 	//
 	// only leaf nodes should be visited. This name has
 	//                     been introduced in 2.6, for older version use
 	//                     %G_TRAVERSE_LEAFS.
 	TraverseLeaves TraverseFlags = 1
-	// TraverseNonLeaves wraps G_TRAVERSE_NON_LEAVES
+	// TraverseNonLeaves wraps TRAVERSE_NON_LEAVES
 	//
 	// only non-leaf nodes should be visited. This
 	//                         name has been introduced in 2.6, for older
 	//                         version use %G_TRAVERSE_NON_LEAFS.
 	TraverseNonLeaves TraverseFlags = 2
-	// TraverseAll wraps G_TRAVERSE_ALL
+	// TraverseAll wraps TRAVERSE_ALL
 	//
 	// all nodes should be visited.
 	TraverseAll TraverseFlags = 3
-	// TraverseMask wraps G_TRAVERSE_MASK
+	// TraverseMask wraps TRAVERSE_MASK
 	//
 	// a mask of all traverse flags.
 	TraverseMask TraverseFlags = 3
-	// TraverseLeafs wraps G_TRAVERSE_LEAFS
+	// TraverseLeafs wraps TRAVERSE_LEAFS
 	//
 	// identical to %G_TRAVERSE_LEAVES.
 	TraverseLeafs TraverseFlags = 1
-	// TraverseNonLeafs wraps G_TRAVERSE_NON_LEAFS
+	// TraverseNonLeafs wraps TRAVERSE_NON_LEAFS
 	//
 	// identical to %G_TRAVERSE_NON_LEAVES.
 	TraverseNonLeafs TraverseFlags = 2
@@ -5080,30 +5533,30 @@ func (f TraverseFlags) String() string {
 type URIFlags C.gint
 
 const (
-	// URIFlagsNone wraps G_URI_FLAGS_NONE
+	// URIFlagsNone wraps URI_FLAGS_NONE
 	//
 	// No flags set.
 	URIFlagsNone URIFlags = 0
-	// URIFlagsParseRelaxed wraps G_URI_FLAGS_PARSE_RELAXED
+	// URIFlagsParseRelaxed wraps URI_FLAGS_PARSE_RELAXED
 	//
 	// Parse the URI more relaxedly than the
 	//     [RFC 3986](https://tools.ietf.org/html/rfc3986) grammar specifies,
 	//     fixing up or ignoring common mistakes in URIs coming from external
 	//     sources. This is also needed for some obscure URI schemes where `;`
-	//     separates the host from the path. Don’t use this flag unless you need to.
+	//     separates the host from the path. Don&#x2019;t use this flag unless you need to.
 	URIFlagsParseRelaxed URIFlags = 1
-	// URIFlagsHasPassword wraps G_URI_FLAGS_HAS_PASSWORD
+	// URIFlagsHasPassword wraps URI_FLAGS_HAS_PASSWORD
 	//
 	// The userinfo field may contain a password,
 	//     which will be separated from the username by `:`.
 	URIFlagsHasPassword URIFlags = 2
-	// URIFlagsHasAuthParams wraps G_URI_FLAGS_HAS_AUTH_PARAMS
+	// URIFlagsHasAuthParams wraps URI_FLAGS_HAS_AUTH_PARAMS
 	//
 	// The userinfo may contain additional
 	//     authentication-related parameters, which will be separated from
 	//     the username and/or password by `;`.
 	URIFlagsHasAuthParams URIFlags = 4
-	// URIFlagsEncoded wraps G_URI_FLAGS_ENCODED
+	// URIFlagsEncoded wraps URI_FLAGS_ENCODED
 	//
 	// When parsing a URI, this indicates that `%`-encoded
 	//     characters in the userinfo, path, query, and fragment fields
@@ -5112,27 +5565,27 @@ const (
 	//     that you have already `%`-encoded the components, and so #GUri
 	//     should not do any encoding itself.
 	URIFlagsEncoded URIFlags = 8
-	// URIFlagsNonDns wraps G_URI_FLAGS_NON_DNS
+	// URIFlagsNonDns wraps URI_FLAGS_NON_DNS
 	//
 	// The host component should not be assumed to be a
 	//     DNS hostname or IP address (for example, for `smb` URIs with NetBIOS
 	//     hostnames).
 	URIFlagsNonDns URIFlags = 16
-	// URIFlagsEncodedQuery wraps G_URI_FLAGS_ENCODED_QUERY
+	// URIFlagsEncodedQuery wraps URI_FLAGS_ENCODED_QUERY
 	//
 	// Same as %G_URI_FLAGS_ENCODED, for the query
 	//     field only.
 	URIFlagsEncodedQuery URIFlags = 32
-	// URIFlagsEncodedPath wraps G_URI_FLAGS_ENCODED_PATH
+	// URIFlagsEncodedPath wraps URI_FLAGS_ENCODED_PATH
 	//
 	// Same as %G_URI_FLAGS_ENCODED, for the path only.
 	URIFlagsEncodedPath URIFlags = 64
-	// URIFlagsEncodedFragment wraps G_URI_FLAGS_ENCODED_FRAGMENT
+	// URIFlagsEncodedFragment wraps URI_FLAGS_ENCODED_FRAGMENT
 	//
 	// Same as %G_URI_FLAGS_ENCODED, for the
 	//     fragment only.
 	URIFlagsEncodedFragment URIFlags = 128
-	// URIFlagsSchemeNormalize wraps G_URI_FLAGS_SCHEME_NORMALIZE
+	// URIFlagsSchemeNormalize wraps URI_FLAGS_SCHEME_NORMALIZE
 	//
 	// A scheme-based normalization will be applied.
 	//     For example, when parsing an HTTP URI changing omitted path to `/` and
@@ -5194,27 +5647,27 @@ func (f URIFlags) String() string {
 type URIHideFlags C.gint
 
 const (
-	// URIHideNone wraps G_URI_HIDE_NONE
+	// URIHideNone wraps URI_HIDE_NONE
 	//
 	// No flags set.
 	URIHideNone URIHideFlags = 0
-	// URIHideUserinfo wraps G_URI_HIDE_USERINFO
+	// URIHideUserinfo wraps URI_HIDE_USERINFO
 	//
 	// Hide the userinfo.
 	URIHideUserinfo URIHideFlags = 1
-	// URIHidePassword wraps G_URI_HIDE_PASSWORD
+	// URIHidePassword wraps URI_HIDE_PASSWORD
 	//
 	// Hide the password.
 	URIHidePassword URIHideFlags = 2
-	// URIHideAuthParams wraps G_URI_HIDE_AUTH_PARAMS
+	// URIHideAuthParams wraps URI_HIDE_AUTH_PARAMS
 	//
 	// Hide the auth_params.
 	URIHideAuthParams URIHideFlags = 4
-	// URIHideQuery wraps G_URI_HIDE_QUERY
+	// URIHideQuery wraps URI_HIDE_QUERY
 	//
 	// Hide the query.
 	URIHideQuery URIHideFlags = 8
-	// URIHideFragment wraps G_URI_HIDE_FRAGMENT
+	// URIHideFragment wraps URI_HIDE_FRAGMENT
 	//
 	// Hide the fragment.
 	URIHideFragment URIHideFlags = 16
@@ -5259,20 +5712,20 @@ func (f URIHideFlags) String() string {
 type URIParamsFlags C.gint
 
 const (
-	// URIParamsNone wraps G_URI_PARAMS_NONE
+	// URIParamsNone wraps URI_PARAMS_NONE
 	//
 	// No flags set.
 	URIParamsNone URIParamsFlags = 0
-	// URIParamsCaseInsensitive wraps G_URI_PARAMS_CASE_INSENSITIVE
+	// URIParamsCaseInsensitive wraps URI_PARAMS_CASE_INSENSITIVE
 	//
 	// Parameter names are case insensitive.
 	URIParamsCaseInsensitive URIParamsFlags = 1
-	// URIParamsWwwForm wraps G_URI_PARAMS_WWW_FORM
+	// URIParamsWwwForm wraps URI_PARAMS_WWW_FORM
 	//
 	// Replace `+` with space character. Only useful for
 	//     URLs on the web, using the `https` or `http` schemas.
 	URIParamsWwwForm URIParamsFlags = 2
-	// URIParamsParseRelaxed wraps G_URI_PARAMS_PARSE_RELAXED
+	// URIParamsParseRelaxed wraps URI_PARAMS_PARSE_RELAXED
 	//
 	// See %G_URI_FLAGS_PARSE_RELAXED.
 	URIParamsParseRelaxed URIParamsFlags = 4
@@ -5388,6 +5841,30 @@ type SourceFunc func() (goret bool)
 // See: [func@GLib.idle_add_once], [func@GLib.timeout_add_once]
 type SourceOnceFunc func()
 
+// TestDataFunc wraps GTestDataFunc
+// 
+// The function takes the following parameters:
+// 
+//
+// The type used for test case functions that take an extra pointer
+// argument.
+type TestDataFunc func()
+
+// TestLogFatalFunc wraps GTestLogFatalFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- logDomain string: the log domain of the message 
+// 	- logLevel LogLevelFlags: the log level of the message (including the fatal and recursion flags) 
+// 	- message string: the message to process 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Specifies the prototype of fatal log handler functions.
+type TestLogFatalFunc func(logDomain string, logLevel LogLevelFlags, message string) (goret bool)
+
 // ChildWatchFunc wraps GChildWatchFunc
 // 
 // The function takes the following parameters:
@@ -5404,6 +5881,720 @@ type SourceOnceFunc func()
 // on Unix platforms, note that it is usually not equal
 // to the integer passed to `exit()` or returned from `main()`.
 type ChildWatchFunc func(pid Pid, waitStatus int32)
+
+// ASCIIDigitValue wraps g_ascii_digit_value
+// 
+// The function takes the following parameters:
+// 
+// 	- c byte: an ASCII character 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Determines the numeric value of a character as a decimal digit. If the
+// character is not a decimal digit according to [func@GLib.ascii_isdigit],
+// `-1` is returned.
+// 
+// Differs from [func@GLib.unichar_digit_value] because it takes a char, so
+// there's no worry about sign extension if characters are signed.
+func ASCIIDigitValue(c byte) int32 {
+	var carg1 C.gchar // in, none, casted
+	var cret  C.gint  // return, none, casted
+
+	carg1 = C.gchar(c)
+
+	cret = C.g_ascii_digit_value(carg1)
+	runtime.KeepAlive(c)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ASCIIDtostr wraps g_ascii_dtostr
+// 
+// The function takes the following parameters:
+// 
+// 	- buffer string: a buffer to place the resulting string in 
+// 	- bufLen int32: the length of the buffer 
+// 	- d float64: the value to convert 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Converts a `gdouble` to a string, using the '.' as
+// decimal point.
+// 
+// This function generates enough precision that converting
+// the string back using [func@GLib.ascii_strtod] gives the same machine-number
+// (on machines with IEEE compatible 64bit doubles). It is
+// guaranteed that the size of the resulting string will never
+// be larger than [const@GLib.ASCII_DTOSTR_BUF_SIZE] bytes, including the terminating
+// nul character, which is always added.
+func ASCIIDtostr(buffer string, bufLen int32, d float64) string {
+	var carg1 *C.gchar  // in, none, string
+	var carg2 C.gint    // in, none, casted
+	var carg3 C.gdouble // in, none, casted
+	var cret  *C.gchar  // return, full, string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(buffer)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.gint(bufLen)
+	carg3 = C.gdouble(d)
+
+	cret = C.g_ascii_dtostr(carg1, carg2, carg3)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(bufLen)
+	runtime.KeepAlive(d)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ASCIIFormatd wraps g_ascii_formatd
+// 
+// The function takes the following parameters:
+// 
+// 	- buffer string: a buffer to place the resulting string in 
+// 	- bufLen int32: the length of the buffer 
+// 	- format string: the `printf()`-style format to use for the
+//   code to use for converting 
+// 	- d float64: the value to convert 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Converts a `gdouble` to a string, using the '.' as
+// decimal point. To format the number you pass in
+// a `printf()`-style format string. Allowed conversion
+// specifiers are 'e', 'E', 'f', 'F', 'g' and 'G'.
+// 
+// The @format must just be a single format specifier
+// starting with `%`, expecting a `gdouble` argument.
+// 
+// The returned buffer is guaranteed to be nul-terminated.
+// 
+// If you just want to want to serialize the value into a
+// string, use [func@GLib.ascii_dtostr].
+func ASCIIFormatd(buffer string, bufLen int32, format string, d float64) string {
+	var carg1 *C.gchar  // in, none, string
+	var carg2 C.gint    // in, none, casted
+	var carg3 *C.gchar  // in, none, string
+	var carg4 C.gdouble // in, none, casted
+	var cret  *C.gchar  // return, full, string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(buffer)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.gint(bufLen)
+	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(format)))
+	defer C.free(unsafe.Pointer(carg3))
+	carg4 = C.gdouble(d)
+
+	cret = C.g_ascii_formatd(carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(bufLen)
+	runtime.KeepAlive(format)
+	runtime.KeepAlive(d)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ASCIIStrcasecmp wraps g_ascii_strcasecmp
+// 
+// The function takes the following parameters:
+// 
+// 	- s1 string: string to compare with @s2 
+// 	- s2 string: string to compare with @s1 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Compare two strings, ignoring the case of ASCII characters.
+// 
+// Unlike the BSD `strcasecmp()` function, this only recognizes standard
+// ASCII letters and ignores the locale, treating all non-ASCII
+// bytes as if they are not letters.
+// 
+// This function should be used only on strings that are known to be
+// in encodings where the bytes corresponding to ASCII letters always
+// represent themselves. This includes UTF-8 and the ISO-8859-*
+// charsets, but not for instance double-byte encodings like the
+// Windows Codepage 932, where the trailing bytes of double-byte
+// characters include all ASCII letters. If you compare two CP932
+// strings using this function, you will get false matches.
+// 
+// Both @s1 and @s2 must be non-`NULL`.
+func ASCIIStrcasecmp(s1 string, s2 string) int32 {
+	var carg1 *C.gchar // in, none, string
+	var carg2 *C.gchar // in, none, string
+	var cret  C.gint   // return, none, casted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(s1)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(s2)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C.g_ascii_strcasecmp(carg1, carg2)
+	runtime.KeepAlive(s1)
+	runtime.KeepAlive(s2)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ASCIIStrdown wraps g_ascii_strdown
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a string 
+// 	- len int: length of @str in bytes, or `-1` if @str is nul-terminated 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Converts all upper case ASCII letters to lower case ASCII letters, with
+// semantics that exactly match [func@GLib.ascii_tolower].
+func ASCIIStrdown(str string, len int) string {
+	var carg1 *C.gchar // in, none, string
+	var carg2 C.gssize // in, none, casted
+	var cret  *C.gchar // return, full, string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.gssize(len)
+
+	cret = C.g_ascii_strdown(carg1, carg2)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(len)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ASCIIStringToSigned wraps g_ascii_string_to_signed
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a string to convert 
+// 	- base uint: base of a parsed number 
+// 	- min int64: a lower bound (inclusive) 
+// 	- max int64: an upper bound (inclusive) 
+// 
+// The function returns the following values:
+// 
+// 	- outNum int64: a return location for a number 
+// 	- goret bool 
+// 	- _goerr error (nullable): an error 
+//
+// A convenience function for converting a string to a signed number.
+// 
+// This function assumes that @str contains only a number of the given
+// @base that is within inclusive bounds limited by @min and @max. If
+// this is true, then the converted number is stored in @out_num. An
+// empty string is not a valid input. A string with leading or
+// trailing whitespace is also an invalid input.
+// 
+// @base can be between 2 and 36 inclusive. Hexadecimal numbers must
+// not be prefixed with "0x" or "0X". Such a problem does not exist
+// for octal numbers, since they were usually prefixed with a zero
+// which does not change the value of the parsed number.
+// 
+// Parsing failures result in an error with the `G_NUMBER_PARSER_ERROR`
+// domain. If the input is invalid, the error code will be
+// [error@GLib.NumberParserError.INVALID]. If the parsed number is out of
+// bounds - [error@GLib.NumberParserError.OUT_OF_BOUNDS].
+// 
+// See [func@GLib.ascii_strtoll] if you have more complex needs such as
+// parsing a string which starts with a number, but then has other
+// characters.
+func ASCIIStringToSigned(str string, base uint, min int64, max int64) (int64, bool, error) {
+	var carg1 *C.gchar   // in, none, string
+	var carg2 C.guint    // in, none, casted
+	var carg3 C.gint64   // in, none, casted
+	var carg4 C.gint64   // in, none, casted
+	var carg5 C.gint64   // out, full, casted
+	var cret  C.gboolean // return
+	var _cerr *C.GError  // out, full, converted, nullable
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.guint(base)
+	carg3 = C.gint64(min)
+	carg4 = C.gint64(max)
+
+	cret = C.g_ascii_string_to_signed(carg1, carg2, carg3, carg4, &carg5, &_cerr)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(base)
+	runtime.KeepAlive(min)
+	runtime.KeepAlive(max)
+
+	var outNum int64
+	var goret  bool
+	var _goerr error
+
+	outNum = int64(carg5)
+	if cret != 0 {
+		goret = true
+	}
+	if _cerr != nil {
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return outNum, goret, _goerr
+}
+
+// ASCIIStringToUnsigned wraps g_ascii_string_to_unsigned
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a string 
+// 	- base uint: base of a parsed number 
+// 	- min uint64: a lower bound (inclusive) 
+// 	- max uint64: an upper bound (inclusive) 
+// 
+// The function returns the following values:
+// 
+// 	- outNum uint64: a return location for a number 
+// 	- goret bool 
+// 	- _goerr error (nullable): an error 
+//
+// A convenience function for converting a string to an unsigned number.
+// 
+// This function assumes that @str contains only a number of the given
+// @base that is within inclusive bounds limited by @min and @max. If
+// this is true, then the converted number is stored in @out_num. An
+// empty string is not a valid input. A string with leading or
+// trailing whitespace is also an invalid input. A string with a leading sign
+// (`-` or `+`) is not a valid input for the unsigned parser.
+// 
+// @base can be between 2 and 36 inclusive. Hexadecimal numbers must
+// not be prefixed with "0x" or "0X". Such a problem does not exist
+// for octal numbers, since they were usually prefixed with a zero
+// which does not change the value of the parsed number.
+// 
+// Parsing failures result in an error with the `G_NUMBER_PARSER_ERROR`
+// domain. If the input is invalid, the error code will be
+// [error@GLib.NumberParserError.INVALID]. If the parsed number is out of
+// bounds - [error@GLib.NumberParserError.OUT_OF_BOUNDS].
+// 
+// See [func@GLib.ascii_strtoull] if you have more complex needs such as
+// parsing a string which starts with a number, but then has other
+// characters.
+func ASCIIStringToUnsigned(str string, base uint, min uint64, max uint64) (uint64, bool, error) {
+	var carg1 *C.gchar   // in, none, string
+	var carg2 C.guint    // in, none, casted
+	var carg3 C.guint64  // in, none, casted
+	var carg4 C.guint64  // in, none, casted
+	var carg5 C.guint64  // out, full, casted
+	var cret  C.gboolean // return
+	var _cerr *C.GError  // out, full, converted, nullable
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.guint(base)
+	carg3 = C.guint64(min)
+	carg4 = C.guint64(max)
+
+	cret = C.g_ascii_string_to_unsigned(carg1, carg2, carg3, carg4, &carg5, &_cerr)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(base)
+	runtime.KeepAlive(min)
+	runtime.KeepAlive(max)
+
+	var outNum uint64
+	var goret  bool
+	var _goerr error
+
+	outNum = uint64(carg5)
+	if cret != 0 {
+		goret = true
+	}
+	if _cerr != nil {
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return outNum, goret, _goerr
+}
+
+// ASCIIStrncasecmp wraps g_ascii_strncasecmp
+// 
+// The function takes the following parameters:
+// 
+// 	- s1 string: string to compare with @s2 
+// 	- s2 string: string to compare with @s1 
+// 	- n uint: number of characters to compare 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Compare @s1 and @s2, ignoring the case of ASCII characters and any
+// characters after the first @n in each string. If either string is
+// less than @n bytes long, comparison will stop at the first nul byte
+// encountered.
+// 
+// Unlike the BSD `strncasecmp()` function, this only recognizes standard
+// ASCII letters and ignores the locale, treating all non-ASCII
+// characters as if they are not letters.
+// 
+// The same warning as in [func@GLib.ascii_strcasecmp] applies: Use this
+// function only on strings known to be in encodings where bytes
+// corresponding to ASCII letters always represent themselves.
+func ASCIIStrncasecmp(s1 string, s2 string, n uint) int32 {
+	var carg1 *C.gchar // in, none, string
+	var carg2 *C.gchar // in, none, string
+	var carg3 C.gsize  // in, none, casted
+	var cret  C.gint   // return, none, casted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(s1)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(s2)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.gsize(n)
+
+	cret = C.g_ascii_strncasecmp(carg1, carg2, carg3)
+	runtime.KeepAlive(s1)
+	runtime.KeepAlive(s2)
+	runtime.KeepAlive(n)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ASCIIStrtod wraps g_ascii_strtod
+// 
+// The function takes the following parameters:
+// 
+// 	- nptr string: the string to convert to a numeric value 
+// 
+// The function returns the following values:
+// 
+// 	- endptr string: if non-`NULL`, it returns the
+//   character after the last character used in the conversion 
+// 	- goret float64 
+//
+// Converts a string to a floating point value.
+// 
+// This function behaves like the standard `strtod()` function
+// does in the C locale. It does this without actually changing
+// the current locale, since that would not be thread-safe.
+// A limitation of the implementation is that this function
+// will still accept localized versions of infinities and NANs.
+// 
+// This function is typically used when reading configuration
+// files or other non-user input that should be locale independent.
+// To handle input from the user you should normally use the
+// locale-sensitive system `strtod()` function.
+// 
+// To convert from a gdouble to a string in a locale-insensitive
+// way, use [func@GLib.ascii_dtostr].
+// 
+// If the correct value would cause overflow, plus or minus `HUGE_VAL`
+// is returned (according to the sign of the value), and `ERANGE` is
+// stored in `errno`. If the correct value would cause underflow,
+// zero is returned and `ERANGE` is stored in `errno`.
+// 
+// This function resets `errno` before calling `strtod()` so that
+// you can reliably detect overflow and underflow.
+func ASCIIStrtod(nptr string) (string, float64) {
+	var carg1 *C.gchar  // in, none, string
+	var carg2 *C.gchar  // out, none, string
+	var cret  C.gdouble // return, none, casted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(nptr)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_ascii_strtod(carg1, &carg2)
+	runtime.KeepAlive(nptr)
+
+	var endptr string
+	var goret  float64
+
+	endptr = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+	goret = float64(cret)
+
+	return endptr, goret
+}
+
+// ASCIIStrtoll wraps g_ascii_strtoll
+// 
+// The function takes the following parameters:
+// 
+// 	- nptr string: the string to convert to a numeric value 
+// 	- base uint: to be used for the conversion, 2..36 or 0 
+// 
+// The function returns the following values:
+// 
+// 	- endptr string: if non-`NULL`, it returns the
+//   character after the last character used in the conversion 
+// 	- goret int64 
+//
+// Converts a string to a `gint64` value.
+// 
+// This function behaves like the standard `strtoll()` function
+// does in the C locale. It does this without actually
+// changing the current locale, since that would not be
+// thread-safe.
+// 
+// This function is typically used when reading configuration
+// files or other non-user input that should be locale independent.
+// To handle input from the user you should normally use the
+// locale-sensitive system `strtoll()` function.
+// 
+// If the correct value would cause overflow, [const@GLib.MAXINT64] or
+// [const@GLib.MININT64] is returned, and `ERANGE` is stored in `errno`.
+// If the base is outside the valid range, zero is returned, and
+// `EINVAL` is stored in `errno`. If the
+// string conversion fails, zero is returned, and @endptr returns @nptr
+// (if @endptr is non-`NULL`).
+func ASCIIStrtoll(nptr string, base uint) (string, int64) {
+	var carg1 *C.gchar // in, none, string
+	var carg3 C.guint  // in, none, casted
+	var carg2 *C.gchar // out, none, string
+	var cret  C.gint64 // return, none, casted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(nptr)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg3 = C.guint(base)
+
+	cret = C.g_ascii_strtoll(carg1, &carg2, carg3)
+	runtime.KeepAlive(nptr)
+	runtime.KeepAlive(base)
+
+	var endptr string
+	var goret  int64
+
+	endptr = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+	goret = int64(cret)
+
+	return endptr, goret
+}
+
+// ASCIIStrtoull wraps g_ascii_strtoull
+// 
+// The function takes the following parameters:
+// 
+// 	- nptr string: the string to convert to a numeric value 
+// 	- base uint: to be used for the conversion, 2..36 or 0 
+// 
+// The function returns the following values:
+// 
+// 	- endptr string: if non-`NULL`, it returns the
+//   character after the last character used in the conversion 
+// 	- goret uint64 
+//
+// Converts a string to a `guint64` value.
+// 
+// This function behaves like the standard `strtoull()` function
+// does in the C locale. It does this without actually
+// changing the current locale, since that would not be
+// thread-safe.
+// 
+// Note that input with a leading minus sign (`-`) is accepted, and will return
+// the negation of the parsed number, unless that would overflow a `guint64`.
+// Critically, this means you cannot assume that a short fixed length input will
+// result in a low return value, as the input could have a leading `-`.
+// 
+// This function is typically used when reading configuration
+// files or other non-user input that should be locale independent.
+// To handle input from the user you should normally use the
+// locale-sensitive system `strtoull()` function.
+// 
+// If the correct value would cause overflow, [const@GLib.MAXUINT64]
+// is returned, and `ERANGE` is stored in `errno`.
+// If the base is outside the valid range, zero is returned, and
+// `EINVAL` is stored in `errno`.
+// If the string conversion fails, zero is returned, and @endptr returns
+// @nptr (if @endptr is non-`NULL`).
+func ASCIIStrtoull(nptr string, base uint) (string, uint64) {
+	var carg1 *C.gchar  // in, none, string
+	var carg3 C.guint   // in, none, casted
+	var carg2 *C.gchar  // out, none, string
+	var cret  C.guint64 // return, none, casted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(nptr)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg3 = C.guint(base)
+
+	cret = C.g_ascii_strtoull(carg1, &carg2, carg3)
+	runtime.KeepAlive(nptr)
+	runtime.KeepAlive(base)
+
+	var endptr string
+	var goret  uint64
+
+	endptr = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+	goret = uint64(cret)
+
+	return endptr, goret
+}
+
+// ASCIIStrup wraps g_ascii_strup
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a string 
+// 	- len int: length of @str in bytes, or `-1` if @str is nul-terminated 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Converts all lower case ASCII letters to upper case ASCII letters, with
+// semantics that exactly match [func@GLib.ascii_toupper].
+func ASCIIStrup(str string, len int) string {
+	var carg1 *C.gchar // in, none, string
+	var carg2 C.gssize // in, none, casted
+	var cret  *C.gchar // return, full, string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.gssize(len)
+
+	cret = C.g_ascii_strup(carg1, carg2)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(len)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ASCIIToLower wraps g_ascii_tolower
+// 
+// The function takes the following parameters:
+// 
+// 	- c byte: any character 
+// 
+// The function returns the following values:
+// 
+// 	- goret byte 
+//
+// Convert a character to ASCII lower case. If the character is not an
+// ASCII upper case letter, it is returned unchanged.
+// 
+// Unlike the standard C library `tolower()` function, this only
+// recognizes standard ASCII letters and ignores the locale, returning
+// all non-ASCII characters unchanged, even if they are lower case
+// letters in a particular character set. Also unlike the standard
+// library function, this takes and returns a char, not an int, so
+// don't call it on `EOF` but no need to worry about casting to `guchar`
+// before passing a possibly non-ASCII character in.
+func ASCIIToLower(c byte) byte {
+	var carg1 C.gchar // in, none, casted
+	var cret  C.gchar // return, none, casted
+
+	carg1 = C.gchar(c)
+
+	cret = C.g_ascii_tolower(carg1)
+	runtime.KeepAlive(c)
+
+	var goret byte
+
+	goret = byte(cret)
+
+	return goret
+}
+
+// ASCIIToUpper wraps g_ascii_toupper
+// 
+// The function takes the following parameters:
+// 
+// 	- c byte: any character 
+// 
+// The function returns the following values:
+// 
+// 	- goret byte 
+//
+// Convert a character to ASCII upper case. If the character is not an
+// ASCII lower case letter, it is returned unchanged.
+// 
+// Unlike the standard C library `toupper()` function, this only
+// recognizes standard ASCII letters and ignores the locale, returning
+// all non-ASCII characters unchanged, even if they are upper case
+// letters in a particular character set. Also unlike the standard
+// library function, this takes and returns a char, not an int, so
+// don't call it on `EOF` but no need to worry about casting to `guchar`
+// before passing a possibly non-ASCII character in.
+func ASCIIToUpper(c byte) byte {
+	var carg1 C.gchar // in, none, casted
+	var cret  C.gchar // return, none, casted
+
+	carg1 = C.gchar(c)
+
+	cret = C.g_ascii_toupper(carg1)
+	runtime.KeepAlive(c)
+
+	var goret byte
+
+	goret = byte(cret)
+
+	return goret
+}
+
+// ASCIIXDigitValue wraps g_ascii_xdigit_value
+// 
+// The function takes the following parameters:
+// 
+// 	- c byte: an ASCII character 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Determines the numeric value of a character as a hexadecimal digit. If the
+// character is not a hex digit according to [func@GLib.ascii_isxdigit],
+// `-1` is returned.
+// 
+// Differs from [func@GLib.unichar_xdigit_value] because it takes a char, so
+// there's no worry about sign extension if characters are signed.
+// 
+// Differs from [func@GLib.unichar_xdigit_value] because it takes a char, so
+// there's no worry about sign extension if characters are signed.
+func ASCIIXDigitValue(c byte) int32 {
+	var carg1 C.gchar // in, none, casted
+	var cret  C.gint  // return, none, casted
+
+	carg1 = C.gchar(c)
+
+	cret = C.g_ascii_xdigit_value(carg1)
+	runtime.KeepAlive(c)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
 
 // AssertWarning wraps g_assert_warning
 // 
@@ -5437,6 +6628,255 @@ func AssertWarning(logDomain string, file string, line int32, prettyFunction str
 	runtime.KeepAlive(line)
 	runtime.KeepAlive(prettyFunction)
 	runtime.KeepAlive(expression)
+}
+
+// AssertionMessage wraps g_assertion_message
+// 
+// The function takes the following parameters:
+// 
+// 	- domain string 
+// 	- file string 
+// 	- line int32 
+// 	- fn string 
+// 	- message string 
+func AssertionMessage(domain string, file string, line int32, fn string, message string) {
+	var carg1 *C.char // in, none, string
+	var carg2 *C.char // in, none, string
+	var carg3 C.int   // in, none, casted
+	var carg4 *C.char // in, none, string
+	var carg5 *C.char // in, none, string
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(domain)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(file)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.int(line)
+	carg4 = (*C.char)(unsafe.Pointer(C.CString(fn)))
+	defer C.free(unsafe.Pointer(carg4))
+	carg5 = (*C.char)(unsafe.Pointer(C.CString(message)))
+	defer C.free(unsafe.Pointer(carg5))
+
+	C.g_assertion_message(carg1, carg2, carg3, carg4, carg5)
+	runtime.KeepAlive(domain)
+	runtime.KeepAlive(file)
+	runtime.KeepAlive(line)
+	runtime.KeepAlive(fn)
+	runtime.KeepAlive(message)
+}
+
+// AssertionMessageCmpint wraps g_assertion_message_cmpint
+// 
+// The function takes the following parameters:
+// 
+// 	- domain string 
+// 	- file string 
+// 	- line int32 
+// 	- fn string 
+// 	- expr string 
+// 	- arg1 uint64 
+// 	- cmp string 
+// 	- arg2 uint64 
+// 	- numtype byte 
+func AssertionMessageCmpint(domain string, file string, line int32, fn string, expr string, arg1 uint64, cmp string, arg2 uint64, numtype byte) {
+	var carg1 *C.char   // in, none, string
+	var carg2 *C.char   // in, none, string
+	var carg3 C.int     // in, none, casted
+	var carg4 *C.char   // in, none, string
+	var carg5 *C.char   // in, none, string
+	var carg6 C.guint64 // in, none, casted
+	var carg7 *C.char   // in, none, string
+	var carg8 C.guint64 // in, none, casted
+	var carg9 C.char    // in, none, casted
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(domain)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(file)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.int(line)
+	carg4 = (*C.char)(unsafe.Pointer(C.CString(fn)))
+	defer C.free(unsafe.Pointer(carg4))
+	carg5 = (*C.char)(unsafe.Pointer(C.CString(expr)))
+	defer C.free(unsafe.Pointer(carg5))
+	carg6 = C.guint64(arg1)
+	carg7 = (*C.char)(unsafe.Pointer(C.CString(cmp)))
+	defer C.free(unsafe.Pointer(carg7))
+	carg8 = C.guint64(arg2)
+	carg9 = C.char(numtype)
+
+	C.g_assertion_message_cmpint(carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8, carg9)
+	runtime.KeepAlive(domain)
+	runtime.KeepAlive(file)
+	runtime.KeepAlive(line)
+	runtime.KeepAlive(fn)
+	runtime.KeepAlive(expr)
+	runtime.KeepAlive(arg1)
+	runtime.KeepAlive(cmp)
+	runtime.KeepAlive(arg2)
+	runtime.KeepAlive(numtype)
+}
+
+// AssertionMessageCmpstr wraps g_assertion_message_cmpstr
+// 
+// The function takes the following parameters:
+// 
+// 	- domain string 
+// 	- file string 
+// 	- line int32 
+// 	- fn string 
+// 	- expr string 
+// 	- arg1 string 
+// 	- cmp string 
+// 	- arg2 string 
+func AssertionMessageCmpstr(domain string, file string, line int32, fn string, expr string, arg1 string, cmp string, arg2 string) {
+	var carg1 *C.char // in, none, string
+	var carg2 *C.char // in, none, string
+	var carg3 C.int   // in, none, casted
+	var carg4 *C.char // in, none, string
+	var carg5 *C.char // in, none, string
+	var carg6 *C.char // in, none, string
+	var carg7 *C.char // in, none, string
+	var carg8 *C.char // in, none, string
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(domain)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(file)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.int(line)
+	carg4 = (*C.char)(unsafe.Pointer(C.CString(fn)))
+	defer C.free(unsafe.Pointer(carg4))
+	carg5 = (*C.char)(unsafe.Pointer(C.CString(expr)))
+	defer C.free(unsafe.Pointer(carg5))
+	carg6 = (*C.char)(unsafe.Pointer(C.CString(arg1)))
+	defer C.free(unsafe.Pointer(carg6))
+	carg7 = (*C.char)(unsafe.Pointer(C.CString(cmp)))
+	defer C.free(unsafe.Pointer(carg7))
+	carg8 = (*C.char)(unsafe.Pointer(C.CString(arg2)))
+	defer C.free(unsafe.Pointer(carg8))
+
+	C.g_assertion_message_cmpstr(carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8)
+	runtime.KeepAlive(domain)
+	runtime.KeepAlive(file)
+	runtime.KeepAlive(line)
+	runtime.KeepAlive(fn)
+	runtime.KeepAlive(expr)
+	runtime.KeepAlive(arg1)
+	runtime.KeepAlive(cmp)
+	runtime.KeepAlive(arg2)
+}
+
+// AssertionMessageError wraps g_assertion_message_error
+// 
+// The function takes the following parameters:
+// 
+// 	- domain string 
+// 	- file string 
+// 	- line int32 
+// 	- fn string 
+// 	- expr string 
+// 	- errorDomain Quark 
+// 	- errorCode int32 
+// 	- err error 
+func AssertionMessageError(domain string, file string, line int32, fn string, expr string, errorDomain Quark, errorCode int32, err error) {
+	var carg1 *C.char   // in, none, string
+	var carg2 *C.char   // in, none, string
+	var carg3 C.int     // in, none, casted
+	var carg4 *C.char   // in, none, string
+	var carg5 *C.char   // in, none, string
+	var carg7 C.GQuark  // in, none, casted, alias
+	var carg8 C.int     // in, none, casted
+	var carg6 *C.GError // in, none, converted
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(domain)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(file)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.int(line)
+	carg4 = (*C.char)(unsafe.Pointer(C.CString(fn)))
+	defer C.free(unsafe.Pointer(carg4))
+	carg5 = (*C.char)(unsafe.Pointer(C.CString(expr)))
+	defer C.free(unsafe.Pointer(carg5))
+	carg7 = C.GQuark(errorDomain)
+	carg8 = C.int(errorCode)
+	carg6 = (*C.GError)(UnsafeErrorToGlibNone(err))
+
+	C.g_assertion_message_error(carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8)
+	runtime.KeepAlive(domain)
+	runtime.KeepAlive(file)
+	runtime.KeepAlive(line)
+	runtime.KeepAlive(fn)
+	runtime.KeepAlive(expr)
+	runtime.KeepAlive(errorDomain)
+	runtime.KeepAlive(errorCode)
+	runtime.KeepAlive(err)
+}
+
+// Base64Decode wraps g_base64_decode
+// 
+// The function takes the following parameters:
+// 
+// 	- text string: zero-terminated string with base64 text to decode 
+// 
+// The function returns the following values:
+// 
+// 	- outLen uint: The length of the decoded data is written here 
+// 	- goret []uint8 
+//
+// Decode a sequence of Base-64 encoded text into binary data.  Note
+// that the returned binary data is not necessarily zero-terminated,
+// so it should not be used as a character string.
+func Base64Decode(text string) (uint, []uint8) {
+	var carg1 *C.gchar  // in, none, string
+	var carg2 C.gsize   // out, full, casted
+	var cret  *C.guchar // return, transfer: full, C Pointers: 1, Name: array[guint8], scope: , array (inner: *typesystem.CastablePrimitive)
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_base64_decode(carg1, &carg2)
+	runtime.KeepAlive(text)
+
+	var outLen uint
+	var goret  []uint8
+
+	outLen = uint(carg2)
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []uint8 (guchar*)")
+
+	return outLen, goret
+}
+
+// Base64Encode wraps g_base64_encode
+// 
+// The function takes the following parameters:
+// 
+// 	- data []uint8 (nullable): the binary data to encode 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Encode a sequence of binary data into its Base-64 stringified
+// representation.
+func Base64Encode(data []uint8) string {
+	var carg1 *C.guchar // in, transfer: none, C Pointers: 1, Name: array[guint8], nullable, array (inner: *typesystem.CastablePrimitive, length-by: carg2)
+	var carg2 C.gsize   // implicit
+	var cret  *C.gchar  // return, full, string
+
+	_ = data
+	_ = carg1
+	_ = carg2
+	panic("unimplemented conversion of []uint8 (const guchar*)")
+
+	cret = C.g_base64_encode(carg1, carg2)
+	runtime.KeepAlive(data)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // BitNthLSF wraps g_bit_nth_lsf
@@ -5781,71 +7221,26 @@ func ChildWatchAddFull(priority int32, pid Pid, function ChildWatchFunc) uint {
 	return goret
 }
 
-// NewChildWatchSource wraps g_child_watch_source_new
-// 
-// The function takes the following parameters:
-// 
-// 	- pid Pid: process to watch. On POSIX the positive pid of a child process. On
-// Windows a handle for a process (which doesn't have to be a child). 
+// ClearError wraps g_clear_error
 // 
 // The function returns the following values:
 // 
-// 	- goret *Source 
+// 	- _goerr error (nullable): an error 
 //
-// Creates a new child_watch source.
-// 
-// The source will not initially be associated with any
-// [struct@GLib.MainContext] and must be added to one with
-// [method@GLib.Source.attach] before it will be executed.
-// 
-// Note that child watch sources can only be used in conjunction with
-// `g_spawn...` when the %G_SPAWN_DO_NOT_REAP_CHILD flag is used.
-// 
-// Note that on platforms where #GPid must be explicitly closed
-// (see [func@GLib.spawn_close_pid]) @pid must not be closed while the
-// source is still active. Typically, you will want to call
-// [func@GLib.spawn_close_pid] in the callback function for the source.
-// 
-// On POSIX platforms, the following restrictions apply to this API
-// due to limitations in POSIX process interfaces:
-// 
-// * @pid must be a child of this process
-// * @pid must be positive
-// * the application must not call `waitpid` with a non-positive
-//   first argument, for instance in another thread
-// * the application must not wait for @pid to exit by any other
-//   mechanism, including `waitpid(pid, ...)` or a second child-watch
-//   source for the same @pid
-// * the application must not ignore `SIGCHLD`
-// * Before 2.78, the application could not send a signal (`kill()`) to the
-//   watched @pid in a race free manner. Since 2.78, you can do that while the
-//   associated [struct@GLib.MainContext] is acquired.
-// * Before 2.78, even after destroying the [struct@GLib.Source], you could not
-//   be sure that @pid wasn't already reaped. Hence, it was also not
-//   safe to `kill()` or `waitpid()` on the process ID after the child watch
-//   source was gone. Destroying the source before it fired made it
-//   impossible to reliably reap the process.
-// 
-// If any of those conditions are not met, this and related APIs will
-// not work correctly. This can often be diagnosed via a GLib warning
-// stating that `ECHILD` was received by `waitpid`.
-// 
-// Calling `waitpid` for specific processes other than @pid remains a
-// valid thing to do.
-func NewChildWatchSource(pid Pid) *Source {
-	var carg1 C.GPid     // in, none, casted, alias
-	var cret  *C.GSource // return, full, converted
+// If @err or `*err` is %NULL, does nothing. Otherwise,
+// calls g_error_free() on `*err` and sets `*err` to %NULL.
+func ClearError() error {
+	var _cerr *C.GError // out, full, converted, nullable
 
-	carg1 = C.GPid(pid)
+	C.g_clear_error(&_cerr)
 
-	cret = C.g_child_watch_source_new(carg1)
-	runtime.KeepAlive(pid)
+	var _goerr error
 
-	var goret *Source
+	if _cerr != nil {
+		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
 
-	goret = UnsafeSourceFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
+	return _goerr
 }
 
 // ComputeChecksumForBytes wraps g_compute_checksum_for_bytes
@@ -6970,7 +8365,7 @@ func FileSetContents(filename string, contents string) (bool, error) {
 // Writes all of @contents to a file named @filename, with good error checking.
 // If a file called @filename already exists it will be overwritten.
 // 
-// @flags control the properties of the write operation: whether it’s atomic,
+// @flags control the properties of the write operation: whether it&#x2019;s atomic,
 // and what the tradeoff is between returning quickly or being resilient to
 // system crashes.
 // 
@@ -7018,9 +8413,9 @@ func FileSetContents(filename string, contents string) (bool, error) {
 // Note that the name for the temporary file is constructed by appending up
 // to 7 characters to @filename.
 // 
-// If the file didn’t exist before and is created, it will be given the
-// permissions from @mode. Otherwise, the permissions of the existing file may
-// be changed to @mode depending on @flags, or they may remain unchanged.
+// If the file didn&#x2019;t exist before and is created, it will be given the
+// permissions from @mode. Otherwise, the permissions of the existing file will
+// remain unchanged.
 func FileSetContentsFull(filename string, contents string, flags FileSetContentsFlags, mode int32) (bool, error) {
 	var carg1 *C.gchar                // in, none, string
 	var carg2 *C.gchar                // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg3)
@@ -7129,8 +8524,6 @@ func FileSetContentsFull(filename string, contents string, flags FileSetContents
 // %G_FILE_TEST_IS_EXECUTABLE will just check that the file exists and
 // its name indicates that it is executable, checking for well-known
 // extensions and those listed in the `PATHEXT` environment variable.
-// 
-// This type has been renamed from file_test.
 func TestFile(filename string, test FileTest) bool {
 	var carg1 *C.gchar    // in, none, string
 	var carg2 C.GFileTest // in, none, casted
@@ -7533,7 +8926,7 @@ func FindProgramInPath(program string) string {
 // and are displayed rounded to the nearest tenth. E.g. the file size
 // 3292528 bytes will be converted into the string "3.2 MB". The returned string
 // is UTF-8, and may use a non-breaking space to separate the number and units,
-// to ensure they aren’t separated when line wrapped.
+// to ensure they aren&#x2019;t separated when line wrapped.
 // 
 // The prefix units base is 1000 (i.e. 1 kB is 1000 bytes).
 // 
@@ -7999,6 +9392,28 @@ func GetMonotonicTime() int64 {
 	return goret
 }
 
+// GetNumProcessors wraps g_get_num_processors
+// 
+// The function returns the following values:
+// 
+// 	- goret uint 
+//
+// Determine the approximate number of threads that the system will
+// schedule simultaneously for this process.  This is intended to be
+// used as a parameter to g_thread_pool_new() for CPU bound tasks and
+// similar cases.
+func GetNumProcessors() uint {
+	var cret C.guint // return, none, casted
+
+	cret = C.g_get_num_processors()
+
+	var goret uint
+
+	goret = uint(cret)
+
+	return goret
+}
+
 // GetOsInfo wraps g_get_os_info
 // 
 // The function takes the following parameters:
@@ -8140,7 +9555,7 @@ func GetRealTime() int64 {
 // to anyone using the computer.
 // 
 // The return value is cached and modifying it at runtime is not supported, as
-// it’s not thread-safe to modify environment variables at runtime.
+// it&#x2019;s not thread-safe to modify environment variables at runtime.
 func GetSystemConfigDirs() []string {
 	var cret **C.gchar // return, transfer: none, C Pointers: 2, Name: array[filename], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
@@ -8194,7 +9609,7 @@ func GetSystemConfigDirs() []string {
 // this function is called.
 // 
 // The return value is cached and modifying it at runtime is not supported, as
-// it’s not thread-safe to modify environment variables at runtime.
+// it&#x2019;s not thread-safe to modify environment variables at runtime.
 func GetSystemDataDirs() []string {
 	var cret **C.gchar // return, transfer: none, C Pointers: 2, Name: array[filename], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
@@ -8262,7 +9677,7 @@ func GetTmpDir() string {
 // See the [documentation for `FOLDERID_InternetCache`](https://docs.microsoft.com/en-us/windows/win32/shell/knownfolderid).
 // 
 // The return value is cached and modifying it at runtime is not supported, as
-// it’s not thread-safe to modify environment variables at runtime.
+// it&#x2019;s not thread-safe to modify environment variables at runtime.
 func GetUserCacheDir() string {
 	var cret *C.gchar // return, none, string
 
@@ -8297,7 +9712,7 @@ func GetUserCacheDir() string {
 // as what g_get_user_data_dir() returns.
 // 
 // The return value is cached and modifying it at runtime is not supported, as
-// it’s not thread-safe to modify environment variables at runtime.
+// it&#x2019;s not thread-safe to modify environment variables at runtime.
 func GetUserConfigDir() string {
 	var cret *C.gchar // return, none, string
 
@@ -8332,7 +9747,7 @@ func GetUserConfigDir() string {
 // as what g_get_user_config_dir() returns.
 // 
 // The return value is cached and modifying it at runtime is not supported, as
-// it’s not thread-safe to modify environment variables at runtime.
+// it&#x2019;s not thread-safe to modify environment variables at runtime.
 func GetUserDataDir() string {
 	var cret *C.gchar // return, none, string
 
@@ -8385,7 +9800,7 @@ func GetUserName() string {
 // g_get_user_cache_dir(), after verifying that it exists.
 // 
 // The return value is cached and modifying it at runtime is not supported, as
-// it’s not thread-safe to modify environment variables at runtime.
+// it&#x2019;s not thread-safe to modify environment variables at runtime.
 func GetUserRuntimeDir() string {
 	var cret *C.gchar // return, none, string
 
@@ -8458,7 +9873,7 @@ func GetUserSpecialDir(directory UserDirectory) string {
 // as what g_get_user_data_dir() returns.
 // 
 // The return value is cached and modifying it at runtime is not supported, as
-// it’s not thread-safe to modify environment variables at runtime.
+// it&#x2019;s not thread-safe to modify environment variables at runtime.
 func GetUserStateDir() string {
 	var cret *C.gchar // return, none, string
 
@@ -8733,32 +10148,6 @@ func IdleAddFull(priority int32, function SourceFunc) uint {
 	return goret
 }
 
-// NewIdleSource wraps g_idle_source_new
-// 
-// The function returns the following values:
-// 
-// 	- goret *Source 
-//
-// Creates a new idle source.
-// 
-// The source will not initially be associated with any
-// [struct@GLib.MainContext] and must be added to one with
-// [method@GLib.Source.attach] before it will be executed. Note that the
-// default priority for idle sources is [const@GLib.PRIORITY_DEFAULT_IDLE], as
-// compared to other sources which have a default priority of
-// [const@GLib.PRIORITY_DEFAULT].
-func NewIdleSource() *Source {
-	var cret *C.GSource // return, full, converted
-
-	cret = C.g_idle_source_new()
-
-	var goret *Source
-
-	goret = UnsafeSourceFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // InternStaticString wraps g_intern_static_string
 // 
 // The function takes the following parameters:
@@ -8828,50 +10217,6 @@ func InternString(str string) string {
 	var goret string
 
 	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// IOCreateWatch wraps g_io_create_watch
-// 
-// The function takes the following parameters:
-// 
-// 	- channel *IOChannel: a #GIOChannel to watch 
-// 	- condition IOCondition: conditions to watch for 
-// 
-// The function returns the following values:
-// 
-// 	- goret *Source 
-//
-// Creates a #GSource that's dispatched when @condition is met for the
-// given @channel. For example, if condition is %G_IO_IN, the source will
-// be dispatched when there's data available for reading.
-// 
-// The callback function invoked by the #GSource should be added with
-// g_source_set_callback(), but it has type #GIOFunc (not #GSourceFunc).
-// 
-// g_io_add_watch() is a simpler interface to this same functionality, for
-// the case where you want to add the source to the default main loop context
-// at the default priority.
-// 
-// On Windows, polling a #GSource created to watch a channel for a socket
-// puts the socket in non-blocking mode. This is a side-effect of the
-// implementation and unavoidable.
-func IOCreateWatch(channel *IOChannel, condition IOCondition) *Source {
-	var carg1 *C.GIOChannel  // in, none, converted
-	var carg2 C.GIOCondition // in, none, casted
-	var cret  *C.GSource     // return, full, converted
-
-	carg1 = (*C.GIOChannel)(UnsafeIOChannelToGlibNone(channel))
-	carg2 = C.GIOCondition(condition)
-
-	cret = C.g_io_create_watch(carg1, carg2)
-	runtime.KeepAlive(channel)
-	runtime.KeepAlive(condition)
-
-	var goret *Source
-
-	goret = UnsafeSourceFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -9108,7 +10453,7 @@ func LogRemoveHandler(logDomain string, handlerId uint) {
 // 
 // You can also make some message levels fatal at runtime by setting
 // the `G_DEBUG` environment variable (see
-// [Running GLib Applications](glib-running.html)).
+// [Running GLib Applications](running.html)).
 // 
 // Libraries should not call this function, as it affects all messages logged
 // by a process, including those from other libraries.
@@ -9142,11 +10487,11 @@ func LogSetAlwaysFatal(fatalMask LogLevelFlags) LogLevelFlags {
 // Enable or disable debug output from the GLib logging system for all domains.
 // 
 // This value interacts disjunctively with `G_MESSAGES_DEBUG`, `DEBUG_INVOCATION` and
-// [func@GLib.log_writer_default_set_debug_domains] — if any of them would allow
+// [func@GLib.log_writer_default_set_debug_domains] &#x2014; if any of them would allow
 // a debug message to be outputted, it will be.
 // 
 // Note that this should not be used from within library code to enable debug
-// output — it is intended for external use.
+// output &#x2014; it is intended for external use.
 func LogSetDebugEnabled(enabled bool) {
 	var carg1 C.gboolean // in
 
@@ -9266,7 +10611,7 @@ func LogSetHandlerFull(logDomain string, logLevels LogLevelFlags, logFunc LogFun
 // Each program should set a writer function, or the default writer
 // ([func@GLib.log_writer_default]) will be used.
 // 
-// Libraries **must not** call this function — only programs are allowed to
+// Libraries **must not** call this function &#x2014; only programs are allowed to
 // install a writer function, as there must be a single, central point where
 // log messages are formatted and outputted.
 // 
@@ -9285,7 +10630,7 @@ func LogSetWriterFunc() {
 // 
 // 	- logLevel LogLevelFlags: log level, either from [type@GLib.LogLevelFlags], or a user-defined
 //    level 
-// 	- fields []LogField: key–value pairs of structured data to add
+// 	- fields []LogField: key&#x2013;value pairs of structured data to add
 //    to the log message 
 //
 // Log a message with structured data.
@@ -9417,7 +10762,7 @@ func LogWriterDefaultWouldDrop(logLevel LogLevelFlags, logDomain string) bool {
 // 
 // 	- logLevel LogLevelFlags: log level, either from [type@GLib.LogLevelFlags], or a user-defined
 //    level 
-// 	- fields []LogField: key–value pairs of structured data forming
+// 	- fields []LogField: key&#x2013;value pairs of structured data forming
 //    the log message 
 // 	- useColor bool: `TRUE` to use
 //   [ANSI color escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code)
@@ -9531,27 +10876,6 @@ func LogWriterSupportsColor(outputFd int32) bool {
 
 	if cret != 0 {
 		goret = true
-	}
-
-	return goret
-}
-
-// MainCurrentSource wraps g_main_current_source
-// 
-// The function returns the following values:
-// 
-// 	- goret *Source (nullable) 
-//
-// Returns the currently firing source for this thread.
-func MainCurrentSource() *Source {
-	var cret *C.GSource // return, none, converted, nullable
-
-	cret = C.g_main_current_source()
-
-	var goret *Source
-
-	if cret != nil {
-		goret = UnsafeSourceFromGlibNone(unsafe.Pointer(cret))
 	}
 
 	return goret
@@ -9789,6 +11113,103 @@ func NumberParserErrorQuark() Quark {
 	return goret
 }
 
+// OnErrorQuery wraps g_on_error_query
+// 
+// The function takes the following parameters:
+// 
+// 	- prgName string: the program name, needed by gdb for the "[S]tack trace"
+//     option. If @prg_name is %NULL, g_get_prgname() is called to get
+//     the program name (which will work correctly if gdk_init() or
+//     gtk_init() has been called) 
+//
+// Prompts the user with
+// `[E]xit, [H]alt, show [S]tack trace or [P]roceed`.
+// This function is intended to be used for debugging use only.
+// The following example shows how it can be used together with
+// the g_log() functions.
+// 
+// |[&lt;!-- language="C" --&gt;
+// #include &lt;glib.h&gt;
+// 
+// static void
+// log_handler (const gchar   *log_domain,
+//              GLogLevelFlags log_level,
+//              const gchar   *message,
+//              gpointer       user_data)
+// {
+//   g_log_default_handler (log_domain, log_level, message, user_data);
+// 
+//   g_on_error_query (MY_PROGRAM_NAME);
+// }
+// 
+// int
+// main (int argc, char *argv[])
+// {
+//   g_log_set_handler (MY_LOG_DOMAIN,
+//                      G_LOG_LEVEL_WARNING |
+//                      G_LOG_LEVEL_ERROR |
+//                      G_LOG_LEVEL_CRITICAL,
+//                      log_handler,
+//                      NULL);
+//   ...
+// ]|
+// 
+// If "[E]xit" is selected, the application terminates with a call
+// to _exit(0).
+// 
+// If "[S]tack" trace is selected, g_on_error_stack_trace() is called.
+// This invokes gdb, which attaches to the current process and shows
+// a stack trace. The prompt is then shown again.
+// 
+// If "[P]roceed" is selected, the function returns.
+// 
+// This function may cause different actions on non-UNIX platforms.
+// 
+// On Windows consider using the `G_DEBUGGER` environment
+// variable (see [Running GLib Applications](running.html)) and
+// calling g_on_error_stack_trace() instead.
+func OnErrorQuery(prgName string) {
+	var carg1 *C.gchar // in, none, string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(prgName)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	C.g_on_error_query(carg1)
+	runtime.KeepAlive(prgName)
+}
+
+// OnErrorStackTrace wraps g_on_error_stack_trace
+// 
+// The function takes the following parameters:
+// 
+// 	- prgName string (nullable): the program name, needed by gdb for the
+//   "[S]tack trace" option, or `NULL` to use a default string 
+//
+// Invokes gdb, which attaches to the current process and shows a
+// stack trace. Called by g_on_error_query() when the "[S]tack trace"
+// option is selected. You can get the current process's program name
+// with g_get_prgname(), assuming that you have called gtk_init() or
+// gdk_init().
+// 
+// This function may cause different actions on non-UNIX platforms.
+// 
+// When running on Windows, this function is *not* called by
+// g_on_error_query(). If called directly, it will raise an
+// exception, which will crash the program. If the `G_DEBUGGER` environment
+// variable is set, a debugger will be invoked to attach and
+// handle that exception (see [Running GLib Applications](running.html)).
+func OnErrorStackTrace(prgName string) {
+	var carg1 *C.gchar // in, none, string, nullable-string
+
+	if prgName != "" {
+		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(prgName)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+
+	C.g_on_error_stack_trace(carg1)
+	runtime.KeepAlive(prgName)
+}
+
 // OptionErrorQuark wraps g_option_error_quark
 // 
 // The function returns the following values:
@@ -10024,7 +11445,7 @@ func PathSkipRoot(fileName string) string {
 // Matches a string against a pattern given as a string.
 // 
 // If this
-// function is to be called in a loop, it’s more efficient to compile
+// function is to be called in a loop, it&#x2019;s more efficient to compile
 // the pattern once with [ctor@GLib.PatternSpec.new] and call
 // [method@GLib.PatternSpec.match_string] repeatedly.
 func PatternMatchSimple(pattern string, str string) bool {
@@ -10099,6 +11520,42 @@ func Poll(fds *PollFD, nfds uint, timeout int32) int32 {
 	goret = int32(cret)
 
 	return goret
+}
+
+// PropagateError wraps g_propagate_error
+// 
+// The function takes the following parameters:
+// 
+// 	- src error: error to move into the return location 
+// 
+// The function returns the following values:
+// 
+// 	- dest error (nullable): error return location 
+//
+// If @dest is %NULL, free @src; otherwise, moves @src into `*dest`.
+// The error variable @dest points to must be %NULL.
+// 
+// @src must be non-%NULL.
+// 
+// Note that @src is no longer valid after this call. If you want
+// to keep using the same GError*, you need to set it to %NULL
+// after calling this function on it.
+func PropagateError(src error) error {
+	var carg2 *C.GError // in, full, converted
+	var carg1 *C.GError // out, full, converted, nullable
+
+	carg2 = (*C.GError)(UnsafeErrorToGlibFull(src))
+
+	C.g_propagate_error(&carg1, carg2)
+	runtime.KeepAlive(src)
+
+	var dest error
+
+	if carg1 != nil {
+		dest = UnsafeErrorFromGlibFull(unsafe.Pointer(carg1))
+	}
+
+	return dest
 }
 
 // QuarkFromStaticString wraps g_quark_from_static_string
@@ -10366,6 +11823,276 @@ func RandomSetSeed(seed uint32) {
 	runtime.KeepAlive(seed)
 }
 
+// RefCountCompare wraps g_ref_count_compare
+// 
+// The function takes the following parameters:
+// 
+// 	- rc *int32: the address of a reference count variable 
+// 	- val int32: the value to compare 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Compares the current value of @rc with @val.
+func RefCountCompare(rc *int32, val int32) bool {
+	var carg1 *C.grefcount // in, transfer: none, C Pointers: 1, Name: gint
+	var carg2 C.gint       // in, none, casted
+	var cret  C.gboolean   // return
+
+	_ = rc
+	_ = carg1
+	panic("unimplemented conversion of *int32 (grefcount*)")
+	carg2 = C.gint(val)
+
+	cret = C.g_ref_count_compare(carg1, carg2)
+	runtime.KeepAlive(rc)
+	runtime.KeepAlive(val)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// RefCountInit wraps g_ref_count_init
+// 
+// The function returns the following values:
+// 
+// 	- rc int32: the address of a reference count variable 
+//
+// Initializes a reference count variable to 1.
+func RefCountInit() int32 {
+	var carg1 C.grefcount // out, full, casted
+
+	C.g_ref_count_init(&carg1)
+
+	var rc int32
+
+	rc = int32(carg1)
+
+	return rc
+}
+
+// RefStringAcquire wraps g_ref_string_acquire
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a reference counted string 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Acquires a reference on a string.
+func RefStringAcquire(str string) string {
+	var carg1 *C.char // in, none, string
+	var cret  *C.char // return, full, string
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_ref_string_acquire(carg1)
+	runtime.KeepAlive(str)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// RefStringEqual wraps g_ref_string_equal
+// 
+// The function takes the following parameters:
+// 
+// 	- str1 string: a reference counted string 
+// 	- str2 string: a reference counted string 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Compares two ref-counted strings for byte-by-byte equality.
+// 
+// It can be passed to [func@GLib.HashTable.new] as the key equality function,
+// and behaves exactly the same as [func@GLib.str_equal] (or `strcmp()`), but
+// can return slightly faster as it can check the string lengths before checking
+// all the bytes.
+func RefStringEqual(str1 string, str2 string) bool {
+	var carg1 *C.char    // in, none, string
+	var carg2 *C.char    // in, none, string
+	var cret  C.gboolean // return
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str1)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(str2)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C.g_ref_string_equal(carg1, carg2)
+	runtime.KeepAlive(str1)
+	runtime.KeepAlive(str2)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// RefStringLength wraps g_ref_string_length
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a reference counted string 
+// 
+// The function returns the following values:
+// 
+// 	- goret uint 
+//
+// Retrieves the length of @str.
+func RefStringLength(str string) uint {
+	var carg1 *C.char // in, none, string
+	var cret  C.gsize // return, none, casted
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_ref_string_length(carg1)
+	runtime.KeepAlive(str)
+
+	var goret uint
+
+	goret = uint(cret)
+
+	return goret
+}
+
+// NewRefString wraps g_ref_string_new
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a NUL-terminated string 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Creates a new reference counted string and copies the contents of @str
+// into it.
+func NewRefString(str string) string {
+	var carg1 *C.char // in, none, string
+	var cret  *C.char // return, full, string
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_ref_string_new(carg1)
+	runtime.KeepAlive(str)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// RefStringNewIntern wraps g_ref_string_new_intern
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a NUL-terminated string 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Creates a new reference counted string and copies the content of @str
+// into it.
+// 
+// If you call this function multiple times with the same @str, or with
+// the same contents of @str, it will return a new reference, instead of
+// creating a new string.
+func RefStringNewIntern(str string) string {
+	var carg1 *C.char // in, none, string
+	var cret  *C.char // return, full, string
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_ref_string_new_intern(carg1)
+	runtime.KeepAlive(str)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// RefStringNewLen wraps g_ref_string_new_len
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a string 
+// 	- len int: length of @str to use, or -1 if @str is nul-terminated 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Creates a new reference counted string and copies the contents of @str
+// into it, up to @len bytes.
+// 
+// Since this function does not stop at nul bytes, it is the caller's
+// responsibility to ensure that @str has at least @len addressable bytes.
+func RefStringNewLen(str string, len int) string {
+	var carg1 *C.char  // in, none, string
+	var carg2 C.gssize // in, none, casted
+	var cret  *C.char  // return, full, string
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.gssize(len)
+
+	cret = C.g_ref_string_new_len(carg1, carg2)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(len)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// RefStringRelease wraps g_ref_string_release
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a reference counted string 
+//
+// Releases a reference on a string; if it was the last reference, the
+// resources allocated by the string are freed as well.
+func RefStringRelease(str string) {
+	var carg1 *C.char // in, none, string
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	C.g_ref_string_release(carg1)
+	runtime.KeepAlive(str)
+}
+
 // ReloadUserSpecialDirsCache wraps g_reload_user_special_dirs_cache
 //
 // Resets the cache used for g_get_user_special_dir(), so
@@ -10406,6 +12133,46 @@ func SetApplicationName(applicationName string) {
 
 	C.g_set_application_name(carg1)
 	runtime.KeepAlive(applicationName)
+}
+
+// SetErrorLiteral wraps g_set_error_literal
+// 
+// The function takes the following parameters:
+// 
+// 	- domain Quark: error domain 
+// 	- code int32: error code 
+// 	- message string: error message 
+// 
+// The function returns the following values:
+// 
+// 	- err error: a return location for a #GError 
+//
+// Does nothing if @err is %NULL; if @err is non-%NULL, then `*err`
+// must be %NULL. A new #GError is created and assigned to `*err`.
+// Unlike g_set_error(), @message is not a printf()-style format string.
+// Use this function if @message contains text you don't have control over,
+// that could include printf() escape sequences.
+func SetErrorLiteral(domain Quark, code int32, message string) error {
+	var carg2 C.GQuark  // in, none, casted, alias
+	var carg3 C.gint    // in, none, casted
+	var carg4 *C.gchar  // in, none, string
+	var carg1 *C.GError // out, full, converted
+
+	carg2 = C.GQuark(domain)
+	carg3 = C.gint(code)
+	carg4 = (*C.gchar)(unsafe.Pointer(C.CString(message)))
+	defer C.free(unsafe.Pointer(carg4))
+
+	C.g_set_error_literal(&carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(domain)
+	runtime.KeepAlive(code)
+	runtime.KeepAlive(message)
+
+	var err error
+
+	err = UnsafeErrorFromGlibFull(unsafe.Pointer(carg1))
+
+	return err
 }
 
 // SetPrgname wraps g_set_prgname
@@ -10543,7 +12310,7 @@ func ShellErrorQuark() Quark {
 // Possible errors are those from the %G_SHELL_ERROR domain.
 // 
 // In particular, if @command_line is an empty string (or a string containing
-// only whitespace), %G_SHELL_ERROR_EMPTY_STRING will be returned. It’s
+// only whitespace), %G_SHELL_ERROR_EMPTY_STRING will be returned. It&#x2019;s
 // guaranteed that @argvp will be a non-empty array if this function returns
 // successfully.
 // 
@@ -10676,6 +12443,86 @@ func ShellUnquote(quotedString string) (string, error) {
 	}
 
 	return goret, _goerr
+}
+
+// SliceGetConfig wraps g_slice_get_config
+// 
+// The function takes the following parameters:
+// 
+// 	- ckey SliceConfig 
+// 
+// The function returns the following values:
+// 
+// 	- goret int64 
+func SliceGetConfig(ckey SliceConfig) int64 {
+	var carg1 C.GSliceConfig // in, none, casted
+	var cret  C.gint64       // return, none, casted
+
+	carg1 = C.GSliceConfig(ckey)
+
+	cret = C.g_slice_get_config(carg1)
+	runtime.KeepAlive(ckey)
+
+	var goret int64
+
+	goret = int64(cret)
+
+	return goret
+}
+
+// SliceGetConfigState wraps g_slice_get_config_state
+// 
+// The function takes the following parameters:
+// 
+// 	- ckey SliceConfig 
+// 	- address int64 
+// 	- nValues *uint 
+// 
+// The function returns the following values:
+// 
+// 	- goret *int64 
+func SliceGetConfigState(ckey SliceConfig, address int64, nValues *uint) *int64 {
+	var carg1 C.GSliceConfig // in, none, casted
+	var carg2 C.gint64       // in, none, casted
+	var carg3 *C.guint       // in, transfer: none, C Pointers: 1, Name: guint
+	var cret  *C.gint64      // return, transfer: none, C Pointers: 1, Name: gint64, scope: 
+
+	carg1 = C.GSliceConfig(ckey)
+	carg2 = C.gint64(address)
+	_ = nValues
+	_ = carg3
+	panic("unimplemented conversion of *uint (guint*)")
+
+	cret = C.g_slice_get_config_state(carg1, carg2, carg3)
+	runtime.KeepAlive(ckey)
+	runtime.KeepAlive(address)
+	runtime.KeepAlive(nValues)
+
+	var goret *int64
+
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of *int64 (gint64*)")
+
+	return goret
+}
+
+// SliceSetConfig wraps g_slice_set_config
+// 
+// The function takes the following parameters:
+// 
+// 	- ckey SliceConfig 
+// 	- value int64 
+func SliceSetConfig(ckey SliceConfig, value int64) {
+	var carg1 C.GSliceConfig // in, none, casted
+	var carg2 C.gint64       // in, none, casted
+
+	carg1 = C.GSliceConfig(ckey)
+	carg2 = C.gint64(value)
+
+	C.g_slice_set_config(carg1, carg2)
+	runtime.KeepAlive(ckey)
+	runtime.KeepAlive(value)
 }
 
 // SpacedPrimesClosest wraps g_spaced_primes_closest
@@ -10961,6 +12808,712 @@ func SpawnExitErrorQuark() Quark {
 	return goret
 }
 
+// Stpcpy wraps g_stpcpy
+// 
+// The function takes the following parameters:
+// 
+// 	- dest string: destination buffer 
+// 	- src string: source string 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Copies a nul-terminated string into the destination buffer, including
+// the trailing nul byte, and returns a pointer to the trailing nul byte
+// in `dest`.  The return value is useful for concatenating multiple
+// strings without having to repeatedly scan for the end.
+func Stpcpy(dest string, src string) string {
+	var carg1 *C.gchar // in, none, string
+	var carg2 *C.char  // in, none, string
+	var cret  *C.gchar // return, full, string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(dest)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(src)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C.g_stpcpy(carg1, carg2)
+	runtime.KeepAlive(dest)
+	runtime.KeepAlive(src)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// StrHasPrefix wraps g_str_has_prefix
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a string to look in 
+// 	- prefix string: the prefix to look for 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Looks whether the string @str begins with @prefix.
+func StrHasPrefix(str string, prefix string) bool {
+	var carg1 *C.gchar   // in, none, string
+	var carg2 *C.gchar   // in, none, string
+	var cret  C.gboolean // return
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(prefix)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C.g_str_has_prefix(carg1, carg2)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(prefix)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// StrHasSuffix wraps g_str_has_suffix
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a string to look in 
+// 	- suffix string: the suffix to look for 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Looks whether a string ends with @suffix.
+func StrHasSuffix(str string, suffix string) bool {
+	var carg1 *C.gchar   // in, none, string
+	var carg2 *C.gchar   // in, none, string
+	var cret  C.gboolean // return
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(suffix)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C.g_str_has_suffix(carg1, carg2)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(suffix)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// StrIsASCII wraps g_str_is_ascii
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a string 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Determines if a string is pure ASCII. A string is pure ASCII if it
+// contains no bytes with the high bit set.
+func StrIsASCII(str string) bool {
+	var carg1 *C.gchar   // in, none, string
+	var cret  C.gboolean // return
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_str_is_ascii(carg1)
+	runtime.KeepAlive(str)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// StrMatchString wraps g_str_match_string
+// 
+// The function takes the following parameters:
+// 
+// 	- searchTerm string: the search term from the user 
+// 	- potentialHit string: the text that may be a hit 
+// 	- acceptAlternates bool: if true, ASCII alternates are accepted 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Checks if a search conducted for @search_term should match
+// @potential_hit.
+// 
+// This function calls [func@GLib.str_tokenize_and_fold] on both
+// @search_term and @potential_hit. ASCII alternates are never taken
+// for @search_term but will be taken for @potential_hit according to
+// the value of @accept_alternates.
+// 
+// A hit occurs when each folded token in @search_term is a prefix of a
+// folded token from @potential_hit.
+// 
+// Depending on how you're performing the search, it will typically be
+// faster to call `g_str_tokenize_and_fold()` on each string in
+// your corpus and build an index on the returned folded tokens, then
+// call `g_str_tokenize_and_fold()` on the search term and
+// perform lookups into that index.
+// 
+// As some examples, searching for &#x2018;fred&#x2019; would match the potential hit
+// &#x2018;Smith, Fred&#x2019; and also &#x2018;Fr&#xE9;d&#xE9;ric&#x2019;.  Searching for &#x2018;Fr&#xE9;d&#x2019; would match
+// &#x2018;Fr&#xE9;d&#xE9;ric&#x2019; but not &#x2018;Frederic&#x2019; (due to the one-directional nature of
+// accent matching).  Searching &#x2018;fo&#x2019; would match &#x2018;Foo&#x2019; and &#x2018;Bar Foo
+// Baz&#x2019;, but not &#x2018;SFO&#x2019; (because no word has &#x2018;fo&#x2019; as a prefix).
+func StrMatchString(searchTerm string, potentialHit string, acceptAlternates bool) bool {
+	var carg1 *C.gchar   // in, none, string
+	var carg2 *C.gchar   // in, none, string
+	var carg3 C.gboolean // in
+	var cret  C.gboolean // return
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(searchTerm)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(potentialHit)))
+	defer C.free(unsafe.Pointer(carg2))
+	if acceptAlternates {
+		carg3 = C.TRUE
+	}
+
+	cret = C.g_str_match_string(carg1, carg2, carg3)
+	runtime.KeepAlive(searchTerm)
+	runtime.KeepAlive(potentialHit)
+	runtime.KeepAlive(acceptAlternates)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// StrToASCII wraps g_str_to_ascii
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a string, in UTF-8 
+// 	- fromLocale string (nullable): the source locale, if known 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Transliterate @str to plain ASCII.
+// 
+// For best results, @str should be in composed normalised form.
+// 
+// This function performs a reasonably good set of character
+// replacements.  The particular set of replacements that is done may
+// change by version or even by runtime environment.
+// 
+// If the source language of @str is known, it can used to improve the
+// accuracy of the translation by passing it as @from_locale.  It should
+// be a valid POSIX locale string (of the form
+// `language[_territory][.codeset][@modifier]`).
+// 
+// If @from_locale is %NULL then the current locale is used.
+// 
+// If you want to do translation for no specific locale, and you want it
+// to be done independently of the currently locale, specify `"C"` for
+// @from_locale.
+func StrToASCII(str string, fromLocale string) string {
+	var carg1 *C.gchar // in, none, string
+	var carg2 *C.gchar // in, none, string, nullable-string
+	var cret  *C.gchar // return, full, string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+	if fromLocale != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(fromLocale)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+
+	cret = C.g_str_to_ascii(carg1, carg2)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(fromLocale)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Strcanon wraps g_strcanon
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a nul-terminated array of bytes 
+// 	- validChars string: bytes permitted in @string 
+// 	- substitutor byte: replacement character for disallowed bytes 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// For each character in @string, if the character is not in @valid_chars,
+// replaces the character with @substitutor.
+// 
+// Modifies @string in place, and return @string itself, not a copy. The
+// return value is to allow nesting such as:
+// ```C
+// g_ascii_strup (g_strcanon (str, "abc", '?'))
+// ```
+// 
+// In order to modify a copy, you may use [func@GLib.strdup]:
+// ```C
+// reformatted = g_strcanon (g_strdup (const_str), "abc", '?');
+// &#x2026;
+// g_free (reformatted);
+// ```
+func Strcanon(str string, validChars string, substitutor byte) string {
+	var carg1 *C.gchar // in, none, string
+	var carg2 *C.gchar // in, none, string
+	var carg3 C.gchar  // in, none, casted
+	var cret  *C.gchar // return, full, string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(validChars)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.gchar(substitutor)
+
+	cret = C.g_strcanon(carg1, carg2, carg3)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(validChars)
+	runtime.KeepAlive(substitutor)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Strchomp wraps g_strchomp
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a string to remove the trailing whitespace from 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Removes trailing whitespace from a string.
+// 
+// This function doesn't allocate or reallocate any memory;
+// it modifies @string in place. Therefore, it cannot be used
+// on statically allocated strings.
+// 
+// The pointer to @string is returned to allow the nesting of functions.
+// 
+// Also see [func@GLib.strchug] and [func@GLib.strstrip].
+func Strchomp(str string) string {
+	var carg1 *C.gchar // in, none, string
+	var cret  *C.gchar // return, full, string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_strchomp(carg1)
+	runtime.KeepAlive(str)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Strchug wraps g_strchug
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a string to remove the leading whitespace from 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Removes leading whitespace from a string, by moving the rest
+// of the characters forward.
+// 
+// This function doesn't allocate or reallocate any memory;
+// it modifies @string in place. Therefore, it cannot be used on
+// statically allocated strings.
+// 
+// The pointer to @string is returned to allow the nesting of functions.
+// 
+// Also see [func@GLib.strchomp] and [func@GLib.strstrip].
+func Strchug(str string) string {
+	var carg1 *C.gchar // in, none, string
+	var cret  *C.gchar // return, full, string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_strchug(carg1)
+	runtime.KeepAlive(str)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Strcmp0 wraps g_strcmp0
+// 
+// The function takes the following parameters:
+// 
+// 	- str1 string (nullable): a string 
+// 	- str2 string (nullable): another string 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Compares @str1 and @str2 like `strcmp()`.
+// 
+// Handles `NULL` gracefully by sorting it before non-`NULL` strings.
+// Comparing two `NULL` pointers returns 0.
+func Strcmp0(str1 string, str2 string) int32 {
+	var carg1 *C.char // in, none, string, nullable-string
+	var carg2 *C.char // in, none, string, nullable-string
+	var cret  C.int   // return, none, casted
+
+	if str1 != "" {
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(str1)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+	if str2 != "" {
+		carg2 = (*C.char)(unsafe.Pointer(C.CString(str2)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+
+	cret = C.g_strcmp0(carg1, carg2)
+	runtime.KeepAlive(str1)
+	runtime.KeepAlive(str2)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// Strcompress wraps g_strcompress
+// 
+// The function takes the following parameters:
+// 
+// 	- source string: a string to compress 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Makes a copy of a string replacing C string-style escape
+// sequences with their one byte equivalent:
+// 
+// - `\b` &#x2192; [U+0008 Backspace](https://en.wikipedia.org/wiki/Backspace)
+// - `\f` &#x2192; [U+000C Form Feed](https://en.wikipedia.org/wiki/Form_feed)
+// - `\n` &#x2192; [U+000A Line Feed](https://en.wikipedia.org/wiki/Newline)
+// - `\r` &#x2192; [U+000D Carriage Return](https://en.wikipedia.org/wiki/Carriage_return)
+// - `\t` &#x2192; [U+0009 Horizontal Tabulation](https://en.wikipedia.org/wiki/Tab_character)
+// - `\v` &#x2192; [U+000B Vertical Tabulation](https://en.wikipedia.org/wiki/Vertical_Tab)
+// - `\` followed by one to three octal digits &#x2192; the numeric value (mod 255)
+// - `\` followed by any other character &#x2192; the character as is.
+//   For example, `\\` will turn into a backslash (`\`) and `\"` into a double quote (`"`).
+// 
+// [func@GLib.strescape] does the reverse conversion.
+func Strcompress(source string) string {
+	var carg1 *C.gchar // in, none, string
+	var cret  *C.gchar // return, full, string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(source)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_strcompress(carg1)
+	runtime.KeepAlive(source)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Strdelimit wraps g_strdelimit
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: the string to convert 
+// 	- delimiters string (nullable): a string containing the current delimiters, or
+//   `NULL` to use the standard delimiters defined in [const@GLib.STR_DELIMITERS] 
+// 	- newDelimiter byte: the new delimiter character 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Converts any delimiter characters in @string to @new_delimiter.
+// 
+// Any characters in @string which are found in @delimiters are
+// changed to the @new_delimiter character. Modifies @string in place,
+// and returns @string itself, not a copy.
+// 
+// The return value is to allow nesting such as:
+// ```C
+// g_ascii_strup (g_strdelimit (str, "abc", '?'))
+// ```
+// 
+// In order to modify a copy, you may use [func@GLib.strdup]:
+// ```C
+// reformatted = g_strdelimit (g_strdup (const_str), "abc", '?');
+// &#x2026;
+// g_free (reformatted);
+// ```
+func Strdelimit(str string, delimiters string, newDelimiter byte) string {
+	var carg1 *C.gchar // in, none, string
+	var carg2 *C.gchar // in, none, string, nullable-string
+	var carg3 C.gchar  // in, none, casted
+	var cret  *C.gchar // return, full, string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+	if delimiters != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(delimiters)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	carg3 = C.gchar(newDelimiter)
+
+	cret = C.g_strdelimit(carg1, carg2, carg3)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(delimiters)
+	runtime.KeepAlive(newDelimiter)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Strdup wraps g_strdup
+// 
+// The function takes the following parameters:
+// 
+// 	- str string (nullable): the string to duplicate 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Duplicates a string. If @str is `NULL` it returns `NULL`.
+func Strdup(str string) string {
+	var carg1 *C.gchar // in, none, string, nullable-string
+	var cret  *C.gchar // return, full, string
+
+	if str != "" {
+		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+
+	cret = C.g_strdup(carg1)
+	runtime.KeepAlive(str)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Strdupv wraps g_strdupv
+// 
+// The function takes the following parameters:
+// 
+// 	- strArray []string (nullable): an array of strings to copy 
+// 
+// The function returns the following values:
+// 
+// 	- goret []string (nullable) 
+//
+// Copies an array of strings. The copy is a deep copy; each string is also
+// copied.
+// 
+// If called on a `NULL` value, `g_strdupv()` simply returns `NULL`.
+func Strdupv(strArray []string) []string {
+	var carg1 **C.gchar // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  **C.gchar // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	_ = strArray
+	_ = carg1
+	panic("unimplemented conversion of []string (gchar**)")
+
+	cret = C.g_strdupv(carg1)
+	runtime.KeepAlive(strArray)
+
+	var goret []string
+
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []string (gchar**)")
+
+	return goret
+}
+
+// Strerror wraps g_strerror
+// 
+// The function takes the following parameters:
+// 
+// 	- errnum int32: the system error number. See the standard C `errno` documentation 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Returns a string corresponding to the given error code, e.g. "no
+// such process".
+// 
+// Unlike `strerror()`, this always returns a string in
+// UTF-8 encoding, and the pointer is guaranteed to remain valid for
+// the lifetime of the process. If the error code is unknown, it returns a
+// string like &#x201C;Unknown error &lt;code\&gt;&#x201D;.
+// 
+// Note that the string may be translated according to the current locale.
+// 
+// The value of `errno` will not be changed by this function. However, it may
+// be changed by intermediate function calls, so you should save its value
+// as soon as the call returns:
+// ```C
+// int saved_errno;
+// 
+// ret = read (blah);
+// saved_errno = errno;
+// 
+// g_strerror (saved_errno);
+// ```
+func Strerror(errnum int32) string {
+	var carg1 C.gint   // in, none, casted
+	var cret  *C.gchar // return, none, string
+
+	carg1 = C.gint(errnum)
+
+	cret = C.g_strerror(carg1)
+	runtime.KeepAlive(errnum)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// Strescape wraps g_strescape
+// 
+// The function takes the following parameters:
+// 
+// 	- source string: a string to escape 
+// 	- exceptions string (nullable): a string of characters not to escape in @source 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// It replaces the following special characters in the string @source
+// with their corresponding C escape sequence:
+// 
+// | Symbol                                                                      | Escape |
+// |-----------------------------------------------------------------------------|--------|
+// | [U+0008 Backspace](https://en.wikipedia.org/wiki/Backspace)                 | `\b`   |
+// | [U+000C Form Feed](https://en.wikipedia.org/wiki/Form_feed)                 | `\f`   |
+// | [U+000A Line Feed](https://en.wikipedia.org/wiki/Newline)                   | `\n`   |
+// | [U+000D Carriage Return](https://en.wikipedia.org/wiki/Carriage_return)     | `\r`   |
+// | [U+0009 Horizontal Tabulation](https://en.wikipedia.org/wiki/Tab_character) | `\t`   |
+// | [U+000B Vertical Tabulation](https://en.wikipedia.org/wiki/Vertical_Tab)    | `\v`   |
+// 
+// It also inserts a backslash (`\`) before any backslash or a double quote (`"`).
+// Additionally all characters in the range 0x01-0x1F (everything
+// below SPACE) and in the range 0x7F-0xFF (all non-ASCII chars) are
+// replaced with a backslash followed by their octal representation.
+// Characters supplied in @exceptions are not escaped.
+// 
+// [func@GLib.strcompress] does the reverse conversion.
+func Strescape(source string, exceptions string) string {
+	var carg1 *C.gchar // in, none, string
+	var carg2 *C.gchar // in, none, string, nullable-string
+	var cret  *C.gchar // return, full, string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(source)))
+	defer C.free(unsafe.Pointer(carg1))
+	if exceptions != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(exceptions)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+
+	cret = C.g_strescape(carg1, carg2)
+	runtime.KeepAlive(source)
+	runtime.KeepAlive(exceptions)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Strfreev wraps g_strfreev
+// 
+// The function takes the following parameters:
+// 
+// 	- strArray []string (nullable): an
+//   array of strings to free 
+//
+// Frees an array of strings, as well as each string it contains.
+// 
+// If @str_array is `NULL`, this function simply returns.
+func Strfreev(strArray []string) {
+	var carg1 **C.gchar // in, transfer: full, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	_ = strArray
+	_ = carg1
+	panic("unimplemented conversion of []string (gchar**)")
+
+	C.g_strfreev(carg1)
+	runtime.KeepAlive(strArray)
+}
+
 // StripContext wraps g_strip_context
 // 
 // The function takes the following parameters:
@@ -10992,6 +13545,1610 @@ func StripContext(msgid string, msgval string) string {
 	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
+}
+
+// Strjoinv wraps g_strjoinv
+// 
+// The function takes the following parameters:
+// 
+// 	- separator string (nullable): a string to insert between each of the strings 
+// 	- strArray []string: an array of strings to join 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Joins an array of strings together to form one long string, with the
+// optional @separator inserted between each of them.
+// 
+// If @str_array has no items, the return value will be an
+// empty string. If @str_array contains a single item, @separator will not
+// appear in the resulting string.
+func Strjoinv(separator string, strArray []string) string {
+	var carg1 *C.gchar  // in, none, string, nullable-string
+	var carg2 **C.gchar // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  *C.gchar  // return, full, string
+
+	if separator != "" {
+		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(separator)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+	_ = strArray
+	_ = carg2
+	panic("unimplemented conversion of []string (gchar**)")
+
+	cret = C.g_strjoinv(carg1, carg2)
+	runtime.KeepAlive(separator)
+	runtime.KeepAlive(strArray)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Strlcat wraps g_strlcat
+// 
+// The function takes the following parameters:
+// 
+// 	- dest string: destination buffer, already containing one nul-terminated string 
+// 	- src string: source buffer 
+// 	- destSize uint: length of @dest buffer in bytes (not length of existing string
+//   inside @dest) 
+// 
+// The function returns the following values:
+// 
+// 	- goret uint 
+//
+// Portability wrapper that calls `strlcat()` on systems which have it,
+// and emulates it otherwise. Appends nul-terminated @src string to @dest,
+// guaranteeing nul-termination for @dest. The total size of @dest won't
+// exceed @dest_size.
+// 
+// At most @dest_size - 1 characters will be copied. Unlike `strncat()`,
+// @dest_size is the full size of dest, not the space left over. This
+// function does not allocate memory. It always nul-terminates (unless
+// @dest_size == 0 or there were no nul characters in the @dest_size
+// characters of dest to start with).
+// 
+// Caveat: this is supposedly a more secure alternative to `strcat()` or
+// `strncat()`, but for real security [func@GLib.strconcat] is harder to mess up.
+func Strlcat(dest string, src string, destSize uint) uint {
+	var carg1 *C.gchar // in, none, string
+	var carg2 *C.gchar // in, none, string
+	var carg3 C.gsize  // in, none, casted
+	var cret  C.gsize  // return, none, casted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(dest)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(src)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.gsize(destSize)
+
+	cret = C.g_strlcat(carg1, carg2, carg3)
+	runtime.KeepAlive(dest)
+	runtime.KeepAlive(src)
+	runtime.KeepAlive(destSize)
+
+	var goret uint
+
+	goret = uint(cret)
+
+	return goret
+}
+
+// Strlcpy wraps g_strlcpy
+// 
+// The function takes the following parameters:
+// 
+// 	- dest string: destination buffer 
+// 	- src string: source buffer 
+// 	- destSize uint: length of @dest in bytes 
+// 
+// The function returns the following values:
+// 
+// 	- goret uint 
+//
+// Portability wrapper that calls `strlcpy()` on systems which have it,
+// and emulates `strlcpy()` otherwise. Copies @src to @dest; @dest is
+// guaranteed to be nul-terminated; @src must be nul-terminated;
+// @dest_size is the buffer size, not the number of bytes to copy.
+// 
+// At most @dest_size - 1 characters will be copied. Always nul-terminates
+// (unless @dest_size is 0). This function does not allocate memory. Unlike
+// `strncpy()`, this function doesn't pad @dest (so it's often faster). It
+// returns the size of the attempted result, `strlen (src)`, so if
+// @retval &gt;= @dest_size, truncation occurred.
+// 
+// Caveat: `strlcpy()` is supposedly more secure than `strcpy()` or `strncpy()`,
+// but if you really want to avoid screwups, [func@GLib.strdup] is an even better
+// idea.
+func Strlcpy(dest string, src string, destSize uint) uint {
+	var carg1 *C.gchar // in, none, string
+	var carg2 *C.gchar // in, none, string
+	var carg3 C.gsize  // in, none, casted
+	var cret  C.gsize  // return, none, casted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(dest)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(src)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.gsize(destSize)
+
+	cret = C.g_strlcpy(carg1, carg2, carg3)
+	runtime.KeepAlive(dest)
+	runtime.KeepAlive(src)
+	runtime.KeepAlive(destSize)
+
+	var goret uint
+
+	goret = uint(cret)
+
+	return goret
+}
+
+// Strndup wraps g_strndup
+// 
+// The function takes the following parameters:
+// 
+// 	- str string (nullable): the string to duplicate 
+// 	- n uint: the maximum number of bytes to copy from @str 
+// 
+// The function returns the following values:
+// 
+// 	- goret string (nullable) 
+//
+// Duplicates the first @n bytes of a string, returning a newly-allocated
+// buffer @n + 1 bytes long which will always be nul-terminated. If @str
+// is less than @n bytes long the buffer is padded with nuls. If @str is
+// `NULL` it returns `NULL`.
+// 
+// To copy a number of characters from a UTF-8 encoded string,
+// use [func@GLib.utf8_strncpy] instead.
+func Strndup(str string, n uint) string {
+	var carg1 *C.gchar // in, none, string, nullable-string
+	var carg2 C.gsize  // in, none, casted
+	var cret  *C.gchar // return, full, string, nullable-string
+
+	if str != "" {
+		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+	carg2 = C.gsize(n)
+
+	cret = C.g_strndup(carg1, carg2)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(n)
+
+	var goret string
+
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
+// Strnfill wraps g_strnfill
+// 
+// The function takes the following parameters:
+// 
+// 	- length uint: the length of the new string 
+// 	- fillChar byte: the byte to fill the string with 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Creates a new string @length bytes long filled with @fill_char.
+func Strnfill(length uint, fillChar byte) string {
+	var carg1 C.gsize  // in, none, casted
+	var carg2 C.gchar  // in, none, casted
+	var cret  *C.gchar // return, full, string
+
+	carg1 = C.gsize(length)
+	carg2 = C.gchar(fillChar)
+
+	cret = C.g_strnfill(carg1, carg2)
+	runtime.KeepAlive(length)
+	runtime.KeepAlive(fillChar)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Strreverse wraps g_strreverse
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: the string to reverse 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Reverses all of the bytes in a string. For example,
+// `g_strreverse ("abcdef")` will result in "fedcba".
+// 
+// Note that `g_strreverse()` doesn't work on UTF-8 strings
+// containing multibyte characters. For that purpose, use
+// [func@GLib.utf8_strreverse].
+func Strreverse(str string) string {
+	var carg1 *C.gchar // in, none, string
+	var cret  *C.gchar // return, full, string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_strreverse(carg1)
+	runtime.KeepAlive(str)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Strrstr wraps g_strrstr
+// 
+// The function takes the following parameters:
+// 
+// 	- haystack string: a string to search in 
+// 	- needle string: the string to search for 
+// 
+// The function returns the following values:
+// 
+// 	- goret string (nullable) 
+//
+// Searches the string @haystack for the last occurrence
+// of the string @needle.
+// 
+// The fact that this function returns `gchar *` rather than `const gchar *` is
+// a historical artifact.
+func Strrstr(haystack string, needle string) string {
+	var carg1 *C.gchar // in, none, string
+	var carg2 *C.gchar // in, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(haystack)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(needle)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C.g_strrstr(carg1, carg2)
+	runtime.KeepAlive(haystack)
+	runtime.KeepAlive(needle)
+
+	var goret string
+
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
+
+	return goret
+}
+
+// StrrstrLen wraps g_strrstr_len
+// 
+// The function takes the following parameters:
+// 
+// 	- haystack string: a string to search in 
+// 	- haystackLen int: the maximum length of @haystack in bytes. A length of `-1`
+//   can be used to mean "search the entire string", like [func@GLib.strrstr] 
+// 	- needle string: the string to search for 
+// 
+// The function returns the following values:
+// 
+// 	- goret string (nullable) 
+//
+// Searches the string @haystack for the last occurrence
+// of the string @needle, limiting the length of the search
+// to @haystack_len.
+// 
+// The fact that this function returns `gchar *` rather than `const gchar *` is
+// a historical artifact.
+func StrrstrLen(haystack string, haystackLen int, needle string) string {
+	var carg1 *C.gchar // in, none, string
+	var carg2 C.gssize // in, none, casted
+	var carg3 *C.gchar // in, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(haystack)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.gssize(haystackLen)
+	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(needle)))
+	defer C.free(unsafe.Pointer(carg3))
+
+	cret = C.g_strrstr_len(carg1, carg2, carg3)
+	runtime.KeepAlive(haystack)
+	runtime.KeepAlive(haystackLen)
+	runtime.KeepAlive(needle)
+
+	var goret string
+
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
+
+	return goret
+}
+
+// Strsignal wraps g_strsignal
+// 
+// The function takes the following parameters:
+// 
+// 	- signum int32: the signal number. See the `signal` documentation 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Returns a string describing the given signal, e.g. "Segmentation fault".
+// If the signal is unknown, it returns &#x201C;unknown signal (&lt;signum\&gt;)&#x201D;.
+// 
+// You should use this function in preference to `strsignal()`, because it
+// returns a string in UTF-8 encoding, and since not all platforms support
+// the `strsignal()` function.
+func Strsignal(signum int32) string {
+	var carg1 C.gint   // in, none, casted
+	var cret  *C.gchar // return, none, string
+
+	carg1 = C.gint(signum)
+
+	cret = C.g_strsignal(carg1)
+	runtime.KeepAlive(signum)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// Strsplit wraps g_strsplit
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a string to split 
+// 	- delimiter string: a string which specifies the places at which to split
+//   the string. The delimiter is not included in any of the resulting
+//   strings, unless @max_tokens is reached. 
+// 	- maxTokens int32: the maximum number of pieces to split @string into
+//   If this is less than 1, the string is split completely 
+// 
+// The function returns the following values:
+// 
+// 	- goret []string 
+//
+// Splits a string into a maximum of @max_tokens pieces, using the given
+// @delimiter. If @max_tokens is reached, the remainder of @string is
+// appended to the last token.
+// 
+// As an example, the result of `g_strsplit (":a:bc::d:", ":", -1)` is an array
+// containing the six strings "", "a", "bc", "", "d" and "".
+// 
+// As a special case, the result of splitting the empty string "" is an empty
+// array, not an array containing a single string. The reason for this
+// special case is that being able to represent an empty array is typically
+// more useful than consistent handling of empty elements. If you do need
+// to represent empty elements, you'll need to check for the empty string
+// before calling `g_strsplit()`.
+func Strsplit(str string, delimiter string, maxTokens int32) []string {
+	var carg1 *C.gchar  // in, none, string
+	var carg2 *C.gchar  // in, none, string
+	var carg3 C.gint    // in, none, casted
+	var cret  **C.gchar // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(delimiter)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.gint(maxTokens)
+
+	cret = C.g_strsplit(carg1, carg2, carg3)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(delimiter)
+	runtime.KeepAlive(maxTokens)
+
+	var goret []string
+
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []string (gchar**)")
+
+	return goret
+}
+
+// StrsplitSet wraps g_strsplit_set
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: a string to split 
+// 	- delimiters string: a string containing characters that are used to split the
+//   string. Can be empty, which will result in no string splitting 
+// 	- maxTokens int32: the maximum number of tokens to split @string into.
+//   If this is less than 1, the string is split completely 
+// 
+// The function returns the following values:
+// 
+// 	- goret []string 
+//
+// Splits @string into a number of tokens not containing any of the characters
+// in @delimiters. A token is the (possibly empty) longest string that does not
+// contain any of the characters in @delimiters. If @max_tokens is reached, the
+// remainder is appended to the last token.
+// 
+// For example, the result of g_strsplit_set ("abc:def/ghi", ":/", -1) is an
+// array containing the three strings "abc", "def", and "ghi".
+// 
+// The result of g_strsplit_set (":def/ghi:", ":/", -1) is an array containing
+// the four strings "", "def", "ghi", and "".
+// 
+// As a special case, the result of splitting the empty string "" is an empty
+// array, not an array containing a single string. The reason for this
+// special case is that being able to represent an empty array is typically
+// more useful than consistent handling of empty elements. If you do need
+// to represent empty elements, you'll need to check for the empty string
+// before calling `g_strsplit_set()`.
+// 
+// Note that this function works on bytes not characters, so it can't be used
+// to delimit UTF-8 strings for anything but ASCII characters.
+func StrsplitSet(str string, delimiters string, maxTokens int32) []string {
+	var carg1 *C.gchar  // in, none, string
+	var carg2 *C.gchar  // in, none, string
+	var carg3 C.gint    // in, none, casted
+	var cret  **C.gchar // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(delimiters)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.gint(maxTokens)
+
+	cret = C.g_strsplit_set(carg1, carg2, carg3)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(delimiters)
+	runtime.KeepAlive(maxTokens)
+
+	var goret []string
+
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []string (gchar**)")
+
+	return goret
+}
+
+// StrstrLen wraps g_strstr_len
+// 
+// The function takes the following parameters:
+// 
+// 	- haystack string: a string to search in 
+// 	- haystackLen int: the maximum length of @haystack in bytes, or `-1` to
+//   search it entirely 
+// 	- needle string: the string to search for 
+// 
+// The function returns the following values:
+// 
+// 	- goret string (nullable) 
+//
+// Searches the string @haystack for the first occurrence
+// of the string @needle, limiting the length of the search
+// to @haystack_len or a nul terminator byte (whichever is reached first).
+// 
+// A length of `-1` can be used to mean &#x201C;search the entire string&#x201D;, like
+// `strstr()`.
+// 
+// The fact that this function returns `gchar *` rather than `const gchar *` is
+// a historical artifact.
+func StrstrLen(haystack string, haystackLen int, needle string) string {
+	var carg1 *C.gchar // in, none, string
+	var carg2 C.gssize // in, none, casted
+	var carg3 *C.gchar // in, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(haystack)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.gssize(haystackLen)
+	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(needle)))
+	defer C.free(unsafe.Pointer(carg3))
+
+	cret = C.g_strstr_len(carg1, carg2, carg3)
+	runtime.KeepAlive(haystack)
+	runtime.KeepAlive(haystackLen)
+	runtime.KeepAlive(needle)
+
+	var goret string
+
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
+
+	return goret
+}
+
+// Strtod wraps g_strtod
+// 
+// The function takes the following parameters:
+// 
+// 	- nptr string: the string to convert to a numeric value 
+// 
+// The function returns the following values:
+// 
+// 	- endptr string: if non-`NULL`, it returns the
+//   character after the last character used in the conversion 
+// 	- goret float64 
+//
+// Converts a string to a floating point value.
+// 
+// It calls the standard `strtod()` function to handle the conversion, but
+// if the string is not completely converted it attempts the conversion
+// again with [func@GLib.ascii_strtod], and returns the best match.
+// 
+// This function should seldom be used. The normal situation when reading
+// numbers not for human consumption is to use [func@GLib.ascii_strtod]. Only when
+// you know that you must expect both locale formatted and C formatted numbers
+// should you use this. Make sure that you don't pass strings such as comma
+// separated lists of values, since the commas may be interpreted as a decimal
+// point in some locales, causing unexpected results.
+func Strtod(nptr string) (string, float64) {
+	var carg1 *C.gchar  // in, none, string
+	var carg2 *C.gchar  // out, none, string
+	var cret  C.gdouble // return, none, casted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(nptr)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_strtod(carg1, &carg2)
+	runtime.KeepAlive(nptr)
+
+	var endptr string
+	var goret  float64
+
+	endptr = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+	goret = float64(cret)
+
+	return endptr, goret
+}
+
+// StrvContains wraps g_strv_contains
+// 
+// The function takes the following parameters:
+// 
+// 	- strv []string: an array of strings to search in 
+// 	- str string: the string to search for 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Checks if an array of strings contains the string @str according to
+// [func@GLib.str_equal]. @strv must not be `NULL`.
+func StrvContains(strv []string, str string) bool {
+	var carg1 **C.gchar  // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var carg2 *C.gchar   // in, none, string
+	var cret  C.gboolean // return
+
+	_ = strv
+	_ = carg1
+	panic("unimplemented conversion of []string (const gchar* const*)")
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C.g_strv_contains(carg1, carg2)
+	runtime.KeepAlive(strv)
+	runtime.KeepAlive(str)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// StrvEqual wraps g_strv_equal
+// 
+// The function takes the following parameters:
+// 
+// 	- strv1 []string: an array of strings to compare to @strv2 
+// 	- strv2 []string: an array of strings to compare to @strv1 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Checks if two arrays of strings contain exactly the same elements in
+// exactly the same order.
+// 
+// Elements are compared using [func@GLib.str_equal]. To match independently
+// of order, sort the arrays first (using [func@GLib.qsort_with_data]
+// or similar).
+// 
+// Two empty arrays are considered equal. Neither @strv1 nor @strv2 may be
+// `NULL`.
+func StrvEqual(strv1 []string, strv2 []string) bool {
+	var carg1 **C.gchar  // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var carg2 **C.gchar  // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  C.gboolean // return
+
+	_ = strv1
+	_ = carg1
+	panic("unimplemented conversion of []string (const gchar* const*)")
+	_ = strv2
+	_ = carg2
+	panic("unimplemented conversion of []string (const gchar* const*)")
+
+	cret = C.g_strv_equal(carg1, carg2)
+	runtime.KeepAlive(strv1)
+	runtime.KeepAlive(strv2)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// StrvLength wraps g_strv_length
+// 
+// The function takes the following parameters:
+// 
+// 	- strArray []string: an array of strings 
+// 
+// The function returns the following values:
+// 
+// 	- goret uint 
+//
+// Returns the length of an array of strings. @str_array must not be `NULL`.
+func StrvLength(strArray []string) uint {
+	var carg1 **C.gchar // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  C.guint   // return, none, casted
+
+	_ = strArray
+	_ = carg1
+	panic("unimplemented conversion of []string (gchar**)")
+
+	cret = C.g_strv_length(carg1)
+	runtime.KeepAlive(strArray)
+
+	var goret uint
+
+	goret = uint(cret)
+
+	return goret
+}
+
+// TestAssertExpectedMessagesInternal wraps g_test_assert_expected_messages_internal
+// 
+// The function takes the following parameters:
+// 
+// 	- domain string 
+// 	- file string 
+// 	- line int32 
+// 	- fn string 
+func TestAssertExpectedMessagesInternal(domain string, file string, line int32, fn string) {
+	var carg1 *C.char // in, none, string
+	var carg2 *C.char // in, none, string
+	var carg3 C.int   // in, none, casted
+	var carg4 *C.char // in, none, string
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(domain)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(file)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.int(line)
+	carg4 = (*C.char)(unsafe.Pointer(C.CString(fn)))
+	defer C.free(unsafe.Pointer(carg4))
+
+	C.g_test_assert_expected_messages_internal(carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(domain)
+	runtime.KeepAlive(file)
+	runtime.KeepAlive(line)
+	runtime.KeepAlive(fn)
+}
+
+// TestBug wraps g_test_bug
+// 
+// The function takes the following parameters:
+// 
+// 	- bugUriSnippet string: Bug specific bug tracker URI or URI portion. 
+//
+// Adds a message to test reports that associates a bug URI with a test case.
+// 
+// Bug URIs are constructed from a base URI set with [func@GLib.test_bug_base]
+// and @bug_uri_snippet. If [func@GLib.test_bug_base] has not been called, it is
+// assumed to be the empty string, so a full URI can be provided to
+// [func@GLib.test_bug] instead.
+// 
+// See also [func@GLib.test_summary].
+// 
+// Since GLib 2.70, the base URI is not prepended to @bug_uri_snippet
+// if it is already a valid URI.
+func TestBug(bugUriSnippet string) {
+	var carg1 *C.char // in, none, string
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(bugUriSnippet)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	C.g_test_bug(carg1)
+	runtime.KeepAlive(bugUriSnippet)
+}
+
+// TestBugBase wraps g_test_bug_base
+// 
+// The function takes the following parameters:
+// 
+// 	- uriPattern string: the base pattern for bug URIs 
+//
+// Specifies the base URI for bug reports.
+// 
+// The base URI is used to construct bug report messages for
+// [func@GLib.test_message] when [func@GLib.test_bug] is called.
+// Calling this function outside of a test case sets the
+// default base URI for all test cases. Calling it from within
+// a test case changes the base URI for the scope of the test
+// case only.
+// Bug URIs are constructed by appending a bug specific URI
+// portion to @uri_pattern, or by replacing the special string
+// `%s` within @uri_pattern if that is present.
+// 
+// If [func@GLib.test_bug_base] is not called, bug URIs are formed
+// solely from the value provided by [func@GLib.test_bug].
+func TestBugBase(uriPattern string) {
+	var carg1 *C.char // in, none, string
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(uriPattern)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	C.g_test_bug_base(carg1)
+	runtime.KeepAlive(uriPattern)
+}
+
+// TestDisableCrashReporting wraps g_test_disable_crash_reporting
+//
+// Attempts to disable system crash reporting infrastructure.
+// 
+// This function should be called before exercising code paths that are
+// expected or intended to crash, to avoid wasting resources in system-wide
+// crash collection infrastructure such as systemd-coredump or abrt.
+func TestDisableCrashReporting() {
+
+	C.g_test_disable_crash_reporting()
+}
+
+// TestExpectMessage wraps g_test_expect_message
+// 
+// The function takes the following parameters:
+// 
+// 	- logDomain string (nullable): the log domain of the message 
+// 	- logLevel LogLevelFlags: the log level of the message 
+// 	- pattern string: a glob-style pattern (see [type@GLib.PatternSpec]) 
+//
+// Indicates that a message with the given @log_domain and @log_level,
+// with text matching @pattern, is expected to be logged.
+// 
+// When this message is logged, it will not be printed, and the test case will
+// not abort.
+// 
+// This API may only be used with the old logging API ([func@GLib.log] without
+// `G_LOG_USE_STRUCTURED` defined). It will not work with the structured logging
+// API. See [Testing for Messages](logging.html#testing-for-messages).
+// 
+// Use [func@GLib.test_assert_expected_messages] to assert that all
+// previously-expected messages have been seen and suppressed.
+// 
+// You can call this multiple times in a row, if multiple messages are
+// expected as a result of a single call. (The messages must appear in
+// the same order as the calls to [func@GLib.test_expect_message].)
+// 
+// For example:
+// 
+// ```c
+// // g_main_context_push_thread_default() should fail if the
+// // context is already owned by another thread.
+// g_test_expect_message (G_LOG_DOMAIN,
+//                        G_LOG_LEVEL_CRITICAL,
+//                        "assertion*acquired_context*failed");
+// g_main_context_push_thread_default (bad_context);
+// g_test_assert_expected_messages ();
+// ```
+// 
+// Note that you cannot use this to test [func@GLib.error] messages, since
+// [func@GLib.error] intentionally never returns even if the program doesn&#x2019;t
+// abort; use [func@GLib.test_trap_subprocess] in this case.
+// 
+// If messages at [flags@GLib.LogLevelFlags.LEVEL_DEBUG] are emitted, but not explicitly
+// expected via [func@GLib.test_expect_message] then they will be ignored.
+func TestExpectMessage(logDomain string, logLevel LogLevelFlags, pattern string) {
+	var carg1 *C.gchar         // in, none, string, nullable-string
+	var carg2 C.GLogLevelFlags // in, none, casted
+	var carg3 *C.gchar         // in, none, string
+
+	if logDomain != "" {
+		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(logDomain)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+	carg2 = C.GLogLevelFlags(logLevel)
+	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(pattern)))
+	defer C.free(unsafe.Pointer(carg3))
+
+	C.g_test_expect_message(carg1, carg2, carg3)
+	runtime.KeepAlive(logDomain)
+	runtime.KeepAlive(logLevel)
+	runtime.KeepAlive(pattern)
+}
+
+// TestFail wraps g_test_fail
+//
+// Indicates that a test failed.
+// 
+// This function can be called multiple times from the same test.
+// You can use this function if your test failed in a recoverable way.
+// 
+// Do not use this function if the failure of a test could cause
+// other tests to malfunction.
+// 
+// Calling this function will not stop the test from running, you
+// need to return from the test function yourself. So you can
+// produce additional diagnostic messages or even continue running
+// the test.
+// 
+// If not called from inside a test, this function does nothing.
+// 
+// Note that unlike [func@GLib.test_skip] and [func@GLib.test_incomplete],
+// this function does not log a message alongside the test failure.
+// If details of the test failure are available, either log them with
+// [func@GLib.test_message] before [func@GLib.test_fail], or use
+// [func@GLib.test_fail_printf] instead.
+func TestFail() {
+
+	C.g_test_fail()
+}
+
+// TestFailed wraps g_test_failed
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Returns whether a test has already failed.
+// 
+// This will be the case when [func@GLib.test_fail],
+// [func@GLib.test_incomplete] or [func@GLib.test_skip] have
+// been called, but also if an assertion has failed.
+// 
+// This can be useful to return early from a test if
+// continuing after a failed assertion might be harmful.
+// 
+// The return value of this function is only meaningful
+// if it is called from inside a test function.
+func TestFailed() bool {
+	var cret C.gboolean // return
+
+	cret = C.g_test_failed()
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// TestGetDir wraps g_test_get_dir
+// 
+// The function takes the following parameters:
+// 
+// 	- fileType TestFileType: the type of file (built vs. distributed) 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the pathname of the directory containing test files of the type
+// specified by @file_type.
+// 
+// This is approximately the same as calling `g_test_build_filename(".")`,
+// but you don't need to free the return value.
+func TestGetDir(fileType TestFileType) string {
+	var carg1 C.GTestFileType // in, none, casted
+	var cret  *C.gchar        // return, none, string
+
+	carg1 = C.GTestFileType(fileType)
+
+	cret = C.g_test_get_dir(carg1)
+	runtime.KeepAlive(fileType)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// TestGetPath wraps g_test_get_path
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the test path for the test currently being run.
+// 
+// In essence, it will be the same string passed as the first argument
+// to e.g. [func@GLib.test_add] when the test was added.
+// 
+// This function returns a valid string only within a test function.
+// 
+// Note that this is a test path, not a file system path.
+func TestGetPath() string {
+	var cret *C.char // return, none, string
+
+	cret = C.g_test_get_path()
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// TestIncomplete wraps g_test_incomplete
+// 
+// The function takes the following parameters:
+// 
+// 	- msg string (nullable): explanation 
+//
+// Indicates that a test failed because of some incomplete
+// functionality.
+// 
+// This function can be called multiple times from the same test.
+// 
+// Calling this function will not stop the test from running, you
+// need to return from the test function yourself. So you can
+// produce additional diagnostic messages or even continue running
+// the test.
+// 
+// If not called from inside a test, this function does nothing.
+func TestIncomplete(msg string) {
+	var carg1 *C.gchar // in, none, string, nullable-string
+
+	if msg != "" {
+		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(msg)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+
+	C.g_test_incomplete(carg1)
+	runtime.KeepAlive(msg)
+}
+
+// TestLogTypeName wraps g_test_log_type_name
+// 
+// The function takes the following parameters:
+// 
+// 	- logType TestLogType 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+func TestLogTypeName(logType TestLogType) string {
+	var carg1 C.GTestLogType // in, none, casted
+	var cret  *C.char        // return, none, string
+
+	carg1 = C.GTestLogType(logType)
+
+	cret = C.g_test_log_type_name(carg1)
+	runtime.KeepAlive(logType)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// TestRandDouble wraps g_test_rand_double
+// 
+// The function returns the following values:
+// 
+// 	- goret float64 
+//
+// Gets a reproducible random floating point number.
+// 
+// See [func@GLib.test_rand_int] for details on test case random numbers.
+func TestRandDouble() float64 {
+	var cret C.double // return, none, casted
+
+	cret = C.g_test_rand_double()
+
+	var goret float64
+
+	goret = float64(cret)
+
+	return goret
+}
+
+// TestRandDoubleRange wraps g_test_rand_double_range
+// 
+// The function takes the following parameters:
+// 
+// 	- rangeStart float64: the minimum value returned by this function 
+// 	- rangeEnd float64: the minimum value not returned by this function 
+// 
+// The function returns the following values:
+// 
+// 	- goret float64 
+//
+// Gets a reproducible random floating point number out of a specified range.
+// 
+// See [func@GLib.test_rand_int] for details on test case random numbers.
+func TestRandDoubleRange(rangeStart float64, rangeEnd float64) float64 {
+	var carg1 C.double // in, none, casted
+	var carg2 C.double // in, none, casted
+	var cret  C.double // return, none, casted
+
+	carg1 = C.double(rangeStart)
+	carg2 = C.double(rangeEnd)
+
+	cret = C.g_test_rand_double_range(carg1, carg2)
+	runtime.KeepAlive(rangeStart)
+	runtime.KeepAlive(rangeEnd)
+
+	var goret float64
+
+	goret = float64(cret)
+
+	return goret
+}
+
+// TestRandInt wraps g_test_rand_int
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets a reproducible random integer number.
+// 
+// The random numbers generated by the g_test_rand_*() family of functions
+// change with every new test program start, unless the --seed option is
+// given when starting test programs.
+// 
+// For individual test cases however, the random number generator is
+// reseeded, to avoid dependencies between tests and to make --seed
+// effective for all test cases.
+func TestRandInt() int32 {
+	var cret C.gint32 // return, none, casted
+
+	cret = C.g_test_rand_int()
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// TestRandIntRange wraps g_test_rand_int_range
+// 
+// The function takes the following parameters:
+// 
+// 	- begin int32: the minimum value returned by this function 
+// 	- end int32: the smallest value not to be returned by this function 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets a reproducible random integer number out of a specified range.
+// 
+// See [func@GLib.test_rand_int] for details on test case random numbers.
+func TestRandIntRange(begin int32, end int32) int32 {
+	var carg1 C.gint32 // in, none, casted
+	var carg2 C.gint32 // in, none, casted
+	var cret  C.gint32 // return, none, casted
+
+	carg1 = C.gint32(begin)
+	carg2 = C.gint32(end)
+
+	cret = C.g_test_rand_int_range(carg1, carg2)
+	runtime.KeepAlive(begin)
+	runtime.KeepAlive(end)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// TestRun wraps g_test_run
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Runs all tests under the toplevel suite.
+// 
+// The toplevel suite can be retrieved with [func@GLib.test_get_root].
+// 
+// Similar to [func@GLib.test_run_suite], the test cases to be run are
+// filtered according to test path arguments (`-p testpath` and `-s testpath`)
+// as parsed by [func@GLib.test_init]. [func@GLib.test_run_suite] or
+// [func@GLib.test_run] may only be called once in a program.
+// 
+// In general, the tests and sub-suites within each suite are run in
+// the order in which they are defined. However, note that prior to
+// GLib 2.36, there was a bug in the `g_test_add_*`
+// functions which caused them to create multiple suites with the same
+// name, meaning that if you created tests "/foo/simple",
+// "/bar/simple", and "/foo/using-bar" in that order, they would get
+// run in that order (since [func@GLib.test_run] would run the first "/foo"
+// suite, then the "/bar" suite, then the second "/foo" suite). As of
+// 2.36, this bug is fixed, and adding the tests in that order would
+// result in a running order of "/foo/simple", "/foo/using-bar",
+// "/bar/simple". If this new ordering is sub-optimal (because it puts
+// more-complicated tests before simpler ones, making it harder to
+// figure out exactly what has failed), you can fix it by changing the
+// test paths to group tests by suite in a way that will result in the
+// desired running order. Eg, "/simple/foo", "/simple/bar",
+// "/complex/foo-using-bar".
+// 
+// However, you should never make the actual result of a test depend
+// on the order that tests are run in. If you need to ensure that some
+// particular code runs before or after a given test case, use
+// [func@GLib.test_add], which lets you specify setup and teardown functions.
+// 
+// If all tests are skipped or marked as incomplete (expected failures),
+// this function will return 0 if producing TAP output, or 77 (treated
+// as "skip test" by Automake) otherwise.
+func TestRun() int32 {
+	var cret C.int // return, none, casted
+
+	cret = C.g_test_run()
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// TestRunSuite wraps g_test_run_suite
+// 
+// The function takes the following parameters:
+// 
+// 	- suite *TestSuite: a test suite 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Executes the tests within @suite and all nested test suites.
+// 
+// The test suites to be executed are filtered according to
+// test path arguments (`-p testpath` and `-s testpath`) as parsed by
+// [func@GLib.test_init]. See the [func@GLib.test_run] documentation
+// for more information on the order that tests are run in.
+// 
+// [func@GLib.test_run_suite] or [func@GLib.test_run] may only be
+// called once in a program.
+func TestRunSuite(suite *TestSuite) int32 {
+	var carg1 *C.GTestSuite // in, none, converted
+	var cret  C.int         // return, none, casted
+
+	carg1 = (*C.GTestSuite)(UnsafeTestSuiteToGlibNone(suite))
+
+	cret = C.g_test_run_suite(carg1)
+	runtime.KeepAlive(suite)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// TestSetNonfatalAssertions wraps g_test_set_nonfatal_assertions
+//
+// Changes the behaviour of the various assertion macros.
+// 
+// The `g_assert_*()` macros, `g_test_assert_expected_messages()`
+// and the various `g_test_trap_assert_*()` macros are changed
+// to not abort to program.
+// 
+// Instead, they will call [func@GLib.test_fail] and continue.
+// (This also changes the behavior of [func@GLib.test_fail] so that
+// it will not cause the test program to abort after completing
+// the failed test.)
+// 
+// Note that the [func@GLib.assert_not_reached] and [func@GLib.assert]
+// macros are not affected by this.
+// 
+// This function can only be called after [func@GLib.test_init].
+func TestSetNonfatalAssertions() {
+
+	C.g_test_set_nonfatal_assertions()
+}
+
+// TestSkip wraps g_test_skip
+// 
+// The function takes the following parameters:
+// 
+// 	- msg string (nullable): explanation 
+//
+// Indicates that a test was skipped.
+// 
+// Calling this function will not stop the test from running, you
+// need to return from the test function yourself. So you can
+// produce additional diagnostic messages or even continue running
+// the test.
+// 
+// If not called from inside a test, this function does nothing.
+func TestSkip(msg string) {
+	var carg1 *C.gchar // in, none, string, nullable-string
+
+	if msg != "" {
+		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(msg)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+
+	C.g_test_skip(carg1)
+	runtime.KeepAlive(msg)
+}
+
+// TestSubprocess wraps g_test_subprocess
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Returns true if the test program is running under [func@GLib.test_trap_subprocess].
+func TestSubprocess() bool {
+	var cret C.gboolean // return
+
+	cret = C.g_test_subprocess()
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// TestSummary wraps g_test_summary
+// 
+// The function takes the following parameters:
+// 
+// 	- summary string: summary of the test purpose 
+//
+// Sets the summary for a test.
+// 
+// This may be included in test report output, and is useful documentation for
+// anyone reading the source code or modifying a test in future. It must be a
+// single line, and it should summarise what the test checks, and how.
+// 
+// This should be called at the top of a test function.
+// 
+// For example:
+// 
+// ```c
+// static void
+// test_array_sort (void)
+// {
+//   g_test_summary ("Test my_array_sort() sorts the array correctly and stably, "
+//                   "including testing zero length and one-element arrays.");
+// 
+//   // ...
+// }
+// ```
+// 
+// See also [func@GLib.test_bug].
+func TestSummary(summary string) {
+	var carg1 *C.char // in, none, string
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(summary)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	C.g_test_summary(carg1)
+	runtime.KeepAlive(summary)
+}
+
+// TestTimerElapsed wraps g_test_timer_elapsed
+// 
+// The function returns the following values:
+// 
+// 	- goret float64 
+//
+// Gets the number of seconds since the last start of the timer with
+// [func@GLib.test_timer_start].
+func TestTimerElapsed() float64 {
+	var cret C.double // return, none, casted
+
+	cret = C.g_test_timer_elapsed()
+
+	var goret float64
+
+	goret = float64(cret)
+
+	return goret
+}
+
+// TestTimerLast wraps g_test_timer_last
+// 
+// The function returns the following values:
+// 
+// 	- goret float64 
+//
+// Reports the last result of [func@GLib.test_timer_elapsed].
+func TestTimerLast() float64 {
+	var cret C.double // return, none, casted
+
+	cret = C.g_test_timer_last()
+
+	var goret float64
+
+	goret = float64(cret)
+
+	return goret
+}
+
+// TestTimerStart wraps g_test_timer_start
+//
+// Starts a timing test.
+// 
+// Call [func@GLib.test_timer_elapsed] when the task is supposed
+// to be done. Call this function again to restart the timer.
+func TestTimerStart() {
+
+	C.g_test_timer_start()
+}
+
+// TestTrapAssertions wraps g_test_trap_assertions
+// 
+// The function takes the following parameters:
+// 
+// 	- domain string 
+// 	- file string 
+// 	- line int32 
+// 	- fn string 
+// 	- assertionFlags uint64 
+// 	- pattern string 
+func TestTrapAssertions(domain string, file string, line int32, fn string, assertionFlags uint64, pattern string) {
+	var carg1 *C.char   // in, none, string
+	var carg2 *C.char   // in, none, string
+	var carg3 C.int     // in, none, casted
+	var carg4 *C.char   // in, none, string
+	var carg5 C.guint64 // in, none, casted
+	var carg6 *C.char   // in, none, string
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(domain)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(file)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.int(line)
+	carg4 = (*C.char)(unsafe.Pointer(C.CString(fn)))
+	defer C.free(unsafe.Pointer(carg4))
+	carg5 = C.guint64(assertionFlags)
+	carg6 = (*C.char)(unsafe.Pointer(C.CString(pattern)))
+	defer C.free(unsafe.Pointer(carg6))
+
+	C.g_test_trap_assertions(carg1, carg2, carg3, carg4, carg5, carg6)
+	runtime.KeepAlive(domain)
+	runtime.KeepAlive(file)
+	runtime.KeepAlive(line)
+	runtime.KeepAlive(fn)
+	runtime.KeepAlive(assertionFlags)
+	runtime.KeepAlive(pattern)
+}
+
+// TestTrapHasPassed wraps g_test_trap_has_passed
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Checks the result of the last [func@GLib.test_trap_subprocess] call.
+func TestTrapHasPassed() bool {
+	var cret C.gboolean // return
+
+	cret = C.g_test_trap_has_passed()
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// TestTrapReachedTimeout wraps g_test_trap_reached_timeout
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Checks the result of the last [func@GLib.test_trap_subprocess] call.
+func TestTrapReachedTimeout() bool {
+	var cret C.gboolean // return
+
+	cret = C.g_test_trap_reached_timeout()
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// TestTrapSubprocess wraps g_test_trap_subprocess
+// 
+// The function takes the following parameters:
+// 
+// 	- testPath string (nullable): test to run in a subprocess 
+// 	- usecTimeout uint64: timeout for the subprocess test in microseconds. 
+// 	- testFlags TestSubprocessFlags: flags to modify subprocess behaviour 
+//
+// Respawns the test program to run only @test_path in a subprocess.
+// 
+// This is equivalent to calling [func@GLib.test_trap_subprocess_with_envp]
+// with `envp` set to `NULL`. See the documentation for that function
+// for full details.
+func TestTrapSubprocess(testPath string, usecTimeout uint64, testFlags TestSubprocessFlags) {
+	var carg1 *C.char                // in, none, string, nullable-string
+	var carg2 C.guint64              // in, none, casted
+	var carg3 C.GTestSubprocessFlags // in, none, casted
+
+	if testPath != "" {
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(testPath)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+	carg2 = C.guint64(usecTimeout)
+	carg3 = C.GTestSubprocessFlags(testFlags)
+
+	C.g_test_trap_subprocess(carg1, carg2, carg3)
+	runtime.KeepAlive(testPath)
+	runtime.KeepAlive(usecTimeout)
+	runtime.KeepAlive(testFlags)
+}
+
+// TestTrapSubprocessWithEnvp wraps g_test_trap_subprocess_with_envp
+// 
+// The function takes the following parameters:
+// 
+// 	- testPath string (nullable): test to run in a subprocess 
+// 	- envp []string (nullable): environment
+//   to run the test in 
+// 	- usecTimeout uint64: timeout for the subprocess test in microseconds 
+// 	- testFlags TestSubprocessFlags: flags to modify subprocess behaviour 
+//
+// Respawns the test program to run only @test_path in a subprocess with
+// a given environment.
+// 
+// This can be used for a test case that might not return, or that
+// might abort.
+// 
+// If @test_path is `NULL` then the same test is re-run in a subprocess.
+// You can use [func@GLib.test_subprocess] to determine whether the test
+// is in a subprocess or not.
+// 
+// @test_path can also be the name of the parent test, followed by
+// "`/subprocess/`" and then a name for the specific subtest (or just
+// ending with "`/subprocess`" if the test only has one child test);
+// tests with names of this form will automatically be skipped in the
+// parent process.
+// 
+// If @envp is `NULL`, the parent process&#x2019; environment will be inherited.
+// 
+// If @usec_timeout is non-0, the test subprocess is aborted and
+// considered failing if its run time exceeds it.
+// 
+// The subprocess behavior can be configured with [flags@GLib.TestSubprocessFlags]
+// flags.
+// 
+// You can use methods such as [func@GLib.test_trap_assert_passed],
+// [func@GLib.test_trap_assert_failed], and [func@GLib.test_trap_assert_stderr] to
+// check the results of the subprocess. (But note that
+// [func@GLib.test_trap_assert_stdout] and [func@GLib.test_trap_assert_stderr]
+// cannot be used if @test_flags specifies that the child should
+// inherit the parent stdout/stderr.)
+// 
+// If your `main ()` needs to behave differently in the subprocess, you can
+// call [func@GLib.test_subprocess] (after calling [func@GLib.test_init])
+// to see whether you are in a subprocess.
+// 
+// Internally, this function tracks the child process using
+// [func@GLib.child_watch_source_new], so your process must not ignore
+// `SIGCHLD`, and must not attempt to watch or wait for the child process
+// via another mechanism.
+// 
+// The following example tests that calling `my_object_new(1000000)` will
+// abort with an error message.
+// 
+// ```c
+//   static void
+//   test_create_large_object (void)
+//   {
+//     if (g_test_subprocess ())
+//       {
+//         my_object_new (1000000);
+//         return;
+//       }
+// 
+//     // Reruns this same test in a subprocess
+//     g_test_trap_subprocess (NULL, 0, G_TEST_SUBPROCESS_DEFAULT);
+//     g_test_trap_assert_failed ();
+//     g_test_trap_assert_stderr ("*ERROR*too large*");
+//   }
+// 
+//   static void
+//   test_different_username (void)
+//   {
+//     if (g_test_subprocess ())
+//       {
+//         // Code under test goes here
+//         g_message ("Username is now simulated as %s", g_getenv ("USER"));
+//         return;
+//       }
+// 
+//     // Reruns this same test in a subprocess
+//     g_autoptr(GStrv) envp = g_get_environ ();
+//     envp = g_environ_setenv (g_steal_pointer (&amp;envp), "USER", "charlie", TRUE);
+//     g_test_trap_subprocess_with_envp (NULL, envp, 0, G_TEST_SUBPROCESS_DEFAULT);
+//     g_test_trap_assert_passed ();
+//     g_test_trap_assert_stdout ("Username is now simulated as charlie");
+//   }
+// 
+//   int
+//   main (int argc, char **argv)
+//   {
+//     g_test_init (&amp;argc, &amp;argv, NULL);
+// 
+//     g_test_add_func ("/myobject/create-large-object",
+//                      test_create_large_object);
+//     g_test_add_func ("/myobject/different-username",
+//                      test_different_username);
+//     return g_test_run ();
+//   }
+// ```
+func TestTrapSubprocessWithEnvp(testPath string, envp []string, usecTimeout uint64, testFlags TestSubprocessFlags) {
+	var carg1 *C.char                // in, none, string, nullable-string
+	var carg2 **C.char               // in, transfer: none, C Pointers: 2, Name: array[filename], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var carg3 C.guint64              // in, none, casted
+	var carg4 C.GTestSubprocessFlags // in, none, casted
+
+	if testPath != "" {
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(testPath)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+	_ = envp
+	_ = carg2
+	panic("unimplemented conversion of []string (const char* const*)")
+	carg3 = C.guint64(usecTimeout)
+	carg4 = C.GTestSubprocessFlags(testFlags)
+
+	C.g_test_trap_subprocess_with_envp(carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(testPath)
+	runtime.KeepAlive(envp)
+	runtime.KeepAlive(usecTimeout)
+	runtime.KeepAlive(testFlags)
 }
 
 // TimeoutAddFull wraps g_timeout_add_full
@@ -11136,77 +15293,6 @@ func TimeoutAddSecondsFull(priority int32, interval uint, function SourceFunc) u
 	var goret uint
 
 	goret = uint(cret)
-
-	return goret
-}
-
-// NewTimeoutSource wraps g_timeout_source_new
-// 
-// The function takes the following parameters:
-// 
-// 	- interval uint: the timeout interval in milliseconds. 
-// 
-// The function returns the following values:
-// 
-// 	- goret *Source 
-//
-// Creates a new timeout source.
-// 
-// The source will not initially be associated with any [struct@GLib.MainContext]
-// and must be added to one with [method@GLib.Source.attach] before it will be
-// executed.
-// 
-// The interval given is in terms of monotonic time, not wall clock
-// time.  See [func@GLib.get_monotonic_time].
-func NewTimeoutSource(interval uint) *Source {
-	var carg1 C.guint    // in, none, casted
-	var cret  *C.GSource // return, full, converted
-
-	carg1 = C.guint(interval)
-
-	cret = C.g_timeout_source_new(carg1)
-	runtime.KeepAlive(interval)
-
-	var goret *Source
-
-	goret = UnsafeSourceFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// TimeoutSourceNewSeconds wraps g_timeout_source_new_seconds
-// 
-// The function takes the following parameters:
-// 
-// 	- interval uint: the timeout interval in seconds 
-// 
-// The function returns the following values:
-// 
-// 	- goret *Source 
-//
-// Creates a new timeout source.
-// 
-// The source will not initially be associated with any
-// [struct@GLib.MainContext] and must be added to one with
-// [method@GLib.Source.attach] before it will be executed.
-// 
-// The scheduling granularity/accuracy of this timeout source will be
-// in seconds.
-// 
-// The interval given is in terms of monotonic time, not wall clock time.
-// See [func@GLib.get_monotonic_time].
-func TimeoutSourceNewSeconds(interval uint) *Source {
-	var carg1 C.guint    // in, none, casted
-	var cret  *C.GSource // return, full, converted
-
-	carg1 = C.guint(interval)
-
-	cret = C.g_timeout_source_new_seconds(carg1)
-	runtime.KeepAlive(interval)
-
-	var goret *Source
-
-	goret = UnsafeSourceFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -12302,7 +16388,7 @@ func UnicharType(c uint32) UnicodeType {
 // Checks whether @ch is a valid Unicode character.
 // 
 // Some possible integer values of @ch will not be valid. U+0000 is considered a
-// valid character, though it’s normally a string terminator.
+// valid character, though it&#x2019;s normally a string terminator.
 func UnicharValidate(ch uint32) bool {
 	var carg1 C.gunichar // in, none, casted
 	var cret  C.gboolean // return
@@ -12493,10 +16579,10 @@ func UTF16ToUCS4(str []uint16) (int32, int32, *uint32, error) {
 //   `NULL`. If `NULL`, then [error@GLib.ConvertError.PARTIAL_INPUT] will
 //   be returned in case @str contains a trailing partial character. If
 //   an error occurs then the index of the invalid input is stored here.
-//   It’s guaranteed to be non-negative. 
+//   It&#x2019;s guaranteed to be non-negative. 
 // 	- itemsWritten int32: location to store number
 //   of bytes written, or `NULL`. The value stored here does not include the
-//   trailing nul byte. It’s guaranteed to be non-negative. 
+//   trailing nul byte. It&#x2019;s guaranteed to be non-negative. 
 // 	- goret string 
 // 	- _goerr error (nullable): an error 
 //
@@ -12512,7 +16598,7 @@ func UTF16ToUCS4(str []uint16) (int32, int32, *uint32, error) {
 // Further note that this function does not validate the result
 // string; it may (for example) include embedded nul characters. The only
 // validation done by this function is to ensure that the input can
-// be correctly interpreted as UTF-16, i.e. it doesn’t contain
+// be correctly interpreted as UTF-16, i.e. it doesn&#x2019;t contain
 // unpaired surrogates or partial character sequences.
 func UTF16ToUTF8(str []uint16) (int32, int32, string, error) {
 	var carg1 *C.gunichar2 // in, transfer: none, C Pointers: 1, Name: array[guint16], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
@@ -13008,7 +17094,7 @@ func UTF8Normalize(str string, len int, mode NormalizeMode) string {
 // instead of forwards if @offset is in the last fourth of the string,
 // since moving forward is about 3 times faster than moving backward.
 // 
-// Note that this function doesn’t abort when reaching the end of @str.
+// Note that this function doesn&#x2019;t abort when reaching the end of @str.
 // Therefore you should be sure that @offset is within string boundaries
 // before calling that function. Call [func@GLib.utf8_strlen] when unsure.
 // This limitation exists as this function is called frequently during
@@ -13197,7 +17283,7 @@ func UTF8Strdown(str string, len int) string {
 // 	- goret int32 
 //
 // Computes the length of the string in characters, not including
-// the terminating nul character. If the @max’th byte falls in the
+// the terminating nul character. If the @max&#x2019;th byte falls in the
 // middle of a character, the last (partial) character is not counted.
 func UTF8Strlen(p string, max int) int32 {
 	var carg1 *C.gchar // in, none, string
@@ -13646,8 +17732,8 @@ func UTF8TruncateMiddle(str string, truncateLength uint) string {
 // 
 // If @end is non-`NULL`, then the end of the valid range will be stored there.
 // This is the first byte of the first invalid character if some bytes were
-// invalid, or the end of the text being validated otherwise — either the
-// trailing nul byte, or the first byte beyond @max_len (if it’s positive).
+// invalid, or the end of the text being validated otherwise &#x2014; either the
+// trailing nul byte, or the first byte beyond @max_len (if it&#x2019;s positive).
 // 
 // Note that `g_utf8_validate()` returns `FALSE` if @max_len is  positive and
 // any of the @max_len bytes are nul.
@@ -13778,6 +17864,195 @@ func UUIDStringRandom() string {
 	defer C.free(unsafe.Pointer(cret))
 
 	return goret
+}
+
+// AsyncQueue wraps GAsyncQueue
+//
+// An opaque data structure which represents an asynchronous queue.
+// 
+// It should only be accessed through the `g_async_queue_*` functions.
+type AsyncQueue struct {
+	*asyncQueue
+}
+
+// asyncQueue is the struct that's finalized
+type asyncQueue struct {
+	native *C.GAsyncQueue
+}
+
+// UnsafeAsyncQueueFromGlibBorrow is used to convert raw C.GAsyncQueue pointers to go. This is used by the bindings internally.
+func UnsafeAsyncQueueFromGlibBorrow(p unsafe.Pointer) *AsyncQueue {
+	return &AsyncQueue{&asyncQueue{(*C.GAsyncQueue)(p)}}
+}
+
+// UnsafeAsyncQueueFromGlibNone is used to convert raw C.GAsyncQueue pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeAsyncQueueFromGlibNone(p unsafe.Pointer) *AsyncQueue {
+	C.g_async_queue_ref((*C.GAsyncQueue)(p))
+	wrapped := UnsafeAsyncQueueFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.asyncQueue,
+		func (intern *asyncQueue) {
+			C.g_async_queue_unref(intern.native)
+		},
+	)
+	return wrapped
+}
+
+// UnsafeAsyncQueueFromGlibFull is used to convert raw C.GAsyncQueue pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeAsyncQueueFromGlibFull(p unsafe.Pointer) *AsyncQueue {
+	wrapped := UnsafeAsyncQueueFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.asyncQueue,
+		func (intern *asyncQueue) {
+			C.g_async_queue_unref(intern.native)
+		},
+	)
+	return wrapped
+}
+
+// UnsafeAsyncQueueRef increases the refcount on the underlying resource. This is used by the bindings internally.
+// 
+// When this is called without an associated call to [AsyncQueue.UnsafeAsyncQueueUnref], then [AsyncQueue] will leak memory.
+func UnsafeAsyncQueueRef(a *AsyncQueue) {
+	C.g_async_queue_ref(a.native)
+}
+
+// UnsafeAsyncQueueUnref unrefs/frees the underlying resource. This is used by the bindings internally.
+// 
+// After this is called, no other method on [AsyncQueue] is expected to work anymore.
+func UnsafeAsyncQueueUnref(a *AsyncQueue) {
+	C.g_async_queue_unref(a.native)
+}
+
+// UnsafeAsyncQueueToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeAsyncQueueToGlibNone(a *AsyncQueue) unsafe.Pointer {
+	return unsafe.Pointer(a.native)
+}
+
+// UnsafeAsyncQueueToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeAsyncQueueToGlibFull(a *AsyncQueue) unsafe.Pointer {
+	runtime.SetFinalizer(a.asyncQueue, nil)
+	_p := unsafe.Pointer(a.native)
+	a.native = nil // AsyncQueue is invalid from here on
+	return _p
+}
+
+// NewAsyncQueue wraps g_async_queue_new
+// 
+// The function returns the following values:
+// 
+// 	- goret *AsyncQueue 
+//
+// Creates a new asynchronous queue.
+func NewAsyncQueue() *AsyncQueue {
+	var cret *C.GAsyncQueue // return, full, converted
+
+	cret = C.g_async_queue_new()
+
+	var goret *AsyncQueue
+
+	goret = UnsafeAsyncQueueFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Length wraps g_async_queue_length
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Returns the length of the queue.
+// 
+// Actually this function returns the number of data items in
+// the queue minus the number of waiting threads, so a negative
+// value means waiting threads, and a positive value means available
+// entries in the @queue. A return value of 0 could mean n entries
+// in the queue and n threads waiting. This can happen due to locking
+// of the queue or due to scheduling.
+func (queue *AsyncQueue) Length() int32 {
+	var carg0 *C.GAsyncQueue // in, none, converted
+	var cret  C.gint         // return, none, casted
+
+	carg0 = (*C.GAsyncQueue)(UnsafeAsyncQueueToGlibNone(queue))
+
+	cret = C.g_async_queue_length(carg0)
+	runtime.KeepAlive(queue)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// LengthUnlocked wraps g_async_queue_length_unlocked
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Returns the length of the queue.
+// 
+// Actually this function returns the number of data items in
+// the queue minus the number of waiting threads, so a negative
+// value means waiting threads, and a positive value means available
+// entries in the @queue. A return value of 0 could mean n entries
+// in the queue and n threads waiting. This can happen due to locking
+// of the queue or due to scheduling.
+// 
+// This function must be called while holding the @queue's lock.
+func (queue *AsyncQueue) LengthUnlocked() int32 {
+	var carg0 *C.GAsyncQueue // in, none, converted
+	var cret  C.gint         // return, none, casted
+
+	carg0 = (*C.GAsyncQueue)(UnsafeAsyncQueueToGlibNone(queue))
+
+	cret = C.g_async_queue_length_unlocked(carg0)
+	runtime.KeepAlive(queue)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// Lock wraps g_async_queue_lock
+//
+// Acquires the @queue's lock. If another thread is already
+// holding the lock, this call will block until the lock
+// becomes available.
+// 
+// Call g_async_queue_unlock() to drop the lock again.
+// 
+// While holding the lock, you can only call the
+// g_async_queue_*_unlocked() functions on @queue. Otherwise,
+// deadlock may occur.
+func (queue *AsyncQueue) Lock() {
+	var carg0 *C.GAsyncQueue // in, none, converted
+
+	carg0 = (*C.GAsyncQueue)(UnsafeAsyncQueueToGlibNone(queue))
+
+	C.g_async_queue_lock(carg0)
+	runtime.KeepAlive(queue)
+}
+
+// Unlock wraps g_async_queue_unlock
+//
+// Releases the queue's lock.
+// 
+// Calling this function when you have not acquired
+// the with g_async_queue_lock() leads to undefined
+// behaviour.
+func (queue *AsyncQueue) Unlock() {
+	var carg0 *C.GAsyncQueue // in, none, converted
+
+	carg0 = (*C.GAsyncQueue)(UnsafeAsyncQueueToGlibNone(queue))
+
+	C.g_async_queue_unlock(carg0)
+	runtime.KeepAlive(queue)
 }
 
 // BookmarkFile wraps GBookmarkFile
@@ -14024,115 +18299,6 @@ func (bookmark *BookmarkFile) Copy() *BookmarkFile {
 	goret = UnsafeBookmarkFileFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// GetAddedDateTime wraps g_bookmark_file_get_added_date_time
-// 
-// The function takes the following parameters:
-// 
-// 	- uri string: a valid URI 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime 
-// 	- _goerr error (nullable): an error 
-//
-// Gets the time the bookmark for @uri was added to @bookmark
-// 
-// In the event the URI cannot be found, %NULL is returned and
-// @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
-func (bookmark *BookmarkFile) GetAddedDateTime(uri string) (*DateTime, error) {
-	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string
-	var cret  *C.GDateTime     // return, none, converted
-	var _cerr *C.GError        // out, full, converted, nullable
-
-	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_bookmark_file_get_added_date_time(carg0, carg1, &_cerr)
-	runtime.KeepAlive(bookmark)
-	runtime.KeepAlive(uri)
-
-	var goret  *DateTime
-	var _goerr error
-
-	goret = UnsafeDateTimeFromGlibNone(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// GetApplicationInfo wraps g_bookmark_file_get_application_info
-// 
-// The function takes the following parameters:
-// 
-// 	- uri string: a valid URI 
-// 	- name string: an application's name 
-// 
-// The function returns the following values:
-// 
-// 	- exec string: return location for the command line of the application, or %NULL 
-// 	- count uint: return location for the registration count, or %NULL 
-// 	- stamp *DateTime: return location for the last registration time, or %NULL 
-// 	- goret bool 
-// 	- _goerr error (nullable): an error 
-//
-// Gets the registration information of @app_name for the bookmark for
-// @uri.  See g_bookmark_file_set_application_info() for more information about
-// the returned data.
-// 
-// The string returned in @app_exec must be freed.
-// 
-// In the event the URI cannot be found, %FALSE is returned and
-// @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.  In the
-// event that no application with name @app_name has registered a bookmark
-// for @uri,  %FALSE is returned and error is set to
-// %G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED. In the event that unquoting
-// the command line fails, an error of the %G_SHELL_ERROR domain is
-// set and %FALSE is returned.
-func (bookmark *BookmarkFile) GetApplicationInfo(uri string, name string) (string, uint, *DateTime, bool, error) {
-	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string
-	var carg2 *C.char          // in, none, string
-	var carg3 *C.char          // out, full, string
-	var carg4 C.uint           // out, full, casted
-	var carg5 *C.GDateTime     // out, none, converted
-	var cret  C.gboolean       // return
-	var _cerr *C.GError        // out, full, converted, nullable
-
-	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.char)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	cret = C.g_bookmark_file_get_application_info(carg0, carg1, carg2, &carg3, &carg4, &carg5, &_cerr)
-	runtime.KeepAlive(bookmark)
-	runtime.KeepAlive(uri)
-	runtime.KeepAlive(name)
-
-	var exec   string
-	var count  uint
-	var stamp  *DateTime
-	var goret  bool
-	var _goerr error
-
-	exec = C.GoString((*C.char)(unsafe.Pointer(carg3)))
-	defer C.free(unsafe.Pointer(carg3))
-	count = uint(carg4)
-	stamp = UnsafeDateTimeFromGlibNone(unsafe.Pointer(carg5))
-	if cret != 0 {
-		goret = true
-	}
-	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return exec, count, stamp, goret, _goerr
 }
 
 // GetApplications wraps g_bookmark_file_get_applications
@@ -14411,46 +18577,6 @@ func (bookmark *BookmarkFile) GetMIMEType(uri string) (string, error) {
 	return goret, _goerr
 }
 
-// GetModifiedDateTime wraps g_bookmark_file_get_modified_date_time
-// 
-// The function takes the following parameters:
-// 
-// 	- uri string: a valid URI 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime 
-// 	- _goerr error (nullable): an error 
-//
-// Gets the time when the bookmark for @uri was last modified.
-// 
-// In the event the URI cannot be found, %NULL is returned and
-// @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
-func (bookmark *BookmarkFile) GetModifiedDateTime(uri string) (*DateTime, error) {
-	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string
-	var cret  *C.GDateTime     // return, none, converted
-	var _cerr *C.GError        // out, full, converted, nullable
-
-	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_bookmark_file_get_modified_date_time(carg0, carg1, &_cerr)
-	runtime.KeepAlive(bookmark)
-	runtime.KeepAlive(uri)
-
-	var goret  *DateTime
-	var _goerr error
-
-	goret = UnsafeDateTimeFromGlibNone(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
 // GetSize wraps g_bookmark_file_get_size
 // 
 // The function returns the following values:
@@ -14548,46 +18674,6 @@ func (bookmark *BookmarkFile) GetURIs() (uint, []string) {
 	panic("unimplemented conversion of []string (gchar**)")
 
 	return length, goret
-}
-
-// GetVisitedDateTime wraps g_bookmark_file_get_visited_date_time
-// 
-// The function takes the following parameters:
-// 
-// 	- uri string: a valid URI 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime 
-// 	- _goerr error (nullable): an error 
-//
-// Gets the time the bookmark for @uri was last visited.
-// 
-// In the event the URI cannot be found, %NULL is returned and
-// @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
-func (bookmark *BookmarkFile) GetVisitedDateTime(uri string) (*DateTime, error) {
-	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string
-	var cret  *C.GDateTime     // return, none, converted
-	var _cerr *C.GError        // out, full, converted, nullable
-
-	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_bookmark_file_get_visited_date_time(carg0, carg1, &_cerr)
-	runtime.KeepAlive(bookmark)
-	runtime.KeepAlive(uri)
-
-	var goret  *DateTime
-	var _goerr error
-
-	goret = UnsafeDateTimeFromGlibNone(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
 }
 
 // HasApplication wraps g_bookmark_file_has_application
@@ -15046,118 +19132,6 @@ func (bookmark *BookmarkFile) RemoveItem(uri string) (bool, error) {
 	return goret, _goerr
 }
 
-// SetAddedDateTime wraps g_bookmark_file_set_added_date_time
-// 
-// The function takes the following parameters:
-// 
-// 	- uri string: a valid URI 
-// 	- added *DateTime: a #GDateTime 
-//
-// Sets the time the bookmark for @uri was added into @bookmark.
-// 
-// If no bookmark for @uri is found then it is created.
-func (bookmark *BookmarkFile) SetAddedDateTime(uri string, added *DateTime) {
-	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string
-	var carg2 *C.GDateTime     // in, none, converted
-
-	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(added))
-
-	C.g_bookmark_file_set_added_date_time(carg0, carg1, carg2)
-	runtime.KeepAlive(bookmark)
-	runtime.KeepAlive(uri)
-	runtime.KeepAlive(added)
-}
-
-// SetApplicationInfo wraps g_bookmark_file_set_application_info
-// 
-// The function takes the following parameters:
-// 
-// 	- uri string: a valid URI 
-// 	- name string: an application's name 
-// 	- exec string: an application's command line 
-// 	- count int32: the number of registrations done for this application 
-// 	- stamp *DateTime (nullable): the time of the last registration for this application,
-//    which may be %NULL if @count is 0 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-// 	- _goerr error (nullable): an error 
-//
-// Sets the meta-data of application @name inside the list of
-// applications that have registered a bookmark for @uri inside
-// @bookmark.
-// 
-// You should rarely use this function; use g_bookmark_file_add_application()
-// and g_bookmark_file_remove_application() instead.
-// 
-// @name can be any UTF-8 encoded string used to identify an
-// application.
-// @exec can have one of these two modifiers: "\%f", which will
-// be expanded as the local file name retrieved from the bookmark's
-// URI; "\%u", which will be expanded as the bookmark's URI.
-// The expansion is done automatically when retrieving the stored
-// command line using the g_bookmark_file_get_application_info() function.
-// @count is the number of times the application has registered the
-// bookmark; if is &lt; 0, the current registration count will be increased
-// by one, if is 0, the application with @name will be removed from
-// the list of registered applications.
-// @stamp is the Unix time of the last registration.
-// 
-// If you try to remove an application by setting its registration count to
-// zero, and no bookmark for @uri is found, %FALSE is returned and
-// @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND; similarly,
-// in the event that no application @name has registered a bookmark
-// for @uri,  %FALSE is returned and error is set to
-// %G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED.  Otherwise, if no bookmark
-// for @uri is found, one is created.
-func (bookmark *BookmarkFile) SetApplicationInfo(uri string, name string, exec string, count int32, stamp *DateTime) (bool, error) {
-	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string
-	var carg2 *C.char          // in, none, string
-	var carg3 *C.char          // in, none, string
-	var carg4 C.int            // in, none, casted
-	var carg5 *C.GDateTime     // in, none, converted, nullable
-	var cret  C.gboolean       // return
-	var _cerr *C.GError        // out, full, converted, nullable
-
-	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.char)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.char)(unsafe.Pointer(C.CString(exec)))
-	defer C.free(unsafe.Pointer(carg3))
-	carg4 = C.int(count)
-	if stamp != nil {
-		carg5 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(stamp))
-	}
-
-	cret = C.g_bookmark_file_set_application_info(carg0, carg1, carg2, carg3, carg4, carg5, &_cerr)
-	runtime.KeepAlive(bookmark)
-	runtime.KeepAlive(uri)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(exec)
-	runtime.KeepAlive(count)
-	runtime.KeepAlive(stamp)
-
-	var goret  bool
-	var _goerr error
-
-	if cret != 0 {
-		goret = true
-	}
-	if _cerr != nil {
-		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
 // SetDescription wraps g_bookmark_file_set_description
 // 
 // The function takes the following parameters:
@@ -15312,37 +19286,6 @@ func (bookmark *BookmarkFile) SetMIMEType(uri string, mimeType string) {
 	runtime.KeepAlive(mimeType)
 }
 
-// SetModifiedDateTime wraps g_bookmark_file_set_modified_date_time
-// 
-// The function takes the following parameters:
-// 
-// 	- uri string: a valid URI 
-// 	- modified *DateTime: a #GDateTime 
-//
-// Sets the last time the bookmark for @uri was last modified.
-// 
-// If no bookmark for @uri is found then it is created.
-// 
-// The "modified" time should only be set when the bookmark's meta-data
-// was actually changed.  Every function of #GBookmarkFile that
-// modifies a bookmark also changes the modification time, except for
-// g_bookmark_file_set_visited_date_time().
-func (bookmark *BookmarkFile) SetModifiedDateTime(uri string, modified *DateTime) {
-	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string
-	var carg2 *C.GDateTime     // in, none, converted
-
-	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(modified))
-
-	C.g_bookmark_file_set_modified_date_time(carg0, carg1, carg2)
-	runtime.KeepAlive(bookmark)
-	runtime.KeepAlive(uri)
-	runtime.KeepAlive(modified)
-}
-
 // SetTitle wraps g_bookmark_file_set_title
 // 
 // The function takes the following parameters:
@@ -15373,38 +19316,6 @@ func (bookmark *BookmarkFile) SetTitle(uri string, title string) {
 	runtime.KeepAlive(bookmark)
 	runtime.KeepAlive(uri)
 	runtime.KeepAlive(title)
-}
-
-// SetVisitedDateTime wraps g_bookmark_file_set_visited_date_time
-// 
-// The function takes the following parameters:
-// 
-// 	- uri string: a valid URI 
-// 	- visited *DateTime: a #GDateTime 
-//
-// Sets the time the bookmark for @uri was last visited.
-// 
-// If no bookmark for @uri is found then it is created.
-// 
-// The "visited" time should only be set if the bookmark was launched,
-// either using the command line retrieved by g_bookmark_file_get_application_info()
-// or by the default application for the bookmark's MIME type, retrieved
-// using g_bookmark_file_get_mime_type().  Changing the "visited" time
-// does not affect the "modified" time.
-func (bookmark *BookmarkFile) SetVisitedDateTime(uri string, visited *DateTime) {
-	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string
-	var carg2 *C.GDateTime     // in, none, converted
-
-	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(visited))
-
-	C.g_bookmark_file_set_visited_date_time(carg0, carg1, carg2)
-	runtime.KeepAlive(bookmark)
-	runtime.KeepAlive(uri)
-	runtime.KeepAlive(visited)
 }
 
 // ToData wraps g_bookmark_file_to_data
@@ -15713,7 +19624,7 @@ func (bytes *Bytes) NewFromBytes(offset uint, length uint) *Bytes {
 
 // Checksum wraps GChecksum
 //
-// GLib provides a generic API for computing checksums (or ‘digests’)
+// GLib provides a generic API for computing checksums (or &#x2018;digests&#x2019;)
 // for a sequence of arbitrary bytes, using various hashing algorithms
 // like MD5, SHA-1 and SHA-256. Checksums are commonly used in various
 // environments and specifications.
@@ -15722,7 +19633,7 @@ func (bytes *Bytes) NewFromBytes(offset uint, length uint) *Bytes {
 // a `GChecksum`, use [method@GLib.Checksum.free].
 // 
 // GLib supports incremental checksums using the `GChecksum` data
-// structure, by calling [method@GLib.Checksum.update] as long as there’s data
+// structure, by calling [method@GLib.Checksum.update] as long as there&#x2019;s data
 // available and then using [method@GLib.Checksum.get_string] or
 // [method@GLib.Checksum.get_digest] to compute the checksum and return it
 // either as a string in hexadecimal form, or as a raw sequence of bytes. To
@@ -15947,1551 +19858,266 @@ func (checksum *Checksum) Update(data []uint8) {
 	runtime.KeepAlive(data)
 }
 
-// DateTime wraps GDateTime
+// Cond wraps GCond
 //
-// `GDateTime` is a structure that combines a Gregorian date and time
-// into a single structure.
+// The #GCond struct is an opaque data structure that represents a
+// condition. Threads can block on a #GCond if they find a certain
+// condition to be false. If other threads change the state of this
+// condition they signal the #GCond, and that causes the waiting
+// threads to be woken up.
 // 
-// `GDateTime` provides many conversion and methods to manipulate dates and times.
-// Time precision is provided down to microseconds and the time can range
-// (proleptically) from 0001-01-01 00:00:00 to 9999-12-31 23:59:59.999999.
-// `GDateTime` follows POSIX time in the sense that it is oblivious to leap
-// seconds.
+// Consider the following example of a shared variable.  One or more
+// threads can wait for data to be published to the variable and when
+// another thread publishes the data, it can signal one of the waiting
+// threads to wake up to collect the data.
 // 
-// `GDateTime` is an immutable object; once it has been created it cannot
-// be modified further. All modifiers will create a new `GDateTime`.
-// Nearly all such functions can fail due to the date or time going out
-// of range, in which case %NULL will be returned.
+// Here is an example for using GCond to block a thread until a condition
+// is satisfied:
+// |[&lt;!-- language="C" --&gt;
+//   gpointer current_data = NULL;
+//   GMutex data_mutex;
+//   GCond data_cond;
 // 
-// `GDateTime` is reference counted: the reference count is increased by calling
-// [method@GLib.DateTime.ref] and decreased by calling [method@GLib.DateTime.unref].
-// When the reference count drops to 0, the resources allocated by the `GDateTime`
-// structure are released.
+//   void
+//   push_data (gpointer data)
+//   {
+//     g_mutex_lock (&amp;data_mutex);
+//     current_data = data;
+//     g_cond_signal (&amp;data_cond);
+//     g_mutex_unlock (&amp;data_mutex);
+//   }
 // 
-// Many parts of the API may produce non-obvious results. As an
-// example, adding two months to January 31st will yield March 31st
-// whereas adding one month and then one month again will yield either
-// March 28th or March 29th.  Also note that adding 24 hours is not
-// always the same as adding one day (since days containing daylight
-// savings time transitions are either 23 or 25 hours in length).
-type DateTime struct {
-	*dateTime
+//   gpointer
+//   pop_data (void)
+//   {
+//     gpointer data;
+// 
+//     g_mutex_lock (&amp;data_mutex);
+//     while (!current_data)
+//       g_cond_wait (&amp;data_cond, &amp;data_mutex);
+//     data = current_data;
+//     current_data = NULL;
+//     g_mutex_unlock (&amp;data_mutex);
+// 
+//     return data;
+//   }
+// ]|
+// Whenever a thread calls pop_data() now, it will wait until
+// current_data is non-%NULL, i.e. until some other thread
+// has called push_data().
+// 
+// The example shows that use of a condition variable must always be
+// paired with a mutex.  Without the use of a mutex, there would be a
+// race between the check of @current_data by the while loop in
+// pop_data() and waiting. Specifically, another thread could set
+// @current_data after the check, and signal the cond (with nobody
+// waiting on it) before the first thread goes to sleep. #GCond is
+// specifically useful for its ability to release the mutex and go
+// to sleep atomically.
+// 
+// It is also important to use the g_cond_wait() and g_cond_wait_until()
+// functions only inside a loop which checks for the condition to be
+// true.  See g_cond_wait() for an explanation of why the condition may
+// not be true even after it returns.
+// 
+// If a #GCond is allocated in static storage then it can be used
+// without initialisation.  Otherwise, you should call g_cond_init()
+// on it and g_cond_clear() when done.
+// 
+// A #GCond should only be accessed via the g_cond_ functions.
+type Cond struct {
+	*cond
 }
 
-// dateTime is the struct that's finalized
-type dateTime struct {
-	native *C.GDateTime
+// cond is the struct that's finalized
+type cond struct {
+	native *C.GCond
 }
 
-// UnsafeDateTimeFromGlibBorrow is used to convert raw C.GDateTime pointers to go. This is used by the bindings internally.
-func UnsafeDateTimeFromGlibBorrow(p unsafe.Pointer) *DateTime {
-	return &DateTime{&dateTime{(*C.GDateTime)(p)}}
+// UnsafeCondFromGlibBorrow is used to convert raw C.GCond pointers to go. This is used by the bindings internally.
+func UnsafeCondFromGlibBorrow(p unsafe.Pointer) *Cond {
+	return &Cond{&cond{(*C.GCond)(p)}}
 }
 
-// UnsafeDateTimeFromGlibNone is used to convert raw C.GDateTime pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeDateTimeFromGlibNone(p unsafe.Pointer) *DateTime {
-	C.g_date_time_ref((*C.GDateTime)(p))
-	wrapped := UnsafeDateTimeFromGlibBorrow(p)
+// UnsafeCondFromGlibNone is used to convert raw C.GCond pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeCondFromGlibNone(p unsafe.Pointer) *Cond {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeCondFromGlibBorrow(p)
 	runtime.SetFinalizer(
-		wrapped.dateTime,
-		func (intern *dateTime) {
-			C.g_date_time_unref(intern.native)
+		wrapped.cond,
+		func (intern *cond) {
+			C.g_cond_free(intern.native)
 		},
 	)
 	return wrapped
 }
 
-// UnsafeDateTimeFromGlibFull is used to convert raw C.GDateTime pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeDateTimeFromGlibFull(p unsafe.Pointer) *DateTime {
-	wrapped := UnsafeDateTimeFromGlibBorrow(p)
+// UnsafeCondFromGlibFull is used to convert raw C.GCond pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeCondFromGlibFull(p unsafe.Pointer) *Cond {
+	wrapped := UnsafeCondFromGlibBorrow(p)
 	runtime.SetFinalizer(
-		wrapped.dateTime,
-		func (intern *dateTime) {
-			C.g_date_time_unref(intern.native)
+		wrapped.cond,
+		func (intern *cond) {
+			C.g_cond_free(intern.native)
 		},
 	)
 	return wrapped
 }
 
-// UnsafeDateTimeRef increases the refcount on the underlying resource. This is used by the bindings internally.
+// UnsafeCondFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
-// When this is called without an associated call to [DateTime.UnsafeDateTimeUnref], then [DateTime] will leak memory.
-func UnsafeDateTimeRef(d *DateTime) {
-	C.g_date_time_ref(d.native)
+// After this is called, no other method on [Cond] is expected to work anymore.
+func UnsafeCondFree(c *Cond) {
+	C.g_cond_free(c.native)
 }
 
-// UnsafeDateTimeUnref unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DateTime] is expected to work anymore.
-func UnsafeDateTimeUnref(d *DateTime) {
-	C.g_date_time_unref(d.native)
+// UnsafeCondToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeCondToGlibNone(c *Cond) unsafe.Pointer {
+	return unsafe.Pointer(c.native)
 }
 
-// UnsafeDateTimeToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDateTimeToGlibNone(d *DateTime) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// UnsafeDateTimeToGlibFull returns the underlying C pointer and gives up ownership.
+// UnsafeCondToGlibFull returns the underlying C pointer and gives up ownership.
 // This is used by the bindings internally.
-func UnsafeDateTimeToGlibFull(d *DateTime) unsafe.Pointer {
-	runtime.SetFinalizer(d.dateTime, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DateTime is invalid from here on
+func UnsafeCondToGlibFull(c *Cond) unsafe.Pointer {
+	runtime.SetFinalizer(c.cond, nil)
+	_p := unsafe.Pointer(c.native)
+	c.native = nil // Cond is invalid from here on
 	return _p
 }
 
-// NewDateTime wraps g_date_time_new
-// 
-// The function takes the following parameters:
-// 
-// 	- tz *TimeZone: a #GTimeZone 
-// 	- year int32: the year component of the date 
-// 	- month int32: the month component of the date 
-// 	- day int32: the day component of the date 
-// 	- hour int32: the hour component of the date 
-// 	- minute int32: the minute component of the date 
-// 	- seconds float64: the number of seconds past the minute 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
+// Broadcast wraps g_cond_broadcast
 //
-// Creates a new #GDateTime corresponding to the given date and time in
-// the time zone @tz.
-// 
-// The @year must be between 1 and 9999, @month between 1 and 12 and @day
-// between 1 and 28, 29, 30 or 31 depending on the month and the year.
-// 
-// @hour must be between 0 and 23 and @minute must be between 0 and 59.
-// 
-// @seconds must be at least 0.0 and must be strictly less than 60.0.
-// It will be rounded down to the nearest microsecond.
-// 
-// If the given time is not representable in the given time zone (for
-// example, 02:30 on March 14th 2010 in Toronto, due to daylight savings
-// time) then the time will be rounded up to the nearest existing time
-// (in this case, 03:00).  If this matters to you then you should verify
-// the return value for containing the same as the numbers you gave.
-// 
-// In the case that the given time is ambiguous in the given time zone
-// (for example, 01:30 on November 7th 2010 in Toronto, due to daylight
-// savings time) then the time falling within standard (ie:
-// non-daylight) time is taken.
-// 
-// It not considered a programmer error for the values to this function
-// to be out of range, but in the case that they are, the function will
-// return %NULL.
-// 
-// You should release the return value by calling g_date_time_unref()
-// when you are done with it.
-func NewDateTime(tz *TimeZone, year int32, month int32, day int32, hour int32, minute int32, seconds float64) *DateTime {
-	var carg1 *C.GTimeZone // in, none, converted
-	var carg2 C.gint       // in, none, casted
-	var carg3 C.gint       // in, none, casted
-	var carg4 C.gint       // in, none, casted
-	var carg5 C.gint       // in, none, casted
-	var carg6 C.gint       // in, none, casted
-	var carg7 C.gdouble    // in, none, casted
-	var cret  *C.GDateTime // return, full, converted, nullable
+// If threads are waiting for @cond, all of them are unblocked.
+// If no threads are waiting for @cond, this function has no effect.
+// It is good practice to lock the same mutex as the waiting threads
+// while calling this function, though not required.
+func (cond *Cond) Broadcast() {
+	var carg0 *C.GCond // in, none, converted
 
-	carg1 = (*C.GTimeZone)(UnsafeTimeZoneToGlibNone(tz))
-	carg2 = C.gint(year)
-	carg3 = C.gint(month)
-	carg4 = C.gint(day)
-	carg5 = C.gint(hour)
-	carg6 = C.gint(minute)
-	carg7 = C.gdouble(seconds)
+	carg0 = (*C.GCond)(UnsafeCondToGlibNone(cond))
 
-	cret = C.g_date_time_new(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
-	runtime.KeepAlive(tz)
-	runtime.KeepAlive(year)
-	runtime.KeepAlive(month)
-	runtime.KeepAlive(day)
-	runtime.KeepAlive(hour)
-	runtime.KeepAlive(minute)
-	runtime.KeepAlive(seconds)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
+	C.g_cond_broadcast(carg0)
+	runtime.KeepAlive(cond)
 }
 
-// NewDateTimeFromISO8601 wraps g_date_time_new_from_iso8601
-// 
-// The function takes the following parameters:
-// 
-// 	- text string: an ISO 8601 formatted time string. 
-// 	- defaultTz *TimeZone (nullable): a #GTimeZone to use if the text doesn't contain a
-//                          timezone, or %NULL. 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
+// Clear wraps g_cond_clear
 //
-// Creates a #GDateTime corresponding to the given
-// [ISO 8601 formatted string](https://en.wikipedia.org/wiki/ISO_8601)
-// @text. ISO 8601 strings of the form `&lt;date&gt;&lt;sep&gt;&lt;time&gt;&lt;tz&gt;` are supported, with
-// some extensions from [RFC 3339](https://tools.ietf.org/html/rfc3339) as
-// mentioned below.
+// Frees the resources allocated to a #GCond with g_cond_init().
 // 
-// Note that as #GDateTime "is oblivious to leap seconds", leap seconds information
-// in an ISO-8601 string will be ignored, so a `23:59:60` time would be parsed as
-// `23:59:59`.
+// This function should not be used with a #GCond that has been
+// statically allocated.
 // 
-// `&lt;sep&gt;` is the separator and can be either 'T', 't' or ' '. The latter two
-// separators are an extension from
-// [RFC 3339](https://tools.ietf.org/html/rfc3339#section-5.6).
-// 
-// `&lt;date&gt;` is in the form:
-// 
-// - `YYYY-MM-DD` - Year/month/day, e.g. 2016-08-24.
-// - `YYYYMMDD` - Same as above without dividers.
-// - `YYYY-DDD` - Ordinal day where DDD is from 001 to 366, e.g. 2016-237.
-// - `YYYYDDD` - Same as above without dividers.
-// - `YYYY-Www-D` - Week day where ww is from 01 to 52 and D from 1-7,
-//   e.g. 2016-W34-3.
-// - `YYYYWwwD` - Same as above without dividers.
-// 
-// `&lt;time&gt;` is in the form:
-// 
-// - `hh:mm:ss(.sss)` - Hours, minutes, seconds (subseconds), e.g. 22:10:42.123.
-// - `hhmmss(.sss)` - Same as above without dividers.
-// 
-// `&lt;tz&gt;` is an optional timezone suffix of the form:
-// 
-// - `Z` - UTC.
-// - `+hh:mm` or `-hh:mm` - Offset from UTC in hours and minutes, e.g. +12:00.
-// - `+hh` or `-hh` - Offset from UTC in hours, e.g. +12.
-// 
-// If the timezone is not provided in @text it must be provided in @default_tz
-// (this field is otherwise ignored).
-// 
-// This call can fail (returning %NULL) if @text is not a valid ISO 8601
-// formatted string.
-// 
-// You should release the return value by calling g_date_time_unref()
-// when you are done with it.
-func NewDateTimeFromISO8601(text string, defaultTz *TimeZone) *DateTime {
-	var carg1 *C.gchar     // in, none, string
-	var carg2 *C.GTimeZone // in, none, converted, nullable
-	var cret  *C.GDateTime // return, full, converted, nullable
+// Calling g_cond_clear() for a #GCond on which threads are
+// blocking leads to undefined behaviour.
+func (cond *Cond) Clear() {
+	var carg0 *C.GCond // in, none, converted
 
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
-	defer C.free(unsafe.Pointer(carg1))
-	if defaultTz != nil {
-		carg2 = (*C.GTimeZone)(UnsafeTimeZoneToGlibNone(defaultTz))
-	}
+	carg0 = (*C.GCond)(UnsafeCondToGlibNone(cond))
 
-	cret = C.g_date_time_new_from_iso8601(carg1, carg2)
-	runtime.KeepAlive(text)
-	runtime.KeepAlive(defaultTz)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
+	C.g_cond_clear(carg0)
+	runtime.KeepAlive(cond)
 }
 
-// NewDateTimeLocal wraps g_date_time_new_local
-// 
-// The function takes the following parameters:
-// 
-// 	- year int32: the year component of the date 
-// 	- month int32: the month component of the date 
-// 	- day int32: the day component of the date 
-// 	- hour int32: the hour component of the date 
-// 	- minute int32: the minute component of the date 
-// 	- seconds float64: the number of seconds past the minute 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
+// Init wraps g_cond_init
 //
-// Creates a new #GDateTime corresponding to the given date and time in
-// the local time zone.
+// Initialises a #GCond so that it can be used.
 // 
-// This call is equivalent to calling g_date_time_new() with the time
-// zone returned by g_time_zone_new_local().
-func NewDateTimeLocal(year int32, month int32, day int32, hour int32, minute int32, seconds float64) *DateTime {
-	var carg1 C.gint       // in, none, casted
-	var carg2 C.gint       // in, none, casted
-	var carg3 C.gint       // in, none, casted
-	var carg4 C.gint       // in, none, casted
-	var carg5 C.gint       // in, none, casted
-	var carg6 C.gdouble    // in, none, casted
-	var cret  *C.GDateTime // return, full, converted, nullable
+// This function is useful to initialise a #GCond that has been
+// allocated as part of a larger structure.  It is not necessary to
+// initialise a #GCond that has been statically allocated.
+// 
+// To undo the effect of g_cond_init() when a #GCond is no longer
+// needed, use g_cond_clear().
+// 
+// Calling g_cond_init() on an already-initialised #GCond leads
+// to undefined behaviour.
+func (cond *Cond) Init() {
+	var carg0 *C.GCond // in, none, converted
 
-	carg1 = C.gint(year)
-	carg2 = C.gint(month)
-	carg3 = C.gint(day)
-	carg4 = C.gint(hour)
-	carg5 = C.gint(minute)
-	carg6 = C.gdouble(seconds)
+	carg0 = (*C.GCond)(UnsafeCondToGlibNone(cond))
 
-	cret = C.g_date_time_new_local(carg1, carg2, carg3, carg4, carg5, carg6)
-	runtime.KeepAlive(year)
-	runtime.KeepAlive(month)
-	runtime.KeepAlive(day)
-	runtime.KeepAlive(hour)
-	runtime.KeepAlive(minute)
-	runtime.KeepAlive(seconds)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
+	C.g_cond_init(carg0)
+	runtime.KeepAlive(cond)
 }
 
-// NewDateTimeNow wraps g_date_time_new_now
-// 
-// The function takes the following parameters:
-// 
-// 	- tz *TimeZone: a #GTimeZone 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
+// Signal wraps g_cond_signal
 //
-// Creates a #GDateTime corresponding to this exact instant in the given
-// time zone @tz.  The time is as accurate as the system allows, to a
-// maximum accuracy of 1 microsecond.
-// 
-// This function will always succeed unless GLib is still being used after the
-// year 9999.
-// 
-// You should release the return value by calling g_date_time_unref()
-// when you are done with it.
-func NewDateTimeNow(tz *TimeZone) *DateTime {
-	var carg1 *C.GTimeZone // in, none, converted
-	var cret  *C.GDateTime // return, full, converted, nullable
+// If threads are waiting for @cond, at least one of them is unblocked.
+// If no threads are waiting for @cond, this function has no effect.
+// It is good practice to hold the same lock as the waiting thread
+// while calling this function, though not required.
+func (cond *Cond) Signal() {
+	var carg0 *C.GCond // in, none, converted
 
-	carg1 = (*C.GTimeZone)(UnsafeTimeZoneToGlibNone(tz))
+	carg0 = (*C.GCond)(UnsafeCondToGlibNone(cond))
 
-	cret = C.g_date_time_new_now(carg1)
-	runtime.KeepAlive(tz)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
+	C.g_cond_signal(carg0)
+	runtime.KeepAlive(cond)
 }
 
-// NewDateTimeNowLocal wraps g_date_time_new_now_local
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
+// Data wraps GData
 //
-// Creates a #GDateTime corresponding to this exact instant in the local
-// time zone.
+// An opaque data structure that represents a keyed data list.
 // 
-// This is equivalent to calling g_date_time_new_now() with the time
-// zone returned by g_time_zone_new_local().
-func NewDateTimeNowLocal() *DateTime {
-	var cret *C.GDateTime // return, full, converted, nullable
-
-	cret = C.g_date_time_new_now_local()
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
+// See also: [Keyed data lists](datalist-and-dataset.html).
+type Data struct {
+	*data
 }
 
-// NewDateTimeNowUTC wraps g_date_time_new_now_utc
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
-//
-// Creates a #GDateTime corresponding to this exact instant in UTC.
-// 
-// This is equivalent to calling g_date_time_new_now() with the time
-// zone returned by g_time_zone_new_utc().
-func NewDateTimeNowUTC() *DateTime {
-	var cret *C.GDateTime // return, full, converted, nullable
-
-	cret = C.g_date_time_new_now_utc()
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
+// data is the struct that's finalized
+type data struct {
+	native *C.GData
 }
 
-// NewDateTimeUTC wraps g_date_time_new_utc
-// 
-// The function takes the following parameters:
-// 
-// 	- year int32: the year component of the date 
-// 	- month int32: the month component of the date 
-// 	- day int32: the day component of the date 
-// 	- hour int32: the hour component of the date 
-// 	- minute int32: the minute component of the date 
-// 	- seconds float64: the number of seconds past the minute 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
-//
-// Creates a new #GDateTime corresponding to the given date and time in
-// UTC.
-// 
-// This call is equivalent to calling g_date_time_new() with the time
-// zone returned by g_time_zone_new_utc().
-func NewDateTimeUTC(year int32, month int32, day int32, hour int32, minute int32, seconds float64) *DateTime {
-	var carg1 C.gint       // in, none, casted
-	var carg2 C.gint       // in, none, casted
-	var carg3 C.gint       // in, none, casted
-	var carg4 C.gint       // in, none, casted
-	var carg5 C.gint       // in, none, casted
-	var carg6 C.gdouble    // in, none, casted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg1 = C.gint(year)
-	carg2 = C.gint(month)
-	carg3 = C.gint(day)
-	carg4 = C.gint(hour)
-	carg5 = C.gint(minute)
-	carg6 = C.gdouble(seconds)
-
-	cret = C.g_date_time_new_utc(carg1, carg2, carg3, carg4, carg5, carg6)
-	runtime.KeepAlive(year)
-	runtime.KeepAlive(month)
-	runtime.KeepAlive(day)
-	runtime.KeepAlive(hour)
-	runtime.KeepAlive(minute)
-	runtime.KeepAlive(seconds)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
+// UnsafeDataFromGlibBorrow is used to convert raw C.GData pointers to go. This is used by the bindings internally.
+func UnsafeDataFromGlibBorrow(p unsafe.Pointer) *Data {
+	return &Data{&data{(*C.GData)(p)}}
 }
 
-// Add wraps g_date_time_add
-// 
-// The function takes the following parameters:
-// 
-// 	- timespan TimeSpan: a #GTimeSpan 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
-//
-// Creates a copy of @datetime and adds the specified timespan to the copy.
-func (datetime *DateTime) Add(timespan TimeSpan) *DateTime {
-	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.GTimeSpan  // in, none, casted, alias
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.GTimeSpan(timespan)
-
-	cret = C.g_date_time_add(carg0, carg1)
-	runtime.KeepAlive(datetime)
-	runtime.KeepAlive(timespan)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
+// UnsafeDataFromGlibNone is used to convert raw C.GData pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeDataFromGlibNone(p unsafe.Pointer) *Data {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeDataFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.data,
+		func (intern *data) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
-// AddDays wraps g_date_time_add_days
-// 
-// The function takes the following parameters:
-// 
-// 	- days int32: the number of days 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
-//
-// Creates a copy of @datetime and adds the specified number of days to the
-// copy. Add negative values to subtract days.
-func (datetime *DateTime) AddDays(days int32) *DateTime {
-	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.gint       // in, none, casted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.gint(days)
-
-	cret = C.g_date_time_add_days(carg0, carg1)
-	runtime.KeepAlive(datetime)
-	runtime.KeepAlive(days)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
+// UnsafeDataFromGlibFull is used to convert raw C.GData pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeDataFromGlibFull(p unsafe.Pointer) *Data {
+	wrapped := UnsafeDataFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.data,
+		func (intern *data) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
 }
 
-// AddFull wraps g_date_time_add_full
+// UnsafeDataFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
-// The function takes the following parameters:
-// 
-// 	- years int32: the number of years to add 
-// 	- months int32: the number of months to add 
-// 	- days int32: the number of days to add 
-// 	- hours int32: the number of hours to add 
-// 	- minutes int32: the number of minutes to add 
-// 	- seconds float64: the number of seconds to add 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
-//
-// Creates a new #GDateTime adding the specified values to the current date and
-// time in @datetime. Add negative values to subtract.
-func (datetime *DateTime) AddFull(years int32, months int32, days int32, hours int32, minutes int32, seconds float64) *DateTime {
-	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.gint       // in, none, casted
-	var carg2 C.gint       // in, none, casted
-	var carg3 C.gint       // in, none, casted
-	var carg4 C.gint       // in, none, casted
-	var carg5 C.gint       // in, none, casted
-	var carg6 C.gdouble    // in, none, casted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.gint(years)
-	carg2 = C.gint(months)
-	carg3 = C.gint(days)
-	carg4 = C.gint(hours)
-	carg5 = C.gint(minutes)
-	carg6 = C.gdouble(seconds)
-
-	cret = C.g_date_time_add_full(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
-	runtime.KeepAlive(datetime)
-	runtime.KeepAlive(years)
-	runtime.KeepAlive(months)
-	runtime.KeepAlive(days)
-	runtime.KeepAlive(hours)
-	runtime.KeepAlive(minutes)
-	runtime.KeepAlive(seconds)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
+// After this is called, no other method on [Data] is expected to work anymore.
+func UnsafeDataFree(d *Data) {
+	C.free(unsafe.Pointer(d.native))
 }
 
-// AddHours wraps g_date_time_add_hours
-// 
-// The function takes the following parameters:
-// 
-// 	- hours int32: the number of hours to add 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
-//
-// Creates a copy of @datetime and adds the specified number of hours.
-// Add negative values to subtract hours.
-func (datetime *DateTime) AddHours(hours int32) *DateTime {
-	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.gint       // in, none, casted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.gint(hours)
-
-	cret = C.g_date_time_add_hours(carg0, carg1)
-	runtime.KeepAlive(datetime)
-	runtime.KeepAlive(hours)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
+// UnsafeDataToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeDataToGlibNone(d *Data) unsafe.Pointer {
+	return unsafe.Pointer(d.native)
 }
 
-// AddMinutes wraps g_date_time_add_minutes
-// 
-// The function takes the following parameters:
-// 
-// 	- minutes int32: the number of minutes to add 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
-//
-// Creates a copy of @datetime adding the specified number of minutes.
-// Add negative values to subtract minutes.
-func (datetime *DateTime) AddMinutes(minutes int32) *DateTime {
-	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.gint       // in, none, casted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.gint(minutes)
-
-	cret = C.g_date_time_add_minutes(carg0, carg1)
-	runtime.KeepAlive(datetime)
-	runtime.KeepAlive(minutes)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// AddMonths wraps g_date_time_add_months
-// 
-// The function takes the following parameters:
-// 
-// 	- months int32: the number of months 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
-//
-// Creates a copy of @datetime and adds the specified number of months to the
-// copy. Add negative values to subtract months.
-// 
-// The day of the month of the resulting #GDateTime is clamped to the number
-// of days in the updated calendar month. For example, if adding 1 month to
-// 31st January 2018, the result would be 28th February 2018. In 2020 (a leap
-// year), the result would be 29th February.
-func (datetime *DateTime) AddMonths(months int32) *DateTime {
-	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.gint       // in, none, casted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.gint(months)
-
-	cret = C.g_date_time_add_months(carg0, carg1)
-	runtime.KeepAlive(datetime)
-	runtime.KeepAlive(months)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// AddSeconds wraps g_date_time_add_seconds
-// 
-// The function takes the following parameters:
-// 
-// 	- seconds float64: the number of seconds to add 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
-//
-// Creates a copy of @datetime and adds the specified number of seconds.
-// Add negative values to subtract seconds.
-func (datetime *DateTime) AddSeconds(seconds float64) *DateTime {
-	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.gdouble    // in, none, casted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.gdouble(seconds)
-
-	cret = C.g_date_time_add_seconds(carg0, carg1)
-	runtime.KeepAlive(datetime)
-	runtime.KeepAlive(seconds)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// AddWeeks wraps g_date_time_add_weeks
-// 
-// The function takes the following parameters:
-// 
-// 	- weeks int32: the number of weeks 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
-//
-// Creates a copy of @datetime and adds the specified number of weeks to the
-// copy. Add negative values to subtract weeks.
-func (datetime *DateTime) AddWeeks(weeks int32) *DateTime {
-	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.gint       // in, none, casted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.gint(weeks)
-
-	cret = C.g_date_time_add_weeks(carg0, carg1)
-	runtime.KeepAlive(datetime)
-	runtime.KeepAlive(weeks)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// AddYears wraps g_date_time_add_years
-// 
-// The function takes the following parameters:
-// 
-// 	- years int32: the number of years 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
-//
-// Creates a copy of @datetime and adds the specified number of years to the
-// copy. Add negative values to subtract years.
-// 
-// As with g_date_time_add_months(), if the resulting date would be 29th
-// February on a non-leap year, the day will be clamped to 28th February.
-func (datetime *DateTime) AddYears(years int32) *DateTime {
-	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.gint       // in, none, casted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = C.gint(years)
-
-	cret = C.g_date_time_add_years(carg0, carg1)
-	runtime.KeepAlive(datetime)
-	runtime.KeepAlive(years)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// Difference wraps g_date_time_difference
-// 
-// The function takes the following parameters:
-// 
-// 	- begin *DateTime: a #GDateTime 
-// 
-// The function returns the following values:
-// 
-// 	- goret TimeSpan 
-//
-// Calculates the difference in time between @end and @begin.  The
-// #GTimeSpan that is returned is effectively @end - @begin (ie:
-// positive if the first parameter is larger).
-func (end *DateTime) Difference(begin *DateTime) TimeSpan {
-	var carg0 *C.GDateTime // in, none, converted
-	var carg1 *C.GDateTime // in, none, converted
-	var cret  C.GTimeSpan  // return, none, casted, alias
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(end))
-	carg1 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(begin))
-
-	cret = C.g_date_time_difference(carg0, carg1)
-	runtime.KeepAlive(end)
-	runtime.KeepAlive(begin)
-
-	var goret TimeSpan
-
-	goret = TimeSpan(cret)
-
-	return goret
-}
-
-// Format wraps g_date_time_format
-// 
-// The function takes the following parameters:
-// 
-// 	- format string: a valid UTF-8 string, containing the format for the
-//          #GDateTime 
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Creates a newly allocated string representing the requested @format.
-// 
-// The format strings understood by this function are a subset of the
-// `strftime()` format language as specified by C99.  The `%D`, `%U` and `%W`
-// conversions are not supported, nor is the `E` modifier.  The GNU
-// extensions `%k`, `%l`, `%s` and `%P` are supported, however, as are the
-// `0`, `_` and `-` modifiers. The Python extension `%f` is also supported.
-// 
-// In contrast to `strftime()`, this function always produces a UTF-8
-// string, regardless of the current locale.  Note that the rendering of
-// many formats is locale-dependent and may not match the `strftime()`
-// output exactly.
-// 
-// The following format specifiers are supported:
-// 
-// - `%a`: the abbreviated weekday name according to the current locale
-// - `%A`: the full weekday name according to the current locale
-// - `%b`: the abbreviated month name according to the current locale
-// - `%B`: the full month name according to the current locale
-// - `%c`: the preferred date and time representation for the current locale
-// - `%C`: the century number (year/100) as a 2-digit integer (00-99)
-// - `%d`: the day of the month as a decimal number (range 01 to 31)
-// - `%e`: the day of the month as a decimal number (range 1 to 31);
-//   single digits are preceded by a figure space (U+2007)
-// - `%F`: equivalent to `%Y-%m-%d` (the ISO 8601 date format)
-// - `%g`: the last two digits of the ISO 8601 week-based year as a
-//   decimal number (00-99). This works well with `%V` and `%u`.
-// - `%G`: the ISO 8601 week-based year as a decimal number. This works
-//   well with `%V` and `%u`.
-// - `%h`: equivalent to `%b`
-// - `%H`: the hour as a decimal number using a 24-hour clock (range 00 to 23)
-// - `%I`: the hour as a decimal number using a 12-hour clock (range 01 to 12)
-// - `%j`: the day of the year as a decimal number (range 001 to 366)
-// - `%k`: the hour (24-hour clock) as a decimal number (range 0 to 23);
-//   single digits are preceded by a figure space (U+2007)
-// - `%l`: the hour (12-hour clock) as a decimal number (range 1 to 12);
-//   single digits are preceded by a figure space (U+2007)
-// - `%m`: the month as a decimal number (range 01 to 12)
-// - `%M`: the minute as a decimal number (range 00 to 59)
-// - `%f`: the microsecond as a decimal number (range 000000 to 999999)
-// - `%p`: either ‘AM’ or ‘PM’ according to the given time value, or the
-//   corresponding  strings for the current locale.  Noon is treated as
-//   ‘PM’ and midnight as ‘AM’. Use of this format specifier is discouraged, as
-//   many locales have no concept of AM/PM formatting. Use `%c` or `%X` instead.
-// - `%P`: like `%p` but lowercase: ‘am’ or ‘pm’ or a corresponding string for
-//   the current locale. Use of this format specifier is discouraged, as
-//   many locales have no concept of AM/PM formatting. Use `%c` or `%X` instead.
-// - `%r`: the time in a.m. or p.m. notation. Use of this format specifier is
-//   discouraged, as many locales have no concept of AM/PM formatting. Use `%c`
-//   or `%X` instead.
-// - `%R`: the time in 24-hour notation (`%H:%M`)
-// - `%s`: the number of seconds since the Epoch, that is, since 1970-01-01
-//   00:00:00 UTC
-// - `%S`: the second as a decimal number (range 00 to 60)
-// - `%t`: a tab character
-// - `%T`: the time in 24-hour notation with seconds (`%H:%M:%S`)
-// - `%u`: the ISO 8601 standard day of the week as a decimal, range 1 to 7,
-//    Monday being 1. This works well with `%G` and `%V`.
-// - `%V`: the ISO 8601 standard week number of the current year as a decimal
-//   number, range 01 to 53, where week 1 is the first week that has at
-//   least 4 days in the new year. See g_date_time_get_week_of_year().
-//   This works well with `%G` and `%u`.
-// - `%w`: the day of the week as a decimal, range 0 to 6, Sunday being 0.
-//   This is not the ISO 8601 standard format — use `%u` instead.
-// - `%x`: the preferred date representation for the current locale without
-//   the time
-// - `%X`: the preferred time representation for the current locale without
-//   the date
-// - `%y`: the year as a decimal number without the century
-// - `%Y`: the year as a decimal number including the century
-// - `%z`: the time zone as an offset from UTC (`+hhmm`)
-// - `%:z`: the time zone as an offset from UTC (`+hh:mm`).
-//   This is a gnulib `strftime()` extension. Since: 2.38
-// - `%::z`: the time zone as an offset from UTC (`+hh:mm:ss`). This is a
-//   gnulib `strftime()` extension. Since: 2.38
-// - `%:::z`: the time zone as an offset from UTC, with `:` to necessary
-//   precision (e.g., `-04`, `+05:30`). This is a gnulib `strftime()` extension. Since: 2.38
-// - `%Z`: the time zone or name or abbreviation
-// - `%%`: a literal `%` character
-// 
-// Some conversion specifications can be modified by preceding the
-// conversion specifier by one or more modifier characters.
-// 
-// The following modifiers are supported for many of the numeric
-// conversions:
-// 
-// - `O`: Use alternative numeric symbols, if the current locale supports those.
-// - `_`: Pad a numeric result with spaces. This overrides the default padding
-//   for the specifier.
-// - `-`: Do not pad a numeric result. This overrides the default padding
-//   for the specifier.
-// - `0`: Pad a numeric result with zeros. This overrides the default padding
-//   for the specifier.
-// 
-// The following modifiers are supported for many of the alphabetic conversions:
-// 
-// - `^`: Use upper case if possible. This is a gnulib `strftime()` extension.
-//   Since: 2.80
-// - `#`: Use opposite case if possible. This is a gnulib `strftime()`
-//   extension. Since: 2.80
-// 
-// Additionally, when `O` is used with `B`, `b`, or `h`, it produces the alternative
-// form of a month name. The alternative form should be used when the month
-// name is used without a day number (e.g., standalone). It is required in
-// some languages (Baltic, Slavic, Greek, and more) due to their grammatical
-// rules. For other languages there is no difference. `%OB` is a GNU and BSD
-// `strftime()` extension expected to be added to the future POSIX specification,
-// `%Ob` and `%Oh` are GNU `strftime()` extensions. Since: 2.56
-// 
-// Since GLib 2.80, when `E` is used with `%c`, `%C`, `%x`, `%X`, `%y` or `%Y`,
-// the date is formatted using an alternate era representation specific to the
-// locale. This is typically used for the Thai solar calendar or Japanese era
-// names, for example.
-// 
-// - `%Ec`: the preferred date and time representation for the current locale,
-//   using the alternate era representation
-// - `%EC`: the name of the era
-// - `%Ex`: the preferred date representation for the current locale without
-//   the time, using the alternate era representation
-// - `%EX`: the preferred time representation for the current locale without
-//   the date, using the alternate era representation
-// - `%Ey`: the year since the beginning of the era denoted by the `%EC`
-//   specifier
-// - `%EY`: the full alternative year representation
-func (datetime *DateTime) Format(format string) string {
-	var carg0 *C.GDateTime // in, none, converted
-	var carg1 *C.gchar     // in, none, string
-	var cret  *C.gchar     // return, full, string, nullable-string
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(format)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_date_time_format(carg0, carg1)
-	runtime.KeepAlive(datetime)
-	runtime.KeepAlive(format)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-		defer C.free(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// FormatISO8601 wraps g_date_time_format_iso8601
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Format @datetime in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601),
-// including the date, time and time zone, and return that as a UTF-8 encoded
-// string.
-// 
-// Since GLib 2.66, this will output to sub-second precision if needed.
-func (datetime *DateTime) FormatISO8601() string {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  *C.gchar     // return, full, string, nullable-string
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_format_iso8601(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-		defer C.free(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// GetDayOfMonth wraps g_date_time_get_day_of_month
-// 
-// The function returns the following values:
-// 
-// 	- goret int32 
-//
-// Retrieves the day of the month represented by @datetime in the gregorian
-// calendar.
-func (datetime *DateTime) GetDayOfMonth() int32 {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.gint       // return, none, casted
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_get_day_of_month(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret int32
-
-	goret = int32(cret)
-
-	return goret
-}
-
-// GetDayOfWeek wraps g_date_time_get_day_of_week
-// 
-// The function returns the following values:
-// 
-// 	- goret int32 
-//
-// Retrieves the ISO 8601 day of the week on which @datetime falls (1 is
-// Monday, 2 is Tuesday... 7 is Sunday).
-func (datetime *DateTime) GetDayOfWeek() int32 {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.gint       // return, none, casted
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_get_day_of_week(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret int32
-
-	goret = int32(cret)
-
-	return goret
-}
-
-// GetDayOfYear wraps g_date_time_get_day_of_year
-// 
-// The function returns the following values:
-// 
-// 	- goret int32 
-//
-// Retrieves the day of the year represented by @datetime in the Gregorian
-// calendar.
-func (datetime *DateTime) GetDayOfYear() int32 {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.gint       // return, none, casted
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_get_day_of_year(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret int32
-
-	goret = int32(cret)
-
-	return goret
-}
-
-// GetHour wraps g_date_time_get_hour
-// 
-// The function returns the following values:
-// 
-// 	- goret int32 
-//
-// Retrieves the hour of the day represented by @datetime
-func (datetime *DateTime) GetHour() int32 {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.gint       // return, none, casted
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_get_hour(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret int32
-
-	goret = int32(cret)
-
-	return goret
-}
-
-// GetMicrosecond wraps g_date_time_get_microsecond
-// 
-// The function returns the following values:
-// 
-// 	- goret int32 
-//
-// Retrieves the microsecond of the date represented by @datetime
-func (datetime *DateTime) GetMicrosecond() int32 {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.gint       // return, none, casted
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_get_microsecond(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret int32
-
-	goret = int32(cret)
-
-	return goret
-}
-
-// GetMinute wraps g_date_time_get_minute
-// 
-// The function returns the following values:
-// 
-// 	- goret int32 
-//
-// Retrieves the minute of the hour represented by @datetime
-func (datetime *DateTime) GetMinute() int32 {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.gint       // return, none, casted
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_get_minute(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret int32
-
-	goret = int32(cret)
-
-	return goret
-}
-
-// GetMonth wraps g_date_time_get_month
-// 
-// The function returns the following values:
-// 
-// 	- goret int32 
-//
-// Retrieves the month of the year represented by @datetime in the Gregorian
-// calendar.
-func (datetime *DateTime) GetMonth() int32 {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.gint       // return, none, casted
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_get_month(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret int32
-
-	goret = int32(cret)
-
-	return goret
-}
-
-// GetSecond wraps g_date_time_get_second
-// 
-// The function returns the following values:
-// 
-// 	- goret int32 
-//
-// Retrieves the second of the minute represented by @datetime
-func (datetime *DateTime) GetSecond() int32 {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.gint       // return, none, casted
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_get_second(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret int32
-
-	goret = int32(cret)
-
-	return goret
-}
-
-// GetSeconds wraps g_date_time_get_seconds
-// 
-// The function returns the following values:
-// 
-// 	- goret float64 
-//
-// Retrieves the number of seconds since the start of the last minute,
-// including the fractional part.
-func (datetime *DateTime) GetSeconds() float64 {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.gdouble    // return, none, casted
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_get_seconds(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret float64
-
-	goret = float64(cret)
-
-	return goret
-}
-
-// GetTimezone wraps g_date_time_get_timezone
-// 
-// The function returns the following values:
-// 
-// 	- goret *TimeZone 
-//
-// Get the time zone for this @datetime.
-func (datetime *DateTime) GetTimezone() *TimeZone {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  *C.GTimeZone // return, none, converted
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_get_timezone(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret *TimeZone
-
-	goret = UnsafeTimeZoneFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetTimezoneAbbreviation wraps g_date_time_get_timezone_abbreviation
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Determines the time zone abbreviation to be used at the time and in
-// the time zone of @datetime.
-// 
-// For example, in Toronto this is currently "EST" during the winter
-// months and "EDT" during the summer months when daylight savings
-// time is in effect.
-func (datetime *DateTime) GetTimezoneAbbreviation() string {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  *C.gchar     // return, none, string
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_get_timezone_abbreviation(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetUTCOffset wraps g_date_time_get_utc_offset
-// 
-// The function returns the following values:
-// 
-// 	- goret TimeSpan 
-//
-// Determines the offset to UTC in effect at the time and in the time
-// zone of @datetime.
-// 
-// The offset is the number of microseconds that you add to UTC time to
-// arrive at local time for the time zone (ie: negative numbers for time
-// zones west of GMT, positive numbers for east).
-// 
-// If @datetime represents UTC time, then the offset is always zero.
-func (datetime *DateTime) GetUTCOffset() TimeSpan {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.GTimeSpan  // return, none, casted, alias
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_get_utc_offset(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret TimeSpan
-
-	goret = TimeSpan(cret)
-
-	return goret
-}
-
-// GetWeekNumberingYear wraps g_date_time_get_week_numbering_year
-// 
-// The function returns the following values:
-// 
-// 	- goret int32 
-//
-// Returns the ISO 8601 week-numbering year in which the week containing
-// @datetime falls.
-// 
-// This function, taken together with g_date_time_get_week_of_year() and
-// g_date_time_get_day_of_week() can be used to determine the full ISO
-// week date on which @datetime falls.
-// 
-// This is usually equal to the normal Gregorian year (as returned by
-// g_date_time_get_year()), except as detailed below:
-// 
-// For Thursday, the week-numbering year is always equal to the usual
-// calendar year.  For other days, the number is such that every day
-// within a complete week (Monday to Sunday) is contained within the
-// same week-numbering year.
-// 
-// For Monday, Tuesday and Wednesday occurring near the end of the year,
-// this may mean that the week-numbering year is one greater than the
-// calendar year (so that these days have the same week-numbering year
-// as the Thursday occurring early in the next year).
-// 
-// For Friday, Saturday and Sunday occurring near the start of the year,
-// this may mean that the week-numbering year is one less than the
-// calendar year (so that these days have the same week-numbering year
-// as the Thursday occurring late in the previous year).
-// 
-// An equivalent description is that the week-numbering year is equal to
-// the calendar year containing the majority of the days in the current
-// week (Monday to Sunday).
-// 
-// Note that January 1 0001 in the proleptic Gregorian calendar is a
-// Monday, so this function never returns 0.
-func (datetime *DateTime) GetWeekNumberingYear() int32 {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.gint       // return, none, casted
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_get_week_numbering_year(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret int32
-
-	goret = int32(cret)
-
-	return goret
-}
-
-// GetWeekOfYear wraps g_date_time_get_week_of_year
-// 
-// The function returns the following values:
-// 
-// 	- goret int32 
-//
-// Returns the ISO 8601 week number for the week containing @datetime.
-// The ISO 8601 week number is the same for every day of the week (from
-// Moday through Sunday).  That can produce some unusual results
-// (described below).
-// 
-// The first week of the year is week 1.  This is the week that contains
-// the first Thursday of the year.  Equivalently, this is the first week
-// that has more than 4 of its days falling within the calendar year.
-// 
-// The value 0 is never returned by this function.  Days contained
-// within a year but occurring before the first ISO 8601 week of that
-// year are considered as being contained in the last week of the
-// previous year.  Similarly, the final days of a calendar year may be
-// considered as being part of the first ISO 8601 week of the next year
-// if 4 or more days of that week are contained within the new year.
-func (datetime *DateTime) GetWeekOfYear() int32 {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.gint       // return, none, casted
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_get_week_of_year(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret int32
-
-	goret = int32(cret)
-
-	return goret
-}
-
-// GetYear wraps g_date_time_get_year
-// 
-// The function returns the following values:
-// 
-// 	- goret int32 
-//
-// Retrieves the year represented by @datetime in the Gregorian calendar.
-func (datetime *DateTime) GetYear() int32 {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.gint       // return, none, casted
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_get_year(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret int32
-
-	goret = int32(cret)
-
-	return goret
-}
-
-// GetYmd wraps g_date_time_get_ymd
-// 
-// The function returns the following values:
-// 
-// 	- year int32: the return location for the gregorian year, or %NULL. 
-// 	- month int32: the return location for the month of the year, or %NULL. 
-// 	- day int32: the return location for the day of the month, or %NULL. 
-//
-// Retrieves the Gregorian day, month, and year of a given #GDateTime.
-func (datetime *DateTime) GetYmd() (int32, int32, int32) {
-	var carg0 *C.GDateTime // in, none, converted
-	var carg1 C.gint       // out, full, casted
-	var carg2 C.gint       // out, full, casted
-	var carg3 C.gint       // out, full, casted
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	C.g_date_time_get_ymd(carg0, &carg1, &carg2, &carg3)
-	runtime.KeepAlive(datetime)
-
-	var year  int32
-	var month int32
-	var day   int32
-
-	year = int32(carg1)
-	month = int32(carg2)
-	day = int32(carg3)
-
-	return year, month, day
-}
-
-// IsDaylightSavings wraps g_date_time_is_daylight_savings
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Determines if daylight savings time is in effect at the time and in
-// the time zone of @datetime.
-func (datetime *DateTime) IsDaylightSavings() bool {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  C.gboolean   // return
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_is_daylight_savings(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// ToLocal wraps g_date_time_to_local
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
-//
-// Creates a new #GDateTime corresponding to the same instant in time as
-// @datetime, but in the local time zone.
-// 
-// This call is equivalent to calling g_date_time_to_timezone() with the
-// time zone returned by g_time_zone_new_local().
-func (datetime *DateTime) ToLocal() *DateTime {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_to_local(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// ToTimezone wraps g_date_time_to_timezone
-// 
-// The function takes the following parameters:
-// 
-// 	- tz *TimeZone: the new #GTimeZone 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
-//
-// Create a new #GDateTime corresponding to the same instant in time as
-// @datetime, but in the time zone @tz.
-// 
-// This call can fail in the case that the time goes out of bounds.  For
-// example, converting 0001-01-01 00:00:00 UTC to a time zone west of
-// Greenwich will fail (due to the year 0 being out of range).
-func (datetime *DateTime) ToTimezone(tz *TimeZone) *DateTime {
-	var carg0 *C.GDateTime // in, none, converted
-	var carg1 *C.GTimeZone // in, none, converted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-	carg1 = (*C.GTimeZone)(UnsafeTimeZoneToGlibNone(tz))
-
-	cret = C.g_date_time_to_timezone(carg0, carg1)
-	runtime.KeepAlive(datetime)
-	runtime.KeepAlive(tz)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// ToUTC wraps g_date_time_to_utc
-// 
-// The function returns the following values:
-// 
-// 	- goret *DateTime (nullable) 
-//
-// Creates a new #GDateTime corresponding to the same instant in time as
-// @datetime, but in UTC.
-// 
-// This call is equivalent to calling g_date_time_to_timezone() with the
-// time zone returned by g_time_zone_new_utc().
-func (datetime *DateTime) ToUTC() *DateTime {
-	var carg0 *C.GDateTime // in, none, converted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
-
-	cret = C.g_date_time_to_utc(carg0)
-	runtime.KeepAlive(datetime)
-
-	var goret *DateTime
-
-	if cret != nil {
-		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
+// UnsafeDataToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeDataToGlibFull(d *Data) unsafe.Pointer {
+	runtime.SetFinalizer(d.data, nil)
+	_p := unsafe.Pointer(d.native)
+	d.native = nil // Data is invalid from here on
+	return _p
 }
 
 // DebugKey wraps GDebugKey
@@ -18113,6 +20739,386 @@ func (hmac *Hmac) Update(data []byte) {
 	runtime.KeepAlive(data)
 }
 
+// Hook wraps GHook
+//
+// The #GHook struct represents a single hook function in a #GHookList.
+type Hook struct {
+	*hook
+}
+
+// hook is the struct that's finalized
+type hook struct {
+	native *C.GHook
+}
+
+// UnsafeHookFromGlibBorrow is used to convert raw C.GHook pointers to go. This is used by the bindings internally.
+func UnsafeHookFromGlibBorrow(p unsafe.Pointer) *Hook {
+	return &Hook{&hook{(*C.GHook)(p)}}
+}
+
+// UnsafeHookFromGlibNone is used to convert raw C.GHook pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeHookFromGlibNone(p unsafe.Pointer) *Hook {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeHookFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.hook,
+		func (intern *hook) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeHookFromGlibFull is used to convert raw C.GHook pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeHookFromGlibFull(p unsafe.Pointer) *Hook {
+	wrapped := UnsafeHookFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.hook,
+		func (intern *hook) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeHookFree unrefs/frees the underlying resource. This is used by the bindings internally.
+// 
+// After this is called, no other method on [Hook] is expected to work anymore.
+func UnsafeHookFree(h *Hook) {
+	C.free(unsafe.Pointer(h.native))
+}
+
+// UnsafeHookToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeHookToGlibNone(h *Hook) unsafe.Pointer {
+	return unsafe.Pointer(h.native)
+}
+
+// UnsafeHookToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeHookToGlibFull(h *Hook) unsafe.Pointer {
+	runtime.SetFinalizer(h.hook, nil)
+	_p := unsafe.Pointer(h.native)
+	h.native = nil // Hook is invalid from here on
+	return _p
+}
+
+// HookDestroy wraps g_hook_destroy
+// 
+// The function takes the following parameters:
+// 
+// 	- hookList *HookList: a #GHookList 
+// 	- hookId uint32: a hook ID 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Destroys a #GHook, given its ID.
+func HookDestroy(hookList *HookList, hookId uint32) bool {
+	var carg1 *C.GHookList // in, none, converted
+	var carg2 C.gulong     // in, none, casted
+	var cret  C.gboolean   // return
+
+	carg1 = (*C.GHookList)(UnsafeHookListToGlibNone(hookList))
+	carg2 = C.gulong(hookId)
+
+	cret = C.g_hook_destroy(carg1, carg2)
+	runtime.KeepAlive(hookList)
+	runtime.KeepAlive(hookId)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// HookDestroyLink wraps g_hook_destroy_link
+// 
+// The function takes the following parameters:
+// 
+// 	- hookList *HookList: a #GHookList 
+// 	- hook *Hook: the #GHook to remove 
+//
+// Removes one #GHook from a #GHookList, marking it
+// inactive and calling g_hook_unref() on it.
+func HookDestroyLink(hookList *HookList, hook *Hook) {
+	var carg1 *C.GHookList // in, none, converted
+	var carg2 *C.GHook     // in, none, converted
+
+	carg1 = (*C.GHookList)(UnsafeHookListToGlibNone(hookList))
+	carg2 = (*C.GHook)(UnsafeHookToGlibNone(hook))
+
+	C.g_hook_destroy_link(carg1, carg2)
+	runtime.KeepAlive(hookList)
+	runtime.KeepAlive(hook)
+}
+
+// HookFree wraps g_hook_free
+// 
+// The function takes the following parameters:
+// 
+// 	- hookList *HookList: a #GHookList 
+// 	- hook *Hook: the #GHook to free 
+//
+// Calls the #GHookList @finalize_hook function if it exists,
+// and frees the memory allocated for the #GHook.
+func HookFree(hookList *HookList, hook *Hook) {
+	var carg1 *C.GHookList // in, none, converted
+	var carg2 *C.GHook     // in, none, converted
+
+	carg1 = (*C.GHookList)(UnsafeHookListToGlibNone(hookList))
+	carg2 = (*C.GHook)(UnsafeHookToGlibNone(hook))
+
+	C.g_hook_free(carg1, carg2)
+	runtime.KeepAlive(hookList)
+	runtime.KeepAlive(hook)
+}
+
+// HookInsertBefore wraps g_hook_insert_before
+// 
+// The function takes the following parameters:
+// 
+// 	- hookList *HookList: a #GHookList 
+// 	- sibling *Hook (nullable): the #GHook to insert the new #GHook before 
+// 	- hook *Hook: the #GHook to insert 
+//
+// Inserts a #GHook into a #GHookList, before a given #GHook.
+func HookInsertBefore(hookList *HookList, sibling *Hook, hook *Hook) {
+	var carg1 *C.GHookList // in, none, converted
+	var carg2 *C.GHook     // in, none, converted, nullable
+	var carg3 *C.GHook     // in, none, converted
+
+	carg1 = (*C.GHookList)(UnsafeHookListToGlibNone(hookList))
+	if sibling != nil {
+		carg2 = (*C.GHook)(UnsafeHookToGlibNone(sibling))
+	}
+	carg3 = (*C.GHook)(UnsafeHookToGlibNone(hook))
+
+	C.g_hook_insert_before(carg1, carg2, carg3)
+	runtime.KeepAlive(hookList)
+	runtime.KeepAlive(sibling)
+	runtime.KeepAlive(hook)
+}
+
+// HookPrepend wraps g_hook_prepend
+// 
+// The function takes the following parameters:
+// 
+// 	- hookList *HookList: a #GHookList 
+// 	- hook *Hook: the #GHook to add to the start of @hook_list 
+//
+// Prepends a #GHook on the start of a #GHookList.
+func HookPrepend(hookList *HookList, hook *Hook) {
+	var carg1 *C.GHookList // in, none, converted
+	var carg2 *C.GHook     // in, none, converted
+
+	carg1 = (*C.GHookList)(UnsafeHookListToGlibNone(hookList))
+	carg2 = (*C.GHook)(UnsafeHookToGlibNone(hook))
+
+	C.g_hook_prepend(carg1, carg2)
+	runtime.KeepAlive(hookList)
+	runtime.KeepAlive(hook)
+}
+
+// HookUnref wraps g_hook_unref
+// 
+// The function takes the following parameters:
+// 
+// 	- hookList *HookList: a #GHookList 
+// 	- hook *Hook: the #GHook to unref 
+//
+// Decrements the reference count of a #GHook.
+// If the reference count falls to 0, the #GHook is removed
+// from the #GHookList and g_hook_free() is called to free it.
+func HookUnref(hookList *HookList, hook *Hook) {
+	var carg1 *C.GHookList // in, none, converted
+	var carg2 *C.GHook     // in, none, converted
+
+	carg1 = (*C.GHookList)(UnsafeHookListToGlibNone(hookList))
+	carg2 = (*C.GHook)(UnsafeHookToGlibNone(hook))
+
+	C.g_hook_unref(carg1, carg2)
+	runtime.KeepAlive(hookList)
+	runtime.KeepAlive(hook)
+}
+
+// CompareIDs wraps g_hook_compare_ids
+// 
+// The function takes the following parameters:
+// 
+// 	- sibling *Hook: a #GHook to compare with @new_hook 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Compares the ids of two #GHook elements, returning a negative value
+// if the second id is greater than the first.
+func (newHook *Hook) CompareIDs(sibling *Hook) int32 {
+	var carg0 *C.GHook // in, none, converted
+	var carg1 *C.GHook // in, none, converted
+	var cret  C.gint   // return, none, casted
+
+	carg0 = (*C.GHook)(UnsafeHookToGlibNone(newHook))
+	carg1 = (*C.GHook)(UnsafeHookToGlibNone(sibling))
+
+	cret = C.g_hook_compare_ids(carg0, carg1)
+	runtime.KeepAlive(newHook)
+	runtime.KeepAlive(sibling)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// HookList wraps GHookList
+//
+// The #GHookList struct represents a list of hook functions.
+type HookList struct {
+	*hookList
+}
+
+// hookList is the struct that's finalized
+type hookList struct {
+	native *C.GHookList
+}
+
+// UnsafeHookListFromGlibBorrow is used to convert raw C.GHookList pointers to go. This is used by the bindings internally.
+func UnsafeHookListFromGlibBorrow(p unsafe.Pointer) *HookList {
+	return &HookList{&hookList{(*C.GHookList)(p)}}
+}
+
+// UnsafeHookListFromGlibNone is used to convert raw C.GHookList pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeHookListFromGlibNone(p unsafe.Pointer) *HookList {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeHookListFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.hookList,
+		func (intern *hookList) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeHookListFromGlibFull is used to convert raw C.GHookList pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeHookListFromGlibFull(p unsafe.Pointer) *HookList {
+	wrapped := UnsafeHookListFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.hookList,
+		func (intern *hookList) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeHookListFree unrefs/frees the underlying resource. This is used by the bindings internally.
+// 
+// After this is called, no other method on [HookList] is expected to work anymore.
+func UnsafeHookListFree(h *HookList) {
+	C.free(unsafe.Pointer(h.native))
+}
+
+// UnsafeHookListToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeHookListToGlibNone(h *HookList) unsafe.Pointer {
+	return unsafe.Pointer(h.native)
+}
+
+// UnsafeHookListToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeHookListToGlibFull(h *HookList) unsafe.Pointer {
+	runtime.SetFinalizer(h.hookList, nil)
+	_p := unsafe.Pointer(h.native)
+	h.native = nil // HookList is invalid from here on
+	return _p
+}
+
+// Clear wraps g_hook_list_clear
+//
+// Removes all the #GHook elements from a #GHookList.
+func (hookList *HookList) Clear() {
+	var carg0 *C.GHookList // in, none, converted
+
+	carg0 = (*C.GHookList)(UnsafeHookListToGlibNone(hookList))
+
+	C.g_hook_list_clear(carg0)
+	runtime.KeepAlive(hookList)
+}
+
+// Init wraps g_hook_list_init
+// 
+// The function takes the following parameters:
+// 
+// 	- hookSize uint: the size of each element in the #GHookList,
+//     typically `sizeof (GHook)`. 
+//
+// Initializes a #GHookList.
+// This must be called before the #GHookList is used.
+func (hookList *HookList) Init(hookSize uint) {
+	var carg0 *C.GHookList // in, none, converted
+	var carg1 C.guint      // in, none, casted
+
+	carg0 = (*C.GHookList)(UnsafeHookListToGlibNone(hookList))
+	carg1 = C.guint(hookSize)
+
+	C.g_hook_list_init(carg0, carg1)
+	runtime.KeepAlive(hookList)
+	runtime.KeepAlive(hookSize)
+}
+
+// Invoke wraps g_hook_list_invoke
+// 
+// The function takes the following parameters:
+// 
+// 	- mayRecurse bool: %TRUE if functions which are already running
+//     (e.g. in another thread) can be called. If set to %FALSE,
+//     these are skipped 
+//
+// Calls all of the #GHook functions in a #GHookList.
+func (hookList *HookList) Invoke(mayRecurse bool) {
+	var carg0 *C.GHookList // in, none, converted
+	var carg1 C.gboolean   // in
+
+	carg0 = (*C.GHookList)(UnsafeHookListToGlibNone(hookList))
+	if mayRecurse {
+		carg1 = C.TRUE
+	}
+
+	C.g_hook_list_invoke(carg0, carg1)
+	runtime.KeepAlive(hookList)
+	runtime.KeepAlive(mayRecurse)
+}
+
+// InvokeCheck wraps g_hook_list_invoke_check
+// 
+// The function takes the following parameters:
+// 
+// 	- mayRecurse bool: %TRUE if functions which are already running
+//     (e.g. in another thread) can be called. If set to %FALSE,
+//     these are skipped 
+//
+// Calls all of the #GHook functions in a #GHookList.
+// Any function which returns %FALSE is removed from the #GHookList.
+func (hookList *HookList) InvokeCheck(mayRecurse bool) {
+	var carg0 *C.GHookList // in, none, converted
+	var carg1 C.gboolean   // in
+
+	carg0 = (*C.GHookList)(UnsafeHookListToGlibNone(hookList))
+	if mayRecurse {
+		carg1 = C.TRUE
+	}
+
+	C.g_hook_list_invoke_check(carg0, carg1)
+	runtime.KeepAlive(hookList)
+	runtime.KeepAlive(mayRecurse)
+}
+
 // IOChannel wraps GIOChannel
 //
 // The `GIOChannel` data type aims to provide a portable method for
@@ -18140,9 +21146,9 @@ func (hmac *Hmac) Update(data []byte) {
 // [method@GLib.IOChannel.ref] and [method@GLib.IOChannel.unref] can be used to
 // increment or decrement the reference count respectively. When the
 // reference count falls to 0, the `GIOChannel` is freed. (Though it
-// isn’t closed automatically, unless it was created using
+// isn&#x2019;t closed automatically, unless it was created using
 // [ctor@GLib.IOChannel.new_file].) Using [func@GLib.io_add_watch] or
-// [func@GLib.io_add_watch_full] increments a channel’s reference count.
+// [func@GLib.io_add_watch_full] increments a channel&#x2019;s reference count.
 // 
 // The new functions [method@GLib.IOChannel.read_chars],
 // [method@GLib.IOChannel.read_line], [method@GLib.IOChannel.read_line_string],
@@ -19076,7 +22082,7 @@ func UnsafeIOFuncsToGlibFull(i *IOFuncs) unsafe.Pointer {
 // `GKeyFile` parses .ini-like config files.
 // 
 // `GKeyFile` lets you parse, edit or create files containing groups of
-// key-value pairs, which we call ‘key files’ for lack of a better name.
+// key-value pairs, which we call &#x2018;key files&#x2019; for lack of a better name.
 // Several freedesktop.org specifications use key files. For example, the
 // [Desktop Entry Specification](https://specifications.freedesktop.org/desktop-entry-spec/latest/)
 // and the [Icon Theme Specification](https://specifications.freedesktop.org/icon-theme-spec/latest/).
@@ -19142,7 +22148,7 @@ func UnsafeIOFuncsToGlibFull(i *IOFuncs) unsafe.Pointer {
 // - Key and Group names are case-sensitive. For example, a group called
 //   `[GROUP]` is a different from `[group]`.
 // 
-// - .ini files don’t have a strongly typed boolean entry type,
+// - .ini files don&#x2019;t have a strongly typed boolean entry type,
 //    they only have `GetProfileInt()`. In key files, only
 //    `true` and `false` (in lower case) are allowed.
 // 
@@ -19184,7 +22190,7 @@ func UnsafeIOFuncsToGlibFull(i *IOFuncs) unsafe.Pointer {
 // 
 // ```c
 // g_autoptr(GKeyFile) key_file = g_key_file_new ();
-// const gchar *val = …;
+// const gchar *val = &#x2026;;
 // g_autoptr(GError) error = NULL;
 // 
 // g_key_file_set_string (key_file, "Group Name", "SomeKey", val);
@@ -20360,7 +23366,7 @@ func (keyFile *KeyFile) LoadFromData(data string, length uint, flags KeyFileFlag
 // [func@GLib.get_user_data_dir] and [func@GLib.get_system_data_dirs].
 // 
 // The search algorithm from [method@GLib.KeyFile.load_from_dirs] is used. If
-// @file is found, it’s loaded into @key_file and its full path is returned in
+// @file is found, it&#x2019;s loaded into @key_file and its full path is returned in
 // @full_path.
 // 
 // If the file could not be loaded then either a [error@GLib.FileError] or
@@ -20416,11 +23422,11 @@ func (keyFile *KeyFile) LoadFromDataDirs(file string, flags KeyFileFlags) (strin
 // 	- _goerr error (nullable): an error 
 //
 // Looks for a key file named @file in the paths specified in @search_dirs,
-// loads the file into @key_file and returns the file’s full path in @full_path.
+// loads the file into @key_file and returns the file&#x2019;s full path in @full_path.
 // 
 // @search_dirs are checked in the order listed in the array, with the highest
 // priority directory listed first. Within each directory, @file is looked for.
-// If it’s not found, `-` characters in @file are progressively replaced with
+// If it&#x2019;s not found, `-` characters in @file are progressively replaced with
 // directory separators to search subdirectories of the search directory. If the
 // file has not been found after all `-` characters have been replaced, the next
 // search directory in @search_dirs is checked.
@@ -20789,6 +23795,11 @@ func (keyFile *KeyFile) SetBooleanList(groupName string, key string, list []bool
 // If @key is `NULL` then @comment will be written above @group_name.
 // If both @key and @group_name are `NULL`, then @comment will be
 // written above the first group in the file.
+// 
+// Passing a non-existent @group_name or @key to this function returns
+// false and populates @error. (In contrast, passing a non-existent
+// `group_name` or `key` to [method@GLib.KeyFile.set_string]
+// creates the associated group name and key.)
 // 
 // Note that this function prepends a `#` comment marker to
 // each line of @comment.
@@ -21671,47 +24682,6 @@ func (_context *MainContext) Dispatch() {
 
 	C.g_main_context_dispatch(carg0)
 	runtime.KeepAlive(_context)
-}
-
-// FindSourceByID wraps g_main_context_find_source_by_id
-// 
-// The function takes the following parameters:
-// 
-// 	- sourceId uint: the source ID, as returned by [method@GLib.Source.get_id]. 
-// 
-// The function returns the following values:
-// 
-// 	- goret *Source 
-//
-// Finds a #GSource given a pair of context and ID.
-// 
-// It is a programmer error to attempt to look up a non-existent source.
-// 
-// More specifically: source IDs can be reissued after a source has been
-// destroyed and therefore it is never valid to use this function with a
-// source ID which may have already been removed.  An example is when
-// scheduling an idle to run in another thread with [func@GLib.idle_add]: the
-// idle may already have run and been removed by the time this function
-// is called on its (now invalid) source ID.  This source ID may have
-// been reissued, leading to the operation being performed against the
-// wrong source.
-func (_context *MainContext) FindSourceByID(sourceId uint) *Source {
-	var carg0 *C.GMainContext // in, none, converted
-	var carg1 C.guint         // in, none, casted
-	var cret  *C.GSource      // return, none, converted
-
-	carg0 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
-	carg1 = C.guint(sourceId)
-
-	cret = C.g_main_context_find_source_by_id(carg0, carg1)
-	runtime.KeepAlive(_context)
-	runtime.KeepAlive(sourceId)
-
-	var goret *Source
-
-	goret = UnsafeSourceFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // InvokeFull wraps g_main_context_invoke_full
@@ -22733,6 +25703,10 @@ func (_context *MarkupParseContext) Parse(text string, textLen int) (bool, error
 // errors are intended to be set from these callbacks. If you set an error
 // from a callback, g_markup_parse_context_parse() will report that error
 // back to its caller.
+// 
+// Refer to the [GMarkup](../glib/markup.html) documentation to understand
+// the scope and limitations of `GMarkupParser`. In particular, it is not a
+// full XML parser and it must not be used to process untrusted data.
 type MarkupParser struct {
 	*markupParser
 }
@@ -23060,7 +26034,7 @@ func (matchInfo *MatchInfo) FetchNamed(name string) string {
 // 	- startPos int32: pointer to location where to store
 //     the start position, or %NULL 
 // 	- endPos int32: pointer to location where to store
-//     the end position, or %NULL 
+//     the end position (the byte after the final byte of the match), or %NULL 
 // 	- goret bool 
 //
 // Retrieves the position in bytes of the capturing parentheses named @name.
@@ -23068,6 +26042,9 @@ func (matchInfo *MatchInfo) FetchNamed(name string) string {
 // If @name is a valid sub pattern name but it didn't match anything
 // (e.g. sub pattern `"X"`, matching `"b"` against `"(?P&lt;X&gt;a)?b"`)
 // then @start_pos and @end_pos are set to -1 and %TRUE is returned.
+// 
+// As @end_pos is set to the byte after the final byte of the match (on success),
+// the length of the match can be calculated as `end_pos - start_pos`.
 func (matchInfo *MatchInfo) FetchNamedPos(name string) (int32, int32, bool) {
 	var carg0 *C.GMatchInfo // in, none, converted
 	var carg1 *C.gchar      // in, none, string
@@ -23100,29 +26077,219 @@ func (matchInfo *MatchInfo) FetchNamedPos(name string) (int32, int32, bool) {
 // 
 // The function takes the following parameters:
 // 
-// 	- matchNum int32: number of the sub expression 
+// 	- matchNum int32: number of the capture parenthesis 
 // 
 // The function returns the following values:
 // 
 // 	- startPos int32: pointer to location where to store
 //     the start position, or %NULL 
 // 	- endPos int32: pointer to location where to store
-//     the end position, or %NULL 
+//     the end position (the byte after the final byte of the match), or %NULL 
 // 	- goret bool 
 //
-// Retrieves the position in bytes of the @match_num'th capturing
-// parentheses. 0 is the full text of the match, 1 is the first
-// paren set, 2 the second, and so on.
+// Returns the start and end positions (in bytes) of a successfully matching
+// capture parenthesis.
 // 
-// If @match_num is a valid sub pattern but it didn't match anything
-// (e.g. sub pattern 1, matching "b" against "(a)?b") then @start_pos
-// and @end_pos are set to -1 and %TRUE is returned.
+// Valid values for @match_num are `0` for the full text of the match,
+// `1` for the first paren set, `2` for the second, and so on.
 // 
-// If the match was obtained using the DFA algorithm, that is using
-// g_regex_match_all() or g_regex_match_all_full(), the retrieved
-// position is not that of a set of parentheses but that of a matched
-// substring. Substrings are matched in reverse order of length, so
-// 0 is the longest match.
+// As @end_pos is set to the byte after the final byte of the match (on success),
+// the length of the match can be calculated as `end_pos - start_pos`.
+// 
+// As a best practice, initialize @start_pos and @end_pos to identifiable
+// values, such as `G_MAXINT`, so that you can test if
+// `g_match_info_fetch_pos()` actually changed the value for a given
+// capture parenthesis.
+// 
+// The parameter @match_num corresponds to a matched capture parenthesis. The
+// actual value you use for @match_num depends on the method used to generate
+// @match_info. The following sections describe those methods.
+// 
+// ## Methods Using Non-deterministic Finite Automata Matching
+// 
+// The methods [method@GLib.Regex.match] and [method@GLib.Regex.match_full]
+// return a [struct@GLib.MatchInfo] using traditional (greedy) pattern
+// matching, also known as
+// [Non-deterministic Finite Automaton](https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton)
+// (NFA) matching. You pass the returned `GMatchInfo` from these methods to
+// `g_match_info_fetch_pos()` to determine the start and end positions
+// of capture parentheses. The values for @match_num correspond to the capture
+// parentheses in order, with `0` corresponding to the entire matched string.
+// 
+// @match_num can refer to a capture parenthesis with no match. For example,
+// the string `b` matches against the pattern `(a)?b`, but the capture
+// parenthesis `(a)` has no match. In this case, `g_match_info_fetch_pos()`
+// returns true and sets @start_pos and @end_pos to `-1` when called with
+// `match_num` as `1` (for `(a)`).
+// 
+// For an expanded example, a regex pattern is `(a)?(.*?)the (.*)`,
+// and a candidate string is `glib regexes are the best`. In this scenario
+// there are four capture parentheses numbered 0&#x2013;3: an implicit one
+// for the entire string, and three explicitly declared in the regex pattern.
+// 
+// Given this example, the following table describes the return values
+// from `g_match_info_fetch_pos()` for various values of @match_num.
+// 
+// `match_num` | Contents | Return value | Returned `start_pos` | Returned `end_pos`
+// ----------- | -------- | ------------ | -------------------- | ------------------
+// 0 | Matches entire string | True | 0 | 25
+// 1 | Does not match first character | True | -1 | -1
+// 2 | All text before `the ` | True | 0 | 17
+// 3 | All text after `the ` | True | 21 | 25
+// 4 | Capture paren out of range | False | Unchanged | Unchanged
+// 
+// The following code sample and output implements this example.
+// 
+// ``` { .c }
+// #include &lt;glib.h&gt;
+// 
+// int
+// main (int argc, char *argv[])
+// {
+//   g_autoptr(GError) local_error = NULL;
+//   const char *regex_pattern = "(a)?(.*?)the (.*)";
+//   const char *test_string = "glib regexes are the best";
+//   g_autoptr(GRegex) regex = NULL;
+// 
+//   regex = g_regex_new (regex_pattern,
+//                        G_REGEX_DEFAULT,
+//                        G_REGEX_MATCH_DEFAULT,
+//                        &amp;local_error);
+//   if (regex == NULL)
+//     {
+//       g_printerr ("Error creating regex: %s\n", local_error-&gt;message);
+//       return 1;
+//     }
+// 
+//   g_autoptr(GMatchInfo) match_info = NULL;
+//   g_regex_match (regex, test_string, G_REGEX_MATCH_DEFAULT, &amp;match_info);
+// 
+//   int n_matched_strings = g_match_info_get_match_count (match_info);
+// 
+//   // Print header line
+//   g_print ("match_num Contents                  Return value returned start_pos returned end_pos\n");
+// 
+//   // Iterate over each capture paren, including one that is out of range as a demonstration.
+//   for (int match_num = 0; match_num &lt;= n_matched_strings; match_num++)
+//     {
+//       gboolean found_match;
+//       g_autofree char *paren_string = NULL;
+//       int start_pos = G_MAXINT;
+//       int end_pos = G_MAXINT;
+// 
+//       found_match = g_match_info_fetch_pos (match_info,
+//                                             match_num,
+//                                             &amp;start_pos,
+//                                             &amp;end_pos);
+// 
+//       // If no match, display N/A as the found string.
+//       if (start_pos == G_MAXINT || start_pos == -1)
+//         paren_string = g_strdup ("N/A");
+//       else
+//         paren_string = g_strndup (test_string + start_pos, end_pos - start_pos);
+// 
+//       g_print ("%-9d %-25s %-12d %-18d %d\n", match_num, paren_string, found_match, start_pos, end_pos);
+//     }
+// 
+//   return 0;
+// }
+// ```
+// 
+// ```
+// match_num Contents                  Return value returned start_pos returned end_pos
+// 0         glib regexes are the best 1            0                  25
+// 1         N/A                       1            -1                 -1
+// 2         glib regexes are          1            0                  17
+// 3         best                      1            21                 25
+// 4         N/A                       0            2147483647         2147483647
+// ```
+// ## Methods Using Deterministic Finite Automata Matching
+// 
+// The methods [method@GLib.Regex.match_all] and
+// [method@GLib.Regex.match_all_full]
+// return a `GMatchInfo` using
+// [Deterministic Finite Automaton](https://en.wikipedia.org/wiki/Deterministic_finite_automaton)
+// (DFA) pattern matching. This algorithm detects overlapping matches. You pass
+// the returned `GMatchInfo` from these methods to `g_match_info_fetch_pos()`
+// to determine the start and end positions of each overlapping match. Use the
+// method [method@GLib.MatchInfo.get_match_count] to determine the number
+// of overlapping matches.
+// 
+// For example, a regex pattern is `&lt;.*&gt;`, and a candidate string is
+// `&lt;a&gt; &lt;b&gt; &lt;c&gt;`. In this scenario there are three implicit capture
+// parentheses: one for the entire string, one for `&lt;a&gt; &lt;b&gt;`, and one for `&lt;a&gt;`.
+// 
+// Given this example, the following table describes the return values from
+// `g_match_info_fetch_pos()` for various values of @match_num.
+// 
+// `match_num` | Contents | Return value | Returned `start_pos` | Returned `end_pos`
+// ----------- | -------- | ------------ | -------------------- | ------------------
+// 0 | Matches entire string | True | 0 | 11
+// 1 | Matches `&lt;a&gt; &lt;b&gt;` | True | 0 | 7
+// 2 | Matches `&lt;a&gt;` | True | 0 | 3
+// 3 | Capture paren out of range | False | Unchanged | Unchanged
+// 
+// The following code sample and output implements this example.
+// 
+// ``` { .c }
+// #include &lt;glib.h&gt;
+// 
+// int
+// main (int argc, char *argv[])
+// {
+//   g_autoptr(GError) local_error = NULL;
+//   const char *regex_pattern = "&lt;.*&gt;";
+//   const char *test_string = "&lt;a&gt; &lt;b&gt; &lt;c&gt;";
+//   g_autoptr(GRegex) regex = NULL;
+// 
+//   regex = g_regex_new (regex_pattern,
+//                        G_REGEX_DEFAULT,
+//                        G_REGEX_MATCH_DEFAULT,
+//                        &amp;local_error);
+//   if (regex == NULL)
+//     {
+//       g_printerr ("Error creating regex: %s\n", local_error-&gt;message);
+//       return -1;
+//     }
+// 
+//   g_autoptr(GMatchInfo) match_info = NULL;
+//   g_regex_match_all (regex, test_string, G_REGEX_MATCH_DEFAULT, &amp;match_info);
+// 
+//   int n_matched_strings = g_match_info_get_match_count (match_info);
+// 
+//   // Print header line
+//   g_print ("match_num Contents                  Return value returned start_pos returned end_pos\n");
+// 
+//   // Iterate over each capture paren, including one that is out of range as a demonstration.
+//   for (int match_num = 0; match_num &lt;= n_matched_strings; match_num++)
+//     {
+//       gboolean found_match;
+//       g_autofree char *paren_string = NULL;
+//       int start_pos = G_MAXINT;
+//       int end_pos = G_MAXINT;
+// 
+//       found_match = g_match_info_fetch_pos (match_info, match_num, &amp;start_pos, &amp;end_pos);
+// 
+//       // If no match, display N/A as the found string.
+//       if (start_pos == G_MAXINT || start_pos == -1)
+//         paren_string = g_strdup ("N/A");
+//       else
+//         paren_string = g_strndup (test_string + start_pos, end_pos - start_pos);
+// 
+//       g_print ("%-9d %-25s %-12d %-18d %d\n", match_num, paren_string, found_match, start_pos, end_pos);
+//     }
+// 
+//   return 0;
+// }
+// ```
+// 
+// ```
+// match_num Contents                  Return value returned start_pos returned end_pos
+// 0         &lt;a&gt; &lt;b&gt; &lt;c&gt;               1            0                  11
+// 1         &lt;a&gt; &lt;b&gt;                   1            0                  7
+// 2         &lt;a&gt;                       1            0                  3
+// 3         N/A                       0            2147483647         2147483647
+// ```
 func (matchInfo *MatchInfo) FetchPos(matchNum int32) (int32, int32, bool) {
 	var carg0 *C.GMatchInfo // in, none, converted
 	var carg1 C.gint        // in, none, casted
@@ -23245,7 +26412,7 @@ func (matchInfo *MatchInfo) GetString() string {
 // type in data for a field with specific formatting requirements. An
 // example might be a date in the form ddmmmyy, defined by the pattern
 // "^\d?\d(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\d\d$".
-// If the application sees the user’s keystrokes one by one, and can
+// If the application sees the user&#x2019;s keystrokes one by one, and can
 // check that what has been typed so far is potentially valid, it is
 // able to raise an error as soon as a mistake is made.
 // 
@@ -23346,6 +26513,73 @@ func (matchInfo *MatchInfo) Next() (bool, error) {
 	}
 
 	return goret, _goerr
+}
+
+// MemVTable wraps GMemVTable
+//
+// A set of functions used to perform memory allocation. The same #GMemVTable must
+// be used for all allocations in the same program; a call to g_mem_set_vtable(),
+// if it exists, should be prior to any use of GLib.
+// 
+// This functions related to this has been deprecated in 2.46, and no longer work.
+type MemVTable struct {
+	*memVTable
+}
+
+// memVTable is the struct that's finalized
+type memVTable struct {
+	native *C.GMemVTable
+}
+
+// UnsafeMemVTableFromGlibBorrow is used to convert raw C.GMemVTable pointers to go. This is used by the bindings internally.
+func UnsafeMemVTableFromGlibBorrow(p unsafe.Pointer) *MemVTable {
+	return &MemVTable{&memVTable{(*C.GMemVTable)(p)}}
+}
+
+// UnsafeMemVTableFromGlibNone is used to convert raw C.GMemVTable pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeMemVTableFromGlibNone(p unsafe.Pointer) *MemVTable {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeMemVTableFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.memVTable,
+		func (intern *memVTable) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeMemVTableFromGlibFull is used to convert raw C.GMemVTable pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeMemVTableFromGlibFull(p unsafe.Pointer) *MemVTable {
+	wrapped := UnsafeMemVTableFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.memVTable,
+		func (intern *memVTable) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeMemVTableFree unrefs/frees the underlying resource. This is used by the bindings internally.
+// 
+// After this is called, no other method on [MemVTable] is expected to work anymore.
+func UnsafeMemVTableFree(m *MemVTable) {
+	C.free(unsafe.Pointer(m.native))
+}
+
+// UnsafeMemVTableToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeMemVTableToGlibNone(m *MemVTable) unsafe.Pointer {
+	return unsafe.Pointer(m.native)
+}
+
+// UnsafeMemVTableToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeMemVTableToGlibFull(m *MemVTable) unsafe.Pointer {
+	runtime.SetFinalizer(m.memVTable, nil)
+	_p := unsafe.Pointer(m.native)
+	m.native = nil // MemVTable is invalid from here on
+	return _p
 }
 
 // Node wraps GNode
@@ -23607,6 +26841,100 @@ func (node *Node) Unlink() {
 
 	C.g_node_unlink(carg0)
 	runtime.KeepAlive(node)
+}
+
+// Once wraps GOnce
+//
+// A #GOnce struct controls a one-time initialization function. Any
+// one-time initialization function must have its own unique #GOnce
+// struct.
+type Once struct {
+	*once
+}
+
+// once is the struct that's finalized
+type once struct {
+	native *C.GOnce
+}
+
+// UnsafeOnceFromGlibBorrow is used to convert raw C.GOnce pointers to go. This is used by the bindings internally.
+func UnsafeOnceFromGlibBorrow(p unsafe.Pointer) *Once {
+	return &Once{&once{(*C.GOnce)(p)}}
+}
+
+// UnsafeOnceFromGlibNone is used to convert raw C.GOnce pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeOnceFromGlibNone(p unsafe.Pointer) *Once {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeOnceFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.once,
+		func (intern *once) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeOnceFromGlibFull is used to convert raw C.GOnce pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeOnceFromGlibFull(p unsafe.Pointer) *Once {
+	wrapped := UnsafeOnceFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.once,
+		func (intern *once) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeOnceFree unrefs/frees the underlying resource. This is used by the bindings internally.
+// 
+// After this is called, no other method on [Once] is expected to work anymore.
+func UnsafeOnceFree(o *Once) {
+	C.free(unsafe.Pointer(o.native))
+}
+
+// UnsafeOnceToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeOnceToGlibNone(o *Once) unsafe.Pointer {
+	return unsafe.Pointer(o.native)
+}
+
+// UnsafeOnceToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeOnceToGlibFull(o *Once) unsafe.Pointer {
+	runtime.SetFinalizer(o.once, nil)
+	_p := unsafe.Pointer(o.native)
+	o.native = nil // Once is invalid from here on
+	return _p
+}
+
+// OnceInitEnterImpl wraps g_once_init_enter_impl
+// 
+// The function takes the following parameters:
+// 
+// 	- location *uint 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+func OnceInitEnterImpl(location *uint) bool {
+	var carg1 *C.gsize   // in, transfer: none, C Pointers: 1, Name: gsize
+	var cret  C.gboolean // return
+
+	_ = location
+	_ = carg1
+	panic("unimplemented conversion of *uint (volatile gsize*)")
+
+	cret = C.g_once_init_enter_impl(carg1)
+	runtime.KeepAlive(location)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
 }
 
 // OptionContext wraps GOptionContext
@@ -24773,7 +28101,7 @@ func (buf *PathBuf) ToPath() string {
 
 // PatternSpec wraps GPatternSpec
 //
-// A `GPatternSpec` struct is the ‘compiled’ form of a glob-style pattern.
+// A `GPatternSpec` struct is the &#x2018;compiled&#x2019; form of a glob-style pattern.
 // 
 // The [func@GLib.pattern_match_simple] and [method@GLib.PatternSpec.match] functions
 // match a string against a pattern containing `*` and `?` wildcards with similar
@@ -24781,7 +28109,7 @@ func (buf *PathBuf) ToPath() string {
 // possibly empty, string, `?` matches an arbitrary character.
 // 
 // Note that in contrast to [`glob()`](man:glob(3)), the `/` character can be
-// matched by the wildcards, there are no `[…]` character ranges and `*` and `?`
+// matched by the wildcards, there are no `[&#x2026;]` character ranges and `*` and `?`
 // can not be escaped to include them literally in a pattern.
 // 
 // When multiple strings must be matched against the same pattern, it is better
@@ -24957,7 +28285,7 @@ func (pspec1 *PatternSpec) Equal(pspec2 *PatternSpec) bool {
 // 
 // Note that, if the user code will (possibly) match a string against a
 // multitude of patterns containing wildcards, chances are high that
-// some patterns will require a reversed string. In this case, it’s
+// some patterns will require a reversed string. In this case, it&#x2019;s
 // more efficient to provide the reversed string to avoid multiple
 // constructions thereof in the various calls to [method@GLib.PatternSpec.match].
 // 
@@ -25095,6 +28423,312 @@ func UnsafePollFDToGlibFull(p *PollFD) unsafe.Pointer {
 	_p := unsafe.Pointer(p.native)
 	p.native = nil // PollFD is invalid from here on
 	return _p
+}
+
+// RWLock wraps GRWLock
+//
+// The GRWLock struct is an opaque data structure to represent a
+// reader-writer lock. It is similar to a #GMutex in that it allows
+// multiple threads to coordinate access to a shared resource.
+// 
+// The difference to a mutex is that a reader-writer lock discriminates
+// between read-only ('reader') and full ('writer') access. While only
+// one thread at a time is allowed write access (by holding the 'writer'
+// lock via g_rw_lock_writer_lock()), multiple threads can gain
+// simultaneous read-only access (by holding the 'reader' lock via
+// g_rw_lock_reader_lock()).
+// 
+// It is unspecified whether readers or writers have priority in acquiring the
+// lock when a reader already holds the lock and a writer is queued to acquire
+// it.
+// 
+// Here is an example for an array with access functions:
+// |[&lt;!-- language="C" --&gt;
+//   GRWLock lock;
+//   GPtrArray *array;
+// 
+//   gpointer
+//   my_array_get (guint index)
+//   {
+//     gpointer retval = NULL;
+// 
+//     if (!array)
+//       return NULL;
+// 
+//     g_rw_lock_reader_lock (&amp;lock);
+//     if (index &lt; array-&gt;len)
+//       retval = g_ptr_array_index (array, index);
+//     g_rw_lock_reader_unlock (&amp;lock);
+// 
+//     return retval;
+//   }
+// 
+//   void
+//   my_array_set (guint index, gpointer data)
+//   {
+//     g_rw_lock_writer_lock (&amp;lock);
+// 
+//     if (!array)
+//       array = g_ptr_array_new ();
+// 
+//     if (index &gt;= array-&gt;len)
+//       g_ptr_array_set_size (array, index+1);
+//     g_ptr_array_index (array, index) = data;
+// 
+//     g_rw_lock_writer_unlock (&amp;lock);
+//   }
+//  ]|
+// This example shows an array which can be accessed by many readers
+// (the my_array_get() function) simultaneously, whereas the writers
+// (the my_array_set() function) will only be allowed one at a time
+// and only if no readers currently access the array. This is because
+// of the potentially dangerous resizing of the array. Using these
+// functions is fully multi-thread safe now.
+// 
+// If a #GRWLock is allocated in static storage then it can be used
+// without initialisation.  Otherwise, you should call
+// g_rw_lock_init() on it and g_rw_lock_clear() when done.
+// 
+// A GRWLock should only be accessed with the g_rw_lock_ functions.
+type RWLock struct {
+	*rwLock
+}
+
+// rwLock is the struct that's finalized
+type rwLock struct {
+	native *C.GRWLock
+}
+
+// UnsafeRWLockFromGlibBorrow is used to convert raw C.GRWLock pointers to go. This is used by the bindings internally.
+func UnsafeRWLockFromGlibBorrow(p unsafe.Pointer) *RWLock {
+	return &RWLock{&rwLock{(*C.GRWLock)(p)}}
+}
+
+// UnsafeRWLockFromGlibNone is used to convert raw C.GRWLock pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeRWLockFromGlibNone(p unsafe.Pointer) *RWLock {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeRWLockFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.rwLock,
+		func (intern *rwLock) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeRWLockFromGlibFull is used to convert raw C.GRWLock pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeRWLockFromGlibFull(p unsafe.Pointer) *RWLock {
+	wrapped := UnsafeRWLockFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.rwLock,
+		func (intern *rwLock) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeRWLockFree unrefs/frees the underlying resource. This is used by the bindings internally.
+// 
+// After this is called, no other method on [RWLock] is expected to work anymore.
+func UnsafeRWLockFree(r *RWLock) {
+	C.free(unsafe.Pointer(r.native))
+}
+
+// UnsafeRWLockToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeRWLockToGlibNone(r *RWLock) unsafe.Pointer {
+	return unsafe.Pointer(r.native)
+}
+
+// UnsafeRWLockToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeRWLockToGlibFull(r *RWLock) unsafe.Pointer {
+	runtime.SetFinalizer(r.rwLock, nil)
+	_p := unsafe.Pointer(r.native)
+	r.native = nil // RWLock is invalid from here on
+	return _p
+}
+
+// Clear wraps g_rw_lock_clear
+//
+// Frees the resources allocated to a lock with g_rw_lock_init().
+// 
+// This function should not be used with a #GRWLock that has been
+// statically allocated.
+// 
+// Calling g_rw_lock_clear() when any thread holds the lock
+// leads to undefined behaviour.
+func (rwLock *RWLock) Clear() {
+	var carg0 *C.GRWLock // in, none, converted
+
+	carg0 = (*C.GRWLock)(UnsafeRWLockToGlibNone(rwLock))
+
+	C.g_rw_lock_clear(carg0)
+	runtime.KeepAlive(rwLock)
+}
+
+// Init wraps g_rw_lock_init
+//
+// Initializes a #GRWLock so that it can be used.
+// 
+// This function is useful to initialize a lock that has been
+// allocated on the stack, or as part of a larger structure.  It is not
+// necessary to initialise a reader-writer lock that has been statically
+// allocated.
+// 
+// |[&lt;!-- language="C" --&gt;
+//   typedef struct {
+//     GRWLock l;
+//     ...
+//   } Blob;
+// 
+// Blob *b;
+// 
+// b = g_new (Blob, 1);
+// g_rw_lock_init (&amp;b-&gt;l);
+// ]|
+// 
+// To undo the effect of g_rw_lock_init() when a lock is no longer
+// needed, use g_rw_lock_clear().
+// 
+// Calling g_rw_lock_init() on an already initialized #GRWLock leads
+// to undefined behaviour.
+func (rwLock *RWLock) Init() {
+	var carg0 *C.GRWLock // in, none, converted
+
+	carg0 = (*C.GRWLock)(UnsafeRWLockToGlibNone(rwLock))
+
+	C.g_rw_lock_init(carg0)
+	runtime.KeepAlive(rwLock)
+}
+
+// ReaderLock wraps g_rw_lock_reader_lock
+//
+// Obtain a read lock on @rw_lock. If another thread currently holds
+// the write lock on @rw_lock, the current thread will block until the
+// write lock was (held and) released. If another thread does not hold
+// the write lock, but is waiting for it, it is implementation defined
+// whether the reader or writer will block. Read locks can be taken
+// recursively.
+// 
+// Calling g_rw_lock_reader_lock() while the current thread already
+// owns a write lock leads to undefined behaviour. Read locks however
+// can be taken recursively, in which case you need to make sure to
+// call g_rw_lock_reader_unlock() the same amount of times.
+// 
+// It is implementation-defined how many read locks are allowed to be
+// held on the same lock simultaneously. If the limit is hit,
+// or if a deadlock is detected, a critical warning will be emitted.
+func (rwLock *RWLock) ReaderLock() {
+	var carg0 *C.GRWLock // in, none, converted
+
+	carg0 = (*C.GRWLock)(UnsafeRWLockToGlibNone(rwLock))
+
+	C.g_rw_lock_reader_lock(carg0)
+	runtime.KeepAlive(rwLock)
+}
+
+// ReaderTrylock wraps g_rw_lock_reader_trylock
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Tries to obtain a read lock on @rw_lock and returns %TRUE if
+// the read lock was successfully obtained. Otherwise it
+// returns %FALSE.
+func (rwLock *RWLock) ReaderTrylock() bool {
+	var carg0 *C.GRWLock // in, none, converted
+	var cret  C.gboolean // return
+
+	carg0 = (*C.GRWLock)(UnsafeRWLockToGlibNone(rwLock))
+
+	cret = C.g_rw_lock_reader_trylock(carg0)
+	runtime.KeepAlive(rwLock)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ReaderUnlock wraps g_rw_lock_reader_unlock
+//
+// Release a read lock on @rw_lock.
+// 
+// Calling g_rw_lock_reader_unlock() on a lock that is not held
+// by the current thread leads to undefined behaviour.
+func (rwLock *RWLock) ReaderUnlock() {
+	var carg0 *C.GRWLock // in, none, converted
+
+	carg0 = (*C.GRWLock)(UnsafeRWLockToGlibNone(rwLock))
+
+	C.g_rw_lock_reader_unlock(carg0)
+	runtime.KeepAlive(rwLock)
+}
+
+// WriterLock wraps g_rw_lock_writer_lock
+//
+// Obtain a write lock on @rw_lock. If another thread currently holds
+// a read or write lock on @rw_lock, the current thread will block
+// until all other threads have dropped their locks on @rw_lock.
+// 
+// Calling g_rw_lock_writer_lock() while the current thread already
+// owns a read or write lock on @rw_lock leads to undefined behaviour.
+func (rwLock *RWLock) WriterLock() {
+	var carg0 *C.GRWLock // in, none, converted
+
+	carg0 = (*C.GRWLock)(UnsafeRWLockToGlibNone(rwLock))
+
+	C.g_rw_lock_writer_lock(carg0)
+	runtime.KeepAlive(rwLock)
+}
+
+// WriterTrylock wraps g_rw_lock_writer_trylock
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Tries to obtain a write lock on @rw_lock. If another thread
+// currently holds a read or write lock on @rw_lock, it immediately
+// returns %FALSE.
+// Otherwise it locks @rw_lock and returns %TRUE.
+func (rwLock *RWLock) WriterTrylock() bool {
+	var carg0 *C.GRWLock // in, none, converted
+	var cret  C.gboolean // return
+
+	carg0 = (*C.GRWLock)(UnsafeRWLockToGlibNone(rwLock))
+
+	cret = C.g_rw_lock_writer_trylock(carg0)
+	runtime.KeepAlive(rwLock)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// WriterUnlock wraps g_rw_lock_writer_unlock
+//
+// Release a write lock on @rw_lock.
+// 
+// Calling g_rw_lock_writer_unlock() on a lock that is not held
+// by the current thread leads to undefined behaviour.
+func (rwLock *RWLock) WriterUnlock() {
+	var carg0 *C.GRWLock // in, none, converted
+
+	carg0 = (*C.GRWLock)(UnsafeRWLockToGlibNone(rwLock))
+
+	C.g_rw_lock_writer_unlock(carg0)
+	runtime.KeepAlive(rwLock)
 }
 
 // Rand wraps GRand
@@ -25436,60 +29070,326 @@ func (rand_ *Rand) SetSeedArray(seed *uint32, seedLength uint) {
 	runtime.KeepAlive(seedLength)
 }
 
+// RecMutex wraps GRecMutex
+//
+// The GRecMutex struct is an opaque data structure to represent a
+// recursive mutex. It is similar to a #GMutex with the difference
+// that it is possible to lock a GRecMutex multiple times in the same
+// thread without deadlock. When doing so, care has to be taken to
+// unlock the recursive mutex as often as it has been locked.
+// 
+// If a #GRecMutex is allocated in static storage then it can be used
+// without initialisation.  Otherwise, you should call
+// g_rec_mutex_init() on it and g_rec_mutex_clear() when done.
+// 
+// A GRecMutex should only be accessed with the
+// g_rec_mutex_ functions.
+type RecMutex struct {
+	*recMutex
+}
+
+// recMutex is the struct that's finalized
+type recMutex struct {
+	native *C.GRecMutex
+}
+
+// UnsafeRecMutexFromGlibBorrow is used to convert raw C.GRecMutex pointers to go. This is used by the bindings internally.
+func UnsafeRecMutexFromGlibBorrow(p unsafe.Pointer) *RecMutex {
+	return &RecMutex{&recMutex{(*C.GRecMutex)(p)}}
+}
+
+// UnsafeRecMutexFromGlibNone is used to convert raw C.GRecMutex pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeRecMutexFromGlibNone(p unsafe.Pointer) *RecMutex {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeRecMutexFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.recMutex,
+		func (intern *recMutex) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeRecMutexFromGlibFull is used to convert raw C.GRecMutex pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeRecMutexFromGlibFull(p unsafe.Pointer) *RecMutex {
+	wrapped := UnsafeRecMutexFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.recMutex,
+		func (intern *recMutex) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeRecMutexFree unrefs/frees the underlying resource. This is used by the bindings internally.
+// 
+// After this is called, no other method on [RecMutex] is expected to work anymore.
+func UnsafeRecMutexFree(r *RecMutex) {
+	C.free(unsafe.Pointer(r.native))
+}
+
+// UnsafeRecMutexToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeRecMutexToGlibNone(r *RecMutex) unsafe.Pointer {
+	return unsafe.Pointer(r.native)
+}
+
+// UnsafeRecMutexToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeRecMutexToGlibFull(r *RecMutex) unsafe.Pointer {
+	runtime.SetFinalizer(r.recMutex, nil)
+	_p := unsafe.Pointer(r.native)
+	r.native = nil // RecMutex is invalid from here on
+	return _p
+}
+
+// Clear wraps g_rec_mutex_clear
+//
+// Frees the resources allocated to a recursive mutex with
+// g_rec_mutex_init().
+// 
+// This function should not be used with a #GRecMutex that has been
+// statically allocated.
+// 
+// Calling g_rec_mutex_clear() on a locked recursive mutex leads
+// to undefined behaviour.
+func (recMutex *RecMutex) Clear() {
+	var carg0 *C.GRecMutex // in, none, converted
+
+	carg0 = (*C.GRecMutex)(UnsafeRecMutexToGlibNone(recMutex))
+
+	C.g_rec_mutex_clear(carg0)
+	runtime.KeepAlive(recMutex)
+}
+
+// Init wraps g_rec_mutex_init
+//
+// Initializes a #GRecMutex so that it can be used.
+// 
+// This function is useful to initialize a recursive mutex
+// that has been allocated on the stack, or as part of a larger
+// structure.
+// 
+// It is not necessary to initialise a recursive mutex that has been
+// statically allocated.
+// 
+// |[&lt;!-- language="C" --&gt;
+//   typedef struct {
+//     GRecMutex m;
+//     ...
+//   } Blob;
+// 
+// Blob *b;
+// 
+// b = g_new (Blob, 1);
+// g_rec_mutex_init (&amp;b-&gt;m);
+// ]|
+// 
+// Calling g_rec_mutex_init() on an already initialized #GRecMutex
+// leads to undefined behaviour.
+// 
+// To undo the effect of g_rec_mutex_init() when a recursive mutex
+// is no longer needed, use g_rec_mutex_clear().
+func (recMutex *RecMutex) Init() {
+	var carg0 *C.GRecMutex // in, none, converted
+
+	carg0 = (*C.GRecMutex)(UnsafeRecMutexToGlibNone(recMutex))
+
+	C.g_rec_mutex_init(carg0)
+	runtime.KeepAlive(recMutex)
+}
+
+// Lock wraps g_rec_mutex_lock
+//
+// Locks @rec_mutex. If @rec_mutex is already locked by another
+// thread, the current thread will block until @rec_mutex is
+// unlocked by the other thread. If @rec_mutex is already locked
+// by the current thread, the 'lock count' of @rec_mutex is increased.
+// The mutex will only become available again when it is unlocked
+// as many times as it has been locked.
+func (recMutex *RecMutex) Lock() {
+	var carg0 *C.GRecMutex // in, none, converted
+
+	carg0 = (*C.GRecMutex)(UnsafeRecMutexToGlibNone(recMutex))
+
+	C.g_rec_mutex_lock(carg0)
+	runtime.KeepAlive(recMutex)
+}
+
+// Trylock wraps g_rec_mutex_trylock
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Tries to lock @rec_mutex. If @rec_mutex is already locked
+// by another thread, it immediately returns %FALSE. Otherwise
+// it locks @rec_mutex and returns %TRUE.
+func (recMutex *RecMutex) Trylock() bool {
+	var carg0 *C.GRecMutex // in, none, converted
+	var cret  C.gboolean   // return
+
+	carg0 = (*C.GRecMutex)(UnsafeRecMutexToGlibNone(recMutex))
+
+	cret = C.g_rec_mutex_trylock(carg0)
+	runtime.KeepAlive(recMutex)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// Unlock wraps g_rec_mutex_unlock
+//
+// Unlocks @rec_mutex. If another thread is blocked in a
+// g_rec_mutex_lock() call for @rec_mutex, it will become unblocked
+// and can lock @rec_mutex itself.
+// 
+// Calling g_rec_mutex_unlock() on a recursive mutex that is not
+// locked by the current thread leads to undefined behaviour.
+func (recMutex *RecMutex) Unlock() {
+	var carg0 *C.GRecMutex // in, none, converted
+
+	carg0 = (*C.GRecMutex)(UnsafeRecMutexToGlibNone(recMutex))
+
+	C.g_rec_mutex_unlock(carg0)
+	runtime.KeepAlive(recMutex)
+}
+
 // Regex wraps GRegex
 //
-// A `GRegex` is the "compiled" form of a regular expression pattern.
+// A `GRegex` is a compiled form of a regular expression.
+// 
+// After instantiating a `GRegex`, you can use its methods to find matches
+// in a string, replace matches within a string, or split the string at matches.
 // 
 // `GRegex` implements regular expression pattern matching using syntax and
-// semantics similar to Perl regular expression. See the
-// [PCRE documentation](man:pcrepattern(3)) for the syntax definition.
+// semantics (such as character classes, quantifiers, and capture groups)
+// similar to Perl regular expression. See the
+// [PCRE documentation](man:pcre2pattern(3)) for details.
 // 
-// Some functions accept a @start_position argument, setting it differs
-// from just passing over a shortened string and setting %G_REGEX_MATCH_NOTBOL
-// in the case of a pattern that begins with any kind of lookbehind assertion.
-// For example, consider the pattern "\Biss\B" which finds occurrences of "iss"
-// in the middle of words. ("\B" matches only if the current position in the
-// subject is not a word boundary.) When applied to the string "Mississipi"
-// from the fourth byte, namely "issipi", it does not match, because "\B" is
-// always false at the start of the subject, which is deemed to be a word
-// boundary. However, if the entire string is passed , but with
-// @start_position set to 4, it finds the second occurrence of "iss" because
-// it is able to look behind the starting point to discover that it is
-// preceded by a letter.
+// A typical scenario for regex pattern matching is to check if a string
+// matches a pattern. The following statements implement this scenario.
 // 
-// Note that, unless you set the %G_REGEX_RAW flag, all the strings passed
-// to these functions must be encoded in UTF-8. The lengths and the positions
-// inside the strings are in bytes and not in characters, so, for instance,
-// "\xc3\xa0" (i.e. "à") is two bytes long but it is treated as a
-// single character. If you set %G_REGEX_RAW the strings can be non-valid
-// UTF-8 strings and a byte is treated as a character, so "\xc3\xa0" is two
-// bytes and two characters long.
+// ``` { .c }
+// const char *regex_pattern = ".*GLib.*";
+// const char *string_to_search = "You will love the GLib implementation of regex";
+// g_autoptr(GMatchInfo) match_info = NULL;
+// g_autoptr(GRegex) regex = NULL;
 // 
-// When matching a pattern, "\n" matches only against a "\n" character in
-// the string, and "\r" matches only a "\r" character. To match any newline
-// sequence use "\R". This particular group matches either the two-character
-// sequence CR + LF ("\r\n"), or one of the single characters LF (linefeed,
-// U+000A, "\n"), VT vertical tab, U+000B, "\v"), FF (formfeed, U+000C, "\f"),
-// CR (carriage return, U+000D, "\r"), NEL (next line, U+0085), LS (line
-// separator, U+2028), or PS (paragraph separator, U+2029).
+// regex = g_regex_new (regex_pattern, G_REGEX_DEFAULT, G_REGEX_MATCH_DEFAULT, NULL);
+// g_assert (regex != NULL);
+// 
+// if (g_regex_match (regex, string_to_search, G_REGEX_MATCH_DEFAULT, &amp;match_info))
+//   {
+//     int start_pos, end_pos;
+//     g_match_info_fetch_pos (match_info, 0, &amp;start_pos, &amp;end_pos);
+//     g_print ("Match successful! Overall pattern matches bytes %d to %d\n", start_pos, end_pos);
+//   }
+// else
+//   {
+//     g_print ("No match!\n");
+//   }
+// ```
+// 
+// The constructor for `GRegex` includes two sets of bitmapped flags:
+// 
+// * [flags@GLib.RegexCompileFlags]&#x2014;These flags
+// control how GLib compiles the regex. There are options for case
+// sensitivity, multiline, ignoring whitespace, etc.
+// * [flags@GLib.RegexMatchFlags]&#x2014;These flags control
+// `GRegex`&#x2019;s matching behavior, such as anchoring and customizing definitions
+// for newline characters.
+// 
+// Some regex patterns include backslash assertions, such as `\d` (digit) or
+// `\D` (non-digit). The regex pattern must escape those backslashes. For
+// example, the pattern `"\\d\\D"` matches a digit followed by a non-digit.
+// 
+// GLib&#x2019;s implementation of pattern matching includes a `start_position`
+// argument for some of the match, replace, and split methods. Specifying
+// a start position provides flexibility when you want to ignore the first
+// _n_ characters of a string, but want to incorporate backslash assertions
+// at character _n_ - 1. For example, a database field contains inconsistent
+// spelling for a job title: `healthcare provider` and `health-care provider`.
+// The database manager wants to make the spelling consistent by adding a
+// hyphen when it is missing. The following regex pattern tests for the string
+// `care` preceded by a non-word boundary character (instead of a hyphen)
+// and followed by a space.
+// 
+// ``` { .c }
+// const char *regex_pattern = "\\Bcare\\s";
+// ```
+// 
+// An efficient way to match with this pattern is to start examining at
+// `start_position` 6 in the string `healthcare` or `health-care`.
+// 
+// ``` { .c }
+// const char *regex_pattern = "\\Bcare\\s";
+// const char *string_to_search = "healthcare provider";
+// g_autoptr(GMatchInfo) match_info = NULL;
+// g_autoptr(GRegex) regex = NULL;
+// 
+// regex = g_regex_new (
+//   regex_pattern,
+//   G_REGEX_DEFAULT,
+//   G_REGEX_MATCH_DEFAULT,
+//   NULL);
+// g_assert (regex != NULL);
+// 
+// g_regex_match_full (
+//   regex,
+//   string_to_search,
+//   -1,
+//   6, // position of 'c' in the test string.
+//   G_REGEX_MATCH_DEFAULT,
+//   &amp;match_info,
+//   NULL);
+// ```
+// 
+// The method [method@GLib.Regex.match_full] (and other methods implementing
+// `start_pos`) allow for lookback before the start position to determine if
+// the previous character satisfies an assertion.
+// 
+// Unless you set the [flags@GLib.RegexCompileFlags.RAW] as one of
+// the `GRegexCompileFlags`, all the strings passed to `GRegex` methods must
+// be encoded in UTF-8. The lengths and the positions inside the strings are
+// in bytes and not in characters, so, for instance, `\xc3\xa0` (i.e., `&#xE0;`)
+// is two bytes long but it is treated as a single character. If you set
+// `G_REGEX_RAW`, the strings can be non-valid UTF-8 strings and a byte is
+// treated as a character, so `\xc3\xa0` is two bytes and two characters long.
+// 
+// Regarding line endings, `\n` matches a `\n` character, and `\r` matches
+// a `\r` character. More generally, `\R` matches all typical line endings:
+// CR + LF (`\r\n`), LF (linefeed, U+000A, `\n`), VT (vertical tab, U+000B,
+// `\v`), FF (formfeed, U+000C, `\f`), CR (carriage return, U+000D, `\r`),
+// NEL (next line, U+0085), LS (line separator, U+2028), and PS (paragraph
+// separator, U+2029).
 // 
 // The behaviour of the dot, circumflex, and dollar metacharacters are
-// affected by newline characters, the default is to recognize any newline
-// character (the same characters recognized by "\R"). This can be changed
-// with `G_REGEX_NEWLINE_CR`, `G_REGEX_NEWLINE_LF` and `G_REGEX_NEWLINE_CRLF`
-// compile options, and with `G_REGEX_MATCH_NEWLINE_ANY`,
-// `G_REGEX_MATCH_NEWLINE_CR`, `G_REGEX_MATCH_NEWLINE_LF` and
-// `G_REGEX_MATCH_NEWLINE_CRLF` match options. These settings are also
-// relevant when compiling a pattern if `G_REGEX_EXTENDED` is set, and an
-// unescaped "#" outside a character class is encountered. This indicates
-// a comment that lasts until after the next newline.
+// affected by newline characters. By default, `GRegex` matches any newline
+// character matched by `\R`. You can limit the matched newline characters by
+// specifying the [flags@GLib.RegexMatchFlags.NEWLINE_CR],
+// [flags@GLib.RegexMatchFlags.NEWLINE_LF], and
+// [flags@GLib.RegexMatchFlags.NEWLINE_CRLF] compile options, and
+// with [flags@GLib.RegexMatchFlags.NEWLINE_ANY],
+// [flags@GLib.RegexMatchFlags.NEWLINE_CR],
+// [flags@GLib.RegexMatchFlags.NEWLINE_LF] and
+// [flags@GLib.RegexMatchFlags.NEWLINE_CRLF] match options.
+// These settings are also relevant when compiling a pattern if
+// [flags@GLib.RegexCompileFlags.EXTENDED] is set and an unescaped
+// `#` outside a character class is encountered. This indicates a comment
+// that lasts until after the next newline.
 // 
-// Creating and manipulating the same `GRegex` structure from different
-// threads is not a problem as `GRegex` does not modify its internal
-// state between creation and destruction, on the other hand `GMatchInfo`
-// is not threadsafe.
+// Because `GRegex` does not modify its internal state between creation and
+// destruction, you can create and modify the same `GRegex` instance from
+// different threads. In contrast, [struct@GLib.MatchInfo] is not thread safe.
 // 
-// The regular expressions low-level functionalities are obtained through
+// The regular expression low-level functionalities are obtained through
 // the excellent [PCRE](http://www.pcre.org/) library written by Philip Hazel.
 type Regex struct {
 	*regex
@@ -27767,860 +31667,6 @@ func (iter *SequenceIter) Prev() *SequenceIter {
 	return goret
 }
 
-// Source wraps GSource
-//
-// The `GSource` struct is an opaque data type
-// representing an event source.
-type Source struct {
-	*source
-}
-
-// source is the struct that's finalized
-type source struct {
-	native *C.GSource
-}
-
-// UnsafeSourceFromGlibBorrow is used to convert raw C.GSource pointers to go. This is used by the bindings internally.
-func UnsafeSourceFromGlibBorrow(p unsafe.Pointer) *Source {
-	return &Source{&source{(*C.GSource)(p)}}
-}
-
-// UnsafeSourceFromGlibNone is used to convert raw C.GSource pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeSourceFromGlibNone(p unsafe.Pointer) *Source {
-	C.g_source_ref((*C.GSource)(p))
-	wrapped := UnsafeSourceFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.source,
-		func (intern *source) {
-			C.g_source_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeSourceFromGlibFull is used to convert raw C.GSource pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeSourceFromGlibFull(p unsafe.Pointer) *Source {
-	wrapped := UnsafeSourceFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.source,
-		func (intern *source) {
-			C.g_source_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeSourceRef increases the refcount on the underlying resource. This is used by the bindings internally.
-// 
-// When this is called without an associated call to [Source.UnsafeSourceUnref], then [Source] will leak memory.
-func UnsafeSourceRef(s *Source) {
-	C.g_source_ref(s.native)
-}
-
-// UnsafeSourceUnref unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [Source] is expected to work anymore.
-func UnsafeSourceUnref(s *Source) {
-	C.g_source_unref(s.native)
-}
-
-// UnsafeSourceToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeSourceToGlibNone(s *Source) unsafe.Pointer {
-	return unsafe.Pointer(s.native)
-}
-
-// UnsafeSourceToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeSourceToGlibFull(s *Source) unsafe.Pointer {
-	runtime.SetFinalizer(s.source, nil)
-	_p := unsafe.Pointer(s.native)
-	s.native = nil // Source is invalid from here on
-	return _p
-}
-
-// NewSource wraps g_source_new
-// 
-// The function takes the following parameters:
-// 
-// 	- sourceFuncs *SourceFuncs: structure containing functions that implement
-//                the sources behavior. 
-// 	- structSize uint: size of the [struct@GLib.Source] structure to create. 
-// 
-// The function returns the following values:
-// 
-// 	- goret *Source 
-//
-// Creates a new [struct@GLib.Source] structure. The size is specified to
-// allow creating structures derived from [struct@GLib.Source] that contain
-// additional data. The size passed in must be at least
-// `sizeof (GSource)`.
-// 
-// The source will not initially be associated with any #GMainContext
-// and must be added to one with [method@GLib.Source.attach] before it will be
-// executed.
-func NewSource(sourceFuncs *SourceFuncs, structSize uint) *Source {
-	var carg1 *C.GSourceFuncs // in, none, converted
-	var carg2 C.guint         // in, none, casted
-	var cret  *C.GSource      // return, full, converted
-
-	carg1 = (*C.GSourceFuncs)(UnsafeSourceFuncsToGlibNone(sourceFuncs))
-	carg2 = C.guint(structSize)
-
-	cret = C.g_source_new(carg1, carg2)
-	runtime.KeepAlive(sourceFuncs)
-	runtime.KeepAlive(structSize)
-
-	var goret *Source
-
-	goret = UnsafeSourceFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// SourceRemove wraps g_source_remove
-// 
-// The function takes the following parameters:
-// 
-// 	- tag uint: the ID of the source to remove. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Removes the source with the given ID from the default main context. You must
-// use [method@GLib.Source.destroy] for sources added to a non-default main context.
-// 
-// The ID of a #GSource is given by [method@GLib.Source.get_id], or will be
-// returned by the functions [method@GLib.Source.attach], [func@GLib.idle_add],
-// [func@GLib.idle_add_full], [func@GLib.timeout_add],
-// [func@GLib.timeout_add_full], [func@GLib.child_watch_add],
-// [func@GLib.child_watch_add_full], [func@GLib.io_add_watch], and
-// [func@GLib.io_add_watch_full].
-// 
-// It is a programmer error to attempt to remove a non-existent source.
-// 
-// More specifically: source IDs can be reissued after a source has been
-// destroyed and therefore it is never valid to use this function with a
-// source ID which may have already been removed.  An example is when
-// scheduling an idle to run in another thread with [func@GLib.idle_add]: the
-// idle may already have run and been removed by the time this function
-// is called on its (now invalid) source ID.  This source ID may have
-// been reissued, leading to the operation being performed against the
-// wrong source.
-func SourceRemove(tag uint) bool {
-	var carg1 C.guint    // in, none, casted
-	var cret  C.gboolean // return
-
-	carg1 = C.guint(tag)
-
-	cret = C.g_source_remove(carg1)
-	runtime.KeepAlive(tag)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SourceSetNameByID wraps g_source_set_name_by_id
-// 
-// The function takes the following parameters:
-// 
-// 	- tag uint: a #GSource ID 
-// 	- name string: debug name for the source 
-//
-// Sets the name of a source using its ID.
-// 
-// This is a convenience utility to set source names from the return
-// value of [func@GLib.idle_add], [func@GLib.timeout_add], etc.
-// 
-// It is a programmer error to attempt to set the name of a non-existent
-// source.
-// 
-// More specifically: source IDs can be reissued after a source has been
-// destroyed and therefore it is never valid to use this function with a
-// source ID which may have already been removed.  An example is when
-// scheduling an idle to run in another thread with [func@GLib.idle_add]: the
-// idle may already have run and been removed by the time this function
-// is called on its (now invalid) source ID.  This source ID may have
-// been reissued, leading to the operation being performed against the
-// wrong source.
-func SourceSetNameByID(tag uint, name string) {
-	var carg1 C.guint // in, none, casted
-	var carg2 *C.char // in, none, string
-
-	carg1 = C.guint(tag)
-	carg2 = (*C.char)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	C.g_source_set_name_by_id(carg1, carg2)
-	runtime.KeepAlive(tag)
-	runtime.KeepAlive(name)
-}
-
-// AddChildSource wraps g_source_add_child_source
-// 
-// The function takes the following parameters:
-// 
-// 	- childSource *Source: a second #GSource that @source should "poll" 
-//
-// Adds @child_source to @source as a "polled" source; when @source is
-// added to a [struct@GLib.MainContext], @child_source will be automatically
-// added with the same priority, when @child_source is triggered, it will
-// cause @source to dispatch (in addition to calling its own
-// callback), and when @source is destroyed, it will destroy
-// @child_source as well. (@source will also still be dispatched if
-// its own prepare/check functions indicate that it is ready.)
-// 
-// If you don't need @child_source to do anything on its own when it
-// triggers, you can call g_source_set_dummy_callback() on it to set a
-// callback that does nothing (except return %TRUE if appropriate).
-// 
-// @source will hold a reference on @child_source while @child_source
-// is attached to it.
-// 
-// This API is only intended to be used by implementations of
-// [struct@GLib.Source]. Do not call this API on a [struct@GLib.Source] that
-// you did not create.
-func (source *Source) AddChildSource(childSource *Source) {
-	var carg0 *C.GSource // in, none, converted
-	var carg1 *C.GSource // in, none, converted
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	carg1 = (*C.GSource)(UnsafeSourceToGlibNone(childSource))
-
-	C.g_source_add_child_source(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(childSource)
-}
-
-// AddPoll wraps g_source_add_poll
-// 
-// The function takes the following parameters:
-// 
-// 	- fd *PollFD: a #GPollFD structure holding information about a file
-//      descriptor to watch. 
-//
-// Adds a file descriptor to the set of file descriptors polled for
-// this source. This is usually combined with [ctor@GLib.Source.new] to add an
-// event source. The event source's check function will typically test
-// the @revents field in the #GPollFD struct and return %TRUE if events need
-// to be processed.
-// 
-// This API is only intended to be used by implementations of [struct@GLib.Source].
-// Do not call this API on a [struct@GLib.Source] that you did not create.
-// 
-// Using this API forces the linear scanning of event sources on each
-// main loop iteration.  Newly-written event sources should try to use
-// `g_source_add_unix_fd` instead of this API.
-func (source *Source) AddPoll(fd *PollFD) {
-	var carg0 *C.GSource // in, none, converted
-	var carg1 *C.GPollFD // in, none, converted
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	carg1 = (*C.GPollFD)(UnsafePollFDToGlibNone(fd))
-
-	C.g_source_add_poll(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(fd)
-}
-
-// Attach wraps g_source_attach
-// 
-// The function takes the following parameters:
-// 
-// 	- _context *MainContext (nullable): a #GMainContext (if %NULL, the global-default
-//   main context will be used) 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-//
-// Adds a [struct@GLib.Source] to a @context so that it will be executed within
-// that context. Remove it by calling [method@GLib.Source.destroy].
-// 
-// This function is safe to call from any thread, regardless of which thread
-// the @context is running in.
-func (source *Source) Attach(_context *MainContext) uint {
-	var carg0 *C.GSource      // in, none, converted
-	var carg1 *C.GMainContext // in, none, converted, nullable
-	var cret  C.guint         // return, none, casted
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	if _context != nil {
-		carg1 = (*C.GMainContext)(UnsafeMainContextToGlibNone(_context))
-	}
-
-	cret = C.g_source_attach(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(_context)
-
-	var goret uint
-
-	goret = uint(cret)
-
-	return goret
-}
-
-// GetCanRecurse wraps g_source_get_can_recurse
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Checks whether a source is allowed to be called recursively.
-// see [method@GLib.Source.set_can_recurse].
-func (source *Source) GetCanRecurse() bool {
-	var carg0 *C.GSource // in, none, converted
-	var cret  C.gboolean // return
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-
-	cret = C.g_source_get_can_recurse(carg0)
-	runtime.KeepAlive(source)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetContext wraps g_source_get_context
-// 
-// The function returns the following values:
-// 
-// 	- goret *MainContext (nullable) 
-//
-// Gets the [struct@GLib.MainContext] with which the source is associated.
-// 
-// You can call this on a source that has been destroyed, provided
-// that the [struct@GLib.MainContext] it was attached to still exists (in which
-// case it will return that [struct@GLib.MainContext]). In particular, you can
-// always call this function on the source returned from
-// [func@GLib.main_current_source]. But calling this function on a source
-// whose [struct@GLib.MainContext] has been destroyed is an error.
-func (source *Source) GetContext() *MainContext {
-	var carg0 *C.GSource      // in, none, converted
-	var cret  *C.GMainContext // return, none, converted, nullable
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-
-	cret = C.g_source_get_context(carg0)
-	runtime.KeepAlive(source)
-
-	var goret *MainContext
-
-	if cret != nil {
-		goret = UnsafeMainContextFromGlibNone(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// GetID wraps g_source_get_id
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-//
-// Returns the numeric ID for a particular source. The ID of a source
-// is a positive integer which is unique within a particular main loop
-// context. The reverse mapping from ID to source is done by
-// [method@GLib.MainContext.find_source_by_id].
-// 
-// You can only call this function while the source is associated to a
-// [struct@GLib.MainContext] instance; calling this function before
-// [method@GLib.Source.attach] or after [method@GLib.Source.destroy] yields
-// undefined behavior. The ID returned is unique within the
-// [struct@GLib.MainContext] instance passed to [method@GLib.Source.attach].
-func (source *Source) GetID() uint {
-	var carg0 *C.GSource // in, none, converted
-	var cret  C.guint    // return, none, casted
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-
-	cret = C.g_source_get_id(carg0)
-	runtime.KeepAlive(source)
-
-	var goret uint
-
-	goret = uint(cret)
-
-	return goret
-}
-
-// GetName wraps g_source_get_name
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Gets a name for the source, used in debugging and profiling.  The
-// name may be #NULL if it has never been set with [method@GLib.Source.set_name].
-func (source *Source) GetName() string {
-	var carg0 *C.GSource // in, none, converted
-	var cret  *C.char    // return, none, string, nullable-string
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-
-	cret = C.g_source_get_name(carg0)
-	runtime.KeepAlive(source)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// GetPriority wraps g_source_get_priority
-// 
-// The function returns the following values:
-// 
-// 	- goret int32 
-//
-// Gets the priority of a source.
-func (source *Source) GetPriority() int32 {
-	var carg0 *C.GSource // in, none, converted
-	var cret  C.gint     // return, none, casted
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-
-	cret = C.g_source_get_priority(carg0)
-	runtime.KeepAlive(source)
-
-	var goret int32
-
-	goret = int32(cret)
-
-	return goret
-}
-
-// GetReadyTime wraps g_source_get_ready_time
-// 
-// The function returns the following values:
-// 
-// 	- goret int64 
-//
-// Gets the "ready time" of @source, as set by
-// [method@GLib.Source.set_ready_time].
-// 
-// Any time before or equal to the current monotonic time (including 0)
-// is an indication that the source will fire immediately.
-func (source *Source) GetReadyTime() int64 {
-	var carg0 *C.GSource // in, none, converted
-	var cret  C.gint64   // return, none, casted
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-
-	cret = C.g_source_get_ready_time(carg0)
-	runtime.KeepAlive(source)
-
-	var goret int64
-
-	goret = int64(cret)
-
-	return goret
-}
-
-// GetTime wraps g_source_get_time
-// 
-// The function returns the following values:
-// 
-// 	- goret int64 
-//
-// Gets the time to be used when checking this source. The advantage of
-// calling this function over calling [func@GLib.get_monotonic_time] directly is
-// that when checking multiple sources, GLib can cache a single value
-// instead of having to repeatedly get the system monotonic time.
-// 
-// The time here is the system monotonic time, if available, or some
-// other reasonable alternative otherwise.  See [func@GLib.get_monotonic_time].
-func (source *Source) GetTime() int64 {
-	var carg0 *C.GSource // in, none, converted
-	var cret  C.gint64   // return, none, casted
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-
-	cret = C.g_source_get_time(carg0)
-	runtime.KeepAlive(source)
-
-	var goret int64
-
-	goret = int64(cret)
-
-	return goret
-}
-
-// IsDestroyed wraps g_source_is_destroyed
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether @source has been destroyed.
-// 
-// This is important when you operate upon your objects
-// from within idle handlers, but may have freed the object
-// before the dispatch of your idle handler.
-// 
-// |[&lt;!-- language="C" --&gt;
-// static gboolean
-// idle_callback (gpointer data)
-// {
-//   SomeWidget *self = data;
-//    
-//   g_mutex_lock (&amp;self-&gt;idle_id_mutex);
-//   // do stuff with self
-//   self-&gt;idle_id = 0;
-//   g_mutex_unlock (&amp;self-&gt;idle_id_mutex);
-//    
-//   return G_SOURCE_REMOVE;
-// }
-//  
-// static void
-// some_widget_do_stuff_later (SomeWidget *self)
-// {
-//   g_mutex_lock (&amp;self-&gt;idle_id_mutex);
-//   self-&gt;idle_id = g_idle_add (idle_callback, self);
-//   g_mutex_unlock (&amp;self-&gt;idle_id_mutex);
-// }
-//  
-// static void
-// some_widget_init (SomeWidget *self)
-// {
-//   g_mutex_init (&amp;self-&gt;idle_id_mutex);
-// 
-//   // ...
-// }
-// 
-// static void
-// some_widget_finalize (GObject *object)
-// {
-//   SomeWidget *self = SOME_WIDGET (object);
-//    
-//   if (self-&gt;idle_id)
-//     g_source_remove (self-&gt;idle_id);
-//    
-//   g_mutex_clear (&amp;self-&gt;idle_id_mutex);
-// 
-//   G_OBJECT_CLASS (parent_class)-&gt;finalize (object);
-// }
-// ]|
-// 
-// This will fail in a multi-threaded application if the
-// widget is destroyed before the idle handler fires due
-// to the use after free in the callback. A solution, to
-// this particular problem, is to check to if the source
-// has already been destroy within the callback.
-// 
-// |[&lt;!-- language="C" --&gt;
-// static gboolean
-// idle_callback (gpointer data)
-// {
-//   SomeWidget *self = data;
-//   
-//   g_mutex_lock (&amp;self-&gt;idle_id_mutex);
-//   if (!g_source_is_destroyed (g_main_current_source ()))
-//     {
-//       // do stuff with self
-//     }
-//   g_mutex_unlock (&amp;self-&gt;idle_id_mutex);
-//   
-//   return FALSE;
-// }
-// ]|
-// 
-// Calls to this function from a thread other than the one acquired by the
-// [struct@GLib.MainContext] the #GSource is attached to are typically
-// redundant, as the source could be destroyed immediately after this function
-// returns. However, once a source is destroyed it cannot be un-destroyed, so
-// this function can be used for opportunistic checks from any thread.
-func (source *Source) IsDestroyed() bool {
-	var carg0 *C.GSource // in, none, converted
-	var cret  C.gboolean // return
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-
-	cret = C.g_source_is_destroyed(carg0)
-	runtime.KeepAlive(source)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// RemoveChildSource wraps g_source_remove_child_source
-// 
-// The function takes the following parameters:
-// 
-// 	- childSource *Source: a #GSource previously passed to
-//     [method@GLib.Source.add_child_source]. 
-//
-// Detaches @child_source from @source and destroys it.
-// 
-// This API is only intended to be used by implementations of #GSource.
-// Do not call this API on a #GSource that you did not create.
-func (source *Source) RemoveChildSource(childSource *Source) {
-	var carg0 *C.GSource // in, none, converted
-	var carg1 *C.GSource // in, none, converted
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	carg1 = (*C.GSource)(UnsafeSourceToGlibNone(childSource))
-
-	C.g_source_remove_child_source(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(childSource)
-}
-
-// RemovePoll wraps g_source_remove_poll
-// 
-// The function takes the following parameters:
-// 
-// 	- fd *PollFD: a #GPollFD structure previously passed to [method@GLib.Source.add_poll]. 
-//
-// Removes a file descriptor from the set of file descriptors polled for
-// this source.
-// 
-// This API is only intended to be used by implementations of [struct@GLib.Source].
-// Do not call this API on a [struct@GLib.Source] that you did not create.
-func (source *Source) RemovePoll(fd *PollFD) {
-	var carg0 *C.GSource // in, none, converted
-	var carg1 *C.GPollFD // in, none, converted
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	carg1 = (*C.GPollFD)(UnsafePollFDToGlibNone(fd))
-
-	C.g_source_remove_poll(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(fd)
-}
-
-// SetCallback wraps g_source_set_callback
-// 
-// The function takes the following parameters:
-// 
-// 	- fn SourceFunc: a callback function 
-//
-// Sets the callback function for a source. The callback for a source is
-// called from the source's dispatch function.
-// 
-// The exact type of @func depends on the type of source; ie. you
-// should not count on @func being called with @data as its first
-// parameter. Cast @func with [func@GLib.SOURCE_FUNC] to avoid warnings about
-// incompatible function types.
-// 
-// See [mainloop memory management](main-loop.html#memory-management-of-sources) for details
-// on how to handle memory management of @data.
-// 
-// Typically, you won't use this function. Instead use functions specific
-// to the type of source you are using, such as [func@GLib.idle_add] or
-// [func@GLib.timeout_add].
-// 
-// It is safe to call this function multiple times on a source which has already
-// been attached to a context. The changes will take effect for the next time
-// the source is dispatched after this call returns.
-// 
-// Note that [method@GLib.Source.destroy] for a currently attached source has the effect
-// of also unsetting the callback.
-func (source *Source) SetCallback(fn SourceFunc) {
-	var carg0 *C.GSource       // in, none, converted
-	var carg1 C.GSourceFunc    // callback, scope: notified, closure: carg2, destroy: carg3
-	var carg2 C.gpointer       // implicit
-	var carg3 C.GDestroyNotify // implicit
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	carg1 = (*[0]byte)(C._gotk4_glib2_SourceFunc)
-	carg2 = C.gpointer(userdata.Register(fn))
-	carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
-
-	C.g_source_set_callback(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(fn)
-}
-
-// SetCanRecurse wraps g_source_set_can_recurse
-// 
-// The function takes the following parameters:
-// 
-// 	- canRecurse bool: whether recursion is allowed for this source 
-//
-// Sets whether a source can be called recursively. If @can_recurse is
-// %TRUE, then while the source is being dispatched then this source
-// will be processed normally. Otherwise, all processing of this
-// source is blocked until the dispatch function returns.
-func (source *Source) SetCanRecurse(canRecurse bool) {
-	var carg0 *C.GSource // in, none, converted
-	var carg1 C.gboolean // in
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	if canRecurse {
-		carg1 = C.TRUE
-	}
-
-	C.g_source_set_can_recurse(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(canRecurse)
-}
-
-// SetFuncs wraps g_source_set_funcs
-// 
-// The function takes the following parameters:
-// 
-// 	- funcs *SourceFuncs: the new #GSourceFuncs 
-//
-// Sets the source functions (can be used to override
-// default implementations) of an unattached source.
-func (source *Source) SetFuncs(funcs *SourceFuncs) {
-	var carg0 *C.GSource      // in, none, converted
-	var carg1 *C.GSourceFuncs // in, none, converted
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	carg1 = (*C.GSourceFuncs)(UnsafeSourceFuncsToGlibNone(funcs))
-
-	C.g_source_set_funcs(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(funcs)
-}
-
-// SetName wraps g_source_set_name
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: debug name for the source 
-//
-// Sets a name for the source, used in debugging and profiling.
-// The name defaults to #NULL.
-// 
-// The source name should describe in a human-readable way
-// what the source does. For example, "X11 event queue"
-// or "GTK repaint idle handler" or whatever it is.
-// 
-// It is permitted to call this function multiple times, but is not
-// recommended due to the potential performance impact.  For example,
-// one could change the name in the "check" function of a #GSourceFuncs
-// to include details like the event type in the source name.
-// 
-// Use caution if changing the name while another thread may be
-// accessing it with [method@GLib.Source.get_name]; that function does not copy
-// the value, and changing the value will free it while the other thread
-// may be attempting to use it.
-// 
-// Also see [method@GLib.Source.set_static_name].
-func (source *Source) SetName(name string) {
-	var carg0 *C.GSource // in, none, converted
-	var carg1 *C.char    // in, none, string
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.g_source_set_name(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(name)
-}
-
-// SetPriority wraps g_source_set_priority
-// 
-// The function takes the following parameters:
-// 
-// 	- priority int32: the new priority. 
-//
-// Sets the priority of a source. While the main loop is being run, a
-// source will be dispatched if it is ready to be dispatched and no
-// sources at a higher (numerically smaller) priority are ready to be
-// dispatched.
-// 
-// A child source always has the same priority as its parent.  It is not
-// permitted to change the priority of a source once it has been added
-// as a child of another source.
-func (source *Source) SetPriority(priority int32) {
-	var carg0 *C.GSource // in, none, converted
-	var carg1 C.gint     // in, none, casted
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	carg1 = C.gint(priority)
-
-	C.g_source_set_priority(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(priority)
-}
-
-// SetReadyTime wraps g_source_set_ready_time
-// 
-// The function takes the following parameters:
-// 
-// 	- readyTime int64: the monotonic time at which the source will be ready,
-//              0 for "immediately", -1 for "never" 
-//
-// Sets a #GSource to be dispatched when the given monotonic time is
-// reached (or passed).  If the monotonic time is in the past (as it
-// always will be if @ready_time is 0) then the source will be
-// dispatched immediately.
-// 
-// If @ready_time is -1 then the source is never woken up on the basis
-// of the passage of time.
-// 
-// Dispatching the source does not reset the ready time.  You should do
-// so yourself, from the source dispatch function.
-// 
-// Note that if you have a pair of sources where the ready time of one
-// suggests that it will be delivered first but the priority for the
-// other suggests that it would be delivered first, and the ready time
-// for both sources is reached during the same main context iteration,
-// then the order of dispatch is undefined.
-// 
-// It is a no-op to call this function on a #GSource which has already been
-// destroyed with [method@GLib.Source.destroy].
-// 
-// This API is only intended to be used by implementations of #GSource.
-// Do not call this API on a #GSource that you did not create.
-func (source *Source) SetReadyTime(readyTime int64) {
-	var carg0 *C.GSource // in, none, converted
-	var carg1 C.gint64   // in, none, casted
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	carg1 = C.gint64(readyTime)
-
-	C.g_source_set_ready_time(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(readyTime)
-}
-
-// SetStaticName wraps g_source_set_static_name
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: debug name for the source 
-//
-// A variant of [method@GLib.Source.set_name] that does not
-// duplicate the @name, and can only be used with
-// string literals.
-func (source *Source) SetStaticName(name string) {
-	var carg0 *C.GSource // in, none, converted
-	var carg1 *C.char    // in, none, string
-
-	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.g_source_set_static_name(carg0, carg1)
-	runtime.KeepAlive(source)
-	runtime.KeepAlive(name)
-}
-
 // SourceCallbackFuncs wraps GSourceCallbackFuncs
 //
 // The `GSourceCallbackFuncs` struct contains
@@ -28767,22 +31813,895 @@ func UnsafeSourceFuncsToGlibFull(s *SourceFuncs) unsafe.Pointer {
 	return _p
 }
 
+// StringChunk wraps GStringChunk
+//
+// `GStringChunk` provides efficient storage of groups of strings
+// 
+// String chunks are used to store groups of strings. Memory is
+// allocated in blocks, and as strings are added to the `GStringChunk`
+// they are copied into the next free position in a block. When a block
+// is full a new block is allocated.
+// 
+// When storing a large number of strings, string chunks are more
+// efficient than using [func@GLib.strdup] since fewer calls to `malloc()`
+// are needed, and less memory is wasted in memory allocation overheads.
+// 
+// By adding strings with [method@GLib.StringChunk.insert_const] it is also
+// possible to remove duplicates.
+// 
+// To create a new `GStringChunk` use [func@GLib.StringChunk.new].
+// 
+// To add strings to a `GStringChunk` use [method@GLib.StringChunk.insert].
+// 
+// To add strings to a `GStringChunk`, but without duplicating strings
+// which are already in the `GStringChunk`, use [method@GLib.StringChunk.insert_const].
+// 
+// To free the entire `GStringChunk` use [method@GLib.StringChunk.free].
+// It is not possible to free individual strings.
+type StringChunk struct {
+	*stringChunk
+}
+
+// stringChunk is the struct that's finalized
+type stringChunk struct {
+	native *C.GStringChunk
+}
+
+// UnsafeStringChunkFromGlibBorrow is used to convert raw C.GStringChunk pointers to go. This is used by the bindings internally.
+func UnsafeStringChunkFromGlibBorrow(p unsafe.Pointer) *StringChunk {
+	return &StringChunk{&stringChunk{(*C.GStringChunk)(p)}}
+}
+
+// UnsafeStringChunkFromGlibNone is used to convert raw C.GStringChunk pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeStringChunkFromGlibNone(p unsafe.Pointer) *StringChunk {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeStringChunkFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.stringChunk,
+		func (intern *stringChunk) {
+			C.g_string_chunk_free(intern.native)
+		},
+	)
+	return wrapped
+}
+
+// UnsafeStringChunkFromGlibFull is used to convert raw C.GStringChunk pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeStringChunkFromGlibFull(p unsafe.Pointer) *StringChunk {
+	wrapped := UnsafeStringChunkFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.stringChunk,
+		func (intern *stringChunk) {
+			C.g_string_chunk_free(intern.native)
+		},
+	)
+	return wrapped
+}
+
+// UnsafeStringChunkFree unrefs/frees the underlying resource. This is used by the bindings internally.
+// 
+// After this is called, no other method on [StringChunk] is expected to work anymore.
+func UnsafeStringChunkFree(s *StringChunk) {
+	C.g_string_chunk_free(s.native)
+}
+
+// UnsafeStringChunkToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeStringChunkToGlibNone(s *StringChunk) unsafe.Pointer {
+	return unsafe.Pointer(s.native)
+}
+
+// UnsafeStringChunkToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeStringChunkToGlibFull(s *StringChunk) unsafe.Pointer {
+	runtime.SetFinalizer(s.stringChunk, nil)
+	_p := unsafe.Pointer(s.native)
+	s.native = nil // StringChunk is invalid from here on
+	return _p
+}
+
+// Clear wraps g_string_chunk_clear
+//
+// Frees all strings contained within the #GStringChunk.
+// After calling g_string_chunk_clear() it is not safe to
+// access any of the strings which were contained within it.
+func (chunk *StringChunk) Clear() {
+	var carg0 *C.GStringChunk // in, none, converted
+
+	carg0 = (*C.GStringChunk)(UnsafeStringChunkToGlibNone(chunk))
+
+	C.g_string_chunk_clear(carg0)
+	runtime.KeepAlive(chunk)
+}
+
+// Insert wraps g_string_chunk_insert
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: the string to add 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Adds a copy of @string to the #GStringChunk.
+// It returns a pointer to the new copy of the string
+// in the #GStringChunk. The characters in the string
+// can be changed, if necessary, though you should not
+// change anything after the end of the string.
+// 
+// Unlike g_string_chunk_insert_const(), this function
+// does not check for duplicates. Also strings added
+// with g_string_chunk_insert() will not be searched
+// by g_string_chunk_insert_const() when looking for
+// duplicates.
+func (chunk *StringChunk) Insert(str string) string {
+	var carg0 *C.GStringChunk // in, none, converted
+	var carg1 *C.gchar        // in, none, string
+	var cret  *C.gchar        // return, full, string
+
+	carg0 = (*C.GStringChunk)(UnsafeStringChunkToGlibNone(chunk))
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_string_chunk_insert(carg0, carg1)
+	runtime.KeepAlive(chunk)
+	runtime.KeepAlive(str)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// InsertConst wraps g_string_chunk_insert_const
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: the string to add 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Adds a copy of @string to the #GStringChunk, unless the same
+// string has already been added to the #GStringChunk with
+// g_string_chunk_insert_const().
+// 
+// This function is useful if you need to copy a large number
+// of strings but do not want to waste space storing duplicates.
+// But you must remember that there may be several pointers to
+// the same string, and so any changes made to the strings
+// should be done very carefully.
+// 
+// Note that g_string_chunk_insert_const() will not return a
+// pointer to a string added with g_string_chunk_insert(), even
+// if they do match.
+func (chunk *StringChunk) InsertConst(str string) string {
+	var carg0 *C.GStringChunk // in, none, converted
+	var carg1 *C.gchar        // in, none, string
+	var cret  *C.gchar        // return, full, string
+
+	carg0 = (*C.GStringChunk)(UnsafeStringChunkToGlibNone(chunk))
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_string_chunk_insert_const(carg0, carg1)
+	runtime.KeepAlive(chunk)
+	runtime.KeepAlive(str)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// InsertLen wraps g_string_chunk_insert_len
+// 
+// The function takes the following parameters:
+// 
+// 	- str string: bytes to insert 
+// 	- len int: number of bytes of @string to insert, or -1 to insert a
+//     nul-terminated string 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Adds a copy of the first @len bytes of @string to the #GStringChunk.
+// The copy is nul-terminated.
+// 
+// Since this function does not stop at nul bytes, it is the caller's
+// responsibility to ensure that @string has at least @len addressable
+// bytes.
+// 
+// The characters in the returned string can be changed, if necessary,
+// though you should not change anything after the end of the string.
+func (chunk *StringChunk) InsertLen(str string, len int) string {
+	var carg0 *C.GStringChunk // in, none, converted
+	var carg1 *C.gchar        // in, none, string
+	var carg2 C.gssize        // in, none, casted
+	var cret  *C.gchar        // return, full, string
+
+	carg0 = (*C.GStringChunk)(UnsafeStringChunkToGlibNone(chunk))
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.gssize(len)
+
+	cret = C.g_string_chunk_insert_len(carg0, carg1, carg2)
+	runtime.KeepAlive(chunk)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(len)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// StrvBuilder wraps GStrvBuilder
+//
+// `GStrvBuilder` is a helper object to build a %NULL-terminated string arrays.
+// 
+// The following example shows how to build a two element array:
+// 
+// ```c
+//   g_autoptr(GStrvBuilder) builder = g_strv_builder_new ();
+//   g_strv_builder_add (builder, "hello");
+//   g_strv_builder_add (builder, "world");
+// 
+//   g_auto(GStrv) array = g_strv_builder_end (builder);
+// 
+//   g_assert_true (g_strv_equal (array, (const char *[]) { "hello", "world", NULL }));
+// ```
+type StrvBuilder struct {
+	*strvBuilder
+}
+
+// strvBuilder is the struct that's finalized
+type strvBuilder struct {
+	native *C.GStrvBuilder
+}
+
+// UnsafeStrvBuilderFromGlibBorrow is used to convert raw C.GStrvBuilder pointers to go. This is used by the bindings internally.
+func UnsafeStrvBuilderFromGlibBorrow(p unsafe.Pointer) *StrvBuilder {
+	return &StrvBuilder{&strvBuilder{(*C.GStrvBuilder)(p)}}
+}
+
+// UnsafeStrvBuilderFromGlibNone is used to convert raw C.GStrvBuilder pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeStrvBuilderFromGlibNone(p unsafe.Pointer) *StrvBuilder {
+	C.g_strv_builder_ref((*C.GStrvBuilder)(p))
+	wrapped := UnsafeStrvBuilderFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.strvBuilder,
+		func (intern *strvBuilder) {
+			C.g_strv_builder_unref(intern.native)
+		},
+	)
+	return wrapped
+}
+
+// UnsafeStrvBuilderFromGlibFull is used to convert raw C.GStrvBuilder pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeStrvBuilderFromGlibFull(p unsafe.Pointer) *StrvBuilder {
+	wrapped := UnsafeStrvBuilderFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.strvBuilder,
+		func (intern *strvBuilder) {
+			C.g_strv_builder_unref(intern.native)
+		},
+	)
+	return wrapped
+}
+
+// UnsafeStrvBuilderRef increases the refcount on the underlying resource. This is used by the bindings internally.
+// 
+// When this is called without an associated call to [StrvBuilder.UnsafeStrvBuilderUnref], then [StrvBuilder] will leak memory.
+func UnsafeStrvBuilderRef(s *StrvBuilder) {
+	C.g_strv_builder_ref(s.native)
+}
+
+// UnsafeStrvBuilderUnref unrefs/frees the underlying resource. This is used by the bindings internally.
+// 
+// After this is called, no other method on [StrvBuilder] is expected to work anymore.
+func UnsafeStrvBuilderUnref(s *StrvBuilder) {
+	C.g_strv_builder_unref(s.native)
+}
+
+// UnsafeStrvBuilderToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeStrvBuilderToGlibNone(s *StrvBuilder) unsafe.Pointer {
+	return unsafe.Pointer(s.native)
+}
+
+// UnsafeStrvBuilderToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeStrvBuilderToGlibFull(s *StrvBuilder) unsafe.Pointer {
+	runtime.SetFinalizer(s.strvBuilder, nil)
+	_p := unsafe.Pointer(s.native)
+	s.native = nil // StrvBuilder is invalid from here on
+	return _p
+}
+
+// NewStrvBuilder wraps g_strv_builder_new
+// 
+// The function returns the following values:
+// 
+// 	- goret *StrvBuilder 
+//
+// Creates a new #GStrvBuilder with a reference count of 1.
+// Use g_strv_builder_unref() on the returned value when no longer needed.
+func NewStrvBuilder() *StrvBuilder {
+	var cret *C.GStrvBuilder // return, full, converted
+
+	cret = C.g_strv_builder_new()
+
+	var goret *StrvBuilder
+
+	goret = UnsafeStrvBuilderFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// Add wraps g_strv_builder_add
+// 
+// The function takes the following parameters:
+// 
+// 	- value string: a string. 
+//
+// Add a string to the end of the array.
+// 
+// Since 2.68
+func (builder *StrvBuilder) Add(value string) {
+	var carg0 *C.GStrvBuilder // in, none, converted
+	var carg1 *C.char         // in, none, string
+
+	carg0 = (*C.GStrvBuilder)(UnsafeStrvBuilderToGlibNone(builder))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(value)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	C.g_strv_builder_add(carg0, carg1)
+	runtime.KeepAlive(builder)
+	runtime.KeepAlive(value)
+}
+
+// Addv wraps g_strv_builder_addv
+// 
+// The function takes the following parameters:
+// 
+// 	- value []string: the vector of strings to add 
+//
+// Appends all the strings in the given vector to the builder.
+// 
+// Since 2.70
+func (builder *StrvBuilder) Addv(value []string) {
+	var carg0 *C.GStrvBuilder // in, none, converted
+	var carg1 **C.char        // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+	carg0 = (*C.GStrvBuilder)(UnsafeStrvBuilderToGlibNone(builder))
+	_ = value
+	_ = carg1
+	panic("unimplemented conversion of []string (const char**)")
+
+	C.g_strv_builder_addv(carg0, carg1)
+	runtime.KeepAlive(builder)
+	runtime.KeepAlive(value)
+}
+
+// Take wraps g_strv_builder_take
+// 
+// The function takes the following parameters:
+// 
+// 	- value string: a string.
+//     Ownership of the string is transferred to the #GStrvBuilder 
+//
+// Add a string to the end of the array. After @value belongs to the
+// #GStrvBuilder and may no longer be modified by the caller.
+// 
+// Since 2.80
+func (builder *StrvBuilder) Take(value string) {
+	var carg0 *C.GStrvBuilder // in, none, converted
+	var carg1 *C.char         // in, full, string
+
+	carg0 = (*C.GStrvBuilder)(UnsafeStrvBuilderToGlibNone(builder))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(value)))
+
+	C.g_strv_builder_take(carg0, carg1)
+	runtime.KeepAlive(builder)
+	runtime.KeepAlive(value)
+}
+
+// TestCase wraps GTestCase
+//
+// An opaque structure representing a test case.
+type TestCase struct {
+	*testCase
+}
+
+// testCase is the struct that's finalized
+type testCase struct {
+	native *C.GTestCase
+}
+
+// UnsafeTestCaseFromGlibBorrow is used to convert raw C.GTestCase pointers to go. This is used by the bindings internally.
+func UnsafeTestCaseFromGlibBorrow(p unsafe.Pointer) *TestCase {
+	return &TestCase{&testCase{(*C.GTestCase)(p)}}
+}
+
+// UnsafeTestCaseFromGlibNone is used to convert raw C.GTestCase pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeTestCaseFromGlibNone(p unsafe.Pointer) *TestCase {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeTestCaseFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.testCase,
+		func (intern *testCase) {
+			C.g_test_case_free(intern.native)
+		},
+	)
+	return wrapped
+}
+
+// UnsafeTestCaseFromGlibFull is used to convert raw C.GTestCase pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeTestCaseFromGlibFull(p unsafe.Pointer) *TestCase {
+	wrapped := UnsafeTestCaseFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.testCase,
+		func (intern *testCase) {
+			C.g_test_case_free(intern.native)
+		},
+	)
+	return wrapped
+}
+
+// UnsafeTestCaseFree unrefs/frees the underlying resource. This is used by the bindings internally.
+// 
+// After this is called, no other method on [TestCase] is expected to work anymore.
+func UnsafeTestCaseFree(t *TestCase) {
+	C.g_test_case_free(t.native)
+}
+
+// UnsafeTestCaseToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeTestCaseToGlibNone(t *TestCase) unsafe.Pointer {
+	return unsafe.Pointer(t.native)
+}
+
+// UnsafeTestCaseToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeTestCaseToGlibFull(t *TestCase) unsafe.Pointer {
+	runtime.SetFinalizer(t.testCase, nil)
+	_p := unsafe.Pointer(t.native)
+	t.native = nil // TestCase is invalid from here on
+	return _p
+}
+
+// TestConfig wraps GTestConfig
+type TestConfig struct {
+	*testConfig
+}
+
+// testConfig is the struct that's finalized
+type testConfig struct {
+	native *C.GTestConfig
+}
+
+// UnsafeTestConfigFromGlibBorrow is used to convert raw C.GTestConfig pointers to go. This is used by the bindings internally.
+func UnsafeTestConfigFromGlibBorrow(p unsafe.Pointer) *TestConfig {
+	return &TestConfig{&testConfig{(*C.GTestConfig)(p)}}
+}
+
+// UnsafeTestConfigFromGlibNone is used to convert raw C.GTestConfig pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeTestConfigFromGlibNone(p unsafe.Pointer) *TestConfig {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeTestConfigFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.testConfig,
+		func (intern *testConfig) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeTestConfigFromGlibFull is used to convert raw C.GTestConfig pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeTestConfigFromGlibFull(p unsafe.Pointer) *TestConfig {
+	wrapped := UnsafeTestConfigFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.testConfig,
+		func (intern *testConfig) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeTestConfigFree unrefs/frees the underlying resource. This is used by the bindings internally.
+// 
+// After this is called, no other method on [TestConfig] is expected to work anymore.
+func UnsafeTestConfigFree(t *TestConfig) {
+	C.free(unsafe.Pointer(t.native))
+}
+
+// UnsafeTestConfigToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeTestConfigToGlibNone(t *TestConfig) unsafe.Pointer {
+	return unsafe.Pointer(t.native)
+}
+
+// UnsafeTestConfigToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeTestConfigToGlibFull(t *TestConfig) unsafe.Pointer {
+	runtime.SetFinalizer(t.testConfig, nil)
+	_p := unsafe.Pointer(t.native)
+	t.native = nil // TestConfig is invalid from here on
+	return _p
+}
+
+// TestLogBuffer wraps GTestLogBuffer
+type TestLogBuffer struct {
+	*testLogBuffer
+}
+
+// testLogBuffer is the struct that's finalized
+type testLogBuffer struct {
+	native *C.GTestLogBuffer
+}
+
+// UnsafeTestLogBufferFromGlibBorrow is used to convert raw C.GTestLogBuffer pointers to go. This is used by the bindings internally.
+func UnsafeTestLogBufferFromGlibBorrow(p unsafe.Pointer) *TestLogBuffer {
+	return &TestLogBuffer{&testLogBuffer{(*C.GTestLogBuffer)(p)}}
+}
+
+// UnsafeTestLogBufferFromGlibNone is used to convert raw C.GTestLogBuffer pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeTestLogBufferFromGlibNone(p unsafe.Pointer) *TestLogBuffer {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeTestLogBufferFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.testLogBuffer,
+		func (intern *testLogBuffer) {
+			C.g_test_log_buffer_free(intern.native)
+		},
+	)
+	return wrapped
+}
+
+// UnsafeTestLogBufferFromGlibFull is used to convert raw C.GTestLogBuffer pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeTestLogBufferFromGlibFull(p unsafe.Pointer) *TestLogBuffer {
+	wrapped := UnsafeTestLogBufferFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.testLogBuffer,
+		func (intern *testLogBuffer) {
+			C.g_test_log_buffer_free(intern.native)
+		},
+	)
+	return wrapped
+}
+
+// UnsafeTestLogBufferFree unrefs/frees the underlying resource. This is used by the bindings internally.
+// 
+// After this is called, no other method on [TestLogBuffer] is expected to work anymore.
+func UnsafeTestLogBufferFree(t *TestLogBuffer) {
+	C.g_test_log_buffer_free(t.native)
+}
+
+// UnsafeTestLogBufferToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeTestLogBufferToGlibNone(t *TestLogBuffer) unsafe.Pointer {
+	return unsafe.Pointer(t.native)
+}
+
+// UnsafeTestLogBufferToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeTestLogBufferToGlibFull(t *TestLogBuffer) unsafe.Pointer {
+	runtime.SetFinalizer(t.testLogBuffer, nil)
+	_p := unsafe.Pointer(t.native)
+	t.native = nil // TestLogBuffer is invalid from here on
+	return _p
+}
+
+// Push wraps g_test_log_buffer_push
+// 
+// The function takes the following parameters:
+// 
+// 	- nBytes uint 
+// 	- bytes *uint8 
+//
+// Internal function for gtester to decode test log messages, no ABI guarantees provided.
+func (tbuffer *TestLogBuffer) Push(nBytes uint, bytes *uint8) {
+	var carg0 *C.GTestLogBuffer // in, none, converted
+	var carg1 C.guint           // in, none, casted
+	var carg2 *C.guint8         // in, transfer: none, C Pointers: 1, Name: guint8
+
+	carg0 = (*C.GTestLogBuffer)(UnsafeTestLogBufferToGlibNone(tbuffer))
+	carg1 = C.guint(nBytes)
+	_ = bytes
+	_ = carg2
+	panic("unimplemented conversion of *uint8 (const guint8*)")
+
+	C.g_test_log_buffer_push(carg0, carg1, carg2)
+	runtime.KeepAlive(tbuffer)
+	runtime.KeepAlive(nBytes)
+	runtime.KeepAlive(bytes)
+}
+
+// TestSuite wraps GTestSuite
+//
+// An opaque structure representing a test suite.
+type TestSuite struct {
+	*testSuite
+}
+
+// testSuite is the struct that's finalized
+type testSuite struct {
+	native *C.GTestSuite
+}
+
+// UnsafeTestSuiteFromGlibBorrow is used to convert raw C.GTestSuite pointers to go. This is used by the bindings internally.
+func UnsafeTestSuiteFromGlibBorrow(p unsafe.Pointer) *TestSuite {
+	return &TestSuite{&testSuite{(*C.GTestSuite)(p)}}
+}
+
+// UnsafeTestSuiteFromGlibNone is used to convert raw C.GTestSuite pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeTestSuiteFromGlibNone(p unsafe.Pointer) *TestSuite {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeTestSuiteFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.testSuite,
+		func (intern *testSuite) {
+			C.g_test_suite_free(intern.native)
+		},
+	)
+	return wrapped
+}
+
+// UnsafeTestSuiteFromGlibFull is used to convert raw C.GTestSuite pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeTestSuiteFromGlibFull(p unsafe.Pointer) *TestSuite {
+	wrapped := UnsafeTestSuiteFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.testSuite,
+		func (intern *testSuite) {
+			C.g_test_suite_free(intern.native)
+		},
+	)
+	return wrapped
+}
+
+// UnsafeTestSuiteFree unrefs/frees the underlying resource. This is used by the bindings internally.
+// 
+// After this is called, no other method on [TestSuite] is expected to work anymore.
+func UnsafeTestSuiteFree(t *TestSuite) {
+	C.g_test_suite_free(t.native)
+}
+
+// UnsafeTestSuiteToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeTestSuiteToGlibNone(t *TestSuite) unsafe.Pointer {
+	return unsafe.Pointer(t.native)
+}
+
+// UnsafeTestSuiteToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeTestSuiteToGlibFull(t *TestSuite) unsafe.Pointer {
+	runtime.SetFinalizer(t.testSuite, nil)
+	_p := unsafe.Pointer(t.native)
+	t.native = nil // TestSuite is invalid from here on
+	return _p
+}
+
+// Add wraps g_test_suite_add
+// 
+// The function takes the following parameters:
+// 
+// 	- testCase *TestCase: a test case 
+//
+// Adds @test_case to @suite.
+func (suite *TestSuite) Add(testCase *TestCase) {
+	var carg0 *C.GTestSuite // in, none, converted
+	var carg1 *C.GTestCase  // in, none, converted
+
+	carg0 = (*C.GTestSuite)(UnsafeTestSuiteToGlibNone(suite))
+	carg1 = (*C.GTestCase)(UnsafeTestCaseToGlibNone(testCase))
+
+	C.g_test_suite_add(carg0, carg1)
+	runtime.KeepAlive(suite)
+	runtime.KeepAlive(testCase)
+}
+
+// AddSuite wraps g_test_suite_add_suite
+// 
+// The function takes the following parameters:
+// 
+// 	- nestedsuite *TestSuite: another test suite 
+//
+// Adds @nestedsuite to @suite.
+func (suite *TestSuite) AddSuite(nestedsuite *TestSuite) {
+	var carg0 *C.GTestSuite // in, none, converted
+	var carg1 *C.GTestSuite // in, none, converted
+
+	carg0 = (*C.GTestSuite)(UnsafeTestSuiteToGlibNone(suite))
+	carg1 = (*C.GTestSuite)(UnsafeTestSuiteToGlibNone(nestedsuite))
+
+	C.g_test_suite_add_suite(carg0, carg1)
+	runtime.KeepAlive(suite)
+	runtime.KeepAlive(nestedsuite)
+}
+
+// Thread wraps GThread
+//
+// The #GThread struct represents a running thread. This struct
+// is returned by g_thread_new() or g_thread_try_new(). You can
+// obtain the #GThread struct representing the current thread by
+// calling g_thread_self().
+// 
+// GThread is refcounted, see g_thread_ref() and g_thread_unref().
+// The thread represented by it holds a reference while it is running,
+// and g_thread_join() consumes the reference that it is given, so
+// it is normally not necessary to manage GThread references
+// explicitly.
+// 
+// The structure is opaque -- none of its fields may be directly
+// accessed.
+type Thread struct {
+	*thread
+}
+
+// thread is the struct that's finalized
+type thread struct {
+	native *C.GThread
+}
+
+// UnsafeThreadFromGlibBorrow is used to convert raw C.GThread pointers to go. This is used by the bindings internally.
+func UnsafeThreadFromGlibBorrow(p unsafe.Pointer) *Thread {
+	return &Thread{&thread{(*C.GThread)(p)}}
+}
+
+// UnsafeThreadFromGlibNone is used to convert raw C.GThread pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeThreadFromGlibNone(p unsafe.Pointer) *Thread {
+	C.g_thread_ref((*C.GThread)(p))
+	wrapped := UnsafeThreadFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.thread,
+		func (intern *thread) {
+			C.g_thread_unref(intern.native)
+		},
+	)
+	return wrapped
+}
+
+// UnsafeThreadFromGlibFull is used to convert raw C.GThread pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeThreadFromGlibFull(p unsafe.Pointer) *Thread {
+	wrapped := UnsafeThreadFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.thread,
+		func (intern *thread) {
+			C.g_thread_unref(intern.native)
+		},
+	)
+	return wrapped
+}
+
+// UnsafeThreadRef increases the refcount on the underlying resource. This is used by the bindings internally.
+// 
+// When this is called without an associated call to [Thread.UnsafeThreadUnref], then [Thread] will leak memory.
+func UnsafeThreadRef(t *Thread) {
+	C.g_thread_ref(t.native)
+}
+
+// UnsafeThreadUnref unrefs/frees the underlying resource. This is used by the bindings internally.
+// 
+// After this is called, no other method on [Thread] is expected to work anymore.
+func UnsafeThreadUnref(t *Thread) {
+	C.g_thread_unref(t.native)
+}
+
+// UnsafeThreadToGlibNone returns the underlying C pointer. This is used by the bindings internally.
+func UnsafeThreadToGlibNone(t *Thread) unsafe.Pointer {
+	return unsafe.Pointer(t.native)
+}
+
+// UnsafeThreadToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeThreadToGlibFull(t *Thread) unsafe.Pointer {
+	runtime.SetFinalizer(t.thread, nil)
+	_p := unsafe.Pointer(t.native)
+	t.native = nil // Thread is invalid from here on
+	return _p
+}
+
+// ThreadErrorQuark wraps g_thread_error_quark
+// 
+// The function returns the following values:
+// 
+// 	- goret Quark 
+func ThreadErrorQuark() Quark {
+	var cret C.GQuark // return, none, casted, alias
+
+	cret = C.g_thread_error_quark()
+
+	var goret Quark
+
+	goret = Quark(cret)
+
+	return goret
+}
+
+// ThreadSelf wraps g_thread_self
+// 
+// The function returns the following values:
+// 
+// 	- goret *Thread 
+//
+// This function returns the #GThread corresponding to the
+// current thread. Note that this function does not increase
+// the reference count of the returned struct.
+// 
+// This function will return a #GThread even for threads that
+// were not created by GLib (i.e. those created by other threading
+// APIs). This may be useful for thread identification purposes
+// (i.e. comparisons) but you must not use GLib functions (such
+// as g_thread_join()) on these threads.
+func ThreadSelf() *Thread {
+	var cret *C.GThread // return, none, converted
+
+	cret = C.g_thread_self()
+
+	var goret *Thread
+
+	goret = UnsafeThreadFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ThreadYield wraps g_thread_yield
+//
+// Causes the calling thread to voluntarily relinquish the CPU, so
+// that other threads can run.
+// 
+// This function is often used as a method to make busy wait less evil.
+func ThreadYield() {
+
+	C.g_thread_yield()
+}
+
+// GetName wraps g_thread_get_name
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the name of the thread.
+// 
+// This function is intended for debugging purposes.
+func (thread *Thread) GetName() string {
+	var carg0 *C.GThread // in, none, converted
+	var cret  *C.char    // return, none, string
+
+	carg0 = (*C.GThread)(UnsafeThreadToGlibNone(thread))
+
+	cret = C.g_thread_get_name(carg0)
+	runtime.KeepAlive(thread)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
 // TimeZone wraps GTimeZone
 //
 // A `GTimeZone` represents a time zone, at no particular point in time.
 // 
 // The `GTimeZone` struct is refcounted and immutable.
 // 
-// Each time zone has an identifier (for example, ‘Europe/London’) which is
+// Each time zone has an identifier (for example, &#x2018;Europe/London&#x2019;) which is
 // platform dependent. See [ctor@GLib.TimeZone.new] for information on the
 // identifier formats. The identifier of a time zone can be retrieved using
 // [method@GLib.TimeZone.get_identifier].
 // 
 // A time zone contains a number of intervals. Each interval has an abbreviation
-// to describe it (for example, ‘PDT’), an offset to UTC and a flag indicating
+// to describe it (for example, &#x2018;PDT&#x2019;), an offset to UTC and a flag indicating
 // if the daylight savings time is in effect during that interval. A time zone
-// always has at least one interval — interval 0. Note that interval abbreviations
-// are not the same as time zone identifiers (apart from ‘UTC’), and cannot be
+// always has at least one interval &#x2014; interval 0. Note that interval abbreviations
+// are not the same as time zone identifiers (apart from &#x2018;UTC&#x2019;), and cannot be
 // passed to [ctor@GLib.TimeZone.new].
 // 
 // Every UTC time is contained within exactly one interval, but a given
@@ -28883,8 +32802,8 @@ func UnsafeTimeZoneToGlibFull(t *TimeZone) unsafe.Pointer {
 // zone for standard time, for example "Pacific Standard Time".
 // 
 // Valid RFC3339 time offsets are `"Z"` (for UTC) or
-// `"±hh:mm"`.  ISO 8601 additionally specifies
-// `"±hhmm"` and `"±hh"`.  Offsets are
+// `"&#xB1;hh:mm"`.  ISO 8601 additionally specifies
+// `"&#xB1;hhmm"` and `"&#xB1;hh"`.  Offsets are
 // time values to be added to Coordinated Universal Time (UTC) to get
 // the local time.
 // 
@@ -28896,7 +32815,7 @@ func UnsafeTimeZoneToGlibFull(t *TimeZone) unsafe.Pointer {
 // and daylight savings time zone must be three or more alphabetic
 // characters. Offsets are time values to be added to local time to
 // get Coordinated Universal Time (UTC) and should be
-// `"[±]hh[[:]mm[:ss]]"`.  Dates are either
+// `"[&#xB1;]hh[[:]mm[:ss]]"`.  Dates are either
 // `"Jn"` (Julian day with n between 1 and 365, leap
 // years not counted), `"n"` (zero-based Julian day
 // with n between 0 and 365) or `"Mm.w.d"` (day d
@@ -28904,7 +32823,7 @@ func UnsafeTimeZoneToGlibFull(t *TimeZone) unsafe.Pointer {
 // 0 is a Sunday).  Times are in local wall clock time, the default is
 // 02:00:00.
 // 
-// In Windows, the "tzn[+|–]hh[:mm[:ss]][dzn]" format is used, but also
+// In Windows, the "tzn[+|&#x2013;]hh[:mm[:ss]][dzn]" format is used, but also
 // accepts POSIX format.  The Windows format uses US rules for all time
 // zones; daylight savings time is 60 minutes behind the standard time
 // with date and time of change taken from Pacific Standard Time.
@@ -28925,7 +32844,7 @@ func UnsafeTimeZoneToGlibFull(t *TimeZone) unsafe.Pointer {
 // instead.
 // 
 // See
-// [RFC3339 §5.6](http://tools.ietf.org/html/rfc3339#section-5.6)
+// [RFC3339 &#xA7;5.6](http://tools.ietf.org/html/rfc3339#section-5.6)
 // for a precise definition of valid RFC3339 time offsets
 // (the `time-offset` expansion) and ISO 8601 for the
 // full list of valid time offsets.  See
@@ -29544,9 +33463,9 @@ func (node *TreeNode) Previous() *TreeNode {
 // be empty).
 // 
 // If the URI string has an
-// [‘authority’ component](https://tools.ietf.org/html/rfc3986#section-3) (that
+// [&#x2018;authority&#x2019; component](https://tools.ietf.org/html/rfc3986#section-3) (that
 // is, if the scheme is followed by `://` rather than just `:`), then the
-// `GUri` will contain a hostname, and possibly a port and ‘userinfo’.
+// `GUri` will contain a hostname, and possibly a port and &#x2018;userinfo&#x2019;.
 // Additionally, depending on how the `GUri` was constructed/parsed (for example,
 // using the `G_URI_FLAGS_HAS_PASSWORD` and `G_URI_FLAGS_HAS_AUTH_PARAMS` flags),
 // the userinfo may be split out into a username, password, and
@@ -29592,7 +33511,7 @@ func (node *TreeNode) Previous() *TreeNode {
 // 
 // Note that the scope of `GUri` is to help manipulate URIs in various applications,
 // following [RFC 3986](https://tools.ietf.org/html/rfc3986). In particular,
-// it doesn't intend to cover web browser needs, and doesn’t implement the
+// it doesn't intend to cover web browser needs, and doesn&#x2019;t implement the
 // [WHATWG URL](https://url.spec.whatwg.org/) standard. No APIs are provided to
 // help prevent
 // [homograph attacks](https://en.wikipedia.org/wiki/IDN_homograph_attack), so
@@ -29602,10 +33521,10 @@ func (node *TreeNode) Previous() *TreeNode {
 // ## Relative and absolute URIs
 // 
 // As defined in [RFC 3986](https://tools.ietf.org/html/rfc3986#section-4), the
-// hierarchical nature of URIs means that they can either be ‘relative
-// references’ (sometimes referred to as ‘relative URIs’) or ‘URIs’ (for
-// clarity, ‘URIs’ are referred to in this documentation as
-// ‘absolute URIs’ — although
+// hierarchical nature of URIs means that they can either be &#x2018;relative
+// references&#x2019; (sometimes referred to as &#x2018;relative URIs&#x2019;) or &#x2018;URIs&#x2019; (for
+// clarity, &#x2018;URIs&#x2019; are referred to in this documentation as
+// &#x2018;absolute URIs&#x2019; &#x2014; although
 // [in contrast to RFC 3986](https://tools.ietf.org/html/rfc3986#section-4.3),
 // fragment identifiers are always allowed).
 // 
@@ -29633,7 +33552,7 @@ func (node *TreeNode) Previous() *TreeNode {
 // The most minimalist APIs for parsing URIs are [func@GLib.Uri.split] and
 // [func@GLib.Uri.split_with_user]. These split a URI into its component
 // parts, and return the parts; the difference between the two is that
-// [func@GLib.Uri.split] treats the ‘userinfo’ component of the URI as a
+// [func@GLib.Uri.split] treats the &#x2018;userinfo&#x2019; component of the URI as a
 // single element, while [func@GLib.Uri.split_with_user] can (depending on the
 // [flags@GLib.UriFlags] you pass) treat it as containing a username, password,
 // and authentication parameters. Alternatively, [func@GLib.Uri.split_network]
@@ -29859,7 +33778,7 @@ func UriBuild(flags URIFlags, scheme string, userinfo string, host string, port 
 // %G_URI_FLAGS_ENCODED.
 // 
 // In contrast to g_uri_build(), this allows specifying the components
-// of the ‘userinfo’ field separately. Note that @user must be non-%NULL
+// of the &#x2018;userinfo&#x2019; field separately. Note that @user must be non-%NULL
 // if either @password or @auth_params is non-%NULL.
 func UriBuildWithUser(flags URIFlags, scheme string, user string, password string, authParams string, host string, port int32, path string, query string, fragment string) *Uri {
 	var carg1  C.GUriFlags // in, none, casted
@@ -29955,10 +33874,10 @@ func UriErrorQuark() Quark {
 //
 // Escapes arbitrary data for use in a URI.
 // 
-// Normally all characters that are not ‘unreserved’ (i.e. ASCII
+// Normally all characters that are not &#x2018;unreserved&#x2019; (i.e. ASCII
 // alphanumerical characters plus dash, dot, underscore and tilde) are
 // escaped. But if you specify characters in @reserved_chars_allowed
-// they are not escaped. This is useful for the ‘reserved’ characters
+// they are not escaped. This is useful for the &#x2018;reserved&#x2019; characters
 // in the URI specification, since those are allowed unescaped in some
 // portions of a URI.
 // 
@@ -30057,7 +33976,7 @@ func UriEscapeString(unescaped string, reservedCharsAllowed string, allowUtf8 bo
 // [absolute URI](#relative-and-absolute-uris), i.e. it does not need to be resolved
 // relative to another URI using g_uri_parse_relative().
 // 
-// If it’s not a valid URI, an error is returned explaining how it’s invalid.
+// If it&#x2019;s not a valid URI, an error is returned explaining how it&#x2019;s invalid.
 // 
 // See g_uri_split(), and the definition of #GUriFlags, for more
 // information on the effect of @flags.
@@ -30115,7 +34034,7 @@ func UriIsValid(uriString string, flags URIFlags) (bool, error) {
 // [RFC 3986, section 3](https://tools.ietf.org/html/rfc3986#section-3).
 // 
 // See also g_uri_join_with_user(), which allows specifying the
-// components of the ‘userinfo’ separately.
+// components of the &#x2018;userinfo&#x2019; separately.
 // 
 // %G_URI_FLAGS_HAS_PASSWORD and %G_URI_FLAGS_HAS_AUTH_PARAMS are ignored if set
 // in @flags.
@@ -30199,7 +34118,7 @@ func UriJoin(flags URIFlags, scheme string, userinfo string, host string, port i
 // string).
 // 
 // In contrast to g_uri_join(), this allows specifying the components
-// of the ‘userinfo’ separately. It otherwise behaves the same.
+// of the &#x2018;userinfo&#x2019; separately. It otherwise behaves the same.
 // 
 // %G_URI_FLAGS_HAS_PASSWORD and %G_URI_FLAGS_HAS_AUTH_PARAMS are ignored if set
 // in @flags.
@@ -31163,7 +35082,7 @@ func (uri *Uri) GetScheme() string {
 // 
 // 	- goret string (nullable) 
 //
-// Gets the ‘username’ component of @uri's userinfo, which may contain
+// Gets the &#x2018;username&#x2019; component of @uri's userinfo, which may contain
 // `%`-encoding, depending on the flags with which @uri was created.
 // If @uri was not created with %G_URI_FLAGS_HAS_PASSWORD or
 // %G_URI_FLAGS_HAS_AUTH_PARAMS, this is the same as g_uri_get_userinfo().
@@ -31326,7 +35245,7 @@ func (uri *Uri) ToStringPartial(flags URIHideFlags) string {
 //
 // Many URI schemes include one or more attribute/value pairs as part of the URI
 // value. For example `scheme://server/path?query=string&amp;is=there` has two
-// attributes – `query=string` and `is=there` – in its query part.
+// attributes &#x2013; `query=string` and `is=there` &#x2013; in its query part.
 // 
 // A #GUriParamsIter structure represents an iterator that can be used to
 // iterate over the attribute/value pairs of a URI query string. #GUriParamsIter
@@ -31974,33 +35893,33 @@ func (dict *VariantDict) Remove(key string) bool {
 // information that is useful when working with [type@GLib.Variant].
 // 
 // The first major change with respect to the D-Bus type system is the
-// introduction of maybe (or ‘nullable’) types.  Any type in [type@GLib.Variant]
+// introduction of maybe (or &#x2018;nullable&#x2019;) types.  Any type in [type@GLib.Variant]
 // can be converted to a maybe type, in which case, `nothing` (or `null`)
 // becomes a valid value.  Maybe types have been added by introducing the
 // character `m` to type strings.
 // 
 // The second major change is that the [type@GLib.Variant] type system supports
-// the concept of ‘indefinite types’ — types that are less specific than
+// the concept of &#x2018;indefinite types&#x2019; &#x2014; types that are less specific than
 // the normal types found in D-Bus.  For example, it is possible to speak
-// of ‘an array of any type’ in [type@GLib.Variant], where the D-Bus type system
-// would require you to speak of ‘an array of integers’ or ‘an array of
-// strings’.  Indefinite types have been added by introducing the
+// of &#x2018;an array of any type&#x2019; in [type@GLib.Variant], where the D-Bus type system
+// would require you to speak of &#x2018;an array of integers&#x2019; or &#x2018;an array of
+// strings&#x2019;.  Indefinite types have been added by introducing the
 // characters `*`, `?` and `r` to type strings.
 // 
 // Finally, all arbitrary restrictions relating to the complexity of
 // types are lifted along with the restriction that dictionary entries
 // may only appear nested inside of arrays.
 // 
-// Just as in D-Bus, [type@GLib.Variant] types are described with strings (‘type
-// strings’).  Subject to the differences mentioned above, these strings
+// Just as in D-Bus, [type@GLib.Variant] types are described with strings (&#x2018;type
+// strings&#x2019;).  Subject to the differences mentioned above, these strings
 // are of the same form as those found in D-Bus.  Note, however: D-Bus
 // always works in terms of messages and therefore individual type
-// strings appear nowhere in its interface.  Instead, ‘signatures’
+// strings appear nowhere in its interface.  Instead, &#x2018;signatures&#x2019;
 // are a concatenation of the strings of the type of each argument in a
 // message.  [type@GLib.Variant] deals with single values directly so
 // [type@GLib.Variant] type strings always describe the type of exactly one
 // value.  This means that a D-Bus signature string is generally not a valid
-// [type@GLib.Variant] type string — except in the case that it is the signature
+// [type@GLib.Variant] type string &#x2014; except in the case that it is the signature
 // of a message containing exactly one argument.
 // 
 // An indefinite type is similar in spirit to what may be called an
@@ -32009,11 +35928,11 @@ func (dict *VariantDict) Remove(key string) bool {
 // that are subtypes of indefinite types.  That is to say,
 // [method@GLib.Variant.get_type] will never return an indefinite type, but
 // calling [method@GLib.Variant.is_of_type] with an indefinite type may return
-// true.  For example, you cannot have a value that represents ‘an
-// array of no particular type’, but you can have an ‘array of integers’
-// which certainly matches the type of ‘an array of no particular type’,
-// since ‘array of integers’ is a subtype of ‘array of no particular
-// type’.
+// true.  For example, you cannot have a value that represents &#x2018;an
+// array of no particular type&#x2019;, but you can have an &#x2018;array of integers&#x2019;
+// which certainly matches the type of &#x2018;an array of no particular type&#x2019;,
+// since &#x2018;array of integers&#x2019; is a subtype of &#x2018;array of no particular
+// type&#x2019;.
 // 
 // This is similar to how instances of abstract classes may not
 // directly exist in other type systems, but instances of their
@@ -32079,8 +35998,8 @@ func (dict *VariantDict) Remove(key string) bool {
 // - `a`: used as a prefix on another type string to mean an array of that
 //   type; the type string `ai`, for example, is the type of an array of
 //   signed 32-bit integers.
-// - `m`: used as a prefix on another type string to mean a ‘maybe’, or
-//   ‘nullable’, version of that type; the type string `ms`, for example,
+// - `m`: used as a prefix on another type string to mean a &#x2018;maybe&#x2019;, or
+//   &#x2018;nullable&#x2019;, version of that type; the type string `ms`, for example,
 //   is the type of a value that maybe contains a string, or maybe contains
 //   nothing.
 // - `()`: used to enclose zero or more other concatenated type strings to
@@ -32100,7 +36019,7 @@ func (dict *VariantDict) Remove(key string) bool {
 // - `*`: the type string of `G_VARIANT_TYPE_ANY`; the indefinite type that is
 //   a supertype of all types.  Note that, as with all type strings, this
 //   character represents exactly one type. It cannot be used inside of tuples
-//   to mean ‘any number of items’.
+//   to mean &#x2018;any number of items&#x2019;.
 // 
 // Any type string of a container that contains an indefinite type is,
 // itself, an indefinite type. For example, the type string `a*`
@@ -32283,7 +36202,7 @@ func NewVariantTypeDictEntry(key *VariantType, value *VariantType) *VariantType 
 // 
 // 	- goret *VariantType 
 //
-// Constructs the type corresponding to a ‘maybe’ instance containing
+// Constructs the type corresponding to a &#x2018;maybe&#x2019; instance containing
 // type @type or `Nothing`.
 // 
 // It is appropriate to call [method@GLib.VariantType.free] on the return value.
@@ -32539,9 +36458,9 @@ func (typ *VariantType) DupString() string {
 // 
 // 	- goret *VariantType 
 //
-// Determines the element type of an array or ‘maybe’ type.
+// Determines the element type of an array or &#x2018;maybe&#x2019; type.
 // 
-// This function may only be used with array or ‘maybe’ types.
+// This function may only be used with array or &#x2018;maybe&#x2019; types.
 func (typ *VariantType) Element() *VariantType {
 	var carg0 *C.GVariantType // in, none, converted
 	var cret  *C.GVariantType // return, none, converted
@@ -32633,7 +36552,7 @@ func (typ *VariantType) GetStringLength() uint {
 // This is true if the type string for @type starts with an `a`.
 // 
 // This function returns true for any indefinite type for which every
-// definite subtype is an array type — `G_VARIANT_TYPE_ARRAY`, for
+// definite subtype is an array type &#x2014; `G_VARIANT_TYPE_ARRAY`, for
 // example.
 func (typ *VariantType) IsArray() bool {
 	var carg0 *C.GVariantType // in, none, converted
@@ -32698,7 +36617,7 @@ func (typ *VariantType) IsBasic() bool {
 // entry types plus the variant type.
 // 
 // This function returns true for any indefinite type for which every
-// definite subtype is a container — `G_VARIANT_TYPE_ARRAY`, for
+// definite subtype is a container &#x2014; `G_VARIANT_TYPE_ARRAY`, for
 // example.
 func (typ *VariantType) IsContainer() bool {
 	var carg0 *C.GVariantType // in, none, converted
@@ -32763,7 +36682,7 @@ func (typ *VariantType) IsDefinite() bool {
 // This is true if the type string for @type starts with a `{`.
 // 
 // This function returns true for any indefinite type for which every
-// definite subtype is a dictionary entry type —
+// definite subtype is a dictionary entry type &#x2014;
 // `G_VARIANT_TYPE_DICT_ENTRY`, for example.
 func (typ *VariantType) IsDictEntry() bool {
 	var carg0 *C.GVariantType // in, none, converted
@@ -32789,12 +36708,12 @@ func (typ *VariantType) IsDictEntry() bool {
 // 
 // 	- goret bool 
 //
-// Determines if the given @type is a ‘maybe’ type.
+// Determines if the given @type is a &#x2018;maybe&#x2019; type.
 // 
 // This is true if the type string for @type starts with an `m`.
 // 
 // This function returns true for any indefinite type for which every
-// definite subtype is a ‘maybe’ type — `G_VARIANT_TYPE_MAYBE`, for
+// definite subtype is a &#x2018;maybe&#x2019; type &#x2014; `G_VARIANT_TYPE_MAYBE`, for
 // example.
 func (typ *VariantType) IsMaybe() bool {
 	var carg0 *C.GVariantType // in, none, converted
@@ -32862,7 +36781,7 @@ func (typ *VariantType) IsSubtypeOf(supertype *VariantType) bool {
 // `G_VARIANT_TYPE_TUPLE`.
 // 
 // This function returns true for any indefinite type for which every
-// definite subtype is a tuple type — `G_VARIANT_TYPE_TUPLE`, for
+// definite subtype is a tuple type &#x2014; `G_VARIANT_TYPE_TUPLE`, for
 // example.
 func (typ *VariantType) IsTuple() bool {
 	var carg0 *C.GVariantType // in, none, converted

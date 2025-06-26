@@ -228,7 +228,7 @@ func (p *Parameters) CGoReturn() *Param {
 	return p.CReturn
 }
 
-func NewCallableParameters(e *env, v gir.CallableAttrs) (*Parameters, resolvedState) {
+func NewCallableParameters(e *env, v *gir.CallableAttrs) (*Parameters, resolvedState) {
 	params := &Parameters{
 		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
 	}

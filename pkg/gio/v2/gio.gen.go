@@ -18,7 +18,6 @@ import (
 // #cgo pkg-config: gio-2.0
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gio/gio.h>
-// extern GDBusMessage* _gotk4_gio2_DBusMessageFilterFunction(GDBusConnection*, GDBusMessage*, gboolean, gpointer);
 // extern GFile* _gotk4_gio2_VFSFileLookupFunc(GVfs*, const char*, gpointer);
 // extern gboolean _gotk4_glib2_SourceFunc(gpointer);
 // extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
@@ -187,73 +186,8 @@ import (
 // void _gotk4_gio2_Converter_virtual_reset(void* fnptr, GConverter* carg0) {
 // 	return ((void (*) (GConverter*))(fnptr))(carg0);
 // }
-// extern GDBusObject* _gotk4_gio2_DBusInterface_dup_object(GDBusInterface*);
-// extern GDBusInterfaceInfo* _gotk4_gio2_DBusInterface_get_info(GDBusInterface*);
-// extern void _gotk4_gio2_DBusInterface_set_object(GDBusInterface*, GDBusObject*);
-// GDBusObject* _gotk4_gio2_DBusInterface_virtual_dup_object(void* fnptr, GDBusInterface* carg0) {
-// 	return ((GDBusObject* (*) (GDBusInterface*))(fnptr))(carg0);
-// }
-// GDBusInterfaceInfo* _gotk4_gio2_DBusInterface_virtual_get_info(void* fnptr, GDBusInterface* carg0) {
-// 	return ((GDBusInterfaceInfo* (*) (GDBusInterface*))(fnptr))(carg0);
-// }
-// void _gotk4_gio2_DBusInterface_virtual_set_object(void* fnptr, GDBusInterface* carg0, GDBusObject* carg1) {
-// 	return ((void (*) (GDBusInterface*, GDBusObject*))(fnptr))(carg0, carg1);
-// }
-// extern GDBusInterface* _gotk4_gio2_DBusObject_get_interface(GDBusObject*, const gchar*);
-// extern GList* _gotk4_gio2_DBusObject_get_interfaces(GDBusObject*);
-// extern const gchar* _gotk4_gio2_DBusObject_get_object_path(GDBusObject*);
-// extern void _gotk4_gio2_DBusObject_interface_added(GDBusObject*, GDBusInterface*);
-// extern void _gotk4_gio2_DBusObject_interface_removed(GDBusObject*, GDBusInterface*);
-// GDBusInterface* _gotk4_gio2_DBusObject_virtual_get_interface(void* fnptr, GDBusObject* carg0, const gchar* carg1) {
-// 	return ((GDBusInterface* (*) (GDBusObject*, const gchar*))(fnptr))(carg0, carg1);
-// }
-// GList* _gotk4_gio2_DBusObject_virtual_get_interfaces(void* fnptr, GDBusObject* carg0) {
-// 	return ((GList* (*) (GDBusObject*))(fnptr))(carg0);
-// }
-// const gchar* _gotk4_gio2_DBusObject_virtual_get_object_path(void* fnptr, GDBusObject* carg0) {
-// 	return ((const gchar* (*) (GDBusObject*))(fnptr))(carg0);
-// }
-// void _gotk4_gio2_DBusObject_virtual_interface_added(void* fnptr, GDBusObject* carg0, GDBusInterface* carg1) {
-// 	return ((void (*) (GDBusObject*, GDBusInterface*))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_gio2_DBusObject_virtual_interface_removed(void* fnptr, GDBusObject* carg0, GDBusInterface* carg1) {
-// 	return ((void (*) (GDBusObject*, GDBusInterface*))(fnptr))(carg0, carg1);
-// }
-// extern GDBusInterface* _gotk4_gio2_DBusObjectManager_get_interface(GDBusObjectManager*, const gchar*, const gchar*);
-// extern GDBusObject* _gotk4_gio2_DBusObjectManager_get_object(GDBusObjectManager*, const gchar*);
-// extern const gchar* _gotk4_gio2_DBusObjectManager_get_object_path(GDBusObjectManager*);
-// extern GList* _gotk4_gio2_DBusObjectManager_get_objects(GDBusObjectManager*);
-// extern void _gotk4_gio2_DBusObjectManager_interface_added(GDBusObjectManager*, GDBusObject*, GDBusInterface*);
-// extern void _gotk4_gio2_DBusObjectManager_interface_removed(GDBusObjectManager*, GDBusObject*, GDBusInterface*);
-// extern void _gotk4_gio2_DBusObjectManager_object_added(GDBusObjectManager*, GDBusObject*);
-// extern void _gotk4_gio2_DBusObjectManager_object_removed(GDBusObjectManager*, GDBusObject*);
-// GDBusInterface* _gotk4_gio2_DBusObjectManager_virtual_get_interface(void* fnptr, GDBusObjectManager* carg0, const gchar* carg1, const gchar* carg2) {
-// 	return ((GDBusInterface* (*) (GDBusObjectManager*, const gchar*, const gchar*))(fnptr))(carg0, carg1, carg2);
-// }
-// GDBusObject* _gotk4_gio2_DBusObjectManager_virtual_get_object(void* fnptr, GDBusObjectManager* carg0, const gchar* carg1) {
-// 	return ((GDBusObject* (*) (GDBusObjectManager*, const gchar*))(fnptr))(carg0, carg1);
-// }
-// const gchar* _gotk4_gio2_DBusObjectManager_virtual_get_object_path(void* fnptr, GDBusObjectManager* carg0) {
-// 	return ((const gchar* (*) (GDBusObjectManager*))(fnptr))(carg0);
-// }
-// GList* _gotk4_gio2_DBusObjectManager_virtual_get_objects(void* fnptr, GDBusObjectManager* carg0) {
-// 	return ((GList* (*) (GDBusObjectManager*))(fnptr))(carg0);
-// }
-// void _gotk4_gio2_DBusObjectManager_virtual_interface_added(void* fnptr, GDBusObjectManager* carg0, GDBusObject* carg1, GDBusInterface* carg2) {
-// 	return ((void (*) (GDBusObjectManager*, GDBusObject*, GDBusInterface*))(fnptr))(carg0, carg1, carg2);
-// }
-// void _gotk4_gio2_DBusObjectManager_virtual_interface_removed(void* fnptr, GDBusObjectManager* carg0, GDBusObject* carg1, GDBusInterface* carg2) {
-// 	return ((void (*) (GDBusObjectManager*, GDBusObject*, GDBusInterface*))(fnptr))(carg0, carg1, carg2);
-// }
-// void _gotk4_gio2_DBusObjectManager_virtual_object_added(void* fnptr, GDBusObjectManager* carg0, GDBusObject* carg1) {
-// 	return ((void (*) (GDBusObjectManager*, GDBusObject*))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_gio2_DBusObjectManager_virtual_object_removed(void* fnptr, GDBusObjectManager* carg0, GDBusObject* carg1) {
-// 	return ((void (*) (GDBusObjectManager*, GDBusObject*))(fnptr))(carg0, carg1);
-// }
 // extern GIOCondition _gotk4_gio2_DatagramBased_condition_check(GDatagramBased*, GIOCondition);
 // extern gboolean _gotk4_gio2_DatagramBased_condition_wait(GDatagramBased*, GIOCondition, gint64, GCancellable*, GError*);
-// extern GSource* _gotk4_gio2_DatagramBased_create_source(GDatagramBased*, GIOCondition, GCancellable*);
 // extern gint _gotk4_gio2_DatagramBased_receive_messages(GDatagramBased*, GInputMessage*, guint, gint, gint64, GCancellable*, GError*);
 // extern gint _gotk4_gio2_DatagramBased_send_messages(GDatagramBased*, GOutputMessage*, guint, gint, gint64, GCancellable*, GError*);
 // GIOCondition _gotk4_gio2_DatagramBased_virtual_condition_check(void* fnptr, GDatagramBased* carg0, GIOCondition carg1) {
@@ -261,9 +195,6 @@ import (
 // }
 // gboolean _gotk4_gio2_DatagramBased_virtual_condition_wait(void* fnptr, GDatagramBased* carg0, GIOCondition carg1, gint64 carg2, GCancellable* carg3, GError** _cerr) {
 // 	return ((gboolean (*) (GDatagramBased*, GIOCondition, gint64, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
-// }
-// GSource* _gotk4_gio2_DatagramBased_virtual_create_source(void* fnptr, GDatagramBased* carg0, GIOCondition carg1, GCancellable* carg2) {
-// 	return ((GSource* (*) (GDatagramBased*, GIOCondition, GCancellable*))(fnptr))(carg0, carg1, carg2);
 // }
 // gint _gotk4_gio2_DatagramBased_virtual_receive_messages(void* fnptr, GDatagramBased* carg0, GInputMessage* carg1, guint carg2, gint carg3, gint64 carg4, GCancellable* carg5, GError** _cerr) {
 // 	return ((gint (*) (GDatagramBased*, GInputMessage*, guint, gint, gint64, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, _cerr);
@@ -800,27 +731,19 @@ import (
 // 	return ((void (*) (GNetworkMonitor*, gboolean))(fnptr))(carg0, carg1);
 // }
 // extern gboolean _gotk4_gio2_PollableInputStream_can_poll(GPollableInputStream*);
-// extern GSource* _gotk4_gio2_PollableInputStream_create_source(GPollableInputStream*, GCancellable*);
 // extern gboolean _gotk4_gio2_PollableInputStream_is_readable(GPollableInputStream*);
 // gboolean _gotk4_gio2_PollableInputStream_virtual_can_poll(void* fnptr, GPollableInputStream* carg0) {
 // 	return ((gboolean (*) (GPollableInputStream*))(fnptr))(carg0);
-// }
-// GSource* _gotk4_gio2_PollableInputStream_virtual_create_source(void* fnptr, GPollableInputStream* carg0, GCancellable* carg1) {
-// 	return ((GSource* (*) (GPollableInputStream*, GCancellable*))(fnptr))(carg0, carg1);
 // }
 // gboolean _gotk4_gio2_PollableInputStream_virtual_is_readable(void* fnptr, GPollableInputStream* carg0) {
 // 	return ((gboolean (*) (GPollableInputStream*))(fnptr))(carg0);
 // }
 // extern gboolean _gotk4_gio2_PollableOutputStream_can_poll(GPollableOutputStream*);
-// extern GSource* _gotk4_gio2_PollableOutputStream_create_source(GPollableOutputStream*, GCancellable*);
 // extern gboolean _gotk4_gio2_PollableOutputStream_is_writable(GPollableOutputStream*);
 // extern gssize _gotk4_gio2_PollableOutputStream_write_nonblocking(GPollableOutputStream*, void*, gsize, GError*);
 // extern GPollableReturn _gotk4_gio2_PollableOutputStream_writev_nonblocking(GPollableOutputStream*, const GOutputVector*, gsize, gsize, GError*);
 // gboolean _gotk4_gio2_PollableOutputStream_virtual_can_poll(void* fnptr, GPollableOutputStream* carg0) {
 // 	return ((gboolean (*) (GPollableOutputStream*))(fnptr))(carg0);
-// }
-// GSource* _gotk4_gio2_PollableOutputStream_virtual_create_source(void* fnptr, GPollableOutputStream* carg0, GCancellable* carg1) {
-// 	return ((GSource* (*) (GPollableOutputStream*, GCancellable*))(fnptr))(carg0, carg1);
 // }
 // gboolean _gotk4_gio2_PollableOutputStream_virtual_is_writable(void* fnptr, GPollableOutputStream* carg0) {
 // 	return ((gboolean (*) (GPollableOutputStream*))(fnptr))(carg0);
@@ -982,8 +905,6 @@ import (
 // extern void _gotk4_gio2_Application_activate(GApplication*);
 // extern void _gotk4_gio2_Application_add_platform_data(GApplication*, GVariantBuilder*);
 // extern int _gotk4_gio2_Application_command_line(GApplication*, GApplicationCommandLine*);
-// extern gboolean _gotk4_gio2_Application_dbus_register(GApplication*, GDBusConnection*, const gchar*, GError*);
-// extern void _gotk4_gio2_Application_dbus_unregister(GApplication*, GDBusConnection*, const gchar*);
 // extern gint _gotk4_gio2_Application_handle_local_options(GApplication*, GVariantDict*);
 // extern gboolean _gotk4_gio2_Application_name_lost(GApplication*);
 // extern void _gotk4_gio2_Application_open(GApplication*, GFile**, gint, const gchar*);
@@ -999,12 +920,6 @@ import (
 // }
 // int _gotk4_gio2_Application_virtual_command_line(void* fnptr, GApplication* carg0, GApplicationCommandLine* carg1) {
 // 	return ((int (*) (GApplication*, GApplicationCommandLine*))(fnptr))(carg0, carg1);
-// }
-// gboolean _gotk4_gio2_Application_virtual_dbus_register(void* fnptr, GApplication* carg0, GDBusConnection* carg1, const gchar* carg2, GError** _cerr) {
-// 	return ((gboolean (*) (GApplication*, GDBusConnection*, const gchar*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
-// }
-// void _gotk4_gio2_Application_virtual_dbus_unregister(void* fnptr, GApplication* carg0, GDBusConnection* carg1, const gchar* carg2) {
-// 	return ((void (*) (GApplication*, GDBusConnection*, const gchar*))(fnptr))(carg0, carg1, carg2);
 // }
 // gint _gotk4_gio2_Application_virtual_handle_local_options(void* fnptr, GApplication* carg0, GVariantDict* carg1) {
 // 	return ((gint (*) (GApplication*, GVariantDict*))(fnptr))(carg0, carg1);
@@ -1042,30 +957,6 @@ import (
 // }
 // void _gotk4_gio2_ApplicationCommandLine_virtual_printerr_literal(void* fnptr, GApplicationCommandLine* carg0, const gchar* carg1) {
 // 	return ((void (*) (GApplicationCommandLine*, const gchar*))(fnptr))(carg0, carg1);
-// }
-// extern void _gotk4_gio2_DBusInterfaceSkeleton_flush(GDBusInterfaceSkeleton*);
-// extern gboolean _gotk4_gio2_DBusInterfaceSkeleton_g_authorize_method(GDBusInterfaceSkeleton*, GDBusMethodInvocation*);
-// extern GDBusInterfaceInfo* _gotk4_gio2_DBusInterfaceSkeleton_get_info(GDBusInterfaceSkeleton*);
-// extern GDBusInterfaceVTable* _gotk4_gio2_DBusInterfaceSkeleton_get_vtable(GDBusInterfaceSkeleton*);
-// void _gotk4_gio2_DBusInterfaceSkeleton_virtual_flush(void* fnptr, GDBusInterfaceSkeleton* carg0) {
-// 	return ((void (*) (GDBusInterfaceSkeleton*))(fnptr))(carg0);
-// }
-// gboolean _gotk4_gio2_DBusInterfaceSkeleton_virtual_g_authorize_method(void* fnptr, GDBusInterfaceSkeleton* carg0, GDBusMethodInvocation* carg1) {
-// 	return ((gboolean (*) (GDBusInterfaceSkeleton*, GDBusMethodInvocation*))(fnptr))(carg0, carg1);
-// }
-// GDBusInterfaceInfo* _gotk4_gio2_DBusInterfaceSkeleton_virtual_get_info(void* fnptr, GDBusInterfaceSkeleton* carg0) {
-// 	return ((GDBusInterfaceInfo* (*) (GDBusInterfaceSkeleton*))(fnptr))(carg0);
-// }
-// GDBusInterfaceVTable* _gotk4_gio2_DBusInterfaceSkeleton_virtual_get_vtable(void* fnptr, GDBusInterfaceSkeleton* carg0) {
-// 	return ((GDBusInterfaceVTable* (*) (GDBusInterfaceSkeleton*))(fnptr))(carg0);
-// }
-// extern gboolean _gotk4_gio2_DBusObjectSkeleton_authorize_method(GDBusObjectSkeleton*, GDBusInterfaceSkeleton*, GDBusMethodInvocation*);
-// gboolean _gotk4_gio2_DBusObjectSkeleton_virtual_authorize_method(void* fnptr, GDBusObjectSkeleton* carg0, GDBusInterfaceSkeleton* carg1, GDBusMethodInvocation* carg2) {
-// 	return ((gboolean (*) (GDBusObjectSkeleton*, GDBusInterfaceSkeleton*, GDBusMethodInvocation*))(fnptr))(carg0, carg1, carg2);
-// }
-// extern gboolean _gotk4_gio2_DebugControllerDBus_authorize(GDebugControllerDBus*, GDBusMethodInvocation*);
-// gboolean _gotk4_gio2_DebugControllerDBus_virtual_authorize(void* fnptr, GDebugControllerDBus* carg0, GDBusMethodInvocation* carg1) {
-// 	return ((gboolean (*) (GDebugControllerDBus*, GDBusMethodInvocation*))(fnptr))(carg0, carg1);
 // }
 // extern gboolean _gotk4_gio2_FileEnumerator_close_finish(GFileEnumerator*, GAsyncResult*, GError*);
 // extern gboolean _gotk4_gio2_FileEnumerator_close_fn(GFileEnumerator*, GCancellable*, GError*);
@@ -1607,231 +1498,188 @@ import "C"
 
 // GType values.
 var (
-	TypeBusType                      = gobject.Type(C.g_bus_type_get_type())
-	TypeConverterResult              = gobject.Type(C.g_converter_result_get_type())
-	TypeCredentialsType              = gobject.Type(C.g_credentials_type_get_type())
-	TypeDBusError                    = gobject.Type(C.g_dbus_error_get_type())
-	TypeDBusMessageByteOrder         = gobject.Type(C.g_dbus_message_byte_order_get_type())
-	TypeDBusMessageHeaderField       = gobject.Type(C.g_dbus_message_header_field_get_type())
-	TypeDBusMessageType              = gobject.Type(C.g_dbus_message_type_get_type())
-	TypeDataStreamByteOrder          = gobject.Type(C.g_data_stream_byte_order_get_type())
-	TypeDataStreamNewlineType        = gobject.Type(C.g_data_stream_newline_type_get_type())
-	TypeDriveStartStopType           = gobject.Type(C.g_drive_start_stop_type_get_type())
-	TypeEmblemOrigin                 = gobject.Type(C.g_emblem_origin_get_type())
-	TypeFileAttributeStatus          = gobject.Type(C.g_file_attribute_status_get_type())
-	TypeFileAttributeType            = gobject.Type(C.g_file_attribute_type_get_type())
-	TypeFileMonitorEvent             = gobject.Type(C.g_file_monitor_event_get_type())
-	TypeFileType                     = gobject.Type(C.g_file_type_get_type())
-	TypeFilesystemPreviewType        = gobject.Type(C.g_filesystem_preview_type_get_type())
-	TypeIOErrorEnum                  = gobject.Type(C.g_io_error_enum_get_type())
-	TypeIOModuleScopeFlags           = gobject.Type(C.g_io_module_scope_flags_get_type())
-	TypeMemoryMonitorWarningLevel    = gobject.Type(C.g_memory_monitor_warning_level_get_type())
-	TypeMountOperationResult         = gobject.Type(C.g_mount_operation_result_get_type())
-	TypeNetworkConnectivity          = gobject.Type(C.g_network_connectivity_get_type())
-	TypeNotificationPriority         = gobject.Type(C.g_notification_priority_get_type())
-	TypePasswordSave                 = gobject.Type(C.g_password_save_get_type())
-	TypePollableReturn               = gobject.Type(C.g_pollable_return_get_type())
-	TypeResolverError                = gobject.Type(C.g_resolver_error_get_type())
-	TypeResolverRecordType           = gobject.Type(C.g_resolver_record_type_get_type())
-	TypeResourceError                = gobject.Type(C.g_resource_error_get_type())
-	TypeSocketClientEvent            = gobject.Type(C.g_socket_client_event_get_type())
-	TypeSocketFamily                 = gobject.Type(C.g_socket_family_get_type())
-	TypeSocketListenerEvent          = gobject.Type(C.g_socket_listener_event_get_type())
-	TypeSocketProtocol               = gobject.Type(C.g_socket_protocol_get_type())
-	TypeSocketType                   = gobject.Type(C.g_socket_type_get_type())
-	TypeTlsAuthenticationMode        = gobject.Type(C.g_tls_authentication_mode_get_type())
-	TypeTlsCertificateRequestFlags   = gobject.Type(C.g_tls_certificate_request_flags_get_type())
-	TypeTlsChannelBindingError       = gobject.Type(C.g_tls_channel_binding_error_get_type())
-	TypeTlsChannelBindingType        = gobject.Type(C.g_tls_channel_binding_type_get_type())
-	TypeTlsDatabaseLookupFlags       = gobject.Type(C.g_tls_database_lookup_flags_get_type())
-	TypeTlsError                     = gobject.Type(C.g_tls_error_get_type())
-	TypeTlsInteractionResult         = gobject.Type(C.g_tls_interaction_result_get_type())
-	TypeTlsProtocolVersion           = gobject.Type(C.g_tls_protocol_version_get_type())
-	TypeTlsRehandshakeMode           = gobject.Type(C.g_tls_rehandshake_mode_get_type())
-	TypeZlibCompressorFormat         = gobject.Type(C.g_zlib_compressor_format_get_type())
-	TypeAppInfoCreateFlags           = gobject.Type(C.g_app_info_create_flags_get_type())
-	TypeApplicationFlags             = gobject.Type(C.g_application_flags_get_type())
-	TypeAskPasswordFlags             = gobject.Type(C.g_ask_password_flags_get_type())
-	TypeBusNameOwnerFlags            = gobject.Type(C.g_bus_name_owner_flags_get_type())
-	TypeBusNameWatcherFlags          = gobject.Type(C.g_bus_name_watcher_flags_get_type())
-	TypeConverterFlags               = gobject.Type(C.g_converter_flags_get_type())
-	TypeDBusCallFlags                = gobject.Type(C.g_dbus_call_flags_get_type())
-	TypeDBusCapabilityFlags          = gobject.Type(C.g_dbus_capability_flags_get_type())
-	TypeDBusConnectionFlags          = gobject.Type(C.g_dbus_connection_flags_get_type())
-	TypeDBusInterfaceSkeletonFlags   = gobject.Type(C.g_dbus_interface_skeleton_flags_get_type())
-	TypeDBusMessageFlags             = gobject.Type(C.g_dbus_message_flags_get_type())
-	TypeDBusObjectManagerClientFlags = gobject.Type(C.g_dbus_object_manager_client_flags_get_type())
-	TypeDBusPropertyInfoFlags        = gobject.Type(C.g_dbus_property_info_flags_get_type())
-	TypeDBusProxyFlags               = gobject.Type(C.g_dbus_proxy_flags_get_type())
-	TypeDBusSendMessageFlags         = gobject.Type(C.g_dbus_send_message_flags_get_type())
-	TypeDBusServerFlags              = gobject.Type(C.g_dbus_server_flags_get_type())
-	TypeDBusSignalFlags              = gobject.Type(C.g_dbus_signal_flags_get_type())
-	TypeDBusSubtreeFlags             = gobject.Type(C.g_dbus_subtree_flags_get_type())
-	TypeDriveStartFlags              = gobject.Type(C.g_drive_start_flags_get_type())
-	TypeFileAttributeInfoFlags       = gobject.Type(C.g_file_attribute_info_flags_get_type())
-	TypeFileCopyFlags                = gobject.Type(C.g_file_copy_flags_get_type())
-	TypeFileCreateFlags              = gobject.Type(C.g_file_create_flags_get_type())
-	TypeFileMeasureFlags             = gobject.Type(C.g_file_measure_flags_get_type())
-	TypeFileMonitorFlags             = gobject.Type(C.g_file_monitor_flags_get_type())
-	TypeFileQueryInfoFlags           = gobject.Type(C.g_file_query_info_flags_get_type())
-	TypeIOStreamSpliceFlags          = gobject.Type(C.g_io_stream_splice_flags_get_type())
-	TypeMountMountFlags              = gobject.Type(C.g_mount_mount_flags_get_type())
-	TypeMountUnmountFlags            = gobject.Type(C.g_mount_unmount_flags_get_type())
-	TypeOutputStreamSpliceFlags      = gobject.Type(C.g_output_stream_splice_flags_get_type())
-	TypeResolverNameLookupFlags      = gobject.Type(C.g_resolver_name_lookup_flags_get_type())
-	TypeResourceFlags                = gobject.Type(C.g_resource_flags_get_type())
-	TypeResourceLookupFlags          = gobject.Type(C.g_resource_lookup_flags_get_type())
-	TypeSettingsBindFlags            = gobject.Type(C.g_settings_bind_flags_get_type())
-	TypeSocketMsgFlags               = gobject.Type(C.g_socket_msg_flags_get_type())
-	TypeTestDBusFlags                = gobject.Type(C.g_test_dbus_flags_get_type())
-	TypeTlsCertificateFlags          = gobject.Type(C.g_tls_certificate_flags_get_type())
-	TypeTlsDatabaseVerifyFlags       = gobject.Type(C.g_tls_database_verify_flags_get_type())
-	TypeTlsPasswordFlags             = gobject.Type(C.g_tls_password_flags_get_type())
-	TypeAction                       = gobject.Type(C.g_action_get_type())
-	TypeActionGroup                  = gobject.Type(C.g_action_group_get_type())
-	TypeActionMap                    = gobject.Type(C.g_action_map_get_type())
-	TypeAppInfo                      = gobject.Type(C.g_app_info_get_type())
-	TypeAsyncInitable                = gobject.Type(C.g_async_initable_get_type())
-	TypeAsyncResult                  = gobject.Type(C.g_async_result_get_type())
-	TypeConverter                    = gobject.Type(C.g_converter_get_type())
-	TypeDBusInterface                = gobject.Type(C.g_dbus_interface_get_type())
-	TypeDBusObject                   = gobject.Type(C.g_dbus_object_get_type())
-	TypeDBusObjectManager            = gobject.Type(C.g_dbus_object_manager_get_type())
-	TypeDatagramBased                = gobject.Type(C.g_datagram_based_get_type())
-	TypeDrive                        = gobject.Type(C.g_drive_get_type())
-	TypeDtlsConnection               = gobject.Type(C.g_dtls_connection_get_type())
-	TypeDtlsServerConnection         = gobject.Type(C.g_dtls_server_connection_get_type())
-	TypeFile                         = gobject.Type(C.g_file_get_type())
-	TypeIcon                         = gobject.Type(C.g_icon_get_type())
-	TypeInitable                     = gobject.Type(C.g_initable_get_type())
-	TypeListModel                    = gobject.Type(C.g_list_model_get_type())
-	TypeLoadableIcon                 = gobject.Type(C.g_loadable_icon_get_type())
-	TypeMemoryMonitor                = gobject.Type(C.g_memory_monitor_get_type())
-	TypeMount                        = gobject.Type(C.g_mount_get_type())
-	TypeNetworkMonitor               = gobject.Type(C.g_network_monitor_get_type())
-	TypePollableInputStream          = gobject.Type(C.g_pollable_input_stream_get_type())
-	TypePollableOutputStream         = gobject.Type(C.g_pollable_output_stream_get_type())
-	TypePowerProfileMonitor          = gobject.Type(C.g_power_profile_monitor_get_type())
-	TypeProxy                        = gobject.Type(C.g_proxy_get_type())
-	TypeProxyResolver                = gobject.Type(C.g_proxy_resolver_get_type())
-	TypeRemoteActionGroup            = gobject.Type(C.g_remote_action_group_get_type())
-	TypeSeekable                     = gobject.Type(C.g_seekable_get_type())
-	TypeSocketConnectable            = gobject.Type(C.g_socket_connectable_get_type())
-	TypeTlsBackend                   = gobject.Type(C.g_tls_backend_get_type())
-	TypeTlsClientConnection          = gobject.Type(C.g_tls_client_connection_get_type())
-	TypeTlsFileDatabase              = gobject.Type(C.g_tls_file_database_get_type())
-	TypeTlsServerConnection          = gobject.Type(C.g_tls_server_connection_get_type())
-	TypeVolume                       = gobject.Type(C.g_volume_get_type())
-	TypeDebugController              = gobject.Type(C.g_debug_controller_get_type())
-	TypeDtlsClientConnection         = gobject.Type(C.g_dtls_client_connection_get_type())
-	TypeAppInfoMonitor               = gobject.Type(C.g_app_info_monitor_get_type())
-	TypeAppLaunchContext             = gobject.Type(C.g_app_launch_context_get_type())
-	TypeApplication                  = gobject.Type(C.g_application_get_type())
-	TypeApplicationCommandLine       = gobject.Type(C.g_application_command_line_get_type())
-	TypeBytesIcon                    = gobject.Type(C.g_bytes_icon_get_type())
-	TypeCharsetConverter             = gobject.Type(C.g_charset_converter_get_type())
-	TypeCredentials                  = gobject.Type(C.g_credentials_get_type())
-	TypeDBusActionGroup              = gobject.Type(C.g_dbus_action_group_get_type())
-	TypeDBusAuthObserver             = gobject.Type(C.g_dbus_auth_observer_get_type())
-	TypeDBusConnection               = gobject.Type(C.g_dbus_connection_get_type())
-	TypeDBusInterfaceSkeleton        = gobject.Type(C.g_dbus_interface_skeleton_get_type())
-	TypeDBusMessage                  = gobject.Type(C.g_dbus_message_get_type())
-	TypeDBusMethodInvocation         = gobject.Type(C.g_dbus_method_invocation_get_type())
-	TypeDBusObjectManagerClient      = gobject.Type(C.g_dbus_object_manager_client_get_type())
-	TypeDBusObjectManagerServer      = gobject.Type(C.g_dbus_object_manager_server_get_type())
-	TypeDBusObjectProxy              = gobject.Type(C.g_dbus_object_proxy_get_type())
-	TypeDBusObjectSkeleton           = gobject.Type(C.g_dbus_object_skeleton_get_type())
-	TypeDBusProxy                    = gobject.Type(C.g_dbus_proxy_get_type())
-	TypeDBusServer                   = gobject.Type(C.g_dbus_server_get_type())
-	TypeDebugControllerDBus          = gobject.Type(C.g_debug_controller_dbus_get_type())
-	TypeEmblem                       = gobject.Type(C.g_emblem_get_type())
-	TypeEmblemedIcon                 = gobject.Type(C.g_emblemed_icon_get_type())
-	TypeFileEnumerator               = gobject.Type(C.g_file_enumerator_get_type())
-	TypeFileIcon                     = gobject.Type(C.g_file_icon_get_type())
-	TypeFileInfo                     = gobject.Type(C.g_file_info_get_type())
-	TypeFileMonitor                  = gobject.Type(C.g_file_monitor_get_type())
-	TypeFilenameCompleter            = gobject.Type(C.g_filename_completer_get_type())
-	TypeIOStream                     = gobject.Type(C.g_io_stream_get_type())
-	TypeInetAddress                  = gobject.Type(C.g_inet_address_get_type())
-	TypeInetAddressMask              = gobject.Type(C.g_inet_address_mask_get_type())
-	TypeInputStream                  = gobject.Type(C.g_input_stream_get_type())
-	TypeListStore                    = gobject.Type(C.g_list_store_get_type())
-	TypeMemoryInputStream            = gobject.Type(C.g_memory_input_stream_get_type())
-	TypeMenuAttributeIter            = gobject.Type(C.g_menu_attribute_iter_get_type())
-	TypeMenuItem                     = gobject.Type(C.g_menu_item_get_type())
-	TypeMenuLinkIter                 = gobject.Type(C.g_menu_link_iter_get_type())
-	TypeMenuModel                    = gobject.Type(C.g_menu_model_get_type())
-	TypeMountOperation               = gobject.Type(C.g_mount_operation_get_type())
-	TypeNetworkAddress               = gobject.Type(C.g_network_address_get_type())
-	TypeNetworkService               = gobject.Type(C.g_network_service_get_type())
-	TypeNotification                 = gobject.Type(C.g_notification_get_type())
-	TypeOutputStream                 = gobject.Type(C.g_output_stream_get_type())
-	TypePermission                   = gobject.Type(C.g_permission_get_type())
-	TypePropertyAction               = gobject.Type(C.g_property_action_get_type())
-	TypeResolver                     = gobject.Type(C.g_resolver_get_type())
-	TypeSettings                     = gobject.Type(C.g_settings_get_type())
-	TypeSimpleAction                 = gobject.Type(C.g_simple_action_get_type())
-	TypeSimpleActionGroup            = gobject.Type(C.g_simple_action_group_get_type())
-	TypeSimpleAsyncResult            = gobject.Type(C.g_simple_async_result_get_type())
-	TypeSimpleIOStream               = gobject.Type(C.g_simple_io_stream_get_type())
-	TypeSimplePermission             = gobject.Type(C.g_simple_permission_get_type())
-	TypeSimpleProxyResolver          = gobject.Type(C.g_simple_proxy_resolver_get_type())
-	TypeSocket                       = gobject.Type(C.g_socket_get_type())
-	TypeSocketAddress                = gobject.Type(C.g_socket_address_get_type())
-	TypeSocketAddressEnumerator      = gobject.Type(C.g_socket_address_enumerator_get_type())
-	TypeSocketClient                 = gobject.Type(C.g_socket_client_get_type())
-	TypeSocketConnection             = gobject.Type(C.g_socket_connection_get_type())
-	TypeSocketControlMessage         = gobject.Type(C.g_socket_control_message_get_type())
-	TypeSocketListener               = gobject.Type(C.g_socket_listener_get_type())
-	TypeSocketService                = gobject.Type(C.g_socket_service_get_type())
-	TypeTask                         = gobject.Type(C.g_task_get_type())
-	TypeTcpConnection                = gobject.Type(C.g_tcp_connection_get_type())
-	TypeTcpWrapperConnection         = gobject.Type(C.g_tcp_wrapper_connection_get_type())
-	TypeTestDBus                     = gobject.Type(C.g_test_dbus_get_type())
-	TypeThemedIcon                   = gobject.Type(C.g_themed_icon_get_type())
-	TypeThreadedSocketService        = gobject.Type(C.g_threaded_socket_service_get_type())
-	TypeTlsCertificate               = gobject.Type(C.g_tls_certificate_get_type())
-	TypeTlsConnection                = gobject.Type(C.g_tls_connection_get_type())
-	TypeTlsDatabase                  = gobject.Type(C.g_tls_database_get_type())
-	TypeTlsInteraction               = gobject.Type(C.g_tls_interaction_get_type())
-	TypeTlsPassword                  = gobject.Type(C.g_tls_password_get_type())
-	TypeVfs                          = gobject.Type(C.g_vfs_get_type())
-	TypeVolumeMonitor                = gobject.Type(C.g_volume_monitor_get_type())
-	TypeZlibCompressor               = gobject.Type(C.g_zlib_compressor_get_type())
-	TypeZlibDecompressor             = gobject.Type(C.g_zlib_decompressor_get_type())
-	TypeDBusMenuModel                = gobject.Type(C.g_dbus_menu_model_get_type())
-	TypeFileIOStream                 = gobject.Type(C.g_file_io_stream_get_type())
-	TypeFileInputStream              = gobject.Type(C.g_file_input_stream_get_type())
-	TypeFileOutputStream             = gobject.Type(C.g_file_output_stream_get_type())
-	TypeFilterInputStream            = gobject.Type(C.g_filter_input_stream_get_type())
-	TypeFilterOutputStream           = gobject.Type(C.g_filter_output_stream_get_type())
-	TypeInetSocketAddress            = gobject.Type(C.g_inet_socket_address_get_type())
-	TypeMemoryOutputStream           = gobject.Type(C.g_memory_output_stream_get_type())
-	TypeMenu                         = gobject.Type(C.g_menu_get_type())
-	TypeNativeSocketAddress          = gobject.Type(C.g_native_socket_address_get_type())
-	TypeNativeVolumeMonitor          = gobject.Type(C.g_native_volume_monitor_get_type())
-	TypeProxyAddress                 = gobject.Type(C.g_proxy_address_get_type())
-	TypeProxyAddressEnumerator       = gobject.Type(C.g_proxy_address_enumerator_get_type())
-	TypeBufferedInputStream          = gobject.Type(C.g_buffered_input_stream_get_type())
-	TypeBufferedOutputStream         = gobject.Type(C.g_buffered_output_stream_get_type())
-	TypeConverterInputStream         = gobject.Type(C.g_converter_input_stream_get_type())
-	TypeConverterOutputStream        = gobject.Type(C.g_converter_output_stream_get_type())
-	TypeDataInputStream              = gobject.Type(C.g_data_input_stream_get_type())
-	TypeDataOutputStream             = gobject.Type(C.g_data_output_stream_get_type())
-	TypeDBusAnnotationInfo           = gobject.Type(C.g_dbus_annotation_info_get_type())
-	TypeDBusArgInfo                  = gobject.Type(C.g_dbus_arg_info_get_type())
-	TypeDBusInterfaceInfo            = gobject.Type(C.g_dbus_interface_info_get_type())
-	TypeDBusMethodInfo               = gobject.Type(C.g_dbus_method_info_get_type())
-	TypeDBusNodeInfo                 = gobject.Type(C.g_dbus_node_info_get_type())
-	TypeDBusPropertyInfo             = gobject.Type(C.g_dbus_property_info_get_type())
-	TypeDBusSignalInfo               = gobject.Type(C.g_dbus_signal_info_get_type())
-	TypeFileAttributeInfoList        = gobject.Type(C.g_file_attribute_info_list_get_type())
-	TypeFileAttributeMatcher         = gobject.Type(C.g_file_attribute_matcher_get_type())
-	TypeResource                     = gobject.Type(C.g_resource_get_type())
-	TypeSettingsSchema               = gobject.Type(C.g_settings_schema_get_type())
-	TypeSettingsSchemaKey            = gobject.Type(C.g_settings_schema_key_get_type())
-	TypeSettingsSchemaSource         = gobject.Type(C.g_settings_schema_source_get_type())
-	TypeSrvTarget                    = gobject.Type(C.g_srv_target_get_type())
+	TypeBusType                    = gobject.Type(C.g_bus_type_get_type())
+	TypeConverterResult            = gobject.Type(C.g_converter_result_get_type())
+	TypeCredentialsType            = gobject.Type(C.g_credentials_type_get_type())
+	TypeDataStreamByteOrder        = gobject.Type(C.g_data_stream_byte_order_get_type())
+	TypeDataStreamNewlineType      = gobject.Type(C.g_data_stream_newline_type_get_type())
+	TypeDriveStartStopType         = gobject.Type(C.g_drive_start_stop_type_get_type())
+	TypeEmblemOrigin               = gobject.Type(C.g_emblem_origin_get_type())
+	TypeFileAttributeStatus        = gobject.Type(C.g_file_attribute_status_get_type())
+	TypeFileAttributeType          = gobject.Type(C.g_file_attribute_type_get_type())
+	TypeFileMonitorEvent           = gobject.Type(C.g_file_monitor_event_get_type())
+	TypeFileType                   = gobject.Type(C.g_file_type_get_type())
+	TypeFilesystemPreviewType      = gobject.Type(C.g_filesystem_preview_type_get_type())
+	TypeIOErrorEnum                = gobject.Type(C.g_io_error_enum_get_type())
+	TypeIOModuleScopeFlags         = gobject.Type(C.g_io_module_scope_flags_get_type())
+	TypeMemoryMonitorWarningLevel  = gobject.Type(C.g_memory_monitor_warning_level_get_type())
+	TypeMountOperationResult       = gobject.Type(C.g_mount_operation_result_get_type())
+	TypeNetworkConnectivity        = gobject.Type(C.g_network_connectivity_get_type())
+	TypeNotificationPriority       = gobject.Type(C.g_notification_priority_get_type())
+	TypePasswordSave               = gobject.Type(C.g_password_save_get_type())
+	TypePollableReturn             = gobject.Type(C.g_pollable_return_get_type())
+	TypeResolverError              = gobject.Type(C.g_resolver_error_get_type())
+	TypeResolverRecordType         = gobject.Type(C.g_resolver_record_type_get_type())
+	TypeResourceError              = gobject.Type(C.g_resource_error_get_type())
+	TypeSocketClientEvent          = gobject.Type(C.g_socket_client_event_get_type())
+	TypeSocketFamily               = gobject.Type(C.g_socket_family_get_type())
+	TypeSocketListenerEvent        = gobject.Type(C.g_socket_listener_event_get_type())
+	TypeSocketProtocol             = gobject.Type(C.g_socket_protocol_get_type())
+	TypeSocketType                 = gobject.Type(C.g_socket_type_get_type())
+	TypeTlsAuthenticationMode      = gobject.Type(C.g_tls_authentication_mode_get_type())
+	TypeTlsCertificateRequestFlags = gobject.Type(C.g_tls_certificate_request_flags_get_type())
+	TypeTlsChannelBindingError     = gobject.Type(C.g_tls_channel_binding_error_get_type())
+	TypeTlsChannelBindingType      = gobject.Type(C.g_tls_channel_binding_type_get_type())
+	TypeTlsDatabaseLookupFlags     = gobject.Type(C.g_tls_database_lookup_flags_get_type())
+	TypeTlsError                   = gobject.Type(C.g_tls_error_get_type())
+	TypeTlsInteractionResult       = gobject.Type(C.g_tls_interaction_result_get_type())
+	TypeTlsProtocolVersion         = gobject.Type(C.g_tls_protocol_version_get_type())
+	TypeTlsRehandshakeMode         = gobject.Type(C.g_tls_rehandshake_mode_get_type())
+	TypeZlibCompressorFormat       = gobject.Type(C.g_zlib_compressor_format_get_type())
+	TypeAppInfoCreateFlags         = gobject.Type(C.g_app_info_create_flags_get_type())
+	TypeApplicationFlags           = gobject.Type(C.g_application_flags_get_type())
+	TypeAskPasswordFlags           = gobject.Type(C.g_ask_password_flags_get_type())
+	TypeBusNameOwnerFlags          = gobject.Type(C.g_bus_name_owner_flags_get_type())
+	TypeBusNameWatcherFlags        = gobject.Type(C.g_bus_name_watcher_flags_get_type())
+	TypeConverterFlags             = gobject.Type(C.g_converter_flags_get_type())
+	TypeDriveStartFlags            = gobject.Type(C.g_drive_start_flags_get_type())
+	TypeFileAttributeInfoFlags     = gobject.Type(C.g_file_attribute_info_flags_get_type())
+	TypeFileCopyFlags              = gobject.Type(C.g_file_copy_flags_get_type())
+	TypeFileCreateFlags            = gobject.Type(C.g_file_create_flags_get_type())
+	TypeFileMeasureFlags           = gobject.Type(C.g_file_measure_flags_get_type())
+	TypeFileMonitorFlags           = gobject.Type(C.g_file_monitor_flags_get_type())
+	TypeFileQueryInfoFlags         = gobject.Type(C.g_file_query_info_flags_get_type())
+	TypeIOStreamSpliceFlags        = gobject.Type(C.g_io_stream_splice_flags_get_type())
+	TypeMountMountFlags            = gobject.Type(C.g_mount_mount_flags_get_type())
+	TypeMountUnmountFlags          = gobject.Type(C.g_mount_unmount_flags_get_type())
+	TypeOutputStreamSpliceFlags    = gobject.Type(C.g_output_stream_splice_flags_get_type())
+	TypeResolverNameLookupFlags    = gobject.Type(C.g_resolver_name_lookup_flags_get_type())
+	TypeResourceFlags              = gobject.Type(C.g_resource_flags_get_type())
+	TypeResourceLookupFlags        = gobject.Type(C.g_resource_lookup_flags_get_type())
+	TypeSettingsBindFlags          = gobject.Type(C.g_settings_bind_flags_get_type())
+	TypeSocketMsgFlags             = gobject.Type(C.g_socket_msg_flags_get_type())
+	TypeTlsCertificateFlags        = gobject.Type(C.g_tls_certificate_flags_get_type())
+	TypeTlsDatabaseVerifyFlags     = gobject.Type(C.g_tls_database_verify_flags_get_type())
+	TypeTlsPasswordFlags           = gobject.Type(C.g_tls_password_flags_get_type())
+	TypeAction                     = gobject.Type(C.g_action_get_type())
+	TypeActionGroup                = gobject.Type(C.g_action_group_get_type())
+	TypeActionMap                  = gobject.Type(C.g_action_map_get_type())
+	TypeAppInfo                    = gobject.Type(C.g_app_info_get_type())
+	TypeAsyncInitable              = gobject.Type(C.g_async_initable_get_type())
+	TypeAsyncResult                = gobject.Type(C.g_async_result_get_type())
+	TypeConverter                  = gobject.Type(C.g_converter_get_type())
+	TypeDatagramBased              = gobject.Type(C.g_datagram_based_get_type())
+	TypeDrive                      = gobject.Type(C.g_drive_get_type())
+	TypeDtlsConnection             = gobject.Type(C.g_dtls_connection_get_type())
+	TypeDtlsServerConnection       = gobject.Type(C.g_dtls_server_connection_get_type())
+	TypeFile                       = gobject.Type(C.g_file_get_type())
+	TypeIcon                       = gobject.Type(C.g_icon_get_type())
+	TypeInitable                   = gobject.Type(C.g_initable_get_type())
+	TypeListModel                  = gobject.Type(C.g_list_model_get_type())
+	TypeLoadableIcon               = gobject.Type(C.g_loadable_icon_get_type())
+	TypeMemoryMonitor              = gobject.Type(C.g_memory_monitor_get_type())
+	TypeMount                      = gobject.Type(C.g_mount_get_type())
+	TypeNetworkMonitor             = gobject.Type(C.g_network_monitor_get_type())
+	TypePollableInputStream        = gobject.Type(C.g_pollable_input_stream_get_type())
+	TypePollableOutputStream       = gobject.Type(C.g_pollable_output_stream_get_type())
+	TypePowerProfileMonitor        = gobject.Type(C.g_power_profile_monitor_get_type())
+	TypeProxy                      = gobject.Type(C.g_proxy_get_type())
+	TypeProxyResolver              = gobject.Type(C.g_proxy_resolver_get_type())
+	TypeRemoteActionGroup          = gobject.Type(C.g_remote_action_group_get_type())
+	TypeSeekable                   = gobject.Type(C.g_seekable_get_type())
+	TypeSocketConnectable          = gobject.Type(C.g_socket_connectable_get_type())
+	TypeTlsBackend                 = gobject.Type(C.g_tls_backend_get_type())
+	TypeTlsClientConnection        = gobject.Type(C.g_tls_client_connection_get_type())
+	TypeTlsFileDatabase            = gobject.Type(C.g_tls_file_database_get_type())
+	TypeTlsServerConnection        = gobject.Type(C.g_tls_server_connection_get_type())
+	TypeVolume                     = gobject.Type(C.g_volume_get_type())
+	TypeDebugController            = gobject.Type(C.g_debug_controller_get_type())
+	TypeDtlsClientConnection       = gobject.Type(C.g_dtls_client_connection_get_type())
+	TypeAppInfoMonitor             = gobject.Type(C.g_app_info_monitor_get_type())
+	TypeAppLaunchContext           = gobject.Type(C.g_app_launch_context_get_type())
+	TypeApplication                = gobject.Type(C.g_application_get_type())
+	TypeApplicationCommandLine     = gobject.Type(C.g_application_command_line_get_type())
+	TypeBytesIcon                  = gobject.Type(C.g_bytes_icon_get_type())
+	TypeCharsetConverter           = gobject.Type(C.g_charset_converter_get_type())
+	TypeCredentials                = gobject.Type(C.g_credentials_get_type())
+	TypeEmblem                     = gobject.Type(C.g_emblem_get_type())
+	TypeEmblemedIcon               = gobject.Type(C.g_emblemed_icon_get_type())
+	TypeFileEnumerator             = gobject.Type(C.g_file_enumerator_get_type())
+	TypeFileIcon                   = gobject.Type(C.g_file_icon_get_type())
+	TypeFileInfo                   = gobject.Type(C.g_file_info_get_type())
+	TypeFileMonitor                = gobject.Type(C.g_file_monitor_get_type())
+	TypeFilenameCompleter          = gobject.Type(C.g_filename_completer_get_type())
+	TypeIOStream                   = gobject.Type(C.g_io_stream_get_type())
+	TypeInetAddress                = gobject.Type(C.g_inet_address_get_type())
+	TypeInetAddressMask            = gobject.Type(C.g_inet_address_mask_get_type())
+	TypeInputStream                = gobject.Type(C.g_input_stream_get_type())
+	TypeListStore                  = gobject.Type(C.g_list_store_get_type())
+	TypeMemoryInputStream          = gobject.Type(C.g_memory_input_stream_get_type())
+	TypeMenuAttributeIter          = gobject.Type(C.g_menu_attribute_iter_get_type())
+	TypeMenuItem                   = gobject.Type(C.g_menu_item_get_type())
+	TypeMenuLinkIter               = gobject.Type(C.g_menu_link_iter_get_type())
+	TypeMenuModel                  = gobject.Type(C.g_menu_model_get_type())
+	TypeMountOperation             = gobject.Type(C.g_mount_operation_get_type())
+	TypeNetworkAddress             = gobject.Type(C.g_network_address_get_type())
+	TypeNetworkService             = gobject.Type(C.g_network_service_get_type())
+	TypeNotification               = gobject.Type(C.g_notification_get_type())
+	TypeOutputStream               = gobject.Type(C.g_output_stream_get_type())
+	TypePermission                 = gobject.Type(C.g_permission_get_type())
+	TypePropertyAction             = gobject.Type(C.g_property_action_get_type())
+	TypeResolver                   = gobject.Type(C.g_resolver_get_type())
+	TypeSettings                   = gobject.Type(C.g_settings_get_type())
+	TypeSimpleAction               = gobject.Type(C.g_simple_action_get_type())
+	TypeSimpleActionGroup          = gobject.Type(C.g_simple_action_group_get_type())
+	TypeSimpleAsyncResult          = gobject.Type(C.g_simple_async_result_get_type())
+	TypeSimpleIOStream             = gobject.Type(C.g_simple_io_stream_get_type())
+	TypeSimplePermission           = gobject.Type(C.g_simple_permission_get_type())
+	TypeSimpleProxyResolver        = gobject.Type(C.g_simple_proxy_resolver_get_type())
+	TypeSocket                     = gobject.Type(C.g_socket_get_type())
+	TypeSocketAddress              = gobject.Type(C.g_socket_address_get_type())
+	TypeSocketAddressEnumerator    = gobject.Type(C.g_socket_address_enumerator_get_type())
+	TypeSocketClient               = gobject.Type(C.g_socket_client_get_type())
+	TypeSocketConnection           = gobject.Type(C.g_socket_connection_get_type())
+	TypeSocketControlMessage       = gobject.Type(C.g_socket_control_message_get_type())
+	TypeSocketListener             = gobject.Type(C.g_socket_listener_get_type())
+	TypeSocketService              = gobject.Type(C.g_socket_service_get_type())
+	TypeTask                       = gobject.Type(C.g_task_get_type())
+	TypeTcpConnection              = gobject.Type(C.g_tcp_connection_get_type())
+	TypeTcpWrapperConnection       = gobject.Type(C.g_tcp_wrapper_connection_get_type())
+	TypeThemedIcon                 = gobject.Type(C.g_themed_icon_get_type())
+	TypeThreadedSocketService      = gobject.Type(C.g_threaded_socket_service_get_type())
+	TypeTlsCertificate             = gobject.Type(C.g_tls_certificate_get_type())
+	TypeTlsConnection              = gobject.Type(C.g_tls_connection_get_type())
+	TypeTlsDatabase                = gobject.Type(C.g_tls_database_get_type())
+	TypeTlsInteraction             = gobject.Type(C.g_tls_interaction_get_type())
+	TypeTlsPassword                = gobject.Type(C.g_tls_password_get_type())
+	TypeVfs                        = gobject.Type(C.g_vfs_get_type())
+	TypeVolumeMonitor              = gobject.Type(C.g_volume_monitor_get_type())
+	TypeZlibDecompressor           = gobject.Type(C.g_zlib_decompressor_get_type())
+	TypeFileIOStream               = gobject.Type(C.g_file_io_stream_get_type())
+	TypeFileInputStream            = gobject.Type(C.g_file_input_stream_get_type())
+	TypeFileOutputStream           = gobject.Type(C.g_file_output_stream_get_type())
+	TypeFilterInputStream          = gobject.Type(C.g_filter_input_stream_get_type())
+	TypeFilterOutputStream         = gobject.Type(C.g_filter_output_stream_get_type())
+	TypeInetSocketAddress          = gobject.Type(C.g_inet_socket_address_get_type())
+	TypeMemoryOutputStream         = gobject.Type(C.g_memory_output_stream_get_type())
+	TypeMenu                       = gobject.Type(C.g_menu_get_type())
+	TypeNativeSocketAddress        = gobject.Type(C.g_native_socket_address_get_type())
+	TypeNativeVolumeMonitor        = gobject.Type(C.g_native_volume_monitor_get_type())
+	TypeProxyAddress               = gobject.Type(C.g_proxy_address_get_type())
+	TypeProxyAddressEnumerator     = gobject.Type(C.g_proxy_address_enumerator_get_type())
+	TypeBufferedInputStream        = gobject.Type(C.g_buffered_input_stream_get_type())
+	TypeBufferedOutputStream       = gobject.Type(C.g_buffered_output_stream_get_type())
+	TypeConverterInputStream       = gobject.Type(C.g_converter_input_stream_get_type())
+	TypeConverterOutputStream      = gobject.Type(C.g_converter_output_stream_get_type())
+	TypeDataInputStream            = gobject.Type(C.g_data_input_stream_get_type())
+	TypeDataOutputStream           = gobject.Type(C.g_data_output_stream_get_type())
+	TypeFileAttributeInfoList      = gobject.Type(C.g_file_attribute_info_list_get_type())
+	TypeFileAttributeMatcher       = gobject.Type(C.g_file_attribute_matcher_get_type())
+	TypeResource                   = gobject.Type(C.g_resource_get_type())
+	TypeSettingsSchema             = gobject.Type(C.g_settings_schema_get_type())
+	TypeSettingsSchemaKey          = gobject.Type(C.g_settings_schema_key_get_type())
+	TypeSettingsSchemaSource       = gobject.Type(C.g_settings_schema_source_get_type())
+	TypeSrvTarget                  = gobject.Type(C.g_srv_target_get_type())
 )
 
 func init() {
@@ -1839,10 +1687,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypeBusType, F: marshalBusType},
 		gobject.TypeMarshaler{T: TypeConverterResult, F: marshalConverterResult},
 		gobject.TypeMarshaler{T: TypeCredentialsType, F: marshalCredentialsType},
-		gobject.TypeMarshaler{T: TypeDBusError, F: marshalDBusError},
-		gobject.TypeMarshaler{T: TypeDBusMessageByteOrder, F: marshalDBusMessageByteOrder},
-		gobject.TypeMarshaler{T: TypeDBusMessageHeaderField, F: marshalDBusMessageHeaderField},
-		gobject.TypeMarshaler{T: TypeDBusMessageType, F: marshalDBusMessageType},
 		gobject.TypeMarshaler{T: TypeDataStreamByteOrder, F: marshalDataStreamByteOrder},
 		gobject.TypeMarshaler{T: TypeDataStreamNewlineType, F: marshalDataStreamNewlineType},
 		gobject.TypeMarshaler{T: TypeDriveStartStopType, F: marshalDriveStartStopType},
@@ -1884,18 +1728,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypeBusNameOwnerFlags, F: marshalBusNameOwnerFlags},
 		gobject.TypeMarshaler{T: TypeBusNameWatcherFlags, F: marshalBusNameWatcherFlags},
 		gobject.TypeMarshaler{T: TypeConverterFlags, F: marshalConverterFlags},
-		gobject.TypeMarshaler{T: TypeDBusCallFlags, F: marshalDBusCallFlags},
-		gobject.TypeMarshaler{T: TypeDBusCapabilityFlags, F: marshalDBusCapabilityFlags},
-		gobject.TypeMarshaler{T: TypeDBusConnectionFlags, F: marshalDBusConnectionFlags},
-		gobject.TypeMarshaler{T: TypeDBusInterfaceSkeletonFlags, F: marshalDBusInterfaceSkeletonFlags},
-		gobject.TypeMarshaler{T: TypeDBusMessageFlags, F: marshalDBusMessageFlags},
-		gobject.TypeMarshaler{T: TypeDBusObjectManagerClientFlags, F: marshalDBusObjectManagerClientFlags},
-		gobject.TypeMarshaler{T: TypeDBusPropertyInfoFlags, F: marshalDBusPropertyInfoFlags},
-		gobject.TypeMarshaler{T: TypeDBusProxyFlags, F: marshalDBusProxyFlags},
-		gobject.TypeMarshaler{T: TypeDBusSendMessageFlags, F: marshalDBusSendMessageFlags},
-		gobject.TypeMarshaler{T: TypeDBusServerFlags, F: marshalDBusServerFlags},
-		gobject.TypeMarshaler{T: TypeDBusSignalFlags, F: marshalDBusSignalFlags},
-		gobject.TypeMarshaler{T: TypeDBusSubtreeFlags, F: marshalDBusSubtreeFlags},
 		gobject.TypeMarshaler{T: TypeDriveStartFlags, F: marshalDriveStartFlags},
 		gobject.TypeMarshaler{T: TypeFileAttributeInfoFlags, F: marshalFileAttributeInfoFlags},
 		gobject.TypeMarshaler{T: TypeFileCopyFlags, F: marshalFileCopyFlags},
@@ -1912,7 +1744,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypeResourceLookupFlags, F: marshalResourceLookupFlags},
 		gobject.TypeMarshaler{T: TypeSettingsBindFlags, F: marshalSettingsBindFlags},
 		gobject.TypeMarshaler{T: TypeSocketMsgFlags, F: marshalSocketMsgFlags},
-		gobject.TypeMarshaler{T: TypeTestDBusFlags, F: marshalTestDBusFlags},
 		gobject.TypeMarshaler{T: TypeTlsCertificateFlags, F: marshalTLSCertificateFlags},
 		gobject.TypeMarshaler{T: TypeTlsDatabaseVerifyFlags, F: marshalTLSDatabaseVerifyFlags},
 		gobject.TypeMarshaler{T: TypeTlsPasswordFlags, F: marshalTLSPasswordFlags},
@@ -1923,9 +1754,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypeAsyncInitable, F: marshalAsyncInitableInstance},
 		gobject.TypeMarshaler{T: TypeAsyncResult, F: marshalAsyncResultInstance},
 		gobject.TypeMarshaler{T: TypeConverter, F: marshalConverterInstance},
-		gobject.TypeMarshaler{T: TypeDBusInterface, F: marshalDBusInterfaceInstance},
-		gobject.TypeMarshaler{T: TypeDBusObject, F: marshalDBusObjectInstance},
-		gobject.TypeMarshaler{T: TypeDBusObjectManager, F: marshalDBusObjectManagerInstance},
 		gobject.TypeMarshaler{T: TypeDatagramBased, F: marshalDatagramBasedInstance},
 		gobject.TypeMarshaler{T: TypeDrive, F: marshalDriveInstance},
 		gobject.TypeMarshaler{T: TypeDtlsConnection, F: marshalDtlsConnectionInstance},
@@ -1960,19 +1788,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypeBytesIcon, F: marshalBytesIconInstance},
 		gobject.TypeMarshaler{T: TypeCharsetConverter, F: marshalCharsetConverterInstance},
 		gobject.TypeMarshaler{T: TypeCredentials, F: marshalCredentialsInstance},
-		gobject.TypeMarshaler{T: TypeDBusActionGroup, F: marshalDBusActionGroupInstance},
-		gobject.TypeMarshaler{T: TypeDBusAuthObserver, F: marshalDBusAuthObserverInstance},
-		gobject.TypeMarshaler{T: TypeDBusConnection, F: marshalDBusConnectionInstance},
-		gobject.TypeMarshaler{T: TypeDBusInterfaceSkeleton, F: marshalDBusInterfaceSkeletonInstance},
-		gobject.TypeMarshaler{T: TypeDBusMessage, F: marshalDBusMessageInstance},
-		gobject.TypeMarshaler{T: TypeDBusMethodInvocation, F: marshalDBusMethodInvocationInstance},
-		gobject.TypeMarshaler{T: TypeDBusObjectManagerClient, F: marshalDBusObjectManagerClientInstance},
-		gobject.TypeMarshaler{T: TypeDBusObjectManagerServer, F: marshalDBusObjectManagerServerInstance},
-		gobject.TypeMarshaler{T: TypeDBusObjectProxy, F: marshalDBusObjectProxyInstance},
-		gobject.TypeMarshaler{T: TypeDBusObjectSkeleton, F: marshalDBusObjectSkeletonInstance},
-		gobject.TypeMarshaler{T: TypeDBusProxy, F: marshalDBusProxyInstance},
-		gobject.TypeMarshaler{T: TypeDBusServer, F: marshalDBusServerInstance},
-		gobject.TypeMarshaler{T: TypeDebugControllerDBus, F: marshalDebugControllerDBusInstance},
 		gobject.TypeMarshaler{T: TypeEmblem, F: marshalEmblemInstance},
 		gobject.TypeMarshaler{T: TypeEmblemedIcon, F: marshalEmblemedIconInstance},
 		gobject.TypeMarshaler{T: TypeFileEnumerator, F: marshalFileEnumeratorInstance},
@@ -2016,7 +1831,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypeTask, F: marshalTaskInstance},
 		gobject.TypeMarshaler{T: TypeTcpConnection, F: marshalTcpConnectionInstance},
 		gobject.TypeMarshaler{T: TypeTcpWrapperConnection, F: marshalTcpWrapperConnectionInstance},
-		gobject.TypeMarshaler{T: TypeTestDBus, F: marshalTestDBusInstance},
 		gobject.TypeMarshaler{T: TypeThemedIcon, F: marshalThemedIconInstance},
 		gobject.TypeMarshaler{T: TypeThreadedSocketService, F: marshalThreadedSocketServiceInstance},
 		gobject.TypeMarshaler{T: TypeTlsCertificate, F: marshalTlsCertificateInstance},
@@ -2026,9 +1840,7 @@ func init() {
 		gobject.TypeMarshaler{T: TypeTlsPassword, F: marshalTlsPasswordInstance},
 		gobject.TypeMarshaler{T: TypeVfs, F: marshalVfsInstance},
 		gobject.TypeMarshaler{T: TypeVolumeMonitor, F: marshalVolumeMonitorInstance},
-		gobject.TypeMarshaler{T: TypeZlibCompressor, F: marshalZlibCompressorInstance},
 		gobject.TypeMarshaler{T: TypeZlibDecompressor, F: marshalZlibDecompressorInstance},
-		gobject.TypeMarshaler{T: TypeDBusMenuModel, F: marshalDBusMenuModelInstance},
 		gobject.TypeMarshaler{T: TypeFileIOStream, F: marshalFileIOStreamInstance},
 		gobject.TypeMarshaler{T: TypeFileInputStream, F: marshalFileInputStreamInstance},
 		gobject.TypeMarshaler{T: TypeFileOutputStream, F: marshalFileOutputStreamInstance},
@@ -2047,13 +1859,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypeConverterOutputStream, F: marshalConverterOutputStreamInstance},
 		gobject.TypeMarshaler{T: TypeDataInputStream, F: marshalDataInputStreamInstance},
 		gobject.TypeMarshaler{T: TypeDataOutputStream, F: marshalDataOutputStreamInstance},
-		gobject.TypeMarshaler{T: TypeDBusAnnotationInfo, F: marshalDBusAnnotationInfo},
-		gobject.TypeMarshaler{T: TypeDBusArgInfo, F: marshalDBusArgInfo},
-		gobject.TypeMarshaler{T: TypeDBusInterfaceInfo, F: marshalDBusInterfaceInfo},
-		gobject.TypeMarshaler{T: TypeDBusMethodInfo, F: marshalDBusMethodInfo},
-		gobject.TypeMarshaler{T: TypeDBusNodeInfo, F: marshalDBusNodeInfo},
-		gobject.TypeMarshaler{T: TypeDBusPropertyInfo, F: marshalDBusPropertyInfo},
-		gobject.TypeMarshaler{T: TypeDBusSignalInfo, F: marshalDBusSignalInfo},
 		gobject.TypeMarshaler{T: TypeFileAttributeInfoList, F: marshalFileAttributeInfoList},
 		gobject.TypeMarshaler{T: TypeFileAttributeMatcher, F: marshalFileAttributeMatcher},
 		gobject.TypeMarshaler{T: TypeResource, F: marshalResource},
@@ -2077,19 +1882,19 @@ const MENU_EXPORTER_MAX_SECTION_SIZE = 1000
 type BusType C.int
 
 const (
-	// BusTypeStarter wraps G_BUS_TYPE_STARTER
+	// BusTypeStarter wraps BUS_TYPE_STARTER
 	//
 	// An alias for the message bus that activated the process, if any.
 	BusTypeStarter BusType = -1
-	// BusTypeNone wraps G_BUS_TYPE_NONE
+	// BusTypeNone wraps BUS_TYPE_NONE
 	//
 	// Not a message bus.
 	BusTypeNone BusType = 0
-	// BusTypeSystem wraps G_BUS_TYPE_SYSTEM
+	// BusTypeSystem wraps BUS_TYPE_SYSTEM
 	//
 	// The system-wide message bus.
 	BusTypeSystem BusType = 1
-	// BusTypeSession wraps G_BUS_TYPE_SESSION
+	// BusTypeSession wraps BUS_TYPE_SESSION
 	//
 	// The login session message bus.
 	BusTypeSession BusType = 2
@@ -2125,19 +1930,19 @@ func (e BusType) String() string {
 type ConverterResult C.int
 
 const (
-	// ConverterError wraps G_CONVERTER_ERROR
+	// ConverterError wraps CONVERTER_ERROR
 	//
 	// There was an error during conversion.
 	ConverterError ConverterResult = 0
-	// ConverterConverted wraps G_CONVERTER_CONVERTED
+	// ConverterConverted wraps CONVERTER_CONVERTED
 	//
 	// Some data was consumed or produced
 	ConverterConverted ConverterResult = 1
-	// ConverterFinished wraps G_CONVERTER_FINISHED
+	// ConverterFinished wraps CONVERTER_FINISHED
 	//
 	// The conversion is finished
 	ConverterFinished ConverterResult = 2
-	// ConverterFlushed wraps G_CONVERTER_FLUSHED
+	// ConverterFlushed wraps CONVERTER_FLUSHED
 	//
 	// Flushing is finished
 	ConverterFlushed ConverterResult = 3
@@ -2173,35 +1978,35 @@ func (e ConverterResult) String() string {
 type CredentialsType C.int
 
 const (
-	// CredentialsTypeInvalid wraps G_CREDENTIALS_TYPE_INVALID
+	// CredentialsTypeInvalid wraps CREDENTIALS_TYPE_INVALID
 	//
 	// Indicates an invalid native credential type.
 	CredentialsTypeInvalid CredentialsType = 0
-	// CredentialsTypeLinuxUcred wraps G_CREDENTIALS_TYPE_LINUX_UCRED
+	// CredentialsTypeLinuxUcred wraps CREDENTIALS_TYPE_LINUX_UCRED
 	//
 	// The native credentials type is a `struct ucred`.
 	CredentialsTypeLinuxUcred CredentialsType = 1
-	// CredentialsTypeFreebsdCmsgcred wraps G_CREDENTIALS_TYPE_FREEBSD_CMSGCRED
+	// CredentialsTypeFreebsdCmsgcred wraps CREDENTIALS_TYPE_FREEBSD_CMSGCRED
 	//
 	// The native credentials type is a `struct cmsgcred`.
 	CredentialsTypeFreebsdCmsgcred CredentialsType = 2
-	// CredentialsTypeOpenbsdSockpeercred wraps G_CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED
+	// CredentialsTypeOpenbsdSockpeercred wraps CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED
 	//
 	// The native credentials type is a `struct sockpeercred`. Added in 2.30.
 	CredentialsTypeOpenbsdSockpeercred CredentialsType = 3
-	// CredentialsTypeSolarisUcred wraps G_CREDENTIALS_TYPE_SOLARIS_UCRED
+	// CredentialsTypeSolarisUcred wraps CREDENTIALS_TYPE_SOLARIS_UCRED
 	//
 	// The native credentials type is a `ucred_t`. Added in 2.40.
 	CredentialsTypeSolarisUcred CredentialsType = 4
-	// CredentialsTypeNetbsdUnpcbid wraps G_CREDENTIALS_TYPE_NETBSD_UNPCBID
+	// CredentialsTypeNetbsdUnpcbid wraps CREDENTIALS_TYPE_NETBSD_UNPCBID
 	//
 	// The native credentials type is a `struct unpcbid`. Added in 2.42.
 	CredentialsTypeNetbsdUnpcbid CredentialsType = 5
-	// CredentialsTypeAppleXucred wraps G_CREDENTIALS_TYPE_APPLE_XUCRED
+	// CredentialsTypeAppleXucred wraps CREDENTIALS_TYPE_APPLE_XUCRED
 	//
 	// The native credentials type is a `struct xucred`. Added in 2.66.
 	CredentialsTypeAppleXucred CredentialsType = 6
-	// CredentialsTypeWin32Pid wraps G_CREDENTIALS_TYPE_WIN32_PID
+	// CredentialsTypeWin32Pid wraps CREDENTIALS_TYPE_WIN32_PID
 	//
 	// The native credentials type is a PID `DWORD`. Added in 2.72.
 	CredentialsTypeWin32Pid CredentialsType = 7
@@ -2235,754 +2040,6 @@ func (e CredentialsType) String() string {
 	}
 }
 
-// DBusError wraps GDBusError
-//
-// Error codes for the %G_DBUS_ERROR error domain.
-type DBusError C.int
-
-const (
-	// DBusErrorFailed wraps G_DBUS_ERROR_FAILED
-	//
-	// A generic error; "something went wrong" - see the error message for
-	// more.
-	DBusErrorFailed DBusError = 0
-	// DBusErrorNoMemory wraps G_DBUS_ERROR_NO_MEMORY
-	//
-	// There was not enough memory to complete an operation.
-	DBusErrorNoMemory DBusError = 1
-	// DBusErrorServiceUnknown wraps G_DBUS_ERROR_SERVICE_UNKNOWN
-	//
-	// The bus doesn't know how to launch a service to supply the bus name
-	// you wanted.
-	DBusErrorServiceUnknown DBusError = 2
-	// DBusErrorNameHasNoOwner wraps G_DBUS_ERROR_NAME_HAS_NO_OWNER
-	//
-	// The bus name you referenced doesn't exist (i.e. no application owns
-	// it).
-	DBusErrorNameHasNoOwner DBusError = 3
-	// DBusErrorNoReply wraps G_DBUS_ERROR_NO_REPLY
-	//
-	// No reply to a message expecting one, usually means a timeout occurred.
-	DBusErrorNoReply DBusError = 4
-	// DBusErrorIOError wraps G_DBUS_ERROR_IO_ERROR
-	//
-	// Something went wrong reading or writing to a socket, for example.
-	DBusErrorIOError DBusError = 5
-	// DBusErrorBadAddress wraps G_DBUS_ERROR_BAD_ADDRESS
-	//
-	// A D-Bus bus address was malformed.
-	DBusErrorBadAddress DBusError = 6
-	// DBusErrorNotSupported wraps G_DBUS_ERROR_NOT_SUPPORTED
-	//
-	// Requested operation isn't supported (like ENOSYS on UNIX).
-	DBusErrorNotSupported DBusError = 7
-	// DBusErrorLimitsExceeded wraps G_DBUS_ERROR_LIMITS_EXCEEDED
-	//
-	// Some limited resource is exhausted.
-	DBusErrorLimitsExceeded DBusError = 8
-	// DBusErrorAccessDenied wraps G_DBUS_ERROR_ACCESS_DENIED
-	//
-	// Security restrictions don't allow doing what you're trying to do.
-	DBusErrorAccessDenied DBusError = 9
-	// DBusErrorAuthFailed wraps G_DBUS_ERROR_AUTH_FAILED
-	//
-	// Authentication didn't work.
-	DBusErrorAuthFailed DBusError = 10
-	// DBusErrorNoServer wraps G_DBUS_ERROR_NO_SERVER
-	//
-	// Unable to connect to server (probably caused by ECONNREFUSED on a
-	// socket).
-	DBusErrorNoServer DBusError = 11
-	// DBusErrorTimeout wraps G_DBUS_ERROR_TIMEOUT
-	//
-	// Certain timeout errors, possibly ETIMEDOUT on a socket.  Note that
-	// %G_DBUS_ERROR_NO_REPLY is used for message reply timeouts. Warning:
-	// this is confusingly-named given that %G_DBUS_ERROR_TIMED_OUT also
-	// exists. We can't fix it for compatibility reasons so just be
-	// careful.
-	DBusErrorTimeout DBusError = 12
-	// DBusErrorNoNetwork wraps G_DBUS_ERROR_NO_NETWORK
-	//
-	// No network access (probably ENETUNREACH on a socket).
-	DBusErrorNoNetwork DBusError = 13
-	// DBusErrorAddressInUse wraps G_DBUS_ERROR_ADDRESS_IN_USE
-	//
-	// Can't bind a socket since its address is in use (i.e. EADDRINUSE).
-	DBusErrorAddressInUse DBusError = 14
-	// DBusErrorDisconnected wraps G_DBUS_ERROR_DISCONNECTED
-	//
-	// The connection is disconnected and you're trying to use it.
-	DBusErrorDisconnected DBusError = 15
-	// DBusErrorInvalidArgs wraps G_DBUS_ERROR_INVALID_ARGS
-	//
-	// Invalid arguments passed to a method call.
-	DBusErrorInvalidArgs DBusError = 16
-	// DBusErrorFileNotFound wraps G_DBUS_ERROR_FILE_NOT_FOUND
-	//
-	// Missing file.
-	DBusErrorFileNotFound DBusError = 17
-	// DBusErrorFileExists wraps G_DBUS_ERROR_FILE_EXISTS
-	//
-	// Existing file and the operation you're using does not silently overwrite.
-	DBusErrorFileExists DBusError = 18
-	// DBusErrorUnknownMethod wraps G_DBUS_ERROR_UNKNOWN_METHOD
-	//
-	// Method name you invoked isn't known by the object you invoked it on.
-	DBusErrorUnknownMethod DBusError = 19
-	// DBusErrorTimedOut wraps G_DBUS_ERROR_TIMED_OUT
-	//
-	// Certain timeout errors, e.g. while starting a service. Warning: this is
-	// confusingly-named given that %G_DBUS_ERROR_TIMEOUT also exists. We
-	// can't fix it for compatibility reasons so just be careful.
-	DBusErrorTimedOut DBusError = 20
-	// DBusErrorMatchRuleNotFound wraps G_DBUS_ERROR_MATCH_RULE_NOT_FOUND
-	//
-	// Tried to remove or modify a match rule that didn't exist.
-	DBusErrorMatchRuleNotFound DBusError = 21
-	// DBusErrorMatchRuleInvalid wraps G_DBUS_ERROR_MATCH_RULE_INVALID
-	//
-	// The match rule isn't syntactically valid.
-	DBusErrorMatchRuleInvalid DBusError = 22
-	// DBusErrorSpawnExecFailed wraps G_DBUS_ERROR_SPAWN_EXEC_FAILED
-	//
-	// While starting a new process, the exec() call failed.
-	DBusErrorSpawnExecFailed DBusError = 23
-	// DBusErrorSpawnForkFailed wraps G_DBUS_ERROR_SPAWN_FORK_FAILED
-	//
-	// While starting a new process, the fork() call failed.
-	DBusErrorSpawnForkFailed DBusError = 24
-	// DBusErrorSpawnChildExited wraps G_DBUS_ERROR_SPAWN_CHILD_EXITED
-	//
-	// While starting a new process, the child exited with a status code.
-	DBusErrorSpawnChildExited DBusError = 25
-	// DBusErrorSpawnChildSignaled wraps G_DBUS_ERROR_SPAWN_CHILD_SIGNALED
-	//
-	// While starting a new process, the child exited on a signal.
-	DBusErrorSpawnChildSignaled DBusError = 26
-	// DBusErrorSpawnFailed wraps G_DBUS_ERROR_SPAWN_FAILED
-	//
-	// While starting a new process, something went wrong.
-	DBusErrorSpawnFailed DBusError = 27
-	// DBusErrorSpawnSetupFailed wraps G_DBUS_ERROR_SPAWN_SETUP_FAILED
-	//
-	// We failed to setup the environment correctly.
-	DBusErrorSpawnSetupFailed DBusError = 28
-	// DBusErrorSpawnConfigInvalid wraps G_DBUS_ERROR_SPAWN_CONFIG_INVALID
-	//
-	// We failed to setup the config parser correctly.
-	DBusErrorSpawnConfigInvalid DBusError = 29
-	// DBusErrorSpawnServiceInvalid wraps G_DBUS_ERROR_SPAWN_SERVICE_INVALID
-	//
-	// Bus name was not valid.
-	DBusErrorSpawnServiceInvalid DBusError = 30
-	// DBusErrorSpawnServiceNotFound wraps G_DBUS_ERROR_SPAWN_SERVICE_NOT_FOUND
-	//
-	// Service file not found in system-services directory.
-	DBusErrorSpawnServiceNotFound DBusError = 31
-	// DBusErrorSpawnPermissionsInvalid wraps G_DBUS_ERROR_SPAWN_PERMISSIONS_INVALID
-	//
-	// Permissions are incorrect on the setuid helper.
-	DBusErrorSpawnPermissionsInvalid DBusError = 32
-	// DBusErrorSpawnFileInvalid wraps G_DBUS_ERROR_SPAWN_FILE_INVALID
-	//
-	// Service file invalid (Name, User or Exec missing).
-	DBusErrorSpawnFileInvalid DBusError = 33
-	// DBusErrorSpawnNoMemory wraps G_DBUS_ERROR_SPAWN_NO_MEMORY
-	//
-	// Tried to get a UNIX process ID and it wasn't available.
-	DBusErrorSpawnNoMemory DBusError = 34
-	// DBusErrorInvalidSignature wraps G_DBUS_ERROR_INVALID_SIGNATURE
-	//
-	// A type signature is not valid.
-	DBusErrorInvalidSignature DBusError = 36
-	// DBusErrorInvalidFileContent wraps G_DBUS_ERROR_INVALID_FILE_CONTENT
-	//
-	// A file contains invalid syntax or is otherwise broken.
-	DBusErrorInvalidFileContent DBusError = 37
-	// DBusErrorSelinuxSecurityContextUnknown wraps G_DBUS_ERROR_SELINUX_SECURITY_CONTEXT_UNKNOWN
-	//
-	// Asked for SELinux security context and it wasn't available.
-	DBusErrorSelinuxSecurityContextUnknown DBusError = 38
-	// DBusErrorAdtAuditDataUnknown wraps G_DBUS_ERROR_ADT_AUDIT_DATA_UNKNOWN
-	//
-	// Asked for ADT audit data and it wasn't available.
-	DBusErrorAdtAuditDataUnknown DBusError = 39
-	// DBusErrorObjectPathInUse wraps G_DBUS_ERROR_OBJECT_PATH_IN_USE
-	//
-	// There's already an object with the requested object path.
-	DBusErrorObjectPathInUse DBusError = 40
-	// DBusErrorUnknownObject wraps G_DBUS_ERROR_UNKNOWN_OBJECT
-	//
-	// Object you invoked a method on isn't known. Since 2.42
-	DBusErrorUnknownObject DBusError = 41
-	// DBusErrorUnknownInterface wraps G_DBUS_ERROR_UNKNOWN_INTERFACE
-	//
-	// Interface you invoked a method on isn't known by the object. Since 2.42
-	DBusErrorUnknownInterface DBusError = 42
-	// DBusErrorUnknownProperty wraps G_DBUS_ERROR_UNKNOWN_PROPERTY
-	//
-	// Property you tried to access isn't known by the object. Since 2.42
-	DBusErrorUnknownProperty DBusError = 43
-	// DBusErrorPropertyReadOnly wraps G_DBUS_ERROR_PROPERTY_READ_ONLY
-	//
-	// Property you tried to set is read-only. Since 2.42
-	DBusErrorPropertyReadOnly DBusError = 44
-)
-
-func marshalDBusError(p unsafe.Pointer) (any, error) {
-	return DBusError(gobject.ValueFromNative(p).Enum()), nil
-}
-
-var _ gobject.GoValueInitializer = DBusError(0)
-
-func (e DBusError) GoValueType() gobject.Type {
-	return TypeDBusError
-}
-
-func (e DBusError) SetGoValue(v *gobject.Value) {
-	v.SetEnum(int(e))
-}
-
-func (e DBusError) String() string {
-	switch e {
-		case DBusErrorAccessDenied: return "DBusErrorAccessDenied"
-		case DBusErrorAddressInUse: return "DBusErrorAddressInUse"
-		case DBusErrorAdtAuditDataUnknown: return "DBusErrorAdtAuditDataUnknown"
-		case DBusErrorAuthFailed: return "DBusErrorAuthFailed"
-		case DBusErrorBadAddress: return "DBusErrorBadAddress"
-		case DBusErrorDisconnected: return "DBusErrorDisconnected"
-		case DBusErrorFailed: return "DBusErrorFailed"
-		case DBusErrorFileExists: return "DBusErrorFileExists"
-		case DBusErrorFileNotFound: return "DBusErrorFileNotFound"
-		case DBusErrorIOError: return "DBusErrorIOError"
-		case DBusErrorInvalidArgs: return "DBusErrorInvalidArgs"
-		case DBusErrorInvalidFileContent: return "DBusErrorInvalidFileContent"
-		case DBusErrorInvalidSignature: return "DBusErrorInvalidSignature"
-		case DBusErrorLimitsExceeded: return "DBusErrorLimitsExceeded"
-		case DBusErrorMatchRuleInvalid: return "DBusErrorMatchRuleInvalid"
-		case DBusErrorMatchRuleNotFound: return "DBusErrorMatchRuleNotFound"
-		case DBusErrorNameHasNoOwner: return "DBusErrorNameHasNoOwner"
-		case DBusErrorNoMemory: return "DBusErrorNoMemory"
-		case DBusErrorNoNetwork: return "DBusErrorNoNetwork"
-		case DBusErrorNoReply: return "DBusErrorNoReply"
-		case DBusErrorNoServer: return "DBusErrorNoServer"
-		case DBusErrorNotSupported: return "DBusErrorNotSupported"
-		case DBusErrorObjectPathInUse: return "DBusErrorObjectPathInUse"
-		case DBusErrorPropertyReadOnly: return "DBusErrorPropertyReadOnly"
-		case DBusErrorSelinuxSecurityContextUnknown: return "DBusErrorSelinuxSecurityContextUnknown"
-		case DBusErrorServiceUnknown: return "DBusErrorServiceUnknown"
-		case DBusErrorSpawnChildExited: return "DBusErrorSpawnChildExited"
-		case DBusErrorSpawnChildSignaled: return "DBusErrorSpawnChildSignaled"
-		case DBusErrorSpawnConfigInvalid: return "DBusErrorSpawnConfigInvalid"
-		case DBusErrorSpawnExecFailed: return "DBusErrorSpawnExecFailed"
-		case DBusErrorSpawnFailed: return "DBusErrorSpawnFailed"
-		case DBusErrorSpawnFileInvalid: return "DBusErrorSpawnFileInvalid"
-		case DBusErrorSpawnForkFailed: return "DBusErrorSpawnForkFailed"
-		case DBusErrorSpawnNoMemory: return "DBusErrorSpawnNoMemory"
-		case DBusErrorSpawnPermissionsInvalid: return "DBusErrorSpawnPermissionsInvalid"
-		case DBusErrorSpawnServiceInvalid: return "DBusErrorSpawnServiceInvalid"
-		case DBusErrorSpawnServiceNotFound: return "DBusErrorSpawnServiceNotFound"
-		case DBusErrorSpawnSetupFailed: return "DBusErrorSpawnSetupFailed"
-		case DBusErrorTimedOut: return "DBusErrorTimedOut"
-		case DBusErrorTimeout: return "DBusErrorTimeout"
-		case DBusErrorUnknownInterface: return "DBusErrorUnknownInterface"
-		case DBusErrorUnknownMethod: return "DBusErrorUnknownMethod"
-		case DBusErrorUnknownObject: return "DBusErrorUnknownObject"
-		case DBusErrorUnknownProperty: return "DBusErrorUnknownProperty"
-		default: return fmt.Sprintf("DBusError(%d)", e)
-	}
-}
-
-// DBusErrorEncodeGError wraps g_dbus_error_encode_gerror
-// 
-// The function takes the following parameters:
-// 
-// 	- err error: A #GError. 
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Creates a D-Bus error name to use for @error. If @error matches
-// a registered error (cf. g_dbus_error_register_error()), the corresponding
-// D-Bus error name will be returned.
-// 
-// Otherwise the a name of the form
-// `org.gtk.GDBus.UnmappedGError.Quark._ESCAPED_QUARK_NAME.Code_ERROR_CODE`
-// will be used. This allows other GDBus applications to map the error
-// on the wire back to a #GError using g_dbus_error_new_for_dbus_error().
-// 
-// This function is typically only used in object mappings to put a
-// #GError on the wire. Regular applications should not use it.
-func DBusErrorEncodeGError(err error) string {
-	var carg1 *C.GError // in, none, converted
-	var cret  *C.gchar  // return, full, string
-
-	carg1 = (*C.GError)(glib.UnsafeErrorToGlibNone(err))
-
-	cret = C.g_dbus_error_encode_gerror(carg1)
-	runtime.KeepAlive(err)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// DBusErrorGetRemoteError wraps g_dbus_error_get_remote_error
-// 
-// The function takes the following parameters:
-// 
-// 	- err error: a #GError 
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Gets the D-Bus error name used for @error, if any.
-// 
-// This function is guaranteed to return a D-Bus error name for all
-// #GErrors returned from functions handling remote method calls
-// (e.g. g_dbus_connection_call_finish()) unless
-// g_dbus_error_strip_remote_error() has been used on @error.
-func DBusErrorGetRemoteError(err error) string {
-	var carg1 *C.GError // in, none, converted
-	var cret  *C.gchar  // return, full, string, nullable-string
-
-	carg1 = (*C.GError)(glib.UnsafeErrorToGlibNone(err))
-
-	cret = C.g_dbus_error_get_remote_error(carg1)
-	runtime.KeepAlive(err)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-		defer C.free(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// DBusErrorIsRemoteError wraps g_dbus_error_is_remote_error
-// 
-// The function takes the following parameters:
-// 
-// 	- err error: A #GError. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Checks if @error represents an error received via D-Bus from a remote peer. If so,
-// use g_dbus_error_get_remote_error() to get the name of the error.
-func DBusErrorIsRemoteError(err error) bool {
-	var carg1 *C.GError  // in, none, converted
-	var cret  C.gboolean // return
-
-	carg1 = (*C.GError)(glib.UnsafeErrorToGlibNone(err))
-
-	cret = C.g_dbus_error_is_remote_error(carg1)
-	runtime.KeepAlive(err)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// NewDBusErrorForDBusError wraps g_dbus_error_new_for_dbus_error
-// 
-// The function takes the following parameters:
-// 
-// 	- dbusErrorName string: D-Bus error name. 
-// 	- dbusErrorMessage string: D-Bus error message. 
-// 
-// The function returns the following values:
-// 
-// 	- goret error 
-//
-// Creates a #GError based on the contents of @dbus_error_name and
-// @dbus_error_message.
-// 
-// Errors registered with g_dbus_error_register_error() will be looked
-// up using @dbus_error_name and if a match is found, the error domain
-// and code is used. Applications can use g_dbus_error_get_remote_error()
-// to recover @dbus_error_name.
-// 
-// If a match against a registered error is not found and the D-Bus
-// error name is in a form as returned by g_dbus_error_encode_gerror()
-// the error domain and code encoded in the name is used to
-// create the #GError. Also, @dbus_error_name is added to the error message
-// such that it can be recovered with g_dbus_error_get_remote_error().
-// 
-// Otherwise, a #GError with the error code %G_IO_ERROR_DBUS_ERROR
-// in the %G_IO_ERROR error domain is returned. Also, @dbus_error_name is
-// added to the error message such that it can be recovered with
-// g_dbus_error_get_remote_error().
-// 
-// In all three cases, @dbus_error_name can always be recovered from the
-// returned #GError using the g_dbus_error_get_remote_error() function
-// (unless g_dbus_error_strip_remote_error() hasn't been used on the returned error).
-// 
-// This function is typically only used in object mappings to prepare
-// #GError instances for applications. Regular applications should not use
-// it.
-func NewDBusErrorForDBusError(dbusErrorName string, dbusErrorMessage string) error {
-	var carg1 *C.gchar  // in, none, string
-	var carg2 *C.gchar  // in, none, string
-	var cret  *C.GError // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(dbusErrorName)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(dbusErrorMessage)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	cret = C.g_dbus_error_new_for_dbus_error(carg1, carg2)
-	runtime.KeepAlive(dbusErrorName)
-	runtime.KeepAlive(dbusErrorMessage)
-
-	var goret error
-
-	goret = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// DBusErrorQuark wraps g_dbus_error_quark
-// 
-// The function returns the following values:
-// 
-// 	- goret glib.Quark 
-func DBusErrorQuark() glib.Quark {
-	var cret C.GQuark // return, none, casted, alias
-
-	cret = C.g_dbus_error_quark()
-
-	var goret glib.Quark
-
-	goret = glib.Quark(cret)
-
-	return goret
-}
-
-// DBusErrorRegisterError wraps g_dbus_error_register_error
-// 
-// The function takes the following parameters:
-// 
-// 	- errorDomain glib.Quark: A #GQuark for an error domain. 
-// 	- errorCode int32: An error code. 
-// 	- dbusErrorName string: A D-Bus error name. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Creates an association to map between @dbus_error_name and
-// #GErrors specified by @error_domain and @error_code.
-// 
-// This is typically done in the routine that returns the #GQuark for
-// an error domain.
-func DBusErrorRegisterError(errorDomain glib.Quark, errorCode int32, dbusErrorName string) bool {
-	var carg1 C.GQuark   // in, none, casted, alias
-	var carg2 C.gint     // in, none, casted
-	var carg3 *C.gchar   // in, none, string
-	var cret  C.gboolean // return
-
-	carg1 = C.GQuark(errorDomain)
-	carg2 = C.gint(errorCode)
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(dbusErrorName)))
-	defer C.free(unsafe.Pointer(carg3))
-
-	cret = C.g_dbus_error_register_error(carg1, carg2, carg3)
-	runtime.KeepAlive(errorDomain)
-	runtime.KeepAlive(errorCode)
-	runtime.KeepAlive(dbusErrorName)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// DBusErrorRegisterErrorDomain wraps g_dbus_error_register_error_domain
-// 
-// The function takes the following parameters:
-// 
-// 	- errorDomainQuarkName string: The error domain name. 
-// 	- quarkVolatile *uint: A pointer where to store the #GQuark. 
-// 	- entries []DBusErrorEntry: A pointer to @num_entries #GDBusErrorEntry struct items. 
-//
-// Helper function for associating a #GError error domain with D-Bus error names.
-// 
-// While @quark_volatile has a `volatile` qualifier, this is a historical
-// artifact and the argument passed to it should not be `volatile`.
-func DBusErrorRegisterErrorDomain(errorDomainQuarkName string, quarkVolatile *uint, entries []DBusErrorEntry) {
-	var carg1 *C.gchar           // in, none, string
-	var carg2 *C.gsize           // in, transfer: none, C Pointers: 1, Name: gsize
-	var carg3 *C.GDBusErrorEntry // in, transfer: none, C Pointers: 1, Name: array[DBusErrorEntry], array (inner: *typesystem.Record, length-by: carg4)
-	var carg4 C.guint            // implicit
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(errorDomainQuarkName)))
-	defer C.free(unsafe.Pointer(carg1))
-	_ = quarkVolatile
-	_ = carg2
-	panic("unimplemented conversion of *uint (volatile gsize*)")
-	_ = entries
-	_ = carg3
-	_ = carg4
-	panic("unimplemented conversion of []DBusErrorEntry (const GDBusErrorEntry*)")
-
-	C.g_dbus_error_register_error_domain(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(errorDomainQuarkName)
-	runtime.KeepAlive(quarkVolatile)
-	runtime.KeepAlive(entries)
-}
-
-// DBusErrorStripRemoteError wraps g_dbus_error_strip_remote_error
-// 
-// The function takes the following parameters:
-// 
-// 	- err error: A #GError. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Looks for extra information in the error message used to recover
-// the D-Bus error name and strips it if found. If stripped, the
-// message field in @error will correspond exactly to what was
-// received on the wire.
-// 
-// This is typically used when presenting errors to the end user.
-func DBusErrorStripRemoteError(err error) bool {
-	var carg1 *C.GError  // in, none, converted
-	var cret  C.gboolean // return
-
-	carg1 = (*C.GError)(glib.UnsafeErrorToGlibNone(err))
-
-	cret = C.g_dbus_error_strip_remote_error(carg1)
-	runtime.KeepAlive(err)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// DBusErrorUnregisterError wraps g_dbus_error_unregister_error
-// 
-// The function takes the following parameters:
-// 
-// 	- errorDomain glib.Quark: A #GQuark for an error domain. 
-// 	- errorCode int32: An error code. 
-// 	- dbusErrorName string: A D-Bus error name. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Destroys an association previously set up with g_dbus_error_register_error().
-func DBusErrorUnregisterError(errorDomain glib.Quark, errorCode int32, dbusErrorName string) bool {
-	var carg1 C.GQuark   // in, none, casted, alias
-	var carg2 C.gint     // in, none, casted
-	var carg3 *C.gchar   // in, none, string
-	var cret  C.gboolean // return
-
-	carg1 = C.GQuark(errorDomain)
-	carg2 = C.gint(errorCode)
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(dbusErrorName)))
-	defer C.free(unsafe.Pointer(carg3))
-
-	cret = C.g_dbus_error_unregister_error(carg1, carg2, carg3)
-	runtime.KeepAlive(errorDomain)
-	runtime.KeepAlive(errorCode)
-	runtime.KeepAlive(dbusErrorName)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// DBusMessageByteOrder wraps GDBusMessageByteOrder
-//
-// Enumeration used to describe the byte order of a D-Bus message.
-type DBusMessageByteOrder C.int
-
-const (
-	// DBusMessageByteOrderBigEndian wraps G_DBUS_MESSAGE_BYTE_ORDER_BIG_ENDIAN
-	//
-	// The byte order is big endian.
-	DBusMessageByteOrderBigEndian DBusMessageByteOrder = 66
-	// DBusMessageByteOrderLittleEndian wraps G_DBUS_MESSAGE_BYTE_ORDER_LITTLE_ENDIAN
-	//
-	// The byte order is little endian.
-	DBusMessageByteOrderLittleEndian DBusMessageByteOrder = 108
-)
-
-func marshalDBusMessageByteOrder(p unsafe.Pointer) (any, error) {
-	return DBusMessageByteOrder(gobject.ValueFromNative(p).Enum()), nil
-}
-
-var _ gobject.GoValueInitializer = DBusMessageByteOrder(0)
-
-func (e DBusMessageByteOrder) GoValueType() gobject.Type {
-	return TypeDBusMessageByteOrder
-}
-
-func (e DBusMessageByteOrder) SetGoValue(v *gobject.Value) {
-	v.SetEnum(int(e))
-}
-
-func (e DBusMessageByteOrder) String() string {
-	switch e {
-		case DBusMessageByteOrderBigEndian: return "DBusMessageByteOrderBigEndian"
-		case DBusMessageByteOrderLittleEndian: return "DBusMessageByteOrderLittleEndian"
-		default: return fmt.Sprintf("DBusMessageByteOrder(%d)", e)
-	}
-}
-
-// DBusMessageHeaderField wraps GDBusMessageHeaderField
-//
-// Header fields used in #GDBusMessage.
-type DBusMessageHeaderField C.int
-
-const (
-	// DBusMessageHeaderFieldInvalid wraps G_DBUS_MESSAGE_HEADER_FIELD_INVALID
-	//
-	// Not a valid header field.
-	DBusMessageHeaderFieldInvalid DBusMessageHeaderField = 0
-	// DBusMessageHeaderFieldPath wraps G_DBUS_MESSAGE_HEADER_FIELD_PATH
-	//
-	// The object path.
-	DBusMessageHeaderFieldPath DBusMessageHeaderField = 1
-	// DBusMessageHeaderFieldInterface wraps G_DBUS_MESSAGE_HEADER_FIELD_INTERFACE
-	//
-	// The interface name.
-	DBusMessageHeaderFieldInterface DBusMessageHeaderField = 2
-	// DBusMessageHeaderFieldMember wraps G_DBUS_MESSAGE_HEADER_FIELD_MEMBER
-	//
-	// The method or signal name.
-	DBusMessageHeaderFieldMember DBusMessageHeaderField = 3
-	// DBusMessageHeaderFieldErrorName wraps G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME
-	//
-	// The name of the error that occurred.
-	DBusMessageHeaderFieldErrorName DBusMessageHeaderField = 4
-	// DBusMessageHeaderFieldReplySerial wraps G_DBUS_MESSAGE_HEADER_FIELD_REPLY_SERIAL
-	//
-	// The serial number the message is a reply to.
-	DBusMessageHeaderFieldReplySerial DBusMessageHeaderField = 5
-	// DBusMessageHeaderFieldDestination wraps G_DBUS_MESSAGE_HEADER_FIELD_DESTINATION
-	//
-	// The name the message is intended for.
-	DBusMessageHeaderFieldDestination DBusMessageHeaderField = 6
-	// DBusMessageHeaderFieldSender wraps G_DBUS_MESSAGE_HEADER_FIELD_SENDER
-	//
-	// Unique name of the sender of the message (filled in by the bus).
-	DBusMessageHeaderFieldSender DBusMessageHeaderField = 7
-	// DBusMessageHeaderFieldSignature wraps G_DBUS_MESSAGE_HEADER_FIELD_SIGNATURE
-	//
-	// The signature of the message body.
-	DBusMessageHeaderFieldSignature DBusMessageHeaderField = 8
-)
-
-func marshalDBusMessageHeaderField(p unsafe.Pointer) (any, error) {
-	return DBusMessageHeaderField(gobject.ValueFromNative(p).Enum()), nil
-}
-
-var _ gobject.GoValueInitializer = DBusMessageHeaderField(0)
-
-func (e DBusMessageHeaderField) GoValueType() gobject.Type {
-	return TypeDBusMessageHeaderField
-}
-
-func (e DBusMessageHeaderField) SetGoValue(v *gobject.Value) {
-	v.SetEnum(int(e))
-}
-
-func (e DBusMessageHeaderField) String() string {
-	switch e {
-		case DBusMessageHeaderFieldDestination: return "DBusMessageHeaderFieldDestination"
-		case DBusMessageHeaderFieldErrorName: return "DBusMessageHeaderFieldErrorName"
-		case DBusMessageHeaderFieldInterface: return "DBusMessageHeaderFieldInterface"
-		case DBusMessageHeaderFieldInvalid: return "DBusMessageHeaderFieldInvalid"
-		case DBusMessageHeaderFieldMember: return "DBusMessageHeaderFieldMember"
-		case DBusMessageHeaderFieldPath: return "DBusMessageHeaderFieldPath"
-		case DBusMessageHeaderFieldReplySerial: return "DBusMessageHeaderFieldReplySerial"
-		case DBusMessageHeaderFieldSender: return "DBusMessageHeaderFieldSender"
-		case DBusMessageHeaderFieldSignature: return "DBusMessageHeaderFieldSignature"
-		default: return fmt.Sprintf("DBusMessageHeaderField(%d)", e)
-	}
-}
-
-// DBusMessageType wraps GDBusMessageType
-//
-// Message types used in #GDBusMessage.
-type DBusMessageType C.int
-
-const (
-	// DBusMessageTypeInvalid wraps G_DBUS_MESSAGE_TYPE_INVALID
-	//
-	// Message is of invalid type.
-	DBusMessageTypeInvalid DBusMessageType = 0
-	// DBusMessageTypeMethodCall wraps G_DBUS_MESSAGE_TYPE_METHOD_CALL
-	//
-	// Method call.
-	DBusMessageTypeMethodCall DBusMessageType = 1
-	// DBusMessageTypeMethodReturn wraps G_DBUS_MESSAGE_TYPE_METHOD_RETURN
-	//
-	// Method reply.
-	DBusMessageTypeMethodReturn DBusMessageType = 2
-	// DBusMessageTypeError wraps G_DBUS_MESSAGE_TYPE_ERROR
-	//
-	// Error reply.
-	DBusMessageTypeError DBusMessageType = 3
-	// DBusMessageTypeSignal wraps G_DBUS_MESSAGE_TYPE_SIGNAL
-	//
-	// Signal emission.
-	DBusMessageTypeSignal DBusMessageType = 4
-)
-
-func marshalDBusMessageType(p unsafe.Pointer) (any, error) {
-	return DBusMessageType(gobject.ValueFromNative(p).Enum()), nil
-}
-
-var _ gobject.GoValueInitializer = DBusMessageType(0)
-
-func (e DBusMessageType) GoValueType() gobject.Type {
-	return TypeDBusMessageType
-}
-
-func (e DBusMessageType) SetGoValue(v *gobject.Value) {
-	v.SetEnum(int(e))
-}
-
-func (e DBusMessageType) String() string {
-	switch e {
-		case DBusMessageTypeError: return "DBusMessageTypeError"
-		case DBusMessageTypeInvalid: return "DBusMessageTypeInvalid"
-		case DBusMessageTypeMethodCall: return "DBusMessageTypeMethodCall"
-		case DBusMessageTypeMethodReturn: return "DBusMessageTypeMethodReturn"
-		case DBusMessageTypeSignal: return "DBusMessageTypeSignal"
-		default: return fmt.Sprintf("DBusMessageType(%d)", e)
-	}
-}
-
 // DataStreamByteOrder wraps GDataStreamByteOrder
 //
 // #GDataStreamByteOrder is used to ensure proper endianness of streaming data sources
@@ -2990,15 +2047,15 @@ func (e DBusMessageType) String() string {
 type DataStreamByteOrder C.int
 
 const (
-	// DataStreamByteOrderBigEndian wraps G_DATA_STREAM_BYTE_ORDER_BIG_ENDIAN
+	// DataStreamByteOrderBigEndian wraps DATA_STREAM_BYTE_ORDER_BIG_ENDIAN
 	//
 	// Selects Big Endian byte order.
 	DataStreamByteOrderBigEndian DataStreamByteOrder = 0
-	// DataStreamByteOrderLittleEndian wraps G_DATA_STREAM_BYTE_ORDER_LITTLE_ENDIAN
+	// DataStreamByteOrderLittleEndian wraps DATA_STREAM_BYTE_ORDER_LITTLE_ENDIAN
 	//
 	// Selects Little Endian byte order.
 	DataStreamByteOrderLittleEndian DataStreamByteOrder = 1
-	// DataStreamByteOrderHostEndian wraps G_DATA_STREAM_BYTE_ORDER_HOST_ENDIAN
+	// DataStreamByteOrderHostEndian wraps DATA_STREAM_BYTE_ORDER_HOST_ENDIAN
 	//
 	// Selects endianness based on host machine's architecture.
 	DataStreamByteOrderHostEndian DataStreamByteOrder = 2
@@ -3033,19 +2090,19 @@ func (e DataStreamByteOrder) String() string {
 type DataStreamNewlineType C.int
 
 const (
-	// DataStreamNewlineTypeLf wraps G_DATA_STREAM_NEWLINE_TYPE_LF
+	// DataStreamNewlineTypeLf wraps DATA_STREAM_NEWLINE_TYPE_LF
 	//
 	// Selects "LF" line endings, common on most modern UNIX platforms.
 	DataStreamNewlineTypeLf DataStreamNewlineType = 0
-	// DataStreamNewlineTypeCr wraps G_DATA_STREAM_NEWLINE_TYPE_CR
+	// DataStreamNewlineTypeCr wraps DATA_STREAM_NEWLINE_TYPE_CR
 	//
 	// Selects "CR" line endings.
 	DataStreamNewlineTypeCr DataStreamNewlineType = 1
-	// DataStreamNewlineTypeCrLf wraps G_DATA_STREAM_NEWLINE_TYPE_CR_LF
+	// DataStreamNewlineTypeCrLf wraps DATA_STREAM_NEWLINE_TYPE_CR_LF
 	//
 	// Selects "CR, LF" line ending, common on Microsoft Windows.
 	DataStreamNewlineTypeCrLf DataStreamNewlineType = 2
-	// DataStreamNewlineTypeAny wraps G_DATA_STREAM_NEWLINE_TYPE_ANY
+	// DataStreamNewlineTypeAny wraps DATA_STREAM_NEWLINE_TYPE_ANY
 	//
 	// Automatically try to handle any line ending type.
 	DataStreamNewlineTypeAny DataStreamNewlineType = 3
@@ -3081,29 +2138,29 @@ func (e DataStreamNewlineType) String() string {
 type DriveStartStopType C.int
 
 const (
-	// DriveStartStopTypeUnknown wraps G_DRIVE_START_STOP_TYPE_UNKNOWN
+	// DriveStartStopTypeUnknown wraps DRIVE_START_STOP_TYPE_UNKNOWN
 	//
 	// Unknown or drive doesn't support
 	//    start/stop.
 	DriveStartStopTypeUnknown DriveStartStopType = 0
-	// DriveStartStopTypeShutdown wraps G_DRIVE_START_STOP_TYPE_SHUTDOWN
+	// DriveStartStopTypeShutdown wraps DRIVE_START_STOP_TYPE_SHUTDOWN
 	//
 	// The stop method will physically
 	//    shut down the drive and e.g. power down the port the drive is
 	//    attached to.
 	DriveStartStopTypeShutdown DriveStartStopType = 1
-	// DriveStartStopTypeNetwork wraps G_DRIVE_START_STOP_TYPE_NETWORK
+	// DriveStartStopTypeNetwork wraps DRIVE_START_STOP_TYPE_NETWORK
 	//
 	// The start/stop methods are used
 	//    for connecting/disconnect to the drive over the network.
 	DriveStartStopTypeNetwork DriveStartStopType = 2
-	// DriveStartStopTypeMultidisk wraps G_DRIVE_START_STOP_TYPE_MULTIDISK
+	// DriveStartStopTypeMultidisk wraps DRIVE_START_STOP_TYPE_MULTIDISK
 	//
 	// The start/stop methods will
 	//    assemble/disassemble a virtual drive from several physical
 	//    drives.
 	DriveStartStopTypeMultidisk DriveStartStopType = 3
-	// DriveStartStopTypePassword wraps G_DRIVE_START_STOP_TYPE_PASSWORD
+	// DriveStartStopTypePassword wraps DRIVE_START_STOP_TYPE_PASSWORD
 	//
 	// The start/stop methods will
 	//    unlock/lock the disk (for example using the ATA `SECURITY UNLOCK
@@ -3143,19 +2200,19 @@ func (e DriveStartStopType) String() string {
 type EmblemOrigin C.int
 
 const (
-	// EmblemOriginUnknown wraps G_EMBLEM_ORIGIN_UNKNOWN
+	// EmblemOriginUnknown wraps EMBLEM_ORIGIN_UNKNOWN
 	//
 	// Emblem of unknown origin
 	EmblemOriginUnknown EmblemOrigin = 0
-	// EmblemOriginDevice wraps G_EMBLEM_ORIGIN_DEVICE
+	// EmblemOriginDevice wraps EMBLEM_ORIGIN_DEVICE
 	//
 	// Emblem adds device-specific information
 	EmblemOriginDevice EmblemOrigin = 1
-	// EmblemOriginLivemetadata wraps G_EMBLEM_ORIGIN_LIVEMETADATA
+	// EmblemOriginLivemetadata wraps EMBLEM_ORIGIN_LIVEMETADATA
 	//
 	// Emblem depicts live metadata, such as "readonly"
 	EmblemOriginLivemetadata EmblemOrigin = 2
-	// EmblemOriginTag wraps G_EMBLEM_ORIGIN_TAG
+	// EmblemOriginTag wraps EMBLEM_ORIGIN_TAG
 	//
 	// Emblem comes from a user-defined tag, e.g. set by nautilus (in the future)
 	EmblemOriginTag EmblemOrigin = 3
@@ -3191,15 +2248,15 @@ func (e EmblemOrigin) String() string {
 type FileAttributeStatus C.int
 
 const (
-	// FileAttributeStatusUnset wraps G_FILE_ATTRIBUTE_STATUS_UNSET
+	// FileAttributeStatusUnset wraps FILE_ATTRIBUTE_STATUS_UNSET
 	//
 	// Attribute value is unset (empty).
 	FileAttributeStatusUnset FileAttributeStatus = 0
-	// FileAttributeStatusSet wraps G_FILE_ATTRIBUTE_STATUS_SET
+	// FileAttributeStatusSet wraps FILE_ATTRIBUTE_STATUS_SET
 	//
 	// Attribute value is set.
 	FileAttributeStatusSet FileAttributeStatus = 1
-	// FileAttributeStatusErrorSetting wraps G_FILE_ATTRIBUTE_STATUS_ERROR_SETTING
+	// FileAttributeStatusErrorSetting wraps FILE_ATTRIBUTE_STATUS_ERROR_SETTING
 	//
 	// Indicates an error in setting the value.
 	FileAttributeStatusErrorSetting FileAttributeStatus = 2
@@ -3234,43 +2291,43 @@ func (e FileAttributeStatus) String() string {
 type FileAttributeType C.int
 
 const (
-	// FileAttributeTypeInvalid wraps G_FILE_ATTRIBUTE_TYPE_INVALID
+	// FileAttributeTypeInvalid wraps FILE_ATTRIBUTE_TYPE_INVALID
 	//
 	// indicates an invalid or uninitialized type.
 	FileAttributeTypeInvalid FileAttributeType = 0
-	// FileAttributeTypeString wraps G_FILE_ATTRIBUTE_TYPE_STRING
+	// FileAttributeTypeString wraps FILE_ATTRIBUTE_TYPE_STRING
 	//
 	// a null terminated UTF8 string.
 	FileAttributeTypeString FileAttributeType = 1
-	// FileAttributeTypeByteString wraps G_FILE_ATTRIBUTE_TYPE_BYTE_STRING
+	// FileAttributeTypeByteString wraps FILE_ATTRIBUTE_TYPE_BYTE_STRING
 	//
 	// a zero terminated string of non-zero bytes.
 	FileAttributeTypeByteString FileAttributeType = 2
-	// FileAttributeTypeBoolean wraps G_FILE_ATTRIBUTE_TYPE_BOOLEAN
+	// FileAttributeTypeBoolean wraps FILE_ATTRIBUTE_TYPE_BOOLEAN
 	//
 	// a boolean value.
 	FileAttributeTypeBoolean FileAttributeType = 3
-	// FileAttributeTypeUint32 wraps G_FILE_ATTRIBUTE_TYPE_UINT32
+	// FileAttributeTypeUint32 wraps FILE_ATTRIBUTE_TYPE_UINT32
 	//
 	// an unsigned 4-byte/32-bit integer.
 	FileAttributeTypeUint32 FileAttributeType = 4
-	// FileAttributeTypeInt32 wraps G_FILE_ATTRIBUTE_TYPE_INT32
+	// FileAttributeTypeInt32 wraps FILE_ATTRIBUTE_TYPE_INT32
 	//
 	// a signed 4-byte/32-bit integer.
 	FileAttributeTypeInt32 FileAttributeType = 5
-	// FileAttributeTypeUint64 wraps G_FILE_ATTRIBUTE_TYPE_UINT64
+	// FileAttributeTypeUint64 wraps FILE_ATTRIBUTE_TYPE_UINT64
 	//
 	// an unsigned 8-byte/64-bit integer.
 	FileAttributeTypeUint64 FileAttributeType = 6
-	// FileAttributeTypeInt64 wraps G_FILE_ATTRIBUTE_TYPE_INT64
+	// FileAttributeTypeInt64 wraps FILE_ATTRIBUTE_TYPE_INT64
 	//
 	// a signed 8-byte/64-bit integer.
 	FileAttributeTypeInt64 FileAttributeType = 7
-	// FileAttributeTypeObject wraps G_FILE_ATTRIBUTE_TYPE_OBJECT
+	// FileAttributeTypeObject wraps FILE_ATTRIBUTE_TYPE_OBJECT
 	//
 	// a #GObject.
 	FileAttributeTypeObject FileAttributeType = 8
-	// FileAttributeTypeStringv wraps G_FILE_ATTRIBUTE_TYPE_STRINGV
+	// FileAttributeTypeStringv wraps FILE_ATTRIBUTE_TYPE_STRINGV
 	//
 	// a %NULL terminated char **. Since 2.22
 	FileAttributeTypeStringv FileAttributeType = 9
@@ -3312,52 +2369,52 @@ func (e FileAttributeType) String() string {
 type FileMonitorEvent C.int
 
 const (
-	// FileMonitorEventChanged wraps G_FILE_MONITOR_EVENT_CHANGED
+	// FileMonitorEventChanged wraps FILE_MONITOR_EVENT_CHANGED
 	//
 	// a file changed.
 	FileMonitorEventChanged FileMonitorEvent = 0
-	// FileMonitorEventChangesDoneHint wraps G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT
+	// FileMonitorEventChangesDoneHint wraps FILE_MONITOR_EVENT_CHANGES_DONE_HINT
 	//
 	// a hint that this was probably the last change in a set of changes.
 	FileMonitorEventChangesDoneHint FileMonitorEvent = 1
-	// FileMonitorEventDeleted wraps G_FILE_MONITOR_EVENT_DELETED
+	// FileMonitorEventDeleted wraps FILE_MONITOR_EVENT_DELETED
 	//
 	// a file was deleted.
 	FileMonitorEventDeleted FileMonitorEvent = 2
-	// FileMonitorEventCreated wraps G_FILE_MONITOR_EVENT_CREATED
+	// FileMonitorEventCreated wraps FILE_MONITOR_EVENT_CREATED
 	//
 	// a file was created.
 	FileMonitorEventCreated FileMonitorEvent = 3
-	// FileMonitorEventAttributeChanged wraps G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED
+	// FileMonitorEventAttributeChanged wraps FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED
 	//
 	// a file attribute was changed.
 	FileMonitorEventAttributeChanged FileMonitorEvent = 4
-	// FileMonitorEventPreUnmount wraps G_FILE_MONITOR_EVENT_PRE_UNMOUNT
+	// FileMonitorEventPreUnmount wraps FILE_MONITOR_EVENT_PRE_UNMOUNT
 	//
 	// the file location will soon be unmounted.
 	FileMonitorEventPreUnmount FileMonitorEvent = 5
-	// FileMonitorEventUnmounted wraps G_FILE_MONITOR_EVENT_UNMOUNTED
+	// FileMonitorEventUnmounted wraps FILE_MONITOR_EVENT_UNMOUNTED
 	//
 	// the file location was unmounted.
 	FileMonitorEventUnmounted FileMonitorEvent = 6
-	// FileMonitorEventMoved wraps G_FILE_MONITOR_EVENT_MOVED
+	// FileMonitorEventMoved wraps FILE_MONITOR_EVENT_MOVED
 	//
 	// the file was moved -- only sent if the
 	//   (deprecated) %G_FILE_MONITOR_SEND_MOVED flag is set
 	FileMonitorEventMoved FileMonitorEvent = 7
-	// FileMonitorEventRenamed wraps G_FILE_MONITOR_EVENT_RENAMED
+	// FileMonitorEventRenamed wraps FILE_MONITOR_EVENT_RENAMED
 	//
 	// the file was renamed within the
 	//   current directory -- only sent if the %G_FILE_MONITOR_WATCH_MOVES
 	//   flag is set.  Since: 2.46.
 	FileMonitorEventRenamed FileMonitorEvent = 8
-	// FileMonitorEventMovedIn wraps G_FILE_MONITOR_EVENT_MOVED_IN
+	// FileMonitorEventMovedIn wraps FILE_MONITOR_EVENT_MOVED_IN
 	//
 	// the file was moved into the
 	//   monitored directory from another location -- only sent if the
 	//   %G_FILE_MONITOR_WATCH_MOVES flag is set.  Since: 2.46.
 	FileMonitorEventMovedIn FileMonitorEvent = 9
-	// FileMonitorEventMovedOut wraps G_FILE_MONITOR_EVENT_MOVED_OUT
+	// FileMonitorEventMovedOut wraps FILE_MONITOR_EVENT_MOVED_OUT
 	//
 	// the file was moved out of the
 	//   monitored directory to another location -- only sent if the
@@ -3411,33 +2468,33 @@ func (e FileMonitorEvent) String() string {
 type FileType C.int
 
 const (
-	// FileTypeUnknown wraps G_FILE_TYPE_UNKNOWN
+	// FileTypeUnknown wraps FILE_TYPE_UNKNOWN
 	//
 	// File's type is unknown.
 	FileTypeUnknown FileType = 0
-	// FileTypeRegular wraps G_FILE_TYPE_REGULAR
+	// FileTypeRegular wraps FILE_TYPE_REGULAR
 	//
 	// File handle represents a regular file.
 	FileTypeRegular FileType = 1
-	// FileTypeDirectory wraps G_FILE_TYPE_DIRECTORY
+	// FileTypeDirectory wraps FILE_TYPE_DIRECTORY
 	//
 	// File handle represents a directory.
 	FileTypeDirectory FileType = 2
-	// FileTypeSymbolicLink wraps G_FILE_TYPE_SYMBOLIC_LINK
+	// FileTypeSymbolicLink wraps FILE_TYPE_SYMBOLIC_LINK
 	//
 	// File handle represents a symbolic link
 	//    (Unix systems).
 	FileTypeSymbolicLink FileType = 3
-	// FileTypeSpecial wraps G_FILE_TYPE_SPECIAL
+	// FileTypeSpecial wraps FILE_TYPE_SPECIAL
 	//
 	// File is a "special" file, such as a socket, fifo,
 	//    block device, or character device.
 	FileTypeSpecial FileType = 4
-	// FileTypeShortcut wraps G_FILE_TYPE_SHORTCUT
+	// FileTypeShortcut wraps FILE_TYPE_SHORTCUT
 	//
 	// File is a shortcut (Windows systems).
 	FileTypeShortcut FileType = 5
-	// FileTypeMountable wraps G_FILE_TYPE_MOUNTABLE
+	// FileTypeMountable wraps FILE_TYPE_MOUNTABLE
 	//
 	// File is a mountable location.
 	FileTypeMountable FileType = 6
@@ -3478,15 +2535,15 @@ func (e FileType) String() string {
 type FilesystemPreviewType C.int
 
 const (
-	// FilesystemPreviewTypeIfAlways wraps G_FILESYSTEM_PREVIEW_TYPE_IF_ALWAYS
+	// FilesystemPreviewTypeIfAlways wraps FILESYSTEM_PREVIEW_TYPE_IF_ALWAYS
 	//
 	// Only preview files if user has explicitly requested it.
 	FilesystemPreviewTypeIfAlways FilesystemPreviewType = 0
-	// FilesystemPreviewTypeIfLocal wraps G_FILESYSTEM_PREVIEW_TYPE_IF_LOCAL
+	// FilesystemPreviewTypeIfLocal wraps FILESYSTEM_PREVIEW_TYPE_IF_LOCAL
 	//
 	// Preview files if user has requested preview of "local" files.
 	FilesystemPreviewTypeIfLocal FilesystemPreviewType = 1
-	// FilesystemPreviewTypeNever wraps G_FILESYSTEM_PREVIEW_TYPE_NEVER
+	// FilesystemPreviewTypeNever wraps FILESYSTEM_PREVIEW_TYPE_NEVER
 	//
 	// Never preview files.
 	FilesystemPreviewTypeNever FilesystemPreviewType = 2
@@ -3538,155 +2595,155 @@ func (e FilesystemPreviewType) String() string {
 type IOErrorEnum C.int
 
 const (
-	// IOErrorFailed wraps G_IO_ERROR_FAILED
+	// IOErrorFailed wraps IO_ERROR_FAILED
 	//
 	// Generic error condition for when an operation fails
 	//     and no more specific #GIOErrorEnum value is defined.
 	IOErrorFailed IOErrorEnum = 0
-	// IOErrorNotFound wraps G_IO_ERROR_NOT_FOUND
+	// IOErrorNotFound wraps IO_ERROR_NOT_FOUND
 	//
 	// File not found.
 	IOErrorNotFound IOErrorEnum = 1
-	// IOErrorExists wraps G_IO_ERROR_EXISTS
+	// IOErrorExists wraps IO_ERROR_EXISTS
 	//
 	// File already exists.
 	IOErrorExists IOErrorEnum = 2
-	// IOErrorIsDirectory wraps G_IO_ERROR_IS_DIRECTORY
+	// IOErrorIsDirectory wraps IO_ERROR_IS_DIRECTORY
 	//
 	// File is a directory.
 	IOErrorIsDirectory IOErrorEnum = 3
-	// IOErrorNotDirectory wraps G_IO_ERROR_NOT_DIRECTORY
+	// IOErrorNotDirectory wraps IO_ERROR_NOT_DIRECTORY
 	//
 	// File is not a directory.
 	IOErrorNotDirectory IOErrorEnum = 4
-	// IOErrorNotEmpty wraps G_IO_ERROR_NOT_EMPTY
+	// IOErrorNotEmpty wraps IO_ERROR_NOT_EMPTY
 	//
 	// File is a directory that isn't empty.
 	IOErrorNotEmpty IOErrorEnum = 5
-	// IOErrorNotRegularFile wraps G_IO_ERROR_NOT_REGULAR_FILE
+	// IOErrorNotRegularFile wraps IO_ERROR_NOT_REGULAR_FILE
 	//
 	// File is not a regular file.
 	IOErrorNotRegularFile IOErrorEnum = 6
-	// IOErrorNotSymbolicLink wraps G_IO_ERROR_NOT_SYMBOLIC_LINK
+	// IOErrorNotSymbolicLink wraps IO_ERROR_NOT_SYMBOLIC_LINK
 	//
 	// File is not a symbolic link.
 	IOErrorNotSymbolicLink IOErrorEnum = 7
-	// IOErrorNotMountableFile wraps G_IO_ERROR_NOT_MOUNTABLE_FILE
+	// IOErrorNotMountableFile wraps IO_ERROR_NOT_MOUNTABLE_FILE
 	//
 	// File cannot be mounted.
 	IOErrorNotMountableFile IOErrorEnum = 8
-	// IOErrorFilenameTooLong wraps G_IO_ERROR_FILENAME_TOO_LONG
+	// IOErrorFilenameTooLong wraps IO_ERROR_FILENAME_TOO_LONG
 	//
 	// Filename is too many characters.
 	IOErrorFilenameTooLong IOErrorEnum = 9
-	// IOErrorInvalidFilename wraps G_IO_ERROR_INVALID_FILENAME
+	// IOErrorInvalidFilename wraps IO_ERROR_INVALID_FILENAME
 	//
 	// Filename is invalid or contains invalid characters.
 	IOErrorInvalidFilename IOErrorEnum = 10
-	// IOErrorTooManyLinks wraps G_IO_ERROR_TOO_MANY_LINKS
+	// IOErrorTooManyLinks wraps IO_ERROR_TOO_MANY_LINKS
 	//
 	// File contains too many symbolic links.
 	IOErrorTooManyLinks IOErrorEnum = 11
-	// IOErrorNoSpace wraps G_IO_ERROR_NO_SPACE
+	// IOErrorNoSpace wraps IO_ERROR_NO_SPACE
 	//
 	// No space left on drive.
 	IOErrorNoSpace IOErrorEnum = 12
-	// IOErrorInvalidArgument wraps G_IO_ERROR_INVALID_ARGUMENT
+	// IOErrorInvalidArgument wraps IO_ERROR_INVALID_ARGUMENT
 	//
 	// Invalid argument.
 	IOErrorInvalidArgument IOErrorEnum = 13
-	// IOErrorPermissionDenied wraps G_IO_ERROR_PERMISSION_DENIED
+	// IOErrorPermissionDenied wraps IO_ERROR_PERMISSION_DENIED
 	//
 	// Permission denied.
 	IOErrorPermissionDenied IOErrorEnum = 14
-	// IOErrorNotSupported wraps G_IO_ERROR_NOT_SUPPORTED
+	// IOErrorNotSupported wraps IO_ERROR_NOT_SUPPORTED
 	//
 	// Operation (or one of its parameters) not supported
 	IOErrorNotSupported IOErrorEnum = 15
-	// IOErrorNotMounted wraps G_IO_ERROR_NOT_MOUNTED
+	// IOErrorNotMounted wraps IO_ERROR_NOT_MOUNTED
 	//
 	// File isn't mounted.
 	IOErrorNotMounted IOErrorEnum = 16
-	// IOErrorAlreadyMounted wraps G_IO_ERROR_ALREADY_MOUNTED
+	// IOErrorAlreadyMounted wraps IO_ERROR_ALREADY_MOUNTED
 	//
 	// File is already mounted.
 	IOErrorAlreadyMounted IOErrorEnum = 17
-	// IOErrorClosed wraps G_IO_ERROR_CLOSED
+	// IOErrorClosed wraps IO_ERROR_CLOSED
 	//
 	// File was closed.
 	IOErrorClosed IOErrorEnum = 18
-	// IOErrorCancelled wraps G_IO_ERROR_CANCELLED
+	// IOErrorCancelled wraps IO_ERROR_CANCELLED
 	//
 	// Operation was cancelled. See #GCancellable.
 	IOErrorCancelled IOErrorEnum = 19
-	// IOErrorPending wraps G_IO_ERROR_PENDING
+	// IOErrorPending wraps IO_ERROR_PENDING
 	//
 	// Operations are still pending.
 	IOErrorPending IOErrorEnum = 20
-	// IOErrorReadOnly wraps G_IO_ERROR_READ_ONLY
+	// IOErrorReadOnly wraps IO_ERROR_READ_ONLY
 	//
 	// File is read only.
 	IOErrorReadOnly IOErrorEnum = 21
-	// IOErrorCantCreateBackup wraps G_IO_ERROR_CANT_CREATE_BACKUP
+	// IOErrorCantCreateBackup wraps IO_ERROR_CANT_CREATE_BACKUP
 	//
 	// Backup couldn't be created.
 	IOErrorCantCreateBackup IOErrorEnum = 22
-	// IOErrorWrongETag wraps G_IO_ERROR_WRONG_ETAG
+	// IOErrorWrongETag wraps IO_ERROR_WRONG_ETAG
 	//
 	// File's Entity Tag was incorrect.
 	IOErrorWrongETag IOErrorEnum = 23
-	// IOErrorTimedOut wraps G_IO_ERROR_TIMED_OUT
+	// IOErrorTimedOut wraps IO_ERROR_TIMED_OUT
 	//
 	// Operation timed out.
 	IOErrorTimedOut IOErrorEnum = 24
-	// IOErrorWouldRecurse wraps G_IO_ERROR_WOULD_RECURSE
+	// IOErrorWouldRecurse wraps IO_ERROR_WOULD_RECURSE
 	//
 	// Operation would be recursive.
 	IOErrorWouldRecurse IOErrorEnum = 25
-	// IOErrorBusy wraps G_IO_ERROR_BUSY
+	// IOErrorBusy wraps IO_ERROR_BUSY
 	//
 	// File is busy.
 	IOErrorBusy IOErrorEnum = 26
-	// IOErrorWouldBlock wraps G_IO_ERROR_WOULD_BLOCK
+	// IOErrorWouldBlock wraps IO_ERROR_WOULD_BLOCK
 	//
 	// Operation would block.
 	IOErrorWouldBlock IOErrorEnum = 27
-	// IOErrorHostNotFound wraps G_IO_ERROR_HOST_NOT_FOUND
+	// IOErrorHostNotFound wraps IO_ERROR_HOST_NOT_FOUND
 	//
 	// Host couldn't be found (remote operations).
 	IOErrorHostNotFound IOErrorEnum = 28
-	// IOErrorWouldMerge wraps G_IO_ERROR_WOULD_MERGE
+	// IOErrorWouldMerge wraps IO_ERROR_WOULD_MERGE
 	//
 	// Operation would merge files.
 	IOErrorWouldMerge IOErrorEnum = 29
-	// IOErrorFailedHandled wraps G_IO_ERROR_FAILED_HANDLED
+	// IOErrorFailedHandled wraps IO_ERROR_FAILED_HANDLED
 	//
 	// Operation failed and a helper program has
 	//     already interacted with the user. Do not display any error dialog.
 	IOErrorFailedHandled IOErrorEnum = 30
-	// IOErrorTooManyOpenFiles wraps G_IO_ERROR_TOO_MANY_OPEN_FILES
+	// IOErrorTooManyOpenFiles wraps IO_ERROR_TOO_MANY_OPEN_FILES
 	//
 	// The current process has too many files
 	//     open and can't open any more. Duplicate descriptors do count toward
 	//     this limit. Since 2.20
 	IOErrorTooManyOpenFiles IOErrorEnum = 31
-	// IOErrorNotInitialized wraps G_IO_ERROR_NOT_INITIALIZED
+	// IOErrorNotInitialized wraps IO_ERROR_NOT_INITIALIZED
 	//
 	// The object has not been initialized. Since 2.22
 	IOErrorNotInitialized IOErrorEnum = 32
-	// IOErrorAddressInUse wraps G_IO_ERROR_ADDRESS_IN_USE
+	// IOErrorAddressInUse wraps IO_ERROR_ADDRESS_IN_USE
 	//
 	// The requested address is already in use. Since 2.22
 	IOErrorAddressInUse IOErrorEnum = 33
-	// IOErrorPartialInput wraps G_IO_ERROR_PARTIAL_INPUT
+	// IOErrorPartialInput wraps IO_ERROR_PARTIAL_INPUT
 	//
 	// Need more input to finish operation. Since 2.24
 	IOErrorPartialInput IOErrorEnum = 34
-	// IOErrorInvalidData wraps G_IO_ERROR_INVALID_DATA
+	// IOErrorInvalidData wraps IO_ERROR_INVALID_DATA
 	//
 	// The input data was invalid. Since 2.24
 	IOErrorInvalidData IOErrorEnum = 35
-	// IOErrorDBusError wraps G_IO_ERROR_DBUS_ERROR
+	// IOErrorDBusError wraps IO_ERROR_DBUS_ERROR
 	//
 	// A remote object generated an error that
 	//     doesn't correspond to a locally registered #GError error
@@ -3694,40 +2751,40 @@ const (
 	//     error name and g_dbus_error_strip_remote_error() to fix up the
 	//     message so it matches what was received on the wire. Since 2.26.
 	IOErrorDBusError IOErrorEnum = 36
-	// IOErrorHostUnreachable wraps G_IO_ERROR_HOST_UNREACHABLE
+	// IOErrorHostUnreachable wraps IO_ERROR_HOST_UNREACHABLE
 	//
 	// Host unreachable. Since 2.26
 	IOErrorHostUnreachable IOErrorEnum = 37
-	// IOErrorNetworkUnreachable wraps G_IO_ERROR_NETWORK_UNREACHABLE
+	// IOErrorNetworkUnreachable wraps IO_ERROR_NETWORK_UNREACHABLE
 	//
 	// Network unreachable. Since 2.26
 	IOErrorNetworkUnreachable IOErrorEnum = 38
-	// IOErrorConnectionRefused wraps G_IO_ERROR_CONNECTION_REFUSED
+	// IOErrorConnectionRefused wraps IO_ERROR_CONNECTION_REFUSED
 	//
 	// Connection refused. Since 2.26
 	IOErrorConnectionRefused IOErrorEnum = 39
-	// IOErrorProxyFailed wraps G_IO_ERROR_PROXY_FAILED
+	// IOErrorProxyFailed wraps IO_ERROR_PROXY_FAILED
 	//
 	// Connection to proxy server failed. Since 2.26
 	IOErrorProxyFailed IOErrorEnum = 40
-	// IOErrorProxyAuthFailed wraps G_IO_ERROR_PROXY_AUTH_FAILED
+	// IOErrorProxyAuthFailed wraps IO_ERROR_PROXY_AUTH_FAILED
 	//
 	// Proxy authentication failed. Since 2.26
 	IOErrorProxyAuthFailed IOErrorEnum = 41
-	// IOErrorProxyNeedAuth wraps G_IO_ERROR_PROXY_NEED_AUTH
+	// IOErrorProxyNeedAuth wraps IO_ERROR_PROXY_NEED_AUTH
 	//
 	// Proxy server needs authentication. Since 2.26
 	IOErrorProxyNeedAuth IOErrorEnum = 42
-	// IOErrorProxyNotAllowed wraps G_IO_ERROR_PROXY_NOT_ALLOWED
+	// IOErrorProxyNotAllowed wraps IO_ERROR_PROXY_NOT_ALLOWED
 	//
 	// Proxy connection is not allowed by ruleset.
 	//     Since 2.26
 	IOErrorProxyNotAllowed IOErrorEnum = 43
-	// IOErrorBrokenPipe wraps G_IO_ERROR_BROKEN_PIPE
+	// IOErrorBrokenPipe wraps IO_ERROR_BROKEN_PIPE
 	//
 	// Broken pipe. Since 2.36
 	IOErrorBrokenPipe IOErrorEnum = 44
-	// IOErrorConnectionClosed wraps G_IO_ERROR_CONNECTION_CLOSED
+	// IOErrorConnectionClosed wraps IO_ERROR_CONNECTION_CLOSED
 	//
 	// Connection closed by peer. Note that this
 	//     is the same code as %G_IO_ERROR_BROKEN_PIPE; before 2.44 some
@@ -3735,19 +2792,19 @@ const (
 	//     returned %G_IO_ERROR_FAILED. Now they should all return the same
 	//     value, which has this more logical name. Since 2.44.
 	IOErrorConnectionClosed IOErrorEnum = 44
-	// IOErrorNotConnected wraps G_IO_ERROR_NOT_CONNECTED
+	// IOErrorNotConnected wraps IO_ERROR_NOT_CONNECTED
 	//
 	// Transport endpoint is not connected. Since 2.44
 	IOErrorNotConnected IOErrorEnum = 45
-	// IOErrorMessageTooLarge wraps G_IO_ERROR_MESSAGE_TOO_LARGE
+	// IOErrorMessageTooLarge wraps IO_ERROR_MESSAGE_TOO_LARGE
 	//
 	// Message too large. Since 2.48.
 	IOErrorMessageTooLarge IOErrorEnum = 46
-	// IOErrorNoSuchDevice wraps G_IO_ERROR_NO_SUCH_DEVICE
+	// IOErrorNoSuchDevice wraps IO_ERROR_NO_SUCH_DEVICE
 	//
 	// No such device found. Since 2.74
 	IOErrorNoSuchDevice IOErrorEnum = 47
-	// IOErrorDestinationUnset wraps G_IO_ERROR_DESTINATION_UNSET
+	// IOErrorDestinationUnset wraps IO_ERROR_DESTINATION_UNSET
 	//
 	// Destination address unset. Since 2.80
 	IOErrorDestinationUnset IOErrorEnum = 48
@@ -3828,11 +2885,11 @@ func (e IOErrorEnum) String() string {
 type IOModuleScopeFlags C.int
 
 const (
-	// IOModuleScopeNone wraps G_IO_MODULE_SCOPE_NONE
+	// IOModuleScopeNone wraps IO_MODULE_SCOPE_NONE
 	//
 	// No module scan flags
 	IOModuleScopeNone IOModuleScopeFlags = 0
-	// IOModuleScopeBlockDuplicates wraps G_IO_MODULE_SCOPE_BLOCK_DUPLICATES
+	// IOModuleScopeBlockDuplicates wraps IO_MODULE_SCOPE_BLOCK_DUPLICATES
 	//
 	// When using this scope to load or
 	//     scan modules, automatically block a modules which has the same base
@@ -3875,20 +2932,20 @@ func (e IOModuleScopeFlags) String() string {
 type MemoryMonitorWarningLevel C.int
 
 const (
-	// MemoryMonitorWarningLevelLow wraps G_MEMORY_MONITOR_WARNING_LEVEL_LOW
+	// MemoryMonitorWarningLevelLow wraps MEMORY_MONITOR_WARNING_LEVEL_LOW
 	//
 	// Memory on the device is low, processes
 	//   should free up unneeded resources (for example, in-memory caches) so they can
 	//   be used elsewhere.
 	MemoryMonitorWarningLevelLow MemoryMonitorWarningLevel = 50
-	// MemoryMonitorWarningLevelMedium wraps G_MEMORY_MONITOR_WARNING_LEVEL_MEDIUM
+	// MemoryMonitorWarningLevelMedium wraps MEMORY_MONITOR_WARNING_LEVEL_MEDIUM
 	//
 	// Same as @G_MEMORY_MONITOR_WARNING_LEVEL_LOW
 	//   but the device has even less free memory, so processes should try harder to free
 	//   up unneeded resources. If your process does not need to stay running, it is a
 	//   good time for it to quit.
 	MemoryMonitorWarningLevelMedium MemoryMonitorWarningLevel = 100
-	// MemoryMonitorWarningLevelCritical wraps G_MEMORY_MONITOR_WARNING_LEVEL_CRITICAL
+	// MemoryMonitorWarningLevelCritical wraps MEMORY_MONITOR_WARNING_LEVEL_CRITICAL
 	//
 	// The system will soon start terminating
 	//   processes to reclaim memory, including background processes.
@@ -3925,17 +2982,17 @@ func (e MemoryMonitorWarningLevel) String() string {
 type MountOperationResult C.int
 
 const (
-	// MountOperationHandled wraps G_MOUNT_OPERATION_HANDLED
+	// MountOperationHandled wraps MOUNT_OPERATION_HANDLED
 	//
 	// The request was fulfilled and the
 	//     user specified data is now available
 	MountOperationHandled MountOperationResult = 0
-	// MountOperationAborted wraps G_MOUNT_OPERATION_ABORTED
+	// MountOperationAborted wraps MOUNT_OPERATION_ABORTED
 	//
 	// The user requested the mount operation
 	//     to be aborted
 	MountOperationAborted MountOperationResult = 1
-	// MountOperationUnhandled wraps G_MOUNT_OPERATION_UNHANDLED
+	// MountOperationUnhandled wraps MOUNT_OPERATION_UNHANDLED
 	//
 	// The request was unhandled (i.e. not
 	//     implemented)
@@ -3971,24 +3028,24 @@ func (e MountOperationResult) String() string {
 type NetworkConnectivity C.int
 
 const (
-	// NetworkConnectivityLocal wraps G_NETWORK_CONNECTIVITY_LOCAL
+	// NetworkConnectivityLocal wraps NETWORK_CONNECTIVITY_LOCAL
 	//
 	// The host is not configured with a
 	//   route to the Internet; it may or may not be connected to a local
 	//   network.
 	NetworkConnectivityLocal NetworkConnectivity = 1
-	// NetworkConnectivityLimited wraps G_NETWORK_CONNECTIVITY_LIMITED
+	// NetworkConnectivityLimited wraps NETWORK_CONNECTIVITY_LIMITED
 	//
 	// The host is connected to a network, but
 	//   does not appear to be able to reach the full Internet, perhaps
 	//   due to upstream network problems.
 	NetworkConnectivityLimited NetworkConnectivity = 2
-	// NetworkConnectivityPortal wraps G_NETWORK_CONNECTIVITY_PORTAL
+	// NetworkConnectivityPortal wraps NETWORK_CONNECTIVITY_PORTAL
 	//
 	// The host is behind a captive portal and
 	//   cannot reach the full Internet.
 	NetworkConnectivityPortal NetworkConnectivity = 3
-	// NetworkConnectivityFull wraps G_NETWORK_CONNECTIVITY_FULL
+	// NetworkConnectivityFull wraps NETWORK_CONNECTIVITY_FULL
 	//
 	// The host is connected to a network, and
 	//   appears to be able to reach the full Internet.
@@ -4025,25 +3082,25 @@ func (e NetworkConnectivity) String() string {
 type NotificationPriority C.int
 
 const (
-	// NotificationPriorityNormal wraps G_NOTIFICATION_PRIORITY_NORMAL
+	// NotificationPriorityNormal wraps NOTIFICATION_PRIORITY_NORMAL
 	//
 	// the default priority, to be used for the
 	//   majority of notifications (for example email messages, software updates,
 	//   completed download/sync operations)
 	NotificationPriorityNormal NotificationPriority = 0
-	// NotificationPriorityLow wraps G_NOTIFICATION_PRIORITY_LOW
+	// NotificationPriorityLow wraps NOTIFICATION_PRIORITY_LOW
 	//
 	// for notifications that do not require
 	//   immediate attention - typically used for contextual background
 	//   information, such as contact birthdays or local weather
 	NotificationPriorityLow NotificationPriority = 1
-	// NotificationPriorityHigh wraps G_NOTIFICATION_PRIORITY_HIGH
+	// NotificationPriorityHigh wraps NOTIFICATION_PRIORITY_HIGH
 	//
 	// for events that require more attention,
 	//   usually because responses are time-sensitive (for example chat and SMS
 	//   messages or alarms)
 	NotificationPriorityHigh NotificationPriority = 2
-	// NotificationPriorityUrgent wraps G_NOTIFICATION_PRIORITY_URGENT
+	// NotificationPriorityUrgent wraps NOTIFICATION_PRIORITY_URGENT
 	//
 	// for urgent notifications, or notifications
 	//   that require a response in a short space of time (for example phone calls
@@ -4084,15 +3141,15 @@ func (e NotificationPriority) String() string {
 type PasswordSave C.int
 
 const (
-	// PasswordSaveNever wraps G_PASSWORD_SAVE_NEVER
+	// PasswordSaveNever wraps PASSWORD_SAVE_NEVER
 	//
 	// never save a password.
 	PasswordSaveNever PasswordSave = 0
-	// PasswordSaveForSession wraps G_PASSWORD_SAVE_FOR_SESSION
+	// PasswordSaveForSession wraps PASSWORD_SAVE_FOR_SESSION
 	//
 	// save a password for the session.
 	PasswordSaveForSession PasswordSave = 1
-	// PasswordSavePermanently wraps G_PASSWORD_SAVE_PERMANENTLY
+	// PasswordSavePermanently wraps PASSWORD_SAVE_PERMANENTLY
 	//
 	// save a password permanently.
 	PasswordSavePermanently PasswordSave = 2
@@ -4135,15 +3192,15 @@ func (e PasswordSave) String() string {
 type PollableReturn C.int
 
 const (
-	// PollableReturnFailed wraps G_POLLABLE_RETURN_FAILED
+	// PollableReturnFailed wraps POLLABLE_RETURN_FAILED
 	//
 	// Generic error condition for when an operation fails.
 	PollableReturnFailed PollableReturn = 0
-	// PollableReturnOK wraps G_POLLABLE_RETURN_OK
+	// PollableReturnOK wraps POLLABLE_RETURN_OK
 	//
 	// The operation was successfully finished.
 	PollableReturnOK PollableReturn = 1
-	// PollableReturnWouldBlock wraps G_POLLABLE_RETURN_WOULD_BLOCK
+	// PollableReturnWouldBlock wraps POLLABLE_RETURN_WOULD_BLOCK
 	//
 	// The operation would block.
 	PollableReturnWouldBlock PollableReturn = -27
@@ -4179,17 +3236,17 @@ func (e PollableReturn) String() string {
 type ResolverError C.int
 
 const (
-	// ResolverErrorNotFound wraps G_RESOLVER_ERROR_NOT_FOUND
+	// ResolverErrorNotFound wraps RESOLVER_ERROR_NOT_FOUND
 	//
 	// the requested name/address/service was not
 	//     found
 	ResolverErrorNotFound ResolverError = 0
-	// ResolverErrorTemporaryFailure wraps G_RESOLVER_ERROR_TEMPORARY_FAILURE
+	// ResolverErrorTemporaryFailure wraps RESOLVER_ERROR_TEMPORARY_FAILURE
 	//
 	// the requested information could not
 	//     be looked up due to a network error or similar problem
 	ResolverErrorTemporaryFailure ResolverError = 1
-	// ResolverErrorInternal wraps G_RESOLVER_ERROR_INTERNAL
+	// ResolverErrorInternal wraps RESOLVER_ERROR_INTERNAL
 	//
 	// unknown error
 	ResolverErrorInternal ResolverError = 2
@@ -4272,23 +3329,23 @@ func ResolverErrorQuark() glib.Quark {
 type ResolverRecordType C.int
 
 const (
-	// ResolverRecordSrv wraps G_RESOLVER_RECORD_SRV
+	// ResolverRecordSrv wraps RESOLVER_RECORD_SRV
 	//
 	// look up DNS SRV records for a domain
 	ResolverRecordSrv ResolverRecordType = 1
-	// ResolverRecordMx wraps G_RESOLVER_RECORD_MX
+	// ResolverRecordMx wraps RESOLVER_RECORD_MX
 	//
 	// look up DNS MX records for a domain
 	ResolverRecordMx ResolverRecordType = 2
-	// ResolverRecordTxt wraps G_RESOLVER_RECORD_TXT
+	// ResolverRecordTxt wraps RESOLVER_RECORD_TXT
 	//
 	// look up DNS TXT records for a name
 	ResolverRecordTxt ResolverRecordType = 3
-	// ResolverRecordSoa wraps G_RESOLVER_RECORD_SOA
+	// ResolverRecordSoa wraps RESOLVER_RECORD_SOA
 	//
 	// look up DNS SOA records for a zone
 	ResolverRecordSoa ResolverRecordType = 4
-	// ResolverRecordNs wraps G_RESOLVER_RECORD_NS
+	// ResolverRecordNs wraps RESOLVER_RECORD_NS
 	//
 	// look up DNS NS records for a domain
 	ResolverRecordNs ResolverRecordType = 5
@@ -4326,11 +3383,11 @@ func (e ResolverRecordType) String() string {
 type ResourceError C.int
 
 const (
-	// ResourceErrorNotFound wraps G_RESOURCE_ERROR_NOT_FOUND
+	// ResourceErrorNotFound wraps RESOURCE_ERROR_NOT_FOUND
 	//
 	// no file was found at the requested path
 	ResourceErrorNotFound ResourceError = 0
-	// ResourceErrorInternal wraps G_RESOURCE_ERROR_INTERNAL
+	// ResourceErrorInternal wraps RESOURCE_ERROR_INTERNAL
 	//
 	// unknown error
 	ResourceErrorInternal ResourceError = 1
@@ -4386,45 +3443,45 @@ func ResourceErrorQuark() glib.Quark {
 type SocketClientEvent C.int
 
 const (
-	// SocketClientResolving wraps G_SOCKET_CLIENT_RESOLVING
+	// SocketClientResolving wraps SOCKET_CLIENT_RESOLVING
 	//
 	// The client is doing a DNS lookup.
 	SocketClientResolving SocketClientEvent = 0
-	// SocketClientResolved wraps G_SOCKET_CLIENT_RESOLVED
+	// SocketClientResolved wraps SOCKET_CLIENT_RESOLVED
 	//
 	// The client has completed a DNS lookup.
 	SocketClientResolved SocketClientEvent = 1
-	// SocketClientConnecting wraps G_SOCKET_CLIENT_CONNECTING
+	// SocketClientConnecting wraps SOCKET_CLIENT_CONNECTING
 	//
 	// The client is connecting to a remote
 	//   host (either a proxy or the destination server).
 	SocketClientConnecting SocketClientEvent = 2
-	// SocketClientConnected wraps G_SOCKET_CLIENT_CONNECTED
+	// SocketClientConnected wraps SOCKET_CLIENT_CONNECTED
 	//
 	// The client has connected to a remote
 	//   host.
 	SocketClientConnected SocketClientEvent = 3
-	// SocketClientProxyNegotiating wraps G_SOCKET_CLIENT_PROXY_NEGOTIATING
+	// SocketClientProxyNegotiating wraps SOCKET_CLIENT_PROXY_NEGOTIATING
 	//
 	// The client is negotiating
 	//   with a proxy to connect to the destination server.
 	SocketClientProxyNegotiating SocketClientEvent = 4
-	// SocketClientProxyNegotiated wraps G_SOCKET_CLIENT_PROXY_NEGOTIATED
+	// SocketClientProxyNegotiated wraps SOCKET_CLIENT_PROXY_NEGOTIATED
 	//
 	// The client has negotiated
 	//   with the proxy server.
 	SocketClientProxyNegotiated SocketClientEvent = 5
-	// SocketClientTLSHandshaking wraps G_SOCKET_CLIENT_TLS_HANDSHAKING
+	// SocketClientTLSHandshaking wraps SOCKET_CLIENT_TLS_HANDSHAKING
 	//
 	// The client is performing a
 	//   TLS handshake.
 	SocketClientTLSHandshaking SocketClientEvent = 6
-	// SocketClientTLSHandshaked wraps G_SOCKET_CLIENT_TLS_HANDSHAKED
+	// SocketClientTLSHandshaked wraps SOCKET_CLIENT_TLS_HANDSHAKED
 	//
 	// The client has performed a
 	//   TLS handshake.
 	SocketClientTLSHandshaked SocketClientEvent = 7
-	// SocketClientComplete wraps G_SOCKET_CLIENT_COMPLETE
+	// SocketClientComplete wraps SOCKET_CLIENT_COMPLETE
 	//
 	// The client is done with a particular
 	//   #GSocketConnectable.
@@ -4468,15 +3525,15 @@ func (e SocketClientEvent) String() string {
 type SocketFamily C.int
 
 const (
-	// SocketFamilyInvalid wraps G_SOCKET_FAMILY_INVALID
+	// SocketFamilyInvalid wraps SOCKET_FAMILY_INVALID
 	//
 	// no address family
 	SocketFamilyInvalid SocketFamily = 0
-	// SocketFamilyIPv4 wraps G_SOCKET_FAMILY_IPV4
+	// SocketFamilyIPv4 wraps SOCKET_FAMILY_IPV4
 	//
 	// the IPv4 family
 	SocketFamilyIPv4 SocketFamily = 2
-	// SocketFamilyIPv6 wraps G_SOCKET_FAMILY_IPV6
+	// SocketFamilyIPv6 wraps SOCKET_FAMILY_IPV6
 	//
 	// the IPv6 family
 	SocketFamilyIPv6 SocketFamily = 10
@@ -4514,20 +3571,20 @@ func (e SocketFamily) String() string {
 type SocketListenerEvent C.int
 
 const (
-	// SocketListenerBinding wraps G_SOCKET_LISTENER_BINDING
+	// SocketListenerBinding wraps SOCKET_LISTENER_BINDING
 	//
 	// The listener is about to bind a socket.
 	SocketListenerBinding SocketListenerEvent = 0
-	// SocketListenerBound wraps G_SOCKET_LISTENER_BOUND
+	// SocketListenerBound wraps SOCKET_LISTENER_BOUND
 	//
 	// The listener has bound a socket.
 	SocketListenerBound SocketListenerEvent = 1
-	// SocketListenerListening wraps G_SOCKET_LISTENER_LISTENING
+	// SocketListenerListening wraps SOCKET_LISTENER_LISTENING
 	//
 	// The listener is about to start
 	//    listening on this socket.
 	SocketListenerListening SocketListenerEvent = 2
-	// SocketListenerListened wraps G_SOCKET_LISTENER_LISTENED
+	// SocketListenerListened wraps SOCKET_LISTENER_LISTENED
 	//
 	// The listener is now listening on
 	//   this socket.
@@ -4570,23 +3627,23 @@ func (e SocketListenerEvent) String() string {
 type SocketProtocol C.int
 
 const (
-	// SocketProtocolUnknown wraps G_SOCKET_PROTOCOL_UNKNOWN
+	// SocketProtocolUnknown wraps SOCKET_PROTOCOL_UNKNOWN
 	//
 	// The protocol type is unknown
 	SocketProtocolUnknown SocketProtocol = -1
-	// SocketProtocolDefault wraps G_SOCKET_PROTOCOL_DEFAULT
+	// SocketProtocolDefault wraps SOCKET_PROTOCOL_DEFAULT
 	//
 	// The default protocol for the family/type
 	SocketProtocolDefault SocketProtocol = 0
-	// SocketProtocolTCP wraps G_SOCKET_PROTOCOL_TCP
+	// SocketProtocolTCP wraps SOCKET_PROTOCOL_TCP
 	//
 	// TCP over IP
 	SocketProtocolTCP SocketProtocol = 6
-	// SocketProtocolUDP wraps G_SOCKET_PROTOCOL_UDP
+	// SocketProtocolUDP wraps SOCKET_PROTOCOL_UDP
 	//
 	// UDP over IP
 	SocketProtocolUDP SocketProtocol = 17
-	// SocketProtocolSCTP wraps G_SOCKET_PROTOCOL_SCTP
+	// SocketProtocolSCTP wraps SOCKET_PROTOCOL_SCTP
 	//
 	// SCTP over IP
 	SocketProtocolSCTP SocketProtocol = 132
@@ -4624,20 +3681,20 @@ func (e SocketProtocol) String() string {
 type SocketType C.int
 
 const (
-	// SocketTypeInvalid wraps G_SOCKET_TYPE_INVALID
+	// SocketTypeInvalid wraps SOCKET_TYPE_INVALID
 	//
 	// Type unknown or wrong
 	SocketTypeInvalid SocketType = 0
-	// SocketTypeStream wraps G_SOCKET_TYPE_STREAM
+	// SocketTypeStream wraps SOCKET_TYPE_STREAM
 	//
 	// Reliable connection-based byte streams (e.g. TCP).
 	SocketTypeStream SocketType = 1
-	// SocketTypeDatagram wraps G_SOCKET_TYPE_DATAGRAM
+	// SocketTypeDatagram wraps SOCKET_TYPE_DATAGRAM
 	//
 	// Connectionless, unreliable datagram passing.
 	//     (e.g. UDP)
 	SocketTypeDatagram SocketType = 2
-	// SocketTypeSeqpacket wraps G_SOCKET_TYPE_SEQPACKET
+	// SocketTypeSeqpacket wraps SOCKET_TYPE_SEQPACKET
 	//
 	// Reliable connection-based passing of datagrams
 	//     of fixed maximum length (e.g. SCTP).
@@ -4674,15 +3731,15 @@ func (e SocketType) String() string {
 type TLSAuthenticationMode C.int
 
 const (
-	// TLSAuthenticationNone wraps G_TLS_AUTHENTICATION_NONE
+	// TLSAuthenticationNone wraps TLS_AUTHENTICATION_NONE
 	//
 	// client authentication not required
 	TLSAuthenticationNone TLSAuthenticationMode = 0
-	// TLSAuthenticationRequested wraps G_TLS_AUTHENTICATION_REQUESTED
+	// TLSAuthenticationRequested wraps TLS_AUTHENTICATION_REQUESTED
 	//
 	// client authentication is requested
 	TLSAuthenticationRequested TLSAuthenticationMode = 1
-	// TLSAuthenticationRequired wraps G_TLS_AUTHENTICATION_REQUIRED
+	// TLSAuthenticationRequired wraps TLS_AUTHENTICATION_REQUIRED
 	//
 	// client authentication is required
 	TLSAuthenticationRequired TLSAuthenticationMode = 2
@@ -4719,7 +3776,7 @@ func (e TLSAuthenticationMode) String() string {
 type TLSCertificateRequestFlags C.int
 
 const (
-	// TLSCertificateRequestNone wraps G_TLS_CERTIFICATE_REQUEST_NONE
+	// TLSCertificateRequestNone wraps TLS_CERTIFICATE_REQUEST_NONE
 	//
 	// No flags
 	TLSCertificateRequestNone TLSCertificateRequestFlags = 0
@@ -4753,33 +3810,33 @@ func (e TLSCertificateRequestFlags) String() string {
 type TLSChannelBindingError C.int
 
 const (
-	// TLSChannelBindingErrorNotImplemented wraps G_TLS_CHANNEL_BINDING_ERROR_NOT_IMPLEMENTED
+	// TLSChannelBindingErrorNotImplemented wraps TLS_CHANNEL_BINDING_ERROR_NOT_IMPLEMENTED
 	//
 	// Either entire binding
 	//    retrieval facility or specific binding type is not implemented in the
 	//    TLS backend.
 	TLSChannelBindingErrorNotImplemented TLSChannelBindingError = 0
-	// TLSChannelBindingErrorInvalidState wraps G_TLS_CHANNEL_BINDING_ERROR_INVALID_STATE
+	// TLSChannelBindingErrorInvalidState wraps TLS_CHANNEL_BINDING_ERROR_INVALID_STATE
 	//
 	// The handshake is not yet
 	//    complete on the connection which is a strong requirement for any existing
 	//    binding type.
 	TLSChannelBindingErrorInvalidState TLSChannelBindingError = 1
-	// TLSChannelBindingErrorNotAvailable wraps G_TLS_CHANNEL_BINDING_ERROR_NOT_AVAILABLE
+	// TLSChannelBindingErrorNotAvailable wraps TLS_CHANNEL_BINDING_ERROR_NOT_AVAILABLE
 	//
 	// Handshake is complete but
 	//    binding data is not available. That normally indicates the TLS
 	//    implementation failed to provide the binding data. For example, some
 	//    implementations do not provide a peer certificate for resumed connections.
 	TLSChannelBindingErrorNotAvailable TLSChannelBindingError = 2
-	// TLSChannelBindingErrorNotSupported wraps G_TLS_CHANNEL_BINDING_ERROR_NOT_SUPPORTED
+	// TLSChannelBindingErrorNotSupported wraps TLS_CHANNEL_BINDING_ERROR_NOT_SUPPORTED
 	//
 	// Binding type is not supported
 	//    on the current connection. This error could be triggered when requesting
 	//    `tls-server-end-point` binding data for a certificate which has no hash
 	//    function or uses multiple hash functions.
 	TLSChannelBindingErrorNotSupported TLSChannelBindingError = 3
-	// TLSChannelBindingErrorGeneralError wraps G_TLS_CHANNEL_BINDING_ERROR_GENERAL_ERROR
+	// TLSChannelBindingErrorGeneralError wraps TLS_CHANNEL_BINDING_ERROR_GENERAL_ERROR
 	//
 	// Any other backend error
 	//    preventing binding data retrieval.
@@ -4839,17 +3896,17 @@ func TLSChannelBindingErrorQuark() glib.Quark {
 type TLSChannelBindingType C.int
 
 const (
-	// TLSChannelBindingTLSUnique wraps G_TLS_CHANNEL_BINDING_TLS_UNIQUE
+	// TLSChannelBindingTLSUnique wraps TLS_CHANNEL_BINDING_TLS_UNIQUE
 	//
 	// [`tls-unique`](https://tools.ietf.org/html/rfc5929#section-3) binding
 	//    type
 	TLSChannelBindingTLSUnique TLSChannelBindingType = 0
-	// TLSChannelBindingTLSServerEndPoint wraps G_TLS_CHANNEL_BINDING_TLS_SERVER_END_POINT
+	// TLSChannelBindingTLSServerEndPoint wraps TLS_CHANNEL_BINDING_TLS_SERVER_END_POINT
 	//
 	// [`tls-server-end-point`](https://tools.ietf.org/html/rfc5929#section-4)
 	//    binding type
 	TLSChannelBindingTLSServerEndPoint TLSChannelBindingType = 1
-	// TLSChannelBindingTLSExporter wraps G_TLS_CHANNEL_BINDING_TLS_EXPORTER
+	// TLSChannelBindingTLSExporter wraps TLS_CHANNEL_BINDING_TLS_EXPORTER
 	//
 	// [`tls-exporter`](https://www.rfc-editor.org/rfc/rfc9266.html) binding
 	//    type. Since: 2.74
@@ -4887,11 +3944,11 @@ func (e TLSChannelBindingType) String() string {
 type TLSDatabaseLookupFlags C.int
 
 const (
-	// TLSDatabaseLookupNone wraps G_TLS_DATABASE_LOOKUP_NONE
+	// TLSDatabaseLookupNone wraps TLS_DATABASE_LOOKUP_NONE
 	//
 	// No lookup flags
 	TLSDatabaseLookupNone TLSDatabaseLookupFlags = 0
-	// TLSDatabaseLookupKeypair wraps G_TLS_DATABASE_LOOKUP_KEYPAIR
+	// TLSDatabaseLookupKeypair wraps TLS_DATABASE_LOOKUP_KEYPAIR
 	//
 	// Restrict lookup to certificates that have
 	//     a private key.
@@ -4927,48 +3984,48 @@ func (e TLSDatabaseLookupFlags) String() string {
 type TLSError C.int
 
 const (
-	// TLSErrorUnavailable wraps G_TLS_ERROR_UNAVAILABLE
+	// TLSErrorUnavailable wraps TLS_ERROR_UNAVAILABLE
 	//
 	// No TLS provider is available
 	TLSErrorUnavailable TLSError = 0
-	// TLSErrorMisc wraps G_TLS_ERROR_MISC
+	// TLSErrorMisc wraps TLS_ERROR_MISC
 	//
 	// Miscellaneous TLS error
 	TLSErrorMisc TLSError = 1
-	// TLSErrorBadCertificate wraps G_TLS_ERROR_BAD_CERTIFICATE
+	// TLSErrorBadCertificate wraps TLS_ERROR_BAD_CERTIFICATE
 	//
 	// The certificate presented could not
 	//   be parsed or failed validation.
 	TLSErrorBadCertificate TLSError = 2
-	// TLSErrorNotTLS wraps G_TLS_ERROR_NOT_TLS
+	// TLSErrorNotTLS wraps TLS_ERROR_NOT_TLS
 	//
 	// The TLS handshake failed because the
 	//   peer does not seem to be a TLS server.
 	TLSErrorNotTLS TLSError = 3
-	// TLSErrorHandshake wraps G_TLS_ERROR_HANDSHAKE
+	// TLSErrorHandshake wraps TLS_ERROR_HANDSHAKE
 	//
 	// The TLS handshake failed because the
 	//   peer's certificate was not acceptable.
 	TLSErrorHandshake TLSError = 4
-	// TLSErrorCertificateRequired wraps G_TLS_ERROR_CERTIFICATE_REQUIRED
+	// TLSErrorCertificateRequired wraps TLS_ERROR_CERTIFICATE_REQUIRED
 	//
 	// The TLS handshake failed because
 	//   the server requested a client-side certificate, but none was
 	//   provided. See g_tls_connection_set_certificate().
 	TLSErrorCertificateRequired TLSError = 5
-	// TLSErrorEOF wraps G_TLS_ERROR_EOF
+	// TLSErrorEOF wraps TLS_ERROR_EOF
 	//
 	// The TLS connection was closed without proper
 	//   notice, which may indicate an attack. See
 	//   g_tls_connection_set_require_close_notify().
 	TLSErrorEOF TLSError = 6
-	// TLSErrorInappropriateFallback wraps G_TLS_ERROR_INAPPROPRIATE_FALLBACK
+	// TLSErrorInappropriateFallback wraps TLS_ERROR_INAPPROPRIATE_FALLBACK
 	//
 	// The TLS handshake failed
 	//   because the client sent the fallback SCSV, indicating a protocol
 	//   downgrade attack. Since: 2.60
 	TLSErrorInappropriateFallback TLSError = 7
-	// TLSErrorBadCertificatePassword wraps G_TLS_ERROR_BAD_CERTIFICATE_PASSWORD
+	// TLSErrorBadCertificatePassword wraps TLS_ERROR_BAD_CERTIFICATE_PASSWORD
 	//
 	// The certificate failed
 	//   to load because a password was incorrect. Since: 2.72
@@ -5030,17 +4087,17 @@ func TLSErrorQuark() glib.Quark {
 type TLSInteractionResult C.int
 
 const (
-	// TLSInteractionUnhandled wraps G_TLS_INTERACTION_UNHANDLED
+	// TLSInteractionUnhandled wraps TLS_INTERACTION_UNHANDLED
 	//
 	// The interaction was unhandled (i.e. not
 	//     implemented).
 	TLSInteractionUnhandled TLSInteractionResult = 0
-	// TLSInteractionHandled wraps G_TLS_INTERACTION_HANDLED
+	// TLSInteractionHandled wraps TLS_INTERACTION_HANDLED
 	//
 	// The interaction completed, and resulting data
 	//     is available.
 	TLSInteractionHandled TLSInteractionResult = 1
-	// TLSInteractionFailed wraps G_TLS_INTERACTION_FAILED
+	// TLSInteractionFailed wraps TLS_INTERACTION_FAILED
 	//
 	// The interaction has failed, or was cancelled.
 	//     and the operation should be aborted.
@@ -5084,35 +4141,35 @@ func (e TLSInteractionResult) String() string {
 type TLSProtocolVersion C.int
 
 const (
-	// TLSProtocolVersionUnknown wraps G_TLS_PROTOCOL_VERSION_UNKNOWN
+	// TLSProtocolVersionUnknown wraps TLS_PROTOCOL_VERSION_UNKNOWN
 	//
 	// No protocol version or unknown protocol version
 	TLSProtocolVersionUnknown TLSProtocolVersion = 0
-	// TLSProtocolVersionSSL30 wraps G_TLS_PROTOCOL_VERSION_SSL_3_0
+	// TLSProtocolVersionSSL30 wraps TLS_PROTOCOL_VERSION_SSL_3_0
 	//
 	// SSL 3.0, which is insecure and should not be used
 	TLSProtocolVersionSSL30 TLSProtocolVersion = 1
-	// TLSProtocolVersionTLS10 wraps G_TLS_PROTOCOL_VERSION_TLS_1_0
+	// TLSProtocolVersionTLS10 wraps TLS_PROTOCOL_VERSION_TLS_1_0
 	//
 	// TLS 1.0, which is insecure and should not be used
 	TLSProtocolVersionTLS10 TLSProtocolVersion = 2
-	// TLSProtocolVersionTLS11 wraps G_TLS_PROTOCOL_VERSION_TLS_1_1
+	// TLSProtocolVersionTLS11 wraps TLS_PROTOCOL_VERSION_TLS_1_1
 	//
 	// TLS 1.1, which is insecure and should not be used
 	TLSProtocolVersionTLS11 TLSProtocolVersion = 3
-	// TLSProtocolVersionTLS12 wraps G_TLS_PROTOCOL_VERSION_TLS_1_2
+	// TLSProtocolVersionTLS12 wraps TLS_PROTOCOL_VERSION_TLS_1_2
 	//
 	// TLS 1.2, defined by [RFC 5246](https://datatracker.ietf.org/doc/html/rfc5246)
 	TLSProtocolVersionTLS12 TLSProtocolVersion = 4
-	// TLSProtocolVersionTLS13 wraps G_TLS_PROTOCOL_VERSION_TLS_1_3
+	// TLSProtocolVersionTLS13 wraps TLS_PROTOCOL_VERSION_TLS_1_3
 	//
 	// TLS 1.3, defined by [RFC 8446](https://datatracker.ietf.org/doc/html/rfc8446)
 	TLSProtocolVersionTLS13 TLSProtocolVersion = 5
-	// TLSProtocolVersionDTLS10 wraps G_TLS_PROTOCOL_VERSION_DTLS_1_0
+	// TLSProtocolVersionDTLS10 wraps TLS_PROTOCOL_VERSION_DTLS_1_0
 	//
 	// DTLS 1.0, which is insecure and should not be used
 	TLSProtocolVersionDTLS10 TLSProtocolVersion = 201
-	// TLSProtocolVersionDTLS12 wraps G_TLS_PROTOCOL_VERSION_DTLS_1_2
+	// TLSProtocolVersionDTLS12 wraps TLS_PROTOCOL_VERSION_DTLS_1_2
 	//
 	// DTLS 1.2, defined by [RFC 6347](https://datatracker.ietf.org/doc/html/rfc6347)
 	TLSProtocolVersionDTLS12 TLSProtocolVersion = 202
@@ -5157,15 +4214,15 @@ func (e TLSProtocolVersion) String() string {
 type TLSRehandshakeMode C.int
 
 const (
-	// TLSRehandshakeNever wraps G_TLS_REHANDSHAKE_NEVER
+	// TLSRehandshakeNever wraps TLS_REHANDSHAKE_NEVER
 	//
 	// Never allow rehandshaking
 	TLSRehandshakeNever TLSRehandshakeMode = 0
-	// TLSRehandshakeSafely wraps G_TLS_REHANDSHAKE_SAFELY
+	// TLSRehandshakeSafely wraps TLS_REHANDSHAKE_SAFELY
 	//
 	// Allow safe rehandshaking only
 	TLSRehandshakeSafely TLSRehandshakeMode = 1
-	// TLSRehandshakeUnsafely wraps G_TLS_REHANDSHAKE_UNSAFELY
+	// TLSRehandshakeUnsafely wraps TLS_REHANDSHAKE_UNSAFELY
 	//
 	// Allow unsafe rehandshaking
 	TLSRehandshakeUnsafely TLSRehandshakeMode = 2
@@ -5201,15 +4258,15 @@ func (e TLSRehandshakeMode) String() string {
 type ZlibCompressorFormat C.int
 
 const (
-	// ZlibCompressorFormatZlib wraps G_ZLIB_COMPRESSOR_FORMAT_ZLIB
+	// ZlibCompressorFormatZlib wraps ZLIB_COMPRESSOR_FORMAT_ZLIB
 	//
 	// deflate compression with zlib header
 	ZlibCompressorFormatZlib ZlibCompressorFormat = 0
-	// ZlibCompressorFormatGzip wraps G_ZLIB_COMPRESSOR_FORMAT_GZIP
+	// ZlibCompressorFormatGzip wraps ZLIB_COMPRESSOR_FORMAT_GZIP
 	//
 	// gzip file format
 	ZlibCompressorFormatGzip ZlibCompressorFormat = 1
-	// ZlibCompressorFormatRaw wraps G_ZLIB_COMPRESSOR_FORMAT_RAW
+	// ZlibCompressorFormatRaw wraps ZLIB_COMPRESSOR_FORMAT_RAW
 	//
 	// deflate compression with no header
 	ZlibCompressorFormatRaw ZlibCompressorFormat = 2
@@ -5244,19 +4301,19 @@ func (e ZlibCompressorFormat) String() string {
 type AppInfoCreateFlags C.gint
 
 const (
-	// AppInfoCreateNone wraps G_APP_INFO_CREATE_NONE
+	// AppInfoCreateNone wraps APP_INFO_CREATE_NONE
 	//
 	// No flags.
 	AppInfoCreateNone AppInfoCreateFlags = 0
-	// AppInfoCreateNeedsTerminal wraps G_APP_INFO_CREATE_NEEDS_TERMINAL
+	// AppInfoCreateNeedsTerminal wraps APP_INFO_CREATE_NEEDS_TERMINAL
 	//
 	// Application opens in a terminal window.
 	AppInfoCreateNeedsTerminal AppInfoCreateFlags = 1
-	// AppInfoCreateSupportsURIs wraps G_APP_INFO_CREATE_SUPPORTS_URIS
+	// AppInfoCreateSupportsURIs wraps APP_INFO_CREATE_SUPPORTS_URIS
 	//
 	// Application supports URI arguments.
 	AppInfoCreateSupportsURIs AppInfoCreateFlags = 2
-	// AppInfoCreateSupportsStartupNotification wraps G_APP_INFO_CREATE_SUPPORTS_STARTUP_NOTIFICATION
+	// AppInfoCreateSupportsStartupNotification wraps APP_INFO_CREATE_SUPPORTS_STARTUP_NOTIFICATION
 	//
 	// Application supports startup notification. Since 2.26
 	AppInfoCreateSupportsStartupNotification AppInfoCreateFlags = 4
@@ -5307,28 +4364,28 @@ func (f AppInfoCreateFlags) String() string {
 type ApplicationFlags C.gint
 
 const (
-	// ApplicationFlagsNone wraps G_APPLICATION_FLAGS_NONE
+	// ApplicationFlagsNone wraps APPLICATION_FLAGS_NONE
 	//
 	// Default flags.
 	//
 	// Deprecated: (since 2.74.0) Use [flags@Gio.ApplicationFlags.DEFAULT_FLAGS].
 	ApplicationFlagsNone ApplicationFlags = 0
-	// ApplicationDefaultFlags wraps G_APPLICATION_DEFAULT_FLAGS
+	// ApplicationDefaultFlags wraps APPLICATION_DEFAULT_FLAGS
 	//
 	// Default flags.
 	ApplicationDefaultFlags ApplicationFlags = 0
-	// ApplicationIsService wraps G_APPLICATION_IS_SERVICE
+	// ApplicationIsService wraps APPLICATION_IS_SERVICE
 	//
 	// Run as a service. In this mode, registration
 	//      fails if the service is already running, and the application
 	//      will initially wait up to 10 seconds for an initial activation
 	//      message to arrive.
 	ApplicationIsService ApplicationFlags = 1
-	// ApplicationIsLauncher wraps G_APPLICATION_IS_LAUNCHER
+	// ApplicationIsLauncher wraps APPLICATION_IS_LAUNCHER
 	//
 	// Don't try to become the primary instance.
 	ApplicationIsLauncher ApplicationFlags = 2
-	// ApplicationHandlesOpen wraps G_APPLICATION_HANDLES_OPEN
+	// ApplicationHandlesOpen wraps APPLICATION_HANDLES_OPEN
 	//
 	// This application handles opening files (in
 	//     the primary instance). Note that this flag only affects the default
@@ -5336,14 +4393,14 @@ const (
 	//     %G_APPLICATION_HANDLES_COMMAND_LINE is given.
 	//     See g_application_run() for details.
 	ApplicationHandlesOpen ApplicationFlags = 4
-	// ApplicationHandlesCommandLine wraps G_APPLICATION_HANDLES_COMMAND_LINE
+	// ApplicationHandlesCommandLine wraps APPLICATION_HANDLES_COMMAND_LINE
 	//
 	// This application handles command line
 	//     arguments (in the primary instance). Note that this flag only affect
 	//     the default implementation of local_command_line().
 	//     See g_application_run() for details.
 	ApplicationHandlesCommandLine ApplicationFlags = 8
-	// ApplicationSendEnvironment wraps G_APPLICATION_SEND_ENVIRONMENT
+	// ApplicationSendEnvironment wraps APPLICATION_SEND_ENVIRONMENT
 	//
 	// Send the environment of the
 	//     launching process to the primary instance. Set this flag if your
@@ -5354,7 +4411,7 @@ const (
 	//     to the #GApplication::command-line signal handler, via
 	//     g_application_command_line_getenv().
 	ApplicationSendEnvironment ApplicationFlags = 16
-	// ApplicationNonUnique wraps G_APPLICATION_NON_UNIQUE
+	// ApplicationNonUnique wraps APPLICATION_NON_UNIQUE
 	//
 	// Make no attempts to do any of the typical
 	//     single-instance application negotiation, even if the application
@@ -5363,18 +4420,18 @@ const (
 	//     owner already exists.  Everything occurs in the local process.
 	//     Since: 2.30.
 	ApplicationNonUnique ApplicationFlags = 32
-	// ApplicationCanOverrideAppID wraps G_APPLICATION_CAN_OVERRIDE_APP_ID
+	// ApplicationCanOverrideAppID wraps APPLICATION_CAN_OVERRIDE_APP_ID
 	//
 	// Allow users to override the
 	//     application ID from the command line with `--gapplication-app-id`.
 	//     Since: 2.48
 	ApplicationCanOverrideAppID ApplicationFlags = 64
-	// ApplicationAllowReplacement wraps G_APPLICATION_ALLOW_REPLACEMENT
+	// ApplicationAllowReplacement wraps APPLICATION_ALLOW_REPLACEMENT
 	//
 	// Allow another instance to take over
 	//     the bus name. Since: 2.60
 	ApplicationAllowReplacement ApplicationFlags = 128
-	// ApplicationReplace wraps G_APPLICATION_REPLACE
+	// ApplicationReplace wraps APPLICATION_REPLACE
 	//
 	// Take over from another instance. This flag is
 	//     usually set by passing `--gapplication-replace` on the commandline.
@@ -5450,27 +4507,27 @@ func (f ApplicationFlags) String() string {
 type AskPasswordFlags C.gint
 
 const (
-	// AskPasswordNeedPassword wraps G_ASK_PASSWORD_NEED_PASSWORD
+	// AskPasswordNeedPassword wraps ASK_PASSWORD_NEED_PASSWORD
 	//
 	// operation requires a password.
 	AskPasswordNeedPassword AskPasswordFlags = 1
-	// AskPasswordNeedUsername wraps G_ASK_PASSWORD_NEED_USERNAME
+	// AskPasswordNeedUsername wraps ASK_PASSWORD_NEED_USERNAME
 	//
 	// operation requires a username.
 	AskPasswordNeedUsername AskPasswordFlags = 2
-	// AskPasswordNeedDomain wraps G_ASK_PASSWORD_NEED_DOMAIN
+	// AskPasswordNeedDomain wraps ASK_PASSWORD_NEED_DOMAIN
 	//
 	// operation requires a domain.
 	AskPasswordNeedDomain AskPasswordFlags = 4
-	// AskPasswordSavingSupported wraps G_ASK_PASSWORD_SAVING_SUPPORTED
+	// AskPasswordSavingSupported wraps ASK_PASSWORD_SAVING_SUPPORTED
 	//
 	// operation supports saving settings.
 	AskPasswordSavingSupported AskPasswordFlags = 8
-	// AskPasswordAnonymousSupported wraps G_ASK_PASSWORD_ANONYMOUS_SUPPORTED
+	// AskPasswordAnonymousSupported wraps ASK_PASSWORD_ANONYMOUS_SUPPORTED
 	//
 	// operation supports anonymous users.
 	AskPasswordAnonymousSupported AskPasswordFlags = 16
-	// AskPasswordTcrypt wraps G_ASK_PASSWORD_TCRYPT
+	// AskPasswordTcrypt wraps ASK_PASSWORD_TCRYPT
 	//
 	// operation takes TCRYPT parameters (Since: 2.58)
 	AskPasswordTcrypt AskPasswordFlags = 32
@@ -5527,23 +4584,24 @@ func (f AskPasswordFlags) String() string {
 type BusNameOwnerFlags C.gint
 
 const (
-	// BusNameOwnerFlagsNone wraps G_BUS_NAME_OWNER_FLAGS_NONE
+	// BusNameOwnerFlagsNone wraps BUS_NAME_OWNER_FLAGS_NONE
 	//
 	// No flags set.
 	BusNameOwnerFlagsNone BusNameOwnerFlags = 0
-	// BusNameOwnerFlagsAllowReplacement wraps G_BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT
+	// BusNameOwnerFlagsAllowReplacement wraps BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT
 	//
 	// Allow another message bus connection to claim the name.
 	BusNameOwnerFlagsAllowReplacement BusNameOwnerFlags = 1
-	// BusNameOwnerFlagsReplace wraps G_BUS_NAME_OWNER_FLAGS_REPLACE
+	// BusNameOwnerFlagsReplace wraps BUS_NAME_OWNER_FLAGS_REPLACE
 	//
 	// If another message bus connection owns the name and have
 	// specified %G_BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT, then take the name from the other connection.
 	BusNameOwnerFlagsReplace BusNameOwnerFlags = 2
-	// BusNameOwnerFlagsDoNotQueue wraps G_BUS_NAME_OWNER_FLAGS_DO_NOT_QUEUE
+	// BusNameOwnerFlagsDoNotQueue wraps BUS_NAME_OWNER_FLAGS_DO_NOT_QUEUE
 	//
-	// If another message bus connection owns the name, immediately
-	// return an error from g_bus_own_name() rather than entering the waiting queue for that name. (Since 2.54)
+	// If another message bus connection owns the name, immediately return an error
+	// from [func@Gio.bus_own_name] rather than entering the waiting queue for that
+	// name.
 	BusNameOwnerFlagsDoNotQueue BusNameOwnerFlags = 4
 )
 
@@ -5592,11 +4650,11 @@ func (f BusNameOwnerFlags) String() string {
 type BusNameWatcherFlags C.gint
 
 const (
-	// BusNameWatcherFlagsNone wraps G_BUS_NAME_WATCHER_FLAGS_NONE
+	// BusNameWatcherFlagsNone wraps BUS_NAME_WATCHER_FLAGS_NONE
 	//
 	// No flags set.
 	BusNameWatcherFlagsNone BusNameWatcherFlags = 0
-	// BusNameWatcherFlagsAutoStart wraps G_BUS_NAME_WATCHER_FLAGS_AUTO_START
+	// BusNameWatcherFlagsAutoStart wraps BUS_NAME_WATCHER_FLAGS_AUTO_START
 	//
 	// If no-one owns the name when
 	// beginning to watch the name, ask the bus to launch an owner for the
@@ -5643,15 +4701,15 @@ func (f BusNameWatcherFlags) String() string {
 type ConverterFlags C.gint
 
 const (
-	// ConverterNoFlags wraps G_CONVERTER_NO_FLAGS
+	// ConverterNoFlags wraps CONVERTER_NO_FLAGS
 	//
 	// No flags.
 	ConverterNoFlags ConverterFlags = 0
-	// ConverterInputAtEnd wraps G_CONVERTER_INPUT_AT_END
+	// ConverterInputAtEnd wraps CONVERTER_INPUT_AT_END
 	//
 	// At end of input data
 	ConverterInputAtEnd ConverterFlags = 1
-	// ConverterFlush wraps G_CONVERTER_FLUSH
+	// ConverterFlush wraps CONVERTER_FLUSH
 	//
 	// Flush data
 	ConverterFlush ConverterFlags = 2
@@ -5693,769 +4751,13 @@ func (f ConverterFlags) String() string {
 	return "ConverterFlags(" + strings.Join(parts, "|") + ")"
 }
 
-// DBusCallFlags wraps GDBusCallFlags
-//
-// Flags used in g_dbus_connection_call() and similar APIs.
-type DBusCallFlags C.gint
-
-const (
-	// DBusCallFlagsNone wraps G_DBUS_CALL_FLAGS_NONE
-	//
-	// No flags set.
-	DBusCallFlagsNone DBusCallFlags = 0
-	// DBusCallFlagsNoAutoStart wraps G_DBUS_CALL_FLAGS_NO_AUTO_START
-	//
-	// The bus must not launch
-	// an owner for the destination name in response to this method
-	// invocation.
-	DBusCallFlagsNoAutoStart DBusCallFlags = 1
-	// DBusCallFlagsAllowInteractiveAuthorization wraps G_DBUS_CALL_FLAGS_ALLOW_INTERACTIVE_AUTHORIZATION
-	//
-	// the caller is prepared to
-	// wait for interactive authorization. Since 2.46.
-	DBusCallFlagsAllowInteractiveAuthorization DBusCallFlags = 2
-)
-
-func marshalDBusCallFlags(p unsafe.Pointer) (any, error) {
-	return DBusCallFlags(gobject.ValueFromNative(p).Flags()), nil
-}
-// Has returns true if d contains other
-func (d DBusCallFlags) Has(other DBusCallFlags) bool {
-	return (d & other) == other
-}
-
-var _ gobject.GoValueInitializer = DBusCallFlags(0)
-
-func (f DBusCallFlags) GoValueType() gobject.Type {
-	return TypeDBusCallFlags
-}
-
-func (f DBusCallFlags) SetGoValue(v *gobject.Value) {
-	v.SetFlags(int(f))
-}
-
-func (f DBusCallFlags) String() string {
-	if f == 0 {
-		return "DBusCallFlags(0)"
-	}
-
-	var parts []string
-	if (f & DBusCallFlagsNone) != 0 {
-		parts = append(parts, "DBusCallFlagsNone")
-	}
-	if (f & DBusCallFlagsNoAutoStart) != 0 {
-		parts = append(parts, "DBusCallFlagsNoAutoStart")
-	}
-	if (f & DBusCallFlagsAllowInteractiveAuthorization) != 0 {
-		parts = append(parts, "DBusCallFlagsAllowInteractiveAuthorization")
-	}
-	return "DBusCallFlags(" + strings.Join(parts, "|") + ")"
-}
-
-// DBusCapabilityFlags wraps GDBusCapabilityFlags
-//
-// Capabilities negotiated with the remote peer.
-type DBusCapabilityFlags C.gint
-
-const (
-	// DBusCapabilityFlagsNone wraps G_DBUS_CAPABILITY_FLAGS_NONE
-	//
-	// No flags set.
-	DBusCapabilityFlagsNone DBusCapabilityFlags = 0
-)
-
-func marshalDBusCapabilityFlags(p unsafe.Pointer) (any, error) {
-	return DBusCapabilityFlags(gobject.ValueFromNative(p).Flags()), nil
-}
-// Has returns true if d contains other
-func (d DBusCapabilityFlags) Has(other DBusCapabilityFlags) bool {
-	return (d & other) == other
-}
-
-var _ gobject.GoValueInitializer = DBusCapabilityFlags(0)
-
-func (f DBusCapabilityFlags) GoValueType() gobject.Type {
-	return TypeDBusCapabilityFlags
-}
-
-func (f DBusCapabilityFlags) SetGoValue(v *gobject.Value) {
-	v.SetFlags(int(f))
-}
-
-func (f DBusCapabilityFlags) String() string {
-	if f == 0 {
-		return "DBusCapabilityFlags(0)"
-	}
-
-	var parts []string
-	if (f & DBusCapabilityFlagsNone) != 0 {
-		parts = append(parts, "DBusCapabilityFlagsNone")
-	}
-	return "DBusCapabilityFlags(" + strings.Join(parts, "|") + ")"
-}
-
-// DBusConnectionFlags wraps GDBusConnectionFlags
-//
-// Flags used when creating a new #GDBusConnection.
-type DBusConnectionFlags C.gint
-
-const (
-	// DBusConnectionFlagsNone wraps G_DBUS_CONNECTION_FLAGS_NONE
-	//
-	// No flags set.
-	DBusConnectionFlagsNone DBusConnectionFlags = 0
-	// DBusConnectionFlagsAuthenticationClient wraps G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT
-	//
-	// Perform authentication against server.
-	DBusConnectionFlagsAuthenticationClient DBusConnectionFlags = 1
-	// DBusConnectionFlagsAuthenticationServer wraps G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER
-	//
-	// Perform authentication against client.
-	DBusConnectionFlagsAuthenticationServer DBusConnectionFlags = 2
-	// DBusConnectionFlagsAuthenticationAllowAnonymous wraps G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS
-	//
-	// When
-	// authenticating as a server, allow the anonymous authentication
-	// method.
-	DBusConnectionFlagsAuthenticationAllowAnonymous DBusConnectionFlags = 4
-	// DBusConnectionFlagsMessageBusConnection wraps G_DBUS_CONNECTION_FLAGS_MESSAGE_BUS_CONNECTION
-	//
-	// Pass this flag if connecting to a peer that is a
-	// message bus. This means that the Hello() method will be invoked as part of the connection setup.
-	DBusConnectionFlagsMessageBusConnection DBusConnectionFlags = 8
-	// DBusConnectionFlagsDelayMessageProcessing wraps G_DBUS_CONNECTION_FLAGS_DELAY_MESSAGE_PROCESSING
-	//
-	// If set, processing of D-Bus messages is
-	// delayed until g_dbus_connection_start_message_processing() is called.
-	DBusConnectionFlagsDelayMessageProcessing DBusConnectionFlags = 16
-	// DBusConnectionFlagsAuthenticationRequireSameUser wraps G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER
-	//
-	// When authenticating
-	// as a server, require the UID of the peer to be the same as the UID of the server. (Since: 2.68)
-	DBusConnectionFlagsAuthenticationRequireSameUser DBusConnectionFlags = 32
-	// DBusConnectionFlagsCrossNamespace wraps G_DBUS_CONNECTION_FLAGS_CROSS_NAMESPACE
-	//
-	// When authenticating, try to use
-	//  protocols that work across a Linux user namespace boundary, even if this
-	//  reduces interoperability with older D-Bus implementations. This currently
-	//  affects client-side `EXTERNAL` authentication, for which this flag makes
-	//  connections to a server in another user namespace succeed, but causes
-	//  a deadlock when connecting to a GDBus server older than 2.73.3. Since: 2.74
-	DBusConnectionFlagsCrossNamespace DBusConnectionFlags = 64
-)
-
-func marshalDBusConnectionFlags(p unsafe.Pointer) (any, error) {
-	return DBusConnectionFlags(gobject.ValueFromNative(p).Flags()), nil
-}
-// Has returns true if d contains other
-func (d DBusConnectionFlags) Has(other DBusConnectionFlags) bool {
-	return (d & other) == other
-}
-
-var _ gobject.GoValueInitializer = DBusConnectionFlags(0)
-
-func (f DBusConnectionFlags) GoValueType() gobject.Type {
-	return TypeDBusConnectionFlags
-}
-
-func (f DBusConnectionFlags) SetGoValue(v *gobject.Value) {
-	v.SetFlags(int(f))
-}
-
-func (f DBusConnectionFlags) String() string {
-	if f == 0 {
-		return "DBusConnectionFlags(0)"
-	}
-
-	var parts []string
-	if (f & DBusConnectionFlagsNone) != 0 {
-		parts = append(parts, "DBusConnectionFlagsNone")
-	}
-	if (f & DBusConnectionFlagsAuthenticationClient) != 0 {
-		parts = append(parts, "DBusConnectionFlagsAuthenticationClient")
-	}
-	if (f & DBusConnectionFlagsAuthenticationServer) != 0 {
-		parts = append(parts, "DBusConnectionFlagsAuthenticationServer")
-	}
-	if (f & DBusConnectionFlagsAuthenticationAllowAnonymous) != 0 {
-		parts = append(parts, "DBusConnectionFlagsAuthenticationAllowAnonymous")
-	}
-	if (f & DBusConnectionFlagsMessageBusConnection) != 0 {
-		parts = append(parts, "DBusConnectionFlagsMessageBusConnection")
-	}
-	if (f & DBusConnectionFlagsDelayMessageProcessing) != 0 {
-		parts = append(parts, "DBusConnectionFlagsDelayMessageProcessing")
-	}
-	if (f & DBusConnectionFlagsAuthenticationRequireSameUser) != 0 {
-		parts = append(parts, "DBusConnectionFlagsAuthenticationRequireSameUser")
-	}
-	if (f & DBusConnectionFlagsCrossNamespace) != 0 {
-		parts = append(parts, "DBusConnectionFlagsCrossNamespace")
-	}
-	return "DBusConnectionFlags(" + strings.Join(parts, "|") + ")"
-}
-
-// DBusInterfaceSkeletonFlags wraps GDBusInterfaceSkeletonFlags
-//
-// Flags describing the behavior of a #GDBusInterfaceSkeleton instance.
-type DBusInterfaceSkeletonFlags C.gint
-
-const (
-	// DBusInterfaceSkeletonFlagsNone wraps G_DBUS_INTERFACE_SKELETON_FLAGS_NONE
-	//
-	// No flags set.
-	DBusInterfaceSkeletonFlagsNone DBusInterfaceSkeletonFlags = 0
-	// DBusInterfaceSkeletonFlagsHandleMethodInvocationsInThread wraps G_DBUS_INTERFACE_SKELETON_FLAGS_HANDLE_METHOD_INVOCATIONS_IN_THREAD
-	//
-	// Each method invocation is handled in
-	//   a thread dedicated to the invocation. This means that the method implementation can use blocking IO
-	//   without blocking any other part of the process. It also means that the method implementation must
-	//   use locking to access data structures used by other threads.
-	DBusInterfaceSkeletonFlagsHandleMethodInvocationsInThread DBusInterfaceSkeletonFlags = 1
-)
-
-func marshalDBusInterfaceSkeletonFlags(p unsafe.Pointer) (any, error) {
-	return DBusInterfaceSkeletonFlags(gobject.ValueFromNative(p).Flags()), nil
-}
-// Has returns true if d contains other
-func (d DBusInterfaceSkeletonFlags) Has(other DBusInterfaceSkeletonFlags) bool {
-	return (d & other) == other
-}
-
-var _ gobject.GoValueInitializer = DBusInterfaceSkeletonFlags(0)
-
-func (f DBusInterfaceSkeletonFlags) GoValueType() gobject.Type {
-	return TypeDBusInterfaceSkeletonFlags
-}
-
-func (f DBusInterfaceSkeletonFlags) SetGoValue(v *gobject.Value) {
-	v.SetFlags(int(f))
-}
-
-func (f DBusInterfaceSkeletonFlags) String() string {
-	if f == 0 {
-		return "DBusInterfaceSkeletonFlags(0)"
-	}
-
-	var parts []string
-	if (f & DBusInterfaceSkeletonFlagsNone) != 0 {
-		parts = append(parts, "DBusInterfaceSkeletonFlagsNone")
-	}
-	if (f & DBusInterfaceSkeletonFlagsHandleMethodInvocationsInThread) != 0 {
-		parts = append(parts, "DBusInterfaceSkeletonFlagsHandleMethodInvocationsInThread")
-	}
-	return "DBusInterfaceSkeletonFlags(" + strings.Join(parts, "|") + ")"
-}
-
-// DBusMessageFlags wraps GDBusMessageFlags
-//
-// Message flags used in #GDBusMessage.
-type DBusMessageFlags C.gint
-
-const (
-	// DBusMessageFlagsNone wraps G_DBUS_MESSAGE_FLAGS_NONE
-	//
-	// No flags set.
-	DBusMessageFlagsNone DBusMessageFlags = 0
-	// DBusMessageFlagsNoReplyExpected wraps G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED
-	//
-	// A reply is not expected.
-	DBusMessageFlagsNoReplyExpected DBusMessageFlags = 1
-	// DBusMessageFlagsNoAutoStart wraps G_DBUS_MESSAGE_FLAGS_NO_AUTO_START
-	//
-	// The bus must not launch an
-	// owner for the destination name in response to this message.
-	DBusMessageFlagsNoAutoStart DBusMessageFlags = 2
-	// DBusMessageFlagsAllowInteractiveAuthorization wraps G_DBUS_MESSAGE_FLAGS_ALLOW_INTERACTIVE_AUTHORIZATION
-	//
-	// If set on a method
-	// call, this flag means that the caller is prepared to wait for interactive
-	// authorization. Since 2.46.
-	DBusMessageFlagsAllowInteractiveAuthorization DBusMessageFlags = 4
-)
-
-func marshalDBusMessageFlags(p unsafe.Pointer) (any, error) {
-	return DBusMessageFlags(gobject.ValueFromNative(p).Flags()), nil
-}
-// Has returns true if d contains other
-func (d DBusMessageFlags) Has(other DBusMessageFlags) bool {
-	return (d & other) == other
-}
-
-var _ gobject.GoValueInitializer = DBusMessageFlags(0)
-
-func (f DBusMessageFlags) GoValueType() gobject.Type {
-	return TypeDBusMessageFlags
-}
-
-func (f DBusMessageFlags) SetGoValue(v *gobject.Value) {
-	v.SetFlags(int(f))
-}
-
-func (f DBusMessageFlags) String() string {
-	if f == 0 {
-		return "DBusMessageFlags(0)"
-	}
-
-	var parts []string
-	if (f & DBusMessageFlagsNone) != 0 {
-		parts = append(parts, "DBusMessageFlagsNone")
-	}
-	if (f & DBusMessageFlagsNoReplyExpected) != 0 {
-		parts = append(parts, "DBusMessageFlagsNoReplyExpected")
-	}
-	if (f & DBusMessageFlagsNoAutoStart) != 0 {
-		parts = append(parts, "DBusMessageFlagsNoAutoStart")
-	}
-	if (f & DBusMessageFlagsAllowInteractiveAuthorization) != 0 {
-		parts = append(parts, "DBusMessageFlagsAllowInteractiveAuthorization")
-	}
-	return "DBusMessageFlags(" + strings.Join(parts, "|") + ")"
-}
-
-// DBusObjectManagerClientFlags wraps GDBusObjectManagerClientFlags
-//
-// Flags used when constructing a #GDBusObjectManagerClient.
-type DBusObjectManagerClientFlags C.gint
-
-const (
-	// DBusObjectManagerClientFlagsNone wraps G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE
-	//
-	// No flags set.
-	DBusObjectManagerClientFlagsNone DBusObjectManagerClientFlags = 0
-	// DBusObjectManagerClientFlagsDoNotAutoStart wraps G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_DO_NOT_AUTO_START
-	//
-	// If not set and the
-	//   manager is for a well-known name, then request the bus to launch
-	//   an owner for the name if no-one owns the name. This flag can only
-	//   be used in managers for well-known names.
-	DBusObjectManagerClientFlagsDoNotAutoStart DBusObjectManagerClientFlags = 1
-)
-
-func marshalDBusObjectManagerClientFlags(p unsafe.Pointer) (any, error) {
-	return DBusObjectManagerClientFlags(gobject.ValueFromNative(p).Flags()), nil
-}
-// Has returns true if d contains other
-func (d DBusObjectManagerClientFlags) Has(other DBusObjectManagerClientFlags) bool {
-	return (d & other) == other
-}
-
-var _ gobject.GoValueInitializer = DBusObjectManagerClientFlags(0)
-
-func (f DBusObjectManagerClientFlags) GoValueType() gobject.Type {
-	return TypeDBusObjectManagerClientFlags
-}
-
-func (f DBusObjectManagerClientFlags) SetGoValue(v *gobject.Value) {
-	v.SetFlags(int(f))
-}
-
-func (f DBusObjectManagerClientFlags) String() string {
-	if f == 0 {
-		return "DBusObjectManagerClientFlags(0)"
-	}
-
-	var parts []string
-	if (f & DBusObjectManagerClientFlagsNone) != 0 {
-		parts = append(parts, "DBusObjectManagerClientFlagsNone")
-	}
-	if (f & DBusObjectManagerClientFlagsDoNotAutoStart) != 0 {
-		parts = append(parts, "DBusObjectManagerClientFlagsDoNotAutoStart")
-	}
-	return "DBusObjectManagerClientFlags(" + strings.Join(parts, "|") + ")"
-}
-
-// DBusPropertyInfoFlags wraps GDBusPropertyInfoFlags
-//
-// Flags describing the access control of a D-Bus property.
-type DBusPropertyInfoFlags C.gint
-
-const (
-	// DBusPropertyInfoFlagsNone wraps G_DBUS_PROPERTY_INFO_FLAGS_NONE
-	//
-	// No flags set.
-	DBusPropertyInfoFlagsNone DBusPropertyInfoFlags = 0
-	// DBusPropertyInfoFlagsReadable wraps G_DBUS_PROPERTY_INFO_FLAGS_READABLE
-	//
-	// Property is readable.
-	DBusPropertyInfoFlagsReadable DBusPropertyInfoFlags = 1
-	// DBusPropertyInfoFlagsWritable wraps G_DBUS_PROPERTY_INFO_FLAGS_WRITABLE
-	//
-	// Property is writable.
-	DBusPropertyInfoFlagsWritable DBusPropertyInfoFlags = 2
-)
-
-func marshalDBusPropertyInfoFlags(p unsafe.Pointer) (any, error) {
-	return DBusPropertyInfoFlags(gobject.ValueFromNative(p).Flags()), nil
-}
-// Has returns true if d contains other
-func (d DBusPropertyInfoFlags) Has(other DBusPropertyInfoFlags) bool {
-	return (d & other) == other
-}
-
-var _ gobject.GoValueInitializer = DBusPropertyInfoFlags(0)
-
-func (f DBusPropertyInfoFlags) GoValueType() gobject.Type {
-	return TypeDBusPropertyInfoFlags
-}
-
-func (f DBusPropertyInfoFlags) SetGoValue(v *gobject.Value) {
-	v.SetFlags(int(f))
-}
-
-func (f DBusPropertyInfoFlags) String() string {
-	if f == 0 {
-		return "DBusPropertyInfoFlags(0)"
-	}
-
-	var parts []string
-	if (f & DBusPropertyInfoFlagsNone) != 0 {
-		parts = append(parts, "DBusPropertyInfoFlagsNone")
-	}
-	if (f & DBusPropertyInfoFlagsReadable) != 0 {
-		parts = append(parts, "DBusPropertyInfoFlagsReadable")
-	}
-	if (f & DBusPropertyInfoFlagsWritable) != 0 {
-		parts = append(parts, "DBusPropertyInfoFlagsWritable")
-	}
-	return "DBusPropertyInfoFlags(" + strings.Join(parts, "|") + ")"
-}
-
-// DBusProxyFlags wraps GDBusProxyFlags
-//
-// Flags used when constructing an instance of a #GDBusProxy derived class.
-type DBusProxyFlags C.gint
-
-const (
-	// DBusProxyFlagsNone wraps G_DBUS_PROXY_FLAGS_NONE
-	//
-	// No flags set.
-	DBusProxyFlagsNone DBusProxyFlags = 0
-	// DBusProxyFlagsDoNotLoadProperties wraps G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES
-	//
-	// Don't load properties.
-	DBusProxyFlagsDoNotLoadProperties DBusProxyFlags = 1
-	// DBusProxyFlagsDoNotConnectSignals wraps G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS
-	//
-	// Don't connect to signals on the remote object.
-	DBusProxyFlagsDoNotConnectSignals DBusProxyFlags = 2
-	// DBusProxyFlagsDoNotAutoStart wraps G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START
-	//
-	// If the proxy is for a well-known name,
-	// do not ask the bus to launch an owner during proxy initialization or a method call.
-	// This flag is only meaningful in proxies for well-known names.
-	DBusProxyFlagsDoNotAutoStart DBusProxyFlags = 4
-	// DBusProxyFlagsGetInvalidatedProperties wraps G_DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES
-	//
-	// If set, the property value for any __invalidated property__ will be (asynchronously) retrieved upon receiving the [`PropertiesChanged`](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties) D-Bus signal and the property will not cause emission of the #GDBusProxy::g-properties-changed signal. When the value is received the #GDBusProxy::g-properties-changed signal is emitted for the property along with the retrieved value. Since 2.32.
-	DBusProxyFlagsGetInvalidatedProperties DBusProxyFlags = 8
-	// DBusProxyFlagsDoNotAutoStartAtConstruction wraps G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION
-	//
-	// If the proxy is for a well-known name,
-	// do not ask the bus to launch an owner during proxy initialization, but allow it to be
-	// autostarted by a method call. This flag is only meaningful in proxies for well-known names,
-	// and only if %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START is not also specified.
-	DBusProxyFlagsDoNotAutoStartAtConstruction DBusProxyFlags = 16
-	// DBusProxyFlagsNoMatchRule wraps G_DBUS_PROXY_FLAGS_NO_MATCH_RULE
-	//
-	// Don't actually send the AddMatch D-Bus
-	//    call for this signal subscription. This gives you more control
-	//    over which match rules you add (but you must add them manually). (Since: 2.72)
-	DBusProxyFlagsNoMatchRule DBusProxyFlags = 32
-)
-
-func marshalDBusProxyFlags(p unsafe.Pointer) (any, error) {
-	return DBusProxyFlags(gobject.ValueFromNative(p).Flags()), nil
-}
-// Has returns true if d contains other
-func (d DBusProxyFlags) Has(other DBusProxyFlags) bool {
-	return (d & other) == other
-}
-
-var _ gobject.GoValueInitializer = DBusProxyFlags(0)
-
-func (f DBusProxyFlags) GoValueType() gobject.Type {
-	return TypeDBusProxyFlags
-}
-
-func (f DBusProxyFlags) SetGoValue(v *gobject.Value) {
-	v.SetFlags(int(f))
-}
-
-func (f DBusProxyFlags) String() string {
-	if f == 0 {
-		return "DBusProxyFlags(0)"
-	}
-
-	var parts []string
-	if (f & DBusProxyFlagsNone) != 0 {
-		parts = append(parts, "DBusProxyFlagsNone")
-	}
-	if (f & DBusProxyFlagsDoNotLoadProperties) != 0 {
-		parts = append(parts, "DBusProxyFlagsDoNotLoadProperties")
-	}
-	if (f & DBusProxyFlagsDoNotConnectSignals) != 0 {
-		parts = append(parts, "DBusProxyFlagsDoNotConnectSignals")
-	}
-	if (f & DBusProxyFlagsDoNotAutoStart) != 0 {
-		parts = append(parts, "DBusProxyFlagsDoNotAutoStart")
-	}
-	if (f & DBusProxyFlagsGetInvalidatedProperties) != 0 {
-		parts = append(parts, "DBusProxyFlagsGetInvalidatedProperties")
-	}
-	if (f & DBusProxyFlagsDoNotAutoStartAtConstruction) != 0 {
-		parts = append(parts, "DBusProxyFlagsDoNotAutoStartAtConstruction")
-	}
-	if (f & DBusProxyFlagsNoMatchRule) != 0 {
-		parts = append(parts, "DBusProxyFlagsNoMatchRule")
-	}
-	return "DBusProxyFlags(" + strings.Join(parts, "|") + ")"
-}
-
-// DBusSendMessageFlags wraps GDBusSendMessageFlags
-//
-// Flags used when sending #GDBusMessages on a #GDBusConnection.
-type DBusSendMessageFlags C.gint
-
-const (
-	// DBusSendMessageFlagsNone wraps G_DBUS_SEND_MESSAGE_FLAGS_NONE
-	//
-	// No flags set.
-	DBusSendMessageFlagsNone DBusSendMessageFlags = 0
-	// DBusSendMessageFlagsPreserveSerial wraps G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL
-	//
-	// Do not automatically
-	// assign a serial number from the #GDBusConnection object when
-	// sending a message.
-	DBusSendMessageFlagsPreserveSerial DBusSendMessageFlags = 1
-)
-
-func marshalDBusSendMessageFlags(p unsafe.Pointer) (any, error) {
-	return DBusSendMessageFlags(gobject.ValueFromNative(p).Flags()), nil
-}
-// Has returns true if d contains other
-func (d DBusSendMessageFlags) Has(other DBusSendMessageFlags) bool {
-	return (d & other) == other
-}
-
-var _ gobject.GoValueInitializer = DBusSendMessageFlags(0)
-
-func (f DBusSendMessageFlags) GoValueType() gobject.Type {
-	return TypeDBusSendMessageFlags
-}
-
-func (f DBusSendMessageFlags) SetGoValue(v *gobject.Value) {
-	v.SetFlags(int(f))
-}
-
-func (f DBusSendMessageFlags) String() string {
-	if f == 0 {
-		return "DBusSendMessageFlags(0)"
-	}
-
-	var parts []string
-	if (f & DBusSendMessageFlagsNone) != 0 {
-		parts = append(parts, "DBusSendMessageFlagsNone")
-	}
-	if (f & DBusSendMessageFlagsPreserveSerial) != 0 {
-		parts = append(parts, "DBusSendMessageFlagsPreserveSerial")
-	}
-	return "DBusSendMessageFlags(" + strings.Join(parts, "|") + ")"
-}
-
-// DBusServerFlags wraps GDBusServerFlags
-//
-// Flags used when creating a #GDBusServer.
-type DBusServerFlags C.gint
-
-const (
-	// DBusServerFlagsNone wraps G_DBUS_SERVER_FLAGS_NONE
-	//
-	// No flags set.
-	DBusServerFlagsNone DBusServerFlags = 0
-	// DBusServerFlagsRunInThread wraps G_DBUS_SERVER_FLAGS_RUN_IN_THREAD
-	//
-	// All #GDBusServer::new-connection
-	// signals will run in separated dedicated threads (see signal for
-	// details).
-	DBusServerFlagsRunInThread DBusServerFlags = 1
-	// DBusServerFlagsAuthenticationAllowAnonymous wraps G_DBUS_SERVER_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS
-	//
-	// Allow the anonymous
-	// authentication method.
-	DBusServerFlagsAuthenticationAllowAnonymous DBusServerFlags = 2
-	// DBusServerFlagsAuthenticationRequireSameUser wraps G_DBUS_SERVER_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER
-	//
-	// Require the UID of the
-	// peer to be the same as the UID of the server when authenticating. (Since: 2.68)
-	DBusServerFlagsAuthenticationRequireSameUser DBusServerFlags = 4
-)
-
-func marshalDBusServerFlags(p unsafe.Pointer) (any, error) {
-	return DBusServerFlags(gobject.ValueFromNative(p).Flags()), nil
-}
-// Has returns true if d contains other
-func (d DBusServerFlags) Has(other DBusServerFlags) bool {
-	return (d & other) == other
-}
-
-var _ gobject.GoValueInitializer = DBusServerFlags(0)
-
-func (f DBusServerFlags) GoValueType() gobject.Type {
-	return TypeDBusServerFlags
-}
-
-func (f DBusServerFlags) SetGoValue(v *gobject.Value) {
-	v.SetFlags(int(f))
-}
-
-func (f DBusServerFlags) String() string {
-	if f == 0 {
-		return "DBusServerFlags(0)"
-	}
-
-	var parts []string
-	if (f & DBusServerFlagsNone) != 0 {
-		parts = append(parts, "DBusServerFlagsNone")
-	}
-	if (f & DBusServerFlagsRunInThread) != 0 {
-		parts = append(parts, "DBusServerFlagsRunInThread")
-	}
-	if (f & DBusServerFlagsAuthenticationAllowAnonymous) != 0 {
-		parts = append(parts, "DBusServerFlagsAuthenticationAllowAnonymous")
-	}
-	if (f & DBusServerFlagsAuthenticationRequireSameUser) != 0 {
-		parts = append(parts, "DBusServerFlagsAuthenticationRequireSameUser")
-	}
-	return "DBusServerFlags(" + strings.Join(parts, "|") + ")"
-}
-
-// DBusSignalFlags wraps GDBusSignalFlags
-//
-// Flags used when subscribing to signals via g_dbus_connection_signal_subscribe().
-type DBusSignalFlags C.gint
-
-const (
-	// DBusSignalFlagsNone wraps G_DBUS_SIGNAL_FLAGS_NONE
-	//
-	// No flags set.
-	DBusSignalFlagsNone DBusSignalFlags = 0
-	// DBusSignalFlagsNoMatchRule wraps G_DBUS_SIGNAL_FLAGS_NO_MATCH_RULE
-	//
-	// Don't actually send the AddMatch
-	// D-Bus call for this signal subscription.  This gives you more control
-	// over which match rules you add (but you must add them manually).
-	DBusSignalFlagsNoMatchRule DBusSignalFlags = 1
-	// DBusSignalFlagsMatchArg0Namespace wraps G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_NAMESPACE
-	//
-	// Match first arguments that
-	// contain a bus or interface name with the given namespace.
-	DBusSignalFlagsMatchArg0Namespace DBusSignalFlags = 2
-	// DBusSignalFlagsMatchArg0Path wraps G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_PATH
-	//
-	// Match first arguments that
-	// contain an object path that is either equivalent to the given path,
-	// or one of the paths is a subpath of the other.
-	DBusSignalFlagsMatchArg0Path DBusSignalFlags = 4
-)
-
-func marshalDBusSignalFlags(p unsafe.Pointer) (any, error) {
-	return DBusSignalFlags(gobject.ValueFromNative(p).Flags()), nil
-}
-// Has returns true if d contains other
-func (d DBusSignalFlags) Has(other DBusSignalFlags) bool {
-	return (d & other) == other
-}
-
-var _ gobject.GoValueInitializer = DBusSignalFlags(0)
-
-func (f DBusSignalFlags) GoValueType() gobject.Type {
-	return TypeDBusSignalFlags
-}
-
-func (f DBusSignalFlags) SetGoValue(v *gobject.Value) {
-	v.SetFlags(int(f))
-}
-
-func (f DBusSignalFlags) String() string {
-	if f == 0 {
-		return "DBusSignalFlags(0)"
-	}
-
-	var parts []string
-	if (f & DBusSignalFlagsNone) != 0 {
-		parts = append(parts, "DBusSignalFlagsNone")
-	}
-	if (f & DBusSignalFlagsNoMatchRule) != 0 {
-		parts = append(parts, "DBusSignalFlagsNoMatchRule")
-	}
-	if (f & DBusSignalFlagsMatchArg0Namespace) != 0 {
-		parts = append(parts, "DBusSignalFlagsMatchArg0Namespace")
-	}
-	if (f & DBusSignalFlagsMatchArg0Path) != 0 {
-		parts = append(parts, "DBusSignalFlagsMatchArg0Path")
-	}
-	return "DBusSignalFlags(" + strings.Join(parts, "|") + ")"
-}
-
-// DBusSubtreeFlags wraps GDBusSubtreeFlags
-//
-// Flags passed to g_dbus_connection_register_subtree().
-type DBusSubtreeFlags C.gint
-
-const (
-	// DBusSubtreeFlagsNone wraps G_DBUS_SUBTREE_FLAGS_NONE
-	//
-	// No flags set.
-	DBusSubtreeFlagsNone DBusSubtreeFlags = 0
-	// DBusSubtreeFlagsDispatchToUnenumeratedNodes wraps G_DBUS_SUBTREE_FLAGS_DISPATCH_TO_UNENUMERATED_NODES
-	//
-	// Method calls to objects not in the enumerated range
-	//                                                       will still be dispatched. This is useful if you want
-	//                                                       to dynamically spawn objects in the subtree.
-	DBusSubtreeFlagsDispatchToUnenumeratedNodes DBusSubtreeFlags = 1
-)
-
-func marshalDBusSubtreeFlags(p unsafe.Pointer) (any, error) {
-	return DBusSubtreeFlags(gobject.ValueFromNative(p).Flags()), nil
-}
-// Has returns true if d contains other
-func (d DBusSubtreeFlags) Has(other DBusSubtreeFlags) bool {
-	return (d & other) == other
-}
-
-var _ gobject.GoValueInitializer = DBusSubtreeFlags(0)
-
-func (f DBusSubtreeFlags) GoValueType() gobject.Type {
-	return TypeDBusSubtreeFlags
-}
-
-func (f DBusSubtreeFlags) SetGoValue(v *gobject.Value) {
-	v.SetFlags(int(f))
-}
-
-func (f DBusSubtreeFlags) String() string {
-	if f == 0 {
-		return "DBusSubtreeFlags(0)"
-	}
-
-	var parts []string
-	if (f & DBusSubtreeFlagsNone) != 0 {
-		parts = append(parts, "DBusSubtreeFlagsNone")
-	}
-	if (f & DBusSubtreeFlagsDispatchToUnenumeratedNodes) != 0 {
-		parts = append(parts, "DBusSubtreeFlagsDispatchToUnenumeratedNodes")
-	}
-	return "DBusSubtreeFlags(" + strings.Join(parts, "|") + ")"
-}
-
 // DriveStartFlags wraps GDriveStartFlags
 //
 // Flags used when starting a drive.
 type DriveStartFlags C.gint
 
 const (
-	// DriveStartNone wraps G_DRIVE_START_NONE
+	// DriveStartNone wraps DRIVE_START_NONE
 	//
 	// No flags set.
 	DriveStartNone DriveStartFlags = 0
@@ -6497,15 +4799,15 @@ func (f DriveStartFlags) String() string {
 type FileAttributeInfoFlags C.gint
 
 const (
-	// FileAttributeInfoNone wraps G_FILE_ATTRIBUTE_INFO_NONE
+	// FileAttributeInfoNone wraps FILE_ATTRIBUTE_INFO_NONE
 	//
 	// no flags set.
 	FileAttributeInfoNone FileAttributeInfoFlags = 0
-	// FileAttributeInfoCopyWithFile wraps G_FILE_ATTRIBUTE_INFO_COPY_WITH_FILE
+	// FileAttributeInfoCopyWithFile wraps FILE_ATTRIBUTE_INFO_COPY_WITH_FILE
 	//
 	// copy the attribute values when the file is copied.
 	FileAttributeInfoCopyWithFile FileAttributeInfoFlags = 1
-	// FileAttributeInfoCopyWhenMoved wraps G_FILE_ATTRIBUTE_INFO_COPY_WHEN_MOVED
+	// FileAttributeInfoCopyWhenMoved wraps FILE_ATTRIBUTE_INFO_COPY_WHEN_MOVED
 	//
 	// copy the attribute values when the file is moved.
 	FileAttributeInfoCopyWhenMoved FileAttributeInfoFlags = 2
@@ -6553,35 +4855,35 @@ func (f FileAttributeInfoFlags) String() string {
 type FileCopyFlags C.gint
 
 const (
-	// FileCopyNone wraps G_FILE_COPY_NONE
+	// FileCopyNone wraps FILE_COPY_NONE
 	//
 	// No flags set.
 	FileCopyNone FileCopyFlags = 0
-	// FileCopyOverwrite wraps G_FILE_COPY_OVERWRITE
+	// FileCopyOverwrite wraps FILE_COPY_OVERWRITE
 	//
 	// Overwrite any existing files
 	FileCopyOverwrite FileCopyFlags = 1
-	// FileCopyBackup wraps G_FILE_COPY_BACKUP
+	// FileCopyBackup wraps FILE_COPY_BACKUP
 	//
 	// Make a backup of any existing files.
 	FileCopyBackup FileCopyFlags = 2
-	// FileCopyNofollowSymlinks wraps G_FILE_COPY_NOFOLLOW_SYMLINKS
+	// FileCopyNofollowSymlinks wraps FILE_COPY_NOFOLLOW_SYMLINKS
 	//
 	// Don't follow symlinks.
 	FileCopyNofollowSymlinks FileCopyFlags = 4
-	// FileCopyAllMetadata wraps G_FILE_COPY_ALL_METADATA
+	// FileCopyAllMetadata wraps FILE_COPY_ALL_METADATA
 	//
 	// Copy all file metadata instead of just default set used for copy (see #GFileInfo).
 	FileCopyAllMetadata FileCopyFlags = 8
-	// FileCopyNoFallbackForMove wraps G_FILE_COPY_NO_FALLBACK_FOR_MOVE
+	// FileCopyNoFallbackForMove wraps FILE_COPY_NO_FALLBACK_FOR_MOVE
 	//
 	// Don't use copy and delete fallback if native move not supported.
 	FileCopyNoFallbackForMove FileCopyFlags = 16
-	// FileCopyTargetDefaultPerms wraps G_FILE_COPY_TARGET_DEFAULT_PERMS
+	// FileCopyTargetDefaultPerms wraps FILE_COPY_TARGET_DEFAULT_PERMS
 	//
 	// Leaves target file with default perms, instead of setting the source file perms.
 	FileCopyTargetDefaultPerms FileCopyFlags = 32
-	// FileCopyTargetDefaultModifiedTime wraps G_FILE_COPY_TARGET_DEFAULT_MODIFIED_TIME
+	// FileCopyTargetDefaultModifiedTime wraps FILE_COPY_TARGET_DEFAULT_MODIFIED_TIME
 	//
 	// Use default modification
 	//     timestamps instead of copying them from the source file. Since 2.80
@@ -6645,16 +4947,16 @@ func (f FileCopyFlags) String() string {
 type FileCreateFlags C.gint
 
 const (
-	// FileCreateNone wraps G_FILE_CREATE_NONE
+	// FileCreateNone wraps FILE_CREATE_NONE
 	//
 	// No flags set.
 	FileCreateNone FileCreateFlags = 0
-	// FileCreatePrivate wraps G_FILE_CREATE_PRIVATE
+	// FileCreatePrivate wraps FILE_CREATE_PRIVATE
 	//
 	// Create a file that can only be
 	//    accessed by the current user.
 	FileCreatePrivate FileCreateFlags = 1
-	// FileCreateReplaceDestination wraps G_FILE_CREATE_REPLACE_DESTINATION
+	// FileCreateReplaceDestination wraps FILE_CREATE_REPLACE_DESTINATION
 	//
 	// Replace the destination
 	//    as if it didn't exist before. Don't try to keep any old
@@ -6711,17 +5013,17 @@ func (f FileCreateFlags) String() string {
 type FileMeasureFlags C.gint
 
 const (
-	// FileMeasureNone wraps G_FILE_MEASURE_NONE
+	// FileMeasureNone wraps FILE_MEASURE_NONE
 	//
 	// No flags set.
 	FileMeasureNone FileMeasureFlags = 0
-	// FileMeasureReportAnyError wraps G_FILE_MEASURE_REPORT_ANY_ERROR
+	// FileMeasureReportAnyError wraps FILE_MEASURE_REPORT_ANY_ERROR
 	//
 	// Report any error encountered
 	//   while traversing the directory tree.  Normally errors are only
 	//   reported for the toplevel file.
 	FileMeasureReportAnyError FileMeasureFlags = 2
-	// FileMeasureApparentSize wraps G_FILE_MEASURE_APPARENT_SIZE
+	// FileMeasureApparentSize wraps FILE_MEASURE_APPARENT_SIZE
 	//
 	// Tally usage based on apparent file
 	//   sizes.  Normally, the block-size is used, if available, as this is a
@@ -6731,7 +5033,7 @@ const (
 	//   ignore the sizes of file types other than regular files and links, as the
 	//   sizes of other file types are not specified in a standard way.
 	FileMeasureApparentSize FileMeasureFlags = 4
-	// FileMeasureNoXdev wraps G_FILE_MEASURE_NO_XDEV
+	// FileMeasureNoXdev wraps FILE_MEASURE_NO_XDEV
 	//
 	// Do not cross mount point boundaries.
 	//   Compare with `du -x`.
@@ -6783,15 +5085,15 @@ func (f FileMeasureFlags) String() string {
 type FileMonitorFlags C.gint
 
 const (
-	// FileMonitorNone wraps G_FILE_MONITOR_NONE
+	// FileMonitorNone wraps FILE_MONITOR_NONE
 	//
 	// No flags set.
 	FileMonitorNone FileMonitorFlags = 0
-	// FileMonitorWatchMounts wraps G_FILE_MONITOR_WATCH_MOUNTS
+	// FileMonitorWatchMounts wraps FILE_MONITOR_WATCH_MOUNTS
 	//
 	// Watch for mount events.
 	FileMonitorWatchMounts FileMonitorFlags = 1
-	// FileMonitorSendMoved wraps G_FILE_MONITOR_SEND_MOVED
+	// FileMonitorSendMoved wraps FILE_MONITOR_SEND_MOVED
 	//
 	// Pair DELETED and CREATED events caused
 	//   by file renames (moves) and send a single G_FILE_MONITOR_EVENT_MOVED
@@ -6800,12 +5102,12 @@ const (
 	//   and CREATED events).  Deprecated since 2.46: use
 	//   %G_FILE_MONITOR_WATCH_MOVES instead.
 	FileMonitorSendMoved FileMonitorFlags = 2
-	// FileMonitorWatchHardLinks wraps G_FILE_MONITOR_WATCH_HARD_LINKS
+	// FileMonitorWatchHardLinks wraps FILE_MONITOR_WATCH_HARD_LINKS
 	//
 	// Watch for changes to the file made
 	//   via another hard link. Since 2.36.
 	FileMonitorWatchHardLinks FileMonitorFlags = 4
-	// FileMonitorWatchMoves wraps G_FILE_MONITOR_WATCH_MOVES
+	// FileMonitorWatchMoves wraps FILE_MONITOR_WATCH_MOVES
 	//
 	// Watch for rename operations on a
 	//   monitored directory.  This causes %G_FILE_MONITOR_EVENT_RENAMED,
@@ -6862,11 +5164,11 @@ func (f FileMonitorFlags) String() string {
 type FileQueryInfoFlags C.gint
 
 const (
-	// FileQueryInfoNone wraps G_FILE_QUERY_INFO_NONE
+	// FileQueryInfoNone wraps FILE_QUERY_INFO_NONE
 	//
 	// No flags set.
 	FileQueryInfoNone FileQueryInfoFlags = 0
-	// FileQueryInfoNofollowSymlinks wraps G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS
+	// FileQueryInfoNofollowSymlinks wraps FILE_QUERY_INFO_NOFOLLOW_SYMLINKS
 	//
 	// Don't follow symlinks.
 	FileQueryInfoNofollowSymlinks FileQueryInfoFlags = 1
@@ -6911,21 +5213,21 @@ func (f FileQueryInfoFlags) String() string {
 type IOStreamSpliceFlags C.gint
 
 const (
-	// IOStreamSpliceNone wraps G_IO_STREAM_SPLICE_NONE
+	// IOStreamSpliceNone wraps IO_STREAM_SPLICE_NONE
 	//
 	// Do not close either stream.
 	IOStreamSpliceNone IOStreamSpliceFlags = 0
-	// IOStreamSpliceCloseStream1 wraps G_IO_STREAM_SPLICE_CLOSE_STREAM1
+	// IOStreamSpliceCloseStream1 wraps IO_STREAM_SPLICE_CLOSE_STREAM1
 	//
 	// Close the first stream after
 	//     the splice.
 	IOStreamSpliceCloseStream1 IOStreamSpliceFlags = 1
-	// IOStreamSpliceCloseStream2 wraps G_IO_STREAM_SPLICE_CLOSE_STREAM2
+	// IOStreamSpliceCloseStream2 wraps IO_STREAM_SPLICE_CLOSE_STREAM2
 	//
 	// Close the second stream after
 	//     the splice.
 	IOStreamSpliceCloseStream2 IOStreamSpliceFlags = 2
-	// IOStreamSpliceWaitForBoth wraps G_IO_STREAM_SPLICE_WAIT_FOR_BOTH
+	// IOStreamSpliceWaitForBoth wraps IO_STREAM_SPLICE_WAIT_FOR_BOTH
 	//
 	// Wait for both splice operations to finish
 	//     before calling the callback.
@@ -6977,7 +5279,7 @@ func (f IOStreamSpliceFlags) String() string {
 type MountMountFlags C.gint
 
 const (
-	// MountMountNone wraps G_MOUNT_MOUNT_NONE
+	// MountMountNone wraps MOUNT_MOUNT_NONE
 	//
 	// No flags set.
 	MountMountNone MountMountFlags = 0
@@ -7019,11 +5321,11 @@ func (f MountMountFlags) String() string {
 type MountUnmountFlags C.gint
 
 const (
-	// MountUnmountNone wraps G_MOUNT_UNMOUNT_NONE
+	// MountUnmountNone wraps MOUNT_UNMOUNT_NONE
 	//
 	// No flags set.
 	MountUnmountNone MountUnmountFlags = 0
-	// MountUnmountForce wraps G_MOUNT_UNMOUNT_FORCE
+	// MountUnmountForce wraps MOUNT_UNMOUNT_FORCE
 	//
 	// Unmount even if there are outstanding
 	//  file operations on the mount.
@@ -7069,16 +5371,16 @@ func (f MountUnmountFlags) String() string {
 type OutputStreamSpliceFlags C.gint
 
 const (
-	// OutputStreamSpliceNone wraps G_OUTPUT_STREAM_SPLICE_NONE
+	// OutputStreamSpliceNone wraps OUTPUT_STREAM_SPLICE_NONE
 	//
 	// Do not close either stream.
 	OutputStreamSpliceNone OutputStreamSpliceFlags = 0
-	// OutputStreamSpliceCloseSource wraps G_OUTPUT_STREAM_SPLICE_CLOSE_SOURCE
+	// OutputStreamSpliceCloseSource wraps OUTPUT_STREAM_SPLICE_CLOSE_SOURCE
 	//
 	// Close the source stream after
 	//     the splice.
 	OutputStreamSpliceCloseSource OutputStreamSpliceFlags = 1
-	// OutputStreamSpliceCloseTarget wraps G_OUTPUT_STREAM_SPLICE_CLOSE_TARGET
+	// OutputStreamSpliceCloseTarget wraps OUTPUT_STREAM_SPLICE_CLOSE_TARGET
 	//
 	// Close the target stream after
 	//     the splice.
@@ -7127,15 +5429,15 @@ func (f OutputStreamSpliceFlags) String() string {
 type ResolverNameLookupFlags C.gint
 
 const (
-	// ResolverNameLookupFlagsDefault wraps G_RESOLVER_NAME_LOOKUP_FLAGS_DEFAULT
+	// ResolverNameLookupFlagsDefault wraps RESOLVER_NAME_LOOKUP_FLAGS_DEFAULT
 	//
 	// default behavior (same as g_resolver_lookup_by_name())
 	ResolverNameLookupFlagsDefault ResolverNameLookupFlags = 0
-	// ResolverNameLookupFlagsIPv4Only wraps G_RESOLVER_NAME_LOOKUP_FLAGS_IPV4_ONLY
+	// ResolverNameLookupFlagsIPv4Only wraps RESOLVER_NAME_LOOKUP_FLAGS_IPV4_ONLY
 	//
 	// only resolve ipv4 addresses
 	ResolverNameLookupFlagsIPv4Only ResolverNameLookupFlags = 1
-	// ResolverNameLookupFlagsIPv6Only wraps G_RESOLVER_NAME_LOOKUP_FLAGS_IPV6_ONLY
+	// ResolverNameLookupFlagsIPv6Only wraps RESOLVER_NAME_LOOKUP_FLAGS_IPV6_ONLY
 	//
 	// only resolve ipv6 addresses
 	ResolverNameLookupFlagsIPv6Only ResolverNameLookupFlags = 2
@@ -7184,11 +5486,11 @@ func (f ResolverNameLookupFlags) String() string {
 type ResourceFlags C.gint
 
 const (
-	// ResourceFlagsNone wraps G_RESOURCE_FLAGS_NONE
+	// ResourceFlagsNone wraps RESOURCE_FLAGS_NONE
 	//
 	// No flags set.
 	ResourceFlagsNone ResourceFlags = 0
-	// ResourceFlagsCompressed wraps G_RESOURCE_FLAGS_COMPRESSED
+	// ResourceFlagsCompressed wraps RESOURCE_FLAGS_COMPRESSED
 	//
 	// The file is compressed.
 	ResourceFlagsCompressed ResourceFlags = 1
@@ -7233,7 +5535,7 @@ func (f ResourceFlags) String() string {
 type ResourceLookupFlags C.gint
 
 const (
-	// ResourceLookupFlagsNone wraps G_RESOURCE_LOOKUP_FLAGS_NONE
+	// ResourceLookupFlagsNone wraps RESOURCE_LOOKUP_FLAGS_NONE
 	//
 	// No flags set.
 	ResourceLookupFlagsNone ResourceLookupFlags = 0
@@ -7278,31 +5580,31 @@ func (f ResourceLookupFlags) String() string {
 type SettingsBindFlags C.gint
 
 const (
-	// SettingsBindDefault wraps G_SETTINGS_BIND_DEFAULT
+	// SettingsBindDefault wraps SETTINGS_BIND_DEFAULT
 	//
 	// Equivalent to `G_SETTINGS_BIND_GET|G_SETTINGS_BIND_SET`
 	SettingsBindDefault SettingsBindFlags = 0
-	// SettingsBindGet wraps G_SETTINGS_BIND_GET
+	// SettingsBindGet wraps SETTINGS_BIND_GET
 	//
 	// Update the [class@GObject.Object] property when the setting changes.
 	//   It is an error to use this flag if the property is not writable.
 	SettingsBindGet SettingsBindFlags = 1
-	// SettingsBindSet wraps G_SETTINGS_BIND_SET
+	// SettingsBindSet wraps SETTINGS_BIND_SET
 	//
 	// Update the setting when the [class@GObject.Object] property changes.
 	//   It is an error to use this flag if the property is not readable.
 	SettingsBindSet SettingsBindFlags = 2
-	// SettingsBindNoSensitivity wraps G_SETTINGS_BIND_NO_SENSITIVITY
+	// SettingsBindNoSensitivity wraps SETTINGS_BIND_NO_SENSITIVITY
 	//
-	// Do not try to bind a ‘sensitivity’ property to the writability of the setting
+	// Do not try to bind a &#x2018;sensitivity&#x2019; property to the writability of the setting
 	SettingsBindNoSensitivity SettingsBindFlags = 4
-	// SettingsBindGetNoChanges wraps G_SETTINGS_BIND_GET_NO_CHANGES
+	// SettingsBindGetNoChanges wraps SETTINGS_BIND_GET_NO_CHANGES
 	//
 	// When set in addition to [flags@Gio.SettingsBindFlags.GET],
 	//   set the [class@GObject.Object] property
 	//   value initially from the setting, but do not listen for changes of the setting
 	SettingsBindGetNoChanges SettingsBindFlags = 8
-	// SettingsBindInvertBoolean wraps G_SETTINGS_BIND_INVERT_BOOLEAN
+	// SettingsBindInvertBoolean wraps SETTINGS_BIND_INVERT_BOOLEAN
 	//
 	// When passed to [method@Gio.Settings.bind],
 	//   uses a pair of mapping functions that invert
@@ -7366,20 +5668,20 @@ func (f SettingsBindFlags) String() string {
 type SocketMsgFlags C.gint
 
 const (
-	// SocketMsgNone wraps G_SOCKET_MSG_NONE
+	// SocketMsgNone wraps SOCKET_MSG_NONE
 	//
 	// No flags.
 	SocketMsgNone SocketMsgFlags = 0
-	// SocketMsgOob wraps G_SOCKET_MSG_OOB
+	// SocketMsgOob wraps SOCKET_MSG_OOB
 	//
 	// Request to send/receive out of band data.
 	SocketMsgOob SocketMsgFlags = 1
-	// SocketMsgPeek wraps G_SOCKET_MSG_PEEK
+	// SocketMsgPeek wraps SOCKET_MSG_PEEK
 	//
 	// Read data from the socket without removing it from
 	//     the queue.
 	SocketMsgPeek SocketMsgFlags = 2
-	// SocketMsgDontroute wraps G_SOCKET_MSG_DONTROUTE
+	// SocketMsgDontroute wraps SOCKET_MSG_DONTROUTE
 	//
 	// Don't use a gateway to send out the packet,
 	//     only send to hosts on directly connected networks.
@@ -7425,48 +5727,6 @@ func (f SocketMsgFlags) String() string {
 	return "SocketMsgFlags(" + strings.Join(parts, "|") + ")"
 }
 
-// TestDBusFlags wraps GTestDBusFlags
-//
-// Flags to define future #GTestDBus behaviour.
-type TestDBusFlags C.gint
-
-const (
-	// TestDBusNone wraps G_TEST_DBUS_NONE
-	//
-	// No flags.
-	TestDBusNone TestDBusFlags = 0
-)
-
-func marshalTestDBusFlags(p unsafe.Pointer) (any, error) {
-	return TestDBusFlags(gobject.ValueFromNative(p).Flags()), nil
-}
-// Has returns true if t contains other
-func (t TestDBusFlags) Has(other TestDBusFlags) bool {
-	return (t & other) == other
-}
-
-var _ gobject.GoValueInitializer = TestDBusFlags(0)
-
-func (f TestDBusFlags) GoValueType() gobject.Type {
-	return TypeTestDBusFlags
-}
-
-func (f TestDBusFlags) SetGoValue(v *gobject.Value) {
-	v.SetFlags(int(f))
-}
-
-func (f TestDBusFlags) String() string {
-	if f == 0 {
-		return "TestDBusFlags(0)"
-	}
-
-	var parts []string
-	if (f & TestDBusNone) != 0 {
-		parts = append(parts, "TestDBusNone")
-	}
-	return "TestDBusFlags(" + strings.Join(parts, "|") + ")"
-}
-
 // TLSCertificateFlags wraps GTlsCertificateFlags
 //
 // A set of flags describing TLS certification validation. This can be
@@ -7483,45 +5743,45 @@ func (f TestDBusFlags) String() string {
 type TLSCertificateFlags C.gint
 
 const (
-	// TLSCertificateNoFlags wraps G_TLS_CERTIFICATE_NO_FLAGS
+	// TLSCertificateNoFlags wraps TLS_CERTIFICATE_NO_FLAGS
 	//
 	// No flags set. Since: 2.74
 	TLSCertificateNoFlags TLSCertificateFlags = 0
-	// TLSCertificateUnknownCa wraps G_TLS_CERTIFICATE_UNKNOWN_CA
+	// TLSCertificateUnknownCa wraps TLS_CERTIFICATE_UNKNOWN_CA
 	//
 	// The signing certificate authority is
 	//   not known.
 	TLSCertificateUnknownCa TLSCertificateFlags = 1
-	// TLSCertificateBadIdentity wraps G_TLS_CERTIFICATE_BAD_IDENTITY
+	// TLSCertificateBadIdentity wraps TLS_CERTIFICATE_BAD_IDENTITY
 	//
 	// The certificate does not match the
 	//   expected identity of the site that it was retrieved from.
 	TLSCertificateBadIdentity TLSCertificateFlags = 2
-	// TLSCertificateNotActivated wraps G_TLS_CERTIFICATE_NOT_ACTIVATED
+	// TLSCertificateNotActivated wraps TLS_CERTIFICATE_NOT_ACTIVATED
 	//
 	// The certificate's activation time
 	//   is still in the future
 	TLSCertificateNotActivated TLSCertificateFlags = 4
-	// TLSCertificateExpired wraps G_TLS_CERTIFICATE_EXPIRED
+	// TLSCertificateExpired wraps TLS_CERTIFICATE_EXPIRED
 	//
 	// The certificate has expired
 	TLSCertificateExpired TLSCertificateFlags = 8
-	// TLSCertificateRevoked wraps G_TLS_CERTIFICATE_REVOKED
+	// TLSCertificateRevoked wraps TLS_CERTIFICATE_REVOKED
 	//
 	// The certificate has been revoked
 	//   according to the #GTlsConnection's certificate revocation list.
 	TLSCertificateRevoked TLSCertificateFlags = 16
-	// TLSCertificateInsecure wraps G_TLS_CERTIFICATE_INSECURE
+	// TLSCertificateInsecure wraps TLS_CERTIFICATE_INSECURE
 	//
 	// The certificate's algorithm is
 	//   considered insecure.
 	TLSCertificateInsecure TLSCertificateFlags = 32
-	// TLSCertificateGenericError wraps G_TLS_CERTIFICATE_GENERIC_ERROR
+	// TLSCertificateGenericError wraps TLS_CERTIFICATE_GENERIC_ERROR
 	//
 	// Some other error occurred validating
 	//   the certificate
 	TLSCertificateGenericError TLSCertificateFlags = 64
-	// TLSCertificateValidateAll wraps G_TLS_CERTIFICATE_VALIDATE_ALL
+	// TLSCertificateValidateAll wraps TLS_CERTIFICATE_VALIDATE_ALL
 	//
 	// the combination of all of the above
 	//   flags
@@ -7588,7 +5848,7 @@ func (f TLSCertificateFlags) String() string {
 type TLSDatabaseVerifyFlags C.gint
 
 const (
-	// TLSDatabaseVerifyNone wraps G_TLS_DATABASE_VERIFY_NONE
+	// TLSDatabaseVerifyNone wraps TLS_DATABASE_VERIFY_NONE
 	//
 	// No verification flags
 	TLSDatabaseVerifyNone TLSDatabaseVerifyFlags = 0
@@ -7630,35 +5890,35 @@ func (f TLSDatabaseVerifyFlags) String() string {
 type TLSPasswordFlags C.gint
 
 const (
-	// TLSPasswordNone wraps G_TLS_PASSWORD_NONE
+	// TLSPasswordNone wraps TLS_PASSWORD_NONE
 	//
 	// No flags
 	TLSPasswordNone TLSPasswordFlags = 0
-	// TLSPasswordRetry wraps G_TLS_PASSWORD_RETRY
+	// TLSPasswordRetry wraps TLS_PASSWORD_RETRY
 	//
 	// The password was wrong, and the user should retry.
 	TLSPasswordRetry TLSPasswordFlags = 2
-	// TLSPasswordManyTries wraps G_TLS_PASSWORD_MANY_TRIES
+	// TLSPasswordManyTries wraps TLS_PASSWORD_MANY_TRIES
 	//
 	// Hint to the user that the password has been
 	//    wrong many times, and the user may not have many chances left.
 	TLSPasswordManyTries TLSPasswordFlags = 4
-	// TLSPasswordFinalTry wraps G_TLS_PASSWORD_FINAL_TRY
+	// TLSPasswordFinalTry wraps TLS_PASSWORD_FINAL_TRY
 	//
 	// Hint to the user that this is the last try to get
 	//    this password right.
 	TLSPasswordFinalTry TLSPasswordFlags = 8
-	// TLSPasswordPKCS11User wraps G_TLS_PASSWORD_PKCS11_USER
+	// TLSPasswordPKCS11User wraps TLS_PASSWORD_PKCS11_USER
 	//
 	// For PKCS #11, the user PIN is required.
 	//    Since: 2.70.
 	TLSPasswordPKCS11User TLSPasswordFlags = 16
-	// TLSPasswordPKCS11SecurityOfficer wraps G_TLS_PASSWORD_PKCS11_SECURITY_OFFICER
+	// TLSPasswordPKCS11SecurityOfficer wraps TLS_PASSWORD_PKCS11_SECURITY_OFFICER
 	//
 	// For PKCS #11, the security officer
 	//    PIN is required. Since: 2.70.
 	TLSPasswordPKCS11SecurityOfficer TLSPasswordFlags = 32
-	// TLSPasswordPKCS11ContextSpecific wraps G_TLS_PASSWORD_PKCS11_CONTEXT_SPECIFIC
+	// TLSPasswordPKCS11ContextSpecific wraps TLS_PASSWORD_PKCS11_CONTEXT_SPECIFIC
 	//
 	// For PKCS #11, the context-specific
 	//    PIN is required. Since: 2.70.
@@ -7734,195 +5994,6 @@ func (f TLSPasswordFlags) String() string {
 // after this callback returns.
 type AsyncReadyCallback func(sourceObject gobject.Object, res AsyncResult)
 
-// BusAcquiredCallback wraps GBusAcquiredCallback
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection: the connection to a message bus 
-// 	- name string: the name that is requested to be owned 
-//
-// Invoked when a connection to a message bus has been obtained.
-type BusAcquiredCallback func(connection DBusConnection, name string)
-
-// BusNameAcquiredCallback wraps GBusNameAcquiredCallback
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection: the connection on which to acquired the name 
-// 	- name string: the name being owned 
-//
-// Invoked when the name is acquired.
-type BusNameAcquiredCallback func(connection DBusConnection, name string)
-
-// BusNameAppearedCallback wraps GBusNameAppearedCallback
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection: The #GDBusConnection the name is being watched on. 
-// 	- name string: The name being watched. 
-// 	- nameOwner string: Unique name of the owner of the name being watched. 
-//
-// Invoked when the name being watched is known to have to have an owner.
-type BusNameAppearedCallback func(connection DBusConnection, name string, nameOwner string)
-
-// BusNameLostCallback wraps GBusNameLostCallback
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection: the connect on which to acquire the name or `NULL` if
-//   the connection was disconnected 
-// 	- name string: the name being owned 
-//
-// Invoked when the name is lost or @connection has been closed.
-type BusNameLostCallback func(connection DBusConnection, name string)
-
-// BusNameVanishedCallback wraps GBusNameVanishedCallback
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection: The #GDBusConnection the name is being watched on, or
-//     %NULL. 
-// 	- name string: The name being watched. 
-//
-// Invoked when the name being watched is known not to have to have an owner.
-// 
-// This is also invoked when the #GDBusConnection on which the watch was
-// established has been closed.  In that case, @connection will be
-// %NULL.
-type BusNameVanishedCallback func(connection DBusConnection, name string)
-
-// DBusMessageFilterFunction wraps GDBusMessageFilterFunction
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection: A #GDBusConnection. 
-// 	- message DBusMessage: A locked #GDBusMessage that the filter function takes ownership of. 
-// 	- incoming bool: %TRUE if it is a message received from the other peer, %FALSE if it is
-// a message to be sent to the other peer. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusMessage (nullable) 
-//
-// Signature for function used in g_dbus_connection_add_filter().
-// 
-// A filter function is passed a #GDBusMessage and expected to return
-// a #GDBusMessage too. Passive filter functions that don't modify the
-// message can simply return the @message object:
-// |[
-// static GDBusMessage *
-// passive_filter (GDBusConnection *connection
-//                 GDBusMessage    *message,
-//                 gboolean         incoming,
-//                 gpointer         user_data)
-// {
-//   // inspect @message
-//   return message;
-// }
-// ]|
-// Filter functions that wants to drop a message can simply return %NULL:
-// |[
-// static GDBusMessage *
-// drop_filter (GDBusConnection *connection
-//              GDBusMessage    *message,
-//              gboolean         incoming,
-//              gpointer         user_data)
-// {
-//   if (should_drop_message)
-//     {
-//       g_object_unref (message);
-//       message = NULL;
-//     }
-//   return message;
-// }
-// ]|
-// Finally, a filter function may modify a message by copying it:
-// |[
-// static GDBusMessage *
-// modifying_filter (GDBusConnection *connection
-//                   GDBusMessage    *message,
-//                   gboolean         incoming,
-//                   gpointer         user_data)
-// {
-//   GDBusMessage *copy;
-//   GError *error;
-// 
-//   error = NULL;
-//   copy = g_dbus_message_copy (message, &amp;error);
-//   // handle @error being set
-//   g_object_unref (message);
-// 
-//   // modify @copy
-// 
-//   return copy;
-// }
-// ]|
-// If the returned #GDBusMessage is different from @message and cannot
-// be sent on @connection (it could use features, such as file
-// descriptors, not compatible with @connection), then a warning is
-// logged to standard error. Applications can
-// check this ahead of time using g_dbus_message_to_blob() passing a
-// #GDBusCapabilityFlags value obtained from @connection.
-type DBusMessageFilterFunction func(connection DBusConnection, message DBusMessage, incoming bool) (goret DBusMessage)
-
-// DBusSubtreeEnumerateFunc wraps GDBusSubtreeEnumerateFunc
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection: A #GDBusConnection. 
-// 	- sender string: The unique bus name of the remote caller. 
-// 	- objectPath string: The object path that was registered with g_dbus_connection_register_subtree(). 
-// 
-// The function returns the following values:
-// 
-// 	- goret []string 
-//
-// The type of the @enumerate function in #GDBusSubtreeVTable.
-// 
-// This function is called when generating introspection data and also
-// when preparing to dispatch incoming messages in the event that the
-// %G_DBUS_SUBTREE_FLAGS_DISPATCH_TO_UNENUMERATED_NODES flag is not
-// specified (ie: to verify that the object path is valid).
-// 
-// Hierarchies are not supported; the items that you return should not
-// contain the `/` character.
-// 
-// The return value will be freed with g_strfreev().
-type DBusSubtreeEnumerateFunc func(connection DBusConnection, sender string, objectPath string) (goret []string)
-
-// DBusSubtreeIntrospectFunc wraps GDBusSubtreeIntrospectFunc
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection: A #GDBusConnection. 
-// 	- sender string: The unique bus name of the remote caller. 
-// 	- objectPath string: The object path that was registered with g_dbus_connection_register_subtree(). 
-// 	- node string: A node that is a child of @object_path (relative to @object_path) or %NULL for the root of the subtree. 
-// 
-// The function returns the following values:
-// 
-// 	- goret []*DBusInterfaceInfo (nullable) 
-//
-// The type of the @introspect function in #GDBusSubtreeVTable.
-// 
-// Subtrees are flat.  @node, if non-%NULL, is always exactly one
-// segment of the object path (ie: it never contains a slash).
-// 
-// This function should return %NULL to indicate that there is no object
-// at this node.
-// 
-// If this function returns non-%NULL, the return value is expected to
-// be a %NULL-terminated array of pointers to #GDBusInterfaceInfo
-// structures describing the interfaces implemented by @node.  This
-// array will have g_dbus_interface_info_unref() called on each item
-// before being freed with g_free().
-// 
-// The difference between returning %NULL and an array containing zero
-// items is that the standard DBus interfaces will returned to the
-// remote introspector in the empty array case, but not in the %NULL
-// case.
-type DBusSubtreeIntrospectFunc func(connection DBusConnection, sender string, objectPath string, node string) (goret []*DBusInterfaceInfo)
-
 // VFSFileLookupFunc wraps GVfsFileLookupFunc
 // 
 // The function takes the following parameters:
@@ -7979,107 +6050,6 @@ func BusGet(cancellable context.Context, busType BusType, callback AsyncReadyCal
 	runtime.KeepAlive(callback)
 }
 
-// BusGetFinish wraps g_bus_get_finish
-// 
-// The function takes the following parameters:
-// 
-// 	- res AsyncResult: a #GAsyncResult obtained from the #GAsyncReadyCallback passed
-//     to g_bus_get() 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusConnection 
-// 	- _goerr error (nullable): an error 
-//
-// Finishes an operation started with g_bus_get().
-// 
-// The returned object is a singleton, that is, shared with other
-// callers of g_bus_get() and g_bus_get_sync() for @bus_type. In the
-// event that you need a private message bus connection, use
-// g_dbus_address_get_for_bus_sync() and
-// g_dbus_connection_new_for_address() with
-// G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT and
-// G_DBUS_CONNECTION_FLAGS_MESSAGE_BUS_CONNECTION flags.
-// 
-// Note that the returned #GDBusConnection object will (usually) have
-// the #GDBusConnection:exit-on-close property set to %TRUE.
-func BusGetFinish(res AsyncResult) (DBusConnection, error) {
-	var carg1 *C.GAsyncResult    // in, none, converted
-	var cret  *C.GDBusConnection // return, full, converted
-	var _cerr *C.GError          // out, full, converted, nullable
-
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
-
-	cret = C.g_bus_get_finish(carg1, &_cerr)
-	runtime.KeepAlive(res)
-
-	var goret  DBusConnection
-	var _goerr error
-
-	goret = UnsafeDBusConnectionFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// BusGetSync wraps g_bus_get_sync
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-// 	- busType BusType: a #GBusType 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusConnection 
-// 	- _goerr error (nullable): an error 
-//
-// Synchronously connects to the message bus specified by @bus_type.
-// Note that the returned object may shared with other callers,
-// e.g. if two separate parts of a process calls this function with
-// the same @bus_type, they will share the same object.
-// 
-// This is a synchronous failable function. See g_bus_get() and
-// g_bus_get_finish() for the asynchronous version.
-// 
-// The returned object is a singleton, that is, shared with other
-// callers of g_bus_get() and g_bus_get_sync() for @bus_type. In the
-// event that you need a private message bus connection, use
-// g_dbus_address_get_for_bus_sync() and
-// g_dbus_connection_new_for_address() with
-// G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT and
-// G_DBUS_CONNECTION_FLAGS_MESSAGE_BUS_CONNECTION flags.
-// 
-// Note that the returned #GDBusConnection object will (usually) have
-// the #GDBusConnection:exit-on-close property set to %TRUE.
-func BusGetSync(cancellable context.Context, busType BusType) (DBusConnection, error) {
-	var carg2 *C.GCancellable    // in, none, converted, nullable
-	var carg1 C.GBusType         // in, none, casted
-	var cret  *C.GDBusConnection // return, full, converted
-	var _cerr *C.GError          // out, full, converted, nullable
-
-	if cancellable != nil {
-		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = C.GBusType(busType)
-
-	cret = C.g_bus_get_sync(carg1, carg2, &_cerr)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(busType)
-
-	var goret  DBusConnection
-	var _goerr error
-
-	goret = UnsafeDBusConnectionFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
 // BusUnownName wraps g_bus_unown_name
 // 
 // The function takes the following parameters:
@@ -8094,7 +6064,7 @@ func BusGetSync(cancellable context.Context, busType BusType) (DBusConnection, e
 // continue to iterate the [struct@GLib.MainContext] until the
 // [callback@GLib.DestroyNotify] function passed to [func@Gio.bus_own_name] is
 // called, in order to avoid memory leaks through callbacks queued on the
-// [struct@GLib.MainContext] after it’s stopped being iterated.
+// [struct@GLib.MainContext] after it&#x2019;s stopped being iterated.
 func BusUnownName(ownerId uint) {
 	var carg1 C.guint // in, none, casted
 
@@ -8117,7 +6087,7 @@ func BusUnownName(ownerId uint) {
 // this function has returned. You should continue to iterate the #GMainContext
 // until the #GDestroyNotify function passed to g_bus_watch_name() is called, in
 // order to avoid memory leaks through callbacks queued on the #GMainContext
-// after it’s stopped being iterated.
+// after it&#x2019;s stopped being iterated.
 func BusUnwatchName(watcherId uint) {
 	var carg1 C.guint // in, none, casted
 
@@ -8608,7 +6578,7 @@ func ContentTypeIsUnknown(typ string) bool {
 // information stored in the MIME database, in order to control the data.
 // 
 // Typically, in case your tests use %G_TEST_OPTION_ISOLATE_DIRS, but they
-// depend on the system’s MIME database, you should call this function
+// depend on the system&#x2019;s MIME database, you should call this function
 // with @dirs set to %NULL before calling g_test_init(), for instance:
 // 
 // |[&lt;!-- language="C" --&gt;
@@ -8617,7 +6587,7 @@ func ContentTypeIsUnknown(typ string) bool {
 //   // Isolate the environment
 //   g_test_init (&amp;argc, &amp;argv, G_TEST_OPTION_ISOLATE_DIRS, NULL);
 // 
-//   …
+//   &#x2026;
 // 
 //   return g_test_run ();
 // ]|
@@ -8968,8 +6938,8 @@ func DBusEscapeObjectPathBytestring(bytes []uint8) string {
 // See the
 // [D-Bus specification](https://dbus.freedesktop.org/doc/dbus-specification.html#uuids)
 // regarding what strings are valid D-Bus GUIDs. The specification refers to
-// these as ‘UUIDs’ whereas GLib (for historical reasons) refers to them as
-// ‘GUIDs’. The terms are interchangeable.
+// these as &#x2018;UUIDs&#x2019; whereas GLib (for historical reasons) refers to them as
+// &#x2018;GUIDs&#x2019;. The terms are interchangeable.
 // 
 // Note that D-Bus GUIDs do not follow
 // [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).
@@ -9448,37 +7418,6 @@ func IOModulesScanAllInDirectoryWithScope(dirname string, scope *IOModuleScope) 
 func IOSchedulerCancelAllJobs() {
 
 	C.g_io_scheduler_cancel_all_jobs()
-}
-
-// NewPollableSource wraps g_pollable_source_new
-// 
-// The function takes the following parameters:
-// 
-// 	- pollableStream gobject.Object: the stream associated with the new source 
-// 
-// The function returns the following values:
-// 
-// 	- goret *glib.Source 
-//
-// Utility method for #GPollableInputStream and #GPollableOutputStream
-// implementations. Creates a new #GSource that expects a callback of
-// type #GPollableSourceFunc. The new source does not actually do
-// anything on its own; use g_source_add_child_source() to add other
-// sources to it to cause it to trigger.
-func NewPollableSource(pollableStream gobject.Object) *glib.Source {
-	var carg1 *C.GObject // in, none, converted
-	var cret  *C.GSource // return, full, converted
-
-	carg1 = (*C.GObject)(gobject.UnsafeObjectToGlibNone(pollableStream))
-
-	cret = C.g_pollable_source_new(carg1)
-	runtime.KeepAlive(pollableStream)
-
-	var goret *glib.Source
-
-	goret = glib.UnsafeSourceFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // PollableStreamRead wraps g_pollable_stream_read
@@ -10649,7 +8588,7 @@ var _ ActionGroup = (*ActionGroupInstance)(nil)
 // set the state by calling [method@Gio.ActionGroup.change_action_state].
 // 
 // As typical example, consider a text editing application which has an
-// option to change the current font to ‘bold’. A good way to represent
+// option to change the current font to &#x2018;bold&#x2019;. A good way to represent
 // this would be a stateful action, with a boolean state. Activating the
 // action would toggle the state.
 // 
@@ -10657,12 +8596,12 @@ var _ ActionGroup = (*ActionGroupInstance)(nil)
 // method calls, except [method@Gio.ActionGroup.list_actions] take the name of
 // an action as an argument.
 // 
-// The `GActionGroup` API is meant to be the ‘public’ API to the action
-// group. The calls here are exactly the interaction that ‘external
-// forces’ (eg: UI, incoming D-Bus messages, etc.) are supposed to have
-// with actions. ‘Internal’ APIs (ie: ones meant only to be accessed by
+// The `GActionGroup` API is meant to be the &#x2018;public&#x2019; API to the action
+// group. The calls here are exactly the interaction that &#x2018;external
+// forces&#x2019; (eg: UI, incoming D-Bus messages, etc.) are supposed to have
+// with actions. &#x2018;Internal&#x2019; APIs (ie: ones meant only to be accessed by
 // the action group implementation) are found on subclasses. This is
-// why you will find – for example – [method@Gio.ActionGroup.get_action_enabled]
+// why you will find &#x2013; for example &#x2013; [method@Gio.ActionGroup.get_action_enabled]
 // but not an equivalent `set_action_enabled()` method.
 // 
 // Signals are emitted on the action group in response to state changes
@@ -10671,7 +8610,7 @@ var _ ActionGroup = (*ActionGroupInstance)(nil)
 // Implementations of `GActionGroup` should provide implementations for
 // the virtual functions [method@Gio.ActionGroup.list_actions] and
 // [method@Gio.ActionGroup.query_action]. The other virtual functions should
-// not be implemented — their ‘wrappers’ are actually implemented with
+// not be implemented &#x2014; their &#x2018;wrappers&#x2019; are actually implemented with
 // calls to [method@Gio.ActionGroup.query_action].
 type ActionGroup interface {
 	upcastToGActionGroup() *ActionGroupInstance
@@ -11888,7 +9827,7 @@ var _ ActionMap = (*ActionMapInstance)(nil)
 // One useful application of this interface is to map the
 // names of actions from various action groups to unique,
 // prefixed names (e.g. by prepending "app." or "win.").
-// This is the motivation for the ‘Map’ part of the interface
+// This is the motivation for the &#x2018;Map&#x2019; part of the interface
 // name.
 type ActionMap interface {
 	upcastToGActionMap() *ActionMapInstance
@@ -12400,7 +10339,7 @@ var _ AppInfo = (*AppInfoInstance)(nil)
 // if a set of suitable GIO extensions (such as GVfs 2.26 compiled with FUSE
 // support), is available and operational; if this is not the case, the URI
 // will be passed unmodified to the application. Some URIs, such as `mailto:`,
-// of course cannot be mapped to a POSIX path (in GVfs there’s no FUSE mount
+// of course cannot be mapped to a POSIX path (in GVfs there&#x2019;s no FUSE mount
 // for it); such URIs will be passed unmodified to the application.
 // 
 // Specifically for GVfs 2.26 and later, the POSIX URI will be mapped
@@ -12431,7 +10370,7 @@ var _ AppInfo = (*AppInfoInstance)(nil)
 // 
 // This code will work when both `cdda://sr0/Track 1.wav` and
 // `/home/user/.gvfs/cdda on sr0/Track 1.wav` is passed to the
-// application. It should be noted that it’s generally not safe
+// application. It should be noted that it&#x2019;s generally not safe
 // for applications to rely on the format of a particular URIs.
 // Different launcher applications (e.g. file managers) may have
 // different ideas of what a given URI means.
@@ -12537,7 +10476,7 @@ type AppInfo interface {
 	// 
 	// 	- goret string 
 	//
-	// Gets the executable’s name for the installed application.
+	// Gets the executable&#x2019;s name for the installed application.
 	// 
 	// This is intended to be used for debugging or labelling what program is going
 	// to be run. To launch the executable, use [method@Gio.AppInfo.launch] and related
@@ -12792,7 +10731,7 @@ type AppInfo interface {
 	// 
 	// 	- goret string 
 	//
-	// Gets the executable’s name for the installed application.
+	// Gets the executable&#x2019;s name for the installed application.
 	// 
 	// This is intended to be used for debugging or labelling what program is going
 	// to be run. To launch the executable, use [method@Gio.AppInfo.launch] and related
@@ -13434,7 +11373,7 @@ func AppInfoGetRecommendedForType(contentType string) []AppInfo {
 // the specified uri. Synchronous I/O is done on the uri to detect the type of
 // the file if required.
 // 
-// The D-Bus–activated applications don’t have to be started if your application
+// The D-Bus&#x2013;activated applications don&#x2019;t have to be started if your application
 // terminates too soon after this function. To prevent this, use
 // [func@Gio.AppInfo.launch_default_for_uri_async] instead.
 func AppInfoLaunchDefaultForURI(uri string, _context AppLaunchContext) (bool, error) {
@@ -13482,7 +11421,7 @@ func AppInfoLaunchDefaultForURI(uri string, _context AppLaunchContext) (bool, er
 // in the case where the application is sandboxed and the portal may present an
 // application chooser dialog to the user.
 // 
-// This is also useful if you want to be sure that the D-Bus–activated
+// This is also useful if you want to be sure that the D-Bus&#x2013;activated
 // applications are really started before termination and if you are interested
 // in receiving error information from their activation.
 func AppInfoLaunchDefaultForURIAsync(cancellable context.Context, uri string, _context AppLaunchContext, callback AsyncReadyCallback) {
@@ -13828,7 +11767,7 @@ func (appinfo *AppInfoInstance) GetDisplayName() string {
 // 
 // 	- goret string 
 //
-// Gets the executable’s name for the installed application.
+// Gets the executable&#x2019;s name for the installed application.
 // 
 // This is intended to be used for debugging or labelling what program is going
 // to be run. To launch the executable, use [method@Gio.AppInfo.launch] and related
@@ -14334,7 +12273,7 @@ type AppInfoOverrides[Instance AppInfo] struct {
 	// 
 	// 	- goret string 
 	//
-	// Gets the executable’s name for the installed application.
+	// Gets the executable&#x2019;s name for the installed application.
 	// 
 	// This is intended to be used for debugging or labelling what program is going
 	// to be run. To launch the executable, use [method@Gio.AppInfo.launch] and related
@@ -15281,7 +13220,7 @@ func (appinfo *AppInfoInstance) ParentGetDisplayName() string {
 // 
 // 	- goret string 
 //
-// Gets the executable’s name for the installed application.
+// Gets the executable&#x2019;s name for the installed application.
 // 
 // This is intended to be used for debugging or labelling what program is going
 // to be run. To launch the executable, use [method@Gio.AppInfo.launch] and related
@@ -17358,1791 +15297,6 @@ func (converter *ConverterInstance) ParentReset() {
 	runtime.KeepAlive(converter)
 }
 
-// DBusInterfaceInstance is the instance type used by all types implementing GDBusInterface. It is used internally by the bindings. Users should use the interface [DBusInterface] instead.
-type DBusInterfaceInstance struct {
-	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
-}
-
-var _ DBusInterface = (*DBusInterfaceInstance)(nil)
-
-// DBusInterface wraps GDBusInterface
-//
-// Base type for D-Bus interfaces.
-// 
-// The `GDBusInterface` type is the base type for D-Bus interfaces both
-// on the service side (see [class@Gio.DBusInterfaceSkeleton]) and client side
-// (see [class@Gio.DBusProxy]).
-type DBusInterface interface {
-	upcastToGDBusInterface() *DBusInterfaceInstance
-
-	// DupObject wraps g_dbus_interface_dup_object
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusObject (nullable) 
-	//
-	// Gets the #GDBusObject that @interface_ belongs to, if any.
-	DupObject() DBusObject
-	// GetInfo wraps g_dbus_interface_get_info
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *DBusInterfaceInfo 
-	//
-	// Gets D-Bus introspection information for the D-Bus interface
-	// implemented by @interface_.
-	GetInfo() *DBusInterfaceInfo
-	// SetObject wraps g_dbus_interface_set_object
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object DBusObject (nullable): A #GDBusObject or %NULL. 
-	//
-	// Sets the #GDBusObject for @interface_ to @object.
-	// 
-	// Note that @interface_ will hold a weak reference to @object.
-	SetObject(DBusObject)
-
-	// chain up virtual methods:
-
-	// ParentDupObject calls the default implementations of the dup_object virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusObject (nullable) 
-	//
-	// Gets the #GDBusObject that @interface_ belongs to, if any.
-	ParentDupObject() DBusObject
-	// ParentGetInfo calls the default implementations of the get_info virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *DBusInterfaceInfo 
-	//
-	// Gets D-Bus introspection information for the D-Bus interface
-	// implemented by @interface_.
-	ParentGetInfo() *DBusInterfaceInfo
-	// ParentSetObject calls the default implementations of the set_object virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object DBusObject (nullable): A #GDBusObject or %NULL. 
-	//
-	// Sets the #GDBusObject for @interface_ to @object.
-	// 
-	// Note that @interface_ will hold a weak reference to @object.
-	ParentSetObject(object DBusObject)
-}
-
-var _ DBusInterface = (*DBusInterfaceInstance)(nil)
-
-func unsafeWrapDBusInterface(base *gobject.ObjectInstance) *DBusInterfaceInstance {
-	return &DBusInterfaceInstance{
-		Instance: *base,
-	}
-}
-
-func marshalDBusInterfaceInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusInterface(gobject.ValueFromNative(p).Object()), nil
-}
-
-func (d *DBusInterfaceInstance) upcastToGDBusInterface() *DBusInterfaceInstance {
-	return d
-}
-
-// UnsafeDBusInterfaceFromGlibNone is used to convert raw GDBusInterface pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusInterfaceFromGlibNone(c unsafe.Pointer) DBusInterface {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusInterface)
-}
-
-// UnsafeDBusInterfaceFromGlibFull is used to convert raw GDBusInterface pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusInterfaceFromGlibFull(c unsafe.Pointer) DBusInterface {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusInterface)
-}
-
-// UnsafeDBusInterfaceFromGlibBorrow is used to convert raw GDBusInterface pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusInterfaceFromGlibBorrow(c unsafe.Pointer) DBusInterface {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusInterface)
-}
-
-// UnsafeDBusInterfaceToGlibNone is used to convert the instance to it's C value GDBusInterface. This is used by the bindings internally.
-func UnsafeDBusInterfaceToGlibNone(c DBusInterface) unsafe.Pointer {
-	i := c.upcastToGDBusInterface()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
-}
-
-// UnsafeDBusInterfaceToGlibFull is used to convert the instance to it's C value GDBusInterface, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusInterfaceToGlibFull(c DBusInterface) unsafe.Pointer {
-	i := c.upcastToGDBusInterface()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
-}
-
-// DupObject wraps g_dbus_interface_dup_object
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusObject (nullable) 
-//
-// Gets the #GDBusObject that @interface_ belongs to, if any.
-func (interface_ *DBusInterfaceInstance) DupObject() DBusObject {
-	var carg0 *C.GDBusInterface // in, none, converted
-	var cret  *C.GDBusObject    // return, full, converted, nullable
-
-	carg0 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
-
-	cret = C.g_dbus_interface_dup_object(carg0)
-	runtime.KeepAlive(interface_)
-
-	var goret DBusObject
-
-	if cret != nil {
-		goret = UnsafeDBusObjectFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// GetInfo wraps g_dbus_interface_get_info
-// 
-// The function returns the following values:
-// 
-// 	- goret *DBusInterfaceInfo 
-//
-// Gets D-Bus introspection information for the D-Bus interface
-// implemented by @interface_.
-func (interface_ *DBusInterfaceInstance) GetInfo() *DBusInterfaceInfo {
-	var carg0 *C.GDBusInterface     // in, none, converted
-	var cret  *C.GDBusInterfaceInfo // return, none, converted
-
-	carg0 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
-
-	cret = C.g_dbus_interface_get_info(carg0)
-	runtime.KeepAlive(interface_)
-
-	var goret *DBusInterfaceInfo
-
-	goret = UnsafeDBusInterfaceInfoFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// SetObject wraps g_dbus_interface_set_object
-// 
-// The function takes the following parameters:
-// 
-// 	- object DBusObject (nullable): A #GDBusObject or %NULL. 
-//
-// Sets the #GDBusObject for @interface_ to @object.
-// 
-// Note that @interface_ will hold a weak reference to @object.
-func (interface_ *DBusInterfaceInstance) SetObject(object DBusObject) {
-	var carg0 *C.GDBusInterface // in, none, converted
-	var carg1 *C.GDBusObject    // in, none, converted, nullable
-
-	carg0 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
-	if object != nil {
-		carg1 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
-	}
-
-	C.g_dbus_interface_set_object(carg0, carg1)
-	runtime.KeepAlive(interface_)
-	runtime.KeepAlive(object)
-}
-
-// DBusInterfaceOverrides is the struct used to override the default implementation of virtual methods.
-// it is generic over the extending instance type.
-type DBusInterfaceOverrides[Instance DBusInterface] struct {
-	// // DupObject allows you to override the implementation of the virtual method dup_object.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusObject (nullable) 
-	//
-	// Gets the #GDBusObject that @interface_ belongs to, if any.
-	DupObject func(Instance) DBusObject
-	// // GetInfo allows you to override the implementation of the virtual method get_info.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *DBusInterfaceInfo 
-	//
-	// Gets D-Bus introspection information for the D-Bus interface
-	// implemented by @interface_.
-	GetInfo func(Instance) *DBusInterfaceInfo
-	// // SetObject allows you to override the implementation of the virtual method set_object.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object DBusObject (nullable): A #GDBusObject or %NULL. 
-	//
-	// Sets the #GDBusObject for @interface_ to @object.
-	// 
-	// Note that @interface_ will hold a weak reference to @object.
-	SetObject func(Instance, DBusObject)
-}
-
-// UnsafeApplyDBusInterfaceOverrides applies the overrides to init the gclass by setting the trampoline functions.
-// This is used by the bindings internally and only exported for visibility to other bindings code.
-func UnsafeApplyDBusInterfaceOverrides[Instance DBusInterface](gclass unsafe.Pointer, overrides DBusInterfaceOverrides[Instance]) {
-	pclass := (*C.GDBusInterfaceIface)(gclass)
-
-	if overrides.DupObject != nil {
-		pclass.dup_object = (*[0]byte)(C._gotk4_gio2_DBusInterface_dup_object)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusInterface_dup_object",
-			func(carg0 *C.GDBusInterface) (cret *C.GDBusObject) {
-				var interface_ Instance   // go GDBusInterface subclass
-				var goret      DBusObject // return, full, converted, nullable
-
-				interface_ = UnsafeDBusInterfaceFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-
-				goret = overrides.DupObject(interface_)
-
-				if goret != nil {
-					cret = (*C.GDBusObject)(UnsafeDBusObjectToGlibFull(goret))
-				}
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.GetInfo != nil {
-		pclass.get_info = (*[0]byte)(C._gotk4_gio2_DBusInterface_get_info)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusInterface_get_info",
-			func(carg0 *C.GDBusInterface) (cret *C.GDBusInterfaceInfo) {
-				var interface_ Instance           // go GDBusInterface subclass
-				var goret      *DBusInterfaceInfo // return, none, converted
-
-				interface_ = UnsafeDBusInterfaceFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-
-				goret = overrides.GetInfo(interface_)
-
-				cret = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(goret))
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.SetObject != nil {
-		pclass.set_object = (*[0]byte)(C._gotk4_gio2_DBusInterface_set_object)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusInterface_set_object",
-			func(carg0 *C.GDBusInterface, carg1 *C.GDBusObject) {
-				var interface_ Instance   // go GDBusInterface subclass
-				var object     DBusObject // in, none, converted, nullable
-
-				interface_ = UnsafeDBusInterfaceFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				if carg1 != nil {
-					object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg1))
-				}
-
-				overrides.SetObject(interface_, object)
-			},
-		)
-	}
-}
-
-// ParentDupObject calls the default implementations of the dup_object virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusObject (nullable) 
-//
-// Gets the #GDBusObject that @interface_ belongs to, if any.
-func (interface_ *DBusInterfaceInstance) ParentDupObject() DBusObject {
-	var carg0 *C.GDBusInterface
-	var cret  *C.GDBusObject // return, full, converted, nullable
-
-	parentclass := (*C.GDBusInterfaceIface)(classdata.PeekParentInterface(UnsafeDBusInterfaceToGlibNone(interface_), uint64(TypeDBusInterface)))
-
-	carg0 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
-
-	cret = C._gotk4_gio2_DBusInterface_virtual_dup_object(unsafe.Pointer(parentclass.dup_object), carg0)
-	runtime.KeepAlive(interface_)
-
-	var goret DBusObject
-
-	if cret != nil {
-		goret = UnsafeDBusObjectFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// ParentGetInfo calls the default implementations of the get_info virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function returns the following values:
-// 
-// 	- goret *DBusInterfaceInfo 
-//
-// Gets D-Bus introspection information for the D-Bus interface
-// implemented by @interface_.
-func (interface_ *DBusInterfaceInstance) ParentGetInfo() *DBusInterfaceInfo {
-	var carg0 *C.GDBusInterface
-	var cret  *C.GDBusInterfaceInfo // return, none, converted
-
-	parentclass := (*C.GDBusInterfaceIface)(classdata.PeekParentInterface(UnsafeDBusInterfaceToGlibNone(interface_), uint64(TypeDBusInterface)))
-
-	carg0 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
-
-	cret = C._gotk4_gio2_DBusInterface_virtual_get_info(unsafe.Pointer(parentclass.get_info), carg0)
-	runtime.KeepAlive(interface_)
-
-	var goret *DBusInterfaceInfo
-
-	goret = UnsafeDBusInterfaceInfoFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// ParentSetObject calls the default implementations of the set_object virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- object DBusObject (nullable): A #GDBusObject or %NULL. 
-//
-// Sets the #GDBusObject for @interface_ to @object.
-// 
-// Note that @interface_ will hold a weak reference to @object.
-func (interface_ *DBusInterfaceInstance) ParentSetObject(object DBusObject) {
-	var carg0 *C.GDBusInterface
-	var carg1 *C.GDBusObject // in, none, converted
-
-	parentclass := (*C.GDBusInterfaceIface)(classdata.PeekParentInterface(UnsafeDBusInterfaceToGlibNone(interface_), uint64(TypeDBusInterface)))
-
-	carg0 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
-	if object != nil {
-		carg1 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
-	}
-
-	C._gotk4_gio2_DBusInterface_virtual_set_object(unsafe.Pointer(parentclass.set_object), carg0, carg1)
-	runtime.KeepAlive(interface_)
-	runtime.KeepAlive(object)
-}
-
-// DBusObjectInstance is the instance type used by all types implementing GDBusObject. It is used internally by the bindings. Users should use the interface [DBusObject] instead.
-type DBusObjectInstance struct {
-	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
-}
-
-var _ DBusObject = (*DBusObjectInstance)(nil)
-
-// DBusObject wraps GDBusObject
-//
-// The `GDBusObject` type is the base type for D-Bus objects on both
-// the service side (see [class@Gio.DBusObjectSkeleton]) and the client side
-// (see [class@Gio.DBusObjectProxy]). It is essentially just a container of
-// interfaces.
-type DBusObject interface {
-	upcastToGDBusObject() *DBusObjectInstance
-
-	// GetInterface wraps g_dbus_object_get_interface
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- interfaceName string: A D-Bus interface name. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusInterface (nullable) 
-	//
-	// Gets the D-Bus interface with name @interface_name associated with
-	// @object, if any.
-	GetInterface(string) DBusInterface
-	// GetInterfaces wraps g_dbus_object_get_interfaces
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret []DBusInterface 
-	//
-	// Gets the D-Bus interfaces associated with @object.
-	GetInterfaces() []DBusInterface
-	// GetObjectPath wraps g_dbus_object_get_object_path
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the object path for @object.
-	GetObjectPath() string
-	// ConnectInterfaceAdded connects the provided callback to the "interface-added" signal
-	//
-	// Emitted when @interface is added to @object.
-	ConnectInterfaceAdded(func(DBusObject, DBusInterface)) gobject.SignalHandle
-	// ConnectInterfaceRemoved connects the provided callback to the "interface-removed" signal
-	//
-	// Emitted when @interface is removed from @object.
-	ConnectInterfaceRemoved(func(DBusObject, DBusInterface)) gobject.SignalHandle
-
-	// chain up virtual methods:
-
-	// ParentGetInterface calls the default implementations of the get_interface virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- interfaceName string: A D-Bus interface name. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusInterface (nullable) 
-	//
-	// Gets the D-Bus interface with name @interface_name associated with
-	// @object, if any.
-	ParentGetInterface(interfaceName string) DBusInterface
-	// ParentGetInterfaces calls the default implementations of the get_interfaces virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret []DBusInterface 
-	//
-	// Gets the D-Bus interfaces associated with @object.
-	ParentGetInterfaces() []DBusInterface
-	// ParentGetObjectPath calls the default implementations of the get_object_path virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the object path for @object.
-	ParentGetObjectPath() string
-	// ParentInterfaceAdded calls the default implementations of the interface_added virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- interface_ DBusInterface 
-	//
-	// Signal handler for the #GDBusObject::interface-added signal.
-	ParentInterfaceAdded(interface_ DBusInterface)
-	// ParentInterfaceRemoved calls the default implementations of the interface_removed virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- interface_ DBusInterface 
-	//
-	// Signal handler for the #GDBusObject::interface-removed signal.
-	ParentInterfaceRemoved(interface_ DBusInterface)
-}
-
-var _ DBusObject = (*DBusObjectInstance)(nil)
-
-func unsafeWrapDBusObject(base *gobject.ObjectInstance) *DBusObjectInstance {
-	return &DBusObjectInstance{
-		Instance: *base,
-	}
-}
-
-func marshalDBusObjectInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusObject(gobject.ValueFromNative(p).Object()), nil
-}
-
-func (d *DBusObjectInstance) upcastToGDBusObject() *DBusObjectInstance {
-	return d
-}
-
-// UnsafeDBusObjectFromGlibNone is used to convert raw GDBusObject pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectFromGlibNone(c unsafe.Pointer) DBusObject {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusObject)
-}
-
-// UnsafeDBusObjectFromGlibFull is used to convert raw GDBusObject pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectFromGlibFull(c unsafe.Pointer) DBusObject {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusObject)
-}
-
-// UnsafeDBusObjectFromGlibBorrow is used to convert raw GDBusObject pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusObjectFromGlibBorrow(c unsafe.Pointer) DBusObject {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusObject)
-}
-
-// UnsafeDBusObjectToGlibNone is used to convert the instance to it's C value GDBusObject. This is used by the bindings internally.
-func UnsafeDBusObjectToGlibNone(c DBusObject) unsafe.Pointer {
-	i := c.upcastToGDBusObject()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
-}
-
-// UnsafeDBusObjectToGlibFull is used to convert the instance to it's C value GDBusObject, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectToGlibFull(c DBusObject) unsafe.Pointer {
-	i := c.upcastToGDBusObject()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
-}
-
-// GetInterface wraps g_dbus_object_get_interface
-// 
-// The function takes the following parameters:
-// 
-// 	- interfaceName string: A D-Bus interface name. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusInterface (nullable) 
-//
-// Gets the D-Bus interface with name @interface_name associated with
-// @object, if any.
-func (object *DBusObjectInstance) GetInterface(interfaceName string) DBusInterface {
-	var carg0 *C.GDBusObject    // in, none, converted
-	var carg1 *C.gchar          // in, none, string
-	var cret  *C.GDBusInterface // return, full, converted, nullable
-
-	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(interfaceName)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_dbus_object_get_interface(carg0, carg1)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(interfaceName)
-
-	var goret DBusInterface
-
-	if cret != nil {
-		goret = UnsafeDBusInterfaceFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// GetInterfaces wraps g_dbus_object_get_interfaces
-// 
-// The function returns the following values:
-// 
-// 	- goret []DBusInterface 
-//
-// Gets the D-Bus interfaces associated with @object.
-func (object *DBusObjectInstance) GetInterfaces() []DBusInterface {
-	var carg0 *C.GDBusObject // in, none, converted
-	var cret  *C.GList       // container, transfer: full
-
-	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
-
-	cret = C.g_dbus_object_get_interfaces(carg0)
-	runtime.KeepAlive(object)
-
-	var goret []DBusInterface
-
-	goret = glib.UnsafeListFromGlibFull(
-		unsafe.Pointer(cret),
-		func(v unsafe.Pointer) DBusInterface {
-			var dst DBusInterface // converted
-			dst = UnsafeDBusInterfaceFromGlibFull(v)
-			return dst
-		},
-	)
-
-	return goret
-}
-
-// GetObjectPath wraps g_dbus_object_get_object_path
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the object path for @object.
-func (object *DBusObjectInstance) GetObjectPath() string {
-	var carg0 *C.GDBusObject // in, none, converted
-	var cret  *C.gchar       // return, none, string
-
-	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
-
-	cret = C.g_dbus_object_get_object_path(carg0)
-	runtime.KeepAlive(object)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// ConnectInterfaceAdded connects the provided callback to the "interface-added" signal
-//
-// Emitted when @interface is added to @object.
-func (o *DBusObjectInstance) ConnectInterfaceAdded(fn func(DBusObject, DBusInterface)) gobject.SignalHandle {
-	return o.Instance.Connect("interface-added", fn)
-}
-
-// ConnectInterfaceRemoved connects the provided callback to the "interface-removed" signal
-//
-// Emitted when @interface is removed from @object.
-func (o *DBusObjectInstance) ConnectInterfaceRemoved(fn func(DBusObject, DBusInterface)) gobject.SignalHandle {
-	return o.Instance.Connect("interface-removed", fn)
-}
-
-// DBusObjectOverrides is the struct used to override the default implementation of virtual methods.
-// it is generic over the extending instance type.
-type DBusObjectOverrides[Instance DBusObject] struct {
-	// // GetInterface allows you to override the implementation of the virtual method get_interface.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- interfaceName string: A D-Bus interface name. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusInterface (nullable) 
-	//
-	// Gets the D-Bus interface with name @interface_name associated with
-	// @object, if any.
-	GetInterface func(Instance, string) DBusInterface
-	// // GetInterfaces allows you to override the implementation of the virtual method get_interfaces.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret []DBusInterface 
-	//
-	// Gets the D-Bus interfaces associated with @object.
-	GetInterfaces func(Instance) []DBusInterface
-	// // GetObjectPath allows you to override the implementation of the virtual method get_object_path.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the object path for @object.
-	GetObjectPath func(Instance) string
-	// // InterfaceAdded allows you to override the implementation of the virtual method interface_added.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- interface_ DBusInterface 
-	//
-	// Signal handler for the #GDBusObject::interface-added signal.
-	InterfaceAdded func(Instance, DBusInterface)
-	// // InterfaceRemoved allows you to override the implementation of the virtual method interface_removed.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- interface_ DBusInterface 
-	//
-	// Signal handler for the #GDBusObject::interface-removed signal.
-	InterfaceRemoved func(Instance, DBusInterface)
-}
-
-// UnsafeApplyDBusObjectOverrides applies the overrides to init the gclass by setting the trampoline functions.
-// This is used by the bindings internally and only exported for visibility to other bindings code.
-func UnsafeApplyDBusObjectOverrides[Instance DBusObject](gclass unsafe.Pointer, overrides DBusObjectOverrides[Instance]) {
-	pclass := (*C.GDBusObjectIface)(gclass)
-
-	if overrides.GetInterface != nil {
-		pclass.get_interface = (*[0]byte)(C._gotk4_gio2_DBusObject_get_interface)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusObject_get_interface",
-			func(carg0 *C.GDBusObject, carg1 *C.gchar) (cret *C.GDBusInterface) {
-				var object        Instance      // go GDBusObject subclass
-				var interfaceName string        // in, none, string
-				var goret         DBusInterface // return, full, converted, nullable
-
-				object = UnsafeDBusObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				interfaceName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
-
-				goret = overrides.GetInterface(object, interfaceName)
-
-				if goret != nil {
-					cret = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibFull(goret))
-				}
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.GetInterfaces != nil {
-		pclass.get_interfaces = (*[0]byte)(C._gotk4_gio2_DBusObject_get_interfaces)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusObject_get_interfaces",
-			func(carg0 *C.GDBusObject) (cret *C.GList) {
-				var object Instance        // go GDBusObject subclass
-				var goret  []DBusInterface // return, transfer: full, C Pointers: 1, Name: List, scope: 
-
-				object = UnsafeDBusObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-
-				goret = overrides.GetInterfaces(object)
-
-				_ = goret
-				_ = cret
-				panic("unimplemented conversion of []DBusInterface (GList*)")
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.GetObjectPath != nil {
-		pclass.get_object_path = (*[0]byte)(C._gotk4_gio2_DBusObject_get_object_path)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusObject_get_object_path",
-			func(carg0 *C.GDBusObject) (cret *C.gchar) {
-				var object Instance // go GDBusObject subclass
-				var goret  string   // return, none, string
-
-				object = UnsafeDBusObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-
-				goret = overrides.GetObjectPath(object)
-
-				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
-				defer C.free(unsafe.Pointer(cret))
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.InterfaceAdded != nil {
-		pclass.interface_added = (*[0]byte)(C._gotk4_gio2_DBusObject_interface_added)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusObject_interface_added",
-			func(carg0 *C.GDBusObject, carg1 *C.GDBusInterface) {
-				var object     Instance      // go GDBusObject subclass
-				var interface_ DBusInterface // in, none, converted
-
-				object = UnsafeDBusObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg1))
-
-				overrides.InterfaceAdded(object, interface_)
-			},
-		)
-	}
-
-	if overrides.InterfaceRemoved != nil {
-		pclass.interface_removed = (*[0]byte)(C._gotk4_gio2_DBusObject_interface_removed)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusObject_interface_removed",
-			func(carg0 *C.GDBusObject, carg1 *C.GDBusInterface) {
-				var object     Instance      // go GDBusObject subclass
-				var interface_ DBusInterface // in, none, converted
-
-				object = UnsafeDBusObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg1))
-
-				overrides.InterfaceRemoved(object, interface_)
-			},
-		)
-	}
-}
-
-// ParentGetInterface calls the default implementations of the get_interface virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- interfaceName string: A D-Bus interface name. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusInterface (nullable) 
-//
-// Gets the D-Bus interface with name @interface_name associated with
-// @object, if any.
-func (object *DBusObjectInstance) ParentGetInterface(interfaceName string) DBusInterface {
-	var carg0 *C.GDBusObject
-	var carg1 *C.gchar          // in, none, converted
-	var cret  *C.GDBusInterface // return, full, converted, nullable
-
-	parentclass := (*C.GDBusObjectIface)(classdata.PeekParentInterface(UnsafeDBusObjectToGlibNone(object), uint64(TypeDBusObject)))
-
-	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(interfaceName)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C._gotk4_gio2_DBusObject_virtual_get_interface(unsafe.Pointer(parentclass.get_interface), carg0, carg1)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(interfaceName)
-
-	var goret DBusInterface
-
-	if cret != nil {
-		goret = UnsafeDBusInterfaceFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// ParentGetInterfaces calls the default implementations of the get_interfaces virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function returns the following values:
-// 
-// 	- goret []DBusInterface 
-//
-// Gets the D-Bus interfaces associated with @object.
-func (object *DBusObjectInstance) ParentGetInterfaces() []DBusInterface {
-	var carg0 *C.GDBusObject
-	var cret  *C.GList // container, transfer: full
-
-	parentclass := (*C.GDBusObjectIface)(classdata.PeekParentInterface(UnsafeDBusObjectToGlibNone(object), uint64(TypeDBusObject)))
-
-	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
-
-	cret = C._gotk4_gio2_DBusObject_virtual_get_interfaces(unsafe.Pointer(parentclass.get_interfaces), carg0)
-	runtime.KeepAlive(object)
-
-	var goret []DBusInterface
-
-	goret = glib.UnsafeListFromGlibFull(
-		unsafe.Pointer(cret),
-		func(v unsafe.Pointer) DBusInterface {
-			var dst DBusInterface // converted
-			dst = UnsafeDBusInterfaceFromGlibFull(v)
-			return dst
-		},
-	)
-
-	return goret
-}
-
-// ParentGetObjectPath calls the default implementations of the get_object_path virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the object path for @object.
-func (object *DBusObjectInstance) ParentGetObjectPath() string {
-	var carg0 *C.GDBusObject
-	var cret  *C.gchar // return, none, string
-
-	parentclass := (*C.GDBusObjectIface)(classdata.PeekParentInterface(UnsafeDBusObjectToGlibNone(object), uint64(TypeDBusObject)))
-
-	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
-
-	cret = C._gotk4_gio2_DBusObject_virtual_get_object_path(unsafe.Pointer(parentclass.get_object_path), carg0)
-	runtime.KeepAlive(object)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// ParentInterfaceAdded calls the default implementations of the interface_added virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- interface_ DBusInterface 
-//
-// Signal handler for the #GDBusObject::interface-added signal.
-func (object *DBusObjectInstance) ParentInterfaceAdded(interface_ DBusInterface) {
-	var carg0 *C.GDBusObject
-	var carg1 *C.GDBusInterface // in, none, converted
-
-	parentclass := (*C.GDBusObjectIface)(classdata.PeekParentInterface(UnsafeDBusObjectToGlibNone(object), uint64(TypeDBusObject)))
-
-	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
-	carg1 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
-
-	C._gotk4_gio2_DBusObject_virtual_interface_added(unsafe.Pointer(parentclass.interface_added), carg0, carg1)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(interface_)
-}
-
-// ParentInterfaceRemoved calls the default implementations of the interface_removed virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- interface_ DBusInterface 
-//
-// Signal handler for the #GDBusObject::interface-removed signal.
-func (object *DBusObjectInstance) ParentInterfaceRemoved(interface_ DBusInterface) {
-	var carg0 *C.GDBusObject
-	var carg1 *C.GDBusInterface // in, none, converted
-
-	parentclass := (*C.GDBusObjectIface)(classdata.PeekParentInterface(UnsafeDBusObjectToGlibNone(object), uint64(TypeDBusObject)))
-
-	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
-	carg1 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
-
-	C._gotk4_gio2_DBusObject_virtual_interface_removed(unsafe.Pointer(parentclass.interface_removed), carg0, carg1)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(interface_)
-}
-
-// DBusObjectManagerInstance is the instance type used by all types implementing GDBusObjectManager. It is used internally by the bindings. Users should use the interface [DBusObjectManager] instead.
-type DBusObjectManagerInstance struct {
-	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
-}
-
-var _ DBusObjectManager = (*DBusObjectManagerInstance)(nil)
-
-// DBusObjectManager wraps GDBusObjectManager
-//
-// The `GDBusObjectManager` type is the base type for service- and
-// client-side implementations of the standardized
-// [`org.freedesktop.DBus.ObjectManager`](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
-// interface.
-// 
-// See [class@Gio.DBusObjectManagerClient] for the client-side implementation
-// and [class@Gio.DBusObjectManagerServer] for the service-side implementation.
-type DBusObjectManager interface {
-	upcastToGDBusObjectManager() *DBusObjectManagerInstance
-
-	// GetInterface wraps g_dbus_object_manager_get_interface
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- objectPath string: Object path to look up. 
-	// 	- interfaceName string: D-Bus interface name to look up. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusInterface (nullable) 
-	//
-	// Gets the interface proxy for @interface_name at @object_path, if
-	// any.
-	GetInterface(string, string) DBusInterface
-	// GetObject wraps g_dbus_object_manager_get_object
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- objectPath string: Object path to look up. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusObject (nullable) 
-	//
-	// Gets the #GDBusObject at @object_path, if any.
-	GetObject(string) DBusObject
-	// GetObjectPath wraps g_dbus_object_manager_get_object_path
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the object path that @manager is for.
-	GetObjectPath() string
-	// GetObjects wraps g_dbus_object_manager_get_objects
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret []DBusObject 
-	//
-	// Gets all #GDBusObject objects known to @manager.
-	GetObjects() []DBusObject
-	// ConnectInterfaceAdded connects the provided callback to the "interface-added" signal
-	//
-	// Emitted when @interface is added to @object.
-	// 
-	// This signal exists purely as a convenience to avoid having to
-	// connect signals to all objects managed by @manager.
-	ConnectInterfaceAdded(func(DBusObjectManager, DBusObject, DBusInterface)) gobject.SignalHandle
-	// ConnectInterfaceRemoved connects the provided callback to the "interface-removed" signal
-	//
-	// Emitted when @interface has been removed from @object.
-	// 
-	// This signal exists purely as a convenience to avoid having to
-	// connect signals to all objects managed by @manager.
-	ConnectInterfaceRemoved(func(DBusObjectManager, DBusObject, DBusInterface)) gobject.SignalHandle
-	// ConnectObjectAdded connects the provided callback to the "object-added" signal
-	//
-	// Emitted when @object is added to @manager.
-	ConnectObjectAdded(func(DBusObjectManager, DBusObject)) gobject.SignalHandle
-	// ConnectObjectRemoved connects the provided callback to the "object-removed" signal
-	//
-	// Emitted when @object is removed from @manager.
-	ConnectObjectRemoved(func(DBusObjectManager, DBusObject)) gobject.SignalHandle
-
-	// chain up virtual methods:
-
-	// ParentGetInterface calls the default implementations of the get_interface virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- objectPath string: Object path to look up. 
-	// 	- interfaceName string: D-Bus interface name to look up. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusInterface (nullable) 
-	//
-	// Gets the interface proxy for @interface_name at @object_path, if
-	// any.
-	ParentGetInterface(objectPath string, interfaceName string) DBusInterface
-	// ParentGetObject calls the default implementations of the get_object virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- objectPath string: Object path to look up. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusObject (nullable) 
-	//
-	// Gets the #GDBusObject at @object_path, if any.
-	ParentGetObject(objectPath string) DBusObject
-	// ParentGetObjectPath calls the default implementations of the get_object_path virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the object path that @manager is for.
-	ParentGetObjectPath() string
-	// ParentGetObjects calls the default implementations of the get_objects virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret []DBusObject 
-	//
-	// Gets all #GDBusObject objects known to @manager.
-	ParentGetObjects() []DBusObject
-	// ParentInterfaceAdded calls the default implementations of the interface_added virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object DBusObject 
-	// 	- interface_ DBusInterface 
-	//
-	// Signal handler for the #GDBusObjectManager::interface-added signal.
-	ParentInterfaceAdded(object DBusObject, interface_ DBusInterface)
-	// ParentInterfaceRemoved calls the default implementations of the interface_removed virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object DBusObject 
-	// 	- interface_ DBusInterface 
-	//
-	// Signal handler for the #GDBusObjectManager::interface-removed signal.
-	ParentInterfaceRemoved(object DBusObject, interface_ DBusInterface)
-	// ParentObjectAdded calls the default implementations of the object_added virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object DBusObject 
-	//
-	// Signal handler for the #GDBusObjectManager::object-added signal.
-	ParentObjectAdded(object DBusObject)
-	// ParentObjectRemoved calls the default implementations of the object_removed virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object DBusObject 
-	//
-	// Signal handler for the #GDBusObjectManager::object-removed signal.
-	ParentObjectRemoved(object DBusObject)
-}
-
-var _ DBusObjectManager = (*DBusObjectManagerInstance)(nil)
-
-func unsafeWrapDBusObjectManager(base *gobject.ObjectInstance) *DBusObjectManagerInstance {
-	return &DBusObjectManagerInstance{
-		Instance: *base,
-	}
-}
-
-func marshalDBusObjectManagerInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusObjectManager(gobject.ValueFromNative(p).Object()), nil
-}
-
-func (d *DBusObjectManagerInstance) upcastToGDBusObjectManager() *DBusObjectManagerInstance {
-	return d
-}
-
-// UnsafeDBusObjectManagerFromGlibNone is used to convert raw GDBusObjectManager pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectManagerFromGlibNone(c unsafe.Pointer) DBusObjectManager {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusObjectManager)
-}
-
-// UnsafeDBusObjectManagerFromGlibFull is used to convert raw GDBusObjectManager pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectManagerFromGlibFull(c unsafe.Pointer) DBusObjectManager {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusObjectManager)
-}
-
-// UnsafeDBusObjectManagerFromGlibBorrow is used to convert raw GDBusObjectManager pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusObjectManagerFromGlibBorrow(c unsafe.Pointer) DBusObjectManager {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusObjectManager)
-}
-
-// UnsafeDBusObjectManagerToGlibNone is used to convert the instance to it's C value GDBusObjectManager. This is used by the bindings internally.
-func UnsafeDBusObjectManagerToGlibNone(c DBusObjectManager) unsafe.Pointer {
-	i := c.upcastToGDBusObjectManager()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
-}
-
-// UnsafeDBusObjectManagerToGlibFull is used to convert the instance to it's C value GDBusObjectManager, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectManagerToGlibFull(c DBusObjectManager) unsafe.Pointer {
-	i := c.upcastToGDBusObjectManager()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
-}
-
-// GetInterface wraps g_dbus_object_manager_get_interface
-// 
-// The function takes the following parameters:
-// 
-// 	- objectPath string: Object path to look up. 
-// 	- interfaceName string: D-Bus interface name to look up. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusInterface (nullable) 
-//
-// Gets the interface proxy for @interface_name at @object_path, if
-// any.
-func (manager *DBusObjectManagerInstance) GetInterface(objectPath string, interfaceName string) DBusInterface {
-	var carg0 *C.GDBusObjectManager // in, none, converted
-	var carg1 *C.gchar              // in, none, string
-	var carg2 *C.gchar              // in, none, string
-	var cret  *C.GDBusInterface     // return, full, converted, nullable
-
-	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(interfaceName)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	cret = C.g_dbus_object_manager_get_interface(carg0, carg1, carg2)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(objectPath)
-	runtime.KeepAlive(interfaceName)
-
-	var goret DBusInterface
-
-	if cret != nil {
-		goret = UnsafeDBusInterfaceFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// GetObject wraps g_dbus_object_manager_get_object
-// 
-// The function takes the following parameters:
-// 
-// 	- objectPath string: Object path to look up. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusObject (nullable) 
-//
-// Gets the #GDBusObject at @object_path, if any.
-func (manager *DBusObjectManagerInstance) GetObject(objectPath string) DBusObject {
-	var carg0 *C.GDBusObjectManager // in, none, converted
-	var carg1 *C.gchar              // in, none, string
-	var cret  *C.GDBusObject        // return, full, converted, nullable
-
-	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_dbus_object_manager_get_object(carg0, carg1)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(objectPath)
-
-	var goret DBusObject
-
-	if cret != nil {
-		goret = UnsafeDBusObjectFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// GetObjectPath wraps g_dbus_object_manager_get_object_path
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the object path that @manager is for.
-func (manager *DBusObjectManagerInstance) GetObjectPath() string {
-	var carg0 *C.GDBusObjectManager // in, none, converted
-	var cret  *C.gchar              // return, none, string
-
-	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
-
-	cret = C.g_dbus_object_manager_get_object_path(carg0)
-	runtime.KeepAlive(manager)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetObjects wraps g_dbus_object_manager_get_objects
-// 
-// The function returns the following values:
-// 
-// 	- goret []DBusObject 
-//
-// Gets all #GDBusObject objects known to @manager.
-func (manager *DBusObjectManagerInstance) GetObjects() []DBusObject {
-	var carg0 *C.GDBusObjectManager // in, none, converted
-	var cret  *C.GList              // container, transfer: full
-
-	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
-
-	cret = C.g_dbus_object_manager_get_objects(carg0)
-	runtime.KeepAlive(manager)
-
-	var goret []DBusObject
-
-	goret = glib.UnsafeListFromGlibFull(
-		unsafe.Pointer(cret),
-		func(v unsafe.Pointer) DBusObject {
-			var dst DBusObject // converted
-			dst = UnsafeDBusObjectFromGlibFull(v)
-			return dst
-		},
-	)
-
-	return goret
-}
-
-// ConnectInterfaceAdded connects the provided callback to the "interface-added" signal
-//
-// Emitted when @interface is added to @object.
-// 
-// This signal exists purely as a convenience to avoid having to
-// connect signals to all objects managed by @manager.
-func (o *DBusObjectManagerInstance) ConnectInterfaceAdded(fn func(DBusObjectManager, DBusObject, DBusInterface)) gobject.SignalHandle {
-	return o.Instance.Connect("interface-added", fn)
-}
-
-// ConnectInterfaceRemoved connects the provided callback to the "interface-removed" signal
-//
-// Emitted when @interface has been removed from @object.
-// 
-// This signal exists purely as a convenience to avoid having to
-// connect signals to all objects managed by @manager.
-func (o *DBusObjectManagerInstance) ConnectInterfaceRemoved(fn func(DBusObjectManager, DBusObject, DBusInterface)) gobject.SignalHandle {
-	return o.Instance.Connect("interface-removed", fn)
-}
-
-// ConnectObjectAdded connects the provided callback to the "object-added" signal
-//
-// Emitted when @object is added to @manager.
-func (o *DBusObjectManagerInstance) ConnectObjectAdded(fn func(DBusObjectManager, DBusObject)) gobject.SignalHandle {
-	return o.Instance.Connect("object-added", fn)
-}
-
-// ConnectObjectRemoved connects the provided callback to the "object-removed" signal
-//
-// Emitted when @object is removed from @manager.
-func (o *DBusObjectManagerInstance) ConnectObjectRemoved(fn func(DBusObjectManager, DBusObject)) gobject.SignalHandle {
-	return o.Instance.Connect("object-removed", fn)
-}
-
-// DBusObjectManagerOverrides is the struct used to override the default implementation of virtual methods.
-// it is generic over the extending instance type.
-type DBusObjectManagerOverrides[Instance DBusObjectManager] struct {
-	// // GetInterface allows you to override the implementation of the virtual method get_interface.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- objectPath string: Object path to look up. 
-	// 	- interfaceName string: D-Bus interface name to look up. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusInterface (nullable) 
-	//
-	// Gets the interface proxy for @interface_name at @object_path, if
-	// any.
-	GetInterface func(Instance, string, string) DBusInterface
-	// // GetObject allows you to override the implementation of the virtual method get_object.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- objectPath string: Object path to look up. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusObject (nullable) 
-	//
-	// Gets the #GDBusObject at @object_path, if any.
-	GetObject func(Instance, string) DBusObject
-	// // GetObjectPath allows you to override the implementation of the virtual method get_object_path.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the object path that @manager is for.
-	GetObjectPath func(Instance) string
-	// // GetObjects allows you to override the implementation of the virtual method get_objects.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret []DBusObject 
-	//
-	// Gets all #GDBusObject objects known to @manager.
-	GetObjects func(Instance) []DBusObject
-	// // InterfaceAdded allows you to override the implementation of the virtual method interface_added.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object DBusObject 
-	// 	- interface_ DBusInterface 
-	//
-	// Signal handler for the #GDBusObjectManager::interface-added signal.
-	InterfaceAdded func(Instance, DBusObject, DBusInterface)
-	// // InterfaceRemoved allows you to override the implementation of the virtual method interface_removed.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object DBusObject 
-	// 	- interface_ DBusInterface 
-	//
-	// Signal handler for the #GDBusObjectManager::interface-removed signal.
-	InterfaceRemoved func(Instance, DBusObject, DBusInterface)
-	// // ObjectAdded allows you to override the implementation of the virtual method object_added.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object DBusObject 
-	//
-	// Signal handler for the #GDBusObjectManager::object-added signal.
-	ObjectAdded func(Instance, DBusObject)
-	// // ObjectRemoved allows you to override the implementation of the virtual method object_removed.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object DBusObject 
-	//
-	// Signal handler for the #GDBusObjectManager::object-removed signal.
-	ObjectRemoved func(Instance, DBusObject)
-}
-
-// UnsafeApplyDBusObjectManagerOverrides applies the overrides to init the gclass by setting the trampoline functions.
-// This is used by the bindings internally and only exported for visibility to other bindings code.
-func UnsafeApplyDBusObjectManagerOverrides[Instance DBusObjectManager](gclass unsafe.Pointer, overrides DBusObjectManagerOverrides[Instance]) {
-	pclass := (*C.GDBusObjectManagerIface)(gclass)
-
-	if overrides.GetInterface != nil {
-		pclass.get_interface = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_get_interface)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusObjectManager_get_interface",
-			func(carg0 *C.GDBusObjectManager, carg1 *C.gchar, carg2 *C.gchar) (cret *C.GDBusInterface) {
-				var manager       Instance      // go GDBusObjectManager subclass
-				var objectPath    string        // in, none, string
-				var interfaceName string        // in, none, string
-				var goret         DBusInterface // return, full, converted, nullable
-
-				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				objectPath = C.GoString((*C.char)(unsafe.Pointer(carg1)))
-				interfaceName = C.GoString((*C.char)(unsafe.Pointer(carg2)))
-
-				goret = overrides.GetInterface(manager, objectPath, interfaceName)
-
-				if goret != nil {
-					cret = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibFull(goret))
-				}
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.GetObject != nil {
-		pclass.get_object = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_get_object)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusObjectManager_get_object",
-			func(carg0 *C.GDBusObjectManager, carg1 *C.gchar) (cret *C.GDBusObject) {
-				var manager    Instance   // go GDBusObjectManager subclass
-				var objectPath string     // in, none, string
-				var goret      DBusObject // return, full, converted, nullable
-
-				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				objectPath = C.GoString((*C.char)(unsafe.Pointer(carg1)))
-
-				goret = overrides.GetObject(manager, objectPath)
-
-				if goret != nil {
-					cret = (*C.GDBusObject)(UnsafeDBusObjectToGlibFull(goret))
-				}
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.GetObjectPath != nil {
-		pclass.get_object_path = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_get_object_path)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusObjectManager_get_object_path",
-			func(carg0 *C.GDBusObjectManager) (cret *C.gchar) {
-				var manager Instance // go GDBusObjectManager subclass
-				var goret   string   // return, none, string
-
-				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-
-				goret = overrides.GetObjectPath(manager)
-
-				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
-				defer C.free(unsafe.Pointer(cret))
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.GetObjects != nil {
-		pclass.get_objects = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_get_objects)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusObjectManager_get_objects",
-			func(carg0 *C.GDBusObjectManager) (cret *C.GList) {
-				var manager Instance     // go GDBusObjectManager subclass
-				var goret   []DBusObject // return, transfer: full, C Pointers: 1, Name: List, scope: 
-
-				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-
-				goret = overrides.GetObjects(manager)
-
-				_ = goret
-				_ = cret
-				panic("unimplemented conversion of []DBusObject (GList*)")
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.InterfaceAdded != nil {
-		pclass.interface_added = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_interface_added)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusObjectManager_interface_added",
-			func(carg0 *C.GDBusObjectManager, carg1 *C.GDBusObject, carg2 *C.GDBusInterface) {
-				var manager    Instance      // go GDBusObjectManager subclass
-				var object     DBusObject    // in, none, converted
-				var interface_ DBusInterface // in, none, converted
-
-				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg1))
-				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg2))
-
-				overrides.InterfaceAdded(manager, object, interface_)
-			},
-		)
-	}
-
-	if overrides.InterfaceRemoved != nil {
-		pclass.interface_removed = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_interface_removed)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusObjectManager_interface_removed",
-			func(carg0 *C.GDBusObjectManager, carg1 *C.GDBusObject, carg2 *C.GDBusInterface) {
-				var manager    Instance      // go GDBusObjectManager subclass
-				var object     DBusObject    // in, none, converted
-				var interface_ DBusInterface // in, none, converted
-
-				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg1))
-				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg2))
-
-				overrides.InterfaceRemoved(manager, object, interface_)
-			},
-		)
-	}
-
-	if overrides.ObjectAdded != nil {
-		pclass.object_added = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_object_added)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusObjectManager_object_added",
-			func(carg0 *C.GDBusObjectManager, carg1 *C.GDBusObject) {
-				var manager Instance   // go GDBusObjectManager subclass
-				var object  DBusObject // in, none, converted
-
-				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg1))
-
-				overrides.ObjectAdded(manager, object)
-			},
-		)
-	}
-
-	if overrides.ObjectRemoved != nil {
-		pclass.object_removed = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_object_removed)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusObjectManager_object_removed",
-			func(carg0 *C.GDBusObjectManager, carg1 *C.GDBusObject) {
-				var manager Instance   // go GDBusObjectManager subclass
-				var object  DBusObject // in, none, converted
-
-				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg1))
-
-				overrides.ObjectRemoved(manager, object)
-			},
-		)
-	}
-}
-
-// ParentGetInterface calls the default implementations of the get_interface virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- objectPath string: Object path to look up. 
-// 	- interfaceName string: D-Bus interface name to look up. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusInterface (nullable) 
-//
-// Gets the interface proxy for @interface_name at @object_path, if
-// any.
-func (manager *DBusObjectManagerInstance) ParentGetInterface(objectPath string, interfaceName string) DBusInterface {
-	var carg0 *C.GDBusObjectManager
-	var carg1 *C.gchar          // in, none, converted
-	var carg2 *C.gchar          // in, none, string
-	var cret  *C.GDBusInterface // return, full, converted, nullable
-
-	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
-
-	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(interfaceName)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	cret = C._gotk4_gio2_DBusObjectManager_virtual_get_interface(unsafe.Pointer(parentclass.get_interface), carg0, carg1, carg2)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(objectPath)
-	runtime.KeepAlive(interfaceName)
-
-	var goret DBusInterface
-
-	if cret != nil {
-		goret = UnsafeDBusInterfaceFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// ParentGetObject calls the default implementations of the get_object virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- objectPath string: Object path to look up. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusObject (nullable) 
-//
-// Gets the #GDBusObject at @object_path, if any.
-func (manager *DBusObjectManagerInstance) ParentGetObject(objectPath string) DBusObject {
-	var carg0 *C.GDBusObjectManager
-	var carg1 *C.gchar       // in, none, converted
-	var cret  *C.GDBusObject // return, full, converted, nullable
-
-	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
-
-	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C._gotk4_gio2_DBusObjectManager_virtual_get_object(unsafe.Pointer(parentclass.get_object), carg0, carg1)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(objectPath)
-
-	var goret DBusObject
-
-	if cret != nil {
-		goret = UnsafeDBusObjectFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// ParentGetObjectPath calls the default implementations of the get_object_path virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the object path that @manager is for.
-func (manager *DBusObjectManagerInstance) ParentGetObjectPath() string {
-	var carg0 *C.GDBusObjectManager
-	var cret  *C.gchar // return, none, string
-
-	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
-
-	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
-
-	cret = C._gotk4_gio2_DBusObjectManager_virtual_get_object_path(unsafe.Pointer(parentclass.get_object_path), carg0)
-	runtime.KeepAlive(manager)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// ParentGetObjects calls the default implementations of the get_objects virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function returns the following values:
-// 
-// 	- goret []DBusObject 
-//
-// Gets all #GDBusObject objects known to @manager.
-func (manager *DBusObjectManagerInstance) ParentGetObjects() []DBusObject {
-	var carg0 *C.GDBusObjectManager
-	var cret  *C.GList // container, transfer: full
-
-	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
-
-	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
-
-	cret = C._gotk4_gio2_DBusObjectManager_virtual_get_objects(unsafe.Pointer(parentclass.get_objects), carg0)
-	runtime.KeepAlive(manager)
-
-	var goret []DBusObject
-
-	goret = glib.UnsafeListFromGlibFull(
-		unsafe.Pointer(cret),
-		func(v unsafe.Pointer) DBusObject {
-			var dst DBusObject // converted
-			dst = UnsafeDBusObjectFromGlibFull(v)
-			return dst
-		},
-	)
-
-	return goret
-}
-
-// ParentInterfaceAdded calls the default implementations of the interface_added virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- object DBusObject 
-// 	- interface_ DBusInterface 
-//
-// Signal handler for the #GDBusObjectManager::interface-added signal.
-func (manager *DBusObjectManagerInstance) ParentInterfaceAdded(object DBusObject, interface_ DBusInterface) {
-	var carg0 *C.GDBusObjectManager
-	var carg1 *C.GDBusObject    // in, none, converted
-	var carg2 *C.GDBusInterface // in, none, converted
-
-	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
-
-	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
-	carg1 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
-	carg2 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
-
-	C._gotk4_gio2_DBusObjectManager_virtual_interface_added(unsafe.Pointer(parentclass.interface_added), carg0, carg1, carg2)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(interface_)
-}
-
-// ParentInterfaceRemoved calls the default implementations of the interface_removed virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- object DBusObject 
-// 	- interface_ DBusInterface 
-//
-// Signal handler for the #GDBusObjectManager::interface-removed signal.
-func (manager *DBusObjectManagerInstance) ParentInterfaceRemoved(object DBusObject, interface_ DBusInterface) {
-	var carg0 *C.GDBusObjectManager
-	var carg1 *C.GDBusObject    // in, none, converted
-	var carg2 *C.GDBusInterface // in, none, converted
-
-	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
-
-	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
-	carg1 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
-	carg2 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
-
-	C._gotk4_gio2_DBusObjectManager_virtual_interface_removed(unsafe.Pointer(parentclass.interface_removed), carg0, carg1, carg2)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(interface_)
-}
-
-// ParentObjectAdded calls the default implementations of the object_added virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- object DBusObject 
-//
-// Signal handler for the #GDBusObjectManager::object-added signal.
-func (manager *DBusObjectManagerInstance) ParentObjectAdded(object DBusObject) {
-	var carg0 *C.GDBusObjectManager
-	var carg1 *C.GDBusObject // in, none, converted
-
-	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
-
-	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
-	carg1 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
-
-	C._gotk4_gio2_DBusObjectManager_virtual_object_added(unsafe.Pointer(parentclass.object_added), carg0, carg1)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(object)
-}
-
-// ParentObjectRemoved calls the default implementations of the object_removed virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- object DBusObject 
-//
-// Signal handler for the #GDBusObjectManager::object-removed signal.
-func (manager *DBusObjectManagerInstance) ParentObjectRemoved(object DBusObject) {
-	var carg0 *C.GDBusObjectManager
-	var carg1 *C.GDBusObject // in, none, converted
-
-	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
-
-	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
-	carg1 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
-
-	C._gotk4_gio2_DBusObjectManager_virtual_object_removed(unsafe.Pointer(parentclass.object_removed), carg0, carg1)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(object)
-}
-
 // DatagramBasedInstance is the instance type used by all types implementing GDatagramBased. It is used internally by the bindings. Users should use the interface [DatagramBased] instead.
 type DatagramBasedInstance struct {
 	_ [0]func() // equal guard
@@ -19194,7 +15348,7 @@ var _ DatagramBased = (*DatagramBasedInstance)(nil)
 // As with `GSocket`, `GDatagramBased`s can be either connection oriented (for
 // example, SCTP) or connectionless (for example, UDP). `GDatagramBased`s must be
 // datagram-based, not stream-based. The interface does not cover connection
-// establishment — use methods on the underlying type to establish a connection
+// establishment &#x2014; use methods on the underlying type to establish a connection
 // before sending and receiving data through the `GDatagramBased` API. For
 // connectionless socket types the target/source address is specified or
 // received in each I/O operation.
@@ -19223,10 +15377,10 @@ type DatagramBased interface {
 	// g_datagram_based_receive_messages(), or if the connection is closed remotely
 	// (EOS); and if the datagram_based has not been closed locally using some
 	// implementation-specific method (such as g_socket_close() or
-	// g_socket_shutdown() with @shutdown_read set, if it’s a #GSocket).
+	// g_socket_shutdown() with @shutdown_read set, if it&#x2019;s a #GSocket).
 	// 
 	// If the connection is shut down or closed (by calling g_socket_close() or
-	// g_socket_shutdown() with @shutdown_read set, if it’s a #GSocket, for
+	// g_socket_shutdown() with @shutdown_read set, if it&#x2019;s a #GSocket, for
 	// example), all calls to this function will return %G_IO_ERROR_CLOSED.
 	// 
 	// %G_IO_OUT will be set if it is expected that at least one byte can be sent
@@ -19273,32 +15427,6 @@ type DatagramBased interface {
 	// reached before the condition is met, then %FALSE is returned and @error is
 	// set appropriately (%G_IO_ERROR_CANCELLED or %G_IO_ERROR_TIMED_OUT).
 	ConditionWait(context.Context, glib.IOCondition, int64) (bool, error)
-	// CreateSource wraps g_datagram_based_create_source
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): a #GCancellable 
-	// 	- condition glib.IOCondition: a #GIOCondition mask to monitor 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *glib.Source 
-	//
-	// Creates a #GSource that can be attached to a #GMainContext to monitor for
-	// the availability of the specified @condition on the #GDatagramBased. The
-	// #GSource keeps a reference to the @datagram_based.
-	// 
-	// The callback on the source is of the #GDatagramBasedSourceFunc type.
-	// 
-	// It is meaningless to specify %G_IO_ERR or %G_IO_HUP in @condition; these
-	// conditions will always be reported in the callback if they are true.
-	// 
-	// If non-%NULL, @cancellable can be used to cancel the source, which will
-	// cause the source to trigger, reporting the current condition (which is
-	// likely 0 unless cancellation happened at the same time as a condition
-	// change). You can check for this in the callback using
-	// g_cancellable_is_cancelled().
-	CreateSource(context.Context, glib.IOCondition) *glib.Source
 	// ReceiveMessages wraps g_datagram_based_receive_messages
 	// 
 	// The function takes the following parameters:
@@ -19356,7 +15484,7 @@ type DatagramBased interface {
 	// g_datagram_based_receive_messages() will return 0 (with no error set).
 	// 
 	// If the connection is shut down or closed (by calling g_socket_close() or
-	// g_socket_shutdown() with @shutdown_read set, if it’s a #GSocket, for
+	// g_socket_shutdown() with @shutdown_read set, if it&#x2019;s a #GSocket, for
 	// example), all calls to this function will return %G_IO_ERROR_CLOSED.
 	// 
 	// On error -1 is returned and @error is set accordingly. An error will only
@@ -19414,7 +15542,7 @@ type DatagramBased interface {
 	// the way the underlying APIs work.)
 	// 
 	// If the connection is shut down or closed (by calling g_socket_close() or
-	// g_socket_shutdown() with @shutdown_write set, if it’s a #GSocket, for
+	// g_socket_shutdown() with @shutdown_write set, if it&#x2019;s a #GSocket, for
 	// example), all calls to this function will return %G_IO_ERROR_CLOSED.
 	// 
 	// On error -1 is returned and @error is set accordingly. An error will only
@@ -19444,10 +15572,10 @@ type DatagramBased interface {
 	// g_datagram_based_receive_messages(), or if the connection is closed remotely
 	// (EOS); and if the datagram_based has not been closed locally using some
 	// implementation-specific method (such as g_socket_close() or
-	// g_socket_shutdown() with @shutdown_read set, if it’s a #GSocket).
+	// g_socket_shutdown() with @shutdown_read set, if it&#x2019;s a #GSocket).
 	// 
 	// If the connection is shut down or closed (by calling g_socket_close() or
-	// g_socket_shutdown() with @shutdown_read set, if it’s a #GSocket, for
+	// g_socket_shutdown() with @shutdown_read set, if it&#x2019;s a #GSocket, for
 	// example), all calls to this function will return %G_IO_ERROR_CLOSED.
 	// 
 	// %G_IO_OUT will be set if it is expected that at least one byte can be sent
@@ -19495,33 +15623,6 @@ type DatagramBased interface {
 	// reached before the condition is met, then %FALSE is returned and @error is
 	// set appropriately (%G_IO_ERROR_CANCELLED or %G_IO_ERROR_TIMED_OUT).
 	ParentConditionWait(cancellable context.Context, condition glib.IOCondition, timeout int64) (bool, error)
-	// ParentCreateSource calls the default implementations of the create_source virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): a #GCancellable 
-	// 	- condition glib.IOCondition: a #GIOCondition mask to monitor 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *glib.Source 
-	//
-	// Creates a #GSource that can be attached to a #GMainContext to monitor for
-	// the availability of the specified @condition on the #GDatagramBased. The
-	// #GSource keeps a reference to the @datagram_based.
-	// 
-	// The callback on the source is of the #GDatagramBasedSourceFunc type.
-	// 
-	// It is meaningless to specify %G_IO_ERR or %G_IO_HUP in @condition; these
-	// conditions will always be reported in the callback if they are true.
-	// 
-	// If non-%NULL, @cancellable can be used to cancel the source, which will
-	// cause the source to trigger, reporting the current condition (which is
-	// likely 0 unless cancellation happened at the same time as a condition
-	// change). You can check for this in the callback using
-	// g_cancellable_is_cancelled().
-	ParentCreateSource(cancellable context.Context, condition glib.IOCondition) *glib.Source
 	// ParentReceiveMessages calls the default implementations of the receive_messages virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -19580,7 +15681,7 @@ type DatagramBased interface {
 	// g_datagram_based_receive_messages() will return 0 (with no error set).
 	// 
 	// If the connection is shut down or closed (by calling g_socket_close() or
-	// g_socket_shutdown() with @shutdown_read set, if it’s a #GSocket, for
+	// g_socket_shutdown() with @shutdown_read set, if it&#x2019;s a #GSocket, for
 	// example), all calls to this function will return %G_IO_ERROR_CLOSED.
 	// 
 	// On error -1 is returned and @error is set accordingly. An error will only
@@ -19639,7 +15740,7 @@ type DatagramBased interface {
 	// the way the underlying APIs work.)
 	// 
 	// If the connection is shut down or closed (by calling g_socket_close() or
-	// g_socket_shutdown() with @shutdown_write set, if it’s a #GSocket, for
+	// g_socket_shutdown() with @shutdown_write set, if it&#x2019;s a #GSocket, for
 	// example), all calls to this function will return %G_IO_ERROR_CLOSED.
 	// 
 	// On error -1 is returned and @error is set accordingly. An error will only
@@ -19710,10 +15811,10 @@ func UnsafeDatagramBasedToGlibFull(c DatagramBased) unsafe.Pointer {
 // g_datagram_based_receive_messages(), or if the connection is closed remotely
 // (EOS); and if the datagram_based has not been closed locally using some
 // implementation-specific method (such as g_socket_close() or
-// g_socket_shutdown() with @shutdown_read set, if it’s a #GSocket).
+// g_socket_shutdown() with @shutdown_read set, if it&#x2019;s a #GSocket).
 // 
 // If the connection is shut down or closed (by calling g_socket_close() or
-// g_socket_shutdown() with @shutdown_read set, if it’s a #GSocket, for
+// g_socket_shutdown() with @shutdown_read set, if it&#x2019;s a #GSocket, for
 // example), all calls to this function will return %G_IO_ERROR_CLOSED.
 // 
 // %G_IO_OUT will be set if it is expected that at least one byte can be sent
@@ -19811,55 +15912,6 @@ func (datagramBased *DatagramBasedInstance) ConditionWait(cancellable context.Co
 	return goret, _goerr
 }
 
-// CreateSource wraps g_datagram_based_create_source
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable 
-// 	- condition glib.IOCondition: a #GIOCondition mask to monitor 
-// 
-// The function returns the following values:
-// 
-// 	- goret *glib.Source 
-//
-// Creates a #GSource that can be attached to a #GMainContext to monitor for
-// the availability of the specified @condition on the #GDatagramBased. The
-// #GSource keeps a reference to the @datagram_based.
-// 
-// The callback on the source is of the #GDatagramBasedSourceFunc type.
-// 
-// It is meaningless to specify %G_IO_ERR or %G_IO_HUP in @condition; these
-// conditions will always be reported in the callback if they are true.
-// 
-// If non-%NULL, @cancellable can be used to cancel the source, which will
-// cause the source to trigger, reporting the current condition (which is
-// likely 0 unless cancellation happened at the same time as a condition
-// change). You can check for this in the callback using
-// g_cancellable_is_cancelled().
-func (datagramBased *DatagramBasedInstance) CreateSource(cancellable context.Context, condition glib.IOCondition) *glib.Source {
-	var carg0 *C.GDatagramBased // in, none, converted
-	var carg2 *C.GCancellable   // in, none, converted, nullable
-	var carg1 C.GIOCondition    // in, none, casted
-	var cret  *C.GSource        // return, full, converted
-
-	carg0 = (*C.GDatagramBased)(UnsafeDatagramBasedToGlibNone(datagramBased))
-	if cancellable != nil {
-		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = C.GIOCondition(condition)
-
-	cret = C.g_datagram_based_create_source(carg0, carg1, carg2)
-	runtime.KeepAlive(datagramBased)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(condition)
-
-	var goret *glib.Source
-
-	goret = glib.UnsafeSourceFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // ReceiveMessages wraps g_datagram_based_receive_messages
 // 
 // The function takes the following parameters:
@@ -19917,7 +15969,7 @@ func (datagramBased *DatagramBasedInstance) CreateSource(cancellable context.Con
 // g_datagram_based_receive_messages() will return 0 (with no error set).
 // 
 // If the connection is shut down or closed (by calling g_socket_close() or
-// g_socket_shutdown() with @shutdown_read set, if it’s a #GSocket, for
+// g_socket_shutdown() with @shutdown_read set, if it&#x2019;s a #GSocket, for
 // example), all calls to this function will return %G_IO_ERROR_CLOSED.
 // 
 // On error -1 is returned and @error is set accordingly. An error will only
@@ -20013,7 +16065,7 @@ func (datagramBased *DatagramBasedInstance) ReceiveMessages(cancellable context.
 // the way the underlying APIs work.)
 // 
 // If the connection is shut down or closed (by calling g_socket_close() or
-// g_socket_shutdown() with @shutdown_write set, if it’s a #GSocket, for
+// g_socket_shutdown() with @shutdown_write set, if it&#x2019;s a #GSocket, for
 // example), all calls to this function will return %G_IO_ERROR_CLOSED.
 // 
 // On error -1 is returned and @error is set accordingly. An error will only
@@ -20080,10 +16132,10 @@ type DatagramBasedOverrides[Instance DatagramBased] struct {
 	// g_datagram_based_receive_messages(), or if the connection is closed remotely
 	// (EOS); and if the datagram_based has not been closed locally using some
 	// implementation-specific method (such as g_socket_close() or
-	// g_socket_shutdown() with @shutdown_read set, if it’s a #GSocket).
+	// g_socket_shutdown() with @shutdown_read set, if it&#x2019;s a #GSocket).
 	// 
 	// If the connection is shut down or closed (by calling g_socket_close() or
-	// g_socket_shutdown() with @shutdown_read set, if it’s a #GSocket, for
+	// g_socket_shutdown() with @shutdown_read set, if it&#x2019;s a #GSocket, for
 	// example), all calls to this function will return %G_IO_ERROR_CLOSED.
 	// 
 	// %G_IO_OUT will be set if it is expected that at least one byte can be sent
@@ -20130,32 +16182,6 @@ type DatagramBasedOverrides[Instance DatagramBased] struct {
 	// reached before the condition is met, then %FALSE is returned and @error is
 	// set appropriately (%G_IO_ERROR_CANCELLED or %G_IO_ERROR_TIMED_OUT).
 	ConditionWait func(Instance, context.Context, glib.IOCondition, int64) (bool, error)
-	// // CreateSource allows you to override the implementation of the virtual method create_source.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): a #GCancellable 
-	// 	- condition glib.IOCondition: a #GIOCondition mask to monitor 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *glib.Source 
-	//
-	// Creates a #GSource that can be attached to a #GMainContext to monitor for
-	// the availability of the specified @condition on the #GDatagramBased. The
-	// #GSource keeps a reference to the @datagram_based.
-	// 
-	// The callback on the source is of the #GDatagramBasedSourceFunc type.
-	// 
-	// It is meaningless to specify %G_IO_ERR or %G_IO_HUP in @condition; these
-	// conditions will always be reported in the callback if they are true.
-	// 
-	// If non-%NULL, @cancellable can be used to cancel the source, which will
-	// cause the source to trigger, reporting the current condition (which is
-	// likely 0 unless cancellation happened at the same time as a condition
-	// change). You can check for this in the callback using
-	// g_cancellable_is_cancelled().
-	CreateSource func(Instance, context.Context, glib.IOCondition) *glib.Source
 	// // ReceiveMessages allows you to override the implementation of the virtual method receive_messages.
 	// 
 	// The function takes the following parameters:
@@ -20213,7 +16239,7 @@ type DatagramBasedOverrides[Instance DatagramBased] struct {
 	// g_datagram_based_receive_messages() will return 0 (with no error set).
 	// 
 	// If the connection is shut down or closed (by calling g_socket_close() or
-	// g_socket_shutdown() with @shutdown_read set, if it’s a #GSocket, for
+	// g_socket_shutdown() with @shutdown_read set, if it&#x2019;s a #GSocket, for
 	// example), all calls to this function will return %G_IO_ERROR_CLOSED.
 	// 
 	// On error -1 is returned and @error is set accordingly. An error will only
@@ -20271,7 +16297,7 @@ type DatagramBasedOverrides[Instance DatagramBased] struct {
 	// the way the underlying APIs work.)
 	// 
 	// If the connection is shut down or closed (by calling g_socket_close() or
-	// g_socket_shutdown() with @shutdown_write set, if it’s a #GSocket, for
+	// g_socket_shutdown() with @shutdown_write set, if it&#x2019;s a #GSocket, for
 	// example), all calls to this function will return %G_IO_ERROR_CLOSED.
 	// 
 	// On error -1 is returned and @error is set accordingly. An error will only
@@ -20334,32 +16360,6 @@ func UnsafeApplyDatagramBasedOverrides[Instance DatagramBased](gclass unsafe.Poi
 					cret = C.TRUE
 				}
 				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.CreateSource != nil {
-		pclass.create_source = (*[0]byte)(C._gotk4_gio2_DatagramBased_create_source)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DatagramBased_create_source",
-			func(carg0 *C.GDatagramBased, carg1 C.GIOCondition, carg2 *C.GCancellable) (cret *C.GSource) {
-				var datagramBased Instance         // go GDatagramBased subclass
-				var cancellable   context.Context  // in, none, converted, nullable
-				var condition     glib.IOCondition // in, none, casted
-				var goret         *glib.Source     // return, full, converted
-
-				datagramBased = UnsafeDatagramBasedFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				if carg2 != nil {
-					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
-				}
-				condition = glib.IOCondition(carg1)
-
-				goret = overrides.CreateSource(datagramBased, cancellable, condition)
-
-				cret = (*C.GSource)(glib.UnsafeSourceToGlibFull(goret))
 
 				return cret
 			},
@@ -20456,10 +16456,10 @@ func UnsafeApplyDatagramBasedOverrides[Instance DatagramBased](gclass unsafe.Poi
 // g_datagram_based_receive_messages(), or if the connection is closed remotely
 // (EOS); and if the datagram_based has not been closed locally using some
 // implementation-specific method (such as g_socket_close() or
-// g_socket_shutdown() with @shutdown_read set, if it’s a #GSocket).
+// g_socket_shutdown() with @shutdown_read set, if it&#x2019;s a #GSocket).
 // 
 // If the connection is shut down or closed (by calling g_socket_close() or
-// g_socket_shutdown() with @shutdown_read set, if it’s a #GSocket, for
+// g_socket_shutdown() with @shutdown_read set, if it&#x2019;s a #GSocket, for
 // example), all calls to this function will return %G_IO_ERROR_CLOSED.
 // 
 // %G_IO_OUT will be set if it is expected that at least one byte can be sent
@@ -20562,58 +16562,6 @@ func (datagramBased *DatagramBasedInstance) ParentConditionWait(cancellable cont
 	return goret, _goerr
 }
 
-// ParentCreateSource calls the default implementations of the create_source virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable 
-// 	- condition glib.IOCondition: a #GIOCondition mask to monitor 
-// 
-// The function returns the following values:
-// 
-// 	- goret *glib.Source 
-//
-// Creates a #GSource that can be attached to a #GMainContext to monitor for
-// the availability of the specified @condition on the #GDatagramBased. The
-// #GSource keeps a reference to the @datagram_based.
-// 
-// The callback on the source is of the #GDatagramBasedSourceFunc type.
-// 
-// It is meaningless to specify %G_IO_ERR or %G_IO_HUP in @condition; these
-// conditions will always be reported in the callback if they are true.
-// 
-// If non-%NULL, @cancellable can be used to cancel the source, which will
-// cause the source to trigger, reporting the current condition (which is
-// likely 0 unless cancellation happened at the same time as a condition
-// change). You can check for this in the callback using
-// g_cancellable_is_cancelled().
-func (datagramBased *DatagramBasedInstance) ParentCreateSource(cancellable context.Context, condition glib.IOCondition) *glib.Source {
-	var carg0 *C.GDatagramBased
-	var carg2 *C.GCancellable // in, none, converted
-	var carg1 C.GIOCondition  // in, none, converted, nullable
-	var cret  *C.GSource      // return, full, converted
-
-	parentclass := (*C.GDatagramBasedInterface)(classdata.PeekParentInterface(UnsafeDatagramBasedToGlibNone(datagramBased), uint64(TypeDatagramBased)))
-
-	carg0 = (*C.GDatagramBased)(UnsafeDatagramBasedToGlibNone(datagramBased))
-	if cancellable != nil {
-		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = C.GIOCondition(condition)
-
-	cret = C._gotk4_gio2_DatagramBased_virtual_create_source(unsafe.Pointer(parentclass.create_source), carg0, carg1, carg2)
-	runtime.KeepAlive(datagramBased)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(condition)
-
-	var goret *glib.Source
-
-	goret = glib.UnsafeSourceFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // ParentReceiveMessages calls the default implementations of the receive_messages virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
@@ -20672,7 +16620,7 @@ func (datagramBased *DatagramBasedInstance) ParentCreateSource(cancellable conte
 // g_datagram_based_receive_messages() will return 0 (with no error set).
 // 
 // If the connection is shut down or closed (by calling g_socket_close() or
-// g_socket_shutdown() with @shutdown_read set, if it’s a #GSocket, for
+// g_socket_shutdown() with @shutdown_read set, if it&#x2019;s a #GSocket, for
 // example), all calls to this function will return %G_IO_ERROR_CLOSED.
 // 
 // On error -1 is returned and @error is set accordingly. An error will only
@@ -20771,7 +16719,7 @@ func (datagramBased *DatagramBasedInstance) ParentReceiveMessages(cancellable co
 // the way the underlying APIs work.)
 // 
 // If the connection is shut down or closed (by calling g_socket_close() or
-// g_socket_shutdown() with @shutdown_write set, if it’s a #GSocket, for
+// g_socket_shutdown() with @shutdown_write set, if it&#x2019;s a #GSocket, for
 // example), all calls to this function will return %G_IO_ERROR_CLOSED.
 // 
 // On error -1 is returned and @error is set accordingly. An error will only
@@ -20830,7 +16778,7 @@ var _ Drive = (*DriveInstance)(nil)
 // Drive wraps GDrive
 //
 // `GDrive` represents a piece of hardware connected to the machine.
-// It’s generally only created for removable hardware or hardware with
+// It&#x2019;s generally only created for removable hardware or hardware with
 // removable media. For example, an optical disc drive, or a USB flash drive.
 // 
 // `GDrive` is a container class for [iface@Gio.Volume] objects that stem from
@@ -20839,7 +16787,7 @@ var _ Drive = (*DriveInstance)(nil)
 // whether media is available, determining whether media change is
 // automatically detected and ejecting the media.
 // 
-// If the `GDrive` reports that media isn’t automatically detected, one
+// If the `GDrive` reports that media isn&#x2019;t automatically detected, one
 // can poll for media; typically one should not do this periodically
 // as a poll for media operation is potentially expensive and may
 // spin up the drive creating noise.
@@ -24042,7 +19990,7 @@ var _ DtlsConnection = (*DtlsConnectionInstance)(nil)
 // 
 // Neither [iface@Gio.DtlsServerConnection] or [iface@Gio.DtlsClientConnection]
 // set the peer address on their base [iface@Gio.DatagramBased] if it is a
-// [class@Gio.Socket] — it is up to the caller to do that if they wish. If they
+// [class@Gio.Socket] &#x2014; it is up to the caller to do that if they wish. If they
 // do not, and [method@Gio.Socket.close] is called on the base socket, the
 // `GDtlsConnection` will not raise a `G_IO_ERROR_NOT_CONNECTED` error on
 // further I/O.
@@ -24437,7 +20385,7 @@ type DtlsConnection interface {
 	// down, and further writing is disallowed. Subsequent calls to
 	// g_datagram_based_send_messages() will return %G_IO_ERROR_CLOSED.
 	// 
-	// It is allowed for both @shutdown_read and @shutdown_write to be TRUE — this
+	// It is allowed for both @shutdown_read and @shutdown_write to be TRUE &#x2014; this
 	// is equivalent to calling g_dtls_connection_close().
 	// 
 	// If @cancellable is cancelled, the #GDtlsConnection may be left
@@ -24645,7 +20593,7 @@ type DtlsConnection interface {
 	// down, and further writing is disallowed. Subsequent calls to
 	// g_datagram_based_send_messages() will return %G_IO_ERROR_CLOSED.
 	// 
-	// It is allowed for both @shutdown_read and @shutdown_write to be TRUE — this
+	// It is allowed for both @shutdown_read and @shutdown_write to be TRUE &#x2014; this
 	// is equivalent to calling g_dtls_connection_close().
 	// 
 	// If @cancellable is cancelled, the #GDtlsConnection may be left
@@ -25512,7 +21460,7 @@ func (conn *DtlsConnectionInstance) SetRequireCloseNotify(requireCloseNotify boo
 // down, and further writing is disallowed. Subsequent calls to
 // g_datagram_based_send_messages() will return %G_IO_ERROR_CLOSED.
 // 
-// It is allowed for both @shutdown_read and @shutdown_write to be TRUE — this
+// It is allowed for both @shutdown_read and @shutdown_write to be TRUE &#x2014; this
 // is equivalent to calling g_dtls_connection_close().
 // 
 // If @cancellable is cancelled, the #GDtlsConnection may be left
@@ -25812,7 +21760,7 @@ type DtlsConnectionOverrides[Instance DtlsConnection] struct {
 	// down, and further writing is disallowed. Subsequent calls to
 	// g_datagram_based_send_messages() will return %G_IO_ERROR_CLOSED.
 	// 
-	// It is allowed for both @shutdown_read and @shutdown_write to be TRUE — this
+	// It is allowed for both @shutdown_read and @shutdown_write to be TRUE &#x2014; this
 	// is equivalent to calling g_dtls_connection_close().
 	// 
 	// If @cancellable is cancelled, the #GDtlsConnection may be left
@@ -26266,7 +22214,7 @@ func (conn *DtlsConnectionInstance) ParentSetAdvertisedProtocols(protocols []str
 // down, and further writing is disallowed. Subsequent calls to
 // g_datagram_based_send_messages() will return %G_IO_ERROR_CLOSED.
 // 
-// It is allowed for both @shutdown_read and @shutdown_write to be TRUE — this
+// It is allowed for both @shutdown_read and @shutdown_write to be TRUE &#x2014; this
 // is equivalent to calling g_dtls_connection_close().
 // 
 // If @cancellable is cancelled, the #GDtlsConnection may be left
@@ -26539,7 +22487,7 @@ var _ File = (*FileInstance)(nil)
 // simply have `_async()` appended to their function names. The asynchronous
 // I/O functions call a [callback@Gio.AsyncReadyCallback] which is then used to
 // finalize the operation, producing a [iface@Gio.AsyncResult] which is then
-// passed to the function’s matching `_finish()` operation.
+// passed to the function&#x2019;s matching `_finish()` operation.
 // 
 // It is highly recommended to use asynchronous calls when running within a
 // shared main loop, such as in the main thread of an application. This avoids
@@ -26558,7 +22506,7 @@ var _ File = (*FileInstance)(nil)
 // 
 // ## Entity Tags
 // 
-// One notable feature of `GFile`s are entity tags, or ‘etags’ for
+// One notable feature of `GFile`s are entity tags, or &#x2018;etags&#x2019; for
 // short. Entity tags are somewhat like a more abstract version of the
 // traditional mtime, and can be used to quickly determine if the file
 // has been modified from the version on the file system. See the
@@ -26847,7 +22795,7 @@ type File interface {
 	// Deletes a file. If the @file is a directory, it will only be
 	// deleted if it is empty. This has the same semantics as g_unlink().
 	// 
-	// If @file doesn’t exist, %G_IO_ERROR_NOT_FOUND will be returned. This allows
+	// If @file doesn&#x2019;t exist, %G_IO_ERROR_NOT_FOUND will be returned. This allows
 	// for deletion to be implemented avoiding
 	// [time-of-check to time-of-use races](https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use):
 	// |[
@@ -26905,7 +22853,7 @@ type File interface {
 	// 
 	// g_file_dup() is useful when a second handle is needed to the same underlying
 	// file, for use in a separate thread (#GFile is not thread-safe). For use
-	// within the same thread, use g_object_ref() to increment the existing object’s
+	// within the same thread, use g_object_ref() to increment the existing object&#x2019;s
 	// reference count.
 	// 
 	// This call does no blocking I/O.
@@ -28107,10 +24055,9 @@ type File interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- cancellable context.Context (nullable): optional #GCancellable object,
-	//   %NULL to ignore 
+	// 	- cancellable context.Context (nullable): optional cancellable object 
 	// 	- attributes string: an attribute query string 
-	// 	- flags FileQueryInfoFlags: a set of #GFileQueryInfoFlags 
+	// 	- flags FileQueryInfoFlags: flags to affect the query operation 
 	// 
 	// The function returns the following values:
 	// 
@@ -28118,35 +24065,48 @@ type File interface {
 	// 	- _goerr error (nullable): an error 
 	//
 	// Gets the requested information about specified @file.
-	// The result is a #GFileInfo object that contains key-value
+	// 
+	// The result is a [class@Gio.FileInfo] object that contains key-value
 	// attributes (such as the type or size of the file).
 	// 
 	// The @attributes value is a string that specifies the file
 	// attributes that should be gathered. It is not an error if
-	// it's not possible to read a particular requested attribute
-	// from a file - it just won't be set. @attributes should be a
-	// comma-separated list of attributes or attribute wildcards.
-	// The wildcard "*" means all attributes, and a wildcard like
-	// "standard::*" means all attributes in the standard namespace.
-	// An example attribute query be "standard::*,owner::user".
-	// The standard attributes are available as defines, like
-	// %G_FILE_ATTRIBUTE_STANDARD_NAME.
+	// it&#x2019;s not possible to read a particular requested attribute
+	// from a file &#x2014; it just won't be set. In particular this means that if a file
+	// is inaccessible (due to being in a folder with restrictive permissions), for
+	// example, you can expect the returned [class@Gio.FileInfo] to have very few
+	// attributes set. You should check whether an attribute is set using
+	// [method@Gio.FileInfo.has_attribute] before trying to retrieve its value.
 	// 
-	// If @cancellable is not %NULL, then the operation can be cancelled
+	// It is guaranteed that if any of the following attributes are listed in
+	// @attributes, they will always be set in the returned [class@Gio.FileInfo],
+	// even if the user doesn&#x2019;t have permissions to access the file:
+	// 
+	//  - [const@Gio.FILE_ATTRIBUTE_STANDARD_NAME]
+	//  - [const@Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME]
+	// 
+	// @attributes should be a comma-separated list of attributes or attribute
+	// wildcards. The wildcard `"*"` means all attributes, and a wildcard like
+	// `"standard::*"` means all attributes in the standard namespace.
+	// An example attribute query might be `"standard::*,owner::user"`.
+	// The standard attributes are available as defines, like
+	// [const@Gio.FILE_ATTRIBUTE_STANDARD_NAME].
+	// 
+	// If @cancellable is not `NULL`, then the operation can be cancelled
 	// by triggering the cancellable object from another thread. If the
-	// operation was cancelled, the error %G_IO_ERROR_CANCELLED will be
+	// operation was cancelled, the error [error@Gio.IOErrorEnum.CANCELLED] will be
 	// returned.
 	// 
 	// For symlinks, normally the information about the target of the
 	// symlink is returned, rather than information about the symlink
-	// itself. However if you pass %G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS
+	// itself. However if you pass [flags@Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS]
 	// in @flags the information about the symlink itself will be returned.
 	// Also, for symlinks that point to non-existing files the information
 	// about the symlink itself will be returned.
 	// 
-	// If the file does not exist, the %G_IO_ERROR_NOT_FOUND error will be
+	// If the file does not exist, the [error@Gio.IOErrorEnum.NOT_FOUND] error will be
 	// returned. Other errors are possible too, and depend on what kind of
-	// filesystem the file is on.
+	// file system the file is on.
 	QueryInfo(context.Context, string, FileQueryInfoFlags) (FileInfo, error)
 	// QueryInfoAsync wraps g_file_query_info_async
 	// 
@@ -28392,7 +24352,7 @@ type File interface {
 	// If @make_backup is %TRUE, this function will attempt to make a backup
 	// of @file. Internally, it uses g_file_replace(), so will try to replace the
 	// file contents in the safest way possible. For example, atomic renames are
-	// used when replacing local files’ contents.
+	// used when replacing local files&#x2019; contents.
 	// 
 	// If @cancellable is not %NULL, then the operation can be cancelled by
 	// triggering the cancellable object from another thread. If the operation
@@ -29225,7 +25185,7 @@ type File interface {
 	// Deletes a file. If the @file is a directory, it will only be
 	// deleted if it is empty. This has the same semantics as g_unlink().
 	// 
-	// If @file doesn’t exist, %G_IO_ERROR_NOT_FOUND will be returned. This allows
+	// If @file doesn&#x2019;t exist, %G_IO_ERROR_NOT_FOUND will be returned. This allows
 	// for deletion to be implemented avoiding
 	// [time-of-check to time-of-use races](https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use):
 	// |[
@@ -29271,7 +25231,7 @@ type File interface {
 	// 
 	// g_file_dup() is useful when a second handle is needed to the same underlying
 	// file, for use in a separate thread (#GFile is not thread-safe). For use
-	// within the same thread, use g_object_ref() to increment the existing object’s
+	// within the same thread, use g_object_ref() to increment the existing object&#x2019;s
 	// reference count.
 	// 
 	// This call does no blocking I/O.
@@ -29991,10 +25951,9 @@ type File interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- cancellable context.Context (nullable): optional #GCancellable object,
-	//   %NULL to ignore 
+	// 	- cancellable context.Context (nullable): optional cancellable object 
 	// 	- attributes string: an attribute query string 
-	// 	- flags FileQueryInfoFlags: a set of #GFileQueryInfoFlags 
+	// 	- flags FileQueryInfoFlags: flags to affect the query operation 
 	// 
 	// The function returns the following values:
 	// 
@@ -30002,35 +25961,48 @@ type File interface {
 	// 	- _goerr error (nullable): an error 
 	//
 	// Gets the requested information about specified @file.
-	// The result is a #GFileInfo object that contains key-value
+	// 
+	// The result is a [class@Gio.FileInfo] object that contains key-value
 	// attributes (such as the type or size of the file).
 	// 
 	// The @attributes value is a string that specifies the file
 	// attributes that should be gathered. It is not an error if
-	// it's not possible to read a particular requested attribute
-	// from a file - it just won't be set. @attributes should be a
-	// comma-separated list of attributes or attribute wildcards.
-	// The wildcard "*" means all attributes, and a wildcard like
-	// "standard::*" means all attributes in the standard namespace.
-	// An example attribute query be "standard::*,owner::user".
-	// The standard attributes are available as defines, like
-	// %G_FILE_ATTRIBUTE_STANDARD_NAME.
+	// it&#x2019;s not possible to read a particular requested attribute
+	// from a file &#x2014; it just won't be set. In particular this means that if a file
+	// is inaccessible (due to being in a folder with restrictive permissions), for
+	// example, you can expect the returned [class@Gio.FileInfo] to have very few
+	// attributes set. You should check whether an attribute is set using
+	// [method@Gio.FileInfo.has_attribute] before trying to retrieve its value.
 	// 
-	// If @cancellable is not %NULL, then the operation can be cancelled
+	// It is guaranteed that if any of the following attributes are listed in
+	// @attributes, they will always be set in the returned [class@Gio.FileInfo],
+	// even if the user doesn&#x2019;t have permissions to access the file:
+	// 
+	//  - [const@Gio.FILE_ATTRIBUTE_STANDARD_NAME]
+	//  - [const@Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME]
+	// 
+	// @attributes should be a comma-separated list of attributes or attribute
+	// wildcards. The wildcard `"*"` means all attributes, and a wildcard like
+	// `"standard::*"` means all attributes in the standard namespace.
+	// An example attribute query might be `"standard::*,owner::user"`.
+	// The standard attributes are available as defines, like
+	// [const@Gio.FILE_ATTRIBUTE_STANDARD_NAME].
+	// 
+	// If @cancellable is not `NULL`, then the operation can be cancelled
 	// by triggering the cancellable object from another thread. If the
-	// operation was cancelled, the error %G_IO_ERROR_CANCELLED will be
+	// operation was cancelled, the error [error@Gio.IOErrorEnum.CANCELLED] will be
 	// returned.
 	// 
 	// For symlinks, normally the information about the target of the
 	// symlink is returned, rather than information about the symlink
-	// itself. However if you pass %G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS
+	// itself. However if you pass [flags@Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS]
 	// in @flags the information about the symlink itself will be returned.
 	// Also, for symlinks that point to non-existing files the information
 	// about the symlink itself will be returned.
 	// 
-	// If the file does not exist, the %G_IO_ERROR_NOT_FOUND error will be
+	// If the file does not exist, the [error@Gio.IOErrorEnum.NOT_FOUND] error will be
 	// returned. Other errors are possible too, and depend on what kind of
-	// filesystem the file is on.
+	// file system the file is on.
 	ParentQueryInfo(cancellable context.Context, attributes string, flags FileQueryInfoFlags) (FileInfo, error)
 	// ParentQueryInfoFinish calls the default implementations of the query_info_finish virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
@@ -31528,7 +27500,7 @@ func (file *FileInstance) CreateReadwriteFinish(res AsyncResult) (FileIOStream, 
 // Deletes a file. If the @file is a directory, it will only be
 // deleted if it is empty. This has the same semantics as g_unlink().
 // 
-// If @file doesn’t exist, %G_IO_ERROR_NOT_FOUND will be returned. This allows
+// If @file doesn&#x2019;t exist, %G_IO_ERROR_NOT_FOUND will be returned. This allows
 // for deletion to be implemented avoiding
 // [time-of-check to time-of-use races](https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use):
 // |[
@@ -31661,7 +27633,7 @@ func (file *FileInstance) DeleteFinish(result AsyncResult) (bool, error) {
 // 
 // g_file_dup() is useful when a second handle is needed to the same underlying
 // file, for use in a separate thread (#GFile is not thread-safe). For use
-// within the same thread, use g_object_ref() to increment the existing object’s
+// within the same thread, use g_object_ref() to increment the existing object&#x2019;s
 // reference count.
 // 
 // This call does no blocking I/O.
@@ -34378,10 +30350,9 @@ func (file *FileInstance) QueryFilesystemInfoFinish(res AsyncResult) (FileInfo, 
 // 
 // The function takes the following parameters:
 // 
-// 	- cancellable context.Context (nullable): optional #GCancellable object,
-//   %NULL to ignore 
+// 	- cancellable context.Context (nullable): optional cancellable object 
 // 	- attributes string: an attribute query string 
-// 	- flags FileQueryInfoFlags: a set of #GFileQueryInfoFlags 
+// 	- flags FileQueryInfoFlags: flags to affect the query operation 
 // 
 // The function returns the following values:
 // 
@@ -34389,35 +30360,48 @@ func (file *FileInstance) QueryFilesystemInfoFinish(res AsyncResult) (FileInfo, 
 // 	- _goerr error (nullable): an error 
 //
 // Gets the requested information about specified @file.
-// The result is a #GFileInfo object that contains key-value
+// 
+// The result is a [class@Gio.FileInfo] object that contains key-value
 // attributes (such as the type or size of the file).
 // 
 // The @attributes value is a string that specifies the file
 // attributes that should be gathered. It is not an error if
-// it's not possible to read a particular requested attribute
-// from a file - it just won't be set. @attributes should be a
-// comma-separated list of attributes or attribute wildcards.
-// The wildcard "*" means all attributes, and a wildcard like
-// "standard::*" means all attributes in the standard namespace.
-// An example attribute query be "standard::*,owner::user".
-// The standard attributes are available as defines, like
-// %G_FILE_ATTRIBUTE_STANDARD_NAME.
+// it&#x2019;s not possible to read a particular requested attribute
+// from a file &#x2014; it just won't be set. In particular this means that if a file
+// is inaccessible (due to being in a folder with restrictive permissions), for
+// example, you can expect the returned [class@Gio.FileInfo] to have very few
+// attributes set. You should check whether an attribute is set using
+// [method@Gio.FileInfo.has_attribute] before trying to retrieve its value.
 // 
-// If @cancellable is not %NULL, then the operation can be cancelled
+// It is guaranteed that if any of the following attributes are listed in
+// @attributes, they will always be set in the returned [class@Gio.FileInfo],
+// even if the user doesn&#x2019;t have permissions to access the file:
+// 
+//  - [const@Gio.FILE_ATTRIBUTE_STANDARD_NAME]
+//  - [const@Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME]
+// 
+// @attributes should be a comma-separated list of attributes or attribute
+// wildcards. The wildcard `"*"` means all attributes, and a wildcard like
+// `"standard::*"` means all attributes in the standard namespace.
+// An example attribute query might be `"standard::*,owner::user"`.
+// The standard attributes are available as defines, like
+// [const@Gio.FILE_ATTRIBUTE_STANDARD_NAME].
+// 
+// If @cancellable is not `NULL`, then the operation can be cancelled
 // by triggering the cancellable object from another thread. If the
-// operation was cancelled, the error %G_IO_ERROR_CANCELLED will be
+// operation was cancelled, the error [error@Gio.IOErrorEnum.CANCELLED] will be
 // returned.
 // 
 // For symlinks, normally the information about the target of the
 // symlink is returned, rather than information about the symlink
-// itself. However if you pass %G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS
+// itself. However if you pass [flags@Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS]
 // in @flags the information about the symlink itself will be returned.
 // Also, for symlinks that point to non-existing files the information
 // about the symlink itself will be returned.
 // 
-// If the file does not exist, the %G_IO_ERROR_NOT_FOUND error will be
+// If the file does not exist, the [error@Gio.IOErrorEnum.NOT_FOUND] error will be
 // returned. Other errors are possible too, and depend on what kind of
-// filesystem the file is on.
+// file system the file is on.
 func (file *FileInstance) QueryInfo(cancellable context.Context, attributes string, flags FileQueryInfoFlags) (FileInfo, error) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
@@ -34945,7 +30929,7 @@ func (file *FileInstance) ReplaceAsync(cancellable context.Context, etag string,
 // If @make_backup is %TRUE, this function will attempt to make a backup
 // of @file. Internally, it uses g_file_replace(), so will try to replace the
 // file contents in the safest way possible. For example, atomic renames are
-// used when replacing local files’ contents.
+// used when replacing local files&#x2019; contents.
 // 
 // If @cancellable is not %NULL, then the operation can be cancelled by
 // triggering the cancellable object from another thread. If the operation
@@ -36766,7 +32750,7 @@ type FileOverrides[Instance File] struct {
 	// Deletes a file. If the @file is a directory, it will only be
 	// deleted if it is empty. This has the same semantics as g_unlink().
 	// 
-	// If @file doesn’t exist, %G_IO_ERROR_NOT_FOUND will be returned. This allows
+	// If @file doesn&#x2019;t exist, %G_IO_ERROR_NOT_FOUND will be returned. This allows
 	// for deletion to be implemented avoiding
 	// [time-of-check to time-of-use races](https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use):
 	// |[
@@ -36810,7 +32794,7 @@ type FileOverrides[Instance File] struct {
 	// 
 	// g_file_dup() is useful when a second handle is needed to the same underlying
 	// file, for use in a separate thread (#GFile is not thread-safe). For use
-	// within the same thread, use g_object_ref() to increment the existing object’s
+	// within the same thread, use g_object_ref() to increment the existing object&#x2019;s
 	// reference count.
 	// 
 	// This call does no blocking I/O.
@@ -37494,10 +33478,9 @@ type FileOverrides[Instance File] struct {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- cancellable context.Context (nullable): optional #GCancellable object,
-	//   %NULL to ignore 
+	// 	- cancellable context.Context (nullable): optional cancellable object 
 	// 	- attributes string: an attribute query string 
-	// 	- flags FileQueryInfoFlags: a set of #GFileQueryInfoFlags 
+	// 	- flags FileQueryInfoFlags: flags to affect the query operation 
 	// 
 	// The function returns the following values:
 	// 
@@ -37505,35 +33488,48 @@ type FileOverrides[Instance File] struct {
 	// 	- _goerr error (nullable): an error 
 	//
 	// Gets the requested information about specified @file.
-	// The result is a #GFileInfo object that contains key-value
+	// 
+	// The result is a [class@Gio.FileInfo] object that contains key-value
 	// attributes (such as the type or size of the file).
 	// 
 	// The @attributes value is a string that specifies the file
 	// attributes that should be gathered. It is not an error if
-	// it's not possible to read a particular requested attribute
-	// from a file - it just won't be set. @attributes should be a
-	// comma-separated list of attributes or attribute wildcards.
-	// The wildcard "*" means all attributes, and a wildcard like
-	// "standard::*" means all attributes in the standard namespace.
-	// An example attribute query be "standard::*,owner::user".
-	// The standard attributes are available as defines, like
-	// %G_FILE_ATTRIBUTE_STANDARD_NAME.
+	// it&#x2019;s not possible to read a particular requested attribute
+	// from a file &#x2014; it just won't be set. In particular this means that if a file
+	// is inaccessible (due to being in a folder with restrictive permissions), for
+	// example, you can expect the returned [class@Gio.FileInfo] to have very few
+	// attributes set. You should check whether an attribute is set using
+	// [method@Gio.FileInfo.has_attribute] before trying to retrieve its value.
 	// 
-	// If @cancellable is not %NULL, then the operation can be cancelled
+	// It is guaranteed that if any of the following attributes are listed in
+	// @attributes, they will always be set in the returned [class@Gio.FileInfo],
+	// even if the user doesn&#x2019;t have permissions to access the file:
+	// 
+	//  - [const@Gio.FILE_ATTRIBUTE_STANDARD_NAME]
+	//  - [const@Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME]
+	// 
+	// @attributes should be a comma-separated list of attributes or attribute
+	// wildcards. The wildcard `"*"` means all attributes, and a wildcard like
+	// `"standard::*"` means all attributes in the standard namespace.
+	// An example attribute query might be `"standard::*,owner::user"`.
+	// The standard attributes are available as defines, like
+	// [const@Gio.FILE_ATTRIBUTE_STANDARD_NAME].
+	// 
+	// If @cancellable is not `NULL`, then the operation can be cancelled
 	// by triggering the cancellable object from another thread. If the
-	// operation was cancelled, the error %G_IO_ERROR_CANCELLED will be
+	// operation was cancelled, the error [error@Gio.IOErrorEnum.CANCELLED] will be
 	// returned.
 	// 
 	// For symlinks, normally the information about the target of the
 	// symlink is returned, rather than information about the symlink
-	// itself. However if you pass %G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS
+	// itself. However if you pass [flags@Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS]
 	// in @flags the information about the symlink itself will be returned.
 	// Also, for symlinks that point to non-existing files the information
 	// about the symlink itself will be returned.
 	// 
-	// If the file does not exist, the %G_IO_ERROR_NOT_FOUND error will be
+	// If the file does not exist, the [error@Gio.IOErrorEnum.NOT_FOUND] error will be
 	// returned. Other errors are possible too, and depend on what kind of
-	// filesystem the file is on.
+	// file system the file is on.
 	QueryInfo func(Instance, context.Context, string, FileQueryInfoFlags) (FileInfo, error)
 	// // QueryInfoFinish allows you to override the implementation of the virtual method query_info_finish.
 	// 
@@ -40028,7 +36024,7 @@ func (file *FileInstance) ParentCreateReadwriteFinish(res AsyncResult) (FileIOSt
 // Deletes a file. If the @file is a directory, it will only be
 // deleted if it is empty. This has the same semantics as g_unlink().
 // 
-// If @file doesn’t exist, %G_IO_ERROR_NOT_FOUND will be returned. This allows
+// If @file doesn&#x2019;t exist, %G_IO_ERROR_NOT_FOUND will be returned. This allows
 // for deletion to be implemented avoiding
 // [time-of-check to time-of-use races](https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use):
 // |[
@@ -40130,7 +36126,7 @@ func (file *FileInstance) ParentDeleteFileFinish(result AsyncResult) (bool, erro
 // 
 // g_file_dup() is useful when a second handle is needed to the same underlying
 // file, for use in a separate thread (#GFile is not thread-safe). For use
-// within the same thread, use g_object_ref() to increment the existing object’s
+// within the same thread, use g_object_ref() to increment the existing object&#x2019;s
 // reference count.
 // 
 // This call does no blocking I/O.
@@ -41749,10 +37745,9 @@ func (file *FileInstance) ParentQueryFilesystemInfoFinish(res AsyncResult) (File
 // 
 // The function takes the following parameters:
 // 
-// 	- cancellable context.Context (nullable): optional #GCancellable object,
-//   %NULL to ignore 
+// 	- cancellable context.Context (nullable): optional cancellable object 
 // 	- attributes string: an attribute query string 
-// 	- flags FileQueryInfoFlags: a set of #GFileQueryInfoFlags 
+// 	- flags FileQueryInfoFlags: flags to affect the query operation 
 // 
 // The function returns the following values:
 // 
@@ -41760,35 +37755,48 @@ func (file *FileInstance) ParentQueryFilesystemInfoFinish(res AsyncResult) (File
 // 	- _goerr error (nullable): an error 
 //
 // Gets the requested information about specified @file.
-// The result is a #GFileInfo object that contains key-value
+// 
+// The result is a [class@Gio.FileInfo] object that contains key-value
 // attributes (such as the type or size of the file).
 // 
 // The @attributes value is a string that specifies the file
 // attributes that should be gathered. It is not an error if
-// it's not possible to read a particular requested attribute
-// from a file - it just won't be set. @attributes should be a
-// comma-separated list of attributes or attribute wildcards.
-// The wildcard "*" means all attributes, and a wildcard like
-// "standard::*" means all attributes in the standard namespace.
-// An example attribute query be "standard::*,owner::user".
-// The standard attributes are available as defines, like
-// %G_FILE_ATTRIBUTE_STANDARD_NAME.
+// it&#x2019;s not possible to read a particular requested attribute
+// from a file &#x2014; it just won't be set. In particular this means that if a file
+// is inaccessible (due to being in a folder with restrictive permissions), for
+// example, you can expect the returned [class@Gio.FileInfo] to have very few
+// attributes set. You should check whether an attribute is set using
+// [method@Gio.FileInfo.has_attribute] before trying to retrieve its value.
 // 
-// If @cancellable is not %NULL, then the operation can be cancelled
+// It is guaranteed that if any of the following attributes are listed in
+// @attributes, they will always be set in the returned [class@Gio.FileInfo],
+// even if the user doesn&#x2019;t have permissions to access the file:
+// 
+//  - [const@Gio.FILE_ATTRIBUTE_STANDARD_NAME]
+//  - [const@Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME]
+// 
+// @attributes should be a comma-separated list of attributes or attribute
+// wildcards. The wildcard `"*"` means all attributes, and a wildcard like
+// `"standard::*"` means all attributes in the standard namespace.
+// An example attribute query might be `"standard::*,owner::user"`.
+// The standard attributes are available as defines, like
+// [const@Gio.FILE_ATTRIBUTE_STANDARD_NAME].
+// 
+// If @cancellable is not `NULL`, then the operation can be cancelled
 // by triggering the cancellable object from another thread. If the
-// operation was cancelled, the error %G_IO_ERROR_CANCELLED will be
+// operation was cancelled, the error [error@Gio.IOErrorEnum.CANCELLED] will be
 // returned.
 // 
 // For symlinks, normally the information about the target of the
 // symlink is returned, rather than information about the symlink
-// itself. However if you pass %G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS
+// itself. However if you pass [flags@Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS]
 // in @flags the information about the symlink itself will be returned.
 // Also, for symlinks that point to non-existing files the information
 // about the symlink itself will be returned.
 // 
-// If the file does not exist, the %G_IO_ERROR_NOT_FOUND error will be
+// If the file does not exist, the [error@Gio.IOErrorEnum.NOT_FOUND] error will be
 // returned. Other errors are possible too, and depend on what kind of
-// filesystem the file is on.
+// file system the file is on.
 func (file *FileInstance) ParentQueryInfo(cancellable context.Context, attributes string, flags FileQueryInfoFlags) (FileInfo, error) {
 	var carg0 *C.GFile
 	var carg3 *C.GCancellable       // in, none, converted
@@ -43301,7 +39309,7 @@ type Initable interface {
 	// 
 	// Callers should not assume that a class which implements #GInitable can be
 	// initialized multiple times, unless the class explicitly documents itself as
-	// supporting this. Generally, a class’ implementation of init() can assume
+	// supporting this. Generally, a class&#x2019; implementation of init() can assume
 	// (and assert) that it will only be called once. Previously, this documentation
 	// recommended all #GInitable implementations should be idempotent; that
 	// recommendation was relaxed in GLib 2.54.
@@ -43355,7 +39363,7 @@ type Initable interface {
 	// 
 	// Callers should not assume that a class which implements #GInitable can be
 	// initialized multiple times, unless the class explicitly documents itself as
-	// supporting this. Generally, a class’ implementation of init() can assume
+	// supporting this. Generally, a class&#x2019; implementation of init() can assume
 	// (and assert) that it will only be called once. Previously, this documentation
 	// recommended all #GInitable implementations should be idempotent; that
 	// recommendation was relaxed in GLib 2.54.
@@ -43450,7 +39458,7 @@ func UnsafeInitableToGlibFull(c Initable) unsafe.Pointer {
 // 
 // Callers should not assume that a class which implements #GInitable can be
 // initialized multiple times, unless the class explicitly documents itself as
-// supporting this. Generally, a class’ implementation of init() can assume
+// supporting this. Generally, a class&#x2019; implementation of init() can assume
 // (and assert) that it will only be called once. Previously, this documentation
 // recommended all #GInitable implementations should be idempotent; that
 // recommendation was relaxed in GLib 2.54.
@@ -43530,7 +39538,7 @@ type InitableOverrides[Instance Initable] struct {
 	// 
 	// Callers should not assume that a class which implements #GInitable can be
 	// initialized multiple times, unless the class explicitly documents itself as
-	// supporting this. Generally, a class’ implementation of init() can assume
+	// supporting this. Generally, a class&#x2019; implementation of init() can assume
 	// (and assert) that it will only be called once. Previously, this documentation
 	// recommended all #GInitable implementations should be idempotent; that
 	// recommendation was relaxed in GLib 2.54.
@@ -43617,7 +39625,7 @@ func UnsafeApplyInitableOverrides[Instance Initable](gclass unsafe.Pointer, over
 // 
 // Callers should not assume that a class which implements #GInitable can be
 // initialized multiple times, unless the class explicitly documents itself as
-// supporting this. Generally, a class’ implementation of init() can assume
+// supporting this. Generally, a class&#x2019; implementation of init() can assume
 // (and assert) that it will only be called once. Previously, this documentation
 // recommended all #GInitable implementations should be idempotent; that
 // recommendation was relaxed in GLib 2.54.
@@ -43711,7 +39719,7 @@ var _ ListModel = (*ListModelInstance)(nil)
 // it are gone.
 // 
 // On the other side, a consumer is expected only to hold references on
-// objects that are currently ‘user visible’, in order to facilitate the
+// objects that are currently &#x2018;user visible&#x2019;, in order to facilitate the
 // maximum level of laziness in the implementation of the list and to
 // reduce the required number of signal connections at a given time.
 // 
@@ -44695,7 +40703,7 @@ var _ MemoryMonitor = (*MemoryMonitorInstance)(nil)
 // Possible actions to take when the signal is received are:
 // 
 //  - Free caches
-//  - Save files that haven’t been looked at in a while to disk, ready to be reopened when needed
+//  - Save files that haven&#x2019;t been looked at in a while to disk, ready to be reopened when needed
 //  - Run a garbage collection cycle
 //  - Try and compress fragmented allocations
 //  - Exit on idle if the process has no reason to stay around
@@ -44730,7 +40738,7 @@ var _ MemoryMonitor = (*MemoryMonitorInstance)(nil)
 // }
 // ```
 // 
-// Don’t forget to disconnect the [signal@Gio.MemoryMonitor::low-memory-warning]
+// Don&#x2019;t forget to disconnect the [signal@Gio.MemoryMonitor::low-memory-warning]
 // signal, and unref the `GMemoryMonitor` itself when exiting.
 type MemoryMonitor interface {
 	upcastToGMemoryMonitor() *MemoryMonitorInstance
@@ -44902,8 +40910,8 @@ var _ Mount = (*MountInstance)(nil)
 // The `GMount` interface represents a user-visible mount, such as a mounted
 // file system.
 // 
-// `GMount` is a ‘mounted’ filesystem that you can access. Mounted is in
-// quotes because it’s not the same as a UNIX mount, it might be a GVFS
+// `GMount` is a &#x2018;mounted&#x2019; filesystem that you can access. Mounted is in
+// quotes because it&#x2019;s not the same as a UNIX mount, it might be a GVFS
 // mount, but you can still access the files on it if you use GIO.
 // 
 // A `GMount` might be associated with a [iface@Gio.Volume] (such as a USB flash
@@ -48688,28 +44696,6 @@ type PollableInputStream interface {
 	// For any given stream, the value returned by this method is constant;
 	// a stream cannot switch from pollable to non-pollable or vice versa.
 	CanPoll() bool
-	// CreateSource wraps g_pollable_input_stream_create_source
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *glib.Source 
-	//
-	// Creates a #GSource that triggers when @stream can be read, or
-	// @cancellable is triggered or an error occurs. The callback on the
-	// source is of the #GPollableSourceFunc type.
-	// 
-	// As with g_pollable_input_stream_is_readable(), it is possible that
-	// the stream may not actually be readable even after the source
-	// triggers, so you should use g_pollable_input_stream_read_nonblocking()
-	// rather than g_input_stream_read() from the callback.
-	// 
-	// The behaviour of this method is undefined if
-	// g_pollable_input_stream_can_poll() returns %FALSE for @stream.
-	CreateSource(context.Context) *glib.Source
 	// IsReadable wraps g_pollable_input_stream_is_readable
 	// 
 	// The function returns the following values:
@@ -48746,29 +44732,6 @@ type PollableInputStream interface {
 	// For any given stream, the value returned by this method is constant;
 	// a stream cannot switch from pollable to non-pollable or vice versa.
 	ParentCanPoll() bool
-	// ParentCreateSource calls the default implementations of the create_source virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *glib.Source 
-	//
-	// Creates a #GSource that triggers when @stream can be read, or
-	// @cancellable is triggered or an error occurs. The callback on the
-	// source is of the #GPollableSourceFunc type.
-	// 
-	// As with g_pollable_input_stream_is_readable(), it is possible that
-	// the stream may not actually be readable even after the source
-	// triggers, so you should use g_pollable_input_stream_read_nonblocking()
-	// rather than g_input_stream_read() from the callback.
-	// 
-	// The behaviour of this method is undefined if
-	// g_pollable_input_stream_can_poll() returns %FALSE for @stream.
-	ParentCreateSource(cancellable context.Context) *glib.Source
 	// ParentIsReadable calls the default implementations of the is_readable virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -48864,48 +44827,6 @@ func (stream *PollableInputStreamInstance) CanPoll() bool {
 	return goret
 }
 
-// CreateSource wraps g_pollable_input_stream_create_source
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- goret *glib.Source 
-//
-// Creates a #GSource that triggers when @stream can be read, or
-// @cancellable is triggered or an error occurs. The callback on the
-// source is of the #GPollableSourceFunc type.
-// 
-// As with g_pollable_input_stream_is_readable(), it is possible that
-// the stream may not actually be readable even after the source
-// triggers, so you should use g_pollable_input_stream_read_nonblocking()
-// rather than g_input_stream_read() from the callback.
-// 
-// The behaviour of this method is undefined if
-// g_pollable_input_stream_can_poll() returns %FALSE for @stream.
-func (stream *PollableInputStreamInstance) CreateSource(cancellable context.Context) *glib.Source {
-	var carg0 *C.GPollableInputStream // in, none, converted
-	var carg1 *C.GCancellable         // in, none, converted, nullable
-	var cret  *C.GSource              // return, full, converted
-
-	carg0 = (*C.GPollableInputStream)(UnsafePollableInputStreamToGlibNone(stream))
-	if cancellable != nil {
-		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-
-	cret = C.g_pollable_input_stream_create_source(carg0, carg1)
-	runtime.KeepAlive(stream)
-	runtime.KeepAlive(cancellable)
-
-	var goret *glib.Source
-
-	goret = glib.UnsafeSourceFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // IsReadable wraps g_pollable_input_stream_is_readable
 // 
 // The function returns the following values:
@@ -48958,28 +44879,6 @@ type PollableInputStreamOverrides[Instance PollableInputStream] struct {
 	// For any given stream, the value returned by this method is constant;
 	// a stream cannot switch from pollable to non-pollable or vice versa.
 	CanPoll func(Instance) bool
-	// // CreateSource allows you to override the implementation of the virtual method create_source.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *glib.Source 
-	//
-	// Creates a #GSource that triggers when @stream can be read, or
-	// @cancellable is triggered or an error occurs. The callback on the
-	// source is of the #GPollableSourceFunc type.
-	// 
-	// As with g_pollable_input_stream_is_readable(), it is possible that
-	// the stream may not actually be readable even after the source
-	// triggers, so you should use g_pollable_input_stream_read_nonblocking()
-	// rather than g_input_stream_read() from the callback.
-	// 
-	// The behaviour of this method is undefined if
-	// g_pollable_input_stream_can_poll() returns %FALSE for @stream.
-	CreateSource func(Instance, context.Context) *glib.Source
 	// // IsReadable allows you to override the implementation of the virtual method is_readable.
 	// 
 	// The function returns the following values:
@@ -49021,30 +44920,6 @@ func UnsafeApplyPollableInputStreamOverrides[Instance PollableInputStream](gclas
 				if goret {
 					cret = C.TRUE
 				}
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.CreateSource != nil {
-		pclass.create_source = (*[0]byte)(C._gotk4_gio2_PollableInputStream_create_source)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_PollableInputStream_create_source",
-			func(carg0 *C.GPollableInputStream, carg1 *C.GCancellable) (cret *C.GSource) {
-				var stream      Instance        // go GPollableInputStream subclass
-				var cancellable context.Context // in, none, converted, nullable
-				var goret       *glib.Source    // return, full, converted
-
-				stream = UnsafePollableInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				if carg1 != nil {
-					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
-				}
-
-				goret = overrides.CreateSource(stream, cancellable)
-
-				cret = (*C.GSource)(glib.UnsafeSourceToGlibFull(goret))
 
 				return cret
 			},
@@ -49104,51 +44979,6 @@ func (stream *PollableInputStreamInstance) ParentCanPoll() bool {
 	if cret != 0 {
 		goret = true
 	}
-
-	return goret
-}
-
-// ParentCreateSource calls the default implementations of the create_source virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- goret *glib.Source 
-//
-// Creates a #GSource that triggers when @stream can be read, or
-// @cancellable is triggered or an error occurs. The callback on the
-// source is of the #GPollableSourceFunc type.
-// 
-// As with g_pollable_input_stream_is_readable(), it is possible that
-// the stream may not actually be readable even after the source
-// triggers, so you should use g_pollable_input_stream_read_nonblocking()
-// rather than g_input_stream_read() from the callback.
-// 
-// The behaviour of this method is undefined if
-// g_pollable_input_stream_can_poll() returns %FALSE for @stream.
-func (stream *PollableInputStreamInstance) ParentCreateSource(cancellable context.Context) *glib.Source {
-	var carg0 *C.GPollableInputStream
-	var carg1 *C.GCancellable // in, none, converted
-	var cret  *C.GSource      // return, full, converted
-
-	parentclass := (*C.GPollableInputStreamInterface)(classdata.PeekParentInterface(UnsafePollableInputStreamToGlibNone(stream), uint64(TypePollableInputStream)))
-
-	carg0 = (*C.GPollableInputStream)(UnsafePollableInputStreamToGlibNone(stream))
-	if cancellable != nil {
-		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-
-	cret = C._gotk4_gio2_PollableInputStream_virtual_create_source(unsafe.Pointer(parentclass.create_source), carg0, carg1)
-	runtime.KeepAlive(stream)
-	runtime.KeepAlive(cancellable)
-
-	var goret *glib.Source
-
-	goret = glib.UnsafeSourceFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -49227,28 +45057,6 @@ type PollableOutputStream interface {
 	// For any given stream, the value returned by this method is constant;
 	// a stream cannot switch from pollable to non-pollable or vice versa.
 	CanPoll() bool
-	// CreateSource wraps g_pollable_output_stream_create_source
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *glib.Source 
-	//
-	// Creates a #GSource that triggers when @stream can be written, or
-	// @cancellable is triggered or an error occurs. The callback on the
-	// source is of the #GPollableSourceFunc type.
-	// 
-	// As with g_pollable_output_stream_is_writable(), it is possible that
-	// the stream may not actually be writable even after the source
-	// triggers, so you should use g_pollable_output_stream_write_nonblocking()
-	// rather than g_output_stream_write() from the callback.
-	// 
-	// The behaviour of this method is undefined if
-	// g_pollable_output_stream_can_poll() returns %FALSE for @stream.
-	CreateSource(context.Context) *glib.Source
 	// IsWritable wraps g_pollable_output_stream_is_writable
 	// 
 	// The function returns the following values:
@@ -49351,29 +45159,6 @@ type PollableOutputStream interface {
 	// For any given stream, the value returned by this method is constant;
 	// a stream cannot switch from pollable to non-pollable or vice versa.
 	ParentCanPoll() bool
-	// ParentCreateSource calls the default implementations of the create_source virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *glib.Source 
-	//
-	// Creates a #GSource that triggers when @stream can be written, or
-	// @cancellable is triggered or an error occurs. The callback on the
-	// source is of the #GPollableSourceFunc type.
-	// 
-	// As with g_pollable_output_stream_is_writable(), it is possible that
-	// the stream may not actually be writable even after the source
-	// triggers, so you should use g_pollable_output_stream_write_nonblocking()
-	// rather than g_output_stream_write() from the callback.
-	// 
-	// The behaviour of this method is undefined if
-	// g_pollable_output_stream_can_poll() returns %FALSE for @stream.
-	ParentCreateSource(cancellable context.Context) *glib.Source
 	// ParentIsWritable calls the default implementations of the is_writable virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -49531,48 +45316,6 @@ func (stream *PollableOutputStreamInstance) CanPoll() bool {
 	if cret != 0 {
 		goret = true
 	}
-
-	return goret
-}
-
-// CreateSource wraps g_pollable_output_stream_create_source
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- goret *glib.Source 
-//
-// Creates a #GSource that triggers when @stream can be written, or
-// @cancellable is triggered or an error occurs. The callback on the
-// source is of the #GPollableSourceFunc type.
-// 
-// As with g_pollable_output_stream_is_writable(), it is possible that
-// the stream may not actually be writable even after the source
-// triggers, so you should use g_pollable_output_stream_write_nonblocking()
-// rather than g_output_stream_write() from the callback.
-// 
-// The behaviour of this method is undefined if
-// g_pollable_output_stream_can_poll() returns %FALSE for @stream.
-func (stream *PollableOutputStreamInstance) CreateSource(cancellable context.Context) *glib.Source {
-	var carg0 *C.GPollableOutputStream // in, none, converted
-	var carg1 *C.GCancellable          // in, none, converted, nullable
-	var cret  *C.GSource               // return, full, converted
-
-	carg0 = (*C.GPollableOutputStream)(UnsafePollableOutputStreamToGlibNone(stream))
-	if cancellable != nil {
-		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-
-	cret = C.g_pollable_output_stream_create_source(carg0, carg1)
-	runtime.KeepAlive(stream)
-	runtime.KeepAlive(cancellable)
-
-	var goret *glib.Source
-
-	goret = glib.UnsafeSourceFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -49762,28 +45505,6 @@ type PollableOutputStreamOverrides[Instance PollableOutputStream] struct {
 	// For any given stream, the value returned by this method is constant;
 	// a stream cannot switch from pollable to non-pollable or vice versa.
 	CanPoll func(Instance) bool
-	// // CreateSource allows you to override the implementation of the virtual method create_source.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *glib.Source 
-	//
-	// Creates a #GSource that triggers when @stream can be written, or
-	// @cancellable is triggered or an error occurs. The callback on the
-	// source is of the #GPollableSourceFunc type.
-	// 
-	// As with g_pollable_output_stream_is_writable(), it is possible that
-	// the stream may not actually be writable even after the source
-	// triggers, so you should use g_pollable_output_stream_write_nonblocking()
-	// rather than g_output_stream_write() from the callback.
-	// 
-	// The behaviour of this method is undefined if
-	// g_pollable_output_stream_can_poll() returns %FALSE for @stream.
-	CreateSource func(Instance, context.Context) *glib.Source
 	// // IsWritable allows you to override the implementation of the virtual method is_writable.
 	// 
 	// The function returns the following values:
@@ -49889,30 +45610,6 @@ func UnsafeApplyPollableOutputStreamOverrides[Instance PollableOutputStream](gcl
 				if goret {
 					cret = C.TRUE
 				}
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.CreateSource != nil {
-		pclass.create_source = (*[0]byte)(C._gotk4_gio2_PollableOutputStream_create_source)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_PollableOutputStream_create_source",
-			func(carg0 *C.GPollableOutputStream, carg1 *C.GCancellable) (cret *C.GSource) {
-				var stream      Instance        // go GPollableOutputStream subclass
-				var cancellable context.Context // in, none, converted, nullable
-				var goret       *glib.Source    // return, full, converted
-
-				stream = UnsafePollableOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				if carg1 != nil {
-					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
-				}
-
-				goret = overrides.CreateSource(stream, cancellable)
-
-				cret = (*C.GSource)(glib.UnsafeSourceToGlibFull(goret))
 
 				return cret
 			},
@@ -50028,51 +45725,6 @@ func (stream *PollableOutputStreamInstance) ParentCanPoll() bool {
 	if cret != 0 {
 		goret = true
 	}
-
-	return goret
-}
-
-// ParentCreateSource calls the default implementations of the create_source virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- goret *glib.Source 
-//
-// Creates a #GSource that triggers when @stream can be written, or
-// @cancellable is triggered or an error occurs. The callback on the
-// source is of the #GPollableSourceFunc type.
-// 
-// As with g_pollable_output_stream_is_writable(), it is possible that
-// the stream may not actually be writable even after the source
-// triggers, so you should use g_pollable_output_stream_write_nonblocking()
-// rather than g_output_stream_write() from the callback.
-// 
-// The behaviour of this method is undefined if
-// g_pollable_output_stream_can_poll() returns %FALSE for @stream.
-func (stream *PollableOutputStreamInstance) ParentCreateSource(cancellable context.Context) *glib.Source {
-	var carg0 *C.GPollableOutputStream
-	var carg1 *C.GCancellable // in, none, converted
-	var cret  *C.GSource      // return, full, converted
-
-	parentclass := (*C.GPollableOutputStreamInterface)(classdata.PeekParentInterface(UnsafePollableOutputStreamToGlibNone(stream), uint64(TypePollableOutputStream)))
-
-	carg0 = (*C.GPollableOutputStream)(UnsafePollableOutputStreamToGlibNone(stream))
-	if cancellable != nil {
-		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-
-	cret = C._gotk4_gio2_PollableOutputStream_virtual_create_source(unsafe.Pointer(parentclass.create_source), carg0, carg1)
-	runtime.KeepAlive(stream)
-	runtime.KeepAlive(cancellable)
-
-	var goret *glib.Source
-
-	goret = glib.UnsafeSourceFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
 }
@@ -50254,10 +45906,10 @@ var _ PowerProfileMonitor = (*PowerProfileMonitorInstance)(nil)
 //
 // `GPowerProfileMonitor` makes it possible for applications as well as OS
 // components to monitor system power profiles and act upon them. It currently
-// only exports whether the system is in “Power Saver” mode (known as
-// “Low Power” mode on some systems).
+// only exports whether the system is in &#x201C;Power Saver&#x201D; mode (known as
+// &#x201C;Low Power&#x201D; mode on some systems).
 // 
-// When in “Low Power” mode, it is recommended that applications:
+// When in &#x201C;Low Power&#x201D; mode, it is recommended that applications:
 // 
 // - disable automatic downloads;
 // - reduce the rate of refresh from online sources such as calendar or
@@ -50273,7 +45925,7 @@ var _ PowerProfileMonitor = (*PowerProfileMonitorInstance)(nil)
 // or activity at all), `sysprof` to inspect CPU usage, and `intel_gpu_time` to
 // profile GPU usage.
 // 
-// Don’t forget to disconnect the [signal@GObject.Object::notify] signal for
+// Don&#x2019;t forget to disconnect the [signal@GObject.Object::notify] signal for
 // [property@Gio.PowerProfileMonitor:power-saver-enabled], and unref the
 // `GPowerProfileMonitor` itself when exiting.
 type PowerProfileMonitor interface {
@@ -50285,7 +45937,7 @@ type PowerProfileMonitor interface {
 	// 
 	// 	- goret bool 
 	//
-	// Gets whether the system is in “Power Saver” mode.
+	// Gets whether the system is in &#x201C;Power Saver&#x201D; mode.
 	// 
 	// You are expected to listen to the
 	// #GPowerProfileMonitor::notify::power-saver-enabled signal to know when the profile has
@@ -50363,7 +46015,7 @@ func PowerProfileMonitorDupDefault() PowerProfileMonitor {
 // 
 // 	- goret bool 
 //
-// Gets whether the system is in “Power Saver” mode.
+// Gets whether the system is in &#x201C;Power Saver&#x201D; mode.
 // 
 // You are expected to listen to the
 // #GPowerProfileMonitor::notify::power-saver-enabled signal to know when the profile has
@@ -51673,7 +47325,7 @@ var _ RemoteActionGroup = (*RemoteActionGroupInstance)(nil)
 // methods on [iface@Gio.ActionGroup] used to activate actions:
 // [method@Gio.ActionGroup.activate_action] and
 // [method@Gio.ActionGroup.change_action_state]. These variants allow a
-// ‘platform data’ [struct@GLib.Variant] to be specified: a dictionary providing
+// &#x2018;platform data&#x2019; [struct@GLib.Variant] to be specified: a dictionary providing
 // context for the action invocation (for example: timestamps, startup
 // notification IDs, etc).
 // 
@@ -52679,7 +48331,7 @@ type SocketConnectable interface {
 	// user.
 	// 
 	// If the #GSocketConnectable implementation does not support string formatting,
-	// the implementation’s type name will be returned as a fallback.
+	// the implementation&#x2019;s type name will be returned as a fallback.
 	ToString() string
 
 	// chain up virtual methods:
@@ -52721,7 +48373,7 @@ type SocketConnectable interface {
 	// user.
 	// 
 	// If the #GSocketConnectable implementation does not support string formatting,
-	// the implementation’s type name will be returned as a fallback.
+	// the implementation&#x2019;s type name will be returned as a fallback.
 	ParentToString() string
 }
 
@@ -52832,7 +48484,7 @@ func (connectable *SocketConnectableInstance) ProxyEnumerate() SocketAddressEnum
 // user.
 // 
 // If the #GSocketConnectable implementation does not support string formatting,
-// the implementation’s type name will be returned as a fallback.
+// the implementation&#x2019;s type name will be returned as a fallback.
 func (connectable *SocketConnectableInstance) ToString() string {
 	var carg0 *C.GSocketConnectable // in, none, converted
 	var cret  *C.gchar              // return, full, string
@@ -52887,7 +48539,7 @@ type SocketConnectableOverrides[Instance SocketConnectable] struct {
 	// user.
 	// 
 	// If the #GSocketConnectable implementation does not support string formatting,
-	// the implementation’s type name will be returned as a fallback.
+	// the implementation&#x2019;s type name will be returned as a fallback.
 	ToString func(Instance) string
 }
 
@@ -53028,7 +48680,7 @@ func (connectable *SocketConnectableInstance) ParentProxyEnumerate() SocketAddre
 // user.
 // 
 // If the #GSocketConnectable implementation does not support string formatting,
-// the implementation’s type name will be returned as a fallback.
+// the implementation&#x2019;s type name will be returned as a fallback.
 func (connectable *SocketConnectableInstance) ParentToString() string {
 	var carg0 *C.GSocketConnectable
 	var cret  *C.gchar // return, full, string
@@ -53094,7 +48746,7 @@ type TlsBackend interface {
 	// 
 	// 	- goret gobject.Type 
 	//
-	// Gets the #GType of @backend’s #GDtlsClientConnection implementation.
+	// Gets the #GType of @backend&#x2019;s #GDtlsClientConnection implementation.
 	GetDTLSClientConnectionType() gobject.Type
 	// GetDTLSServerConnectionType wraps g_tls_backend_get_dtls_server_connection_type
 	// 
@@ -53102,7 +48754,7 @@ type TlsBackend interface {
 	// 
 	// 	- goret gobject.Type 
 	//
-	// Gets the #GType of @backend’s #GDtlsServerConnection implementation.
+	// Gets the #GType of @backend&#x2019;s #GDtlsServerConnection implementation.
 	GetDTLSServerConnectionType() gobject.Type
 	// GetFileDatabaseType wraps g_tls_backend_get_file_database_type
 	// 
@@ -53324,7 +48976,7 @@ func (backend *TlsBackendInstance) GetDefaultDatabase() TlsDatabase {
 // 
 // 	- goret gobject.Type 
 //
-// Gets the #GType of @backend’s #GDtlsClientConnection implementation.
+// Gets the #GType of @backend&#x2019;s #GDtlsClientConnection implementation.
 func (backend *TlsBackendInstance) GetDTLSClientConnectionType() gobject.Type {
 	var carg0 *C.GTlsBackend // in, none, converted
 	var cret  C.GType        // return, none, casted, alias
@@ -53347,7 +48999,7 @@ func (backend *TlsBackendInstance) GetDTLSClientConnectionType() gobject.Type {
 // 
 // 	- goret gobject.Type 
 //
-// Gets the #GType of @backend’s #GDtlsServerConnection implementation.
+// Gets the #GType of @backend&#x2019;s #GDtlsServerConnection implementation.
 func (backend *TlsBackendInstance) GetDTLSServerConnectionType() gobject.Type {
 	var carg0 *C.GTlsBackend // in, none, converted
 	var cret  C.GType        // return, none, casted, alias
@@ -54503,7 +50155,7 @@ var _ Volume = (*VolumeInstance)(nil)
 // 
 // Typically, one will only want to pass `NULL` for the
 // [class@Gio.MountOperation] if automounting all volumes when a desktop session
-// starts since it’s not desirable to put up a lot of dialogs asking
+// starts since it&#x2019;s not desirable to put up a lot of dialogs asking
 // for credentials.
 // 
 // The callback will be fired when the operation has resolved (either
@@ -54523,7 +50175,7 @@ var _ Volume = (*VolumeInstance)(nil)
 // It is sometimes necessary to directly access the underlying
 // operating system object behind a volume (e.g. for passing a volume
 // to an application via the command line). For this purpose, GIO
-// allows to obtain an ‘identifier’ for the volume. There can be
+// allows to obtain an &#x2018;identifier&#x2019; for the volume. There can be
 // different kinds of identifiers, such as Hal UDIs, filesystem labels,
 // traditional Unix devices (e.g. `/dev/sda2`), UUIDs. GIO uses predefined
 // strings as names for the different kinds of identifiers:
@@ -56846,7 +52498,7 @@ var _ DebugController = (*DebugControllerInstance)(nil)
 // 
 // If your application or service is using the default GLib log writer function,
 // creating one of the built-in implementations of `GDebugController` should be
-// all that’s needed to dynamically enable or disable debug output.
+// all that&#x2019;s needed to dynamically enable or disable debug output.
 type DebugController interface {
 	upcastToGDebugController() *DebugControllerInstance
 
@@ -57348,7 +53000,7 @@ func UnsafeAppInfoMonitorToGlibFull(c AppInfoMonitor) unsafe.Pointer {
 // Gets the #GAppInfoMonitor for the current thread-default main
 // context.
 // 
-// The #GAppInfoMonitor will emit a “changed” signal in the
+// The #GAppInfoMonitor will emit a &#x201C;changed&#x201D; signal in the
 // thread-default main context whenever the list of installed
 // applications (as reported by g_app_info_get_all()) may have changed.
 // 
@@ -57424,7 +53076,7 @@ type AppLaunchContext interface {
 	// 	- variable string: the environment variable to set 
 	// 	- value string: the value for to set the variable to. 
 	//
-	// Arranges for @variable to be set to @value in the child’s environment when
+	// Arranges for @variable to be set to @value in the child&#x2019;s environment when
 	// @context is used to launch an application.
 	Setenv(string, string)
 	// Unsetenv wraps g_app_launch_context_unsetenv
@@ -57433,7 +53085,7 @@ type AppLaunchContext interface {
 	// 
 	// 	- variable string: the environment variable to remove 
 	//
-	// Arranges for @variable to be unset in the child’s environment when @context
+	// Arranges for @variable to be unset in the child&#x2019;s environment when @context
 	// is used to launch an application.
 	Unsetenv(string)
 	// ConnectLaunchFailed connects the provided callback to the "launch-failed" signal
@@ -57590,7 +53242,7 @@ func (_context *AppLaunchContextInstance) LaunchFailed(startupNotifyId string) {
 // 	- variable string: the environment variable to set 
 // 	- value string: the value for to set the variable to. 
 //
-// Arranges for @variable to be set to @value in the child’s environment when
+// Arranges for @variable to be set to @value in the child&#x2019;s environment when
 // @context is used to launch an application.
 func (_context *AppLaunchContextInstance) Setenv(variable string, value string) {
 	var carg0 *C.GAppLaunchContext // in, none, converted
@@ -57615,7 +53267,7 @@ func (_context *AppLaunchContextInstance) Setenv(variable string, value string) 
 // 
 // 	- variable string: the environment variable to remove 
 //
-// Arranges for @variable to be unset in the child’s environment when @context
+// Arranges for @variable to be unset in the child&#x2019;s environment when @context
 // is used to launch an application.
 func (_context *AppLaunchContextInstance) Unsetenv(variable string) {
 	var carg0 *C.GAppLaunchContext // in, none, converted
@@ -57838,7 +53490,7 @@ var _ Application = (*ApplicationInstance)(nil)
 // initialization for all of these in a single place.
 // 
 // Regardless of which of these entry points is used to start the
-// application, `GApplication` passes some ‘platform data’ from the
+// application, `GApplication` passes some &#x2018;platform data&#x2019; from the
 // launching instance to the primary instance, in the form of a
 // [struct@GLib.Variant] dictionary mapping strings to variants. To use platform
 // data, override the [vfunc@Gio.Application.before_emit] or
@@ -58015,26 +53667,6 @@ type Application interface {
 	//
 	// Gets the unique identifier for @application.
 	GetApplicationID() string
-	// GetDBusConnection wraps g_application_get_dbus_connection
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusConnection (nullable) 
-	//
-	// Gets the #GDBusConnection being used by the application, or %NULL.
-	// 
-	// If #GApplication is using its D-Bus backend then this function will
-	// return the #GDBusConnection being used for uniqueness and
-	// communication with the desktop environment and other instances of the
-	// application.
-	// 
-	// If #GApplication is not using D-Bus then this function will return
-	// %NULL.  This includes the situation where the D-Bus backend would
-	// normally be in use but we were unable to connect to the bus.
-	// 
-	// This function must not be called before the application has been
-	// registered.  See g_application_get_is_registered().
-	GetDBusConnection() DBusConnection
 	// GetDBusObjectPath wraps g_application_get_dbus_object_path
 	// 
 	// The function returns the following values:
@@ -58621,7 +54253,7 @@ type Application interface {
 	//
 	// The ::open signal is emitted on the primary instance when there are
 	// files to open. See g_application_open() for more information.
-	ConnectOpen(func(Application, []File, int32, string)) gobject.SignalHandle
+	ConnectOpen(func(Application, []byte, int32, string)) gobject.SignalHandle
 	// ConnectShutdown connects the provided callback to the "shutdown" signal
 	//
 	// The ::shutdown signal is emitted only on the registered primary instance
@@ -58669,39 +54301,6 @@ type Application interface {
 	// invoked on the primary instance when a command-line is
 	//   not handled locally
 	ParentCommandLine(commandLine ApplicationCommandLine) int32
-	// ParentDBusRegister calls the default implementations of the dbus_register virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- connection DBusConnection 
-	// 	- objectPath string 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	// 	- _goerr error (nullable): an error 
-	//
-	// invoked locally during registration, if the application is
-	//     using its D-Bus backend. You can use this to export extra objects on the
-	//     bus, that need to exist before the application tries to own the bus name.
-	//     The function is passed the #GDBusConnection to to session bus, and the
-	//     object path that #GApplication will use to export its D-Bus API.
-	//     If this function returns %TRUE, registration will proceed; otherwise
-	//     registration will abort. Since: 2.34
-	ParentDBusRegister(connection DBusConnection, objectPath string) (bool, error)
-	// ParentDBusUnregister calls the default implementations of the dbus_unregister virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- connection DBusConnection 
-	// 	- objectPath string 
-	//
-	// invoked locally during unregistration, if the application
-	//     is using its D-Bus backend. Use this to undo anything done by
-	//     the @dbus_register vfunc. Since: 2.34
-	ParentDBusUnregister(connection DBusConnection, objectPath string)
 	// ParentHandleLocalOptions calls the default implementations of the handle_local_options virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -59179,43 +54778,6 @@ func (application *ApplicationInstance) GetApplicationID() string {
 
 	if cret != nil {
 		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// GetDBusConnection wraps g_application_get_dbus_connection
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusConnection (nullable) 
-//
-// Gets the #GDBusConnection being used by the application, or %NULL.
-// 
-// If #GApplication is using its D-Bus backend then this function will
-// return the #GDBusConnection being used for uniqueness and
-// communication with the desktop environment and other instances of the
-// application.
-// 
-// If #GApplication is not using D-Bus then this function will return
-// %NULL.  This includes the situation where the D-Bus backend would
-// normally be in use but we were unable to connect to the bus.
-// 
-// This function must not be called before the application has been
-// registered.  See g_application_get_is_registered().
-func (application *ApplicationInstance) GetDBusConnection() DBusConnection {
-	var carg0 *C.GApplication    // in, none, converted
-	var cret  *C.GDBusConnection // return, none, converted, nullable
-
-	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
-
-	cret = C.g_application_get_dbus_connection(carg0)
-	runtime.KeepAlive(application)
-
-	var goret DBusConnection
-
-	if cret != nil {
-		goret = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(cret))
 	}
 
 	return goret
@@ -60213,7 +55775,7 @@ func (o *ApplicationInstance) ConnectNameLost(fn func(Application) bool) gobject
 //
 // The ::open signal is emitted on the primary instance when there are
 // files to open. See g_application_open() for more information.
-func (o *ApplicationInstance) ConnectOpen(fn func(Application, []File, int32, string)) gobject.SignalHandle {
+func (o *ApplicationInstance) ConnectOpen(fn func(Application, []byte, int32, string)) gobject.SignalHandle {
 	return o.Connect("open", fn)
 }
 
@@ -60270,37 +55832,6 @@ type ApplicationOverrides[Instance Application] struct {
 	// invoked on the primary instance when a command-line is
 	//   not handled locally
 	CommandLine func(Instance, ApplicationCommandLine) int32
-	// // DBusRegister allows you to override the implementation of the virtual method dbus_register.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- connection DBusConnection 
-	// 	- objectPath string 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	// 	- _goerr error (nullable): an error 
-	//
-	// invoked locally during registration, if the application is
-	//     using its D-Bus backend. You can use this to export extra objects on the
-	//     bus, that need to exist before the application tries to own the bus name.
-	//     The function is passed the #GDBusConnection to to session bus, and the
-	//     object path that #GApplication will use to export its D-Bus API.
-	//     If this function returns %TRUE, registration will proceed; otherwise
-	//     registration will abort. Since: 2.34
-	DBusRegister func(Instance, DBusConnection, string) (bool, error)
-	// // DBusUnregister allows you to override the implementation of the virtual method dbus_unregister.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- connection DBusConnection 
-	// 	- objectPath string 
-	//
-	// invoked locally during unregistration, if the application
-	//     is using its D-Bus backend. Use this to undo anything done by
-	//     the @dbus_register vfunc. Since: 2.34
-	DBusUnregister func(Instance, DBusConnection, string)
 	// // HandleLocalOptions allows you to override the implementation of the virtual method handle_local_options.
 	// 
 	// The function takes the following parameters:
@@ -60425,53 +55956,6 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 				cret = C.int(goret)
 
 				return cret
-			},
-		)
-	}
-
-	if overrides.DBusRegister != nil {
-		pclass.dbus_register = (*[0]byte)(C._gotk4_gio2_Application_dbus_register)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_Application_dbus_register",
-			func(carg0 *C.GApplication, carg1 *C.GDBusConnection, carg2 *C.gchar, _cerr **C.GError) (cret C.gboolean) {
-				var application Instance       // go GApplication subclass
-				var connection  DBusConnection // in, none, converted
-				var objectPath  string         // in, none, string
-				var goret       bool           // return
-				var _goerr      error          // out, full, converted
-
-				application = UnsafeApplicationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
-				objectPath = C.GoString((*C.char)(unsafe.Pointer(carg2)))
-
-				goret, _goerr = overrides.DBusRegister(application, connection, objectPath)
-
-				if goret {
-					cret = C.TRUE
-				}
-				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.DBusUnregister != nil {
-		pclass.dbus_unregister = (*[0]byte)(C._gotk4_gio2_Application_dbus_unregister)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_Application_dbus_unregister",
-			func(carg0 *C.GApplication, carg1 *C.GDBusConnection, carg2 *C.gchar) {
-				var application Instance       // go GApplication subclass
-				var connection  DBusConnection // in, none, converted
-				var objectPath  string         // in, none, string
-
-				application = UnsafeApplicationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
-				objectPath = C.GoString((*C.char)(unsafe.Pointer(carg2)))
-
-				overrides.DBusUnregister(application, connection, objectPath)
 			},
 		)
 	}
@@ -60678,87 +56162,6 @@ func (application *ApplicationInstance) ParentCommandLine(commandLine Applicatio
 	goret = int32(cret)
 
 	return goret
-}
-
-// ParentDBusRegister calls the default implementations of the dbus_register virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection 
-// 	- objectPath string 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-// 	- _goerr error (nullable): an error 
-//
-// invoked locally during registration, if the application is
-//     using its D-Bus backend. You can use this to export extra objects on the
-//     bus, that need to exist before the application tries to own the bus name.
-//     The function is passed the #GDBusConnection to to session bus, and the
-//     object path that #GApplication will use to export its D-Bus API.
-//     If this function returns %TRUE, registration will proceed; otherwise
-//     registration will abort. Since: 2.34
-func (application *ApplicationInstance) ParentDBusRegister(connection DBusConnection, objectPath string) (bool, error) {
-	var carg0 *C.GApplication
-	var carg1 *C.GDBusConnection // in, none, converted
-	var carg2 *C.gchar           // in, none, converted
-	var cret  C.gboolean         // return
-	var _cerr *C.GError          // out, full, converted, nullable
-
-	parentclass := (*C.GApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
-
-	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
-	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	cret = C._gotk4_gio2_Application_virtual_dbus_register(unsafe.Pointer(parentclass.dbus_register), carg0, carg1, carg2, &_cerr)
-	runtime.KeepAlive(application)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(objectPath)
-
-	var goret  bool
-	var _goerr error
-
-	if cret != 0 {
-		goret = true
-	}
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// ParentDBusUnregister calls the default implementations of the dbus_unregister virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection 
-// 	- objectPath string 
-//
-// invoked locally during unregistration, if the application
-//     is using its D-Bus backend. Use this to undo anything done by
-//     the @dbus_register vfunc. Since: 2.34
-func (application *ApplicationInstance) ParentDBusUnregister(connection DBusConnection, objectPath string) {
-	var carg0 *C.GApplication
-	var carg1 *C.GDBusConnection // in, none, converted
-	var carg2 *C.gchar           // in, none, converted
-
-	parentclass := (*C.GApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
-
-	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
-	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	C._gotk4_gio2_Application_virtual_dbus_unregister(unsafe.Pointer(parentclass.dbus_unregister), carg0, carg1, carg2)
-	runtime.KeepAlive(application)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(objectPath)
 }
 
 // ParentHandleLocalOptions calls the default implementations of the handle_local_options virtual method.
@@ -61173,7 +56576,7 @@ type ApplicationCommandLine interface {
 	// Subsequent calls to this method are no-ops.
 	// 
 	// This method is automatically called when the #GApplicationCommandLine
-	// object is disposed — so you can omit the call in non-garbage collected
+	// object is disposed &#x2014; so you can omit the call in non-garbage collected
 	// languages.
 	Done()
 	// GetArguments wraps g_application_command_line_get_arguments
@@ -61381,7 +56784,7 @@ type ApplicationCommandLine interface {
 	// Subsequent calls to this method are no-ops.
 	// 
 	// This method is automatically called when the #GApplicationCommandLine
-	// object is disposed — so you can omit the call in non-garbage collected
+	// object is disposed &#x2014; so you can omit the call in non-garbage collected
 	// languages.
 	ParentDone()
 	// ParentGetStdin calls the default implementations of the get_stdin virtual method.
@@ -61529,7 +56932,7 @@ func (cmdline *ApplicationCommandLineInstance) CreateFileForArg(arg string) File
 // Subsequent calls to this method are no-ops.
 // 
 // This method is automatically called when the #GApplicationCommandLine
-// object is disposed — so you can omit the call in non-garbage collected
+// object is disposed &#x2014; so you can omit the call in non-garbage collected
 // languages.
 func (cmdline *ApplicationCommandLineInstance) Done() {
 	var carg0 *C.GApplicationCommandLine // in, none, converted
@@ -61921,7 +57324,7 @@ type ApplicationCommandLineOverrides[Instance ApplicationCommandLine] struct {
 	// Subsequent calls to this method are no-ops.
 	// 
 	// This method is automatically called when the #GApplicationCommandLine
-	// object is disposed — so you can omit the call in non-garbage collected
+	// object is disposed &#x2014; so you can omit the call in non-garbage collected
 	// languages.
 	Done func(Instance)
 	// // GetStdin allows you to override the implementation of the virtual method get_stdin.
@@ -62062,7 +57465,7 @@ func UnsafeApplyApplicationCommandLineOverrides[Instance ApplicationCommandLine]
 // Subsequent calls to this method are no-ops.
 // 
 // This method is automatically called when the #GApplicationCommandLine
-// object is disposed — so you can omit the call in non-garbage collected
+// object is disposed &#x2014; so you can omit the call in non-garbage collected
 // languages.
 func (cmdline *ApplicationCommandLineInstance) ParentDone() {
 	var carg0 *C.GApplicationCommandLine
@@ -62771,8631 +58174,6 @@ func (credentials *CredentialsInstance) ToString() string {
 	return goret
 }
 
-// DBusActionGroupInstance is the instance type used by all types extending GDBusActionGroup. It is used internally by the bindings. Users should use the interface [DBusActionGroup] instead.
-type DBusActionGroupInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ DBusActionGroup = (*DBusActionGroupInstance)(nil)
-
-// DBusActionGroup wraps GDBusActionGroup
-//
-// `GDBusActionGroup` is an implementation of the [iface@Gio.ActionGroup]
-// interface.
-// 
-// `GDBusActionGroup` can be used as a proxy for an action group
-// that is exported over D-Bus with [method@Gio.DBusConnection.export_action_group].
-type DBusActionGroup interface {
-	gobject.Object
-	upcastToGDBusActionGroup() *DBusActionGroupInstance
-}
-
-func unsafeWrapDBusActionGroup(base *gobject.ObjectInstance) *DBusActionGroupInstance {
-	return &DBusActionGroupInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeDBusActionGroup,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusActionGroup(inst)
-		},
-	)
-}
-
-func marshalDBusActionGroupInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusActionGroup(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeDBusActionGroupFromGlibNone is used to convert raw GDBusActionGroup pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusActionGroupFromGlibNone(c unsafe.Pointer) DBusActionGroup {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusActionGroup)
-}
-
-// UnsafeDBusActionGroupFromGlibFull is used to convert raw GDBusActionGroup pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusActionGroupFromGlibFull(c unsafe.Pointer) DBusActionGroup {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusActionGroup)
-}
-
-// UnsafeDBusActionGroupFromGlibBorrow is used to convert raw GDBusActionGroup pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusActionGroupFromGlibBorrow(c unsafe.Pointer) DBusActionGroup {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusActionGroup)
-}
-
-func (d *DBusActionGroupInstance) upcastToGDBusActionGroup() *DBusActionGroupInstance {
-	return d
-}
-
-// UnsafeDBusActionGroupToGlibNone is used to convert the instance to it's C value GDBusActionGroup. This is used by the bindings internally.
-func UnsafeDBusActionGroupToGlibNone(c DBusActionGroup) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeDBusActionGroupToGlibFull is used to convert the instance to it's C value GDBusActionGroup, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusActionGroupToGlibFull(c DBusActionGroup) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// DBusActionGroupGet wraps g_dbus_action_group_get
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection: A #GDBusConnection 
-// 	- busName string (nullable): the bus name which exports the action
-//     group or %NULL if @connection is not a message bus connection 
-// 	- objectPath string: the object path at which the action group is exported 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusActionGroup 
-//
-// Obtains a #GDBusActionGroup for the action group which is exported at
-// the given @bus_name and @object_path.
-// 
-// The thread default main context is taken at the time of this call.
-// All signals on the menu model (and any linked models) are reported
-// with respect to this context.  All calls on the returned menu model
-// (and linked models) must also originate from this same context, with
-// the thread default main context unchanged.
-// 
-// This call is non-blocking.  The returned action group may or may not
-// already be filled in.  The correct thing to do is connect the signals
-// for the action group to monitor for changes and then to call
-// g_action_group_list_actions() to get the initial list.
-func DBusActionGroupGet(connection DBusConnection, busName string, objectPath string) DBusActionGroup {
-	var carg1 *C.GDBusConnection  // in, none, converted
-	var carg2 *C.gchar            // in, none, string, nullable-string
-	var carg3 *C.gchar            // in, none, string
-	var cret  *C.GDBusActionGroup // return, full, converted
-
-	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	if busName != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(busName)))
-		defer C.free(unsafe.Pointer(carg2))
-	}
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg3))
-
-	cret = C.g_dbus_action_group_get(carg1, carg2, carg3)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(busName)
-	runtime.KeepAlive(objectPath)
-
-	var goret DBusActionGroup
-
-	goret = UnsafeDBusActionGroupFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// DBusAuthObserverInstance is the instance type used by all types extending GDBusAuthObserver. It is used internally by the bindings. Users should use the interface [DBusAuthObserver] instead.
-type DBusAuthObserverInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ DBusAuthObserver = (*DBusAuthObserverInstance)(nil)
-
-// DBusAuthObserver wraps GDBusAuthObserver
-//
-// `GDBusAuthObserver` provides a mechanism for participating
-// in how a [class@Gio.DBusServer] (or a [class@Gio.DBusConnection])
-// authenticates remote peers.
-// 
-// Simply instantiate a `GDBusAuthObserver` and connect to the
-// signals you are interested in. Note that new signals may be added
-// in the future.
-// 
-// ## Controlling Authentication Mechanisms
-// 
-// By default, a `GDBusServer` or server-side `GDBusConnection` will allow
-// any authentication mechanism to be used. If you only want to allow D-Bus
-// connections with the `EXTERNAL` mechanism, which makes use of credentials
-// passing and is the recommended mechanism for modern Unix platforms such
-// as Linux and the BSD family, you would use a signal handler like this:
-// 
-// ```c
-// static gboolean
-// on_allow_mechanism (GDBusAuthObserver *observer,
-//                     const gchar       *mechanism,
-//                     gpointer           user_data)
-// {
-//   if (g_strcmp0 (mechanism, "EXTERNAL") == 0)
-//     {
-//       return TRUE;
-//     }
-// 
-//   return FALSE;
-// }
-// ```
-// 
-// ## Controlling Authorization
-// 
-// By default, a `GDBusServer` or server-side `GDBusConnection` will accept
-// connections from any successfully authenticated user (but not from
-// anonymous connections using the `ANONYMOUS` mechanism). If you only
-// want to allow D-Bus connections from processes owned by the same uid
-// as the server, since GLib 2.68, you should use the
-// `G_DBUS_SERVER_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER` flag. It’s equivalent
-// to the following signal handler:
-// 
-// ```c
-// static gboolean
-// on_authorize_authenticated_peer (GDBusAuthObserver *observer,
-//                                  GIOStream         *stream,
-//                                  GCredentials      *credentials,
-//                                  gpointer           user_data)
-// {
-//   gboolean authorized;
-// 
-//   authorized = FALSE;
-//   if (credentials != NULL)
-//     {
-//       GCredentials *own_credentials;
-//       own_credentials = g_credentials_new ();
-//       if (g_credentials_is_same_user (credentials, own_credentials, NULL))
-//         authorized = TRUE;
-//       g_object_unref (own_credentials);
-//     }
-// 
-//   return authorized;
-// }
-// ```
-type DBusAuthObserver interface {
-	gobject.Object
-	upcastToGDBusAuthObserver() *DBusAuthObserverInstance
-
-	// AllowMechanism wraps g_dbus_auth_observer_allow_mechanism
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- mechanism string: The name of the mechanism, e.g. `DBUS_COOKIE_SHA1`. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Emits the #GDBusAuthObserver::allow-mechanism signal on @observer.
-	AllowMechanism(string) bool
-	// AuthorizeAuthenticatedPeer wraps g_dbus_auth_observer_authorize_authenticated_peer
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- stream IOStream: A #GIOStream for the #GDBusConnection. 
-	// 	- credentials Credentials (nullable): Credentials received from the peer or %NULL. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Emits the #GDBusAuthObserver::authorize-authenticated-peer signal on @observer.
-	AuthorizeAuthenticatedPeer(IOStream, Credentials) bool
-	// ConnectAllowMechanism connects the provided callback to the "allow-mechanism" signal
-	//
-	// Emitted to check if @mechanism is allowed to be used.
-	ConnectAllowMechanism(func(DBusAuthObserver, string) bool) gobject.SignalHandle
-	// ConnectAuthorizeAuthenticatedPeer connects the provided callback to the "authorize-authenticated-peer" signal
-	//
-	// Emitted to check if a peer that is successfully authenticated
-	// is authorized.
-	ConnectAuthorizeAuthenticatedPeer(func(DBusAuthObserver, IOStream, Credentials) bool) gobject.SignalHandle
-}
-
-func unsafeWrapDBusAuthObserver(base *gobject.ObjectInstance) *DBusAuthObserverInstance {
-	return &DBusAuthObserverInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeDBusAuthObserver,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusAuthObserver(inst)
-		},
-	)
-}
-
-func marshalDBusAuthObserverInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusAuthObserver(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeDBusAuthObserverFromGlibNone is used to convert raw GDBusAuthObserver pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusAuthObserverFromGlibNone(c unsafe.Pointer) DBusAuthObserver {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusAuthObserver)
-}
-
-// UnsafeDBusAuthObserverFromGlibFull is used to convert raw GDBusAuthObserver pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusAuthObserverFromGlibFull(c unsafe.Pointer) DBusAuthObserver {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusAuthObserver)
-}
-
-// UnsafeDBusAuthObserverFromGlibBorrow is used to convert raw GDBusAuthObserver pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusAuthObserverFromGlibBorrow(c unsafe.Pointer) DBusAuthObserver {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusAuthObserver)
-}
-
-func (d *DBusAuthObserverInstance) upcastToGDBusAuthObserver() *DBusAuthObserverInstance {
-	return d
-}
-
-// UnsafeDBusAuthObserverToGlibNone is used to convert the instance to it's C value GDBusAuthObserver. This is used by the bindings internally.
-func UnsafeDBusAuthObserverToGlibNone(c DBusAuthObserver) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeDBusAuthObserverToGlibFull is used to convert the instance to it's C value GDBusAuthObserver, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusAuthObserverToGlibFull(c DBusAuthObserver) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewDBusAuthObserver wraps g_dbus_auth_observer_new
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusAuthObserver 
-//
-// Creates a new #GDBusAuthObserver object.
-func NewDBusAuthObserver() DBusAuthObserver {
-	var cret *C.GDBusAuthObserver // return, full, converted
-
-	cret = C.g_dbus_auth_observer_new()
-
-	var goret DBusAuthObserver
-
-	goret = UnsafeDBusAuthObserverFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// AllowMechanism wraps g_dbus_auth_observer_allow_mechanism
-// 
-// The function takes the following parameters:
-// 
-// 	- mechanism string: The name of the mechanism, e.g. `DBUS_COOKIE_SHA1`. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Emits the #GDBusAuthObserver::allow-mechanism signal on @observer.
-func (observer *DBusAuthObserverInstance) AllowMechanism(mechanism string) bool {
-	var carg0 *C.GDBusAuthObserver // in, none, converted
-	var carg1 *C.gchar             // in, none, string
-	var cret  C.gboolean           // return
-
-	carg0 = (*C.GDBusAuthObserver)(UnsafeDBusAuthObserverToGlibNone(observer))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mechanism)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_dbus_auth_observer_allow_mechanism(carg0, carg1)
-	runtime.KeepAlive(observer)
-	runtime.KeepAlive(mechanism)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// AuthorizeAuthenticatedPeer wraps g_dbus_auth_observer_authorize_authenticated_peer
-// 
-// The function takes the following parameters:
-// 
-// 	- stream IOStream: A #GIOStream for the #GDBusConnection. 
-// 	- credentials Credentials (nullable): Credentials received from the peer or %NULL. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Emits the #GDBusAuthObserver::authorize-authenticated-peer signal on @observer.
-func (observer *DBusAuthObserverInstance) AuthorizeAuthenticatedPeer(stream IOStream, credentials Credentials) bool {
-	var carg0 *C.GDBusAuthObserver // in, none, converted
-	var carg1 *C.GIOStream         // in, none, converted
-	var carg2 *C.GCredentials      // in, none, converted, nullable
-	var cret  C.gboolean           // return
-
-	carg0 = (*C.GDBusAuthObserver)(UnsafeDBusAuthObserverToGlibNone(observer))
-	carg1 = (*C.GIOStream)(UnsafeIOStreamToGlibNone(stream))
-	if credentials != nil {
-		carg2 = (*C.GCredentials)(UnsafeCredentialsToGlibNone(credentials))
-	}
-
-	cret = C.g_dbus_auth_observer_authorize_authenticated_peer(carg0, carg1, carg2)
-	runtime.KeepAlive(observer)
-	runtime.KeepAlive(stream)
-	runtime.KeepAlive(credentials)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// ConnectAllowMechanism connects the provided callback to the "allow-mechanism" signal
-//
-// Emitted to check if @mechanism is allowed to be used.
-func (o *DBusAuthObserverInstance) ConnectAllowMechanism(fn func(DBusAuthObserver, string) bool) gobject.SignalHandle {
-	return o.Connect("allow-mechanism", fn)
-}
-
-// ConnectAuthorizeAuthenticatedPeer connects the provided callback to the "authorize-authenticated-peer" signal
-//
-// Emitted to check if a peer that is successfully authenticated
-// is authorized.
-func (o *DBusAuthObserverInstance) ConnectAuthorizeAuthenticatedPeer(fn func(DBusAuthObserver, IOStream, Credentials) bool) gobject.SignalHandle {
-	return o.Connect("authorize-authenticated-peer", fn)
-}
-
-// DBusConnectionInstance is the instance type used by all types extending GDBusConnection. It is used internally by the bindings. Users should use the interface [DBusConnection] instead.
-type DBusConnectionInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ DBusConnection = (*DBusConnectionInstance)(nil)
-
-// DBusConnection wraps GDBusConnection
-//
-// The `GDBusConnection` type is used for D-Bus connections to remote
-// peers such as a message buses.
-// 
-// It is a low-level API that offers a lot of flexibility. For instance,
-// it lets you establish a connection over any transport that can by represented
-// as a [class@Gio.IOStream].
-// 
-// This class is rarely used directly in D-Bus clients. If you are writing
-// a D-Bus client, it is often easier to use the [func@Gio.bus_own_name],
-// [func@Gio.bus_watch_name] or [func@Gio.DBusProxy.new_for_bus] APIs.
-// 
-// As an exception to the usual GLib rule that a particular object must not
-// be used by two threads at the same time, `GDBusConnection`s methods may be
-// called from any thread. This is so that [func@Gio.bus_get] and
-// [func@Gio.bus_get_sync] can safely return the same `GDBusConnection` when
-// called from any thread.
-// 
-// Most of the ways to obtain a `GDBusConnection` automatically initialize it
-// (i.e. connect to D-Bus): for instance, [func@Gio.DBusConnection.new] and
-// [func@Gio.bus_get], and the synchronous versions of those methods, give you
-// an initialized connection. Language bindings for GIO should use
-// [func@Gio.Initable.new] or [func@Gio.AsyncInitable.new_async], which also
-// initialize the connection.
-// 
-// If you construct an uninitialized `GDBusConnection`, such as via
-// [ctor@GObject.Object.new], you must initialize it via [method@Gio.Initable.init] or
-// [method@Gio.AsyncInitable.init_async] before using its methods or properties.
-// Calling methods or accessing properties on a `GDBusConnection` that has not
-// completed initialization successfully is considered to be invalid, and leads
-// to undefined behaviour. In particular, if initialization fails with a
-// `GError`, the only valid thing you can do with that `GDBusConnection` is to
-// free it with [method@GObject.Object.unref].
-// 
-// ## An example D-Bus server
-// 
-// Here is an example for a D-Bus server:
-// [gdbus-example-server.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-server.c)
-// 
-// ## An example for exporting a subtree
-// 
-// Here is an example for exporting a subtree:
-// [gdbus-example-subtree.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-subtree.c)
-// 
-// ## An example for file descriptor passing
-// 
-// Here is an example for passing UNIX file descriptors:
-// [gdbus-unix-fd-client.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-unix-fd-client.c)
-// 
-// ## An example for exporting a GObject
-// 
-// Here is an example for exporting a #GObject:
-// [gdbus-example-export.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-export.c)
-type DBusConnection interface {
-	gobject.Object
-	upcastToGDBusConnection() *DBusConnectionInstance
-
-	// AddFilter wraps g_dbus_connection_add_filter
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- filterFunction DBusMessageFilterFunction: a filter function 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret uint 
-	//
-	// Adds a message filter. Filters are handlers that are run on all
-	// incoming and outgoing messages, prior to standard dispatch. Filters
-	// are run in the order that they were added.  The same handler can be
-	// added as a filter more than once, in which case it will be run more
-	// than once.  Filters added during a filter callback won't be run on
-	// the message being processed. Filter functions are allowed to modify
-	// and even drop messages.
-	// 
-	// Note that filters are run in a dedicated message handling thread so
-	// they can't block and, generally, can't do anything but signal a
-	// worker thread. Also note that filters are rarely needed - use API
-	// such as g_dbus_connection_send_message_with_reply(),
-	// g_dbus_connection_signal_subscribe() or g_dbus_connection_call() instead.
-	// 
-	// If a filter consumes an incoming message the message is not
-	// dispatched anywhere else - not even the standard dispatch machinery
-	// (that API such as g_dbus_connection_signal_subscribe() and
-	// g_dbus_connection_send_message_with_reply() relies on) will see the
-	// message. Similarly, if a filter consumes an outgoing message, the
-	// message will not be sent to the other peer.
-	// 
-	// If @user_data_free_func is non-%NULL, it will be called (in the
-	// thread-default main context of the thread you are calling this
-	// method from) at some point after @user_data is no longer
-	// needed. (It is not guaranteed to be called synchronously when the
-	// filter is removed, and may be called after @connection has been
-	// destroyed.)
-	AddFilter(DBusMessageFilterFunction) uint
-	// Close wraps g_dbus_connection_close
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the request is
-	//     satisfied or %NULL if you don't care about the result 
-	//
-	// Closes @connection. Note that this never causes the process to
-	// exit (this might only happen if the other end of a shared message
-	// bus connection disconnects, see #GDBusConnection:exit-on-close).
-	// 
-	// Once the connection is closed, operations such as sending a message
-	// will return with the error %G_IO_ERROR_CLOSED. Closing a connection
-	// will not automatically flush the connection so queued messages may
-	// be lost. Use g_dbus_connection_flush() if you need such guarantees.
-	// 
-	// If @connection is already closed, this method fails with
-	// %G_IO_ERROR_CLOSED.
-	// 
-	// When @connection has been closed, the #GDBusConnection::closed
-	// signal is emitted in the thread-default main context
-	// (see [method@GLib.MainContext.push_thread_default])
-	// of the thread that @connection was constructed in.
-	// 
-	// This is an asynchronous method. When the operation is finished,
-	// @callback will be invoked in the thread-default main context
-	// (see [method@GLib.MainContext.push_thread_default])
-	// of the thread you are calling this method from. You can
-	// then call g_dbus_connection_close_finish() to get the result of the
-	// operation. See g_dbus_connection_close_sync() for the synchronous
-	// version.
-	Close(context.Context, AsyncReadyCallback)
-	// CloseFinish wraps g_dbus_connection_close_finish
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- res AsyncResult: a #GAsyncResult obtained from the #GAsyncReadyCallback passed
-	//     to g_dbus_connection_close() 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Finishes an operation started with g_dbus_connection_close().
-	CloseFinish(AsyncResult) (bool, error)
-	// CloseSync wraps g_dbus_connection_close_sync
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Synchronously closes @connection. The calling thread is blocked
-	// until this is done. See g_dbus_connection_close() for the
-	// asynchronous version of this method and more details about what it
-	// does.
-	CloseSync(context.Context) (bool, error)
-	// ExportActionGroup wraps g_dbus_connection_export_action_group
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- objectPath string: a D-Bus object path 
-	// 	- actionGroup ActionGroup: an action group 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret uint 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Exports @action_group on @connection at @object_path.
-	// 
-	// The implemented D-Bus API should be considered private.  It is
-	// subject to change in the future.
-	// 
-	// A given object path can only have one action group exported on it.
-	// If this constraint is violated, the export will fail and 0 will be
-	// returned (with @error set accordingly).
-	// 
-	// You can unexport the action group using
-	// [method@Gio.DBusConnection.unexport_action_group] with the return value of
-	// this function.
-	// 
-	// The thread default main context is taken at the time of this call.
-	// All incoming action activations and state change requests are
-	// reported from this context.  Any changes on the action group that
-	// cause it to emit signals must also come from this same context.
-	// Since incoming action activations and state change requests are
-	// rather likely to cause changes on the action group, this effectively
-	// limits a given action group to being exported from only one main
-	// context.
-	ExportActionGroup(string, ActionGroup) (uint, error)
-	// ExportMenuModel wraps g_dbus_connection_export_menu_model
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- objectPath string: a D-Bus object path 
-	// 	- menu MenuModel: a #GMenuModel 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret uint 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Exports @menu on @connection at @object_path.
-	// 
-	// The implemented D-Bus API should be considered private.
-	// It is subject to change in the future.
-	// 
-	// An object path can only have one menu model exported on it. If this
-	// constraint is violated, the export will fail and 0 will be
-	// returned (with @error set accordingly).
-	// 
-	// Exporting menus with sections containing more than
-	// %G_MENU_EXPORTER_MAX_SECTION_SIZE items is not supported and results in
-	// undefined behavior.
-	// 
-	// You can unexport the menu model using
-	// g_dbus_connection_unexport_menu_model() with the return value of
-	// this function.
-	ExportMenuModel(string, MenuModel) (uint, error)
-	// Flush wraps g_dbus_connection_flush
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the
-	//     request is satisfied or %NULL if you don't care about the result 
-	//
-	// Asynchronously flushes @connection, that is, writes all queued
-	// outgoing messages to the transport and then flushes the transport
-	// (using g_output_stream_flush_async()). This is useful in programs
-	// that want to emit a D-Bus signal and then exit immediately. Without
-	// flushing the connection, there is no guarantee that the message has
-	// been sent to the networking buffers in the OS kernel.
-	// 
-	// This is an asynchronous method. When the operation is finished,
-	// @callback will be invoked in the thread-default main context
-	// (see [method@GLib.MainContext.push_thread_default])
-	// of the thread you are calling this method from. You can
-	// then call g_dbus_connection_flush_finish() to get the result of the
-	// operation. See g_dbus_connection_flush_sync() for the synchronous
-	// version.
-	Flush(context.Context, AsyncReadyCallback)
-	// FlushFinish wraps g_dbus_connection_flush_finish
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- res AsyncResult: a #GAsyncResult obtained from the #GAsyncReadyCallback passed
-	//     to g_dbus_connection_flush() 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Finishes an operation started with g_dbus_connection_flush().
-	FlushFinish(AsyncResult) (bool, error)
-	// FlushSync wraps g_dbus_connection_flush_sync
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Synchronously flushes @connection. The calling thread is blocked
-	// until this is done. See g_dbus_connection_flush() for the
-	// asynchronous version of this method and more details about what it
-	// does.
-	FlushSync(context.Context) (bool, error)
-	// GetCapabilities wraps g_dbus_connection_get_capabilities
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusCapabilityFlags 
-	//
-	// Gets the capabilities negotiated with the remote peer
-	GetCapabilities() DBusCapabilityFlags
-	// GetExitOnClose wraps g_dbus_connection_get_exit_on_close
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Gets whether the process is terminated when @connection is
-	// closed by the remote peer. See
-	// #GDBusConnection:exit-on-close for more details.
-	GetExitOnClose() bool
-	// GetFlags wraps g_dbus_connection_get_flags
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusConnectionFlags 
-	//
-	// Gets the flags used to construct this connection
-	GetFlags() DBusConnectionFlags
-	// GetGUID wraps g_dbus_connection_get_guid
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// The GUID of the peer performing the role of server when
-	// authenticating. See #GDBusConnection:guid for more details.
-	GetGUID() string
-	// GetLastSerial wraps g_dbus_connection_get_last_serial
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret uint32 
-	//
-	// Retrieves the last serial number assigned to a #GDBusMessage on
-	// the current thread. This includes messages sent via both low-level
-	// API such as g_dbus_connection_send_message() as well as
-	// high-level API such as g_dbus_connection_emit_signal(),
-	// g_dbus_connection_call() or g_dbus_proxy_call().
-	GetLastSerial() uint32
-	// GetPeerCredentials wraps g_dbus_connection_get_peer_credentials
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret Credentials (nullable) 
-	//
-	// Gets the credentials of the authenticated peer. This will always
-	// return %NULL unless @connection acted as a server
-	// (e.g. %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER was passed)
-	// when set up and the client passed credentials as part of the
-	// authentication process.
-	// 
-	// In a message bus setup, the message bus is always the server and
-	// each application is a client. So this method will always return
-	// %NULL for message bus clients.
-	GetPeerCredentials() Credentials
-	// GetStream wraps g_dbus_connection_get_stream
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret IOStream 
-	//
-	// Gets the underlying stream used for IO.
-	// 
-	// While the #GDBusConnection is active, it will interact with this
-	// stream from a worker thread, so it is not safe to interact with
-	// the stream directly.
-	GetStream() IOStream
-	// GetUniqueName wraps g_dbus_connection_get_unique_name
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// Gets the unique name of @connection as assigned by the message
-	// bus. This can also be used to figure out if @connection is a
-	// message bus connection.
-	GetUniqueName() string
-	// IsClosed wraps g_dbus_connection_is_closed
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Gets whether @connection is closed.
-	IsClosed() bool
-	// RemoveFilter wraps g_dbus_connection_remove_filter
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- filterId uint: an identifier obtained from g_dbus_connection_add_filter() 
-	//
-	// Removes a filter.
-	// 
-	// Note that since filters run in a different thread, there is a race
-	// condition where it is possible that the filter will be running even
-	// after calling g_dbus_connection_remove_filter(), so you cannot just
-	// free data that the filter might be using. Instead, you should pass
-	// a #GDestroyNotify to g_dbus_connection_add_filter(), which will be
-	// called when it is guaranteed that the data is no longer needed.
-	RemoveFilter(uint)
-	// SendMessage wraps g_dbus_connection_send_message
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- message DBusMessage: a #GDBusMessage 
-	// 	- flags DBusSendMessageFlags: flags affecting how the message is sent 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- outSerial uint32: return location for serial number assigned
-	//     to @message when sending it or %NULL 
-	// 	- goret bool 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Asynchronously sends @message to the peer represented by @connection.
-	// 
-	// Unless @flags contain the
-	// %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number
-	// will be assigned by @connection and set on @message via
-	// g_dbus_message_set_serial(). If @out_serial is not %NULL, then the
-	// serial number used will be written to this location prior to
-	// submitting the message to the underlying transport. While it has a `volatile`
-	// qualifier, this is a historical artifact and the argument passed to it should
-	// not be `volatile`.
-	// 
-	// If @connection is closed then the operation will fail with
-	// %G_IO_ERROR_CLOSED. If @message is not well-formed,
-	// the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.
-	// 
-	// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
-	// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
-	// for an example of how to use this low-level API to send and receive
-	// UNIX file descriptors.
-	// 
-	// Note that @message must be unlocked, unless @flags contain the
-	// %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.
-	SendMessage(DBusMessage, DBusSendMessageFlags) (uint32, bool, error)
-	// SendMessageWithReply wraps g_dbus_connection_send_message_with_reply
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-	// 	- message DBusMessage: a #GDBusMessage 
-	// 	- flags DBusSendMessageFlags: flags affecting how the message is sent 
-	// 	- timeoutMsec int32: the timeout in milliseconds, -1 to use the default
-	//     timeout or %G_MAXINT for no timeout 
-	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the request
-	//     is satisfied or %NULL if you don't care about the result 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- outSerial uint32: return location for serial number assigned
-	//     to @message when sending it or %NULL 
-	//
-	// Asynchronously sends @message to the peer represented by @connection.
-	// 
-	// Unless @flags contain the
-	// %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number
-	// will be assigned by @connection and set on @message via
-	// g_dbus_message_set_serial(). If @out_serial is not %NULL, then the
-	// serial number used will be written to this location prior to
-	// submitting the message to the underlying transport. While it has a `volatile`
-	// qualifier, this is a historical artifact and the argument passed to it should
-	// not be `volatile`.
-	// 
-	// If @connection is closed then the operation will fail with
-	// %G_IO_ERROR_CLOSED. If @cancellable is canceled, the operation will
-	// fail with %G_IO_ERROR_CANCELLED. If @message is not well-formed,
-	// the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.
-	// 
-	// This is an asynchronous method. When the operation is finished, @callback
-	// will be invoked in the thread-default main context
-	// (see [method@GLib.MainContext.push_thread_default])
-	// of the thread you are calling this method from. You can then call
-	// g_dbus_connection_send_message_with_reply_finish() to get the result of the operation.
-	// See g_dbus_connection_send_message_with_reply_sync() for the synchronous version.
-	// 
-	// Note that @message must be unlocked, unless @flags contain the
-	// %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.
-	// 
-	// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
-	// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
-	// for an example of how to use this low-level API to send and receive
-	// UNIX file descriptors.
-	SendMessageWithReply(context.Context, DBusMessage, DBusSendMessageFlags, int32, AsyncReadyCallback) uint32
-	// SendMessageWithReplyFinish wraps g_dbus_connection_send_message_with_reply_finish
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- res AsyncResult: a #GAsyncResult obtained from the #GAsyncReadyCallback passed to
-	//     g_dbus_connection_send_message_with_reply() 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusMessage 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Finishes an operation started with g_dbus_connection_send_message_with_reply().
-	// 
-	// Note that @error is only set if a local in-process error
-	// occurred. That is to say that the returned #GDBusMessage object may
-	// be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use
-	// g_dbus_message_to_gerror() to transcode this to a #GError.
-	// 
-	// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
-	// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
-	// for an example of how to use this low-level API to send and receive
-	// UNIX file descriptors.
-	SendMessageWithReplyFinish(AsyncResult) (DBusMessage, error)
-	// SendMessageWithReplySync wraps g_dbus_connection_send_message_with_reply_sync
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-	// 	- message DBusMessage: a #GDBusMessage 
-	// 	- flags DBusSendMessageFlags: flags affecting how the message is sent. 
-	// 	- timeoutMsec int32: the timeout in milliseconds, -1 to use the default
-	//     timeout or %G_MAXINT for no timeout 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- outSerial uint32: return location for serial number
-	//     assigned to @message when sending it or %NULL 
-	// 	- goret DBusMessage 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Synchronously sends @message to the peer represented by @connection
-	// and blocks the calling thread until a reply is received or the
-	// timeout is reached. See g_dbus_connection_send_message_with_reply()
-	// for the asynchronous version of this method.
-	// 
-	// Unless @flags contain the
-	// %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number
-	// will be assigned by @connection and set on @message via
-	// g_dbus_message_set_serial(). If @out_serial is not %NULL, then the
-	// serial number used will be written to this location prior to
-	// submitting the message to the underlying transport. While it has a `volatile`
-	// qualifier, this is a historical artifact and the argument passed to it should
-	// not be `volatile`.
-	// 
-	// If @connection is closed then the operation will fail with
-	// %G_IO_ERROR_CLOSED. If @cancellable is canceled, the operation will
-	// fail with %G_IO_ERROR_CANCELLED. If @message is not well-formed,
-	// the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.
-	// 
-	// Note that @error is only set if a local in-process error
-	// occurred. That is to say that the returned #GDBusMessage object may
-	// be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use
-	// g_dbus_message_to_gerror() to transcode this to a #GError.
-	// 
-	// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
-	// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
-	// for an example of how to use this low-level API to send and receive
-	// UNIX file descriptors.
-	// 
-	// Note that @message must be unlocked, unless @flags contain the
-	// %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.
-	SendMessageWithReplySync(context.Context, DBusMessage, DBusSendMessageFlags, int32) (uint32, DBusMessage, error)
-	// SetExitOnClose wraps g_dbus_connection_set_exit_on_close
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- exitOnClose bool: whether the process should be terminated
-	//     when @connection is closed by the remote peer 
-	//
-	// Sets whether the process should be terminated when @connection is
-	// closed by the remote peer. See #GDBusConnection:exit-on-close for
-	// more details.
-	// 
-	// Note that this function should be used with care. Most modern UNIX
-	// desktops tie the notion of a user session with the session bus, and expect
-	// all of a user's applications to quit when their bus connection goes away.
-	// If you are setting @exit_on_close to %FALSE for the shared session
-	// bus connection, you should make sure that your application exits
-	// when the user session ends.
-	SetExitOnClose(bool)
-	// SignalUnsubscribe wraps g_dbus_connection_signal_unsubscribe
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- subscriptionId uint: a subscription id obtained from
-	//     g_dbus_connection_signal_subscribe() 
-	//
-	// Unsubscribes from signals.
-	// 
-	// Note that there may still be D-Bus traffic to process (relating to this
-	// signal subscription) in the current thread-default #GMainContext after this
-	// function has returned. You should continue to iterate the #GMainContext
-	// until the #GDestroyNotify function passed to
-	// g_dbus_connection_signal_subscribe() is called, in order to avoid memory
-	// leaks through callbacks queued on the #GMainContext after it’s stopped being
-	// iterated.
-	// Alternatively, any idle source with a priority lower than %G_PRIORITY_DEFAULT
-	// that was scheduled after unsubscription, also indicates that all resources
-	// of this subscription are released.
-	SignalUnsubscribe(uint)
-	// StartMessageProcessing wraps g_dbus_connection_start_message_processing
-	//
-	// If @connection was created with
-	// %G_DBUS_CONNECTION_FLAGS_DELAY_MESSAGE_PROCESSING, this method
-	// starts processing messages. Does nothing on if @connection wasn't
-	// created with this flag or if the method has already been called.
-	StartMessageProcessing()
-	// UnexportActionGroup wraps g_dbus_connection_unexport_action_group
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- exportId uint: the ID from [method@Gio.DBusConnection.export_action_group] 
-	//
-	// Reverses the effect of a previous call to
-	// [method@Gio.DBusConnection.export_action_group].
-	// 
-	// It is an error to call this function with an ID that wasn’t returned from
-	// [method@Gio.DBusConnection.export_action_group] or to call it with the same
-	// ID more than once.
-	UnexportActionGroup(uint)
-	// UnexportMenuModel wraps g_dbus_connection_unexport_menu_model
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- exportId uint: the ID from g_dbus_connection_export_menu_model() 
-	//
-	// Reverses the effect of a previous call to
-	// g_dbus_connection_export_menu_model().
-	// 
-	// It is an error to call this function with an ID that wasn't returned
-	// from g_dbus_connection_export_menu_model() or to call it with the
-	// same ID more than once.
-	UnexportMenuModel(uint)
-	// UnregisterObject wraps g_dbus_connection_unregister_object
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- registrationId uint: a registration id obtained from
-	//     g_dbus_connection_register_object() 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Unregisters an object.
-	UnregisterObject(uint) bool
-	// UnregisterSubtree wraps g_dbus_connection_unregister_subtree
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- registrationId uint: a subtree registration id obtained from
-	//     g_dbus_connection_register_subtree() 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Unregisters a subtree.
-	UnregisterSubtree(uint) bool
-	// ConnectClosed connects the provided callback to the "closed" signal
-	//
-	// Emitted when the connection is closed.
-	// 
-	// The cause of this event can be
-	// 
-	// - If g_dbus_connection_close() is called. In this case
-	//   @remote_peer_vanished is set to %FALSE and @error is %NULL.
-	// 
-	// - If the remote peer closes the connection. In this case
-	//   @remote_peer_vanished is set to %TRUE and @error is set.
-	// 
-	// - If the remote peer sends invalid or malformed data. In this
-	//   case @remote_peer_vanished is set to %FALSE and @error is set.
-	// 
-	// Upon receiving this signal, you should give up your reference to
-	// @connection. You are guaranteed that this signal is emitted only
-	// once.
-	ConnectClosed(func(DBusConnection, bool, error)) gobject.SignalHandle
-}
-
-func unsafeWrapDBusConnection(base *gobject.ObjectInstance) *DBusConnectionInstance {
-	return &DBusConnectionInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeDBusConnection,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusConnection(inst)
-		},
-	)
-}
-
-func marshalDBusConnectionInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusConnection(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeDBusConnectionFromGlibNone is used to convert raw GDBusConnection pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusConnectionFromGlibNone(c unsafe.Pointer) DBusConnection {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusConnection)
-}
-
-// UnsafeDBusConnectionFromGlibFull is used to convert raw GDBusConnection pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusConnectionFromGlibFull(c unsafe.Pointer) DBusConnection {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusConnection)
-}
-
-// UnsafeDBusConnectionFromGlibBorrow is used to convert raw GDBusConnection pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusConnectionFromGlibBorrow(c unsafe.Pointer) DBusConnection {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusConnection)
-}
-
-func (d *DBusConnectionInstance) upcastToGDBusConnection() *DBusConnectionInstance {
-	return d
-}
-
-// UnsafeDBusConnectionToGlibNone is used to convert the instance to it's C value GDBusConnection. This is used by the bindings internally.
-func UnsafeDBusConnectionToGlibNone(c DBusConnection) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeDBusConnectionToGlibFull is used to convert the instance to it's C value GDBusConnection, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusConnectionToGlibFull(c DBusConnection) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewDBusConnectionFinish wraps g_dbus_connection_new_finish
-// 
-// The function takes the following parameters:
-// 
-// 	- res AsyncResult: a #GAsyncResult obtained from the #GAsyncReadyCallback
-//     passed to g_dbus_connection_new(). 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusConnection 
-// 	- _goerr error (nullable): an error 
-//
-// Finishes an operation started with g_dbus_connection_new().
-func NewDBusConnectionFinish(res AsyncResult) (DBusConnection, error) {
-	var carg1 *C.GAsyncResult    // in, none, converted
-	var cret  *C.GDBusConnection // return, full, converted
-	var _cerr *C.GError          // out, full, converted, nullable
-
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
-
-	cret = C.g_dbus_connection_new_finish(carg1, &_cerr)
-	runtime.KeepAlive(res)
-
-	var goret  DBusConnection
-	var _goerr error
-
-	goret = UnsafeDBusConnectionFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// NewDBusConnectionForAddressFinish wraps g_dbus_connection_new_for_address_finish
-// 
-// The function takes the following parameters:
-// 
-// 	- res AsyncResult: a #GAsyncResult obtained from the #GAsyncReadyCallback passed
-//     to g_dbus_connection_new() 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusConnection 
-// 	- _goerr error (nullable): an error 
-//
-// Finishes an operation started with g_dbus_connection_new_for_address().
-func NewDBusConnectionForAddressFinish(res AsyncResult) (DBusConnection, error) {
-	var carg1 *C.GAsyncResult    // in, none, converted
-	var cret  *C.GDBusConnection // return, full, converted
-	var _cerr *C.GError          // out, full, converted, nullable
-
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
-
-	cret = C.g_dbus_connection_new_for_address_finish(carg1, &_cerr)
-	runtime.KeepAlive(res)
-
-	var goret  DBusConnection
-	var _goerr error
-
-	goret = UnsafeDBusConnectionFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// NewDBusConnectionForAddressSync wraps g_dbus_connection_new_for_address_sync
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-// 	- address string: a D-Bus address 
-// 	- flags DBusConnectionFlags: flags describing how to make the connection 
-// 	- observer DBusAuthObserver (nullable): a #GDBusAuthObserver or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusConnection 
-// 	- _goerr error (nullable): an error 
-//
-// Synchronously connects and sets up a D-Bus client connection for
-// exchanging D-Bus messages with an endpoint specified by @address
-// which must be in the
-// [D-Bus address format](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses).
-// 
-// This constructor can only be used to initiate client-side
-// connections - use g_dbus_connection_new_sync() if you need to act
-// as the server. In particular, @flags cannot contain the
-// %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER,
-// %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS or
-// %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER flags.
-// 
-// This is a synchronous failable constructor. See
-// g_dbus_connection_new_for_address() for the asynchronous version.
-// 
-// If @observer is not %NULL it may be used to control the
-// authentication process.
-func NewDBusConnectionForAddressSync(cancellable context.Context, address string, flags DBusConnectionFlags, observer DBusAuthObserver) (DBusConnection, error) {
-	var carg4 *C.GCancellable        // in, none, converted, nullable
-	var carg1 *C.gchar               // in, none, string
-	var carg2 C.GDBusConnectionFlags // in, none, casted
-	var carg3 *C.GDBusAuthObserver   // in, none, converted, nullable
-	var cret  *C.GDBusConnection     // return, full, converted
-	var _cerr *C.GError              // out, full, converted, nullable
-
-	if cancellable != nil {
-		carg4 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(address)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GDBusConnectionFlags(flags)
-	if observer != nil {
-		carg3 = (*C.GDBusAuthObserver)(UnsafeDBusAuthObserverToGlibNone(observer))
-	}
-
-	cret = C.g_dbus_connection_new_for_address_sync(carg1, carg2, carg3, carg4, &_cerr)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(address)
-	runtime.KeepAlive(flags)
-	runtime.KeepAlive(observer)
-
-	var goret  DBusConnection
-	var _goerr error
-
-	goret = UnsafeDBusConnectionFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// NewDBusConnectionSync wraps g_dbus_connection_new_sync
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-// 	- stream IOStream: a #GIOStream 
-// 	- guid string (nullable): the GUID to use if authenticating as a server or %NULL 
-// 	- flags DBusConnectionFlags: flags describing how to make the connection 
-// 	- observer DBusAuthObserver (nullable): a #GDBusAuthObserver or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusConnection 
-// 	- _goerr error (nullable): an error 
-//
-// Synchronously sets up a D-Bus connection for exchanging D-Bus messages
-// with the end represented by @stream.
-// 
-// If @stream is a #GSocketConnection, then the corresponding #GSocket
-// will be put into non-blocking mode.
-// 
-// The D-Bus connection will interact with @stream from a worker thread.
-// As a result, the caller should not interact with @stream after this
-// method has been called, except by calling g_object_unref() on it.
-// 
-// If @observer is not %NULL it may be used to control the
-// authentication process.
-// 
-// This is a synchronous failable constructor. See
-// g_dbus_connection_new() for the asynchronous version.
-func NewDBusConnectionSync(cancellable context.Context, stream IOStream, guid string, flags DBusConnectionFlags, observer DBusAuthObserver) (DBusConnection, error) {
-	var carg5 *C.GCancellable        // in, none, converted, nullable
-	var carg1 *C.GIOStream           // in, none, converted
-	var carg2 *C.gchar               // in, none, string, nullable-string
-	var carg3 C.GDBusConnectionFlags // in, none, casted
-	var carg4 *C.GDBusAuthObserver   // in, none, converted, nullable
-	var cret  *C.GDBusConnection     // return, full, converted
-	var _cerr *C.GError              // out, full, converted, nullable
-
-	if cancellable != nil {
-		carg5 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = (*C.GIOStream)(UnsafeIOStreamToGlibNone(stream))
-	if guid != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(guid)))
-		defer C.free(unsafe.Pointer(carg2))
-	}
-	carg3 = C.GDBusConnectionFlags(flags)
-	if observer != nil {
-		carg4 = (*C.GDBusAuthObserver)(UnsafeDBusAuthObserverToGlibNone(observer))
-	}
-
-	cret = C.g_dbus_connection_new_sync(carg1, carg2, carg3, carg4, carg5, &_cerr)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(stream)
-	runtime.KeepAlive(guid)
-	runtime.KeepAlive(flags)
-	runtime.KeepAlive(observer)
-
-	var goret  DBusConnection
-	var _goerr error
-
-	goret = UnsafeDBusConnectionFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// NewDBusConnection wraps g_dbus_connection_new
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-// 	- stream IOStream: a #GIOStream 
-// 	- guid string (nullable): the GUID to use if authenticating as a server or %NULL 
-// 	- flags DBusConnectionFlags: flags describing how to make the connection 
-// 	- observer DBusAuthObserver (nullable): a #GDBusAuthObserver or %NULL 
-// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the request is satisfied 
-//
-// Asynchronously sets up a D-Bus connection for exchanging D-Bus messages
-// with the end represented by @stream.
-// 
-// If @stream is a #GSocketConnection, then the corresponding #GSocket
-// will be put into non-blocking mode.
-// 
-// The D-Bus connection will interact with @stream from a worker thread.
-// As a result, the caller should not interact with @stream after this
-// method has been called, except by calling g_object_unref() on it.
-// 
-// If @observer is not %NULL it may be used to control the
-// authentication process.
-// 
-// When the operation is finished, @callback will be invoked. You can
-// then call g_dbus_connection_new_finish() to get the result of the
-// operation.
-// 
-// This is an asynchronous failable constructor. See
-// g_dbus_connection_new_sync() for the synchronous
-// version.
-func NewDBusConnection(cancellable context.Context, stream IOStream, guid string, flags DBusConnectionFlags, observer DBusAuthObserver, callback AsyncReadyCallback) {
-	var carg5 *C.GCancellable        // in, none, converted, nullable
-	var carg1 *C.GIOStream           // in, none, converted
-	var carg2 *C.gchar               // in, none, string, nullable-string
-	var carg3 C.GDBusConnectionFlags // in, none, casted
-	var carg4 *C.GDBusAuthObserver   // in, none, converted, nullable
-	var carg6 C.GAsyncReadyCallback  // callback, scope: async, closure: carg7, nullable
-	var carg7 C.gpointer             // implicit
-
-	if cancellable != nil {
-		carg5 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = (*C.GIOStream)(UnsafeIOStreamToGlibNone(stream))
-	if guid != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(guid)))
-		defer C.free(unsafe.Pointer(carg2))
-	}
-	carg3 = C.GDBusConnectionFlags(flags)
-	if observer != nil {
-		carg4 = (*C.GDBusAuthObserver)(UnsafeDBusAuthObserverToGlibNone(observer))
-	}
-	if callback != nil {
-		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg7 = C.gpointer(userdata.RegisterOnce(callback))
-	}
-
-	C.g_dbus_connection_new(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(stream)
-	runtime.KeepAlive(guid)
-	runtime.KeepAlive(flags)
-	runtime.KeepAlive(observer)
-	runtime.KeepAlive(callback)
-}
-
-// NewDBusConnectionForAddress wraps g_dbus_connection_new_for_address
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-// 	- address string: a D-Bus address 
-// 	- flags DBusConnectionFlags: flags describing how to make the connection 
-// 	- observer DBusAuthObserver (nullable): a #GDBusAuthObserver or %NULL 
-// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the request is satisfied 
-//
-// Asynchronously connects and sets up a D-Bus client connection for
-// exchanging D-Bus messages with an endpoint specified by @address
-// which must be in the
-// [D-Bus address format](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses).
-// 
-// This constructor can only be used to initiate client-side
-// connections - use g_dbus_connection_new() if you need to act as the
-// server. In particular, @flags cannot contain the
-// %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER,
-// %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS or
-// %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER flags.
-// 
-// When the operation is finished, @callback will be invoked. You can
-// then call g_dbus_connection_new_for_address_finish() to get the result of
-// the operation.
-// 
-// If @observer is not %NULL it may be used to control the
-// authentication process.
-// 
-// This is an asynchronous failable constructor. See
-// g_dbus_connection_new_for_address_sync() for the synchronous
-// version.
-func NewDBusConnectionForAddress(cancellable context.Context, address string, flags DBusConnectionFlags, observer DBusAuthObserver, callback AsyncReadyCallback) {
-	var carg4 *C.GCancellable        // in, none, converted, nullable
-	var carg1 *C.gchar               // in, none, string
-	var carg2 C.GDBusConnectionFlags // in, none, casted
-	var carg3 *C.GDBusAuthObserver   // in, none, converted, nullable
-	var carg5 C.GAsyncReadyCallback  // callback, scope: async, closure: carg6, nullable
-	var carg6 C.gpointer             // implicit
-
-	if cancellable != nil {
-		carg4 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(address)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GDBusConnectionFlags(flags)
-	if observer != nil {
-		carg3 = (*C.GDBusAuthObserver)(UnsafeDBusAuthObserverToGlibNone(observer))
-	}
-	if callback != nil {
-		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg6 = C.gpointer(userdata.RegisterOnce(callback))
-	}
-
-	C.g_dbus_connection_new_for_address(carg1, carg2, carg3, carg4, carg5, carg6)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(address)
-	runtime.KeepAlive(flags)
-	runtime.KeepAlive(observer)
-	runtime.KeepAlive(callback)
-}
-
-// AddFilter wraps g_dbus_connection_add_filter
-// 
-// The function takes the following parameters:
-// 
-// 	- filterFunction DBusMessageFilterFunction: a filter function 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-//
-// Adds a message filter. Filters are handlers that are run on all
-// incoming and outgoing messages, prior to standard dispatch. Filters
-// are run in the order that they were added.  The same handler can be
-// added as a filter more than once, in which case it will be run more
-// than once.  Filters added during a filter callback won't be run on
-// the message being processed. Filter functions are allowed to modify
-// and even drop messages.
-// 
-// Note that filters are run in a dedicated message handling thread so
-// they can't block and, generally, can't do anything but signal a
-// worker thread. Also note that filters are rarely needed - use API
-// such as g_dbus_connection_send_message_with_reply(),
-// g_dbus_connection_signal_subscribe() or g_dbus_connection_call() instead.
-// 
-// If a filter consumes an incoming message the message is not
-// dispatched anywhere else - not even the standard dispatch machinery
-// (that API such as g_dbus_connection_signal_subscribe() and
-// g_dbus_connection_send_message_with_reply() relies on) will see the
-// message. Similarly, if a filter consumes an outgoing message, the
-// message will not be sent to the other peer.
-// 
-// If @user_data_free_func is non-%NULL, it will be called (in the
-// thread-default main context of the thread you are calling this
-// method from) at some point after @user_data is no longer
-// needed. (It is not guaranteed to be called synchronously when the
-// filter is removed, and may be called after @connection has been
-// destroyed.)
-func (connection *DBusConnectionInstance) AddFilter(filterFunction DBusMessageFilterFunction) uint {
-	var carg0 *C.GDBusConnection           // in, none, converted
-	var carg1 C.GDBusMessageFilterFunction // callback, scope: notified, closure: carg2, destroy: carg3
-	var carg2 C.gpointer                   // implicit
-	var carg3 C.GDestroyNotify             // implicit
-	var cret  C.guint                      // return, none, casted
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg1 = (*[0]byte)(C._gotk4_gio2_DBusMessageFilterFunction)
-	carg2 = C.gpointer(userdata.Register(filterFunction))
-	carg3 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
-
-	cret = C.g_dbus_connection_add_filter(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(filterFunction)
-
-	var goret uint
-
-	goret = uint(cret)
-
-	return goret
-}
-
-// Close wraps g_dbus_connection_close
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the request is
-//     satisfied or %NULL if you don't care about the result 
-//
-// Closes @connection. Note that this never causes the process to
-// exit (this might only happen if the other end of a shared message
-// bus connection disconnects, see #GDBusConnection:exit-on-close).
-// 
-// Once the connection is closed, operations such as sending a message
-// will return with the error %G_IO_ERROR_CLOSED. Closing a connection
-// will not automatically flush the connection so queued messages may
-// be lost. Use g_dbus_connection_flush() if you need such guarantees.
-// 
-// If @connection is already closed, this method fails with
-// %G_IO_ERROR_CLOSED.
-// 
-// When @connection has been closed, the #GDBusConnection::closed
-// signal is emitted in the thread-default main context
-// (see [method@GLib.MainContext.push_thread_default])
-// of the thread that @connection was constructed in.
-// 
-// This is an asynchronous method. When the operation is finished,
-// @callback will be invoked in the thread-default main context
-// (see [method@GLib.MainContext.push_thread_default])
-// of the thread you are calling this method from. You can
-// then call g_dbus_connection_close_finish() to get the result of the
-// operation. See g_dbus_connection_close_sync() for the synchronous
-// version.
-func (connection *DBusConnectionInstance) Close(cancellable context.Context, callback AsyncReadyCallback) {
-	var carg0 *C.GDBusConnection    // in, none, converted
-	var carg1 *C.GCancellable       // in, none, converted, nullable
-	var carg2 C.GAsyncReadyCallback // callback, scope: async, closure: carg3, nullable
-	var carg3 C.gpointer            // implicit
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	if cancellable != nil {
-		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	if callback != nil {
-		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(userdata.RegisterOnce(callback))
-	}
-
-	C.g_dbus_connection_close(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(callback)
-}
-
-// CloseFinish wraps g_dbus_connection_close_finish
-// 
-// The function takes the following parameters:
-// 
-// 	- res AsyncResult: a #GAsyncResult obtained from the #GAsyncReadyCallback passed
-//     to g_dbus_connection_close() 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-// 	- _goerr error (nullable): an error 
-//
-// Finishes an operation started with g_dbus_connection_close().
-func (connection *DBusConnectionInstance) CloseFinish(res AsyncResult) (bool, error) {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 *C.GAsyncResult    // in, none, converted
-	var cret  C.gboolean         // return
-	var _cerr *C.GError          // out, full, converted, nullable
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
-
-	cret = C.g_dbus_connection_close_finish(carg0, carg1, &_cerr)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(res)
-
-	var goret  bool
-	var _goerr error
-
-	if cret != 0 {
-		goret = true
-	}
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// CloseSync wraps g_dbus_connection_close_sync
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-// 	- _goerr error (nullable): an error 
-//
-// Synchronously closes @connection. The calling thread is blocked
-// until this is done. See g_dbus_connection_close() for the
-// asynchronous version of this method and more details about what it
-// does.
-func (connection *DBusConnectionInstance) CloseSync(cancellable context.Context) (bool, error) {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 *C.GCancellable    // in, none, converted, nullable
-	var cret  C.gboolean         // return
-	var _cerr *C.GError          // out, full, converted, nullable
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	if cancellable != nil {
-		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-
-	cret = C.g_dbus_connection_close_sync(carg0, carg1, &_cerr)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(cancellable)
-
-	var goret  bool
-	var _goerr error
-
-	if cret != 0 {
-		goret = true
-	}
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// ExportActionGroup wraps g_dbus_connection_export_action_group
-// 
-// The function takes the following parameters:
-// 
-// 	- objectPath string: a D-Bus object path 
-// 	- actionGroup ActionGroup: an action group 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-// 	- _goerr error (nullable): an error 
-//
-// Exports @action_group on @connection at @object_path.
-// 
-// The implemented D-Bus API should be considered private.  It is
-// subject to change in the future.
-// 
-// A given object path can only have one action group exported on it.
-// If this constraint is violated, the export will fail and 0 will be
-// returned (with @error set accordingly).
-// 
-// You can unexport the action group using
-// [method@Gio.DBusConnection.unexport_action_group] with the return value of
-// this function.
-// 
-// The thread default main context is taken at the time of this call.
-// All incoming action activations and state change requests are
-// reported from this context.  Any changes on the action group that
-// cause it to emit signals must also come from this same context.
-// Since incoming action activations and state change requests are
-// rather likely to cause changes on the action group, this effectively
-// limits a given action group to being exported from only one main
-// context.
-func (connection *DBusConnectionInstance) ExportActionGroup(objectPath string, actionGroup ActionGroup) (uint, error) {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 *C.gchar           // in, none, string
-	var carg2 *C.GActionGroup    // in, none, converted
-	var cret  C.guint            // return, none, casted
-	var _cerr *C.GError          // out, full, converted, nullable
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
-
-	cret = C.g_dbus_connection_export_action_group(carg0, carg1, carg2, &_cerr)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(objectPath)
-	runtime.KeepAlive(actionGroup)
-
-	var goret  uint
-	var _goerr error
-
-	goret = uint(cret)
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// ExportMenuModel wraps g_dbus_connection_export_menu_model
-// 
-// The function takes the following parameters:
-// 
-// 	- objectPath string: a D-Bus object path 
-// 	- menu MenuModel: a #GMenuModel 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-// 	- _goerr error (nullable): an error 
-//
-// Exports @menu on @connection at @object_path.
-// 
-// The implemented D-Bus API should be considered private.
-// It is subject to change in the future.
-// 
-// An object path can only have one menu model exported on it. If this
-// constraint is violated, the export will fail and 0 will be
-// returned (with @error set accordingly).
-// 
-// Exporting menus with sections containing more than
-// %G_MENU_EXPORTER_MAX_SECTION_SIZE items is not supported and results in
-// undefined behavior.
-// 
-// You can unexport the menu model using
-// g_dbus_connection_unexport_menu_model() with the return value of
-// this function.
-func (connection *DBusConnectionInstance) ExportMenuModel(objectPath string, menu MenuModel) (uint, error) {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 *C.gchar           // in, none, string
-	var carg2 *C.GMenuModel      // in, none, converted
-	var cret  C.guint            // return, none, casted
-	var _cerr *C.GError          // out, full, converted, nullable
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GMenuModel)(UnsafeMenuModelToGlibNone(menu))
-
-	cret = C.g_dbus_connection_export_menu_model(carg0, carg1, carg2, &_cerr)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(objectPath)
-	runtime.KeepAlive(menu)
-
-	var goret  uint
-	var _goerr error
-
-	goret = uint(cret)
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// Flush wraps g_dbus_connection_flush
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the
-//     request is satisfied or %NULL if you don't care about the result 
-//
-// Asynchronously flushes @connection, that is, writes all queued
-// outgoing messages to the transport and then flushes the transport
-// (using g_output_stream_flush_async()). This is useful in programs
-// that want to emit a D-Bus signal and then exit immediately. Without
-// flushing the connection, there is no guarantee that the message has
-// been sent to the networking buffers in the OS kernel.
-// 
-// This is an asynchronous method. When the operation is finished,
-// @callback will be invoked in the thread-default main context
-// (see [method@GLib.MainContext.push_thread_default])
-// of the thread you are calling this method from. You can
-// then call g_dbus_connection_flush_finish() to get the result of the
-// operation. See g_dbus_connection_flush_sync() for the synchronous
-// version.
-func (connection *DBusConnectionInstance) Flush(cancellable context.Context, callback AsyncReadyCallback) {
-	var carg0 *C.GDBusConnection    // in, none, converted
-	var carg1 *C.GCancellable       // in, none, converted, nullable
-	var carg2 C.GAsyncReadyCallback // callback, scope: async, closure: carg3, nullable
-	var carg3 C.gpointer            // implicit
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	if cancellable != nil {
-		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	if callback != nil {
-		carg2 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg3 = C.gpointer(userdata.RegisterOnce(callback))
-	}
-
-	C.g_dbus_connection_flush(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(callback)
-}
-
-// FlushFinish wraps g_dbus_connection_flush_finish
-// 
-// The function takes the following parameters:
-// 
-// 	- res AsyncResult: a #GAsyncResult obtained from the #GAsyncReadyCallback passed
-//     to g_dbus_connection_flush() 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-// 	- _goerr error (nullable): an error 
-//
-// Finishes an operation started with g_dbus_connection_flush().
-func (connection *DBusConnectionInstance) FlushFinish(res AsyncResult) (bool, error) {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 *C.GAsyncResult    // in, none, converted
-	var cret  C.gboolean         // return
-	var _cerr *C.GError          // out, full, converted, nullable
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
-
-	cret = C.g_dbus_connection_flush_finish(carg0, carg1, &_cerr)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(res)
-
-	var goret  bool
-	var _goerr error
-
-	if cret != 0 {
-		goret = true
-	}
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// FlushSync wraps g_dbus_connection_flush_sync
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-// 	- _goerr error (nullable): an error 
-//
-// Synchronously flushes @connection. The calling thread is blocked
-// until this is done. See g_dbus_connection_flush() for the
-// asynchronous version of this method and more details about what it
-// does.
-func (connection *DBusConnectionInstance) FlushSync(cancellable context.Context) (bool, error) {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 *C.GCancellable    // in, none, converted, nullable
-	var cret  C.gboolean         // return
-	var _cerr *C.GError          // out, full, converted, nullable
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	if cancellable != nil {
-		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-
-	cret = C.g_dbus_connection_flush_sync(carg0, carg1, &_cerr)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(cancellable)
-
-	var goret  bool
-	var _goerr error
-
-	if cret != 0 {
-		goret = true
-	}
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// GetCapabilities wraps g_dbus_connection_get_capabilities
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusCapabilityFlags 
-//
-// Gets the capabilities negotiated with the remote peer
-func (connection *DBusConnectionInstance) GetCapabilities() DBusCapabilityFlags {
-	var carg0 *C.GDBusConnection     // in, none, converted
-	var cret  C.GDBusCapabilityFlags // return, none, casted
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-
-	cret = C.g_dbus_connection_get_capabilities(carg0)
-	runtime.KeepAlive(connection)
-
-	var goret DBusCapabilityFlags
-
-	goret = DBusCapabilityFlags(cret)
-
-	return goret
-}
-
-// GetExitOnClose wraps g_dbus_connection_get_exit_on_close
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Gets whether the process is terminated when @connection is
-// closed by the remote peer. See
-// #GDBusConnection:exit-on-close for more details.
-func (connection *DBusConnectionInstance) GetExitOnClose() bool {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var cret  C.gboolean         // return
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-
-	cret = C.g_dbus_connection_get_exit_on_close(carg0)
-	runtime.KeepAlive(connection)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetFlags wraps g_dbus_connection_get_flags
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusConnectionFlags 
-//
-// Gets the flags used to construct this connection
-func (connection *DBusConnectionInstance) GetFlags() DBusConnectionFlags {
-	var carg0 *C.GDBusConnection     // in, none, converted
-	var cret  C.GDBusConnectionFlags // return, none, casted
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-
-	cret = C.g_dbus_connection_get_flags(carg0)
-	runtime.KeepAlive(connection)
-
-	var goret DBusConnectionFlags
-
-	goret = DBusConnectionFlags(cret)
-
-	return goret
-}
-
-// GetGUID wraps g_dbus_connection_get_guid
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// The GUID of the peer performing the role of server when
-// authenticating. See #GDBusConnection:guid for more details.
-func (connection *DBusConnectionInstance) GetGUID() string {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var cret  *C.gchar           // return, none, string
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-
-	cret = C.g_dbus_connection_get_guid(carg0)
-	runtime.KeepAlive(connection)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetLastSerial wraps g_dbus_connection_get_last_serial
-// 
-// The function returns the following values:
-// 
-// 	- goret uint32 
-//
-// Retrieves the last serial number assigned to a #GDBusMessage on
-// the current thread. This includes messages sent via both low-level
-// API such as g_dbus_connection_send_message() as well as
-// high-level API such as g_dbus_connection_emit_signal(),
-// g_dbus_connection_call() or g_dbus_proxy_call().
-func (connection *DBusConnectionInstance) GetLastSerial() uint32 {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var cret  C.guint32          // return, none, casted
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-
-	cret = C.g_dbus_connection_get_last_serial(carg0)
-	runtime.KeepAlive(connection)
-
-	var goret uint32
-
-	goret = uint32(cret)
-
-	return goret
-}
-
-// GetPeerCredentials wraps g_dbus_connection_get_peer_credentials
-// 
-// The function returns the following values:
-// 
-// 	- goret Credentials (nullable) 
-//
-// Gets the credentials of the authenticated peer. This will always
-// return %NULL unless @connection acted as a server
-// (e.g. %G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER was passed)
-// when set up and the client passed credentials as part of the
-// authentication process.
-// 
-// In a message bus setup, the message bus is always the server and
-// each application is a client. So this method will always return
-// %NULL for message bus clients.
-func (connection *DBusConnectionInstance) GetPeerCredentials() Credentials {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var cret  *C.GCredentials    // return, none, converted, nullable
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-
-	cret = C.g_dbus_connection_get_peer_credentials(carg0)
-	runtime.KeepAlive(connection)
-
-	var goret Credentials
-
-	if cret != nil {
-		goret = UnsafeCredentialsFromGlibNone(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// GetStream wraps g_dbus_connection_get_stream
-// 
-// The function returns the following values:
-// 
-// 	- goret IOStream 
-//
-// Gets the underlying stream used for IO.
-// 
-// While the #GDBusConnection is active, it will interact with this
-// stream from a worker thread, so it is not safe to interact with
-// the stream directly.
-func (connection *DBusConnectionInstance) GetStream() IOStream {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var cret  *C.GIOStream       // return, none, converted
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-
-	cret = C.g_dbus_connection_get_stream(carg0)
-	runtime.KeepAlive(connection)
-
-	var goret IOStream
-
-	goret = UnsafeIOStreamFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetUniqueName wraps g_dbus_connection_get_unique_name
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Gets the unique name of @connection as assigned by the message
-// bus. This can also be used to figure out if @connection is a
-// message bus connection.
-func (connection *DBusConnectionInstance) GetUniqueName() string {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var cret  *C.gchar           // return, none, string, nullable-string
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-
-	cret = C.g_dbus_connection_get_unique_name(carg0)
-	runtime.KeepAlive(connection)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// IsClosed wraps g_dbus_connection_is_closed
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Gets whether @connection is closed.
-func (connection *DBusConnectionInstance) IsClosed() bool {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var cret  C.gboolean         // return
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-
-	cret = C.g_dbus_connection_is_closed(carg0)
-	runtime.KeepAlive(connection)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// RemoveFilter wraps g_dbus_connection_remove_filter
-// 
-// The function takes the following parameters:
-// 
-// 	- filterId uint: an identifier obtained from g_dbus_connection_add_filter() 
-//
-// Removes a filter.
-// 
-// Note that since filters run in a different thread, there is a race
-// condition where it is possible that the filter will be running even
-// after calling g_dbus_connection_remove_filter(), so you cannot just
-// free data that the filter might be using. Instead, you should pass
-// a #GDestroyNotify to g_dbus_connection_add_filter(), which will be
-// called when it is guaranteed that the data is no longer needed.
-func (connection *DBusConnectionInstance) RemoveFilter(filterId uint) {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 C.guint            // in, none, casted
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg1 = C.guint(filterId)
-
-	C.g_dbus_connection_remove_filter(carg0, carg1)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(filterId)
-}
-
-// SendMessage wraps g_dbus_connection_send_message
-// 
-// The function takes the following parameters:
-// 
-// 	- message DBusMessage: a #GDBusMessage 
-// 	- flags DBusSendMessageFlags: flags affecting how the message is sent 
-// 
-// The function returns the following values:
-// 
-// 	- outSerial uint32: return location for serial number assigned
-//     to @message when sending it or %NULL 
-// 	- goret bool 
-// 	- _goerr error (nullable): an error 
-//
-// Asynchronously sends @message to the peer represented by @connection.
-// 
-// Unless @flags contain the
-// %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number
-// will be assigned by @connection and set on @message via
-// g_dbus_message_set_serial(). If @out_serial is not %NULL, then the
-// serial number used will be written to this location prior to
-// submitting the message to the underlying transport. While it has a `volatile`
-// qualifier, this is a historical artifact and the argument passed to it should
-// not be `volatile`.
-// 
-// If @connection is closed then the operation will fail with
-// %G_IO_ERROR_CLOSED. If @message is not well-formed,
-// the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.
-// 
-// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
-// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
-// for an example of how to use this low-level API to send and receive
-// UNIX file descriptors.
-// 
-// Note that @message must be unlocked, unless @flags contain the
-// %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.
-func (connection *DBusConnectionInstance) SendMessage(message DBusMessage, flags DBusSendMessageFlags) (uint32, bool, error) {
-	var carg0 *C.GDBusConnection      // in, none, converted
-	var carg1 *C.GDBusMessage         // in, none, converted
-	var carg2 C.GDBusSendMessageFlags // in, none, casted
-	var carg3 C.guint32               // out, full, casted
-	var cret  C.gboolean              // return
-	var _cerr *C.GError               // out, full, converted, nullable
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg1 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	carg2 = C.GDBusSendMessageFlags(flags)
-
-	cret = C.g_dbus_connection_send_message(carg0, carg1, carg2, &carg3, &_cerr)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(flags)
-
-	var outSerial uint32
-	var goret     bool
-	var _goerr    error
-
-	outSerial = uint32(carg3)
-	if cret != 0 {
-		goret = true
-	}
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return outSerial, goret, _goerr
-}
-
-// SendMessageWithReply wraps g_dbus_connection_send_message_with_reply
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-// 	- message DBusMessage: a #GDBusMessage 
-// 	- flags DBusSendMessageFlags: flags affecting how the message is sent 
-// 	- timeoutMsec int32: the timeout in milliseconds, -1 to use the default
-//     timeout or %G_MAXINT for no timeout 
-// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the request
-//     is satisfied or %NULL if you don't care about the result 
-// 
-// The function returns the following values:
-// 
-// 	- outSerial uint32: return location for serial number assigned
-//     to @message when sending it or %NULL 
-//
-// Asynchronously sends @message to the peer represented by @connection.
-// 
-// Unless @flags contain the
-// %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number
-// will be assigned by @connection and set on @message via
-// g_dbus_message_set_serial(). If @out_serial is not %NULL, then the
-// serial number used will be written to this location prior to
-// submitting the message to the underlying transport. While it has a `volatile`
-// qualifier, this is a historical artifact and the argument passed to it should
-// not be `volatile`.
-// 
-// If @connection is closed then the operation will fail with
-// %G_IO_ERROR_CLOSED. If @cancellable is canceled, the operation will
-// fail with %G_IO_ERROR_CANCELLED. If @message is not well-formed,
-// the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.
-// 
-// This is an asynchronous method. When the operation is finished, @callback
-// will be invoked in the thread-default main context
-// (see [method@GLib.MainContext.push_thread_default])
-// of the thread you are calling this method from. You can then call
-// g_dbus_connection_send_message_with_reply_finish() to get the result of the operation.
-// See g_dbus_connection_send_message_with_reply_sync() for the synchronous version.
-// 
-// Note that @message must be unlocked, unless @flags contain the
-// %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.
-// 
-// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
-// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
-// for an example of how to use this low-level API to send and receive
-// UNIX file descriptors.
-func (connection *DBusConnectionInstance) SendMessageWithReply(cancellable context.Context, message DBusMessage, flags DBusSendMessageFlags, timeoutMsec int32, callback AsyncReadyCallback) uint32 {
-	var carg0 *C.GDBusConnection      // in, none, converted
-	var carg5 *C.GCancellable         // in, none, converted, nullable
-	var carg1 *C.GDBusMessage         // in, none, converted
-	var carg2 C.GDBusSendMessageFlags // in, none, casted
-	var carg3 C.gint                  // in, none, casted
-	var carg6 C.GAsyncReadyCallback   // callback, scope: async, closure: carg7, nullable
-	var carg7 C.gpointer              // implicit
-	var carg4 C.guint32               // out, full, casted
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	if cancellable != nil {
-		carg5 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	carg2 = C.GDBusSendMessageFlags(flags)
-	carg3 = C.gint(timeoutMsec)
-	if callback != nil {
-		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg7 = C.gpointer(userdata.RegisterOnce(callback))
-	}
-
-	C.g_dbus_connection_send_message_with_reply(carg0, carg1, carg2, carg3, &carg4, carg5, carg6, carg7)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(flags)
-	runtime.KeepAlive(timeoutMsec)
-	runtime.KeepAlive(callback)
-
-	var outSerial uint32
-
-	outSerial = uint32(carg4)
-
-	return outSerial
-}
-
-// SendMessageWithReplyFinish wraps g_dbus_connection_send_message_with_reply_finish
-// 
-// The function takes the following parameters:
-// 
-// 	- res AsyncResult: a #GAsyncResult obtained from the #GAsyncReadyCallback passed to
-//     g_dbus_connection_send_message_with_reply() 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusMessage 
-// 	- _goerr error (nullable): an error 
-//
-// Finishes an operation started with g_dbus_connection_send_message_with_reply().
-// 
-// Note that @error is only set if a local in-process error
-// occurred. That is to say that the returned #GDBusMessage object may
-// be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use
-// g_dbus_message_to_gerror() to transcode this to a #GError.
-// 
-// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
-// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
-// for an example of how to use this low-level API to send and receive
-// UNIX file descriptors.
-func (connection *DBusConnectionInstance) SendMessageWithReplyFinish(res AsyncResult) (DBusMessage, error) {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 *C.GAsyncResult    // in, none, converted
-	var cret  *C.GDBusMessage    // return, full, converted
-	var _cerr *C.GError          // out, full, converted, nullable
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
-
-	cret = C.g_dbus_connection_send_message_with_reply_finish(carg0, carg1, &_cerr)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(res)
-
-	var goret  DBusMessage
-	var _goerr error
-
-	goret = UnsafeDBusMessageFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// SendMessageWithReplySync wraps g_dbus_connection_send_message_with_reply_sync
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
-// 	- message DBusMessage: a #GDBusMessage 
-// 	- flags DBusSendMessageFlags: flags affecting how the message is sent. 
-// 	- timeoutMsec int32: the timeout in milliseconds, -1 to use the default
-//     timeout or %G_MAXINT for no timeout 
-// 
-// The function returns the following values:
-// 
-// 	- outSerial uint32: return location for serial number
-//     assigned to @message when sending it or %NULL 
-// 	- goret DBusMessage 
-// 	- _goerr error (nullable): an error 
-//
-// Synchronously sends @message to the peer represented by @connection
-// and blocks the calling thread until a reply is received or the
-// timeout is reached. See g_dbus_connection_send_message_with_reply()
-// for the asynchronous version of this method.
-// 
-// Unless @flags contain the
-// %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag, the serial number
-// will be assigned by @connection and set on @message via
-// g_dbus_message_set_serial(). If @out_serial is not %NULL, then the
-// serial number used will be written to this location prior to
-// submitting the message to the underlying transport. While it has a `volatile`
-// qualifier, this is a historical artifact and the argument passed to it should
-// not be `volatile`.
-// 
-// If @connection is closed then the operation will fail with
-// %G_IO_ERROR_CLOSED. If @cancellable is canceled, the operation will
-// fail with %G_IO_ERROR_CANCELLED. If @message is not well-formed,
-// the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.
-// 
-// Note that @error is only set if a local in-process error
-// occurred. That is to say that the returned #GDBusMessage object may
-// be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use
-// g_dbus_message_to_gerror() to transcode this to a #GError.
-// 
-// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
-// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
-// for an example of how to use this low-level API to send and receive
-// UNIX file descriptors.
-// 
-// Note that @message must be unlocked, unless @flags contain the
-// %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.
-func (connection *DBusConnectionInstance) SendMessageWithReplySync(cancellable context.Context, message DBusMessage, flags DBusSendMessageFlags, timeoutMsec int32) (uint32, DBusMessage, error) {
-	var carg0 *C.GDBusConnection      // in, none, converted
-	var carg5 *C.GCancellable         // in, none, converted, nullable
-	var carg1 *C.GDBusMessage         // in, none, converted
-	var carg2 C.GDBusSendMessageFlags // in, none, casted
-	var carg3 C.gint                  // in, none, casted
-	var carg4 C.guint32               // out, full, casted
-	var cret  *C.GDBusMessage         // return, full, converted
-	var _cerr *C.GError               // out, full, converted, nullable
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	if cancellable != nil {
-		carg5 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	carg2 = C.GDBusSendMessageFlags(flags)
-	carg3 = C.gint(timeoutMsec)
-
-	cret = C.g_dbus_connection_send_message_with_reply_sync(carg0, carg1, carg2, carg3, &carg4, carg5, &_cerr)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(flags)
-	runtime.KeepAlive(timeoutMsec)
-
-	var outSerial uint32
-	var goret     DBusMessage
-	var _goerr    error
-
-	outSerial = uint32(carg4)
-	goret = UnsafeDBusMessageFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return outSerial, goret, _goerr
-}
-
-// SetExitOnClose wraps g_dbus_connection_set_exit_on_close
-// 
-// The function takes the following parameters:
-// 
-// 	- exitOnClose bool: whether the process should be terminated
-//     when @connection is closed by the remote peer 
-//
-// Sets whether the process should be terminated when @connection is
-// closed by the remote peer. See #GDBusConnection:exit-on-close for
-// more details.
-// 
-// Note that this function should be used with care. Most modern UNIX
-// desktops tie the notion of a user session with the session bus, and expect
-// all of a user's applications to quit when their bus connection goes away.
-// If you are setting @exit_on_close to %FALSE for the shared session
-// bus connection, you should make sure that your application exits
-// when the user session ends.
-func (connection *DBusConnectionInstance) SetExitOnClose(exitOnClose bool) {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 C.gboolean         // in
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	if exitOnClose {
-		carg1 = C.TRUE
-	}
-
-	C.g_dbus_connection_set_exit_on_close(carg0, carg1)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(exitOnClose)
-}
-
-// SignalUnsubscribe wraps g_dbus_connection_signal_unsubscribe
-// 
-// The function takes the following parameters:
-// 
-// 	- subscriptionId uint: a subscription id obtained from
-//     g_dbus_connection_signal_subscribe() 
-//
-// Unsubscribes from signals.
-// 
-// Note that there may still be D-Bus traffic to process (relating to this
-// signal subscription) in the current thread-default #GMainContext after this
-// function has returned. You should continue to iterate the #GMainContext
-// until the #GDestroyNotify function passed to
-// g_dbus_connection_signal_subscribe() is called, in order to avoid memory
-// leaks through callbacks queued on the #GMainContext after it’s stopped being
-// iterated.
-// Alternatively, any idle source with a priority lower than %G_PRIORITY_DEFAULT
-// that was scheduled after unsubscription, also indicates that all resources
-// of this subscription are released.
-func (connection *DBusConnectionInstance) SignalUnsubscribe(subscriptionId uint) {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 C.guint            // in, none, casted
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg1 = C.guint(subscriptionId)
-
-	C.g_dbus_connection_signal_unsubscribe(carg0, carg1)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(subscriptionId)
-}
-
-// StartMessageProcessing wraps g_dbus_connection_start_message_processing
-//
-// If @connection was created with
-// %G_DBUS_CONNECTION_FLAGS_DELAY_MESSAGE_PROCESSING, this method
-// starts processing messages. Does nothing on if @connection wasn't
-// created with this flag or if the method has already been called.
-func (connection *DBusConnectionInstance) StartMessageProcessing() {
-	var carg0 *C.GDBusConnection // in, none, converted
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-
-	C.g_dbus_connection_start_message_processing(carg0)
-	runtime.KeepAlive(connection)
-}
-
-// UnexportActionGroup wraps g_dbus_connection_unexport_action_group
-// 
-// The function takes the following parameters:
-// 
-// 	- exportId uint: the ID from [method@Gio.DBusConnection.export_action_group] 
-//
-// Reverses the effect of a previous call to
-// [method@Gio.DBusConnection.export_action_group].
-// 
-// It is an error to call this function with an ID that wasn’t returned from
-// [method@Gio.DBusConnection.export_action_group] or to call it with the same
-// ID more than once.
-func (connection *DBusConnectionInstance) UnexportActionGroup(exportId uint) {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 C.guint            // in, none, casted
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg1 = C.guint(exportId)
-
-	C.g_dbus_connection_unexport_action_group(carg0, carg1)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(exportId)
-}
-
-// UnexportMenuModel wraps g_dbus_connection_unexport_menu_model
-// 
-// The function takes the following parameters:
-// 
-// 	- exportId uint: the ID from g_dbus_connection_export_menu_model() 
-//
-// Reverses the effect of a previous call to
-// g_dbus_connection_export_menu_model().
-// 
-// It is an error to call this function with an ID that wasn't returned
-// from g_dbus_connection_export_menu_model() or to call it with the
-// same ID more than once.
-func (connection *DBusConnectionInstance) UnexportMenuModel(exportId uint) {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 C.guint            // in, none, casted
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg1 = C.guint(exportId)
-
-	C.g_dbus_connection_unexport_menu_model(carg0, carg1)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(exportId)
-}
-
-// UnregisterObject wraps g_dbus_connection_unregister_object
-// 
-// The function takes the following parameters:
-// 
-// 	- registrationId uint: a registration id obtained from
-//     g_dbus_connection_register_object() 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Unregisters an object.
-func (connection *DBusConnectionInstance) UnregisterObject(registrationId uint) bool {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 C.guint            // in, none, casted
-	var cret  C.gboolean         // return
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg1 = C.guint(registrationId)
-
-	cret = C.g_dbus_connection_unregister_object(carg0, carg1)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(registrationId)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// UnregisterSubtree wraps g_dbus_connection_unregister_subtree
-// 
-// The function takes the following parameters:
-// 
-// 	- registrationId uint: a subtree registration id obtained from
-//     g_dbus_connection_register_subtree() 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Unregisters a subtree.
-func (connection *DBusConnectionInstance) UnregisterSubtree(registrationId uint) bool {
-	var carg0 *C.GDBusConnection // in, none, converted
-	var carg1 C.guint            // in, none, casted
-	var cret  C.gboolean         // return
-
-	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg1 = C.guint(registrationId)
-
-	cret = C.g_dbus_connection_unregister_subtree(carg0, carg1)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(registrationId)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// ConnectClosed connects the provided callback to the "closed" signal
-//
-// Emitted when the connection is closed.
-// 
-// The cause of this event can be
-// 
-// - If g_dbus_connection_close() is called. In this case
-//   @remote_peer_vanished is set to %FALSE and @error is %NULL.
-// 
-// - If the remote peer closes the connection. In this case
-//   @remote_peer_vanished is set to %TRUE and @error is set.
-// 
-// - If the remote peer sends invalid or malformed data. In this
-//   case @remote_peer_vanished is set to %FALSE and @error is set.
-// 
-// Upon receiving this signal, you should give up your reference to
-// @connection. You are guaranteed that this signal is emitted only
-// once.
-func (o *DBusConnectionInstance) ConnectClosed(fn func(DBusConnection, bool, error)) gobject.SignalHandle {
-	return o.Connect("closed", fn)
-}
-
-// DBusInterfaceSkeletonInstance is the instance type used by all types extending GDBusInterfaceSkeleton. It is used internally by the bindings. Users should use the interface [DBusInterfaceSkeleton] instead.
-type DBusInterfaceSkeletonInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ DBusInterfaceSkeleton = (*DBusInterfaceSkeletonInstance)(nil)
-
-// DBusInterfaceSkeleton wraps GDBusInterfaceSkeleton
-//
-// Abstract base class for D-Bus interfaces on the service side.
-type DBusInterfaceSkeleton interface {
-	gobject.Object
-	upcastToGDBusInterfaceSkeleton() *DBusInterfaceSkeletonInstance
-
-	// Export wraps g_dbus_interface_skeleton_export
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- connection DBusConnection: A #GDBusConnection to export @interface_ on. 
-	// 	- objectPath string: The path to export the interface at. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Exports @interface_ at @object_path on @connection.
-	// 
-	// This can be called multiple times to export the same @interface_
-	// onto multiple connections however the @object_path provided must be
-	// the same for all connections.
-	// 
-	// Use g_dbus_interface_skeleton_unexport() to unexport the object.
-	Export(DBusConnection, string) (bool, error)
-	// Flush wraps g_dbus_interface_skeleton_flush
-	//
-	// If @interface_ has outstanding changes, request for these changes to be
-	// emitted immediately.
-	// 
-	// For example, an exported D-Bus interface may queue up property
-	// changes and emit the
-	// `org.freedesktop.DBus.Properties.PropertiesChanged`
-	// signal later (e.g. in an idle handler). This technique is useful
-	// for collapsing multiple property changes into one.
-	Flush()
-	// GetConnection wraps g_dbus_interface_skeleton_get_connection
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusConnection (nullable) 
-	//
-	// Gets the first connection that @interface_ is exported on, if any.
-	GetConnection() DBusConnection
-	// GetConnections wraps g_dbus_interface_skeleton_get_connections
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret []DBusConnection 
-	//
-	// Gets a list of the connections that @interface_ is exported on.
-	GetConnections() []DBusConnection
-	// GetFlags wraps g_dbus_interface_skeleton_get_flags
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusInterfaceSkeletonFlags 
-	//
-	// Gets the #GDBusInterfaceSkeletonFlags that describes what the behavior
-	// of @interface_
-	GetFlags() DBusInterfaceSkeletonFlags
-	// GetInfo wraps g_dbus_interface_skeleton_get_info
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *DBusInterfaceInfo 
-	//
-	// Gets D-Bus introspection information for the D-Bus interface
-	// implemented by @interface_.
-	GetInfo() *DBusInterfaceInfo
-	// GetObjectPath wraps g_dbus_interface_skeleton_get_object_path
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// Gets the object path that @interface_ is exported on, if any.
-	GetObjectPath() string
-	// GetVtable wraps g_dbus_interface_skeleton_get_vtable
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *DBusInterfaceVTable 
-	//
-	// Gets the interface vtable for the D-Bus interface implemented by
-	// @interface_. The returned function pointers should expect @interface_
-	// itself to be passed as @user_data.
-	GetVtable() *DBusInterfaceVTable
-	// HasConnection wraps g_dbus_interface_skeleton_has_connection
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- connection DBusConnection: A #GDBusConnection. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Checks if @interface_ is exported on @connection.
-	HasConnection(DBusConnection) bool
-	// SetFlags wraps g_dbus_interface_skeleton_set_flags
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- flags DBusInterfaceSkeletonFlags: Flags from the #GDBusInterfaceSkeletonFlags enumeration. 
-	//
-	// Sets flags describing what the behavior of @skeleton should be.
-	SetFlags(DBusInterfaceSkeletonFlags)
-	// Unexport wraps g_dbus_interface_skeleton_unexport
-	//
-	// Stops exporting @interface_ on all connections it is exported on.
-	// 
-	// To unexport @interface_ from only a single connection, use
-	// g_dbus_interface_skeleton_unexport_from_connection()
-	Unexport()
-	// UnexportFromConnection wraps g_dbus_interface_skeleton_unexport_from_connection
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- connection DBusConnection: A #GDBusConnection. 
-	//
-	// Stops exporting @interface_ on @connection.
-	// 
-	// To stop exporting on all connections the interface is exported on,
-	// use g_dbus_interface_skeleton_unexport().
-	UnexportFromConnection(DBusConnection)
-	// ConnectGAuthorizeMethod connects the provided callback to the "g-authorize-method" signal
-	//
-	// Emitted when a method is invoked by a remote caller and used to
-	// determine if the method call is authorized.
-	// 
-	// Note that this signal is emitted in a thread dedicated to
-	// handling the method call so handlers are allowed to perform
-	// blocking IO. This means that it is appropriate to call e.g.
-	// [polkit_authority_check_authorization_sync()](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#polkit-authority-check-authorization-sync)
-	// with the
-	// [POLKIT_CHECK_AUTHORIZATION_FLAGS_ALLOW_USER_INTERACTION](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#POLKIT-CHECK-AUTHORIZATION-FLAGS-ALLOW-USER-INTERACTION:CAPS)
-	// flag set.
-	// 
-	// If %FALSE is returned then no further handlers are run and the
-	// signal handler must take a reference to @invocation and finish
-	// handling the call (e.g. return an error via
-	// g_dbus_method_invocation_return_error()).
-	// 
-	// Otherwise, if %TRUE is returned, signal emission continues. If no
-	// handlers return %FALSE, then the method is dispatched. If
-	// @interface has an enclosing #GDBusObjectSkeleton, then the
-	// #GDBusObjectSkeleton::authorize-method signal handlers run before
-	// the handlers for this signal.
-	// 
-	// The default class handler just returns %TRUE.
-	// 
-	// Please note that the common case is optimized: if no signals
-	// handlers are connected and the default class handler isn't
-	// overridden (for both @interface and the enclosing
-	// #GDBusObjectSkeleton, if any) and #GDBusInterfaceSkeleton:g-flags does
-	// not have the
-	// %G_DBUS_INTERFACE_SKELETON_FLAGS_HANDLE_METHOD_INVOCATIONS_IN_THREAD
-	// flags set, no dedicated thread is ever used and the call will be
-	// handled in the same thread as the object that @interface belongs
-	// to was exported in.
-	ConnectGAuthorizeMethod(func(DBusInterfaceSkeleton, DBusMethodInvocation) bool) gobject.SignalHandle
-
-	// chain up virtual methods:
-
-	// ParentFlush calls the default implementations of the flush virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	//
-	// If @interface_ has outstanding changes, request for these changes to be
-	// emitted immediately.
-	// 
-	// For example, an exported D-Bus interface may queue up property
-	// changes and emit the
-	// `org.freedesktop.DBus.Properties.PropertiesChanged`
-	// signal later (e.g. in an idle handler). This technique is useful
-	// for collapsing multiple property changes into one.
-	ParentFlush()
-	// ParentGAuthorizeMethod calls the default implementations of the g_authorize_method virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- invocation DBusMethodInvocation 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Signal class handler for the #GDBusInterfaceSkeleton::g-authorize-method signal.
-	ParentGAuthorizeMethod(invocation DBusMethodInvocation) bool
-	// ParentGetInfo calls the default implementations of the get_info virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *DBusInterfaceInfo 
-	//
-	// Gets D-Bus introspection information for the D-Bus interface
-	// implemented by @interface_.
-	ParentGetInfo() *DBusInterfaceInfo
-	// ParentGetVtable calls the default implementations of the get_vtable virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *DBusInterfaceVTable 
-	//
-	// Gets the interface vtable for the D-Bus interface implemented by
-	// @interface_. The returned function pointers should expect @interface_
-	// itself to be passed as @user_data.
-	ParentGetVtable() *DBusInterfaceVTable
-}
-
-func unsafeWrapDBusInterfaceSkeleton(base *gobject.ObjectInstance) *DBusInterfaceSkeletonInstance {
-	return &DBusInterfaceSkeletonInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeDBusInterfaceSkeleton,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusInterfaceSkeleton(inst)
-		},
-	)
-}
-
-func marshalDBusInterfaceSkeletonInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusInterfaceSkeleton(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeDBusInterfaceSkeletonFromGlibNone is used to convert raw GDBusInterfaceSkeleton pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusInterfaceSkeletonFromGlibNone(c unsafe.Pointer) DBusInterfaceSkeleton {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusInterfaceSkeleton)
-}
-
-// UnsafeDBusInterfaceSkeletonFromGlibFull is used to convert raw GDBusInterfaceSkeleton pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusInterfaceSkeletonFromGlibFull(c unsafe.Pointer) DBusInterfaceSkeleton {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusInterfaceSkeleton)
-}
-
-// UnsafeDBusInterfaceSkeletonFromGlibBorrow is used to convert raw GDBusInterfaceSkeleton pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusInterfaceSkeletonFromGlibBorrow(c unsafe.Pointer) DBusInterfaceSkeleton {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusInterfaceSkeleton)
-}
-
-func (d *DBusInterfaceSkeletonInstance) upcastToGDBusInterfaceSkeleton() *DBusInterfaceSkeletonInstance {
-	return d
-}
-
-// UnsafeDBusInterfaceSkeletonToGlibNone is used to convert the instance to it's C value GDBusInterfaceSkeleton. This is used by the bindings internally.
-func UnsafeDBusInterfaceSkeletonToGlibNone(c DBusInterfaceSkeleton) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeDBusInterfaceSkeletonToGlibFull is used to convert the instance to it's C value GDBusInterfaceSkeleton, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusInterfaceSkeletonToGlibFull(c DBusInterfaceSkeleton) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// Export wraps g_dbus_interface_skeleton_export
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection: A #GDBusConnection to export @interface_ on. 
-// 	- objectPath string: The path to export the interface at. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-// 	- _goerr error (nullable): an error 
-//
-// Exports @interface_ at @object_path on @connection.
-// 
-// This can be called multiple times to export the same @interface_
-// onto multiple connections however the @object_path provided must be
-// the same for all connections.
-// 
-// Use g_dbus_interface_skeleton_unexport() to unexport the object.
-func (interface_ *DBusInterfaceSkeletonInstance) Export(connection DBusConnection, objectPath string) (bool, error) {
-	var carg0 *C.GDBusInterfaceSkeleton // in, none, converted
-	var carg1 *C.GDBusConnection        // in, none, converted
-	var carg2 *C.gchar                  // in, none, string
-	var cret  C.gboolean                // return
-	var _cerr *C.GError                 // out, full, converted, nullable
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	cret = C.g_dbus_interface_skeleton_export(carg0, carg1, carg2, &_cerr)
-	runtime.KeepAlive(interface_)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(objectPath)
-
-	var goret  bool
-	var _goerr error
-
-	if cret != 0 {
-		goret = true
-	}
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// Flush wraps g_dbus_interface_skeleton_flush
-//
-// If @interface_ has outstanding changes, request for these changes to be
-// emitted immediately.
-// 
-// For example, an exported D-Bus interface may queue up property
-// changes and emit the
-// `org.freedesktop.DBus.Properties.PropertiesChanged`
-// signal later (e.g. in an idle handler). This technique is useful
-// for collapsing multiple property changes into one.
-func (interface_ *DBusInterfaceSkeletonInstance) Flush() {
-	var carg0 *C.GDBusInterfaceSkeleton // in, none, converted
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-
-	C.g_dbus_interface_skeleton_flush(carg0)
-	runtime.KeepAlive(interface_)
-}
-
-// GetConnection wraps g_dbus_interface_skeleton_get_connection
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusConnection (nullable) 
-//
-// Gets the first connection that @interface_ is exported on, if any.
-func (interface_ *DBusInterfaceSkeletonInstance) GetConnection() DBusConnection {
-	var carg0 *C.GDBusInterfaceSkeleton // in, none, converted
-	var cret  *C.GDBusConnection        // return, none, converted, nullable
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-
-	cret = C.g_dbus_interface_skeleton_get_connection(carg0)
-	runtime.KeepAlive(interface_)
-
-	var goret DBusConnection
-
-	if cret != nil {
-		goret = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// GetConnections wraps g_dbus_interface_skeleton_get_connections
-// 
-// The function returns the following values:
-// 
-// 	- goret []DBusConnection 
-//
-// Gets a list of the connections that @interface_ is exported on.
-func (interface_ *DBusInterfaceSkeletonInstance) GetConnections() []DBusConnection {
-	var carg0 *C.GDBusInterfaceSkeleton // in, none, converted
-	var cret  *C.GList                  // container, transfer: full
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-
-	cret = C.g_dbus_interface_skeleton_get_connections(carg0)
-	runtime.KeepAlive(interface_)
-
-	var goret []DBusConnection
-
-	goret = glib.UnsafeListFromGlibFull(
-		unsafe.Pointer(cret),
-		func(v unsafe.Pointer) DBusConnection {
-			var dst DBusConnection // converted
-			dst = UnsafeDBusConnectionFromGlibFull(v)
-			return dst
-		},
-	)
-
-	return goret
-}
-
-// GetFlags wraps g_dbus_interface_skeleton_get_flags
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusInterfaceSkeletonFlags 
-//
-// Gets the #GDBusInterfaceSkeletonFlags that describes what the behavior
-// of @interface_
-func (interface_ *DBusInterfaceSkeletonInstance) GetFlags() DBusInterfaceSkeletonFlags {
-	var carg0 *C.GDBusInterfaceSkeleton     // in, none, converted
-	var cret  C.GDBusInterfaceSkeletonFlags // return, none, casted
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-
-	cret = C.g_dbus_interface_skeleton_get_flags(carg0)
-	runtime.KeepAlive(interface_)
-
-	var goret DBusInterfaceSkeletonFlags
-
-	goret = DBusInterfaceSkeletonFlags(cret)
-
-	return goret
-}
-
-// GetInfo wraps g_dbus_interface_skeleton_get_info
-// 
-// The function returns the following values:
-// 
-// 	- goret *DBusInterfaceInfo 
-//
-// Gets D-Bus introspection information for the D-Bus interface
-// implemented by @interface_.
-func (interface_ *DBusInterfaceSkeletonInstance) GetInfo() *DBusInterfaceInfo {
-	var carg0 *C.GDBusInterfaceSkeleton // in, none, converted
-	var cret  *C.GDBusInterfaceInfo     // return, none, converted
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-
-	cret = C.g_dbus_interface_skeleton_get_info(carg0)
-	runtime.KeepAlive(interface_)
-
-	var goret *DBusInterfaceInfo
-
-	goret = UnsafeDBusInterfaceInfoFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetObjectPath wraps g_dbus_interface_skeleton_get_object_path
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Gets the object path that @interface_ is exported on, if any.
-func (interface_ *DBusInterfaceSkeletonInstance) GetObjectPath() string {
-	var carg0 *C.GDBusInterfaceSkeleton // in, none, converted
-	var cret  *C.gchar                  // return, none, string, nullable-string
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-
-	cret = C.g_dbus_interface_skeleton_get_object_path(carg0)
-	runtime.KeepAlive(interface_)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// GetVtable wraps g_dbus_interface_skeleton_get_vtable
-// 
-// The function returns the following values:
-// 
-// 	- goret *DBusInterfaceVTable 
-//
-// Gets the interface vtable for the D-Bus interface implemented by
-// @interface_. The returned function pointers should expect @interface_
-// itself to be passed as @user_data.
-func (interface_ *DBusInterfaceSkeletonInstance) GetVtable() *DBusInterfaceVTable {
-	var carg0 *C.GDBusInterfaceSkeleton // in, none, converted
-	var cret  *C.GDBusInterfaceVTable   // return, none, converted
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-
-	cret = C.g_dbus_interface_skeleton_get_vtable(carg0)
-	runtime.KeepAlive(interface_)
-
-	var goret *DBusInterfaceVTable
-
-	goret = UnsafeDBusInterfaceVTableFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// HasConnection wraps g_dbus_interface_skeleton_has_connection
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection: A #GDBusConnection. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Checks if @interface_ is exported on @connection.
-func (interface_ *DBusInterfaceSkeletonInstance) HasConnection(connection DBusConnection) bool {
-	var carg0 *C.GDBusInterfaceSkeleton // in, none, converted
-	var carg1 *C.GDBusConnection        // in, none, converted
-	var cret  C.gboolean                // return
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-
-	cret = C.g_dbus_interface_skeleton_has_connection(carg0, carg1)
-	runtime.KeepAlive(interface_)
-	runtime.KeepAlive(connection)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SetFlags wraps g_dbus_interface_skeleton_set_flags
-// 
-// The function takes the following parameters:
-// 
-// 	- flags DBusInterfaceSkeletonFlags: Flags from the #GDBusInterfaceSkeletonFlags enumeration. 
-//
-// Sets flags describing what the behavior of @skeleton should be.
-func (interface_ *DBusInterfaceSkeletonInstance) SetFlags(flags DBusInterfaceSkeletonFlags) {
-	var carg0 *C.GDBusInterfaceSkeleton     // in, none, converted
-	var carg1 C.GDBusInterfaceSkeletonFlags // in, none, casted
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-	carg1 = C.GDBusInterfaceSkeletonFlags(flags)
-
-	C.g_dbus_interface_skeleton_set_flags(carg0, carg1)
-	runtime.KeepAlive(interface_)
-	runtime.KeepAlive(flags)
-}
-
-// Unexport wraps g_dbus_interface_skeleton_unexport
-//
-// Stops exporting @interface_ on all connections it is exported on.
-// 
-// To unexport @interface_ from only a single connection, use
-// g_dbus_interface_skeleton_unexport_from_connection()
-func (interface_ *DBusInterfaceSkeletonInstance) Unexport() {
-	var carg0 *C.GDBusInterfaceSkeleton // in, none, converted
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-
-	C.g_dbus_interface_skeleton_unexport(carg0)
-	runtime.KeepAlive(interface_)
-}
-
-// UnexportFromConnection wraps g_dbus_interface_skeleton_unexport_from_connection
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection: A #GDBusConnection. 
-//
-// Stops exporting @interface_ on @connection.
-// 
-// To stop exporting on all connections the interface is exported on,
-// use g_dbus_interface_skeleton_unexport().
-func (interface_ *DBusInterfaceSkeletonInstance) UnexportFromConnection(connection DBusConnection) {
-	var carg0 *C.GDBusInterfaceSkeleton // in, none, converted
-	var carg1 *C.GDBusConnection        // in, none, converted
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-
-	C.g_dbus_interface_skeleton_unexport_from_connection(carg0, carg1)
-	runtime.KeepAlive(interface_)
-	runtime.KeepAlive(connection)
-}
-
-// ConnectGAuthorizeMethod connects the provided callback to the "g-authorize-method" signal
-//
-// Emitted when a method is invoked by a remote caller and used to
-// determine if the method call is authorized.
-// 
-// Note that this signal is emitted in a thread dedicated to
-// handling the method call so handlers are allowed to perform
-// blocking IO. This means that it is appropriate to call e.g.
-// [polkit_authority_check_authorization_sync()](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#polkit-authority-check-authorization-sync)
-// with the
-// [POLKIT_CHECK_AUTHORIZATION_FLAGS_ALLOW_USER_INTERACTION](http://hal.freedesktop.org/docs/polkit/PolkitAuthority.html#POLKIT-CHECK-AUTHORIZATION-FLAGS-ALLOW-USER-INTERACTION:CAPS)
-// flag set.
-// 
-// If %FALSE is returned then no further handlers are run and the
-// signal handler must take a reference to @invocation and finish
-// handling the call (e.g. return an error via
-// g_dbus_method_invocation_return_error()).
-// 
-// Otherwise, if %TRUE is returned, signal emission continues. If no
-// handlers return %FALSE, then the method is dispatched. If
-// @interface has an enclosing #GDBusObjectSkeleton, then the
-// #GDBusObjectSkeleton::authorize-method signal handlers run before
-// the handlers for this signal.
-// 
-// The default class handler just returns %TRUE.
-// 
-// Please note that the common case is optimized: if no signals
-// handlers are connected and the default class handler isn't
-// overridden (for both @interface and the enclosing
-// #GDBusObjectSkeleton, if any) and #GDBusInterfaceSkeleton:g-flags does
-// not have the
-// %G_DBUS_INTERFACE_SKELETON_FLAGS_HANDLE_METHOD_INVOCATIONS_IN_THREAD
-// flags set, no dedicated thread is ever used and the call will be
-// handled in the same thread as the object that @interface belongs
-// to was exported in.
-func (o *DBusInterfaceSkeletonInstance) ConnectGAuthorizeMethod(fn func(DBusInterfaceSkeleton, DBusMethodInvocation) bool) gobject.SignalHandle {
-	return o.Connect("g-authorize-method", fn)
-}
-
-// DBusInterfaceSkeletonOverrides is the struct used to override the default implementation of virtual methods.
-// it is generic over the extending instance type.
-type DBusInterfaceSkeletonOverrides[Instance DBusInterfaceSkeleton] struct {
-	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
-	gobject.ObjectOverrides[Instance]
-
-	// // Flush allows you to override the implementation of the virtual method flush.
-	//
-	// If @interface_ has outstanding changes, request for these changes to be
-	// emitted immediately.
-	// 
-	// For example, an exported D-Bus interface may queue up property
-	// changes and emit the
-	// `org.freedesktop.DBus.Properties.PropertiesChanged`
-	// signal later (e.g. in an idle handler). This technique is useful
-	// for collapsing multiple property changes into one.
-	Flush func(Instance)
-	// // GAuthorizeMethod allows you to override the implementation of the virtual method g_authorize_method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- invocation DBusMethodInvocation 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Signal class handler for the #GDBusInterfaceSkeleton::g-authorize-method signal.
-	GAuthorizeMethod func(Instance, DBusMethodInvocation) bool
-	// // GetInfo allows you to override the implementation of the virtual method get_info.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *DBusInterfaceInfo 
-	//
-	// Gets D-Bus introspection information for the D-Bus interface
-	// implemented by @interface_.
-	GetInfo func(Instance) *DBusInterfaceInfo
-	// // GetVtable allows you to override the implementation of the virtual method get_vtable.
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *DBusInterfaceVTable 
-	//
-	// Gets the interface vtable for the D-Bus interface implemented by
-	// @interface_. The returned function pointers should expect @interface_
-	// itself to be passed as @user_data.
-	GetVtable func(Instance) *DBusInterfaceVTable
-}
-
-// UnsafeApplyDBusInterfaceSkeletonOverrides applies the overrides to init the gclass by setting the trampoline functions.
-// This is used by the bindings internally and only exported for visibility to other bindings code.
-func UnsafeApplyDBusInterfaceSkeletonOverrides[Instance DBusInterfaceSkeleton](gclass unsafe.Pointer, overrides DBusInterfaceSkeletonOverrides[Instance]) {
-	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
-
-	pclass := (*C.GDBusInterfaceSkeletonClass)(gclass)
-
-	if overrides.Flush != nil {
-		pclass.flush = (*[0]byte)(C._gotk4_gio2_DBusInterfaceSkeleton_flush)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusInterfaceSkeleton_flush",
-			func(carg0 *C.GDBusInterfaceSkeleton) {
-				var interface_ Instance // go GDBusInterfaceSkeleton subclass
-
-				interface_ = UnsafeDBusInterfaceSkeletonFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-
-				overrides.Flush(interface_)
-			},
-		)
-	}
-
-	if overrides.GAuthorizeMethod != nil {
-		pclass.g_authorize_method = (*[0]byte)(C._gotk4_gio2_DBusInterfaceSkeleton_g_authorize_method)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusInterfaceSkeleton_g_authorize_method",
-			func(carg0 *C.GDBusInterfaceSkeleton, carg1 *C.GDBusMethodInvocation) (cret C.gboolean) {
-				var interface_ Instance             // go GDBusInterfaceSkeleton subclass
-				var invocation DBusMethodInvocation // in, none, converted
-				var goret      bool                 // return
-
-				interface_ = UnsafeDBusInterfaceSkeletonFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				invocation = UnsafeDBusMethodInvocationFromGlibNone(unsafe.Pointer(carg1))
-
-				goret = overrides.GAuthorizeMethod(interface_, invocation)
-
-				if goret {
-					cret = C.TRUE
-				}
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.GetInfo != nil {
-		pclass.get_info = (*[0]byte)(C._gotk4_gio2_DBusInterfaceSkeleton_get_info)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusInterfaceSkeleton_get_info",
-			func(carg0 *C.GDBusInterfaceSkeleton) (cret *C.GDBusInterfaceInfo) {
-				var interface_ Instance           // go GDBusInterfaceSkeleton subclass
-				var goret      *DBusInterfaceInfo // return, none, converted
-
-				interface_ = UnsafeDBusInterfaceSkeletonFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-
-				goret = overrides.GetInfo(interface_)
-
-				cret = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(goret))
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.GetVtable != nil {
-		pclass.get_vtable = (*[0]byte)(C._gotk4_gio2_DBusInterfaceSkeleton_get_vtable)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusInterfaceSkeleton_get_vtable",
-			func(carg0 *C.GDBusInterfaceSkeleton) (cret *C.GDBusInterfaceVTable) {
-				var interface_ Instance             // go GDBusInterfaceSkeleton subclass
-				var goret      *DBusInterfaceVTable // return, none, converted
-
-				interface_ = UnsafeDBusInterfaceSkeletonFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-
-				goret = overrides.GetVtable(interface_)
-
-				cret = (*C.GDBusInterfaceVTable)(UnsafeDBusInterfaceVTableToGlibNone(goret))
-
-				return cret
-			},
-		)
-	}
-}
-
-// ParentFlush calls the default implementations of the flush virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-//
-// If @interface_ has outstanding changes, request for these changes to be
-// emitted immediately.
-// 
-// For example, an exported D-Bus interface may queue up property
-// changes and emit the
-// `org.freedesktop.DBus.Properties.PropertiesChanged`
-// signal later (e.g. in an idle handler). This technique is useful
-// for collapsing multiple property changes into one.
-func (interface_ *DBusInterfaceSkeletonInstance) ParentFlush() {
-	var carg0 *C.GDBusInterfaceSkeleton
-
-	parentclass := (*C.GDBusInterfaceSkeletonClass)(classdata.PeekParentClass(UnsafeDBusInterfaceSkeletonToGlibNone(interface_)))
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-
-	C._gotk4_gio2_DBusInterfaceSkeleton_virtual_flush(unsafe.Pointer(parentclass.flush), carg0)
-	runtime.KeepAlive(interface_)
-}
-
-// ParentGAuthorizeMethod calls the default implementations of the g_authorize_method virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- invocation DBusMethodInvocation 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Signal class handler for the #GDBusInterfaceSkeleton::g-authorize-method signal.
-func (interface_ *DBusInterfaceSkeletonInstance) ParentGAuthorizeMethod(invocation DBusMethodInvocation) bool {
-	var carg0 *C.GDBusInterfaceSkeleton
-	var carg1 *C.GDBusMethodInvocation // in, none, converted
-	var cret  C.gboolean               // return
-
-	parentclass := (*C.GDBusInterfaceSkeletonClass)(classdata.PeekParentClass(UnsafeDBusInterfaceSkeletonToGlibNone(interface_)))
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-	carg1 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
-
-	cret = C._gotk4_gio2_DBusInterfaceSkeleton_virtual_g_authorize_method(unsafe.Pointer(parentclass.g_authorize_method), carg0, carg1)
-	runtime.KeepAlive(interface_)
-	runtime.KeepAlive(invocation)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// ParentGetInfo calls the default implementations of the get_info virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function returns the following values:
-// 
-// 	- goret *DBusInterfaceInfo 
-//
-// Gets D-Bus introspection information for the D-Bus interface
-// implemented by @interface_.
-func (interface_ *DBusInterfaceSkeletonInstance) ParentGetInfo() *DBusInterfaceInfo {
-	var carg0 *C.GDBusInterfaceSkeleton
-	var cret  *C.GDBusInterfaceInfo // return, none, converted
-
-	parentclass := (*C.GDBusInterfaceSkeletonClass)(classdata.PeekParentClass(UnsafeDBusInterfaceSkeletonToGlibNone(interface_)))
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-
-	cret = C._gotk4_gio2_DBusInterfaceSkeleton_virtual_get_info(unsafe.Pointer(parentclass.get_info), carg0)
-	runtime.KeepAlive(interface_)
-
-	var goret *DBusInterfaceInfo
-
-	goret = UnsafeDBusInterfaceInfoFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// ParentGetVtable calls the default implementations of the get_vtable virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function returns the following values:
-// 
-// 	- goret *DBusInterfaceVTable 
-//
-// Gets the interface vtable for the D-Bus interface implemented by
-// @interface_. The returned function pointers should expect @interface_
-// itself to be passed as @user_data.
-func (interface_ *DBusInterfaceSkeletonInstance) ParentGetVtable() *DBusInterfaceVTable {
-	var carg0 *C.GDBusInterfaceSkeleton
-	var cret  *C.GDBusInterfaceVTable // return, none, converted
-
-	parentclass := (*C.GDBusInterfaceSkeletonClass)(classdata.PeekParentClass(UnsafeDBusInterfaceSkeletonToGlibNone(interface_)))
-
-	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-
-	cret = C._gotk4_gio2_DBusInterfaceSkeleton_virtual_get_vtable(unsafe.Pointer(parentclass.get_vtable), carg0)
-	runtime.KeepAlive(interface_)
-
-	var goret *DBusInterfaceVTable
-
-	goret = UnsafeDBusInterfaceVTableFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// RegisterDBusInterfaceSkeletonSubClass is used to register a go subclass of GDBusInterfaceSkeleton. For this to work safely please implement the
-// virtual methods required by the implementation.
-func RegisterDBusInterfaceSkeletonSubClass[InstanceT DBusInterfaceSkeleton](
-		name string,
-		classInit func(class *DBusInterfaceSkeletonClass),
-		constructor func() InstanceT,
-		overrides DBusInterfaceSkeletonOverrides[InstanceT],
-		signals map[string]gobject.SignalDefinition,
-		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
-) gobject.Type {
-	return gobject.UnsafeRegisterSubClass(
-		name,
-		classInit,
-		constructor,
-		overrides,
-		signals,
-		TypeDBusInterfaceSkeleton,
-		UnsafeDBusInterfaceSkeletonClassFromGlibBorrow,
-		UnsafeApplyDBusInterfaceSkeletonOverrides,
-		func (obj *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusInterfaceSkeleton(obj)
-		},
-		interfaceInits...,
-	)
-}
-
-// DBusMessageInstance is the instance type used by all types extending GDBusMessage. It is used internally by the bindings. Users should use the interface [DBusMessage] instead.
-type DBusMessageInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ DBusMessage = (*DBusMessageInstance)(nil)
-
-// DBusMessage wraps GDBusMessage
-//
-// A type for representing D-Bus messages that can be sent or received
-// on a [class@Gio.DBusConnection].
-type DBusMessage interface {
-	gobject.Object
-	upcastToGDBusMessage() *DBusMessageInstance
-
-	// Copy wraps g_dbus_message_copy
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusMessage 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Copies @message. The copy is a deep copy and the returned
-	// #GDBusMessage is completely identical except that it is guaranteed
-	// to not be locked.
-	// 
-	// This operation can fail if e.g. @message contains file descriptors
-	// and the per-process or system-wide open files limit is reached.
-	Copy() (DBusMessage, error)
-	// GetArg0 wraps g_dbus_message_get_arg0
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// Convenience to get the first item in the body of @message.
-	// 
-	// See [method@Gio.DBusMessage.get_arg0_path] for returning object-path-typed
-	// arg0 values.
-	GetArg0() string
-	// GetArg0Path wraps g_dbus_message_get_arg0_path
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// Convenience to get the first item in the body of @message.
-	// 
-	// See [method@Gio.DBusMessage.get_arg0] for returning string-typed arg0 values.
-	GetArg0Path() string
-	// GetByteOrder wraps g_dbus_message_get_byte_order
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusMessageByteOrder 
-	//
-	// Gets the byte order of @message.
-	GetByteOrder() DBusMessageByteOrder
-	// GetDestination wraps g_dbus_message_get_destination
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_DESTINATION header field.
-	GetDestination() string
-	// GetErrorName wraps g_dbus_message_get_error_name
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field.
-	GetErrorName() string
-	// GetFlags wraps g_dbus_message_get_flags
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusMessageFlags 
-	//
-	// Gets the flags for @message.
-	GetFlags() DBusMessageFlags
-	// GetHeaderFields wraps g_dbus_message_get_header_fields
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret []byte 
-	//
-	// Gets an array of all header fields on @message that are set.
-	GetHeaderFields() []byte
-	// GetInterface wraps g_dbus_message_get_interface
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_INTERFACE header field.
-	GetInterface() string
-	// GetLocked wraps g_dbus_message_get_locked
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Checks whether @message is locked. To monitor changes to this
-	// value, conncet to the #GObject::notify signal to listen for changes
-	// on the #GDBusMessage:locked property.
-	GetLocked() bool
-	// GetMember wraps g_dbus_message_get_member
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_MEMBER header field.
-	GetMember() string
-	// GetMessageType wraps g_dbus_message_get_message_type
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusMessageType 
-	//
-	// Gets the type of @message.
-	GetMessageType() DBusMessageType
-	// GetPath wraps g_dbus_message_get_path
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_PATH header field.
-	GetPath() string
-	// GetReplySerial wraps g_dbus_message_get_reply_serial
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret uint32 
-	//
-	// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_REPLY_SERIAL header field.
-	GetReplySerial() uint32
-	// GetSender wraps g_dbus_message_get_sender
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_SENDER header field.
-	GetSender() string
-	// GetSerial wraps g_dbus_message_get_serial
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret uint32 
-	//
-	// Gets the serial for @message.
-	GetSerial() uint32
-	// GetSignature wraps g_dbus_message_get_signature
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_SIGNATURE header field.
-	// 
-	// This will always be non-%NULL, but may be an empty string.
-	GetSignature() string
-	// Lock wraps g_dbus_message_lock
-	//
-	// If @message is locked, does nothing. Otherwise locks the message.
-	Lock()
-	// NewMethodErrorLiteral wraps g_dbus_message_new_method_error_literal
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- errorName string: A valid D-Bus error name. 
-	// 	- errorMessage string: The D-Bus error message. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusMessage 
-	//
-	// Creates a new #GDBusMessage that is an error reply to @method_call_message.
-	NewMethodErrorLiteral(string, string) DBusMessage
-	// NewMethodReply wraps g_dbus_message_new_method_reply
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusMessage 
-	//
-	// Creates a new #GDBusMessage that is a reply to @method_call_message.
-	NewMethodReply() DBusMessage
-	// Print wraps g_dbus_message_print
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- indent uint: Indentation level. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Produces a human-readable multi-line description of @message.
-	// 
-	// The contents of the description has no ABI guarantees, the contents
-	// and formatting is subject to change at any time. Typical output
-	// looks something like this:
-	// ```
-	// Flags:   none
-	// Version: 0
-	// Serial:  4
-	// Headers:
-	//   path -&gt; objectpath '/org/gtk/GDBus/TestObject'
-	//   interface -&gt; 'org.gtk.GDBus.TestInterface'
-	//   member -&gt; 'GimmeStdout'
-	//   destination -&gt; ':1.146'
-	// Body: ()
-	// UNIX File Descriptors:
-	//   (none)
-	// ```
-	// or
-	// ```
-	// Flags:   no-reply-expected
-	// Version: 0
-	// Serial:  477
-	// Headers:
-	//   reply-serial -&gt; uint32 4
-	//   destination -&gt; ':1.159'
-	//   sender -&gt; ':1.146'
-	//   num-unix-fds -&gt; uint32 1
-	// Body: ()
-	// UNIX File Descriptors:
-	//   fd 12: dev=0:10,mode=020620,ino=5,uid=500,gid=5,rdev=136:2,size=0,atime=1273085037,mtime=1273085851,ctime=1272982635
-	// ```
-	Print(uint) string
-	// SetByteOrder wraps g_dbus_message_set_byte_order
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- byteOrder DBusMessageByteOrder: The byte order. 
-	//
-	// Sets the byte order of @message.
-	SetByteOrder(DBusMessageByteOrder)
-	// SetDestination wraps g_dbus_message_set_destination
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- value string (nullable): The value to set. 
-	//
-	// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_DESTINATION header field.
-	SetDestination(string)
-	// SetErrorName wraps g_dbus_message_set_error_name
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- value string: The value to set. 
-	//
-	// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field.
-	SetErrorName(string)
-	// SetFlags wraps g_dbus_message_set_flags
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- flags DBusMessageFlags: Flags for @message that are set (typically values from the #GDBusMessageFlags
-	// enumeration bitwise ORed together). 
-	//
-	// Sets the flags to set on @message.
-	SetFlags(DBusMessageFlags)
-	// SetInterface wraps g_dbus_message_set_interface
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- value string (nullable): The value to set. 
-	//
-	// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_INTERFACE header field.
-	SetInterface(string)
-	// SetMember wraps g_dbus_message_set_member
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- value string (nullable): The value to set. 
-	//
-	// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_MEMBER header field.
-	SetMember(string)
-	// SetMessageType wraps g_dbus_message_set_message_type
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- typ DBusMessageType: A 8-bit unsigned integer (typically a value from the #GDBusMessageType enumeration). 
-	//
-	// Sets @message to be of @type.
-	SetMessageType(DBusMessageType)
-	// SetPath wraps g_dbus_message_set_path
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- value string (nullable): The value to set. 
-	//
-	// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_PATH header field.
-	SetPath(string)
-	// SetReplySerial wraps g_dbus_message_set_reply_serial
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- value uint32: The value to set. 
-	//
-	// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_REPLY_SERIAL header field.
-	SetReplySerial(uint32)
-	// SetSender wraps g_dbus_message_set_sender
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- value string (nullable): The value to set. 
-	//
-	// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_SENDER header field.
-	SetSender(string)
-	// SetSerial wraps g_dbus_message_set_serial
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- serial uint32: A #guint32, which must not be zero. 
-	//
-	// Sets the serial for @message.
-	// 
-	// The [D-Bus specification](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-messages)
-	// does not allow the @serial to be zero.
-	SetSerial(uint32)
-	// SetSignature wraps g_dbus_message_set_signature
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- value string (nullable): The value to set. 
-	//
-	// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_SIGNATURE header field.
-	SetSignature(string)
-	// ToBlob wraps g_dbus_message_to_blob
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- capabilities DBusCapabilityFlags: A #GDBusCapabilityFlags describing what protocol features are supported. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- outSize uint: Return location for size of generated blob. 
-	// 	- goret []byte 
-	// 	- _goerr error (nullable): an error 
-	//
-	// Serializes @message to a blob. The byte order returned by
-	// g_dbus_message_get_byte_order() will be used.
-	ToBlob(DBusCapabilityFlags) (uint, []byte, error)
-	// ToGError wraps g_dbus_message_to_gerror
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	// 	- _goerr error (nullable): an error 
-	//
-	// If @message is not of type %G_DBUS_MESSAGE_TYPE_ERROR does
-	// nothing and returns %FALSE.
-	// 
-	// Otherwise this method encodes the error in @message as a #GError
-	// using g_dbus_error_set_dbus_error() using the information in the
-	// %G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field of @message as
-	// well as the first string item in @message's body.
-	ToGError() (bool, error)
-}
-
-func unsafeWrapDBusMessage(base *gobject.ObjectInstance) *DBusMessageInstance {
-	return &DBusMessageInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeDBusMessage,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusMessage(inst)
-		},
-	)
-}
-
-func marshalDBusMessageInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusMessage(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeDBusMessageFromGlibNone is used to convert raw GDBusMessage pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusMessageFromGlibNone(c unsafe.Pointer) DBusMessage {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusMessage)
-}
-
-// UnsafeDBusMessageFromGlibFull is used to convert raw GDBusMessage pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusMessageFromGlibFull(c unsafe.Pointer) DBusMessage {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusMessage)
-}
-
-// UnsafeDBusMessageFromGlibBorrow is used to convert raw GDBusMessage pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusMessageFromGlibBorrow(c unsafe.Pointer) DBusMessage {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusMessage)
-}
-
-func (d *DBusMessageInstance) upcastToGDBusMessage() *DBusMessageInstance {
-	return d
-}
-
-// UnsafeDBusMessageToGlibNone is used to convert the instance to it's C value GDBusMessage. This is used by the bindings internally.
-func UnsafeDBusMessageToGlibNone(c DBusMessage) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeDBusMessageToGlibFull is used to convert the instance to it's C value GDBusMessage, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusMessageToGlibFull(c DBusMessage) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewDBusMessage wraps g_dbus_message_new
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusMessage 
-//
-// Creates a new empty #GDBusMessage.
-func NewDBusMessage() DBusMessage {
-	var cret *C.GDBusMessage // return, full, converted
-
-	cret = C.g_dbus_message_new()
-
-	var goret DBusMessage
-
-	goret = UnsafeDBusMessageFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewDBusMessageFromBlob wraps g_dbus_message_new_from_blob
-// 
-// The function takes the following parameters:
-// 
-// 	- blob []uint8: A blob representing a binary D-Bus message. 
-// 	- capabilities DBusCapabilityFlags: A #GDBusCapabilityFlags describing what protocol features are supported. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusMessage 
-// 	- _goerr error (nullable): an error 
-//
-// Creates a new #GDBusMessage from the data stored at @blob. The byte
-// order that the message was in can be retrieved using
-// g_dbus_message_get_byte_order().
-// 
-// If the @blob cannot be parsed, contains invalid fields, or contains invalid
-// headers, %G_IO_ERROR_INVALID_ARGUMENT will be returned.
-func NewDBusMessageFromBlob(blob []uint8, capabilities DBusCapabilityFlags) (DBusMessage, error) {
-	var carg1 *C.guchar              // in, transfer: none, C Pointers: 1, Name: array[guint8], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
-	var carg2 C.gsize                // implicit
-	var carg3 C.GDBusCapabilityFlags // in, none, casted
-	var cret  *C.GDBusMessage        // return, full, converted
-	var _cerr *C.GError              // out, full, converted, nullable
-
-	_ = blob
-	_ = carg1
-	_ = carg2
-	panic("unimplemented conversion of []uint8 (guchar*)")
-	carg3 = C.GDBusCapabilityFlags(capabilities)
-
-	cret = C.g_dbus_message_new_from_blob(carg1, carg2, carg3, &_cerr)
-	runtime.KeepAlive(blob)
-	runtime.KeepAlive(capabilities)
-
-	var goret  DBusMessage
-	var _goerr error
-
-	goret = UnsafeDBusMessageFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// NewDBusMessageMethodCall wraps g_dbus_message_new_method_call
-// 
-// The function takes the following parameters:
-// 
-// 	- name string (nullable): A valid D-Bus name or %NULL. 
-// 	- path string: A valid object path. 
-// 	- interface_ string (nullable): A valid D-Bus interface name or %NULL. 
-// 	- method string: A valid method name. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusMessage 
-//
-// Creates a new #GDBusMessage for a method call.
-func NewDBusMessageMethodCall(name string, path string, interface_ string, method string) DBusMessage {
-	var carg1 *C.gchar        // in, none, string, nullable-string
-	var carg2 *C.gchar        // in, none, string
-	var carg3 *C.gchar        // in, none, string, nullable-string
-	var carg4 *C.gchar        // in, none, string
-	var cret  *C.GDBusMessage // return, full, converted
-
-	if name != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
-	defer C.free(unsafe.Pointer(carg2))
-	if interface_ != "" {
-		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(interface_)))
-		defer C.free(unsafe.Pointer(carg3))
-	}
-	carg4 = (*C.gchar)(unsafe.Pointer(C.CString(method)))
-	defer C.free(unsafe.Pointer(carg4))
-
-	cret = C.g_dbus_message_new_method_call(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(path)
-	runtime.KeepAlive(interface_)
-	runtime.KeepAlive(method)
-
-	var goret DBusMessage
-
-	goret = UnsafeDBusMessageFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewDBusMessageSignal wraps g_dbus_message_new_signal
-// 
-// The function takes the following parameters:
-// 
-// 	- path string: A valid object path. 
-// 	- interface_ string: A valid D-Bus interface name. 
-// 	- signal string: A valid signal name. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusMessage 
-//
-// Creates a new #GDBusMessage for a signal emission.
-func NewDBusMessageSignal(path string, interface_ string, signal string) DBusMessage {
-	var carg1 *C.gchar        // in, none, string
-	var carg2 *C.gchar        // in, none, string
-	var carg3 *C.gchar        // in, none, string
-	var cret  *C.GDBusMessage // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(interface_)))
-	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(signal)))
-	defer C.free(unsafe.Pointer(carg3))
-
-	cret = C.g_dbus_message_new_signal(carg1, carg2, carg3)
-	runtime.KeepAlive(path)
-	runtime.KeepAlive(interface_)
-	runtime.KeepAlive(signal)
-
-	var goret DBusMessage
-
-	goret = UnsafeDBusMessageFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// DBusMessageBytesNeeded wraps g_dbus_message_bytes_needed
-// 
-// The function takes the following parameters:
-// 
-// 	- blob []uint8: A blob representing a binary D-Bus message. 
-// 
-// The function returns the following values:
-// 
-// 	- goret int 
-// 	- _goerr error (nullable): an error 
-//
-// Utility function to calculate how many bytes are needed to
-// completely deserialize the D-Bus message stored at @blob.
-func DBusMessageBytesNeeded(blob []uint8) (int, error) {
-	var carg1 *C.guchar // in, transfer: none, C Pointers: 1, Name: array[guint8], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
-	var carg2 C.gsize   // implicit
-	var cret  C.gssize  // return, none, casted
-	var _cerr *C.GError // out, full, converted, nullable
-
-	_ = blob
-	_ = carg1
-	_ = carg2
-	panic("unimplemented conversion of []uint8 (guchar*)")
-
-	cret = C.g_dbus_message_bytes_needed(carg1, carg2, &_cerr)
-	runtime.KeepAlive(blob)
-
-	var goret  int
-	var _goerr error
-
-	goret = int(cret)
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// Copy wraps g_dbus_message_copy
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusMessage 
-// 	- _goerr error (nullable): an error 
-//
-// Copies @message. The copy is a deep copy and the returned
-// #GDBusMessage is completely identical except that it is guaranteed
-// to not be locked.
-// 
-// This operation can fail if e.g. @message contains file descriptors
-// and the per-process or system-wide open files limit is reached.
-func (message *DBusMessageInstance) Copy() (DBusMessage, error) {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.GDBusMessage // return, full, converted
-	var _cerr *C.GError       // out, full, converted, nullable
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_copy(carg0, &_cerr)
-	runtime.KeepAlive(message)
-
-	var goret  DBusMessage
-	var _goerr error
-
-	goret = UnsafeDBusMessageFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// GetArg0 wraps g_dbus_message_get_arg0
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Convenience to get the first item in the body of @message.
-// 
-// See [method@Gio.DBusMessage.get_arg0_path] for returning object-path-typed
-// arg0 values.
-func (message *DBusMessageInstance) GetArg0() string {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, nullable-string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_arg0(carg0)
-	runtime.KeepAlive(message)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// GetArg0Path wraps g_dbus_message_get_arg0_path
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Convenience to get the first item in the body of @message.
-// 
-// See [method@Gio.DBusMessage.get_arg0] for returning string-typed arg0 values.
-func (message *DBusMessageInstance) GetArg0Path() string {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, nullable-string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_arg0_path(carg0)
-	runtime.KeepAlive(message)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// GetByteOrder wraps g_dbus_message_get_byte_order
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusMessageByteOrder 
-//
-// Gets the byte order of @message.
-func (message *DBusMessageInstance) GetByteOrder() DBusMessageByteOrder {
-	var carg0 *C.GDBusMessage         // in, none, converted
-	var cret  C.GDBusMessageByteOrder // return, none, casted
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_byte_order(carg0)
-	runtime.KeepAlive(message)
-
-	var goret DBusMessageByteOrder
-
-	goret = DBusMessageByteOrder(cret)
-
-	return goret
-}
-
-// GetDestination wraps g_dbus_message_get_destination
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_DESTINATION header field.
-func (message *DBusMessageInstance) GetDestination() string {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, nullable-string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_destination(carg0)
-	runtime.KeepAlive(message)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// GetErrorName wraps g_dbus_message_get_error_name
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field.
-func (message *DBusMessageInstance) GetErrorName() string {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, nullable-string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_error_name(carg0)
-	runtime.KeepAlive(message)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// GetFlags wraps g_dbus_message_get_flags
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusMessageFlags 
-//
-// Gets the flags for @message.
-func (message *DBusMessageInstance) GetFlags() DBusMessageFlags {
-	var carg0 *C.GDBusMessage     // in, none, converted
-	var cret  C.GDBusMessageFlags // return, none, casted
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_flags(carg0)
-	runtime.KeepAlive(message)
-
-	var goret DBusMessageFlags
-
-	goret = DBusMessageFlags(cret)
-
-	return goret
-}
-
-// GetHeaderFields wraps g_dbus_message_get_header_fields
-// 
-// The function returns the following values:
-// 
-// 	- goret []byte 
-//
-// Gets an array of all header fields on @message that are set.
-func (message *DBusMessageInstance) GetHeaderFields() []byte {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.guchar       // return, transfer: none, C Pointers: 1, Name: array[guchar], scope: , array (inner: *typesystem.CastablePrimitive, zero-terminated)
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_header_fields(carg0)
-	runtime.KeepAlive(message)
-
-	var goret []byte
-
-	_ = goret
-	_ = cret
-	panic("unimplemented conversion of []byte (guchar*)")
-
-	return goret
-}
-
-// GetInterface wraps g_dbus_message_get_interface
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_INTERFACE header field.
-func (message *DBusMessageInstance) GetInterface() string {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, nullable-string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_interface(carg0)
-	runtime.KeepAlive(message)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// GetLocked wraps g_dbus_message_get_locked
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Checks whether @message is locked. To monitor changes to this
-// value, conncet to the #GObject::notify signal to listen for changes
-// on the #GDBusMessage:locked property.
-func (message *DBusMessageInstance) GetLocked() bool {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  C.gboolean      // return
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_locked(carg0)
-	runtime.KeepAlive(message)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// GetMember wraps g_dbus_message_get_member
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_MEMBER header field.
-func (message *DBusMessageInstance) GetMember() string {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, nullable-string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_member(carg0)
-	runtime.KeepAlive(message)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// GetMessageType wraps g_dbus_message_get_message_type
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusMessageType 
-//
-// Gets the type of @message.
-func (message *DBusMessageInstance) GetMessageType() DBusMessageType {
-	var carg0 *C.GDBusMessage    // in, none, converted
-	var cret  C.GDBusMessageType // return, none, casted
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_message_type(carg0)
-	runtime.KeepAlive(message)
-
-	var goret DBusMessageType
-
-	goret = DBusMessageType(cret)
-
-	return goret
-}
-
-// GetPath wraps g_dbus_message_get_path
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_PATH header field.
-func (message *DBusMessageInstance) GetPath() string {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, nullable-string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_path(carg0)
-	runtime.KeepAlive(message)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// GetReplySerial wraps g_dbus_message_get_reply_serial
-// 
-// The function returns the following values:
-// 
-// 	- goret uint32 
-//
-// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_REPLY_SERIAL header field.
-func (message *DBusMessageInstance) GetReplySerial() uint32 {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  C.guint32       // return, none, casted
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_reply_serial(carg0)
-	runtime.KeepAlive(message)
-
-	var goret uint32
-
-	goret = uint32(cret)
-
-	return goret
-}
-
-// GetSender wraps g_dbus_message_get_sender
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_SENDER header field.
-func (message *DBusMessageInstance) GetSender() string {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string, nullable-string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_sender(carg0)
-	runtime.KeepAlive(message)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// GetSerial wraps g_dbus_message_get_serial
-// 
-// The function returns the following values:
-// 
-// 	- goret uint32 
-//
-// Gets the serial for @message.
-func (message *DBusMessageInstance) GetSerial() uint32 {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  C.guint32       // return, none, casted
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_serial(carg0)
-	runtime.KeepAlive(message)
-
-	var goret uint32
-
-	goret = uint32(cret)
-
-	return goret
-}
-
-// GetSignature wraps g_dbus_message_get_signature
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_SIGNATURE header field.
-// 
-// This will always be non-%NULL, but may be an empty string.
-func (message *DBusMessageInstance) GetSignature() string {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_get_signature(carg0)
-	runtime.KeepAlive(message)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// Lock wraps g_dbus_message_lock
-//
-// If @message is locked, does nothing. Otherwise locks the message.
-func (message *DBusMessageInstance) Lock() {
-	var carg0 *C.GDBusMessage // in, none, converted
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	C.g_dbus_message_lock(carg0)
-	runtime.KeepAlive(message)
-}
-
-// NewMethodErrorLiteral wraps g_dbus_message_new_method_error_literal
-// 
-// The function takes the following parameters:
-// 
-// 	- errorName string: A valid D-Bus error name. 
-// 	- errorMessage string: The D-Bus error message. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusMessage 
-//
-// Creates a new #GDBusMessage that is an error reply to @method_call_message.
-func (methodCallMessage *DBusMessageInstance) NewMethodErrorLiteral(errorName string, errorMessage string) DBusMessage {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var carg1 *C.gchar        // in, none, string
-	var carg2 *C.gchar        // in, none, string
-	var cret  *C.GDBusMessage // return, full, converted
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(methodCallMessage))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(errorName)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(errorMessage)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	cret = C.g_dbus_message_new_method_error_literal(carg0, carg1, carg2)
-	runtime.KeepAlive(methodCallMessage)
-	runtime.KeepAlive(errorName)
-	runtime.KeepAlive(errorMessage)
-
-	var goret DBusMessage
-
-	goret = UnsafeDBusMessageFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// NewMethodReply wraps g_dbus_message_new_method_reply
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusMessage 
-//
-// Creates a new #GDBusMessage that is a reply to @method_call_message.
-func (methodCallMessage *DBusMessageInstance) NewMethodReply() DBusMessage {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.GDBusMessage // return, full, converted
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(methodCallMessage))
-
-	cret = C.g_dbus_message_new_method_reply(carg0)
-	runtime.KeepAlive(methodCallMessage)
-
-	var goret DBusMessage
-
-	goret = UnsafeDBusMessageFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Print wraps g_dbus_message_print
-// 
-// The function takes the following parameters:
-// 
-// 	- indent uint: Indentation level. 
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Produces a human-readable multi-line description of @message.
-// 
-// The contents of the description has no ABI guarantees, the contents
-// and formatting is subject to change at any time. Typical output
-// looks something like this:
-// ```
-// Flags:   none
-// Version: 0
-// Serial:  4
-// Headers:
-//   path -&gt; objectpath '/org/gtk/GDBus/TestObject'
-//   interface -&gt; 'org.gtk.GDBus.TestInterface'
-//   member -&gt; 'GimmeStdout'
-//   destination -&gt; ':1.146'
-// Body: ()
-// UNIX File Descriptors:
-//   (none)
-// ```
-// or
-// ```
-// Flags:   no-reply-expected
-// Version: 0
-// Serial:  477
-// Headers:
-//   reply-serial -&gt; uint32 4
-//   destination -&gt; ':1.159'
-//   sender -&gt; ':1.146'
-//   num-unix-fds -&gt; uint32 1
-// Body: ()
-// UNIX File Descriptors:
-//   fd 12: dev=0:10,mode=020620,ino=5,uid=500,gid=5,rdev=136:2,size=0,atime=1273085037,mtime=1273085851,ctime=1272982635
-// ```
-func (message *DBusMessageInstance) Print(indent uint) string {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var carg1 C.guint         // in, none, casted
-	var cret  *C.gchar        // return, full, string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	carg1 = C.guint(indent)
-
-	cret = C.g_dbus_message_print(carg0, carg1)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(indent)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// SetByteOrder wraps g_dbus_message_set_byte_order
-// 
-// The function takes the following parameters:
-// 
-// 	- byteOrder DBusMessageByteOrder: The byte order. 
-//
-// Sets the byte order of @message.
-func (message *DBusMessageInstance) SetByteOrder(byteOrder DBusMessageByteOrder) {
-	var carg0 *C.GDBusMessage         // in, none, converted
-	var carg1 C.GDBusMessageByteOrder // in, none, casted
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	carg1 = C.GDBusMessageByteOrder(byteOrder)
-
-	C.g_dbus_message_set_byte_order(carg0, carg1)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(byteOrder)
-}
-
-// SetDestination wraps g_dbus_message_set_destination
-// 
-// The function takes the following parameters:
-// 
-// 	- value string (nullable): The value to set. 
-//
-// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_DESTINATION header field.
-func (message *DBusMessageInstance) SetDestination(value string) {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var carg1 *C.gchar        // in, none, string, nullable-string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	if value != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(value)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-
-	C.g_dbus_message_set_destination(carg0, carg1)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(value)
-}
-
-// SetErrorName wraps g_dbus_message_set_error_name
-// 
-// The function takes the following parameters:
-// 
-// 	- value string: The value to set. 
-//
-// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field.
-func (message *DBusMessageInstance) SetErrorName(value string) {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var carg1 *C.gchar        // in, none, string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(value)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.g_dbus_message_set_error_name(carg0, carg1)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(value)
-}
-
-// SetFlags wraps g_dbus_message_set_flags
-// 
-// The function takes the following parameters:
-// 
-// 	- flags DBusMessageFlags: Flags for @message that are set (typically values from the #GDBusMessageFlags
-// enumeration bitwise ORed together). 
-//
-// Sets the flags to set on @message.
-func (message *DBusMessageInstance) SetFlags(flags DBusMessageFlags) {
-	var carg0 *C.GDBusMessage     // in, none, converted
-	var carg1 C.GDBusMessageFlags // in, none, casted
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	carg1 = C.GDBusMessageFlags(flags)
-
-	C.g_dbus_message_set_flags(carg0, carg1)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(flags)
-}
-
-// SetInterface wraps g_dbus_message_set_interface
-// 
-// The function takes the following parameters:
-// 
-// 	- value string (nullable): The value to set. 
-//
-// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_INTERFACE header field.
-func (message *DBusMessageInstance) SetInterface(value string) {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var carg1 *C.gchar        // in, none, string, nullable-string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	if value != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(value)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-
-	C.g_dbus_message_set_interface(carg0, carg1)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(value)
-}
-
-// SetMember wraps g_dbus_message_set_member
-// 
-// The function takes the following parameters:
-// 
-// 	- value string (nullable): The value to set. 
-//
-// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_MEMBER header field.
-func (message *DBusMessageInstance) SetMember(value string) {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var carg1 *C.gchar        // in, none, string, nullable-string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	if value != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(value)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-
-	C.g_dbus_message_set_member(carg0, carg1)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(value)
-}
-
-// SetMessageType wraps g_dbus_message_set_message_type
-// 
-// The function takes the following parameters:
-// 
-// 	- typ DBusMessageType: A 8-bit unsigned integer (typically a value from the #GDBusMessageType enumeration). 
-//
-// Sets @message to be of @type.
-func (message *DBusMessageInstance) SetMessageType(typ DBusMessageType) {
-	var carg0 *C.GDBusMessage    // in, none, converted
-	var carg1 C.GDBusMessageType // in, none, casted
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	carg1 = C.GDBusMessageType(typ)
-
-	C.g_dbus_message_set_message_type(carg0, carg1)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(typ)
-}
-
-// SetPath wraps g_dbus_message_set_path
-// 
-// The function takes the following parameters:
-// 
-// 	- value string (nullable): The value to set. 
-//
-// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_PATH header field.
-func (message *DBusMessageInstance) SetPath(value string) {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var carg1 *C.gchar        // in, none, string, nullable-string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	if value != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(value)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-
-	C.g_dbus_message_set_path(carg0, carg1)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(value)
-}
-
-// SetReplySerial wraps g_dbus_message_set_reply_serial
-// 
-// The function takes the following parameters:
-// 
-// 	- value uint32: The value to set. 
-//
-// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_REPLY_SERIAL header field.
-func (message *DBusMessageInstance) SetReplySerial(value uint32) {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var carg1 C.guint32       // in, none, casted
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	carg1 = C.guint32(value)
-
-	C.g_dbus_message_set_reply_serial(carg0, carg1)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(value)
-}
-
-// SetSender wraps g_dbus_message_set_sender
-// 
-// The function takes the following parameters:
-// 
-// 	- value string (nullable): The value to set. 
-//
-// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_SENDER header field.
-func (message *DBusMessageInstance) SetSender(value string) {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var carg1 *C.gchar        // in, none, string, nullable-string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	if value != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(value)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-
-	C.g_dbus_message_set_sender(carg0, carg1)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(value)
-}
-
-// SetSerial wraps g_dbus_message_set_serial
-// 
-// The function takes the following parameters:
-// 
-// 	- serial uint32: A #guint32, which must not be zero. 
-//
-// Sets the serial for @message.
-// 
-// The [D-Bus specification](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-messages)
-// does not allow the @serial to be zero.
-func (message *DBusMessageInstance) SetSerial(serial uint32) {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var carg1 C.guint32       // in, none, casted
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	carg1 = C.guint32(serial)
-
-	C.g_dbus_message_set_serial(carg0, carg1)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(serial)
-}
-
-// SetSignature wraps g_dbus_message_set_signature
-// 
-// The function takes the following parameters:
-// 
-// 	- value string (nullable): The value to set. 
-//
-// Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_SIGNATURE header field.
-func (message *DBusMessageInstance) SetSignature(value string) {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var carg1 *C.gchar        // in, none, string, nullable-string
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	if value != "" {
-		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(value)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-
-	C.g_dbus_message_set_signature(carg0, carg1)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(value)
-}
-
-// ToBlob wraps g_dbus_message_to_blob
-// 
-// The function takes the following parameters:
-// 
-// 	- capabilities DBusCapabilityFlags: A #GDBusCapabilityFlags describing what protocol features are supported. 
-// 
-// The function returns the following values:
-// 
-// 	- outSize uint: Return location for size of generated blob. 
-// 	- goret []byte 
-// 	- _goerr error (nullable): an error 
-//
-// Serializes @message to a blob. The byte order returned by
-// g_dbus_message_get_byte_order() will be used.
-func (message *DBusMessageInstance) ToBlob(capabilities DBusCapabilityFlags) (uint, []byte, error) {
-	var carg0 *C.GDBusMessage        // in, none, converted
-	var carg2 C.GDBusCapabilityFlags // in, none, casted
-	var carg1 C.gsize                // out, full, casted
-	var cret  *C.guchar              // return, transfer: full, C Pointers: 1, Name: array[guchar], scope: , array (inner: *typesystem.CastablePrimitive)
-	var _cerr *C.GError              // out, full, converted, nullable
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-	carg2 = C.GDBusCapabilityFlags(capabilities)
-
-	cret = C.g_dbus_message_to_blob(carg0, &carg1, carg2, &_cerr)
-	runtime.KeepAlive(message)
-	runtime.KeepAlive(capabilities)
-
-	var outSize uint
-	var goret   []byte
-	var _goerr  error
-
-	outSize = uint(carg1)
-	_ = goret
-	_ = cret
-	panic("unimplemented conversion of []byte (guchar*)")
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return outSize, goret, _goerr
-}
-
-// ToGError wraps g_dbus_message_to_gerror
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-// 	- _goerr error (nullable): an error 
-//
-// If @message is not of type %G_DBUS_MESSAGE_TYPE_ERROR does
-// nothing and returns %FALSE.
-// 
-// Otherwise this method encodes the error in @message as a #GError
-// using g_dbus_error_set_dbus_error() using the information in the
-// %G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field of @message as
-// well as the first string item in @message's body.
-func (message *DBusMessageInstance) ToGError() (bool, error) {
-	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  C.gboolean      // return
-	var _cerr *C.GError       // out, full, converted, nullable
-
-	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
-
-	cret = C.g_dbus_message_to_gerror(carg0, &_cerr)
-	runtime.KeepAlive(message)
-
-	var goret  bool
-	var _goerr error
-
-	if cret != 0 {
-		goret = true
-	}
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// DBusMethodInvocationInstance is the instance type used by all types extending GDBusMethodInvocation. It is used internally by the bindings. Users should use the interface [DBusMethodInvocation] instead.
-type DBusMethodInvocationInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ DBusMethodInvocation = (*DBusMethodInvocationInstance)(nil)
-
-// DBusMethodInvocation wraps GDBusMethodInvocation
-//
-// Instances of the `GDBusMethodInvocation` class are used when
-// handling D-Bus method calls. It provides a way to asynchronously
-// return results and errors.
-// 
-// The normal way to obtain a `GDBusMethodInvocation` object is to receive
-// it as an argument to the `handle_method_call()` function in a
-// [type@Gio.DBusInterfaceVTable] that was passed to
-// [method@Gio.DBusConnection.register_object].
-type DBusMethodInvocation interface {
-	gobject.Object
-	upcastToGDBusMethodInvocation() *DBusMethodInvocationInstance
-
-	// GetConnection wraps g_dbus_method_invocation_get_connection
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusConnection 
-	//
-	// Gets the #GDBusConnection the method was invoked on.
-	GetConnection() DBusConnection
-	// GetInterfaceName wraps g_dbus_method_invocation_get_interface_name
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// Gets the name of the D-Bus interface the method was invoked on.
-	// 
-	// This can be `NULL` if it was not specified by the sender. See
-	// [callback@Gio.DBusInterfaceMethodCallFunc] or the
-	// [D-Bus Specification](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-types-method)
-	// for details on when this can happen and how it should be handled.
-	// 
-	// If this method call is a property Get, Set or GetAll call that has
-	// been redirected to the method call handler then
-	// "org.freedesktop.DBus.Properties" will be returned.  See
-	// #GDBusInterfaceVTable for more information.
-	GetInterfaceName() string
-	// GetMessage wraps g_dbus_method_invocation_get_message
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusMessage 
-	//
-	// Gets the #GDBusMessage for the method invocation. This is useful if
-	// you need to use low-level protocol features, such as UNIX file
-	// descriptor passing, that cannot be properly expressed in the
-	// #GVariant API.
-	// 
-	// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
-	// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
-	// for an example of how to use this low-level API to send and receive
-	// UNIX file descriptors.
-	GetMessage() DBusMessage
-	// GetMethodInfo wraps g_dbus_method_invocation_get_method_info
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *DBusMethodInfo (nullable) 
-	//
-	// Gets information about the method call, if any.
-	// 
-	// If this method invocation is a property Get, Set or GetAll call that
-	// has been redirected to the method call handler then %NULL will be
-	// returned.  See g_dbus_method_invocation_get_property_info() and
-	// #GDBusInterfaceVTable for more information.
-	GetMethodInfo() *DBusMethodInfo
-	// GetMethodName wraps g_dbus_method_invocation_get_method_name
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the name of the method that was invoked.
-	GetMethodName() string
-	// GetObjectPath wraps g_dbus_method_invocation_get_object_path
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the object path the method was invoked on.
-	GetObjectPath() string
-	// GetPropertyInfo wraps g_dbus_method_invocation_get_property_info
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *DBusPropertyInfo (nullable) 
-	//
-	// Gets information about the property that this method call is for, if
-	// any.
-	// 
-	// This will only be set in the case of an invocation in response to a
-	// property Get or Set call that has been directed to the method call
-	// handler for an object on account of its property_get() or
-	// property_set() vtable pointers being unset.
-	// 
-	// See #GDBusInterfaceVTable for more information.
-	// 
-	// If the call was GetAll, %NULL will be returned.
-	GetPropertyInfo() *DBusPropertyInfo
-	// GetSender wraps g_dbus_method_invocation_get_sender
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// Gets the bus name that invoked the method.
-	// 
-	// This can return %NULL if not specified by the caller, e.g. on peer-to-peer
-	// connections.
-	GetSender() string
-	// ReturnDBusError wraps g_dbus_method_invocation_return_dbus_error
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- errorName string: A valid D-Bus error name. 
-	// 	- errorMessage string: A valid D-Bus error message. 
-	//
-	// Finishes handling a D-Bus method call by returning an error.
-	// 
-	// This method will take ownership of @invocation. See
-	// #GDBusInterfaceVTable for more information about the ownership of
-	// @invocation.
-	ReturnDBusError(string, string)
-	// ReturnErrorLiteral wraps g_dbus_method_invocation_return_error_literal
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- domain glib.Quark: A #GQuark for the #GError error domain. 
-	// 	- code int32: The error code. 
-	// 	- message string: The error message. 
-	//
-	// Like g_dbus_method_invocation_return_error() but without printf()-style formatting.
-	// 
-	// This method will take ownership of @invocation. See
-	// #GDBusInterfaceVTable for more information about the ownership of
-	// @invocation.
-	ReturnErrorLiteral(glib.Quark, int32, string)
-	// ReturnGError wraps g_dbus_method_invocation_return_gerror
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- err error: A #GError. 
-	//
-	// Like g_dbus_method_invocation_return_error() but takes a #GError
-	// instead of the error domain, error code and message.
-	// 
-	// This method will take ownership of @invocation. See
-	// #GDBusInterfaceVTable for more information about the ownership of
-	// @invocation.
-	ReturnGError(error)
-}
-
-func unsafeWrapDBusMethodInvocation(base *gobject.ObjectInstance) *DBusMethodInvocationInstance {
-	return &DBusMethodInvocationInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeDBusMethodInvocation,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusMethodInvocation(inst)
-		},
-	)
-}
-
-func marshalDBusMethodInvocationInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusMethodInvocation(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeDBusMethodInvocationFromGlibNone is used to convert raw GDBusMethodInvocation pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusMethodInvocationFromGlibNone(c unsafe.Pointer) DBusMethodInvocation {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusMethodInvocation)
-}
-
-// UnsafeDBusMethodInvocationFromGlibFull is used to convert raw GDBusMethodInvocation pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusMethodInvocationFromGlibFull(c unsafe.Pointer) DBusMethodInvocation {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusMethodInvocation)
-}
-
-// UnsafeDBusMethodInvocationFromGlibBorrow is used to convert raw GDBusMethodInvocation pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusMethodInvocationFromGlibBorrow(c unsafe.Pointer) DBusMethodInvocation {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusMethodInvocation)
-}
-
-func (d *DBusMethodInvocationInstance) upcastToGDBusMethodInvocation() *DBusMethodInvocationInstance {
-	return d
-}
-
-// UnsafeDBusMethodInvocationToGlibNone is used to convert the instance to it's C value GDBusMethodInvocation. This is used by the bindings internally.
-func UnsafeDBusMethodInvocationToGlibNone(c DBusMethodInvocation) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeDBusMethodInvocationToGlibFull is used to convert the instance to it's C value GDBusMethodInvocation, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusMethodInvocationToGlibFull(c DBusMethodInvocation) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// GetConnection wraps g_dbus_method_invocation_get_connection
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusConnection 
-//
-// Gets the #GDBusConnection the method was invoked on.
-func (invocation *DBusMethodInvocationInstance) GetConnection() DBusConnection {
-	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.GDBusConnection       // return, none, converted
-
-	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
-
-	cret = C.g_dbus_method_invocation_get_connection(carg0)
-	runtime.KeepAlive(invocation)
-
-	var goret DBusConnection
-
-	goret = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetInterfaceName wraps g_dbus_method_invocation_get_interface_name
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Gets the name of the D-Bus interface the method was invoked on.
-// 
-// This can be `NULL` if it was not specified by the sender. See
-// [callback@Gio.DBusInterfaceMethodCallFunc] or the
-// [D-Bus Specification](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-types-method)
-// for details on when this can happen and how it should be handled.
-// 
-// If this method call is a property Get, Set or GetAll call that has
-// been redirected to the method call handler then
-// "org.freedesktop.DBus.Properties" will be returned.  See
-// #GDBusInterfaceVTable for more information.
-func (invocation *DBusMethodInvocationInstance) GetInterfaceName() string {
-	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.gchar                 // return, none, string, nullable-string
-
-	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
-
-	cret = C.g_dbus_method_invocation_get_interface_name(carg0)
-	runtime.KeepAlive(invocation)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// GetMessage wraps g_dbus_method_invocation_get_message
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusMessage 
-//
-// Gets the #GDBusMessage for the method invocation. This is useful if
-// you need to use low-level protocol features, such as UNIX file
-// descriptor passing, that cannot be properly expressed in the
-// #GVariant API.
-// 
-// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
-// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
-// for an example of how to use this low-level API to send and receive
-// UNIX file descriptors.
-func (invocation *DBusMethodInvocationInstance) GetMessage() DBusMessage {
-	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.GDBusMessage          // return, none, converted
-
-	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
-
-	cret = C.g_dbus_method_invocation_get_message(carg0)
-	runtime.KeepAlive(invocation)
-
-	var goret DBusMessage
-
-	goret = UnsafeDBusMessageFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetMethodInfo wraps g_dbus_method_invocation_get_method_info
-// 
-// The function returns the following values:
-// 
-// 	- goret *DBusMethodInfo (nullable) 
-//
-// Gets information about the method call, if any.
-// 
-// If this method invocation is a property Get, Set or GetAll call that
-// has been redirected to the method call handler then %NULL will be
-// returned.  See g_dbus_method_invocation_get_property_info() and
-// #GDBusInterfaceVTable for more information.
-func (invocation *DBusMethodInvocationInstance) GetMethodInfo() *DBusMethodInfo {
-	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.GDBusMethodInfo       // return, none, converted, nullable
-
-	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
-
-	cret = C.g_dbus_method_invocation_get_method_info(carg0)
-	runtime.KeepAlive(invocation)
-
-	var goret *DBusMethodInfo
-
-	if cret != nil {
-		goret = UnsafeDBusMethodInfoFromGlibNone(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// GetMethodName wraps g_dbus_method_invocation_get_method_name
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the name of the method that was invoked.
-func (invocation *DBusMethodInvocationInstance) GetMethodName() string {
-	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.gchar                 // return, none, string
-
-	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
-
-	cret = C.g_dbus_method_invocation_get_method_name(carg0)
-	runtime.KeepAlive(invocation)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetObjectPath wraps g_dbus_method_invocation_get_object_path
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the object path the method was invoked on.
-func (invocation *DBusMethodInvocationInstance) GetObjectPath() string {
-	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.gchar                 // return, none, string
-
-	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
-
-	cret = C.g_dbus_method_invocation_get_object_path(carg0)
-	runtime.KeepAlive(invocation)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetPropertyInfo wraps g_dbus_method_invocation_get_property_info
-// 
-// The function returns the following values:
-// 
-// 	- goret *DBusPropertyInfo (nullable) 
-//
-// Gets information about the property that this method call is for, if
-// any.
-// 
-// This will only be set in the case of an invocation in response to a
-// property Get or Set call that has been directed to the method call
-// handler for an object on account of its property_get() or
-// property_set() vtable pointers being unset.
-// 
-// See #GDBusInterfaceVTable for more information.
-// 
-// If the call was GetAll, %NULL will be returned.
-func (invocation *DBusMethodInvocationInstance) GetPropertyInfo() *DBusPropertyInfo {
-	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.GDBusPropertyInfo     // return, none, converted, nullable
-
-	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
-
-	cret = C.g_dbus_method_invocation_get_property_info(carg0)
-	runtime.KeepAlive(invocation)
-
-	var goret *DBusPropertyInfo
-
-	if cret != nil {
-		goret = UnsafeDBusPropertyInfoFromGlibNone(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// GetSender wraps g_dbus_method_invocation_get_sender
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Gets the bus name that invoked the method.
-// 
-// This can return %NULL if not specified by the caller, e.g. on peer-to-peer
-// connections.
-func (invocation *DBusMethodInvocationInstance) GetSender() string {
-	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.gchar                 // return, none, string, nullable-string
-
-	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
-
-	cret = C.g_dbus_method_invocation_get_sender(carg0)
-	runtime.KeepAlive(invocation)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// ReturnDBusError wraps g_dbus_method_invocation_return_dbus_error
-// 
-// The function takes the following parameters:
-// 
-// 	- errorName string: A valid D-Bus error name. 
-// 	- errorMessage string: A valid D-Bus error message. 
-//
-// Finishes handling a D-Bus method call by returning an error.
-// 
-// This method will take ownership of @invocation. See
-// #GDBusInterfaceVTable for more information about the ownership of
-// @invocation.
-func (invocation *DBusMethodInvocationInstance) ReturnDBusError(errorName string, errorMessage string) {
-	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var carg1 *C.gchar                 // in, none, string
-	var carg2 *C.gchar                 // in, none, string
-
-	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(errorName)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(errorMessage)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	C.g_dbus_method_invocation_return_dbus_error(carg0, carg1, carg2)
-	runtime.KeepAlive(invocation)
-	runtime.KeepAlive(errorName)
-	runtime.KeepAlive(errorMessage)
-}
-
-// ReturnErrorLiteral wraps g_dbus_method_invocation_return_error_literal
-// 
-// The function takes the following parameters:
-// 
-// 	- domain glib.Quark: A #GQuark for the #GError error domain. 
-// 	- code int32: The error code. 
-// 	- message string: The error message. 
-//
-// Like g_dbus_method_invocation_return_error() but without printf()-style formatting.
-// 
-// This method will take ownership of @invocation. See
-// #GDBusInterfaceVTable for more information about the ownership of
-// @invocation.
-func (invocation *DBusMethodInvocationInstance) ReturnErrorLiteral(domain glib.Quark, code int32, message string) {
-	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var carg1 C.GQuark                 // in, none, casted, alias
-	var carg2 C.gint                   // in, none, casted
-	var carg3 *C.gchar                 // in, none, string
-
-	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
-	carg1 = C.GQuark(domain)
-	carg2 = C.gint(code)
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(message)))
-	defer C.free(unsafe.Pointer(carg3))
-
-	C.g_dbus_method_invocation_return_error_literal(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(invocation)
-	runtime.KeepAlive(domain)
-	runtime.KeepAlive(code)
-	runtime.KeepAlive(message)
-}
-
-// ReturnGError wraps g_dbus_method_invocation_return_gerror
-// 
-// The function takes the following parameters:
-// 
-// 	- err error: A #GError. 
-//
-// Like g_dbus_method_invocation_return_error() but takes a #GError
-// instead of the error domain, error code and message.
-// 
-// This method will take ownership of @invocation. See
-// #GDBusInterfaceVTable for more information about the ownership of
-// @invocation.
-func (invocation *DBusMethodInvocationInstance) ReturnGError(err error) {
-	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var carg1 *C.GError                // in, none, converted
-
-	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
-	carg1 = (*C.GError)(glib.UnsafeErrorToGlibNone(err))
-
-	C.g_dbus_method_invocation_return_gerror(carg0, carg1)
-	runtime.KeepAlive(invocation)
-	runtime.KeepAlive(err)
-}
-
-// DBusObjectManagerClientInstance is the instance type used by all types extending GDBusObjectManagerClient. It is used internally by the bindings. Users should use the interface [DBusObjectManagerClient] instead.
-type DBusObjectManagerClientInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ DBusObjectManagerClient = (*DBusObjectManagerClientInstance)(nil)
-
-// DBusObjectManagerClient wraps GDBusObjectManagerClient
-//
-// `GDBusObjectManagerClient` is used to create, monitor and delete object
-// proxies for remote objects exported by a [class@Gio.DBusObjectManagerServer]
-// (or any code implementing the
-// [org.freedesktop.DBus.ObjectManager](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
-// interface).
-// 
-// Once an instance of this type has been created, you can connect to
-// the [signal@Gio.DBusObjectManager::object-added] and
-// [signal@Gio.DBusObjectManager::object-removed signals] and inspect the
-// [class@Gio.DBusObjectProxy] objects returned by
-// [method@Gio.DBusObjectManager.get_objects].
-// 
-// If the name for a `GDBusObjectManagerClient` is not owned by anyone at
-// object construction time, the default behavior is to request the
-// message bus to launch an owner for the name. This behavior can be
-// disabled using the `G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_DO_NOT_AUTO_START`
-// flag. It’s also worth noting that this only works if the name of
-// interest is activatable in the first place. E.g. in some cases it
-// is not possible to launch an owner for the requested name. In this
-// case, `GDBusObjectManagerClient` object construction still succeeds but
-// there will be no object proxies
-// (e.g. [method@Gio.DBusObjectManager.get_objects] returns the empty list) and
-// the [property@Gio.DBusObjectManagerClient:name-owner] property is `NULL`.
-// 
-// The owner of the requested name can come and go (for example
-// consider a system service being restarted) – `GDBusObjectManagerClient`
-// handles this case too; simply connect to the [signal@GObject.Object::notify]
-// signal to watch for changes on the
-// [property@Gio.DBusObjectManagerClient:name-owner] property. When the name
-// owner vanishes, the behavior is that
-// [property@Gio.DBusObjectManagerClient:name-owner] is set to `NULL` (this
-// includes emission of the [signal@GObject.Object::notify] signal) and then
-// [signal@Gio.DBusObjectManager::object-removed] signals are synthesized
-// for all currently existing object proxies. Since
-// [property@Gio.DBusObjectManagerClient:name-owner] is `NULL` when this
-// happens, you can use this information to disambiguate a synthesized signal
-// from a genuine signal caused by object removal on the remote
-// [iface@Gio.DBusObjectManager]. Similarly, when a new name owner appears,
-// [signal@Gio.DBusObjectManager::object-added] signals are synthesized
-// while [property@Gio.DBusObjectManagerClient:name-owner] is still `NULL`. Only
-// when all object proxies have been added, the
-// [property@Gio.DBusObjectManagerClient:name-owner] is set to the new name
-// owner (this includes emission of the [signal@GObject.Object::notify] signal).
-// Furthermore, you are guaranteed that
-// [property@Gio.DBusObjectManagerClient:name-owner] will alternate between a
-// name owner (e.g. `:1.42`) and `NULL` even in the case where
-// the name of interest is atomically replaced
-// 
-// Ultimately, `GDBusObjectManagerClient` is used to obtain
-// [class@Gio.DBusProxy] instances. All signals (including the
-// `org.freedesktop.DBus.Properties::PropertiesChanged` signal)
-// delivered to [class@Gio.DBusProxy] instances are guaranteed to originate
-// from the name owner. This guarantee along with the behavior
-// described above, means that certain race conditions including the
-// “half the proxy is from the old owner and the other half is from
-// the new owner” problem cannot happen.
-// 
-// To avoid having the application connect to signals on the returned
-// [class@Gio.DBusObjectProxy] and [class@Gio.DBusProxy] objects, the
-// [signal@Gio.DBusObject::interface-added],
-// [signal@Gio.DBusObject::interface-removed],
-// [signal@Gio.DBusProxy::g-properties-changed] and
-// [signal@Gio.DBusProxy::g-signal] signals
-// are also emitted on the `GDBusObjectManagerClient` instance managing these
-// objects. The signals emitted are
-// [signal@Gio.DBusObjectManager::interface-added],
-// [signal@Gio.DBusObjectManager::interface-removed],
-// [signal@Gio.DBusObjectManagerClient::interface-proxy-properties-changed] and
-// [signal@Gio.DBusObjectManagerClient::interface-proxy-signal].
-// 
-// Note that all callbacks and signals are emitted in the
-// thread-default main context (see
-// [method@GLib.MainContext.push_thread_default]) that the
-// `GDBusObjectManagerClient` object was constructed in. Additionally, the
-// [class@Gio.DBusObjectProxy] and [class@Gio.DBusProxy] objects
-// originating from the `GDBusObjectManagerClient` object will be created in
-// the same context and, consequently, will deliver signals in the
-// same main loop.
-type DBusObjectManagerClient interface {
-	gobject.Object
-	upcastToGDBusObjectManagerClient() *DBusObjectManagerClientInstance
-
-	// GetConnection wraps g_dbus_object_manager_client_get_connection
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusConnection 
-	//
-	// Gets the #GDBusConnection used by @manager.
-	GetConnection() DBusConnection
-	// GetFlags wraps g_dbus_object_manager_client_get_flags
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusObjectManagerClientFlags 
-	//
-	// Gets the flags that @manager was constructed with.
-	GetFlags() DBusObjectManagerClientFlags
-	// GetName wraps g_dbus_object_manager_client_get_name
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the name that @manager is for, or %NULL if not a message bus
-	// connection.
-	GetName() string
-	// GetNameOwner wraps g_dbus_object_manager_client_get_name_owner
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// The unique name that owns the name that @manager is for or %NULL if
-	// no-one currently owns that name. You can connect to the
-	// #GObject::notify signal to track changes to the
-	// #GDBusObjectManagerClient:name-owner property.
-	GetNameOwner() string
-
-	// chain up virtual methods:
-}
-
-func unsafeWrapDBusObjectManagerClient(base *gobject.ObjectInstance) *DBusObjectManagerClientInstance {
-	return &DBusObjectManagerClientInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeDBusObjectManagerClient,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusObjectManagerClient(inst)
-		},
-	)
-}
-
-func marshalDBusObjectManagerClientInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusObjectManagerClient(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeDBusObjectManagerClientFromGlibNone is used to convert raw GDBusObjectManagerClient pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectManagerClientFromGlibNone(c unsafe.Pointer) DBusObjectManagerClient {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusObjectManagerClient)
-}
-
-// UnsafeDBusObjectManagerClientFromGlibFull is used to convert raw GDBusObjectManagerClient pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectManagerClientFromGlibFull(c unsafe.Pointer) DBusObjectManagerClient {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusObjectManagerClient)
-}
-
-// UnsafeDBusObjectManagerClientFromGlibBorrow is used to convert raw GDBusObjectManagerClient pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusObjectManagerClientFromGlibBorrow(c unsafe.Pointer) DBusObjectManagerClient {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusObjectManagerClient)
-}
-
-func (d *DBusObjectManagerClientInstance) upcastToGDBusObjectManagerClient() *DBusObjectManagerClientInstance {
-	return d
-}
-
-// UnsafeDBusObjectManagerClientToGlibNone is used to convert the instance to it's C value GDBusObjectManagerClient. This is used by the bindings internally.
-func UnsafeDBusObjectManagerClientToGlibNone(c DBusObjectManagerClient) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeDBusObjectManagerClientToGlibFull is used to convert the instance to it's C value GDBusObjectManagerClient, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectManagerClientToGlibFull(c DBusObjectManagerClient) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewDBusObjectManagerClientFinish wraps g_dbus_object_manager_client_new_finish
-// 
-// The function takes the following parameters:
-// 
-// 	- res AsyncResult: A #GAsyncResult obtained from the #GAsyncReadyCallback passed to g_dbus_object_manager_client_new(). 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusObjectManagerClient 
-// 	- _goerr error (nullable): an error 
-//
-// Finishes an operation started with g_dbus_object_manager_client_new().
-func NewDBusObjectManagerClientFinish(res AsyncResult) (DBusObjectManagerClient, error) {
-	var carg1 *C.GAsyncResult       // in, none, converted
-	var cret  *C.GDBusObjectManager // return, full, converted
-	var _cerr *C.GError             // out, full, converted, nullable
-
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
-
-	cret = C.g_dbus_object_manager_client_new_finish(carg1, &_cerr)
-	runtime.KeepAlive(res)
-
-	var goret  DBusObjectManagerClient
-	var _goerr error
-
-	goret = UnsafeDBusObjectManagerClientFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// NewDBusObjectManagerClientForBusFinish wraps g_dbus_object_manager_client_new_for_bus_finish
-// 
-// The function takes the following parameters:
-// 
-// 	- res AsyncResult: A #GAsyncResult obtained from the #GAsyncReadyCallback passed to g_dbus_object_manager_client_new_for_bus(). 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusObjectManagerClient 
-// 	- _goerr error (nullable): an error 
-//
-// Finishes an operation started with g_dbus_object_manager_client_new_for_bus().
-func NewDBusObjectManagerClientForBusFinish(res AsyncResult) (DBusObjectManagerClient, error) {
-	var carg1 *C.GAsyncResult       // in, none, converted
-	var cret  *C.GDBusObjectManager // return, full, converted
-	var _cerr *C.GError             // out, full, converted, nullable
-
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
-
-	cret = C.g_dbus_object_manager_client_new_for_bus_finish(carg1, &_cerr)
-	runtime.KeepAlive(res)
-
-	var goret  DBusObjectManagerClient
-	var _goerr error
-
-	goret = UnsafeDBusObjectManagerClientFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// GetConnection wraps g_dbus_object_manager_client_get_connection
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusConnection 
-//
-// Gets the #GDBusConnection used by @manager.
-func (manager *DBusObjectManagerClientInstance) GetConnection() DBusConnection {
-	var carg0 *C.GDBusObjectManagerClient // in, none, converted
-	var cret  *C.GDBusConnection          // return, none, converted
-
-	carg0 = (*C.GDBusObjectManagerClient)(UnsafeDBusObjectManagerClientToGlibNone(manager))
-
-	cret = C.g_dbus_object_manager_client_get_connection(carg0)
-	runtime.KeepAlive(manager)
-
-	var goret DBusConnection
-
-	goret = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetFlags wraps g_dbus_object_manager_client_get_flags
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusObjectManagerClientFlags 
-//
-// Gets the flags that @manager was constructed with.
-func (manager *DBusObjectManagerClientInstance) GetFlags() DBusObjectManagerClientFlags {
-	var carg0 *C.GDBusObjectManagerClient     // in, none, converted
-	var cret  C.GDBusObjectManagerClientFlags // return, none, casted
-
-	carg0 = (*C.GDBusObjectManagerClient)(UnsafeDBusObjectManagerClientToGlibNone(manager))
-
-	cret = C.g_dbus_object_manager_client_get_flags(carg0)
-	runtime.KeepAlive(manager)
-
-	var goret DBusObjectManagerClientFlags
-
-	goret = DBusObjectManagerClientFlags(cret)
-
-	return goret
-}
-
-// GetName wraps g_dbus_object_manager_client_get_name
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the name that @manager is for, or %NULL if not a message bus
-// connection.
-func (manager *DBusObjectManagerClientInstance) GetName() string {
-	var carg0 *C.GDBusObjectManagerClient // in, none, converted
-	var cret  *C.gchar                    // return, none, string
-
-	carg0 = (*C.GDBusObjectManagerClient)(UnsafeDBusObjectManagerClientToGlibNone(manager))
-
-	cret = C.g_dbus_object_manager_client_get_name(carg0)
-	runtime.KeepAlive(manager)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetNameOwner wraps g_dbus_object_manager_client_get_name_owner
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// The unique name that owns the name that @manager is for or %NULL if
-// no-one currently owns that name. You can connect to the
-// #GObject::notify signal to track changes to the
-// #GDBusObjectManagerClient:name-owner property.
-func (manager *DBusObjectManagerClientInstance) GetNameOwner() string {
-	var carg0 *C.GDBusObjectManagerClient // in, none, converted
-	var cret  *C.gchar                    // return, full, string, nullable-string
-
-	carg0 = (*C.GDBusObjectManagerClient)(UnsafeDBusObjectManagerClientToGlibNone(manager))
-
-	cret = C.g_dbus_object_manager_client_get_name_owner(carg0)
-	runtime.KeepAlive(manager)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-		defer C.free(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// DBusObjectManagerClientOverrides is the struct used to override the default implementation of virtual methods.
-// it is generic over the extending instance type.
-type DBusObjectManagerClientOverrides[Instance DBusObjectManagerClient] struct {
-	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
-	gobject.ObjectOverrides[Instance]
-
-}
-
-// UnsafeApplyDBusObjectManagerClientOverrides applies the overrides to init the gclass by setting the trampoline functions.
-// This is used by the bindings internally and only exported for visibility to other bindings code.
-func UnsafeApplyDBusObjectManagerClientOverrides[Instance DBusObjectManagerClient](gclass unsafe.Pointer, overrides DBusObjectManagerClientOverrides[Instance]) {
-	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
-}
-
-// RegisterDBusObjectManagerClientSubClass is used to register a go subclass of GDBusObjectManagerClient. For this to work safely please implement the
-// virtual methods required by the implementation.
-func RegisterDBusObjectManagerClientSubClass[InstanceT DBusObjectManagerClient](
-		name string,
-		classInit func(class *DBusObjectManagerClientClass),
-		constructor func() InstanceT,
-		overrides DBusObjectManagerClientOverrides[InstanceT],
-		signals map[string]gobject.SignalDefinition,
-		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
-) gobject.Type {
-	return gobject.UnsafeRegisterSubClass(
-		name,
-		classInit,
-		constructor,
-		overrides,
-		signals,
-		TypeDBusObjectManagerClient,
-		UnsafeDBusObjectManagerClientClassFromGlibBorrow,
-		UnsafeApplyDBusObjectManagerClientOverrides,
-		func (obj *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusObjectManagerClient(obj)
-		},
-		interfaceInits...,
-	)
-}
-
-// DBusObjectManagerServerInstance is the instance type used by all types extending GDBusObjectManagerServer. It is used internally by the bindings. Users should use the interface [DBusObjectManagerServer] instead.
-type DBusObjectManagerServerInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ DBusObjectManagerServer = (*DBusObjectManagerServerInstance)(nil)
-
-// DBusObjectManagerServer wraps GDBusObjectManagerServer
-//
-// `GDBusObjectManagerServer` is used to export [iface@Gio.DBusObject] instances
-// using the standardized
-// [`org.freedesktop.DBus.ObjectManager`](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
-// interface. For example, remote D-Bus clients can get all objects
-// and properties in a single call. Additionally, any change in the
-// object hierarchy is broadcast using signals. This means that D-Bus
-// clients can keep caches up to date by only listening to D-Bus
-// signals.
-// 
-// The recommended path to export an object manager at is the path form of the
-// well-known name of a D-Bus service, or below. For example, if a D-Bus service
-// is available at the well-known name `net.example.ExampleService1`, the object
-// manager should typically be exported at `/net/example/ExampleService1`, or
-// below (to allow for multiple object managers in a service).
-// 
-// It is supported, but not recommended, to export an object manager at the root
-// path, `/`.
-// 
-// See [class@Gio.DBusObjectManagerClient] for the client-side code that is
-// intended to be used with `GDBusObjectManagerServer` or any D-Bus
-// object implementing the `org.freedesktop.DBus.ObjectManager` interface.
-type DBusObjectManagerServer interface {
-	gobject.Object
-	upcastToGDBusObjectManagerServer() *DBusObjectManagerServerInstance
-
-	// Export wraps g_dbus_object_manager_server_export
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object DBusObjectSkeleton: A #GDBusObjectSkeleton. 
-	//
-	// Exports @object on @manager.
-	// 
-	// If there is already a #GDBusObject exported at the object path,
-	// then the old object is removed.
-	// 
-	// The object path for @object must be in the hierarchy rooted by the
-	// object path for @manager.
-	// 
-	// Note that @manager will take a reference on @object for as long as
-	// it is exported.
-	Export(DBusObjectSkeleton)
-	// ExportUniquely wraps g_dbus_object_manager_server_export_uniquely
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object DBusObjectSkeleton: An object. 
-	//
-	// Like g_dbus_object_manager_server_export() but appends a string of
-	// the form _N (with N being a natural number) to @object's object path
-	// if an object with the given path already exists. As such, the
-	// #GDBusObjectProxy:g-object-path property of @object may be modified.
-	ExportUniquely(DBusObjectSkeleton)
-	// GetConnection wraps g_dbus_object_manager_server_get_connection
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusConnection (nullable) 
-	//
-	// Gets the #GDBusConnection used by @manager.
-	GetConnection() DBusConnection
-	// IsExported wraps g_dbus_object_manager_server_is_exported
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- object DBusObjectSkeleton: An object. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Returns whether @object is currently exported on @manager.
-	IsExported(DBusObjectSkeleton) bool
-	// SetConnection wraps g_dbus_object_manager_server_set_connection
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- connection DBusConnection (nullable): A #GDBusConnection or %NULL. 
-	//
-	// Exports all objects managed by @manager on @connection. If
-	// @connection is %NULL, stops exporting objects.
-	SetConnection(DBusConnection)
-	// Unexport wraps g_dbus_object_manager_server_unexport
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- objectPath string: An object path. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// If @manager has an object at @path, removes the object. Otherwise
-	// does nothing.
-	// 
-	// Note that @object_path must be in the hierarchy rooted by the
-	// object path for @manager.
-	Unexport(string) bool
-
-	// chain up virtual methods:
-}
-
-func unsafeWrapDBusObjectManagerServer(base *gobject.ObjectInstance) *DBusObjectManagerServerInstance {
-	return &DBusObjectManagerServerInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeDBusObjectManagerServer,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusObjectManagerServer(inst)
-		},
-	)
-}
-
-func marshalDBusObjectManagerServerInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusObjectManagerServer(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeDBusObjectManagerServerFromGlibNone is used to convert raw GDBusObjectManagerServer pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectManagerServerFromGlibNone(c unsafe.Pointer) DBusObjectManagerServer {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusObjectManagerServer)
-}
-
-// UnsafeDBusObjectManagerServerFromGlibFull is used to convert raw GDBusObjectManagerServer pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectManagerServerFromGlibFull(c unsafe.Pointer) DBusObjectManagerServer {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusObjectManagerServer)
-}
-
-// UnsafeDBusObjectManagerServerFromGlibBorrow is used to convert raw GDBusObjectManagerServer pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusObjectManagerServerFromGlibBorrow(c unsafe.Pointer) DBusObjectManagerServer {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusObjectManagerServer)
-}
-
-func (d *DBusObjectManagerServerInstance) upcastToGDBusObjectManagerServer() *DBusObjectManagerServerInstance {
-	return d
-}
-
-// UnsafeDBusObjectManagerServerToGlibNone is used to convert the instance to it's C value GDBusObjectManagerServer. This is used by the bindings internally.
-func UnsafeDBusObjectManagerServerToGlibNone(c DBusObjectManagerServer) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeDBusObjectManagerServerToGlibFull is used to convert the instance to it's C value GDBusObjectManagerServer, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectManagerServerToGlibFull(c DBusObjectManagerServer) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewDBusObjectManagerServer wraps g_dbus_object_manager_server_new
-// 
-// The function takes the following parameters:
-// 
-// 	- objectPath string: The object path to export the manager object at. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusObjectManagerServer 
-//
-// Creates a new #GDBusObjectManagerServer object.
-// 
-// The returned server isn't yet exported on any connection. To do so,
-// use g_dbus_object_manager_server_set_connection(). Normally you
-// want to export all of your objects before doing so to avoid
-// [InterfacesAdded](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
-// signals being emitted.
-func NewDBusObjectManagerServer(objectPath string) DBusObjectManagerServer {
-	var carg1 *C.gchar                    // in, none, string
-	var cret  *C.GDBusObjectManagerServer // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_dbus_object_manager_server_new(carg1)
-	runtime.KeepAlive(objectPath)
-
-	var goret DBusObjectManagerServer
-
-	goret = UnsafeDBusObjectManagerServerFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Export wraps g_dbus_object_manager_server_export
-// 
-// The function takes the following parameters:
-// 
-// 	- object DBusObjectSkeleton: A #GDBusObjectSkeleton. 
-//
-// Exports @object on @manager.
-// 
-// If there is already a #GDBusObject exported at the object path,
-// then the old object is removed.
-// 
-// The object path for @object must be in the hierarchy rooted by the
-// object path for @manager.
-// 
-// Note that @manager will take a reference on @object for as long as
-// it is exported.
-func (manager *DBusObjectManagerServerInstance) Export(object DBusObjectSkeleton) {
-	var carg0 *C.GDBusObjectManagerServer // in, none, converted
-	var carg1 *C.GDBusObjectSkeleton      // in, none, converted
-
-	carg0 = (*C.GDBusObjectManagerServer)(UnsafeDBusObjectManagerServerToGlibNone(manager))
-	carg1 = (*C.GDBusObjectSkeleton)(UnsafeDBusObjectSkeletonToGlibNone(object))
-
-	C.g_dbus_object_manager_server_export(carg0, carg1)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(object)
-}
-
-// ExportUniquely wraps g_dbus_object_manager_server_export_uniquely
-// 
-// The function takes the following parameters:
-// 
-// 	- object DBusObjectSkeleton: An object. 
-//
-// Like g_dbus_object_manager_server_export() but appends a string of
-// the form _N (with N being a natural number) to @object's object path
-// if an object with the given path already exists. As such, the
-// #GDBusObjectProxy:g-object-path property of @object may be modified.
-func (manager *DBusObjectManagerServerInstance) ExportUniquely(object DBusObjectSkeleton) {
-	var carg0 *C.GDBusObjectManagerServer // in, none, converted
-	var carg1 *C.GDBusObjectSkeleton      // in, none, converted
-
-	carg0 = (*C.GDBusObjectManagerServer)(UnsafeDBusObjectManagerServerToGlibNone(manager))
-	carg1 = (*C.GDBusObjectSkeleton)(UnsafeDBusObjectSkeletonToGlibNone(object))
-
-	C.g_dbus_object_manager_server_export_uniquely(carg0, carg1)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(object)
-}
-
-// GetConnection wraps g_dbus_object_manager_server_get_connection
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusConnection (nullable) 
-//
-// Gets the #GDBusConnection used by @manager.
-func (manager *DBusObjectManagerServerInstance) GetConnection() DBusConnection {
-	var carg0 *C.GDBusObjectManagerServer // in, none, converted
-	var cret  *C.GDBusConnection          // return, full, converted, nullable
-
-	carg0 = (*C.GDBusObjectManagerServer)(UnsafeDBusObjectManagerServerToGlibNone(manager))
-
-	cret = C.g_dbus_object_manager_server_get_connection(carg0)
-	runtime.KeepAlive(manager)
-
-	var goret DBusConnection
-
-	if cret != nil {
-		goret = UnsafeDBusConnectionFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// IsExported wraps g_dbus_object_manager_server_is_exported
-// 
-// The function takes the following parameters:
-// 
-// 	- object DBusObjectSkeleton: An object. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Returns whether @object is currently exported on @manager.
-func (manager *DBusObjectManagerServerInstance) IsExported(object DBusObjectSkeleton) bool {
-	var carg0 *C.GDBusObjectManagerServer // in, none, converted
-	var carg1 *C.GDBusObjectSkeleton      // in, none, converted
-	var cret  C.gboolean                  // return
-
-	carg0 = (*C.GDBusObjectManagerServer)(UnsafeDBusObjectManagerServerToGlibNone(manager))
-	carg1 = (*C.GDBusObjectSkeleton)(UnsafeDBusObjectSkeletonToGlibNone(object))
-
-	cret = C.g_dbus_object_manager_server_is_exported(carg0, carg1)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(object)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// SetConnection wraps g_dbus_object_manager_server_set_connection
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection (nullable): A #GDBusConnection or %NULL. 
-//
-// Exports all objects managed by @manager on @connection. If
-// @connection is %NULL, stops exporting objects.
-func (manager *DBusObjectManagerServerInstance) SetConnection(connection DBusConnection) {
-	var carg0 *C.GDBusObjectManagerServer // in, none, converted
-	var carg1 *C.GDBusConnection          // in, none, converted, nullable
-
-	carg0 = (*C.GDBusObjectManagerServer)(UnsafeDBusObjectManagerServerToGlibNone(manager))
-	if connection != nil {
-		carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	}
-
-	C.g_dbus_object_manager_server_set_connection(carg0, carg1)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(connection)
-}
-
-// Unexport wraps g_dbus_object_manager_server_unexport
-// 
-// The function takes the following parameters:
-// 
-// 	- objectPath string: An object path. 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// If @manager has an object at @path, removes the object. Otherwise
-// does nothing.
-// 
-// Note that @object_path must be in the hierarchy rooted by the
-// object path for @manager.
-func (manager *DBusObjectManagerServerInstance) Unexport(objectPath string) bool {
-	var carg0 *C.GDBusObjectManagerServer // in, none, converted
-	var carg1 *C.gchar                    // in, none, string
-	var cret  C.gboolean                  // return
-
-	carg0 = (*C.GDBusObjectManagerServer)(UnsafeDBusObjectManagerServerToGlibNone(manager))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_dbus_object_manager_server_unexport(carg0, carg1)
-	runtime.KeepAlive(manager)
-	runtime.KeepAlive(objectPath)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// DBusObjectManagerServerOverrides is the struct used to override the default implementation of virtual methods.
-// it is generic over the extending instance type.
-type DBusObjectManagerServerOverrides[Instance DBusObjectManagerServer] struct {
-	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
-	gobject.ObjectOverrides[Instance]
-
-}
-
-// UnsafeApplyDBusObjectManagerServerOverrides applies the overrides to init the gclass by setting the trampoline functions.
-// This is used by the bindings internally and only exported for visibility to other bindings code.
-func UnsafeApplyDBusObjectManagerServerOverrides[Instance DBusObjectManagerServer](gclass unsafe.Pointer, overrides DBusObjectManagerServerOverrides[Instance]) {
-	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
-}
-
-// RegisterDBusObjectManagerServerSubClass is used to register a go subclass of GDBusObjectManagerServer. For this to work safely please implement the
-// virtual methods required by the implementation.
-func RegisterDBusObjectManagerServerSubClass[InstanceT DBusObjectManagerServer](
-		name string,
-		classInit func(class *DBusObjectManagerServerClass),
-		constructor func() InstanceT,
-		overrides DBusObjectManagerServerOverrides[InstanceT],
-		signals map[string]gobject.SignalDefinition,
-		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
-) gobject.Type {
-	return gobject.UnsafeRegisterSubClass(
-		name,
-		classInit,
-		constructor,
-		overrides,
-		signals,
-		TypeDBusObjectManagerServer,
-		UnsafeDBusObjectManagerServerClassFromGlibBorrow,
-		UnsafeApplyDBusObjectManagerServerOverrides,
-		func (obj *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusObjectManagerServer(obj)
-		},
-		interfaceInits...,
-	)
-}
-
-// DBusObjectProxyInstance is the instance type used by all types extending GDBusObjectProxy. It is used internally by the bindings. Users should use the interface [DBusObjectProxy] instead.
-type DBusObjectProxyInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ DBusObjectProxy = (*DBusObjectProxyInstance)(nil)
-
-// DBusObjectProxy wraps GDBusObjectProxy
-//
-// A `GDBusObjectProxy` is an object used to represent a remote object
-// with one or more D-Bus interfaces. Normally, you don’t instantiate
-// a `GDBusObjectProxy` yourself — typically [class@Gio.DBusObjectManagerClient]
-// is used to obtain it.
-type DBusObjectProxy interface {
-	gobject.Object
-	upcastToGDBusObjectProxy() *DBusObjectProxyInstance
-
-	// GetConnection wraps g_dbus_object_proxy_get_connection
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusConnection 
-	//
-	// Gets the connection that @proxy is for.
-	GetConnection() DBusConnection
-
-	// chain up virtual methods:
-}
-
-func unsafeWrapDBusObjectProxy(base *gobject.ObjectInstance) *DBusObjectProxyInstance {
-	return &DBusObjectProxyInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeDBusObjectProxy,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusObjectProxy(inst)
-		},
-	)
-}
-
-func marshalDBusObjectProxyInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusObjectProxy(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeDBusObjectProxyFromGlibNone is used to convert raw GDBusObjectProxy pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectProxyFromGlibNone(c unsafe.Pointer) DBusObjectProxy {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusObjectProxy)
-}
-
-// UnsafeDBusObjectProxyFromGlibFull is used to convert raw GDBusObjectProxy pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectProxyFromGlibFull(c unsafe.Pointer) DBusObjectProxy {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusObjectProxy)
-}
-
-// UnsafeDBusObjectProxyFromGlibBorrow is used to convert raw GDBusObjectProxy pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusObjectProxyFromGlibBorrow(c unsafe.Pointer) DBusObjectProxy {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusObjectProxy)
-}
-
-func (d *DBusObjectProxyInstance) upcastToGDBusObjectProxy() *DBusObjectProxyInstance {
-	return d
-}
-
-// UnsafeDBusObjectProxyToGlibNone is used to convert the instance to it's C value GDBusObjectProxy. This is used by the bindings internally.
-func UnsafeDBusObjectProxyToGlibNone(c DBusObjectProxy) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeDBusObjectProxyToGlibFull is used to convert the instance to it's C value GDBusObjectProxy, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectProxyToGlibFull(c DBusObjectProxy) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewDBusObjectProxy wraps g_dbus_object_proxy_new
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection: a #GDBusConnection 
-// 	- objectPath string: the object path 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusObjectProxy 
-//
-// Creates a new #GDBusObjectProxy for the given connection and
-// object path.
-func NewDBusObjectProxy(connection DBusConnection, objectPath string) DBusObjectProxy {
-	var carg1 *C.GDBusConnection  // in, none, converted
-	var carg2 *C.gchar            // in, none, string
-	var cret  *C.GDBusObjectProxy // return, full, converted
-
-	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	cret = C.g_dbus_object_proxy_new(carg1, carg2)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(objectPath)
-
-	var goret DBusObjectProxy
-
-	goret = UnsafeDBusObjectProxyFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetConnection wraps g_dbus_object_proxy_get_connection
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusConnection 
-//
-// Gets the connection that @proxy is for.
-func (proxy *DBusObjectProxyInstance) GetConnection() DBusConnection {
-	var carg0 *C.GDBusObjectProxy // in, none, converted
-	var cret  *C.GDBusConnection  // return, none, converted
-
-	carg0 = (*C.GDBusObjectProxy)(UnsafeDBusObjectProxyToGlibNone(proxy))
-
-	cret = C.g_dbus_object_proxy_get_connection(carg0)
-	runtime.KeepAlive(proxy)
-
-	var goret DBusConnection
-
-	goret = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// DBusObjectProxyOverrides is the struct used to override the default implementation of virtual methods.
-// it is generic over the extending instance type.
-type DBusObjectProxyOverrides[Instance DBusObjectProxy] struct {
-	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
-	gobject.ObjectOverrides[Instance]
-
-}
-
-// UnsafeApplyDBusObjectProxyOverrides applies the overrides to init the gclass by setting the trampoline functions.
-// This is used by the bindings internally and only exported for visibility to other bindings code.
-func UnsafeApplyDBusObjectProxyOverrides[Instance DBusObjectProxy](gclass unsafe.Pointer, overrides DBusObjectProxyOverrides[Instance]) {
-	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
-}
-
-// RegisterDBusObjectProxySubClass is used to register a go subclass of GDBusObjectProxy. For this to work safely please implement the
-// virtual methods required by the implementation.
-func RegisterDBusObjectProxySubClass[InstanceT DBusObjectProxy](
-		name string,
-		classInit func(class *DBusObjectProxyClass),
-		constructor func() InstanceT,
-		overrides DBusObjectProxyOverrides[InstanceT],
-		signals map[string]gobject.SignalDefinition,
-		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
-) gobject.Type {
-	return gobject.UnsafeRegisterSubClass(
-		name,
-		classInit,
-		constructor,
-		overrides,
-		signals,
-		TypeDBusObjectProxy,
-		UnsafeDBusObjectProxyClassFromGlibBorrow,
-		UnsafeApplyDBusObjectProxyOverrides,
-		func (obj *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusObjectProxy(obj)
-		},
-		interfaceInits...,
-	)
-}
-
-// DBusObjectSkeletonInstance is the instance type used by all types extending GDBusObjectSkeleton. It is used internally by the bindings. Users should use the interface [DBusObjectSkeleton] instead.
-type DBusObjectSkeletonInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ DBusObjectSkeleton = (*DBusObjectSkeletonInstance)(nil)
-
-// DBusObjectSkeleton wraps GDBusObjectSkeleton
-//
-// A `GDBusObjectSkeleton` instance is essentially a group of D-Bus
-// interfaces. The set of exported interfaces on the object may be
-// dynamic and change at runtime.
-// 
-// This type is intended to be used with [iface@Gio.DBusObjectManager].
-type DBusObjectSkeleton interface {
-	gobject.Object
-	upcastToGDBusObjectSkeleton() *DBusObjectSkeletonInstance
-
-	// AddInterface wraps g_dbus_object_skeleton_add_interface
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- interface_ DBusInterfaceSkeleton: A #GDBusInterfaceSkeleton. 
-	//
-	// Adds @interface_ to @object.
-	// 
-	// If @object already contains a #GDBusInterfaceSkeleton with the same
-	// interface name, it is removed before @interface_ is added.
-	// 
-	// Note that @object takes its own reference on @interface_ and holds
-	// it until removed.
-	AddInterface(DBusInterfaceSkeleton)
-	// Flush wraps g_dbus_object_skeleton_flush
-	//
-	// This method simply calls g_dbus_interface_skeleton_flush() on all
-	// interfaces belonging to @object. See that method for when flushing
-	// is useful.
-	Flush()
-	// RemoveInterface wraps g_dbus_object_skeleton_remove_interface
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- interface_ DBusInterfaceSkeleton: A #GDBusInterfaceSkeleton. 
-	//
-	// Removes @interface_ from @object.
-	RemoveInterface(DBusInterfaceSkeleton)
-	// RemoveInterfaceByName wraps g_dbus_object_skeleton_remove_interface_by_name
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- interfaceName string: A D-Bus interface name. 
-	//
-	// Removes the #GDBusInterface with @interface_name from @object.
-	// 
-	// If no D-Bus interface of the given interface exists, this function
-	// does nothing.
-	RemoveInterfaceByName(string)
-	// SetObjectPath wraps g_dbus_object_skeleton_set_object_path
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- objectPath string: A valid D-Bus object path. 
-	//
-	// Sets the object path for @object.
-	SetObjectPath(string)
-	// ConnectAuthorizeMethod connects the provided callback to the "authorize-method" signal
-	//
-	// Emitted when a method is invoked by a remote caller and used to
-	// determine if the method call is authorized.
-	// 
-	// This signal is like #GDBusInterfaceSkeleton's
-	// #GDBusInterfaceSkeleton::g-authorize-method signal,
-	// except that it is for the enclosing object.
-	// 
-	// The default class handler just returns %TRUE.
-	ConnectAuthorizeMethod(func(DBusObjectSkeleton, DBusInterfaceSkeleton, DBusMethodInvocation) bool) gobject.SignalHandle
-
-	// chain up virtual methods:
-
-	// ParentAuthorizeMethod calls the default implementations of the authorize_method virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- interface_ DBusInterfaceSkeleton 
-	// 	- invocation DBusMethodInvocation 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Signal class handler for the #GDBusObjectSkeleton::authorize-method signal.
-	ParentAuthorizeMethod(interface_ DBusInterfaceSkeleton, invocation DBusMethodInvocation) bool
-}
-
-func unsafeWrapDBusObjectSkeleton(base *gobject.ObjectInstance) *DBusObjectSkeletonInstance {
-	return &DBusObjectSkeletonInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeDBusObjectSkeleton,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusObjectSkeleton(inst)
-		},
-	)
-}
-
-func marshalDBusObjectSkeletonInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusObjectSkeleton(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeDBusObjectSkeletonFromGlibNone is used to convert raw GDBusObjectSkeleton pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectSkeletonFromGlibNone(c unsafe.Pointer) DBusObjectSkeleton {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusObjectSkeleton)
-}
-
-// UnsafeDBusObjectSkeletonFromGlibFull is used to convert raw GDBusObjectSkeleton pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectSkeletonFromGlibFull(c unsafe.Pointer) DBusObjectSkeleton {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusObjectSkeleton)
-}
-
-// UnsafeDBusObjectSkeletonFromGlibBorrow is used to convert raw GDBusObjectSkeleton pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusObjectSkeletonFromGlibBorrow(c unsafe.Pointer) DBusObjectSkeleton {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusObjectSkeleton)
-}
-
-func (d *DBusObjectSkeletonInstance) upcastToGDBusObjectSkeleton() *DBusObjectSkeletonInstance {
-	return d
-}
-
-// UnsafeDBusObjectSkeletonToGlibNone is used to convert the instance to it's C value GDBusObjectSkeleton. This is used by the bindings internally.
-func UnsafeDBusObjectSkeletonToGlibNone(c DBusObjectSkeleton) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeDBusObjectSkeletonToGlibFull is used to convert the instance to it's C value GDBusObjectSkeleton, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusObjectSkeletonToGlibFull(c DBusObjectSkeleton) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewDBusObjectSkeleton wraps g_dbus_object_skeleton_new
-// 
-// The function takes the following parameters:
-// 
-// 	- objectPath string: An object path. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusObjectSkeleton 
-//
-// Creates a new #GDBusObjectSkeleton.
-func NewDBusObjectSkeleton(objectPath string) DBusObjectSkeleton {
-	var carg1 *C.gchar               // in, none, string
-	var cret  *C.GDBusObjectSkeleton // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_dbus_object_skeleton_new(carg1)
-	runtime.KeepAlive(objectPath)
-
-	var goret DBusObjectSkeleton
-
-	goret = UnsafeDBusObjectSkeletonFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// AddInterface wraps g_dbus_object_skeleton_add_interface
-// 
-// The function takes the following parameters:
-// 
-// 	- interface_ DBusInterfaceSkeleton: A #GDBusInterfaceSkeleton. 
-//
-// Adds @interface_ to @object.
-// 
-// If @object already contains a #GDBusInterfaceSkeleton with the same
-// interface name, it is removed before @interface_ is added.
-// 
-// Note that @object takes its own reference on @interface_ and holds
-// it until removed.
-func (object *DBusObjectSkeletonInstance) AddInterface(interface_ DBusInterfaceSkeleton) {
-	var carg0 *C.GDBusObjectSkeleton    // in, none, converted
-	var carg1 *C.GDBusInterfaceSkeleton // in, none, converted
-
-	carg0 = (*C.GDBusObjectSkeleton)(UnsafeDBusObjectSkeletonToGlibNone(object))
-	carg1 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-
-	C.g_dbus_object_skeleton_add_interface(carg0, carg1)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(interface_)
-}
-
-// Flush wraps g_dbus_object_skeleton_flush
-//
-// This method simply calls g_dbus_interface_skeleton_flush() on all
-// interfaces belonging to @object. See that method for when flushing
-// is useful.
-func (object *DBusObjectSkeletonInstance) Flush() {
-	var carg0 *C.GDBusObjectSkeleton // in, none, converted
-
-	carg0 = (*C.GDBusObjectSkeleton)(UnsafeDBusObjectSkeletonToGlibNone(object))
-
-	C.g_dbus_object_skeleton_flush(carg0)
-	runtime.KeepAlive(object)
-}
-
-// RemoveInterface wraps g_dbus_object_skeleton_remove_interface
-// 
-// The function takes the following parameters:
-// 
-// 	- interface_ DBusInterfaceSkeleton: A #GDBusInterfaceSkeleton. 
-//
-// Removes @interface_ from @object.
-func (object *DBusObjectSkeletonInstance) RemoveInterface(interface_ DBusInterfaceSkeleton) {
-	var carg0 *C.GDBusObjectSkeleton    // in, none, converted
-	var carg1 *C.GDBusInterfaceSkeleton // in, none, converted
-
-	carg0 = (*C.GDBusObjectSkeleton)(UnsafeDBusObjectSkeletonToGlibNone(object))
-	carg1 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-
-	C.g_dbus_object_skeleton_remove_interface(carg0, carg1)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(interface_)
-}
-
-// RemoveInterfaceByName wraps g_dbus_object_skeleton_remove_interface_by_name
-// 
-// The function takes the following parameters:
-// 
-// 	- interfaceName string: A D-Bus interface name. 
-//
-// Removes the #GDBusInterface with @interface_name from @object.
-// 
-// If no D-Bus interface of the given interface exists, this function
-// does nothing.
-func (object *DBusObjectSkeletonInstance) RemoveInterfaceByName(interfaceName string) {
-	var carg0 *C.GDBusObjectSkeleton // in, none, converted
-	var carg1 *C.gchar               // in, none, string
-
-	carg0 = (*C.GDBusObjectSkeleton)(UnsafeDBusObjectSkeletonToGlibNone(object))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(interfaceName)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.g_dbus_object_skeleton_remove_interface_by_name(carg0, carg1)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(interfaceName)
-}
-
-// SetObjectPath wraps g_dbus_object_skeleton_set_object_path
-// 
-// The function takes the following parameters:
-// 
-// 	- objectPath string: A valid D-Bus object path. 
-//
-// Sets the object path for @object.
-func (object *DBusObjectSkeletonInstance) SetObjectPath(objectPath string) {
-	var carg0 *C.GDBusObjectSkeleton // in, none, converted
-	var carg1 *C.gchar               // in, none, string
-
-	carg0 = (*C.GDBusObjectSkeleton)(UnsafeDBusObjectSkeletonToGlibNone(object))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.g_dbus_object_skeleton_set_object_path(carg0, carg1)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(objectPath)
-}
-
-// ConnectAuthorizeMethod connects the provided callback to the "authorize-method" signal
-//
-// Emitted when a method is invoked by a remote caller and used to
-// determine if the method call is authorized.
-// 
-// This signal is like #GDBusInterfaceSkeleton's
-// #GDBusInterfaceSkeleton::g-authorize-method signal,
-// except that it is for the enclosing object.
-// 
-// The default class handler just returns %TRUE.
-func (o *DBusObjectSkeletonInstance) ConnectAuthorizeMethod(fn func(DBusObjectSkeleton, DBusInterfaceSkeleton, DBusMethodInvocation) bool) gobject.SignalHandle {
-	return o.Connect("authorize-method", fn)
-}
-
-// DBusObjectSkeletonOverrides is the struct used to override the default implementation of virtual methods.
-// it is generic over the extending instance type.
-type DBusObjectSkeletonOverrides[Instance DBusObjectSkeleton] struct {
-	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
-	gobject.ObjectOverrides[Instance]
-
-	// // AuthorizeMethod allows you to override the implementation of the virtual method authorize_method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- interface_ DBusInterfaceSkeleton 
-	// 	- invocation DBusMethodInvocation 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Signal class handler for the #GDBusObjectSkeleton::authorize-method signal.
-	AuthorizeMethod func(Instance, DBusInterfaceSkeleton, DBusMethodInvocation) bool
-}
-
-// UnsafeApplyDBusObjectSkeletonOverrides applies the overrides to init the gclass by setting the trampoline functions.
-// This is used by the bindings internally and only exported for visibility to other bindings code.
-func UnsafeApplyDBusObjectSkeletonOverrides[Instance DBusObjectSkeleton](gclass unsafe.Pointer, overrides DBusObjectSkeletonOverrides[Instance]) {
-	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
-
-	pclass := (*C.GDBusObjectSkeletonClass)(gclass)
-
-	if overrides.AuthorizeMethod != nil {
-		pclass.authorize_method = (*[0]byte)(C._gotk4_gio2_DBusObjectSkeleton_authorize_method)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DBusObjectSkeleton_authorize_method",
-			func(carg0 *C.GDBusObjectSkeleton, carg1 *C.GDBusInterfaceSkeleton, carg2 *C.GDBusMethodInvocation) (cret C.gboolean) {
-				var object     Instance              // go GDBusObjectSkeleton subclass
-				var interface_ DBusInterfaceSkeleton // in, none, converted
-				var invocation DBusMethodInvocation  // in, none, converted
-				var goret      bool                  // return
-
-				object = UnsafeDBusObjectSkeletonFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				interface_ = UnsafeDBusInterfaceSkeletonFromGlibNone(unsafe.Pointer(carg1))
-				invocation = UnsafeDBusMethodInvocationFromGlibNone(unsafe.Pointer(carg2))
-
-				goret = overrides.AuthorizeMethod(object, interface_, invocation)
-
-				if goret {
-					cret = C.TRUE
-				}
-
-				return cret
-			},
-		)
-	}
-}
-
-// ParentAuthorizeMethod calls the default implementations of the authorize_method virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- interface_ DBusInterfaceSkeleton 
-// 	- invocation DBusMethodInvocation 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Signal class handler for the #GDBusObjectSkeleton::authorize-method signal.
-func (object *DBusObjectSkeletonInstance) ParentAuthorizeMethod(interface_ DBusInterfaceSkeleton, invocation DBusMethodInvocation) bool {
-	var carg0 *C.GDBusObjectSkeleton
-	var carg1 *C.GDBusInterfaceSkeleton // in, none, converted
-	var carg2 *C.GDBusMethodInvocation  // in, none, converted
-	var cret  C.gboolean                // return
-
-	parentclass := (*C.GDBusObjectSkeletonClass)(classdata.PeekParentClass(UnsafeDBusObjectSkeletonToGlibNone(object)))
-
-	carg0 = (*C.GDBusObjectSkeleton)(UnsafeDBusObjectSkeletonToGlibNone(object))
-	carg1 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
-	carg2 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
-
-	cret = C._gotk4_gio2_DBusObjectSkeleton_virtual_authorize_method(unsafe.Pointer(parentclass.authorize_method), carg0, carg1, carg2)
-	runtime.KeepAlive(object)
-	runtime.KeepAlive(interface_)
-	runtime.KeepAlive(invocation)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// RegisterDBusObjectSkeletonSubClass is used to register a go subclass of GDBusObjectSkeleton. For this to work safely please implement the
-// virtual methods required by the implementation.
-func RegisterDBusObjectSkeletonSubClass[InstanceT DBusObjectSkeleton](
-		name string,
-		classInit func(class *DBusObjectSkeletonClass),
-		constructor func() InstanceT,
-		overrides DBusObjectSkeletonOverrides[InstanceT],
-		signals map[string]gobject.SignalDefinition,
-		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
-) gobject.Type {
-	return gobject.UnsafeRegisterSubClass(
-		name,
-		classInit,
-		constructor,
-		overrides,
-		signals,
-		TypeDBusObjectSkeleton,
-		UnsafeDBusObjectSkeletonClassFromGlibBorrow,
-		UnsafeApplyDBusObjectSkeletonOverrides,
-		func (obj *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusObjectSkeleton(obj)
-		},
-		interfaceInits...,
-	)
-}
-
-// DBusProxyInstance is the instance type used by all types extending GDBusProxy. It is used internally by the bindings. Users should use the interface [DBusProxy] instead.
-type DBusProxyInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ DBusProxy = (*DBusProxyInstance)(nil)
-
-// DBusProxy wraps GDBusProxy
-//
-// `GDBusProxy` is a base class used for proxies to access a D-Bus
-// interface on a remote object. A `GDBusProxy` can be constructed for
-// both well-known and unique names.
-// 
-// By default, `GDBusProxy` will cache all properties (and listen to
-// changes) of the remote object, and proxy all signals that get
-// emitted. This behaviour can be changed by passing suitable
-// [flags@Gio.DBusProxyFlags] when the proxy is created. If the proxy is for a
-// well-known name, the property cache is flushed when the name owner
-// vanishes and reloaded when a name owner appears.
-// 
-// The unique name owner of the proxy’s name is tracked and can be read from
-// [property@Gio.DBusProxy:g-name-owner]. Connect to the
-// [signal@GObject.Object::notify] signal to get notified of changes.
-// Additionally, only signals and property changes emitted from the current name
-// owner are considered and calls are always sent to the current name owner.
-// This avoids a number of race conditions when the name is lost by one owner
-// and claimed by another. However, if no name owner currently exists,
-// then calls will be sent to the well-known name which may result in
-// the message bus launching an owner (unless
-// `G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START` is set).
-// 
-// If the proxy is for a stateless D-Bus service, where the name owner may
-// be started and stopped between calls, the
-// [property@Gio.DBusProxy:g-name-owner] tracking of `GDBusProxy` will cause the
-// proxy to drop signal and property changes from the service after it has
-// restarted for the first time. When interacting with a stateless D-Bus
-// service, do not use `GDBusProxy` — use direct D-Bus method calls and signal
-// connections.
-// 
-// The generic [signal@Gio.DBusProxy::g-properties-changed] and
-// [signal@Gio.DBusProxy::g-signal] signals are not very convenient to work
-// with. Therefore, the recommended way of working with proxies is to subclass
-// `GDBusProxy`, and have more natural properties and signals in your derived
-// class. This [example](migrating-gdbus.html#using-gdbus-codegen) shows how
-// this can easily be done using the [`gdbus-codegen`](gdbus-codegen.html) tool.
-// 
-// A `GDBusProxy` instance can be used from multiple threads but note
-// that all signals (e.g. [signal@Gio.DBusProxy::g-signal],
-// [signal@Gio.DBusProxy::g-properties-changed] and
-// [signal@GObject.Object::notify]) are emitted in the thread-default main
-// context (see [method@GLib.MainContext.push_thread_default]) of the thread
-// where the instance was constructed.
-// 
-// 
-// ## A watch proxy example
-// An example using a proxy for a well-known name can be found in
-// [`gdbus-example-watch-proxy.c`](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-watch-proxy.c).
-type DBusProxy interface {
-	gobject.Object
-	upcastToGDBusProxy() *DBusProxyInstance
-
-	// GetCachedPropertyNames wraps g_dbus_proxy_get_cached_property_names
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret []string (nullable) 
-	//
-	// Gets the names of all cached properties on @proxy.
-	GetCachedPropertyNames() []string
-	// GetConnection wraps g_dbus_proxy_get_connection
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusConnection 
-	//
-	// Gets the connection @proxy is for.
-	GetConnection() DBusConnection
-	// GetDefaultTimeout wraps g_dbus_proxy_get_default_timeout
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret int32 
-	//
-	// Gets the timeout to use if -1 (specifying default timeout) is
-	// passed as @timeout_msec in the g_dbus_proxy_call() and
-	// g_dbus_proxy_call_sync() functions.
-	// 
-	// See the #GDBusProxy:g-default-timeout property for more details.
-	GetDefaultTimeout() int32
-	// GetFlags wraps g_dbus_proxy_get_flags
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusProxyFlags 
-	//
-	// Gets the flags that @proxy was constructed with.
-	GetFlags() DBusProxyFlags
-	// GetInterfaceInfo wraps g_dbus_proxy_get_interface_info
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *DBusInterfaceInfo (nullable) 
-	//
-	// Returns the #GDBusInterfaceInfo, if any, specifying the interface
-	// that @proxy conforms to. See the #GDBusProxy:g-interface-info
-	// property for more details.
-	GetInterfaceInfo() *DBusInterfaceInfo
-	// GetInterfaceName wraps g_dbus_proxy_get_interface_name
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the D-Bus interface name @proxy is for.
-	GetInterfaceName() string
-	// GetName wraps g_dbus_proxy_get_name
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// Gets the name that @proxy was constructed for.
-	// 
-	// When connected to a message bus, this will usually be non-%NULL.
-	// However, it may be %NULL for a proxy that communicates using a peer-to-peer
-	// pattern.
-	GetName() string
-	// GetNameOwner wraps g_dbus_proxy_get_name_owner
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// The unique name that owns the name that @proxy is for or %NULL if
-	// no-one currently owns that name. You may connect to the
-	// #GObject::notify signal to track changes to the
-	// #GDBusProxy:g-name-owner property.
-	GetNameOwner() string
-	// GetObjectPath wraps g_dbus_proxy_get_object_path
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the object path @proxy is for.
-	GetObjectPath() string
-	// SetDefaultTimeout wraps g_dbus_proxy_set_default_timeout
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- timeoutMsec int32: Timeout in milliseconds. 
-	//
-	// Sets the timeout to use if -1 (specifying default timeout) is
-	// passed as @timeout_msec in the g_dbus_proxy_call() and
-	// g_dbus_proxy_call_sync() functions.
-	// 
-	// See the #GDBusProxy:g-default-timeout property for more details.
-	SetDefaultTimeout(int32)
-	// SetInterfaceInfo wraps g_dbus_proxy_set_interface_info
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- info *DBusInterfaceInfo (nullable): Minimum interface this proxy conforms to
-	//    or %NULL to unset. 
-	//
-	// Ensure that interactions with @proxy conform to the given
-	// interface. See the #GDBusProxy:g-interface-info property for more
-	// details.
-	SetInterfaceInfo(*DBusInterfaceInfo)
-
-	// chain up virtual methods:
-}
-
-func unsafeWrapDBusProxy(base *gobject.ObjectInstance) *DBusProxyInstance {
-	return &DBusProxyInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeDBusProxy,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusProxy(inst)
-		},
-	)
-}
-
-func marshalDBusProxyInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusProxy(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeDBusProxyFromGlibNone is used to convert raw GDBusProxy pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusProxyFromGlibNone(c unsafe.Pointer) DBusProxy {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusProxy)
-}
-
-// UnsafeDBusProxyFromGlibFull is used to convert raw GDBusProxy pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusProxyFromGlibFull(c unsafe.Pointer) DBusProxy {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusProxy)
-}
-
-// UnsafeDBusProxyFromGlibBorrow is used to convert raw GDBusProxy pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusProxyFromGlibBorrow(c unsafe.Pointer) DBusProxy {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusProxy)
-}
-
-func (d *DBusProxyInstance) upcastToGDBusProxy() *DBusProxyInstance {
-	return d
-}
-
-// UnsafeDBusProxyToGlibNone is used to convert the instance to it's C value GDBusProxy. This is used by the bindings internally.
-func UnsafeDBusProxyToGlibNone(c DBusProxy) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeDBusProxyToGlibFull is used to convert the instance to it's C value GDBusProxy, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusProxyToGlibFull(c DBusProxy) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewDBusProxyFinish wraps g_dbus_proxy_new_finish
-// 
-// The function takes the following parameters:
-// 
-// 	- res AsyncResult: A #GAsyncResult obtained from the #GAsyncReadyCallback function passed to g_dbus_proxy_new(). 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusProxy 
-// 	- _goerr error (nullable): an error 
-//
-// Finishes creating a #GDBusProxy.
-func NewDBusProxyFinish(res AsyncResult) (DBusProxy, error) {
-	var carg1 *C.GAsyncResult // in, none, converted
-	var cret  *C.GDBusProxy   // return, full, converted
-	var _cerr *C.GError       // out, full, converted, nullable
-
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
-
-	cret = C.g_dbus_proxy_new_finish(carg1, &_cerr)
-	runtime.KeepAlive(res)
-
-	var goret  DBusProxy
-	var _goerr error
-
-	goret = UnsafeDBusProxyFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// NewDBusProxyForBusFinish wraps g_dbus_proxy_new_for_bus_finish
-// 
-// The function takes the following parameters:
-// 
-// 	- res AsyncResult: A #GAsyncResult obtained from the #GAsyncReadyCallback function passed to g_dbus_proxy_new_for_bus(). 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusProxy 
-// 	- _goerr error (nullable): an error 
-//
-// Finishes creating a #GDBusProxy.
-func NewDBusProxyForBusFinish(res AsyncResult) (DBusProxy, error) {
-	var carg1 *C.GAsyncResult // in, none, converted
-	var cret  *C.GDBusProxy   // return, full, converted
-	var _cerr *C.GError       // out, full, converted, nullable
-
-	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
-
-	cret = C.g_dbus_proxy_new_for_bus_finish(carg1, &_cerr)
-	runtime.KeepAlive(res)
-
-	var goret  DBusProxy
-	var _goerr error
-
-	goret = UnsafeDBusProxyFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// NewDBusProxyForBusSync wraps g_dbus_proxy_new_for_bus_sync
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): A #GCancellable or %NULL. 
-// 	- busType BusType: A #GBusType. 
-// 	- flags DBusProxyFlags: Flags used when constructing the proxy. 
-// 	- info *DBusInterfaceInfo (nullable): A #GDBusInterfaceInfo specifying the minimal interface
-//        that @proxy conforms to or %NULL. 
-// 	- name string: A bus name (well-known or unique). 
-// 	- objectPath string: An object path. 
-// 	- interfaceName string: A D-Bus interface name. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusProxy 
-// 	- _goerr error (nullable): an error 
-//
-// Like g_dbus_proxy_new_sync() but takes a #GBusType instead of a #GDBusConnection.
-// 
-// #GDBusProxy is used in this [example][class@Gio.DBusProxy#a-watch-proxy-example].
-func NewDBusProxyForBusSync(cancellable context.Context, busType BusType, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string) (DBusProxy, error) {
-	var carg7 *C.GCancellable       // in, none, converted, nullable
-	var carg1 C.GBusType            // in, none, casted
-	var carg2 C.GDBusProxyFlags     // in, none, casted
-	var carg3 *C.GDBusInterfaceInfo // in, none, converted, nullable
-	var carg4 *C.gchar              // in, none, string
-	var carg5 *C.gchar              // in, none, string
-	var carg6 *C.gchar              // in, none, string
-	var cret  *C.GDBusProxy         // return, full, converted
-	var _cerr *C.GError             // out, full, converted, nullable
-
-	if cancellable != nil {
-		carg7 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = C.GBusType(busType)
-	carg2 = C.GDBusProxyFlags(flags)
-	if info != nil {
-		carg3 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
-	}
-	carg4 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg4))
-	carg5 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg5))
-	carg6 = (*C.gchar)(unsafe.Pointer(C.CString(interfaceName)))
-	defer C.free(unsafe.Pointer(carg6))
-
-	cret = C.g_dbus_proxy_new_for_bus_sync(carg1, carg2, carg3, carg4, carg5, carg6, carg7, &_cerr)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(busType)
-	runtime.KeepAlive(flags)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(objectPath)
-	runtime.KeepAlive(interfaceName)
-
-	var goret  DBusProxy
-	var _goerr error
-
-	goret = UnsafeDBusProxyFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// NewDBusProxySync wraps g_dbus_proxy_new_sync
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): A #GCancellable or %NULL. 
-// 	- connection DBusConnection: A #GDBusConnection. 
-// 	- flags DBusProxyFlags: Flags used when constructing the proxy. 
-// 	- info *DBusInterfaceInfo (nullable): A #GDBusInterfaceInfo specifying the minimal interface that @proxy conforms to or %NULL. 
-// 	- name string (nullable): A bus name (well-known or unique) or %NULL if @connection is not a message bus connection. 
-// 	- objectPath string: An object path. 
-// 	- interfaceName string: A D-Bus interface name. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusProxy 
-// 	- _goerr error (nullable): an error 
-//
-// Creates a proxy for accessing @interface_name on the remote object
-// at @object_path owned by @name at @connection and synchronously
-// loads D-Bus properties unless the
-// %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES flag is used.
-// 
-// If the %G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS flag is not set, also sets up
-// match rules for signals. Connect to the #GDBusProxy::g-signal signal
-// to handle signals from the remote object.
-// 
-// If both %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES and
-// %G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS are set, this constructor is
-// guaranteed to return immediately without blocking.
-// 
-// If @name is a well-known name and the
-// %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START and %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION
-// flags aren't set and no name owner currently exists, the message bus
-// will be requested to launch a name owner for the name.
-// 
-// This is a synchronous failable constructor. See g_dbus_proxy_new()
-// and g_dbus_proxy_new_finish() for the asynchronous version.
-// 
-// #GDBusProxy is used in this [example][class@Gio.DBusProxy#a-watch-proxy-example].
-func NewDBusProxySync(cancellable context.Context, connection DBusConnection, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string) (DBusProxy, error) {
-	var carg7 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.GDBusConnection    // in, none, converted
-	var carg2 C.GDBusProxyFlags     // in, none, casted
-	var carg3 *C.GDBusInterfaceInfo // in, none, converted, nullable
-	var carg4 *C.gchar              // in, none, string, nullable-string
-	var carg5 *C.gchar              // in, none, string
-	var carg6 *C.gchar              // in, none, string
-	var cret  *C.GDBusProxy         // return, full, converted
-	var _cerr *C.GError             // out, full, converted, nullable
-
-	if cancellable != nil {
-		carg7 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg2 = C.GDBusProxyFlags(flags)
-	if info != nil {
-		carg3 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
-	}
-	if name != "" {
-		carg4 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-		defer C.free(unsafe.Pointer(carg4))
-	}
-	carg5 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg5))
-	carg6 = (*C.gchar)(unsafe.Pointer(C.CString(interfaceName)))
-	defer C.free(unsafe.Pointer(carg6))
-
-	cret = C.g_dbus_proxy_new_sync(carg1, carg2, carg3, carg4, carg5, carg6, carg7, &_cerr)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(flags)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(objectPath)
-	runtime.KeepAlive(interfaceName)
-
-	var goret  DBusProxy
-	var _goerr error
-
-	goret = UnsafeDBusProxyFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// NewDBusProxy wraps g_dbus_proxy_new
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): A #GCancellable or %NULL. 
-// 	- connection DBusConnection: A #GDBusConnection. 
-// 	- flags DBusProxyFlags: Flags used when constructing the proxy. 
-// 	- info *DBusInterfaceInfo (nullable): A #GDBusInterfaceInfo specifying the minimal interface that @proxy conforms to or %NULL. 
-// 	- name string (nullable): A bus name (well-known or unique) or %NULL if @connection is not a message bus connection. 
-// 	- objectPath string: An object path. 
-// 	- interfaceName string: A D-Bus interface name. 
-// 	- callback AsyncReadyCallback (nullable): Callback function to invoke when the proxy is ready. 
-//
-// Creates a proxy for accessing @interface_name on the remote object
-// at @object_path owned by @name at @connection and asynchronously
-// loads D-Bus properties unless the
-// %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES flag is used. Connect to
-// the #GDBusProxy::g-properties-changed signal to get notified about
-// property changes.
-// 
-// If the %G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS flag is not set, also sets up
-// match rules for signals. Connect to the #GDBusProxy::g-signal signal
-// to handle signals from the remote object.
-// 
-// If both %G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES and
-// %G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS are set, this constructor is
-// guaranteed to complete immediately without blocking.
-// 
-// If @name is a well-known name and the
-// %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START and %G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION
-// flags aren't set and no name owner currently exists, the message bus
-// will be requested to launch a name owner for the name.
-// 
-// This is a failable asynchronous constructor - when the proxy is
-// ready, @callback will be invoked and you can use
-// g_dbus_proxy_new_finish() to get the result.
-// 
-// See g_dbus_proxy_new_sync() and for a synchronous version of this constructor.
-// 
-// #GDBusProxy is used in this [example][class@Gio.DBusProxy#a-watch-proxy-example].
-func NewDBusProxy(cancellable context.Context, connection DBusConnection, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string, callback AsyncReadyCallback) {
-	var carg7 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.GDBusConnection    // in, none, converted
-	var carg2 C.GDBusProxyFlags     // in, none, casted
-	var carg3 *C.GDBusInterfaceInfo // in, none, converted, nullable
-	var carg4 *C.gchar              // in, none, string, nullable-string
-	var carg5 *C.gchar              // in, none, string
-	var carg6 *C.gchar              // in, none, string
-	var carg8 C.GAsyncReadyCallback // callback, scope: async, closure: carg9, nullable
-	var carg9 C.gpointer            // implicit
-
-	if cancellable != nil {
-		carg7 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	carg2 = C.GDBusProxyFlags(flags)
-	if info != nil {
-		carg3 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
-	}
-	if name != "" {
-		carg4 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-		defer C.free(unsafe.Pointer(carg4))
-	}
-	carg5 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg5))
-	carg6 = (*C.gchar)(unsafe.Pointer(C.CString(interfaceName)))
-	defer C.free(unsafe.Pointer(carg6))
-	if callback != nil {
-		carg8 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg9 = C.gpointer(userdata.RegisterOnce(callback))
-	}
-
-	C.g_dbus_proxy_new(carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8, carg9)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(flags)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(objectPath)
-	runtime.KeepAlive(interfaceName)
-	runtime.KeepAlive(callback)
-}
-
-// NewDBusProxyForBus wraps g_dbus_proxy_new_for_bus
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): A #GCancellable or %NULL. 
-// 	- busType BusType: A #GBusType. 
-// 	- flags DBusProxyFlags: Flags used when constructing the proxy. 
-// 	- info *DBusInterfaceInfo (nullable): A #GDBusInterfaceInfo specifying the minimal interface that @proxy conforms to or %NULL. 
-// 	- name string: A bus name (well-known or unique). 
-// 	- objectPath string: An object path. 
-// 	- interfaceName string: A D-Bus interface name. 
-// 	- callback AsyncReadyCallback (nullable): Callback function to invoke when the proxy is ready. 
-//
-// Like g_dbus_proxy_new() but takes a #GBusType instead of a #GDBusConnection.
-// 
-// #GDBusProxy is used in this [example][class@Gio.DBusProxy#a-watch-proxy-example].
-func NewDBusProxyForBus(cancellable context.Context, busType BusType, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string, callback AsyncReadyCallback) {
-	var carg7 *C.GCancellable       // in, none, converted, nullable
-	var carg1 C.GBusType            // in, none, casted
-	var carg2 C.GDBusProxyFlags     // in, none, casted
-	var carg3 *C.GDBusInterfaceInfo // in, none, converted, nullable
-	var carg4 *C.gchar              // in, none, string
-	var carg5 *C.gchar              // in, none, string
-	var carg6 *C.gchar              // in, none, string
-	var carg8 C.GAsyncReadyCallback // callback, scope: async, closure: carg9, nullable
-	var carg9 C.gpointer            // implicit
-
-	if cancellable != nil {
-		carg7 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = C.GBusType(busType)
-	carg2 = C.GDBusProxyFlags(flags)
-	if info != nil {
-		carg3 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
-	}
-	carg4 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg4))
-	carg5 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg5))
-	carg6 = (*C.gchar)(unsafe.Pointer(C.CString(interfaceName)))
-	defer C.free(unsafe.Pointer(carg6))
-	if callback != nil {
-		carg8 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
-		carg9 = C.gpointer(userdata.RegisterOnce(callback))
-	}
-
-	C.g_dbus_proxy_new_for_bus(carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8, carg9)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(busType)
-	runtime.KeepAlive(flags)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(objectPath)
-	runtime.KeepAlive(interfaceName)
-	runtime.KeepAlive(callback)
-}
-
-// GetCachedPropertyNames wraps g_dbus_proxy_get_cached_property_names
-// 
-// The function returns the following values:
-// 
-// 	- goret []string (nullable) 
-//
-// Gets the names of all cached properties on @proxy.
-func (proxy *DBusProxyInstance) GetCachedPropertyNames() []string {
-	var carg0 *C.GDBusProxy // in, none, converted
-	var cret  **C.gchar     // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
-
-	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
-
-	cret = C.g_dbus_proxy_get_cached_property_names(carg0)
-	runtime.KeepAlive(proxy)
-
-	var goret []string
-
-	_ = goret
-	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
-
-	return goret
-}
-
-// GetConnection wraps g_dbus_proxy_get_connection
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusConnection 
-//
-// Gets the connection @proxy is for.
-func (proxy *DBusProxyInstance) GetConnection() DBusConnection {
-	var carg0 *C.GDBusProxy      // in, none, converted
-	var cret  *C.GDBusConnection // return, none, converted
-
-	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
-
-	cret = C.g_dbus_proxy_get_connection(carg0)
-	runtime.KeepAlive(proxy)
-
-	var goret DBusConnection
-
-	goret = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetDefaultTimeout wraps g_dbus_proxy_get_default_timeout
-// 
-// The function returns the following values:
-// 
-// 	- goret int32 
-//
-// Gets the timeout to use if -1 (specifying default timeout) is
-// passed as @timeout_msec in the g_dbus_proxy_call() and
-// g_dbus_proxy_call_sync() functions.
-// 
-// See the #GDBusProxy:g-default-timeout property for more details.
-func (proxy *DBusProxyInstance) GetDefaultTimeout() int32 {
-	var carg0 *C.GDBusProxy // in, none, converted
-	var cret  C.gint        // return, none, casted
-
-	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
-
-	cret = C.g_dbus_proxy_get_default_timeout(carg0)
-	runtime.KeepAlive(proxy)
-
-	var goret int32
-
-	goret = int32(cret)
-
-	return goret
-}
-
-// GetFlags wraps g_dbus_proxy_get_flags
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusProxyFlags 
-//
-// Gets the flags that @proxy was constructed with.
-func (proxy *DBusProxyInstance) GetFlags() DBusProxyFlags {
-	var carg0 *C.GDBusProxy     // in, none, converted
-	var cret  C.GDBusProxyFlags // return, none, casted
-
-	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
-
-	cret = C.g_dbus_proxy_get_flags(carg0)
-	runtime.KeepAlive(proxy)
-
-	var goret DBusProxyFlags
-
-	goret = DBusProxyFlags(cret)
-
-	return goret
-}
-
-// GetInterfaceInfo wraps g_dbus_proxy_get_interface_info
-// 
-// The function returns the following values:
-// 
-// 	- goret *DBusInterfaceInfo (nullable) 
-//
-// Returns the #GDBusInterfaceInfo, if any, specifying the interface
-// that @proxy conforms to. See the #GDBusProxy:g-interface-info
-// property for more details.
-func (proxy *DBusProxyInstance) GetInterfaceInfo() *DBusInterfaceInfo {
-	var carg0 *C.GDBusProxy         // in, none, converted
-	var cret  *C.GDBusInterfaceInfo // return, none, converted, nullable
-
-	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
-
-	cret = C.g_dbus_proxy_get_interface_info(carg0)
-	runtime.KeepAlive(proxy)
-
-	var goret *DBusInterfaceInfo
-
-	if cret != nil {
-		goret = UnsafeDBusInterfaceInfoFromGlibNone(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// GetInterfaceName wraps g_dbus_proxy_get_interface_name
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the D-Bus interface name @proxy is for.
-func (proxy *DBusProxyInstance) GetInterfaceName() string {
-	var carg0 *C.GDBusProxy // in, none, converted
-	var cret  *C.gchar      // return, none, string
-
-	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
-
-	cret = C.g_dbus_proxy_get_interface_name(carg0)
-	runtime.KeepAlive(proxy)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetName wraps g_dbus_proxy_get_name
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Gets the name that @proxy was constructed for.
-// 
-// When connected to a message bus, this will usually be non-%NULL.
-// However, it may be %NULL for a proxy that communicates using a peer-to-peer
-// pattern.
-func (proxy *DBusProxyInstance) GetName() string {
-	var carg0 *C.GDBusProxy // in, none, converted
-	var cret  *C.gchar      // return, none, string, nullable-string
-
-	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
-
-	cret = C.g_dbus_proxy_get_name(carg0)
-	runtime.KeepAlive(proxy)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// GetNameOwner wraps g_dbus_proxy_get_name_owner
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// The unique name that owns the name that @proxy is for or %NULL if
-// no-one currently owns that name. You may connect to the
-// #GObject::notify signal to track changes to the
-// #GDBusProxy:g-name-owner property.
-func (proxy *DBusProxyInstance) GetNameOwner() string {
-	var carg0 *C.GDBusProxy // in, none, converted
-	var cret  *C.gchar      // return, full, string, nullable-string
-
-	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
-
-	cret = C.g_dbus_proxy_get_name_owner(carg0)
-	runtime.KeepAlive(proxy)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-		defer C.free(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// GetObjectPath wraps g_dbus_proxy_get_object_path
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the object path @proxy is for.
-func (proxy *DBusProxyInstance) GetObjectPath() string {
-	var carg0 *C.GDBusProxy // in, none, converted
-	var cret  *C.gchar      // return, none, string
-
-	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
-
-	cret = C.g_dbus_proxy_get_object_path(carg0)
-	runtime.KeepAlive(proxy)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// SetDefaultTimeout wraps g_dbus_proxy_set_default_timeout
-// 
-// The function takes the following parameters:
-// 
-// 	- timeoutMsec int32: Timeout in milliseconds. 
-//
-// Sets the timeout to use if -1 (specifying default timeout) is
-// passed as @timeout_msec in the g_dbus_proxy_call() and
-// g_dbus_proxy_call_sync() functions.
-// 
-// See the #GDBusProxy:g-default-timeout property for more details.
-func (proxy *DBusProxyInstance) SetDefaultTimeout(timeoutMsec int32) {
-	var carg0 *C.GDBusProxy // in, none, converted
-	var carg1 C.gint        // in, none, casted
-
-	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
-	carg1 = C.gint(timeoutMsec)
-
-	C.g_dbus_proxy_set_default_timeout(carg0, carg1)
-	runtime.KeepAlive(proxy)
-	runtime.KeepAlive(timeoutMsec)
-}
-
-// SetInterfaceInfo wraps g_dbus_proxy_set_interface_info
-// 
-// The function takes the following parameters:
-// 
-// 	- info *DBusInterfaceInfo (nullable): Minimum interface this proxy conforms to
-//    or %NULL to unset. 
-//
-// Ensure that interactions with @proxy conform to the given
-// interface. See the #GDBusProxy:g-interface-info property for more
-// details.
-func (proxy *DBusProxyInstance) SetInterfaceInfo(info *DBusInterfaceInfo) {
-	var carg0 *C.GDBusProxy         // in, none, converted
-	var carg1 *C.GDBusInterfaceInfo // in, none, converted, nullable
-
-	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
-	if info != nil {
-		carg1 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
-	}
-
-	C.g_dbus_proxy_set_interface_info(carg0, carg1)
-	runtime.KeepAlive(proxy)
-	runtime.KeepAlive(info)
-}
-
-// DBusProxyOverrides is the struct used to override the default implementation of virtual methods.
-// it is generic over the extending instance type.
-type DBusProxyOverrides[Instance DBusProxy] struct {
-	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
-	gobject.ObjectOverrides[Instance]
-
-}
-
-// UnsafeApplyDBusProxyOverrides applies the overrides to init the gclass by setting the trampoline functions.
-// This is used by the bindings internally and only exported for visibility to other bindings code.
-func UnsafeApplyDBusProxyOverrides[Instance DBusProxy](gclass unsafe.Pointer, overrides DBusProxyOverrides[Instance]) {
-	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
-}
-
-// RegisterDBusProxySubClass is used to register a go subclass of GDBusProxy. For this to work safely please implement the
-// virtual methods required by the implementation.
-func RegisterDBusProxySubClass[InstanceT DBusProxy](
-		name string,
-		classInit func(class *DBusProxyClass),
-		constructor func() InstanceT,
-		overrides DBusProxyOverrides[InstanceT],
-		signals map[string]gobject.SignalDefinition,
-		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
-) gobject.Type {
-	return gobject.UnsafeRegisterSubClass(
-		name,
-		classInit,
-		constructor,
-		overrides,
-		signals,
-		TypeDBusProxy,
-		UnsafeDBusProxyClassFromGlibBorrow,
-		UnsafeApplyDBusProxyOverrides,
-		func (obj *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusProxy(obj)
-		},
-		interfaceInits...,
-	)
-}
-
-// DBusServerInstance is the instance type used by all types extending GDBusServer. It is used internally by the bindings. Users should use the interface [DBusServer] instead.
-type DBusServerInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ DBusServer = (*DBusServerInstance)(nil)
-
-// DBusServer wraps GDBusServer
-//
-// `GDBusServer` is a helper for listening to and accepting D-Bus
-// connections. This can be used to create a new D-Bus server, allowing two
-// peers to use the D-Bus protocol for their own specialized communication.
-// A server instance provided in this way will not perform message routing or
-// implement the
-// [`org.freedesktop.DBus` interface](https://dbus.freedesktop.org/doc/dbus-specification.html#message-bus-messages).
-// 
-// To just export an object on a well-known name on a message bus, such as the
-// session or system bus, you should instead use [func@Gio.bus_own_name].
-// 
-// An example of peer-to-peer communication with GDBus can be found
-// in [gdbus-example-peer.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-peer.c).
-// 
-// Note that a minimal `GDBusServer` will accept connections from any
-// peer. In many use-cases it will be necessary to add a
-// [class@Gio.DBusAuthObserver] that only accepts connections that have
-// successfully authenticated as the same user that is running the
-// `GDBusServer`. Since GLib 2.68 this can be achieved more simply by passing
-// the `G_DBUS_SERVER_FLAGS_AUTHENTICATION_REQUIRE_SAME_USER` flag to the
-// server.
-type DBusServer interface {
-	gobject.Object
-	upcastToGDBusServer() *DBusServerInstance
-
-	// GetClientAddress wraps g_dbus_server_get_client_address
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets a
-	// [D-Bus address](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses)
-	// string that can be used by clients to connect to @server.
-	// 
-	// This is valid and non-empty if initializing the #GDBusServer succeeded.
-	GetClientAddress() string
-	// GetFlags wraps g_dbus_server_get_flags
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret DBusServerFlags 
-	//
-	// Gets the flags for @server.
-	GetFlags() DBusServerFlags
-	// GetGUID wraps g_dbus_server_get_guid
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Gets the GUID for @server, as provided to g_dbus_server_new_sync().
-	GetGUID() string
-	// IsActive wraps g_dbus_server_is_active
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Gets whether @server is active.
-	IsActive() bool
-	// Start wraps g_dbus_server_start
-	//
-	// Starts @server.
-	Start()
-	// Stop wraps g_dbus_server_stop
-	//
-	// Stops @server.
-	Stop()
-	// ConnectNewConnection connects the provided callback to the "new-connection" signal
-	//
-	// Emitted when a new authenticated connection has been made. Use
-	// g_dbus_connection_get_peer_credentials() to figure out what
-	// identity (if any), was authenticated.
-	// 
-	// If you want to accept the connection, take a reference to the
-	// @connection object and return %TRUE. When you are done with the
-	// connection call g_dbus_connection_close() and give up your
-	// reference. Note that the other peer may disconnect at any time -
-	// a typical thing to do when accepting a connection is to listen to
-	// the #GDBusConnection::closed signal.
-	// 
-	// If #GDBusServer:flags contains %G_DBUS_SERVER_FLAGS_RUN_IN_THREAD
-	// then the signal is emitted in a new thread dedicated to the
-	// connection. Otherwise the signal is emitted in the thread-default
-	// main context (see [method@GLib.MainContext.push_thread_default])
-	// of the thread that @server was constructed in.
-	// 
-	// You are guaranteed that signal handlers for this signal runs
-	// before incoming messages on @connection are processed. This means
-	// that it's suitable to call g_dbus_connection_register_object() or
-	// similar from the signal handler.
-	ConnectNewConnection(func(DBusServer, DBusConnection) bool) gobject.SignalHandle
-}
-
-func unsafeWrapDBusServer(base *gobject.ObjectInstance) *DBusServerInstance {
-	return &DBusServerInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeDBusServer,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusServer(inst)
-		},
-	)
-}
-
-func marshalDBusServerInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusServer(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeDBusServerFromGlibNone is used to convert raw GDBusServer pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusServerFromGlibNone(c unsafe.Pointer) DBusServer {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusServer)
-}
-
-// UnsafeDBusServerFromGlibFull is used to convert raw GDBusServer pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusServerFromGlibFull(c unsafe.Pointer) DBusServer {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusServer)
-}
-
-// UnsafeDBusServerFromGlibBorrow is used to convert raw GDBusServer pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusServerFromGlibBorrow(c unsafe.Pointer) DBusServer {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusServer)
-}
-
-func (d *DBusServerInstance) upcastToGDBusServer() *DBusServerInstance {
-	return d
-}
-
-// UnsafeDBusServerToGlibNone is used to convert the instance to it's C value GDBusServer. This is used by the bindings internally.
-func UnsafeDBusServerToGlibNone(c DBusServer) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeDBusServerToGlibFull is used to convert the instance to it's C value GDBusServer, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusServerToGlibFull(c DBusServer) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewDBusServerSync wraps g_dbus_server_new_sync
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): A #GCancellable or %NULL. 
-// 	- address string: A D-Bus address. 
-// 	- flags DBusServerFlags: Flags from the #GDBusServerFlags enumeration. 
-// 	- guid string: A D-Bus GUID. 
-// 	- observer DBusAuthObserver (nullable): A #GDBusAuthObserver or %NULL. 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusServer 
-// 	- _goerr error (nullable): an error 
-//
-// Creates a new D-Bus server that listens on the first address in
-// @address that works.
-// 
-// Once constructed, you can use g_dbus_server_get_client_address() to
-// get a D-Bus address string that clients can use to connect.
-// 
-// To have control over the available authentication mechanisms and
-// the users that are authorized to connect, it is strongly recommended
-// to provide a non-%NULL #GDBusAuthObserver.
-// 
-// Connect to the #GDBusServer::new-connection signal to handle
-// incoming connections.
-// 
-// The returned #GDBusServer isn't active - you have to start it with
-// g_dbus_server_start().
-// 
-// #GDBusServer is used in this [example](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-peer.c).
-// 
-// This is a synchronous failable constructor. There is currently no
-// asynchronous version.
-func NewDBusServerSync(cancellable context.Context, address string, flags DBusServerFlags, guid string, observer DBusAuthObserver) (DBusServer, error) {
-	var carg5 *C.GCancellable      // in, none, converted, nullable
-	var carg1 *C.gchar             // in, none, string
-	var carg2 C.GDBusServerFlags   // in, none, casted
-	var carg3 *C.gchar             // in, none, string
-	var carg4 *C.GDBusAuthObserver // in, none, converted, nullable
-	var cret  *C.GDBusServer       // return, full, converted
-	var _cerr *C.GError            // out, full, converted, nullable
-
-	if cancellable != nil {
-		carg5 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(address)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = C.GDBusServerFlags(flags)
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(guid)))
-	defer C.free(unsafe.Pointer(carg3))
-	if observer != nil {
-		carg4 = (*C.GDBusAuthObserver)(UnsafeDBusAuthObserverToGlibNone(observer))
-	}
-
-	cret = C.g_dbus_server_new_sync(carg1, carg2, carg3, carg4, carg5, &_cerr)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(address)
-	runtime.KeepAlive(flags)
-	runtime.KeepAlive(guid)
-	runtime.KeepAlive(observer)
-
-	var goret  DBusServer
-	var _goerr error
-
-	goret = UnsafeDBusServerFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// GetClientAddress wraps g_dbus_server_get_client_address
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets a
-// [D-Bus address](https://dbus.freedesktop.org/doc/dbus-specification.html#addresses)
-// string that can be used by clients to connect to @server.
-// 
-// This is valid and non-empty if initializing the #GDBusServer succeeded.
-func (server *DBusServerInstance) GetClientAddress() string {
-	var carg0 *C.GDBusServer // in, none, converted
-	var cret  *C.gchar       // return, none, string
-
-	carg0 = (*C.GDBusServer)(UnsafeDBusServerToGlibNone(server))
-
-	cret = C.g_dbus_server_get_client_address(carg0)
-	runtime.KeepAlive(server)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// GetFlags wraps g_dbus_server_get_flags
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusServerFlags 
-//
-// Gets the flags for @server.
-func (server *DBusServerInstance) GetFlags() DBusServerFlags {
-	var carg0 *C.GDBusServer     // in, none, converted
-	var cret  C.GDBusServerFlags // return, none, casted
-
-	carg0 = (*C.GDBusServer)(UnsafeDBusServerToGlibNone(server))
-
-	cret = C.g_dbus_server_get_flags(carg0)
-	runtime.KeepAlive(server)
-
-	var goret DBusServerFlags
-
-	goret = DBusServerFlags(cret)
-
-	return goret
-}
-
-// GetGUID wraps g_dbus_server_get_guid
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Gets the GUID for @server, as provided to g_dbus_server_new_sync().
-func (server *DBusServerInstance) GetGUID() string {
-	var carg0 *C.GDBusServer // in, none, converted
-	var cret  *C.gchar       // return, none, string
-
-	carg0 = (*C.GDBusServer)(UnsafeDBusServerToGlibNone(server))
-
-	cret = C.g_dbus_server_get_guid(carg0)
-	runtime.KeepAlive(server)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// IsActive wraps g_dbus_server_is_active
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Gets whether @server is active.
-func (server *DBusServerInstance) IsActive() bool {
-	var carg0 *C.GDBusServer // in, none, converted
-	var cret  C.gboolean     // return
-
-	carg0 = (*C.GDBusServer)(UnsafeDBusServerToGlibNone(server))
-
-	cret = C.g_dbus_server_is_active(carg0)
-	runtime.KeepAlive(server)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// Start wraps g_dbus_server_start
-//
-// Starts @server.
-func (server *DBusServerInstance) Start() {
-	var carg0 *C.GDBusServer // in, none, converted
-
-	carg0 = (*C.GDBusServer)(UnsafeDBusServerToGlibNone(server))
-
-	C.g_dbus_server_start(carg0)
-	runtime.KeepAlive(server)
-}
-
-// Stop wraps g_dbus_server_stop
-//
-// Stops @server.
-func (server *DBusServerInstance) Stop() {
-	var carg0 *C.GDBusServer // in, none, converted
-
-	carg0 = (*C.GDBusServer)(UnsafeDBusServerToGlibNone(server))
-
-	C.g_dbus_server_stop(carg0)
-	runtime.KeepAlive(server)
-}
-
-// ConnectNewConnection connects the provided callback to the "new-connection" signal
-//
-// Emitted when a new authenticated connection has been made. Use
-// g_dbus_connection_get_peer_credentials() to figure out what
-// identity (if any), was authenticated.
-// 
-// If you want to accept the connection, take a reference to the
-// @connection object and return %TRUE. When you are done with the
-// connection call g_dbus_connection_close() and give up your
-// reference. Note that the other peer may disconnect at any time -
-// a typical thing to do when accepting a connection is to listen to
-// the #GDBusConnection::closed signal.
-// 
-// If #GDBusServer:flags contains %G_DBUS_SERVER_FLAGS_RUN_IN_THREAD
-// then the signal is emitted in a new thread dedicated to the
-// connection. Otherwise the signal is emitted in the thread-default
-// main context (see [method@GLib.MainContext.push_thread_default])
-// of the thread that @server was constructed in.
-// 
-// You are guaranteed that signal handlers for this signal runs
-// before incoming messages on @connection are processed. This means
-// that it's suitable to call g_dbus_connection_register_object() or
-// similar from the signal handler.
-func (o *DBusServerInstance) ConnectNewConnection(fn func(DBusServer, DBusConnection) bool) gobject.SignalHandle {
-	return o.Connect("new-connection", fn)
-}
-
-// DebugControllerDBusInstance is the instance type used by all types extending GDebugControllerDBus. It is used internally by the bindings. Users should use the interface [DebugControllerDBus] instead.
-type DebugControllerDBusInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ DebugControllerDBus = (*DebugControllerDBusInstance)(nil)
-
-// DebugControllerDBus wraps GDebugControllerDBus
-//
-// `GDebugControllerDBus` is an implementation of [iface@Gio.DebugController]
-// which exposes debug settings as a D-Bus object.
-// 
-// It is a [iface@Gio.Initable] object, and will register an object at
-// `/org/gtk/Debugging` on the bus given as
-// [property@Gio.DebugControllerDBus:connection] once it’s initialized. The
-// object will be unregistered when the last reference to the
-// `GDebugControllerDBus` is dropped.
-// 
-// This D-Bus object can be used by remote processes to enable or disable debug
-// output in this process. Remote processes calling
-// `org.gtk.Debugging.SetDebugEnabled()` will affect the value of
-// [property@Gio.DebugController:debug-enabled] and, by default,
-// [func@GLib.log_get_debug_enabled].
-// 
-// By default, no processes are allowed to call `SetDebugEnabled()` unless a
-// [signal@Gio.DebugControllerDBus::authorize] signal handler is installed. This
-// is because the process may be privileged, or might expose sensitive
-// information in its debug output. You may want to restrict the ability to
-// enable debug output to privileged users or processes.
-// 
-// One option is to install a D-Bus security policy which restricts access to
-// `SetDebugEnabled()`, installing something like the following in
-// `$datadir/dbus-1/system.d/`:
-// 
-// ```xml
-// &lt;?xml version="1.0"?&gt; &lt;!--*-nxml-*--&gt;
-// &lt;!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
-//      "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd"&gt;
-// &lt;busconfig&gt;
-//   &lt;policy user="root"&gt;
-//     &lt;allow send_destination="com.example.MyService" send_interface="org.gtk.Debugging"/&gt;
-//   &lt;/policy&gt;
-//   &lt;policy context="default"&gt;
-//     &lt;deny send_destination="com.example.MyService" send_interface="org.gtk.Debugging"/&gt;
-//   &lt;/policy&gt;
-// &lt;/busconfig&gt;
-// ```
-// 
-// This will prevent the `SetDebugEnabled()` method from being called by all
-// except root. It will not prevent the `DebugEnabled` property from being read,
-// as it’s accessed through the `org.freedesktop.DBus.Properties` interface.
-// 
-// Another option is to use polkit to allow or deny requests on a case-by-case
-// basis, allowing for the possibility of dynamic authorisation. To do this,
-// connect to the [signal@Gio.DebugControllerDBus::authorize] signal and query
-// polkit in it:
-// 
-// ```c
-//   g_autoptr(GError) child_error = NULL;
-//   g_autoptr(GDBusConnection) connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
-//   gulong debug_controller_authorize_id = 0;
-// 
-//   // Set up the debug controller.
-//   debug_controller = G_DEBUG_CONTROLLER (g_debug_controller_dbus_new (priv-&gt;connection, NULL, &amp;child_error));
-//   if (debug_controller == NULL)
-//     {
-//       g_error ("Could not register debug controller on bus: %s",
-//                child_error-&gt;message);
-//     }
-// 
-//   debug_controller_authorize_id = g_signal_connect (debug_controller,
-//                                                     "authorize",
-//                                                     G_CALLBACK (debug_controller_authorize_cb),
-//                                                     self);
-// 
-//   static gboolean
-//   debug_controller_authorize_cb (GDebugControllerDBus  *debug_controller,
-//                                  GDBusMethodInvocation *invocation,
-//                                  gpointer               user_data)
-//   {
-//     g_autoptr(PolkitAuthority) authority = NULL;
-//     g_autoptr(PolkitSubject) subject = NULL;
-//     g_autoptr(PolkitAuthorizationResult) auth_result = NULL;
-//     g_autoptr(GError) local_error = NULL;
-//     GDBusMessage *message;
-//     GDBusMessageFlags message_flags;
-//     PolkitCheckAuthorizationFlags flags = POLKIT_CHECK_AUTHORIZATION_FLAGS_NONE;
-// 
-//     message = g_dbus_method_invocation_get_message (invocation);
-//     message_flags = g_dbus_message_get_flags (message);
-// 
-//     authority = polkit_authority_get_sync (NULL, &amp;local_error);
-//     if (authority == NULL)
-//       {
-//         g_warning ("Failed to get polkit authority: %s", local_error-&gt;message);
-//         return FALSE;
-//       }
-// 
-//     if (message_flags &amp; G_DBUS_MESSAGE_FLAGS_ALLOW_INTERACTIVE_AUTHORIZATION)
-//       flags |= POLKIT_CHECK_AUTHORIZATION_FLAGS_ALLOW_USER_INTERACTION;
-// 
-//     subject = polkit_system_bus_name_new (g_dbus_method_invocation_get_sender (invocation));
-// 
-//     auth_result = polkit_authority_check_authorization_sync (authority,
-//                                                              subject,
-//                                                              "com.example.MyService.set-debug-enabled",
-//                                                              NULL,
-//                                                              flags,
-//                                                              NULL,
-//                                                              &amp;local_error);
-//     if (auth_result == NULL)
-//       {
-//         g_warning ("Failed to get check polkit authorization: %s", local_error-&gt;message);
-//         return FALSE;
-//       }
-// 
-//     return polkit_authorization_result_get_is_authorized (auth_result);
-//   }
-// ```
-type DebugControllerDBus interface {
-	gobject.Object
-	upcastToGDebugControllerDBus() *DebugControllerDBusInstance
-
-	// Stop wraps g_debug_controller_dbus_stop
-	//
-	// Stop the debug controller, unregistering its object from the bus.
-	// 
-	// Any pending method calls to the object will complete successfully, but new
-	// ones will return an error. This method will block until all pending
-	// #GDebugControllerDBus::authorize signals have been handled. This is expected
-	// to not take long, as it will just be waiting for threads to join. If any
-	// #GDebugControllerDBus::authorize signal handlers are still executing in other
-	// threads, this will block until after they have returned.
-	// 
-	// This method will be called automatically when the final reference to the
-	// #GDebugControllerDBus is dropped. You may want to call it explicitly to know
-	// when the controller has been fully removed from the bus, or to break
-	// reference count cycles.
-	// 
-	// Calling this method from within a #GDebugControllerDBus::authorize signal
-	// handler will cause a deadlock and must not be done.
-	Stop()
-	// ConnectAuthorize connects the provided callback to the "authorize" signal
-	//
-	// Emitted when a D-Bus peer is trying to change the debug settings and used
-	// to determine if that is authorized.
-	// 
-	// This signal is emitted in a dedicated worker thread, so handlers are
-	// allowed to perform blocking I/O. This means that, for example, it is
-	// appropriate to call `polkit_authority_check_authorization_sync()` to check
-	// authorization using polkit.
-	// 
-	// If %FALSE is returned then no further handlers are run and the request to
-	// change the debug settings is rejected.
-	// 
-	// Otherwise, if %TRUE is returned, signal emission continues. If no handlers
-	// return %FALSE, then the debug settings are allowed to be changed.
-	// 
-	// Signal handlers must not modify @invocation, or cause it to return a value.
-	// 
-	// The default class handler just returns %TRUE.
-	ConnectAuthorize(func(DebugControllerDBus, DBusMethodInvocation) bool) gobject.SignalHandle
-
-	// chain up virtual methods:
-
-	// ParentAuthorize calls the default implementations of the authorize virtual method.
-	// This function's behavior is not defined when the parent does not implement the virtual method.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- invocation DBusMethodInvocation 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Default handler for the #GDebugControllerDBus::authorize signal.
-	ParentAuthorize(invocation DBusMethodInvocation) bool
-}
-
-func unsafeWrapDebugControllerDBus(base *gobject.ObjectInstance) *DebugControllerDBusInstance {
-	return &DebugControllerDBusInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeDebugControllerDBus,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDebugControllerDBus(inst)
-		},
-	)
-}
-
-func marshalDebugControllerDBusInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDebugControllerDBus(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeDebugControllerDBusFromGlibNone is used to convert raw GDebugControllerDBus pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDebugControllerDBusFromGlibNone(c unsafe.Pointer) DebugControllerDBus {
-	return gobject.UnsafeObjectFromGlibNone(c).(DebugControllerDBus)
-}
-
-// UnsafeDebugControllerDBusFromGlibFull is used to convert raw GDebugControllerDBus pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDebugControllerDBusFromGlibFull(c unsafe.Pointer) DebugControllerDBus {
-	return gobject.UnsafeObjectFromGlibFull(c).(DebugControllerDBus)
-}
-
-// UnsafeDebugControllerDBusFromGlibBorrow is used to convert raw GDebugControllerDBus pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDebugControllerDBusFromGlibBorrow(c unsafe.Pointer) DebugControllerDBus {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DebugControllerDBus)
-}
-
-func (d *DebugControllerDBusInstance) upcastToGDebugControllerDBus() *DebugControllerDBusInstance {
-	return d
-}
-
-// UnsafeDebugControllerDBusToGlibNone is used to convert the instance to it's C value GDebugControllerDBus. This is used by the bindings internally.
-func UnsafeDebugControllerDBusToGlibNone(c DebugControllerDBus) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeDebugControllerDBusToGlibFull is used to convert the instance to it's C value GDebugControllerDBus, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDebugControllerDBusToGlibFull(c DebugControllerDBus) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewDebugControllerDBus wraps g_debug_controller_dbus_new
-// 
-// The function takes the following parameters:
-// 
-// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-// 	- connection DBusConnection: a #GDBusConnection to register the debug object on 
-// 
-// The function returns the following values:
-// 
-// 	- goret DebugControllerDBus (nullable) 
-// 	- _goerr error (nullable): an error 
-//
-// Create a new #GDebugControllerDBus and synchronously initialize it.
-// 
-// Initializing the object will export the debug object on @connection. The
-// object will remain registered until the last reference to the
-// #GDebugControllerDBus is dropped.
-// 
-// Initialization may fail if registering the object on @connection fails.
-func NewDebugControllerDBus(cancellable context.Context, connection DBusConnection) (DebugControllerDBus, error) {
-	var carg2 *C.GCancellable         // in, none, converted, nullable
-	var carg1 *C.GDBusConnection      // in, none, converted
-	var cret  *C.GDebugControllerDBus // return, full, converted, nullable
-	var _cerr *C.GError               // out, full, converted, nullable
-
-	if cancellable != nil {
-		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
-	}
-	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-
-	cret = C.g_debug_controller_dbus_new(carg1, carg2, &_cerr)
-	runtime.KeepAlive(cancellable)
-	runtime.KeepAlive(connection)
-
-	var goret  DebugControllerDBus
-	var _goerr error
-
-	if cret != nil {
-		goret = UnsafeDebugControllerDBusFromGlibFull(unsafe.Pointer(cret))
-	}
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// Stop wraps g_debug_controller_dbus_stop
-//
-// Stop the debug controller, unregistering its object from the bus.
-// 
-// Any pending method calls to the object will complete successfully, but new
-// ones will return an error. This method will block until all pending
-// #GDebugControllerDBus::authorize signals have been handled. This is expected
-// to not take long, as it will just be waiting for threads to join. If any
-// #GDebugControllerDBus::authorize signal handlers are still executing in other
-// threads, this will block until after they have returned.
-// 
-// This method will be called automatically when the final reference to the
-// #GDebugControllerDBus is dropped. You may want to call it explicitly to know
-// when the controller has been fully removed from the bus, or to break
-// reference count cycles.
-// 
-// Calling this method from within a #GDebugControllerDBus::authorize signal
-// handler will cause a deadlock and must not be done.
-func (self *DebugControllerDBusInstance) Stop() {
-	var carg0 *C.GDebugControllerDBus // in, none, converted
-
-	carg0 = (*C.GDebugControllerDBus)(UnsafeDebugControllerDBusToGlibNone(self))
-
-	C.g_debug_controller_dbus_stop(carg0)
-	runtime.KeepAlive(self)
-}
-
-// ConnectAuthorize connects the provided callback to the "authorize" signal
-//
-// Emitted when a D-Bus peer is trying to change the debug settings and used
-// to determine if that is authorized.
-// 
-// This signal is emitted in a dedicated worker thread, so handlers are
-// allowed to perform blocking I/O. This means that, for example, it is
-// appropriate to call `polkit_authority_check_authorization_sync()` to check
-// authorization using polkit.
-// 
-// If %FALSE is returned then no further handlers are run and the request to
-// change the debug settings is rejected.
-// 
-// Otherwise, if %TRUE is returned, signal emission continues. If no handlers
-// return %FALSE, then the debug settings are allowed to be changed.
-// 
-// Signal handlers must not modify @invocation, or cause it to return a value.
-// 
-// The default class handler just returns %TRUE.
-func (o *DebugControllerDBusInstance) ConnectAuthorize(fn func(DebugControllerDBus, DBusMethodInvocation) bool) gobject.SignalHandle {
-	return o.Connect("authorize", fn)
-}
-
-// DebugControllerDBusOverrides is the struct used to override the default implementation of virtual methods.
-// it is generic over the extending instance type.
-type DebugControllerDBusOverrides[Instance DebugControllerDBus] struct {
-	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
-	gobject.ObjectOverrides[Instance]
-
-	// // Authorize allows you to override the implementation of the virtual method authorize.
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- invocation DBusMethodInvocation 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Default handler for the #GDebugControllerDBus::authorize signal.
-	Authorize func(Instance, DBusMethodInvocation) bool
-}
-
-// UnsafeApplyDebugControllerDBusOverrides applies the overrides to init the gclass by setting the trampoline functions.
-// This is used by the bindings internally and only exported for visibility to other bindings code.
-func UnsafeApplyDebugControllerDBusOverrides[Instance DebugControllerDBus](gclass unsafe.Pointer, overrides DebugControllerDBusOverrides[Instance]) {
-	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
-
-	pclass := (*C.GDebugControllerDBusClass)(gclass)
-
-	if overrides.Authorize != nil {
-		pclass.authorize = (*[0]byte)(C._gotk4_gio2_DebugControllerDBus_authorize)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gio2_DebugControllerDBus_authorize",
-			func(carg0 *C.GDebugControllerDBus, carg1 *C.GDBusMethodInvocation) (cret C.gboolean) {
-				var controller Instance             // go GDebugControllerDBus subclass
-				var invocation DBusMethodInvocation // in, none, converted
-				var goret      bool                 // return
-
-				controller = UnsafeDebugControllerDBusFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				invocation = UnsafeDBusMethodInvocationFromGlibNone(unsafe.Pointer(carg1))
-
-				goret = overrides.Authorize(controller, invocation)
-
-				if goret {
-					cret = C.TRUE
-				}
-
-				return cret
-			},
-		)
-	}
-}
-
-// ParentAuthorize calls the default implementations of the authorize virtual method.
-// This function's behavior is not defined when the parent does not implement the virtual method.
-// 
-// The function takes the following parameters:
-// 
-// 	- invocation DBusMethodInvocation 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Default handler for the #GDebugControllerDBus::authorize signal.
-func (controller *DebugControllerDBusInstance) ParentAuthorize(invocation DBusMethodInvocation) bool {
-	var carg0 *C.GDebugControllerDBus
-	var carg1 *C.GDBusMethodInvocation // in, none, converted
-	var cret  C.gboolean               // return
-
-	parentclass := (*C.GDebugControllerDBusClass)(classdata.PeekParentClass(UnsafeDebugControllerDBusToGlibNone(controller)))
-
-	carg0 = (*C.GDebugControllerDBus)(UnsafeDebugControllerDBusToGlibNone(controller))
-	carg1 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
-
-	cret = C._gotk4_gio2_DebugControllerDBus_virtual_authorize(unsafe.Pointer(parentclass.authorize), carg0, carg1)
-	runtime.KeepAlive(controller)
-	runtime.KeepAlive(invocation)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// RegisterDebugControllerDBusSubClass is used to register a go subclass of GDebugControllerDBus. For this to work safely please implement the
-// virtual methods required by the implementation.
-func RegisterDebugControllerDBusSubClass[InstanceT DebugControllerDBus](
-		name string,
-		classInit func(class *DebugControllerDBusClass),
-		constructor func() InstanceT,
-		overrides DebugControllerDBusOverrides[InstanceT],
-		signals map[string]gobject.SignalDefinition,
-		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
-) gobject.Type {
-	return gobject.UnsafeRegisterSubClass(
-		name,
-		classInit,
-		constructor,
-		overrides,
-		signals,
-		TypeDebugControllerDBus,
-		UnsafeDebugControllerDBusClassFromGlibBorrow,
-		UnsafeApplyDebugControllerDBusOverrides,
-		func (obj *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDebugControllerDBus(obj)
-		},
-		interfaceInits...,
-	)
-}
-
 // EmblemInstance is the instance type used by all types extending GEmblem. It is used internally by the bindings. Users should use the interface [Emblem] instead.
 type EmblemInstance struct {
 	_ [0]func() // equal guard
@@ -72101,7 +58879,7 @@ type FileEnumerator interface {
 	//                                                     G_FILE_QUERY_INFO_NONE,
 	//                                                     G_PRIORITY_DEFAULT,
 	//                                                     cancellable,
-	//                                                     …,
+	//                                                     &#x2026;,
 	//                                                     &amp;local_error);
 	// if (enumerator == NULL)
 	//   g_error ("Error enumerating: %s", local_error-&gt;message);
@@ -72114,10 +58892,10 @@ type FileEnumerator interface {
 	//                                                       5,  // number of files to request
 	//                                                       G_PRIORITY_DEFAULT,
 	//                                                       cancellable,
-	//                                                       …,
+	//                                                       &#x2026;,
 	//                                                       &amp;local_error);
 	// 
-	//     // Process the returned files, but don’t assume that exactly 5 were returned.
+	//     // Process the returned files, but don&#x2019;t assume that exactly 5 were returned.
 	//     for (GList *l = files; l != NULL; l = l-&gt;next)
 	//       {
 	//         GFileInfo *info = l-&gt;data;
@@ -72705,7 +59483,7 @@ func (enumerator *FileEnumeratorInstance) NextFile(cancellable context.Context) 
 //                                                     G_FILE_QUERY_INFO_NONE,
 //                                                     G_PRIORITY_DEFAULT,
 //                                                     cancellable,
-//                                                     …,
+//                                                     &#x2026;,
 //                                                     &amp;local_error);
 // if (enumerator == NULL)
 //   g_error ("Error enumerating: %s", local_error-&gt;message);
@@ -72718,10 +59496,10 @@ func (enumerator *FileEnumeratorInstance) NextFile(cancellable context.Context) 
 //                                                       5,  // number of files to request
 //                                                       G_PRIORITY_DEFAULT,
 //                                                       cancellable,
-//                                                       …,
+//                                                       &#x2026;,
 //                                                       &amp;local_error);
 // 
-//     // Process the returned files, but don’t assume that exactly 5 were returned.
+//     // Process the returned files, but don&#x2019;t assume that exactly 5 were returned.
 //     for (GList *l = files; l != NULL; l = l-&gt;next)
 //       {
 //         GFileInfo *info = l-&gt;data;
@@ -73438,23 +60216,6 @@ type FileInfo interface {
 	//
 	// Duplicates a file info structure.
 	Dup() FileInfo
-	// GetAccessDateTime wraps g_file_info_get_access_date_time
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *glib.DateTime (nullable) 
-	//
-	// Gets the access time of the current @info and returns it as a
-	// #GDateTime.
-	// 
-	// It is an error to call this if the #GFileInfo does not contain
-	// %G_FILE_ATTRIBUTE_TIME_ACCESS. If %G_FILE_ATTRIBUTE_TIME_ACCESS_USEC is
-	// provided, the resulting #GDateTime will additionally have microsecond
-	// precision.
-	// 
-	// If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC must
-	// be queried separately using g_file_info_get_attribute_uint32().
-	GetAccessDateTime() *glib.DateTime
 	// GetAttributeAsString wraps g_file_info_get_attribute_as_string
 	// 
 	// The function takes the following parameters:
@@ -73468,7 +60229,7 @@ type FileInfo interface {
 	// Gets the value of an attribute, formatted as a human readable string.
 	// 
 	// This escapes things as needed to make the string valid UTF-8 and readable by
-	// humans. It’s not meant to be a machine readable or reversible escaping
+	// humans. It&#x2019;s not meant to be a machine readable or reversible escaping
 	// format.
 	// 
 	// To format file name attributes of type
@@ -73657,33 +60418,6 @@ type FileInfo interface {
 	// It is an error to call this if the #GFileInfo does not contain
 	// %G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE.
 	GetContentType() string
-	// GetCreationDateTime wraps g_file_info_get_creation_date_time
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *glib.DateTime (nullable) 
-	//
-	// Gets the creation time of the current @info and returns it as a
-	// #GDateTime.
-	// 
-	// It is an error to call this if the #GFileInfo does not contain
-	// %G_FILE_ATTRIBUTE_TIME_CREATED. If %G_FILE_ATTRIBUTE_TIME_CREATED_USEC is
-	// provided, the resulting #GDateTime will additionally have microsecond
-	// precision.
-	// 
-	// If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_CREATED_NSEC must
-	// be queried separately using g_file_info_get_attribute_uint32().
-	GetCreationDateTime() *glib.DateTime
-	// GetDeletionDate wraps g_file_info_get_deletion_date
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *glib.DateTime (nullable) 
-	//
-	// Returns the #GDateTime representing the deletion date of the file, as
-	// available in %G_FILE_ATTRIBUTE_TRASH_DELETION_DATE. If the
-	// %G_FILE_ATTRIBUTE_TRASH_DELETION_DATE attribute is unset, %NULL is returned.
-	GetDeletionDate() *glib.DateTime
 	// GetDisplayName wraps g_file_info_get_display_name
 	// 
 	// The function returns the following values:
@@ -73774,23 +60508,6 @@ type FileInfo interface {
 	// It is an error to call this if the #GFileInfo does not contain
 	// %G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK.
 	GetIsSymlink() bool
-	// GetModificationDateTime wraps g_file_info_get_modification_date_time
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *glib.DateTime (nullable) 
-	//
-	// Gets the modification time of the current @info and returns it as a
-	// #GDateTime.
-	// 
-	// It is an error to call this if the #GFileInfo does not contain
-	// %G_FILE_ATTRIBUTE_TIME_MODIFIED. If %G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC is
-	// provided, the resulting #GDateTime will additionally have microsecond
-	// precision.
-	// 
-	// If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC must
-	// be queried separately using g_file_info_get_attribute_uint32().
-	GetModificationDateTime() *glib.DateTime
 	// GetName wraps g_file_info_get_name
 	// 
 	// The function returns the following values:
@@ -73895,18 +60612,6 @@ type FileInfo interface {
 	//
 	// Removes all cases of @attribute from @info if it exists.
 	RemoveAttribute(string)
-	// SetAccessDateTime wraps g_file_info_set_access_date_time
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- atime *glib.DateTime: a #GDateTime. 
-	//
-	// Sets the %G_FILE_ATTRIBUTE_TIME_ACCESS and
-	// %G_FILE_ATTRIBUTE_TIME_ACCESS_USEC attributes in the file info to the
-	// given date/time value.
-	// 
-	// %G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC will be cleared.
-	SetAccessDateTime(*glib.DateTime)
 	// SetAttributeBoolean wraps g_file_info_set_attribute_boolean
 	// 
 	// The function takes the following parameters:
@@ -74048,18 +60753,6 @@ type FileInfo interface {
 	// Sets the content type attribute for a given #GFileInfo.
 	// See %G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE.
 	SetContentType(string)
-	// SetCreationDateTime wraps g_file_info_set_creation_date_time
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- creationTime *glib.DateTime: a #GDateTime. 
-	//
-	// Sets the %G_FILE_ATTRIBUTE_TIME_CREATED and
-	// %G_FILE_ATTRIBUTE_TIME_CREATED_USEC attributes in the file info to the
-	// given date/time value.
-	// 
-	// %G_FILE_ATTRIBUTE_TIME_CREATED_NSEC will be cleared.
-	SetCreationDateTime(*glib.DateTime)
 	// SetDisplayName wraps g_file_info_set_display_name
 	// 
 	// The function takes the following parameters:
@@ -74114,18 +60807,6 @@ type FileInfo interface {
 	// Sets the "is_symlink" attribute in a #GFileInfo according to @is_symlink.
 	// See %G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK.
 	SetIsSymlink(bool)
-	// SetModificationDateTime wraps g_file_info_set_modification_date_time
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- mtime *glib.DateTime: a #GDateTime. 
-	//
-	// Sets the %G_FILE_ATTRIBUTE_TIME_MODIFIED and
-	// %G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC attributes in the file info to the
-	// given date/time value.
-	// 
-	// %G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC will be cleared.
-	SetModificationDateTime(*glib.DateTime)
 	// SetName wraps g_file_info_set_name
 	// 
 	// The function takes the following parameters:
@@ -74300,40 +60981,6 @@ func (other *FileInfoInstance) Dup() FileInfo {
 	return goret
 }
 
-// GetAccessDateTime wraps g_file_info_get_access_date_time
-// 
-// The function returns the following values:
-// 
-// 	- goret *glib.DateTime (nullable) 
-//
-// Gets the access time of the current @info and returns it as a
-// #GDateTime.
-// 
-// It is an error to call this if the #GFileInfo does not contain
-// %G_FILE_ATTRIBUTE_TIME_ACCESS. If %G_FILE_ATTRIBUTE_TIME_ACCESS_USEC is
-// provided, the resulting #GDateTime will additionally have microsecond
-// precision.
-// 
-// If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC must
-// be queried separately using g_file_info_get_attribute_uint32().
-func (info *FileInfoInstance) GetAccessDateTime() *glib.DateTime {
-	var carg0 *C.GFileInfo // in, none, converted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
-
-	cret = C.g_file_info_get_access_date_time(carg0)
-	runtime.KeepAlive(info)
-
-	var goret *glib.DateTime
-
-	if cret != nil {
-		goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
 // GetAttributeAsString wraps g_file_info_get_attribute_as_string
 // 
 // The function takes the following parameters:
@@ -74347,7 +60994,7 @@ func (info *FileInfoInstance) GetAccessDateTime() *glib.DateTime {
 // Gets the value of an attribute, formatted as a human readable string.
 // 
 // This escapes things as needed to make the string valid UTF-8 and readable by
-// humans. It’s not meant to be a machine readable or reversible escaping
+// humans. It&#x2019;s not meant to be a machine readable or reversible escaping
 // format.
 // 
 // To format file name attributes of type
@@ -74815,67 +61462,6 @@ func (info *FileInfoInstance) GetContentType() string {
 	return goret
 }
 
-// GetCreationDateTime wraps g_file_info_get_creation_date_time
-// 
-// The function returns the following values:
-// 
-// 	- goret *glib.DateTime (nullable) 
-//
-// Gets the creation time of the current @info and returns it as a
-// #GDateTime.
-// 
-// It is an error to call this if the #GFileInfo does not contain
-// %G_FILE_ATTRIBUTE_TIME_CREATED. If %G_FILE_ATTRIBUTE_TIME_CREATED_USEC is
-// provided, the resulting #GDateTime will additionally have microsecond
-// precision.
-// 
-// If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_CREATED_NSEC must
-// be queried separately using g_file_info_get_attribute_uint32().
-func (info *FileInfoInstance) GetCreationDateTime() *glib.DateTime {
-	var carg0 *C.GFileInfo // in, none, converted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
-
-	cret = C.g_file_info_get_creation_date_time(carg0)
-	runtime.KeepAlive(info)
-
-	var goret *glib.DateTime
-
-	if cret != nil {
-		goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// GetDeletionDate wraps g_file_info_get_deletion_date
-// 
-// The function returns the following values:
-// 
-// 	- goret *glib.DateTime (nullable) 
-//
-// Returns the #GDateTime representing the deletion date of the file, as
-// available in %G_FILE_ATTRIBUTE_TRASH_DELETION_DATE. If the
-// %G_FILE_ATTRIBUTE_TRASH_DELETION_DATE attribute is unset, %NULL is returned.
-func (info *FileInfoInstance) GetDeletionDate() *glib.DateTime {
-	var carg0 *C.GFileInfo // in, none, converted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
-
-	cret = C.g_file_info_get_deletion_date(carg0)
-	runtime.KeepAlive(info)
-
-	var goret *glib.DateTime
-
-	if cret != nil {
-		goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
 // GetDisplayName wraps g_file_info_get_display_name
 // 
 // The function returns the following values:
@@ -75091,40 +61677,6 @@ func (info *FileInfoInstance) GetIsSymlink() bool {
 
 	if cret != 0 {
 		goret = true
-	}
-
-	return goret
-}
-
-// GetModificationDateTime wraps g_file_info_get_modification_date_time
-// 
-// The function returns the following values:
-// 
-// 	- goret *glib.DateTime (nullable) 
-//
-// Gets the modification time of the current @info and returns it as a
-// #GDateTime.
-// 
-// It is an error to call this if the #GFileInfo does not contain
-// %G_FILE_ATTRIBUTE_TIME_MODIFIED. If %G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC is
-// provided, the resulting #GDateTime will additionally have microsecond
-// precision.
-// 
-// If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC must
-// be queried separately using g_file_info_get_attribute_uint32().
-func (info *FileInfoInstance) GetModificationDateTime() *glib.DateTime {
-	var carg0 *C.GFileInfo // in, none, converted
-	var cret  *C.GDateTime // return, full, converted, nullable
-
-	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
-
-	cret = C.g_file_info_get_modification_date_time(carg0)
-	runtime.KeepAlive(info)
-
-	var goret *glib.DateTime
-
-	if cret != nil {
-		goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
 	}
 
 	return goret
@@ -75388,29 +61940,6 @@ func (info *FileInfoInstance) RemoveAttribute(attribute string) {
 	C.g_file_info_remove_attribute(carg0, carg1)
 	runtime.KeepAlive(info)
 	runtime.KeepAlive(attribute)
-}
-
-// SetAccessDateTime wraps g_file_info_set_access_date_time
-// 
-// The function takes the following parameters:
-// 
-// 	- atime *glib.DateTime: a #GDateTime. 
-//
-// Sets the %G_FILE_ATTRIBUTE_TIME_ACCESS and
-// %G_FILE_ATTRIBUTE_TIME_ACCESS_USEC attributes in the file info to the
-// given date/time value.
-// 
-// %G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC will be cleared.
-func (info *FileInfoInstance) SetAccessDateTime(atime *glib.DateTime) {
-	var carg0 *C.GFileInfo // in, none, converted
-	var carg1 *C.GDateTime // in, none, converted
-
-	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
-	carg1 = (*C.GDateTime)(glib.UnsafeDateTimeToGlibNone(atime))
-
-	C.g_file_info_set_access_date_time(carg0, carg1)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(atime)
 }
 
 // SetAttributeBoolean wraps g_file_info_set_attribute_boolean
@@ -75758,29 +62287,6 @@ func (info *FileInfoInstance) SetContentType(contentType string) {
 	runtime.KeepAlive(contentType)
 }
 
-// SetCreationDateTime wraps g_file_info_set_creation_date_time
-// 
-// The function takes the following parameters:
-// 
-// 	- creationTime *glib.DateTime: a #GDateTime. 
-//
-// Sets the %G_FILE_ATTRIBUTE_TIME_CREATED and
-// %G_FILE_ATTRIBUTE_TIME_CREATED_USEC attributes in the file info to the
-// given date/time value.
-// 
-// %G_FILE_ATTRIBUTE_TIME_CREATED_NSEC will be cleared.
-func (info *FileInfoInstance) SetCreationDateTime(creationTime *glib.DateTime) {
-	var carg0 *C.GFileInfo // in, none, converted
-	var carg1 *C.GDateTime // in, none, converted
-
-	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
-	carg1 = (*C.GDateTime)(glib.UnsafeDateTimeToGlibNone(creationTime))
-
-	C.g_file_info_set_creation_date_time(carg0, carg1)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(creationTime)
-}
-
 // SetDisplayName wraps g_file_info_set_display_name
 // 
 // The function takes the following parameters:
@@ -75905,29 +62411,6 @@ func (info *FileInfoInstance) SetIsSymlink(isSymlink bool) {
 	C.g_file_info_set_is_symlink(carg0, carg1)
 	runtime.KeepAlive(info)
 	runtime.KeepAlive(isSymlink)
-}
-
-// SetModificationDateTime wraps g_file_info_set_modification_date_time
-// 
-// The function takes the following parameters:
-// 
-// 	- mtime *glib.DateTime: a #GDateTime. 
-//
-// Sets the %G_FILE_ATTRIBUTE_TIME_MODIFIED and
-// %G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC attributes in the file info to the
-// given date/time value.
-// 
-// %G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC will be cleared.
-func (info *FileInfoInstance) SetModificationDateTime(mtime *glib.DateTime) {
-	var carg0 *C.GFileInfo // in, none, converted
-	var carg1 *C.GDateTime // in, none, converted
-
-	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
-	carg1 = (*C.GDateTime)(glib.UnsafeDateTimeToGlibNone(mtime))
-
-	C.g_file_info_set_modification_date_time(carg0, carg1)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(mtime)
 }
 
 // SetName wraps g_file_info_set_name
@@ -76085,7 +62568,7 @@ type FileMonitor interface {
 	// The function takes the following parameters:
 	// 
 	// 	- child File: a #GFile. 
-	// 	- otherFile File: a #GFile. 
+	// 	- otherFile File (nullable): a #GFile, or %NULL. 
 	// 	- eventType FileMonitorEvent: a set of #GFileMonitorEvent flags. 
 	//
 	// Emits the #GFileMonitor::changed signal if a change
@@ -76246,7 +62729,7 @@ func (monitor *FileMonitorInstance) Cancel() bool {
 // The function takes the following parameters:
 // 
 // 	- child File: a #GFile. 
-// 	- otherFile File: a #GFile. 
+// 	- otherFile File (nullable): a #GFile, or %NULL. 
 // 	- eventType FileMonitorEvent: a set of #GFileMonitorEvent flags. 
 //
 // Emits the #GFileMonitor::changed signal if a change
@@ -76259,12 +62742,14 @@ func (monitor *FileMonitorInstance) Cancel() bool {
 func (monitor *FileMonitorInstance) EmitEvent(child File, otherFile File, eventType FileMonitorEvent) {
 	var carg0 *C.GFileMonitor     // in, none, converted
 	var carg1 *C.GFile            // in, none, converted
-	var carg2 *C.GFile            // in, none, converted
+	var carg2 *C.GFile            // in, none, converted, nullable
 	var carg3 C.GFileMonitorEvent // in, none, casted
 
 	carg0 = (*C.GFileMonitor)(UnsafeFileMonitorToGlibNone(monitor))
 	carg1 = (*C.GFile)(UnsafeFileToGlibNone(child))
-	carg2 = (*C.GFile)(UnsafeFileToGlibNone(otherFile))
+	if otherFile != nil {
+		carg2 = (*C.GFile)(UnsafeFileToGlibNone(otherFile))
+	}
 	carg3 = C.GFileMonitorEvent(eventType)
 
 	C.g_file_monitor_emit_event(carg0, carg1, carg2, carg3)
@@ -76842,7 +63327,7 @@ var _ IOStream = (*IOStreamInstance)(nil)
 // the substreams themselves. In most cases this only marks the
 // substream as closed, so further I/O on it fails but common state in the
 // `GIOStream` may still be open. However, some streams may support
-// ‘half-closed’ states where one direction of the stream is actually shut down.
+// &#x2018;half-closed&#x2019; states where one direction of the stream is actually shut down.
 // 
 // Operations on `GIOStream`s cannot be started while another operation on the
 // `GIOStream` or its substreams is in progress. Specifically, an application can
@@ -76850,7 +63335,7 @@ var _ IOStream = (*IOStreamInstance)(nil)
 // [class@Gio.OutputStream] simultaneously (either in separate threads, or as
 // asynchronous operations in the same thread), but an application cannot start
 // any `GIOStream` operation while there is a `GIOStream`, `GInputStream` or
-// `GOutputStream` operation in progress, and an application can’t start any
+// `GOutputStream` operation in progress, and an application can&#x2019;t start any
 // `GInputStream` or `GOutputStream` operation while there is a `GIOStream`
 // operation in progress.
 // 
@@ -82476,7 +68961,7 @@ var _ MenuModel = (*MenuModelInstance)(nil)
 
 // MenuModel wraps GMenuModel
 //
-// `GMenuModel` represents the contents of a menu — an ordered list of
+// `GMenuModel` represents the contents of a menu &#x2014; an ordered list of
 // menu items. The items are associated with actions, which can be
 // activated through them. Items can be grouped in sections, and may
 // have submenus associated with them. Both items and sections usually
@@ -82488,7 +68973,7 @@ var _ MenuModel = (*MenuModelInstance)(nil)
 // sections and submenus are again represented by `GMenuModel`s.
 // Menus themselves do not define their own roles. Rather, the role
 // of a particular `GMenuModel` is defined by the item that references
-// it (or, in the case of the ‘root’ menu, is defined by the context
+// it (or, in the case of the &#x2018;root&#x2019; menu, is defined by the context
 // in which it is used).
 // 
 // As an example, consider the visible portions of this menu:
@@ -82499,7 +68984,7 @@ var _ MenuModel = (*MenuModelInstance)(nil)
 // 
 // While this kind of deeply nested menu is no longer considered good UI
 // practice, it serves as a good example of the concepts in `GMenuModel`.
-// There are 8 ‘menus’ visible in the screenshot: one menubar, two
+// There are 8 &#x2018;menus&#x2019; visible in the screenshot: one menubar, two
 // submenus and 5 sections:
 // 
 // - the toplevel menubar (containing 4 items)
@@ -82533,7 +69018,7 @@ var _ MenuModel = (*MenuModelInstance)(nil)
 // The motivation for this abstract model of application controls is
 // that modern user interfaces tend to make these controls available
 // outside the application. Examples include global menus, jumplists,
-// dash boards, etc. To support such uses, it is necessary to ‘export’
+// dash boards, etc. To support such uses, it is necessary to &#x2018;export&#x2019;
 // information about actions and their representation in menus, which
 // is exactly what the action group exporter and the menu model exporter do for
 // [iface@Gio.ActionGroup] and [class@Gio.MenuModel]. The client-side
@@ -82543,7 +69028,7 @@ var _ MenuModel = (*MenuModelInstance)(nil)
 // The API of `GMenuModel` is very generic, with iterators for the
 // attributes and links of an item, see
 // [method@Gio.MenuModel.iterate_item_attributes] and
-// [method@Gio.MenuModel.iterate_item_links]. The ‘standard’ attributes and
+// [method@Gio.MenuModel.iterate_item_links]. The &#x2018;standard&#x2019; attributes and
 // link types have predefined names: `G_MENU_ATTRIBUTE_LABEL`,
 // `G_MENU_ATTRIBUTE_ACTION`, `G_MENU_ATTRIBUTE_TARGET`, `G_MENU_LINK_SECTION`
 // and `G_MENU_LINK_SUBMENU`.
@@ -82576,12 +69061,12 @@ var _ MenuModel = (*MenuModelInstance)(nil)
 // 
 // ## Boolean State
 // 
-// An action with a boolean state will most typically be used with a ‘toggle’
-// or ‘switch’ menu item. The state can be set directly, but activating the
+// An action with a boolean state will most typically be used with a &#x2018;toggle&#x2019;
+// or &#x2018;switch&#x2019; menu item. The state can be set directly, but activating the
 // action (with no parameter) results in the state being toggled.
 // 
 // Selecting a toggle menu item will activate the action. The menu item should
-// be rendered as ‘checked’ when the state is true.
+// be rendered as &#x2018;checked&#x2019; when the state is true.
 // 
 // ## String Parameter and State
 // 
@@ -82593,7 +69078,7 @@ var _ MenuModel = (*MenuModelInstance)(nil)
 // Radio menu items, in addition to being associated with the action, will
 // have a target value. Selecting that menu item will result in activation
 // of the action with the target value as the parameter. The menu item should
-// be rendered as ‘selected’ when the state of the action is equal to the
+// be rendered as &#x2018;selected&#x2019; when the state of the action is equal to the
 // target value of the menu item.
 type MenuModel interface {
 	gobject.Object
@@ -83471,7 +69956,7 @@ var _ MountOperation = (*MountOperationInstance)(nil)
 // preventing unmount or eject operations from completing.
 // 
 // Note that `GMountOperation` is used for more than just [iface@Gio.Mount]
-// objects – for example it is also used in [method@Gio.Drive.start] and
+// objects &#x2013; for example it is also used in [method@Gio.Drive.start] and
 // [method@Gio.Drive.stop].
 // 
 // Users should instantiate a subclass of this that implements all the
@@ -83481,7 +69966,7 @@ var _ MountOperation = (*MountOperationInstance)(nil)
 // filesystems at login time), usually `NULL` can be passed, see each method
 // taking a `GMountOperation` for details.
 // 
-// Throughout the API, the term ‘TCRYPT’ is used to mean ‘compatible with TrueCrypt and VeraCrypt’.
+// Throughout the API, the term &#x2018;TCRYPT&#x2019; is used to mean &#x2018;compatible with TrueCrypt and VeraCrypt&#x2019;.
 // [TrueCrypt](https://en.wikipedia.org/wiki/TrueCrypt) is a discontinued system for
 // encrypting file containers, partitions or whole disks, typically used with Windows.
 // [VeraCrypt](https://www.veracrypt.fr/) is a maintained fork of TrueCrypt with various
@@ -85296,7 +71781,7 @@ var _ Notification = (*NotificationInstance)(nil)
 // Notification wraps GNotification
 //
 // `GNotification` is a mechanism for creating a notification to be shown
-// to the user — typically as a pop-up notification presented by the
+// to the user &#x2014; typically as a pop-up notification presented by the
 // desktop environment shell.
 // 
 // The key difference between `GNotification` and other similar APIs is
@@ -85326,7 +71811,7 @@ var _ Notification = (*NotificationInstance)(nil)
 // 
 // The `X-GNOME-UsesNotifications` key indicates to GNOME Control Center
 // that this application uses notifications, so it can be listed in the
-// Control Center’s ‘Notifications’ panel.
+// Control Center&#x2019;s &#x2018;Notifications&#x2019; panel.
 // 
 // The `.desktop` file must be named as `org.gnome.TestApplication.desktop`,
 // where `org.gnome.TestApplication` is the ID passed to
@@ -86342,7 +72827,7 @@ type OutputStream interface {
 	// but generally we try to write as many bytes as requested.
 	// 
 	// You are guaranteed that this method will never fail with
-	// %G_IO_ERROR_WOULD_BLOCK — if @stream can't accept more data, the
+	// %G_IO_ERROR_WOULD_BLOCK &#x2014; if @stream can't accept more data, the
 	// method will just wait until this changes.
 	// 
 	// Any outstanding I/O request with higher priority (lower numerical
@@ -87922,7 +74407,7 @@ func (stream *OutputStreamInstance) WritevAllFinish(result AsyncResult) (uint, b
 // but generally we try to write as many bytes as requested.
 // 
 // You are guaranteed that this method will never fail with
-// %G_IO_ERROR_WOULD_BLOCK — if @stream can't accept more data, the
+// %G_IO_ERROR_WOULD_BLOCK &#x2014; if @stream can't accept more data, the
 // method will just wait until this changes.
 // 
 // Any outstanding I/O request with higher priority (lower numerical
@@ -89019,7 +75504,7 @@ var _ Permission = (*PermissionInstance)(nil)
 
 // Permission wraps GPermission
 //
-// A `GPermission` represents the status of the caller’s permission to
+// A `GPermission` represents the status of the caller&#x2019;s permission to
 // perform a certain action.
 // 
 // You can query if the action is currently allowed and if it is
@@ -89031,8 +75516,8 @@ var _ Permission = (*PermissionInstance)(nil)
 // 
 // As an example, a `GPermission` might represent the ability for the
 // user to write to a [class@Gio.Settings] object.  This `GPermission` object
-// could then be used to decide if it is appropriate to show a “Click here to
-// unlock” button in a dialog and to provide the mechanism to invoke
+// could then be used to decide if it is appropriate to show a &#x201C;Click here to
+// unlock&#x201D; button in a dialog and to provide the mechanism to invoke
 // when that button is clicked.
 type Permission interface {
 	gobject.Object
@@ -90178,7 +76663,7 @@ var _ PropertyAction = (*PropertyActionInstance)(nil)
 // 
 // If the property is an enum then the state will be string-typed and
 // conversion will automatically be performed between the enum value and
-// ‘nick’ string as per the [type@GObject.EnumValue] table.
+// &#x2018;nick&#x2019; string as per the [type@GObject.EnumValue] table.
 // 
 // Flags types are not currently supported.
 // 
@@ -90197,7 +76682,7 @@ var _ PropertyAction = (*PropertyActionInstance)(nil)
 // The general idea here is to reduce the number of locations where a
 // particular piece of state is kept (and therefore has to be synchronised
 // between). `GPropertyAction` does not have a separate state that is kept
-// in sync with the property value — its state is the property value.
+// in sync with the property value &#x2014; its state is the property value.
 // 
 // For example, it might be useful to create a [iface@Gio.Action] corresponding
 // to the `visible-child-name` property of a [`GtkStack`](https://docs.gtk.org/gtk4/class.Stack.html)
@@ -92354,11 +78839,11 @@ var _ Settings = (*SettingsInstance)(nil)
 // for other threads and other processes.  Many settings backends
 // (including dconf) have lazy initialisation which means in the common
 // case of the user using their computer without modifying any settings
-// a lot of work can be avoided.  For dconf, the D-Bus service doesn’t
+// a lot of work can be avoided.  For dconf, the D-Bus service doesn&#x2019;t
 // even need to be started in this case.  For this reason, you should
 // only ever modify `GSettings` keys in response to explicit user action.
 // Particular care should be paid to ensure that modifications are not
-// made during startup — for example, when setting the initial value
+// made during startup &#x2014; for example, when setting the initial value
 // of preferences widgets.  The built-in [method@Gio.Settings.bind]
 // functionality is careful not to write settings in response to notify signals
 // as a result of modifications that it makes to widgets.
@@ -92369,9 +78854,9 @@ var _ Settings = (*SettingsInstance)(nil)
 // 
 // Normally, a schema has a fixed path that determines where the settings
 // are stored in the conceptual global tree of settings. However, schemas
-// can also be ‘[relocatable](#relocatable-schemas)’, i.e. not equipped with
+// can also be &#x2018;[relocatable](#relocatable-schemas)&#x2019;, i.e. not equipped with
 // a fixed path. This is
-// useful e.g. when the schema describes an ‘account’, and you want to be
+// useful e.g. when the schema describes an &#x2018;account&#x2019;, and you want to be
 // able to store a arbitrary number of accounts.
 // 
 // Paths must start with and end with a forward slash character (`/`)
@@ -92402,7 +78887,7 @@ var _ Settings = (*SettingsInstance)(nil)
 // translation](https://www.gnu.org/software/gettext/manual/html_node/Aspects.html#index-locale-categories-1).
 // The `messages` category should be used by default; use `time` for
 // translatable date or time formats. A translation comment can be added as an
-// XML comment immediately above the `&lt;default&gt;` element — it is recommended to
+// XML comment immediately above the `&lt;default&gt;` element &#x2014; it is recommended to
 // add these comments to aid translators understand the meaning and
 // implications of the default value. An optional translation `context`
 // attribute can be set on the `&lt;default&gt;` element to disambiguate multiple
@@ -92526,8 +79011,8 @@ var _ Settings = (*SettingsInstance)(nil)
 // an application. Sometimes, it is necessary for a vendor or distributor
 // to adjust these defaults. Since patching the XML source for the schema
 // is inconvenient and error-prone,
-// [`glib-compile-schemas`](glib-compile-schemas.html) reads so-called ‘vendor
-// override’ files. These are keyfiles in the same directory as the XML
+// [`glib-compile-schemas`](glib-compile-schemas.html) reads so-called &#x2018;vendor
+// override&#x2019; files. These are keyfiles in the same directory as the XML
 // schema sources which can override default values. The schema ID serves
 // as the group name in the key file, and the values are expected in
 // serialized [struct@GLib.Variant] form, as in the following example:
@@ -92547,17 +79032,17 @@ var _ Settings = (*SettingsInstance)(nil)
 // time that [method@Gio.Settings.set]) returns; see [func@Gio.Settings.sync]).
 // 
 // In order to allow groups of settings to be changed simultaneously and
-// atomically, GSettings also supports a ‘delay-apply’ mode. In this mode,
+// atomically, GSettings also supports a &#x2018;delay-apply&#x2019; mode. In this mode,
 // updated values are kept locally in the [class@Gio.Settings] instance until
 // they are explicitly applied by calling [method@Gio.Settings.apply].
 // 
 // For example, this could be useful for a preferences dialog where the
-// preferences all need to be applied simultaneously when the user clicks ‘Save’.
+// preferences all need to be applied simultaneously when the user clicks &#x2018;Save&#x2019;.
 // 
-// Switching a [class@Gio.Settings] instance to ‘delay-apply’ mode is a one-time
+// Switching a [class@Gio.Settings] instance to &#x2018;delay-apply&#x2019; mode is a one-time
 // irreversible operation: from that point onwards, *all* changes made to that
 // [class@Gio.Settings] have to be explicitly applied by calling
-// [method@Gio.Settings.apply]. The ‘delay-apply’ mode is also propagated to any
+// [method@Gio.Settings.apply]. The &#x2018;delay-apply&#x2019; mode is also propagated to any
 // child settings objects subsequently created using
 // [method@Gio.Settings.get_child].
 // 
@@ -92578,7 +79063,7 @@ var _ Settings = (*SettingsInstance)(nil)
 // underlying settings. To make this even more convenient, GSettings
 // looks for a boolean property with the name `sensitivity` and
 // automatically binds it to the writability of the bound setting.
-// If this ‘magic’ gets in the way, it can be suppressed with the
+// If this &#x2018;magic&#x2019; gets in the way, it can be suppressed with the
 // `G_SETTINGS_BIND_NO_SENSITIVITY` flag.
 // 
 // ## Relocatable schemas
@@ -92608,7 +79093,7 @@ var _ Settings = (*SettingsInstance)(nil)
 // 
 // ### Meson
 // 
-// GSettings is natively supported by Meson’s [GNOME module](https://mesonbuild.com/Gnome-module.html).
+// GSettings is natively supported by Meson&#x2019;s [GNOME module](https://mesonbuild.com/Gnome-module.html).
 // 
 // You can install the schemas as any other data file:
 // 
@@ -92733,7 +79218,7 @@ type Settings interface {
 	// Applies any changes that have been made to the settings.
 	// 
 	// This function does nothing unless @settings is in
-	// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).  In the normal
+	// [&#x2018;delay-apply&#x2019; mode](class.Settings.html#delay-apply-mode).  In the normal
 	// case settings are always applied immediately.
 	Apply()
 	// CreateAction wraps g_settings_create_action
@@ -92764,7 +79249,7 @@ type Settings interface {
 	// Delay wraps g_settings_delay
 	//
 	// Changes the [class@Gio.Settings] object into
-	// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).
+	// [&#x2018;delay-apply&#x2019; mode](class.Settings.html#delay-apply-mode).
 	// 
 	// In this
 	// mode, changes to @settings are not immediately propagated to the
@@ -92784,7 +79269,7 @@ type Settings interface {
 	// 
 	// A convenience variant of [method@Gio.Settings.get] for booleans.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having a `b` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetBoolean(string) bool
 	// GetChild wraps g_settings_get_child
@@ -92821,7 +79306,7 @@ type Settings interface {
 	// 
 	// A convenience variant of [method@Gio.Settings.get] for doubles.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having a `d` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetDouble(string) float64
 	// GetEnum wraps g_settings_get_enum
@@ -92840,7 +79325,7 @@ type Settings interface {
 	// In order to use this function the type of the value must be a string
 	// and it must be marked in the schema file as an enumerated type.
 	// 
-	// It is a programmer error to give a @key that isn’t contained in the
+	// It is a programmer error to give a @key that isn&#x2019;t contained in the
 	// schema for @settings or is not marked as an enumerated type.
 	// 
 	// If the value stored in the configuration database is not a valid
@@ -92863,7 +79348,7 @@ type Settings interface {
 	// In order to use this function the type of the value must be an array
 	// of strings and it must be marked in the schema file as a flags type.
 	// 
-	// It is a programmer error to give a @key that isn’t contained in the
+	// It is a programmer error to give a @key that isn&#x2019;t contained in the
 	// schema for @settings or is not marked as a flags type.
 	// 
 	// If the value stored in the configuration database is not a valid
@@ -92880,7 +79365,7 @@ type Settings interface {
 	// changes.
 	// 
 	// This can only be the case if it is in
-	// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).
+	// [&#x2018;delay-apply&#x2019; mode](class.Settings.html#delay-apply-mode).
 	GetHasUnapplied() bool
 	// GetInt wraps g_settings_get_int
 	// 
@@ -92896,7 +79381,7 @@ type Settings interface {
 	// 
 	// A convenience variant of [method@Gio.Settings.get] for 32-bit integers.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having an `i` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetInt(string) int32
 	// GetInt64 wraps g_settings_get_int64
@@ -92913,7 +79398,7 @@ type Settings interface {
 	// 
 	// A convenience variant of [method@Gio.Settings.get] for 64-bit integers.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having an `x` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetInt64(string) int64
 	// GetString wraps g_settings_get_string
@@ -92930,7 +79415,7 @@ type Settings interface {
 	// 
 	// A convenience variant of [method@Gio.Settings.get] for strings.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having an `s` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetString(string) string
 	// GetStrv wraps g_settings_get_strv
@@ -92945,7 +79430,7 @@ type Settings interface {
 	//
 	// A convenience variant of [method@Gio.Settings.get] for string arrays.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having an `as` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetStrv(string) []string
 	// GetUint wraps g_settings_get_uint
@@ -92963,7 +79448,7 @@ type Settings interface {
 	// A convenience variant of [method@Gio.Settings.get] for 32-bit unsigned
 	// integers.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having a `u` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetUint(string) uint
 	// GetUint64 wraps g_settings_get_uint64
@@ -92981,7 +79466,7 @@ type Settings interface {
 	// A convenience variant of [method@Gio.Settings.get] for 64-bit unsigned
 	// integers.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having a `t` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetUint64(string) uint64
 	// IsWritable wraps g_settings_is_writable
@@ -93007,7 +79492,7 @@ type Settings interface {
 	// The list is exactly the list of strings for which it is not an error
 	// to call [method@Gio.Settings.get_child].
 	// 
-	// There is little reason to call this function from ‘normal’ code, since
+	// There is little reason to call this function from &#x2018;normal&#x2019; code, since
 	// you should already know what children are in your schema. This function
 	// may still be useful there for introspection reasons, however.
 	// 
@@ -93022,7 +79507,7 @@ type Settings interface {
 	//
 	// Introspects the list of keys on @settings.
 	// 
-	// You should probably not be calling this function from ‘normal’ code
+	// You should probably not be calling this function from &#x2018;normal&#x2019; code
 	// (since you should already know what keys are in your schema).  This
 	// function is intended for introspection reasons.
 	// 
@@ -93048,7 +79533,7 @@ type Settings interface {
 	// Reverts all unapplied changes to the settings.
 	// 
 	// This function does nothing unless @settings is in
-	// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).  In the normal
+	// [&#x2018;delay-apply&#x2019; mode](class.Settings.html#delay-apply-mode).  In the normal
 	// case settings are always applied immediately.
 	// 
 	// Change notifications will be emitted for affected keys.
@@ -93068,7 +79553,7 @@ type Settings interface {
 	// 
 	// A convenience variant of [method@Gio.Settings.set] for booleans.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having a `b` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetBoolean(string, bool) bool
 	// SetDouble wraps g_settings_set_double
@@ -93086,7 +79571,7 @@ type Settings interface {
 	// 
 	// A convenience variant of [method@Gio.Settings.set] for doubles.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having a `d` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetDouble(string, float64) bool
 	// SetEnum wraps g_settings_set_enum
@@ -93103,12 +79588,12 @@ type Settings interface {
 	// Looks up the enumerated type nick for @value and writes it to @key,
 	// within @settings.
 	// 
-	// It is a programmer error to give a @key that isn’t contained in the
+	// It is a programmer error to give a @key that isn&#x2019;t contained in the
 	// schema for @settings or is not marked as an enumerated type, or for
 	// @value not to be a valid value for the named type.
 	// 
 	// After performing the write, accessing @key directly with
-	// [method@Gio.Settings.get_string] will return the ‘nick’ associated with
+	// [method@Gio.Settings.get_string] will return the &#x2018;nick&#x2019; associated with
 	// @value.
 	SetEnum(string, int32) bool
 	// SetFlags wraps g_settings_set_flags
@@ -93126,12 +79611,12 @@ type Settings interface {
 	// them in an array of strings and writes the array to @key, within
 	// @settings.
 	// 
-	// It is a programmer error to give a @key that isn’t contained in the
+	// It is a programmer error to give a @key that isn&#x2019;t contained in the
 	// schema for @settings or is not marked as a flags type, or for @value
 	// to contain any bits that are not value for the named type.
 	// 
 	// After performing the write, accessing @key directly with
-	// [method@Gio.Settings.get_strv] will return an array of ‘nicks’; one for each
+	// [method@Gio.Settings.get_strv] will return an array of &#x2018;nicks&#x2019;; one for each
 	// bit in @value.
 	SetFlags(string, uint) bool
 	// SetInt wraps g_settings_set_int
@@ -93149,7 +79634,7 @@ type Settings interface {
 	// 
 	// A convenience variant of [method@Gio.Settings.set] for 32-bit integers.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having an `i` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetInt(string, int32) bool
 	// SetInt64 wraps g_settings_set_int64
@@ -93167,7 +79652,7 @@ type Settings interface {
 	// 
 	// A convenience variant of [method@Gio.Settings.set] for 64-bit integers.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having an `x` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetInt64(string, int64) bool
 	// SetString wraps g_settings_set_string
@@ -93185,7 +79670,7 @@ type Settings interface {
 	// 
 	// A convenience variant of [method@Gio.Settings.set] for strings.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having an `s` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetString(string, string) bool
 	// SetStrv wraps g_settings_set_strv
@@ -93204,7 +79689,7 @@ type Settings interface {
 	// A convenience variant of [method@Gio.Settings.set] for string arrays.  If
 	// @value is `NULL`, then @key is set to be the empty array.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having an `as` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetStrv(string, []string) bool
 	// SetUint wraps g_settings_set_uint
@@ -93223,7 +79708,7 @@ type Settings interface {
 	// A convenience variant of [method@Gio.Settings.set] for 32-bit unsigned
 	// integers.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having a `u` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetUint(string, uint) bool
 	// SetUint64 wraps g_settings_set_uint64
@@ -93242,7 +79727,7 @@ type Settings interface {
 	// A convenience variant of [method@Gio.Settings.set] for 64-bit unsigned
 	// integers.
 	// 
-	// It is a programmer error to give a @key that isn’t specified as
+	// It is a programmer error to give a @key that isn&#x2019;t specified as
 	// having a `t` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetUint64(string, uint64) bool
 	// ConnectChangeEvent connects the provided callback to the "change-event" signal
@@ -93456,8 +79941,8 @@ func NewSettings(schemaId string) Settings {
 // by @schema_id and a given path.
 // 
 // You only need to do this if you want to directly create a settings
-// object with a schema that doesn’t have a specified path of its own.
-// That’s quite rare.
+// object with a schema that doesn&#x2019;t have a specified path of its own.
+// That&#x2019;s quite rare.
 // 
 // It is a programmer error to call this function for a schema that
 // has an explicitly specified path.
@@ -93557,7 +80042,7 @@ func SettingsSync() {
 // Applies any changes that have been made to the settings.
 // 
 // This function does nothing unless @settings is in
-// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).  In the normal
+// [&#x2018;delay-apply&#x2019; mode](class.Settings.html#delay-apply-mode).  In the normal
 // case settings are always applied immediately.
 func (settings *SettingsInstance) Apply() {
 	var carg0 *C.GSettings // in, none, converted
@@ -93615,7 +80100,7 @@ func (settings *SettingsInstance) CreateAction(key string) Action {
 // Delay wraps g_settings_delay
 //
 // Changes the [class@Gio.Settings] object into
-// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).
+// [&#x2018;delay-apply&#x2019; mode](class.Settings.html#delay-apply-mode).
 // 
 // In this
 // mode, changes to @settings are not immediately propagated to the
@@ -93643,7 +80128,7 @@ func (settings *SettingsInstance) Delay() {
 // 
 // A convenience variant of [method@Gio.Settings.get] for booleans.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having a `b` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetBoolean(key string) bool {
 	var carg0 *C.GSettings // in, none, converted
@@ -93720,7 +80205,7 @@ func (settings *SettingsInstance) GetChild(name string) Settings {
 // 
 // A convenience variant of [method@Gio.Settings.get] for doubles.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having a `d` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetDouble(key string) float64 {
 	var carg0 *C.GSettings // in, none, converted
@@ -93758,7 +80243,7 @@ func (settings *SettingsInstance) GetDouble(key string) float64 {
 // In order to use this function the type of the value must be a string
 // and it must be marked in the schema file as an enumerated type.
 // 
-// It is a programmer error to give a @key that isn’t contained in the
+// It is a programmer error to give a @key that isn&#x2019;t contained in the
 // schema for @settings or is not marked as an enumerated type.
 // 
 // If the value stored in the configuration database is not a valid
@@ -93800,7 +80285,7 @@ func (settings *SettingsInstance) GetEnum(key string) int32 {
 // In order to use this function the type of the value must be an array
 // of strings and it must be marked in the schema file as a flags type.
 // 
-// It is a programmer error to give a @key that isn’t contained in the
+// It is a programmer error to give a @key that isn&#x2019;t contained in the
 // schema for @settings or is not marked as a flags type.
 // 
 // If the value stored in the configuration database is not a valid
@@ -93836,7 +80321,7 @@ func (settings *SettingsInstance) GetFlags(key string) uint {
 // changes.
 // 
 // This can only be the case if it is in
-// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).
+// [&#x2018;delay-apply&#x2019; mode](class.Settings.html#delay-apply-mode).
 func (settings *SettingsInstance) GetHasUnapplied() bool {
 	var carg0 *C.GSettings // in, none, converted
 	var cret  C.gboolean   // return
@@ -93869,7 +80354,7 @@ func (settings *SettingsInstance) GetHasUnapplied() bool {
 // 
 // A convenience variant of [method@Gio.Settings.get] for 32-bit integers.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having an `i` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetInt(key string) int32 {
 	var carg0 *C.GSettings // in, none, converted
@@ -93905,7 +80390,7 @@ func (settings *SettingsInstance) GetInt(key string) int32 {
 // 
 // A convenience variant of [method@Gio.Settings.get] for 64-bit integers.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having an `x` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetInt64(key string) int64 {
 	var carg0 *C.GSettings // in, none, converted
@@ -93941,7 +80426,7 @@ func (settings *SettingsInstance) GetInt64(key string) int64 {
 // 
 // A convenience variant of [method@Gio.Settings.get] for strings.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having an `s` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetString(key string) string {
 	var carg0 *C.GSettings // in, none, converted
@@ -93976,7 +80461,7 @@ func (settings *SettingsInstance) GetString(key string) string {
 //
 // A convenience variant of [method@Gio.Settings.get] for string arrays.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having an `as` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetStrv(key string) []string {
 	var carg0 *C.GSettings // in, none, converted
@@ -94015,7 +80500,7 @@ func (settings *SettingsInstance) GetStrv(key string) []string {
 // A convenience variant of [method@Gio.Settings.get] for 32-bit unsigned
 // integers.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having a `u` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetUint(key string) uint {
 	var carg0 *C.GSettings // in, none, converted
@@ -94052,7 +80537,7 @@ func (settings *SettingsInstance) GetUint(key string) uint {
 // A convenience variant of [method@Gio.Settings.get] for 64-bit unsigned
 // integers.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having a `t` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetUint64(key string) uint64 {
 	var carg0 *C.GSettings // in, none, converted
@@ -94118,7 +80603,7 @@ func (settings *SettingsInstance) IsWritable(name string) bool {
 // The list is exactly the list of strings for which it is not an error
 // to call [method@Gio.Settings.get_child].
 // 
-// There is little reason to call this function from ‘normal’ code, since
+// There is little reason to call this function from &#x2018;normal&#x2019; code, since
 // you should already know what children are in your schema. This function
 // may still be useful there for introspection reasons, however.
 // 
@@ -94150,7 +80635,7 @@ func (settings *SettingsInstance) ListChildren() []string {
 //
 // Introspects the list of keys on @settings.
 // 
-// You should probably not be calling this function from ‘normal’ code
+// You should probably not be calling this function from &#x2018;normal&#x2019; code
 // (since you should already know what keys are in your schema).  This
 // function is intended for introspection reasons.
 // 
@@ -94205,7 +80690,7 @@ func (settings *SettingsInstance) Reset(key string) {
 // Reverts all unapplied changes to the settings.
 // 
 // This function does nothing unless @settings is in
-// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).  In the normal
+// [&#x2018;delay-apply&#x2019; mode](class.Settings.html#delay-apply-mode).  In the normal
 // case settings are always applied immediately.
 // 
 // Change notifications will be emitted for affected keys.
@@ -94233,7 +80718,7 @@ func (settings *SettingsInstance) Revert() {
 // 
 // A convenience variant of [method@Gio.Settings.set] for booleans.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having a `b` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetBoolean(key string, value bool) bool {
 	var carg0 *C.GSettings // in, none, converted
@@ -94277,7 +80762,7 @@ func (settings *SettingsInstance) SetBoolean(key string, value bool) bool {
 // 
 // A convenience variant of [method@Gio.Settings.set] for doubles.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having a `d` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetDouble(key string, value float64) bool {
 	var carg0 *C.GSettings // in, none, converted
@@ -94318,12 +80803,12 @@ func (settings *SettingsInstance) SetDouble(key string, value float64) bool {
 // Looks up the enumerated type nick for @value and writes it to @key,
 // within @settings.
 // 
-// It is a programmer error to give a @key that isn’t contained in the
+// It is a programmer error to give a @key that isn&#x2019;t contained in the
 // schema for @settings or is not marked as an enumerated type, or for
 // @value not to be a valid value for the named type.
 // 
 // After performing the write, accessing @key directly with
-// [method@Gio.Settings.get_string] will return the ‘nick’ associated with
+// [method@Gio.Settings.get_string] will return the &#x2018;nick&#x2019; associated with
 // @value.
 func (settings *SettingsInstance) SetEnum(key string, value int32) bool {
 	var carg0 *C.GSettings // in, none, converted
@@ -94365,12 +80850,12 @@ func (settings *SettingsInstance) SetEnum(key string, value int32) bool {
 // them in an array of strings and writes the array to @key, within
 // @settings.
 // 
-// It is a programmer error to give a @key that isn’t contained in the
+// It is a programmer error to give a @key that isn&#x2019;t contained in the
 // schema for @settings or is not marked as a flags type, or for @value
 // to contain any bits that are not value for the named type.
 // 
 // After performing the write, accessing @key directly with
-// [method@Gio.Settings.get_strv] will return an array of ‘nicks’; one for each
+// [method@Gio.Settings.get_strv] will return an array of &#x2018;nicks&#x2019;; one for each
 // bit in @value.
 func (settings *SettingsInstance) SetFlags(key string, value uint) bool {
 	var carg0 *C.GSettings // in, none, converted
@@ -94412,7 +80897,7 @@ func (settings *SettingsInstance) SetFlags(key string, value uint) bool {
 // 
 // A convenience variant of [method@Gio.Settings.set] for 32-bit integers.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having an `i` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetInt(key string, value int32) bool {
 	var carg0 *C.GSettings // in, none, converted
@@ -94454,7 +80939,7 @@ func (settings *SettingsInstance) SetInt(key string, value int32) bool {
 // 
 // A convenience variant of [method@Gio.Settings.set] for 64-bit integers.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having an `x` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetInt64(key string, value int64) bool {
 	var carg0 *C.GSettings // in, none, converted
@@ -94496,7 +80981,7 @@ func (settings *SettingsInstance) SetInt64(key string, value int64) bool {
 // 
 // A convenience variant of [method@Gio.Settings.set] for strings.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having an `s` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetString(key string, value string) bool {
 	var carg0 *C.GSettings // in, none, converted
@@ -94540,7 +81025,7 @@ func (settings *SettingsInstance) SetString(key string, value string) bool {
 // A convenience variant of [method@Gio.Settings.set] for string arrays.  If
 // @value is `NULL`, then @key is set to be the empty array.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having an `as` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetStrv(key string, value []string) bool {
 	var carg0 *C.GSettings // in, none, converted
@@ -94585,7 +81070,7 @@ func (settings *SettingsInstance) SetStrv(key string, value []string) bool {
 // A convenience variant of [method@Gio.Settings.set] for 32-bit unsigned
 // integers.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having a `u` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetUint(key string, value uint) bool {
 	var carg0 *C.GSettings // in, none, converted
@@ -94628,7 +81113,7 @@ func (settings *SettingsInstance) SetUint(key string, value uint) bool {
 // A convenience variant of [method@Gio.Settings.set] for 64-bit unsigned
 // integers.
 // 
-// It is a programmer error to give a @key that isn’t specified as
+// It is a programmer error to give a @key that isn&#x2019;t specified as
 // having a `t` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetUint64(key string, value uint64) bool {
 	var carg0 *C.GSettings // in, none, converted
@@ -95436,7 +81921,7 @@ var _ SimpleAsyncResult = (*SimpleAsyncResultInstance)(nil)
 // 
 // Most of the time, an application will not need to know of the details
 // of this API; it is handled transparently, and any necessary operations
-// are handled by [iface@Gio.AsyncResult]’s interface. However, if implementing
+// are handled by [iface@Gio.AsyncResult]&#x2019;s interface. However, if implementing
 // a new GIO module, for writing language bindings, or for complex
 // applications that need better control of how asynchronous operations
 // are completed, it is important to understand this functionality.
@@ -95449,7 +81934,7 @@ var _ SimpleAsyncResult = (*SimpleAsyncResultInstance)(nil)
 // If the result needs to be created for a `GError`, use
 // [ctor@Gio.SimpleAsyncResult.new_from_error] or
 // [ctor@Gio.SimpleAsyncResult.new_take_error]. If a `GError` is not available
-// (e.g. the asynchronous operation doesn’t take a `GError` argument),
+// (e.g. the asynchronous operation doesn&#x2019;t take a `GError` argument),
 // but the result still needs to be created for an error condition, use
 // [ctor@Gio.SimpleAsyncResult.new_error] (or
 // [method@Gio.SimpleAsyncResult.set_error_va] if your application or binding
@@ -95463,7 +81948,7 @@ var _ SimpleAsyncResult = (*SimpleAsyncResultInstance)(nil)
 // operations that are dangerous to cancel, such as close (which would
 // cause a leak if cancelled before being run).
 // 
-// `GSimpleAsyncResult` can integrate into GLib’s event loop,
+// `GSimpleAsyncResult` can integrate into GLib&#x2019;s event loop,
 // [type@GLib.MainLoop], or it can use [type@GLib.Thread]s.
 // [method@Gio.SimpleAsyncResult.complete] will finish an I/O task directly
 // from the point where it is called.
@@ -95485,7 +81970,7 @@ var _ SimpleAsyncResult = (*SimpleAsyncResultInstance)(nil)
 // [method@Gio.SimpleAsyncResult.get_op_res_gpointer],
 // [method@Gio.SimpleAsyncResult.get_op_res_gboolean], and
 // [method@Gio.SimpleAsyncResult.get_op_res_gssize] are
-// provided, getting the operation’s result as a `gpointer`, `gboolean`, and
+// provided, getting the operation&#x2019;s result as a `gpointer`, `gboolean`, and
 // `gssize`, respectively.
 // 
 // For the details of the requirements implementations must respect, see
@@ -95515,7 +82000,7 @@ var _ SimpleAsyncResult = (*SimpleAsyncResultInstance)(nil)
 //   // In this example, we assume that baked_cb is called as a callback from
 //   // the mainloop, so it's safe to complete the operation synchronously here.
 //   // If, however, _baker_prepare_cake () might call its callback without
-//   // first returning to the mainloop — inadvisable, but some APIs do so —
+//   // first returning to the mainloop &#x2014; inadvisable, but some APIs do so &#x2014;
 //   // we would need to use g_simple_async_result_complete_in_idle().
 //   g_simple_async_result_complete (result);
 //   g_object_unref (result);
@@ -96191,7 +82676,7 @@ var _ SimplePermission = (*SimplePermissionInstance)(nil)
 //
 // `GSimplePermission` is a trivial implementation of [class@Gio.Permission]
 // that represents a permission that is either always or never allowed.  The
-// value is given at construction and doesn’t change.
+// value is given at construction and doesn&#x2019;t change.
 // 
 // Calling [method@Gio.Permission.acquire] or [method@Gio.Permission.release]
 // on a `GSimplePermission` will result in errors.
@@ -96589,7 +83074,7 @@ var _ Socket = (*SocketInstance)(nil)
 // [ctor@Gio.Socket.new_from_fd], so these functions can return `NULL`.
 // 
 // Sockets operate in two general modes, blocking or non-blocking. When
-// in blocking mode all operations (which don’t take an explicit blocking
+// in blocking mode all operations (which don&#x2019;t take an explicit blocking
 // parameter) block until the requested operation
 // is finished or there is an error. In non-blocking mode all calls that
 // would block return immediately with a `G_IO_ERROR_WOULD_BLOCK` error.
@@ -96625,17 +83110,17 @@ var _ Socket = (*SocketInstance)(nil)
 // a `GSocket` concurrently from multiple threads, you must implement your own
 // locking.
 // 
-// ## Nagle’s algorithm
+// ## Nagle&#x2019;s algorithm
 // 
 // Since GLib 2.80, `GSocket` will automatically set the `TCP_NODELAY` option on
 // all `G_SOCKET_TYPE_STREAM` sockets. This disables
-// [Nagle’s algorithm](https://en.wikipedia.org/wiki/Nagle%27s_algorithm) as it
+// [Nagle&#x2019;s algorithm](https://en.wikipedia.org/wiki/Nagle%27s_algorithm) as it
 // typically does more harm than good on modern networks.
 // 
-// If your application needs Nagle’s algorithm enabled, call
+// If your application needs Nagle&#x2019;s algorithm enabled, call
 // [method@Gio.Socket.set_option] after constructing a `GSocket` to enable it:
 // ```c
-// socket = g_socket_new (…, G_SOCKET_TYPE_STREAM, …);
+// socket = g_socket_new (&#x2026;, G_SOCKET_TYPE_STREAM, &#x2026;);
 // if (socket != NULL)
 //   {
 //     g_socket_set_option (socket, IPPROTO_TCP, TCP_NODELAY, FALSE, &amp;local_error);
@@ -97622,7 +84107,7 @@ type Socket interface {
 	// 	- blocking bool: Whether to use blocking I/O or not. 
 	//
 	// Sets the blocking mode of the socket. In blocking mode
-	// all operations (which don’t take an explicit blocking parameter) block until
+	// all operations (which don&#x2019;t take an explicit blocking parameter) block until
 	// they succeed or there is an error. In
 	// non-blocking mode all functions return results immediately or
 	// with a %G_IO_ERROR_WOULD_BLOCK error.
@@ -100090,7 +86575,7 @@ func (socket *SocketInstance) SendWithBlocking(cancellable context.Context, buff
 // 	- blocking bool: Whether to use blocking I/O or not. 
 //
 // Sets the blocking mode of the socket. In blocking mode
-// all operations (which don’t take an explicit blocking parameter) block until
+// all operations (which don&#x2019;t take an explicit blocking parameter) block until
 // they succeed or there is an error. In
 // non-blocking mode all functions return results immediately or
 // with a %G_IO_ERROR_WOULD_BLOCK error.
@@ -103787,7 +90272,7 @@ var _ SocketControlMessage = (*SocketControlMessageInstance)(nil)
 //
 // A `GSocketControlMessage` is a special-purpose utility message that
 // can be sent to or received from a [class@Gio.Socket]. These types of
-// messages are often called ‘ancillary data’.
+// messages are often called &#x2018;ancillary data&#x2019;.
 // 
 // The message can represent some sort of special instruction to or
 // information from the socket or can represent a special kind of
@@ -104388,6 +90873,14 @@ type SocketListener interface {
 	// This is useful if you need to have a socket for incoming connections
 	// but don't care about the specific port number.
 	// 
+	// If possible, the [class@Gio.SocketListener] will listen on both IPv4 and
+	// IPv6 (listening on the same port on both). If listening on one of the socket
+	// families fails, the [class@Gio.SocketListener] will only listen on the other.
+	// If listening on both fails, an error will be returned.
+	// 
+	// If you need to distinguish whether listening on IPv4 or IPv6 or both was
+	// successful, connect to [signal@Gio.SocketListener::event].
+	// 
 	// @source_object will be passed out in the various calls
 	// to accept to identify this particular source, which is
 	// useful if you're listening on multiple addresses and do
@@ -104408,6 +90901,14 @@ type SocketListener interface {
 	// Helper function for g_socket_listener_add_address() that
 	// creates a TCP/IP socket listening on IPv4 and IPv6 (if
 	// supported) on the specified port on all interfaces.
+	// 
+	// If possible, the [class@Gio.SocketListener] will listen on both IPv4 and
+	// IPv6 (listening on the same port on both). If listening on one of the socket
+	// families fails, the [class@Gio.SocketListener] will only listen on the other.
+	// If listening on both fails, an error will be returned.
+	// 
+	// If you need to distinguish whether listening on IPv4 or IPv6 or both was
+	// successful, connect to [signal@Gio.SocketListener::event].
 	// 
 	// @source_object will be passed out in the various calls
 	// to accept to identify this particular source, which is
@@ -104910,6 +91411,14 @@ func (listener *SocketListenerInstance) AddAddress(address SocketAddress, typ So
 // This is useful if you need to have a socket for incoming connections
 // but don't care about the specific port number.
 // 
+// If possible, the [class@Gio.SocketListener] will listen on both IPv4 and
+// IPv6 (listening on the same port on both). If listening on one of the socket
+// families fails, the [class@Gio.SocketListener] will only listen on the other.
+// If listening on both fails, an error will be returned.
+// 
+// If you need to distinguish whether listening on IPv4 or IPv6 or both was
+// successful, connect to [signal@Gio.SocketListener::event].
+// 
 // @source_object will be passed out in the various calls
 // to accept to identify this particular source, which is
 // useful if you're listening on multiple addresses and do
@@ -104955,6 +91464,14 @@ func (listener *SocketListenerInstance) AddAnyInetPort(sourceObject gobject.Obje
 // Helper function for g_socket_listener_add_address() that
 // creates a TCP/IP socket listening on IPv4 and IPv6 (if
 // supported) on the specified port on all interfaces.
+// 
+// If possible, the [class@Gio.SocketListener] will listen on both IPv4 and
+// IPv6 (listening on the same port on both). If listening on one of the socket
+// families fails, the [class@Gio.SocketListener] will only listen on the other.
+// If listening on both fails, an error will be returned.
+// 
+// If you need to distinguish whether listening on IPv4 or IPv6 or both was
+// successful, connect to [signal@Gio.SocketListener::event].
 // 
 // @source_object will be passed out in the various calls
 // to accept to identify this particular source, which is
@@ -105620,24 +92137,24 @@ var _ Task = (*TaskInstance)(nil)
 
 // Task wraps GTask
 //
-// A `GTask` represents and manages a cancellable ‘task’.
+// A `GTask` represents and manages a cancellable &#x2018;task&#x2019;.
 // 
 // ## Asynchronous operations
 // 
 // The most common usage of `GTask` is as a [iface@Gio.AsyncResult], to
 // manage data during an asynchronous operation. You call
-// [ctor@Gio.Task.new] in the ‘start’ method, followed by
+// [ctor@Gio.Task.new] in the &#x2018;start&#x2019; method, followed by
 // [method@Gio.Task.set_task_data] and the like if you need to keep some
 // additional data associated with the task, and then pass the
 // task object around through your asynchronous operation.
 // Eventually, you will call a method such as
 // [method@Gio.Task.return_pointer] or [method@Gio.Task.return_error], which
-// will save the value you give it and then invoke the task’s callback
+// will save the value you give it and then invoke the task&#x2019;s callback
 // function in the thread-default main context (see
 // [method@GLib.MainContext.push_thread_default])
 // where it was created (waiting until the next iteration of the main
 // loop first, if necessary). The caller will pass the `GTask` back to
-// the operation’s finish function (as a [iface@Gio.AsyncResult]), and you can
+// the operation&#x2019;s finish function (as a [iface@Gio.AsyncResult]), and you can
 // use [method@Gio.Task.propagate_pointer] or the like to extract the
 // return value.
 // 
@@ -105749,10 +92266,10 @@ var _ Task = (*TaskInstance)(nil)
 // `GTask` also tries to simplify asynchronous operations that
 // internally chain together several smaller asynchronous
 // operations. [method@Gio.Task.get_cancellable], [method@Gio.Task.get_context],
-// and [method@Gio.Task.get_priority] allow you to get back the task’s
+// and [method@Gio.Task.get_priority] allow you to get back the task&#x2019;s
 // [class@Gio.Cancellable], [struct@GLib.MainContext], and
 // [I/O priority](iface.AsyncResult.html#io-priority)
-// when starting a new subtask, so you don’t have to keep track
+// when starting a new subtask, so you don&#x2019;t have to keep track
 // of them yourself. [method@Gio.Task.attach_source] simplifies the case
 // of waiting for a source to fire (automatically using the correct
 // [struct@GLib.MainContext] and priority).
@@ -105841,7 +92358,7 @@ var _ Task = (*TaskInstance)(nil)
 //       GSource *source;
 // 
 //       source = cake_decorator_wait_source_new (cake);
-//       // Attach @source to @task’s GMainContext and have it call
+//       // Attach @source to @task&#x2019;s GMainContext and have it call
 //       // decorator_ready() when it is ready.
 //       g_task_attach_source (task, source, decorator_ready);
 //       g_source_unref (source);
@@ -105968,13 +92485,13 @@ var _ Task = (*TaskInstance)(nil)
 // Finally, [method@Gio.Task.run_in_thread] and
 // [method@Gio.Task.run_in_thread_sync] can be used to turn an uncancellable
 // operation into a cancellable one. If you call
-// [method@Gio.Task.set_return_on_cancel], passing `TRUE`, then if the task’s
+// [method@Gio.Task.set_return_on_cancel], passing `TRUE`, then if the task&#x2019;s
 // [class@Gio.Cancellable] is cancelled, it will return control back to the
 // caller immediately, while allowing the task thread to continue running in the
 // background (and simply discarding its result when it finally does finish).
 // Provided that the task thread is careful about how it uses
 // locks and other externally-visible resources, this allows you
-// to make ‘GLib-friendly’ asynchronous and cancellable
+// to make &#x2018;GLib-friendly&#x2019; asynchronous and cancellable
 // synchronous variants of blocking APIs.
 // 
 // Cancelling a task:
@@ -105999,8 +92516,8 @@ var _ Task = (*TaskInstance)(nil)
 //       return;
 //     }
 // 
-//   // If the task has already been cancelled, then we don’t want to add
-//   // the cake to the cake cache. Likewise, we don’t  want to have the
+//   // If the task has already been cancelled, then we don&#x2019;t want to add
+//   // the cake to the cake cache. Likewise, we don&#x2019;t  want to have the
 //   // task get cancelled in the middle of updating the cache.
 //   // g_task_set_return_on_cancel() will return %TRUE here if it managed
 //   // to disable return-on-cancel, or %FALSE if the task was cancelled
@@ -106008,11 +92525,11 @@ var _ Task = (*TaskInstance)(nil)
 //   if (g_task_set_return_on_cancel (task, FALSE))
 //     {
 //       // If the caller cancels at this point, their
-//       // GAsyncReadyCallback won’t be invoked until we return,
-//       // so we don’t have to worry that this code will run at
+//       // GAsyncReadyCallback won&#x2019;t be invoked until we return,
+//       // so we don&#x2019;t have to worry that this code will run at
 //       // the same time as that code does. But if there were
 //       // other functions that might look at the cake cache,
-//       // then we’d probably need a GMutex here as well.
+//       // then we&#x2019;d probably need a GMutex here as well.
 //       baker_add_cake_to_cache (baker, cake);
 //       g_task_return_pointer (task, cake, g_object_unref);
 //     }
@@ -106071,7 +92588,7 @@ var _ Task = (*TaskInstance)(nil)
 // 
 // ## Porting from [class@Gio.SimpleAsyncResult]
 // 
-// `GTask`’s API attempts to be simpler than [class@Gio.SimpleAsyncResult]’s
+// `GTask`&#x2019;s API attempts to be simpler than [class@Gio.SimpleAsyncResult]&#x2019;s
 // in several ways:
 // 
 // - You can save task-specific data with [method@Gio.Task.set_task_data], and
@@ -106091,22 +92608,22 @@ var _ Task = (*TaskInstance)(nil)
 //   (You can use [method@Gio.Task.set_check_cancellable] to turn off that
 //   behavior.) On the other hand, [method@Gio.Task.run_in_thread]
 //   guarantees that it will always run your
-//   `task_func`, even if the task’s [class@Gio.Cancellable]
+//   `task_func`, even if the task&#x2019;s [class@Gio.Cancellable]
 //   is already cancelled before the task gets a chance to run;
 //   you can start your `task_func` with a
 //   [method@Gio.Task.return_error_if_cancelled] check if you need the
 //   old behavior.
-// - The ‘return’ methods (eg, [method@Gio.Task.return_pointer])
-//   automatically cause the task to be ‘completed’ as well, and
-//   there is no need to worry about the ‘complete’ vs ‘complete in idle’
+// - The &#x2018;return&#x2019; methods (eg, [method@Gio.Task.return_pointer])
+//   automatically cause the task to be &#x2018;completed&#x2019; as well, and
+//   there is no need to worry about the &#x2018;complete&#x2019; vs &#x2018;complete in idle&#x2019;
 //   distinction. (`GTask` automatically figures out
-//   whether the task’s callback can be invoked directly, or
+//   whether the task&#x2019;s callback can be invoked directly, or
 //   if it needs to be sent to another [struct@GLib.MainContext], or delayed
 //   until the next iteration of the current [struct@GLib.MainContext].)
-// - The ‘finish’ functions for `GTask` based operations are generally
+// - The &#x2018;finish&#x2019; functions for `GTask` based operations are generally
 //   much simpler than [class@Gio.SimpleAsyncResult] ones, normally consisting
 //   of only a single call to [method@Gio.Task.propagate_pointer] or the like.
-//   Since [method@Gio.Task.propagate_pointer] ‘steals’ the return value from
+//   Since [method@Gio.Task.propagate_pointer] &#x2018;steals&#x2019; the return value from
 //   the `GTask`, it is not necessary to juggle pointers around to
 //   prevent it from being freed twice.
 // - With [class@Gio.SimpleAsyncResult], it was common to call
@@ -106114,7 +92631,7 @@ var _ Task = (*TaskInstance)(nil)
 //   `_finish()` wrapper function, and have
 //   virtual method implementations only deal with successful
 //   returns. This behavior is deprecated, because it makes it
-//   difficult for a subclass to chain to a parent class’s async
+//   difficult for a subclass to chain to a parent class&#x2019;s async
 //   methods. Instead, the wrapper function should just be a
 //   simple wrapper, and the virtual method should call an
 //   appropriate `g_task_propagate_` function.
@@ -106123,7 +92640,7 @@ var _ Task = (*TaskInstance)(nil)
 //   [class@Gio.SimpleAsyncResult] error-returning behavior, and
 //   [method@Gio.AsyncResult.is_tagged] to check if a result is tagged as
 //   having come from the `_async()` wrapper
-//   function (for ‘short-circuit’ results, such as when passing
+//   function (for &#x2018;short-circuit&#x2019; results, such as when passing
 //   `0` to [method@Gio.InputStream.read_async]).
 // 
 // ## Thread-safety considerations
@@ -106170,7 +92687,7 @@ type Task interface {
 	// 	- goret bool 
 	//
 	// Gets the value of #GTask:completed. This changes from %FALSE to %TRUE after
-	// the task’s callback is invoked, and will return %FALSE if called from inside
+	// the task&#x2019;s callback is invoked, and will return %FALSE if called from inside
 	// the callback.
 	GetCompleted() bool
 	// GetContext wraps g_task_get_context
@@ -106193,7 +92710,7 @@ type Task interface {
 	// 
 	// 	- goret string (nullable) 
 	//
-	// Gets @task’s name. See g_task_set_name().
+	// Gets @task&#x2019;s name. See g_task_set_name().
 	GetName() string
 	// GetPriority wraps g_task_get_priority
 	// 
@@ -106327,11 +92844,11 @@ type Task interface {
 	// 	- code int32: an error code. 
 	// 	- message string: an error message 
 	//
-	// Sets @task’s result to a new [type@GLib.Error] created from @domain, @code,
+	// Sets @task&#x2019;s result to a new [type@GLib.Error] created from @domain, @code,
 	// @message and completes the task.
 	// 
 	// See [method@Gio.Task.return_pointer] for more discussion of exactly what
-	// ‘completing the task’ means.
+	// &#x2018;completing the task&#x2019; means.
 	// 
 	// See also [method@Gio.Task.return_new_error].
 	ReturnNewErrorLiteral(glib.Quark, int32, string)
@@ -106379,11 +92896,11 @@ type Task interface {
 	// 
 	// 	- name string (nullable): a human readable name for the task, or %NULL to unset it 
 	//
-	// Sets @task’s name, used in debugging and profiling. The name defaults to
+	// Sets @task&#x2019;s name, used in debugging and profiling. The name defaults to
 	// %NULL.
 	// 
 	// The task name should describe in a human readable way what the task does.
-	// For example, ‘Open file’ or ‘Connect to network host’. It is used to set the
+	// For example, &#x2018;Open file&#x2019; or &#x2018;Connect to network host&#x2019;. It is used to set the
 	// name of the #GSource used for idle completion of the task.
 	// 
 	// This function may only be called before the @task is first used in a thread
@@ -106449,7 +92966,7 @@ type Task interface {
 	// 
 	// 	- name string (nullable): a human readable name for the task. Must be a string literal 
 	//
-	// Sets @task’s name, used in debugging and profiling.
+	// Sets @task&#x2019;s name, used in debugging and profiling.
 	// 
 	// This is a variant of g_task_set_name() that avoids copying @name.
 	// 
@@ -106564,7 +93081,7 @@ func (task *TaskInstance) GetCheckCancellable() bool {
 // 	- goret bool 
 //
 // Gets the value of #GTask:completed. This changes from %FALSE to %TRUE after
-// the task’s callback is invoked, and will return %FALSE if called from inside
+// the task&#x2019;s callback is invoked, and will return %FALSE if called from inside
 // the callback.
 func (task *TaskInstance) GetCompleted() bool {
 	var carg0 *C.GTask   // in, none, converted
@@ -106619,7 +93136,7 @@ func (task *TaskInstance) GetContext() *glib.MainContext {
 // 
 // 	- goret string (nullable) 
 //
-// Gets @task’s name. See g_task_set_name().
+// Gets @task&#x2019;s name. See g_task_set_name().
 func (task *TaskInstance) GetName() string {
 	var carg0 *C.GTask // in, none, converted
 	var cret  *C.gchar // return, none, string, nullable-string
@@ -106940,11 +93457,11 @@ func (task *TaskInstance) ReturnInt(result int) {
 // 	- code int32: an error code. 
 // 	- message string: an error message 
 //
-// Sets @task’s result to a new [type@GLib.Error] created from @domain, @code,
+// Sets @task&#x2019;s result to a new [type@GLib.Error] created from @domain, @code,
 // @message and completes the task.
 // 
 // See [method@Gio.Task.return_pointer] for more discussion of exactly what
-// ‘completing the task’ means.
+// &#x2018;completing the task&#x2019; means.
 // 
 // See also [method@Gio.Task.return_new_error].
 func (task *TaskInstance) ReturnNewErrorLiteral(domain glib.Quark, code int32, message string) {
@@ -107036,11 +93553,11 @@ func (task *TaskInstance) SetCheckCancellable(checkCancellable bool) {
 // 
 // 	- name string (nullable): a human readable name for the task, or %NULL to unset it 
 //
-// Sets @task’s name, used in debugging and profiling. The name defaults to
+// Sets @task&#x2019;s name, used in debugging and profiling. The name defaults to
 // %NULL.
 // 
 // The task name should describe in a human readable way what the task does.
-// For example, ‘Open file’ or ‘Connect to network host’. It is used to set the
+// For example, &#x2018;Open file&#x2019; or &#x2018;Connect to network host&#x2019;. It is used to set the
 // name of the #GSource used for idle completion of the task.
 // 
 // This function may only be called before the @task is first used in a thread
@@ -107153,7 +93670,7 @@ func (task *TaskInstance) SetReturnOnCancel(returnOnCancel bool) bool {
 // 
 // 	- name string (nullable): a human readable name for the task. Must be a string literal 
 //
-// Sets @task’s name, used in debugging and profiling.
+// Sets @task&#x2019;s name, used in debugging and profiling.
 // 
 // This is a variant of g_task_set_name() that avoids copying @name.
 // 
@@ -107544,367 +94061,6 @@ func RegisterTcpWrapperConnectionSubClass[InstanceT TcpWrapperConnection](
 		},
 		interfaceInits...,
 	)
-}
-
-// TestDBusInstance is the instance type used by all types extending GTestDBus. It is used internally by the bindings. Users should use the interface [TestDBus] instead.
-type TestDBusInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ TestDBus = (*TestDBusInstance)(nil)
-
-// TestDBus wraps GTestDBus
-//
-// A helper class for testing code which uses D-Bus without touching the user’s
-// session bus.
-// 
-// Note that `GTestDBus` modifies the user’s environment, calling
-// [`setenv()`](man:setenv(3)). This is not thread-safe, so all `GTestDBus`
-// calls should be completed before threads are spawned, or should have
-// appropriate locking to ensure no access conflicts to environment variables
-// shared between `GTestDBus` and other threads.
-// 
-// ## Creating unit tests using `GTestDBus`
-// 
-// Testing of D-Bus services can be tricky because normally we only ever run
-// D-Bus services over an existing instance of the D-Bus daemon thus we
-// usually don’t activate D-Bus services that are not yet installed into the
-// target system. The `GTestDBus` object makes this easier for us by taking care
-// of the lower level tasks such as running a private D-Bus daemon and looking
-// up uninstalled services in customizable locations, typically in your source
-// code tree.
-// 
-// The first thing you will need is a separate service description file for the
-// D-Bus daemon. Typically a `services` subdirectory of your `tests` directory
-// is a good place to put this file.
-// 
-// The service file should list your service along with an absolute path to the
-// uninstalled service executable in your source tree. Using autotools we would
-// achieve this by adding a file such as `my-server.service.in` in the services
-// directory and have it processed by configure.
-// 
-// ```
-// [D-BUS Service]
-// Name=org.gtk.GDBus.Examples.ObjectManager
-// Exec=@abs_top_builddir@/gio/tests/gdbus-example-objectmanager-server
-// ```
-// 
-// You will also need to indicate this service directory in your test
-// fixtures, so you will need to pass the path while compiling your
-// test cases. Typically this is done with autotools with an added
-// preprocessor flag specified to compile your tests such as:
-// 
-// ```
-// -DTEST_SERVICES=\""$(abs_top_builddir)/tests/services"\"
-// ```
-// 
-// Once you have a service definition file which is local to your source tree,
-// you can proceed to set up a GTest fixture using the `GTestDBus` scaffolding.
-// 
-// An example of a test fixture for D-Bus services can be found
-// here:
-// [gdbus-test-fixture.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-test-fixture.c)
-// 
-// Note that these examples only deal with isolating the D-Bus aspect of your
-// service. To successfully run isolated unit tests on your service you may need
-// some additional modifications to your test case fixture. For example; if your
-// service uses [class@Gio.Settings] and installs a schema then it is important
-// that your test service not load the schema in the ordinary installed location
-// (chances are that your service and schema files are not yet installed, or
-// worse; there is an older version of the schema file sitting in the install
-// location).
-// 
-// Most of the time we can work around these obstacles using the
-// environment. Since the environment is inherited by the D-Bus daemon
-// created by `GTestDBus` and then in turn inherited by any services the
-// D-Bus daemon activates, using the setup routine for your fixture is
-// a practical place to help sandbox your runtime environment. For the
-// rather typical GSettings case we can work around this by setting
-// `GSETTINGS_SCHEMA_DIR` to the in tree directory holding your schemas
-// in the above `fixture_setup()` routine.
-// 
-// The GSettings schemas need to be locally pre-compiled for this to work. This
-// can be achieved by compiling the schemas locally as a step before running
-// test cases, an autotools setup might do the following in the directory
-// holding schemas:
-// 
-// ```
-//     all-am:
-//             $(GLIB_COMPILE_SCHEMAS) .
-// 
-//     CLEANFILES += gschemas.compiled
-// ```
-type TestDBus interface {
-	gobject.Object
-	upcastToGTestDBus() *TestDBusInstance
-
-	// AddServiceDir wraps g_test_dbus_add_service_dir
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- path string: path to a directory containing .service files 
-	//
-	// Add a path where dbus-daemon will look up .service files. This can't be
-	// called after g_test_dbus_up().
-	AddServiceDir(string)
-	// Down wraps g_test_dbus_down
-	//
-	// Stop the session bus started by g_test_dbus_up().
-	// 
-	// This will wait for the singleton returned by g_bus_get() or g_bus_get_sync()
-	// to be destroyed. This is done to ensure that the next unit test won't get a
-	// leaked singleton from this test.
-	Down()
-	// GetBusAddress wraps g_test_dbus_get_bus_address
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string (nullable) 
-	//
-	// Get the address on which dbus-daemon is running. If g_test_dbus_up() has not
-	// been called yet, %NULL is returned. This can be used with
-	// g_dbus_connection_new_for_address().
-	GetBusAddress() string
-	// GetFlags wraps g_test_dbus_get_flags
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret TestDBusFlags 
-	//
-	// Get the flags of the #GTestDBus object.
-	GetFlags() TestDBusFlags
-	// Stop wraps g_test_dbus_stop
-	//
-	// Stop the session bus started by g_test_dbus_up().
-	// 
-	// Unlike g_test_dbus_down(), this won't verify the #GDBusConnection
-	// singleton returned by g_bus_get() or g_bus_get_sync() is destroyed. Unit
-	// tests wanting to verify behaviour after the session bus has been stopped
-	// can use this function but should still call g_test_dbus_down() when done.
-	Stop()
-	// Up wraps g_test_dbus_up
-	//
-	// Start a dbus-daemon instance and set DBUS_SESSION_BUS_ADDRESS. After this
-	// call, it is safe for unit tests to start sending messages on the session bus.
-	// 
-	// If this function is called from setup callback of g_test_add(),
-	// g_test_dbus_down() must be called in its teardown callback.
-	// 
-	// If this function is called from unit test's main(), then g_test_dbus_down()
-	// must be called after g_test_run().
-	Up()
-}
-
-func unsafeWrapTestDBus(base *gobject.ObjectInstance) *TestDBusInstance {
-	return &TestDBusInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeTestDBus,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapTestDBus(inst)
-		},
-	)
-}
-
-func marshalTestDBusInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapTestDBus(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeTestDBusFromGlibNone is used to convert raw GTestDBus pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeTestDBusFromGlibNone(c unsafe.Pointer) TestDBus {
-	return gobject.UnsafeObjectFromGlibNone(c).(TestDBus)
-}
-
-// UnsafeTestDBusFromGlibFull is used to convert raw GTestDBus pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeTestDBusFromGlibFull(c unsafe.Pointer) TestDBus {
-	return gobject.UnsafeObjectFromGlibFull(c).(TestDBus)
-}
-
-// UnsafeTestDBusFromGlibBorrow is used to convert raw GTestDBus pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeTestDBusFromGlibBorrow(c unsafe.Pointer) TestDBus {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(TestDBus)
-}
-
-func (t *TestDBusInstance) upcastToGTestDBus() *TestDBusInstance {
-	return t
-}
-
-// UnsafeTestDBusToGlibNone is used to convert the instance to it's C value GTestDBus. This is used by the bindings internally.
-func UnsafeTestDBusToGlibNone(c TestDBus) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeTestDBusToGlibFull is used to convert the instance to it's C value GTestDBus, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeTestDBusToGlibFull(c TestDBus) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewTestDBus wraps g_test_dbus_new
-// 
-// The function takes the following parameters:
-// 
-// 	- flags TestDBusFlags: a #GTestDBusFlags 
-// 
-// The function returns the following values:
-// 
-// 	- goret TestDBus 
-//
-// Create a new #GTestDBus object.
-func NewTestDBus(flags TestDBusFlags) TestDBus {
-	var carg1 C.GTestDBusFlags // in, none, casted
-	var cret  *C.GTestDBus     // return, full, converted
-
-	carg1 = C.GTestDBusFlags(flags)
-
-	cret = C.g_test_dbus_new(carg1)
-	runtime.KeepAlive(flags)
-
-	var goret TestDBus
-
-	goret = UnsafeTestDBusFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// TestDBusUnset wraps g_test_dbus_unset
-//
-// Unset DISPLAY and DBUS_SESSION_BUS_ADDRESS env variables to ensure the test
-// won't use user's session bus.
-// 
-// This is useful for unit tests that want to verify behaviour when no session
-// bus is running. It is not necessary to call this if unit test already calls
-// g_test_dbus_up() before acquiring the session bus.
-func TestDBusUnset() {
-
-	C.g_test_dbus_unset()
-}
-
-// AddServiceDir wraps g_test_dbus_add_service_dir
-// 
-// The function takes the following parameters:
-// 
-// 	- path string: path to a directory containing .service files 
-//
-// Add a path where dbus-daemon will look up .service files. This can't be
-// called after g_test_dbus_up().
-func (self *TestDBusInstance) AddServiceDir(path string) {
-	var carg0 *C.GTestDBus // in, none, converted
-	var carg1 *C.gchar     // in, none, string
-
-	carg0 = (*C.GTestDBus)(UnsafeTestDBusToGlibNone(self))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(path)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.g_test_dbus_add_service_dir(carg0, carg1)
-	runtime.KeepAlive(self)
-	runtime.KeepAlive(path)
-}
-
-// Down wraps g_test_dbus_down
-//
-// Stop the session bus started by g_test_dbus_up().
-// 
-// This will wait for the singleton returned by g_bus_get() or g_bus_get_sync()
-// to be destroyed. This is done to ensure that the next unit test won't get a
-// leaked singleton from this test.
-func (self *TestDBusInstance) Down() {
-	var carg0 *C.GTestDBus // in, none, converted
-
-	carg0 = (*C.GTestDBus)(UnsafeTestDBusToGlibNone(self))
-
-	C.g_test_dbus_down(carg0)
-	runtime.KeepAlive(self)
-}
-
-// GetBusAddress wraps g_test_dbus_get_bus_address
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Get the address on which dbus-daemon is running. If g_test_dbus_up() has not
-// been called yet, %NULL is returned. This can be used with
-// g_dbus_connection_new_for_address().
-func (self *TestDBusInstance) GetBusAddress() string {
-	var carg0 *C.GTestDBus // in, none, converted
-	var cret  *C.gchar     // return, none, string, nullable-string
-
-	carg0 = (*C.GTestDBus)(UnsafeTestDBusToGlibNone(self))
-
-	cret = C.g_test_dbus_get_bus_address(carg0)
-	runtime.KeepAlive(self)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// GetFlags wraps g_test_dbus_get_flags
-// 
-// The function returns the following values:
-// 
-// 	- goret TestDBusFlags 
-//
-// Get the flags of the #GTestDBus object.
-func (self *TestDBusInstance) GetFlags() TestDBusFlags {
-	var carg0 *C.GTestDBus     // in, none, converted
-	var cret  C.GTestDBusFlags // return, none, casted
-
-	carg0 = (*C.GTestDBus)(UnsafeTestDBusToGlibNone(self))
-
-	cret = C.g_test_dbus_get_flags(carg0)
-	runtime.KeepAlive(self)
-
-	var goret TestDBusFlags
-
-	goret = TestDBusFlags(cret)
-
-	return goret
-}
-
-// Stop wraps g_test_dbus_stop
-//
-// Stop the session bus started by g_test_dbus_up().
-// 
-// Unlike g_test_dbus_down(), this won't verify the #GDBusConnection
-// singleton returned by g_bus_get() or g_bus_get_sync() is destroyed. Unit
-// tests wanting to verify behaviour after the session bus has been stopped
-// can use this function but should still call g_test_dbus_down() when done.
-func (self *TestDBusInstance) Stop() {
-	var carg0 *C.GTestDBus // in, none, converted
-
-	carg0 = (*C.GTestDBus)(UnsafeTestDBusToGlibNone(self))
-
-	C.g_test_dbus_stop(carg0)
-	runtime.KeepAlive(self)
-}
-
-// Up wraps g_test_dbus_up
-//
-// Start a dbus-daemon instance and set DBUS_SESSION_BUS_ADDRESS. After this
-// call, it is safe for unit tests to start sending messages on the session bus.
-// 
-// If this function is called from setup callback of g_test_add(),
-// g_test_dbus_down() must be called in its teardown callback.
-// 
-// If this function is called from unit test's main(), then g_test_dbus_down()
-// must be called after g_test_run().
-func (self *TestDBusInstance) Up() {
-	var carg0 *C.GTestDBus // in, none, converted
-
-	carg0 = (*C.GTestDBus)(UnsafeTestDBusToGlibNone(self))
-
-	C.g_test_dbus_up(carg0)
-	runtime.KeepAlive(self)
 }
 
 // ThemedIconInstance is the instance type used by all types extending GThemedIcon. It is used internally by the bindings. Users should use the interface [ThemedIcon] instead.
@@ -108478,22 +94634,6 @@ type TlsCertificate interface {
 	//
 	// Returns the issuer name from the certificate.
 	GetIssuerName() string
-	// GetNotValidAfter wraps g_tls_certificate_get_not_valid_after
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *glib.DateTime (nullable) 
-	//
-	// Returns the time at which the certificate became or will become invalid.
-	GetNotValidAfter() *glib.DateTime
-	// GetNotValidBefore wraps g_tls_certificate_get_not_valid_before
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret *glib.DateTime (nullable) 
-	//
-	// Returns the time at which the certificate became or will become valid.
-	GetNotValidBefore() *glib.DateTime
 	// GetSubjectName wraps g_tls_certificate_get_subject_name
 	// 
 	// The function returns the following values:
@@ -108872,7 +95012,7 @@ func NewTlsCertificateFromPem(data string, length int) (TlsCertificate, error) {
 // 
 // An example @pkcs11_uri would be `pkcs11:model=Model;manufacturer=Manufacture;serial=1;token=My%20Client%20Certificate;id=%01`
 // 
-// Where the token’s layout is:
+// Where the token&#x2019;s layout is:
 // 
 // |[
 // Object 0:
@@ -109070,56 +95210,6 @@ func (cert *TlsCertificateInstance) GetIssuerName() string {
 	if cret != nil {
 		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 		defer C.free(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// GetNotValidAfter wraps g_tls_certificate_get_not_valid_after
-// 
-// The function returns the following values:
-// 
-// 	- goret *glib.DateTime (nullable) 
-//
-// Returns the time at which the certificate became or will become invalid.
-func (cert *TlsCertificateInstance) GetNotValidAfter() *glib.DateTime {
-	var carg0 *C.GTlsCertificate // in, none, converted
-	var cret  *C.GDateTime       // return, full, converted, nullable
-
-	carg0 = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibNone(cert))
-
-	cret = C.g_tls_certificate_get_not_valid_after(carg0)
-	runtime.KeepAlive(cert)
-
-	var goret *glib.DateTime
-
-	if cret != nil {
-		goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// GetNotValidBefore wraps g_tls_certificate_get_not_valid_before
-// 
-// The function returns the following values:
-// 
-// 	- goret *glib.DateTime (nullable) 
-//
-// Returns the time at which the certificate became or will become valid.
-func (cert *TlsCertificateInstance) GetNotValidBefore() *glib.DateTime {
-	var carg0 *C.GTlsCertificate // in, none, converted
-	var cret  *C.GDateTime       // return, full, converted, nullable
-
-	carg0 = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibNone(cert))
-
-	cret = C.g_tls_certificate_get_not_valid_before(carg0)
-	runtime.KeepAlive(cert)
-
-	var goret *glib.DateTime
-
-	if cret != nil {
-		goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
 	}
 
 	return goret
@@ -113380,7 +99470,7 @@ var _ TlsInteraction = (*TlsInteractionInstance)(nil)
 // and not in the current thread, if the current thread is not running the
 // main loop.
 // 
-// Derived classes can choose to implement whichever interactions methods they’d
+// Derived classes can choose to implement whichever interactions methods they&#x2019;d
 // like to support by overriding those virtual methods in their class
 // initialization function. Any interactions not implemented will return
 // `G_TLS_INTERACTION_UNHANDLED`. If a derived class implements an async method,
@@ -117963,221 +104053,6 @@ func RegisterVolumeMonitorSubClass[InstanceT VolumeMonitor](
 	)
 }
 
-// ZlibCompressorInstance is the instance type used by all types extending GZlibCompressor. It is used internally by the bindings. Users should use the interface [ZlibCompressor] instead.
-type ZlibCompressorInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ ZlibCompressor = (*ZlibCompressorInstance)(nil)
-
-// ZlibCompressor wraps GZlibCompressor
-//
-// `GZlibCompressor` is an implementation of [iface@Gio.Converter] that
-// compresses data using zlib.
-type ZlibCompressor interface {
-	gobject.Object
-	upcastToGZlibCompressor() *ZlibCompressorInstance
-
-	// GetFileInfo wraps g_zlib_compressor_get_file_info
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret FileInfo (nullable) 
-	//
-	// Returns the #GZlibCompressor:file-info property.
-	GetFileInfo() FileInfo
-	// SetFileInfo wraps g_zlib_compressor_set_file_info
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- fileInfo FileInfo (nullable): a #GFileInfo 
-	//
-	// Sets @file_info in @compressor. If non-%NULL, and @compressor's
-	// #GZlibCompressor:format property is %G_ZLIB_COMPRESSOR_FORMAT_GZIP,
-	// it will be used to set the file name and modification time in
-	// the GZIP header of the compressed data.
-	// 
-	// Note: it is an error to call this function while a compression is in
-	// progress; it may only be called immediately after creation of @compressor,
-	// or after resetting it with g_converter_reset().
-	SetFileInfo(FileInfo)
-
-	// chain up virtual methods:
-}
-
-func unsafeWrapZlibCompressor(base *gobject.ObjectInstance) *ZlibCompressorInstance {
-	return &ZlibCompressorInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeZlibCompressor,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapZlibCompressor(inst)
-		},
-	)
-}
-
-func marshalZlibCompressorInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapZlibCompressor(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeZlibCompressorFromGlibNone is used to convert raw GZlibCompressor pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeZlibCompressorFromGlibNone(c unsafe.Pointer) ZlibCompressor {
-	return gobject.UnsafeObjectFromGlibNone(c).(ZlibCompressor)
-}
-
-// UnsafeZlibCompressorFromGlibFull is used to convert raw GZlibCompressor pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeZlibCompressorFromGlibFull(c unsafe.Pointer) ZlibCompressor {
-	return gobject.UnsafeObjectFromGlibFull(c).(ZlibCompressor)
-}
-
-// UnsafeZlibCompressorFromGlibBorrow is used to convert raw GZlibCompressor pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeZlibCompressorFromGlibBorrow(c unsafe.Pointer) ZlibCompressor {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(ZlibCompressor)
-}
-
-func (z *ZlibCompressorInstance) upcastToGZlibCompressor() *ZlibCompressorInstance {
-	return z
-}
-
-// UnsafeZlibCompressorToGlibNone is used to convert the instance to it's C value GZlibCompressor. This is used by the bindings internally.
-func UnsafeZlibCompressorToGlibNone(c ZlibCompressor) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeZlibCompressorToGlibFull is used to convert the instance to it's C value GZlibCompressor, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeZlibCompressorToGlibFull(c ZlibCompressor) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewZlibCompressor wraps g_zlib_compressor_new
-// 
-// The function takes the following parameters:
-// 
-// 	- format ZlibCompressorFormat: The format to use for the compressed data 
-// 	- level int32: compression level (0-9), -1 for default 
-// 
-// The function returns the following values:
-// 
-// 	- goret ZlibCompressor 
-//
-// Creates a new #GZlibCompressor.
-func NewZlibCompressor(format ZlibCompressorFormat, level int32) ZlibCompressor {
-	var carg1 C.GZlibCompressorFormat // in, none, casted
-	var carg2 C.int                   // in, none, casted
-	var cret  *C.GZlibCompressor      // return, full, converted
-
-	carg1 = C.GZlibCompressorFormat(format)
-	carg2 = C.int(level)
-
-	cret = C.g_zlib_compressor_new(carg1, carg2)
-	runtime.KeepAlive(format)
-	runtime.KeepAlive(level)
-
-	var goret ZlibCompressor
-
-	goret = UnsafeZlibCompressorFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// GetFileInfo wraps g_zlib_compressor_get_file_info
-// 
-// The function returns the following values:
-// 
-// 	- goret FileInfo (nullable) 
-//
-// Returns the #GZlibCompressor:file-info property.
-func (compressor *ZlibCompressorInstance) GetFileInfo() FileInfo {
-	var carg0 *C.GZlibCompressor // in, none, converted
-	var cret  *C.GFileInfo       // return, none, converted, nullable
-
-	carg0 = (*C.GZlibCompressor)(UnsafeZlibCompressorToGlibNone(compressor))
-
-	cret = C.g_zlib_compressor_get_file_info(carg0)
-	runtime.KeepAlive(compressor)
-
-	var goret FileInfo
-
-	if cret != nil {
-		goret = UnsafeFileInfoFromGlibNone(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// SetFileInfo wraps g_zlib_compressor_set_file_info
-// 
-// The function takes the following parameters:
-// 
-// 	- fileInfo FileInfo (nullable): a #GFileInfo 
-//
-// Sets @file_info in @compressor. If non-%NULL, and @compressor's
-// #GZlibCompressor:format property is %G_ZLIB_COMPRESSOR_FORMAT_GZIP,
-// it will be used to set the file name and modification time in
-// the GZIP header of the compressed data.
-// 
-// Note: it is an error to call this function while a compression is in
-// progress; it may only be called immediately after creation of @compressor,
-// or after resetting it with g_converter_reset().
-func (compressor *ZlibCompressorInstance) SetFileInfo(fileInfo FileInfo) {
-	var carg0 *C.GZlibCompressor // in, none, converted
-	var carg1 *C.GFileInfo       // in, none, converted, nullable
-
-	carg0 = (*C.GZlibCompressor)(UnsafeZlibCompressorToGlibNone(compressor))
-	if fileInfo != nil {
-		carg1 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(fileInfo))
-	}
-
-	C.g_zlib_compressor_set_file_info(carg0, carg1)
-	runtime.KeepAlive(compressor)
-	runtime.KeepAlive(fileInfo)
-}
-
-// ZlibCompressorOverrides is the struct used to override the default implementation of virtual methods.
-// it is generic over the extending instance type.
-type ZlibCompressorOverrides[Instance ZlibCompressor] struct {
-	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
-	gobject.ObjectOverrides[Instance]
-
-}
-
-// UnsafeApplyZlibCompressorOverrides applies the overrides to init the gclass by setting the trampoline functions.
-// This is used by the bindings internally and only exported for visibility to other bindings code.
-func UnsafeApplyZlibCompressorOverrides[Instance ZlibCompressor](gclass unsafe.Pointer, overrides ZlibCompressorOverrides[Instance]) {
-	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
-}
-
-// RegisterZlibCompressorSubClass is used to register a go subclass of GZlibCompressor. For this to work safely please implement the
-// virtual methods required by the implementation.
-func RegisterZlibCompressorSubClass[InstanceT ZlibCompressor](
-		name string,
-		classInit func(class *ZlibCompressorClass),
-		constructor func() InstanceT,
-		overrides ZlibCompressorOverrides[InstanceT],
-		signals map[string]gobject.SignalDefinition,
-		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
-) gobject.Type {
-	return gobject.UnsafeRegisterSubClass(
-		name,
-		classInit,
-		constructor,
-		overrides,
-		signals,
-		TypeZlibCompressor,
-		UnsafeZlibCompressorClassFromGlibBorrow,
-		UnsafeApplyZlibCompressorOverrides,
-		func (obj *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapZlibCompressor(obj)
-		},
-		interfaceInits...,
-	)
-}
-
 // ZlibDecompressorInstance is the instance type used by all types extending GZlibDecompressor. It is used internally by the bindings. Users should use the interface [ZlibDecompressor] instead.
 type ZlibDecompressorInstance struct {
 	_ [0]func() // equal guard
@@ -118200,11 +104075,7 @@ type ZlibDecompressor interface {
 	// 
 	// 	- goret FileInfo (nullable) 
 	//
-	// Retrieves the #GFileInfo constructed from the GZIP header data
-	// of compressed data processed by @compressor, or %NULL if @decompressor's
-	// #GZlibDecompressor:format property is not %G_ZLIB_COMPRESSOR_FORMAT_GZIP,
-	// or the header data was not fully processed yet, or it not present in the
-	// data stream at all.
+	// Gets the [property@Gio.ZlibDecompressor:file-info] property.
 	GetFileInfo() FileInfo
 
 	// chain up virtual methods:
@@ -118262,13 +104133,13 @@ func UnsafeZlibDecompressorToGlibFull(c ZlibDecompressor) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- format ZlibCompressorFormat: The format to use for the compressed data 
+// 	- format ZlibCompressorFormat: the format to use for the compressed data 
 // 
 // The function returns the following values:
 // 
 // 	- goret ZlibDecompressor 
 //
-// Creates a new #GZlibDecompressor.
+// Creates a new decompressor.
 func NewZlibDecompressor(format ZlibCompressorFormat) ZlibDecompressor {
 	var carg1 C.GZlibCompressorFormat // in, none, casted
 	var cret  *C.GZlibDecompressor    // return, full, converted
@@ -118291,11 +104162,7 @@ func NewZlibDecompressor(format ZlibCompressorFormat) ZlibDecompressor {
 // 
 // 	- goret FileInfo (nullable) 
 //
-// Retrieves the #GFileInfo constructed from the GZIP header data
-// of compressed data processed by @compressor, or %NULL if @decompressor's
-// #GZlibDecompressor:format property is not %G_ZLIB_COMPRESSOR_FORMAT_GZIP,
-// or the header data was not fully processed yet, or it not present in the
-// data stream at all.
+// Gets the [property@Gio.ZlibDecompressor:file-info] property.
 func (decompressor *ZlibDecompressorInstance) GetFileInfo() FileInfo {
 	var carg0 *C.GZlibDecompressor // in, none, converted
 	var cret  *C.GFileInfo         // return, none, converted, nullable
@@ -118352,121 +104219,6 @@ func RegisterZlibDecompressorSubClass[InstanceT ZlibDecompressor](
 		},
 		interfaceInits...,
 	)
-}
-
-// DBusMenuModelInstance is the instance type used by all types extending GDBusMenuModel. It is used internally by the bindings. Users should use the interface [DBusMenuModel] instead.
-type DBusMenuModelInstance struct {
-	_ [0]func() // equal guard
-	MenuModelInstance
-}
-
-var _ DBusMenuModel = (*DBusMenuModelInstance)(nil)
-
-// DBusMenuModel wraps GDBusMenuModel
-//
-// `GDBusMenuModel` is an implementation of [class@Gio.MenuModel] that can be
-// used as a proxy for a menu model that is exported over D-Bus with
-// [method@Gio.DBusConnection.export_menu_model].
-type DBusMenuModel interface {
-	MenuModel
-	upcastToGDBusMenuModel() *DBusMenuModelInstance
-}
-
-func unsafeWrapDBusMenuModel(base *gobject.ObjectInstance) *DBusMenuModelInstance {
-	return &DBusMenuModelInstance{
-		MenuModelInstance: MenuModelInstance{
-			ObjectInstance: *base,
-		},
-	}
-}
-
-func init() {
-	gobject.RegisterObjectCasting(
-		TypeDBusMenuModel,
-		func (inst *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapDBusMenuModel(inst)
-		},
-	)
-}
-
-func marshalDBusMenuModelInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapDBusMenuModel(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeDBusMenuModelFromGlibNone is used to convert raw GDBusMenuModel pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusMenuModelFromGlibNone(c unsafe.Pointer) DBusMenuModel {
-	return gobject.UnsafeObjectFromGlibNone(c).(DBusMenuModel)
-}
-
-// UnsafeDBusMenuModelFromGlibFull is used to convert raw GDBusMenuModel pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeDBusMenuModelFromGlibFull(c unsafe.Pointer) DBusMenuModel {
-	return gobject.UnsafeObjectFromGlibFull(c).(DBusMenuModel)
-}
-
-// UnsafeDBusMenuModelFromGlibBorrow is used to convert raw GDBusMenuModel pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeDBusMenuModelFromGlibBorrow(c unsafe.Pointer) DBusMenuModel {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusMenuModel)
-}
-
-func (d *DBusMenuModelInstance) upcastToGDBusMenuModel() *DBusMenuModelInstance {
-	return d
-}
-
-// UnsafeDBusMenuModelToGlibNone is used to convert the instance to it's C value GDBusMenuModel. This is used by the bindings internally.
-func UnsafeDBusMenuModelToGlibNone(c DBusMenuModel) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeDBusMenuModelToGlibFull is used to convert the instance to it's C value GDBusMenuModel, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeDBusMenuModelToGlibFull(c DBusMenuModel) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// DBusMenuModelGet wraps g_dbus_menu_model_get
-// 
-// The function takes the following parameters:
-// 
-// 	- connection DBusConnection: a #GDBusConnection 
-// 	- busName string (nullable): the bus name which exports the menu model
-//     or %NULL if @connection is not a message bus connection 
-// 	- objectPath string: the object path at which the menu model is exported 
-// 
-// The function returns the following values:
-// 
-// 	- goret DBusMenuModel 
-//
-// Obtains a #GDBusMenuModel for the menu model which is exported
-// at the given @bus_name and @object_path.
-// 
-// The thread default main context is taken at the time of this call.
-// All signals on the menu model (and any linked models) are reported
-// with respect to this context.  All calls on the returned menu model
-// (and linked models) must also originate from this same context, with
-// the thread default main context unchanged.
-func DBusMenuModelGet(connection DBusConnection, busName string, objectPath string) DBusMenuModel {
-	var carg1 *C.GDBusConnection // in, none, converted
-	var carg2 *C.gchar           // in, none, string, nullable-string
-	var carg3 *C.gchar           // in, none, string
-	var cret  *C.GDBusMenuModel  // return, full, converted
-
-	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
-	if busName != "" {
-		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(busName)))
-		defer C.free(unsafe.Pointer(carg2))
-	}
-	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
-	defer C.free(unsafe.Pointer(carg3))
-
-	cret = C.g_dbus_menu_model_get(carg1, carg2, carg3)
-	runtime.KeepAlive(connection)
-	runtime.KeepAlive(busName)
-	runtime.KeepAlive(objectPath)
-
-	var goret DBusMenuModel
-
-	goret = UnsafeDBusMenuModelFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // FileIOStreamInstance is the instance type used by all types extending GFileIOStream. It is used internally by the bindings. Users should use the interface [FileIOStream] instead.
@@ -128444,1516 +114196,6 @@ func (c *CredentialsClass) ParentClass() *gobject.ObjectClass {
 	return parent
 }
 
-// DBusAnnotationInfo wraps GDBusAnnotationInfo
-//
-// Information about an annotation.
-type DBusAnnotationInfo struct {
-	*dBusAnnotationInfo
-}
-
-// dBusAnnotationInfo is the struct that's finalized
-type dBusAnnotationInfo struct {
-	native *C.GDBusAnnotationInfo
-}
-
-var _ gobject.GoValueInitializer = (*DBusAnnotationInfo)(nil)
-
-func marshalDBusAnnotationInfo(p unsafe.Pointer) (interface{}, error) {
-	b := gobject.ValueFromNative(p).Boxed()
-	return UnsafeDBusAnnotationInfoFromGlibBorrow(b), nil
-}
-
-func (r *DBusAnnotationInfo) GoValueType() gobject.Type {
-	return TypeDBusAnnotationInfo
-}
-
-func (r *DBusAnnotationInfo) SetGoValue(v *gobject.Value) {
-	v.SetBoxed(unsafe.Pointer(r.native))
-}
-
-// UnsafeDBusAnnotationInfoFromGlibBorrow is used to convert raw C.GDBusAnnotationInfo pointers to go. This is used by the bindings internally.
-func UnsafeDBusAnnotationInfoFromGlibBorrow(p unsafe.Pointer) *DBusAnnotationInfo {
-	return &DBusAnnotationInfo{&dBusAnnotationInfo{(*C.GDBusAnnotationInfo)(p)}}
-}
-
-// UnsafeDBusAnnotationInfoFromGlibNone is used to convert raw C.GDBusAnnotationInfo pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeDBusAnnotationInfoFromGlibNone(p unsafe.Pointer) *DBusAnnotationInfo {
-	C.g_dbus_annotation_info_ref((*C.GDBusAnnotationInfo)(p))
-	wrapped := UnsafeDBusAnnotationInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusAnnotationInfo,
-		func (intern *dBusAnnotationInfo) {
-			C.g_dbus_annotation_info_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusAnnotationInfoFromGlibFull is used to convert raw C.GDBusAnnotationInfo pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeDBusAnnotationInfoFromGlibFull(p unsafe.Pointer) *DBusAnnotationInfo {
-	wrapped := UnsafeDBusAnnotationInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusAnnotationInfo,
-		func (intern *dBusAnnotationInfo) {
-			C.g_dbus_annotation_info_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusAnnotationInfoRef increases the refcount on the underlying resource. This is used by the bindings internally.
-// 
-// When this is called without an associated call to [DBusAnnotationInfo.UnsafeDBusAnnotationInfoUnref], then [DBusAnnotationInfo] will leak memory.
-func UnsafeDBusAnnotationInfoRef(d *DBusAnnotationInfo) {
-	C.g_dbus_annotation_info_ref(d.native)
-}
-
-// UnsafeDBusAnnotationInfoUnref unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusAnnotationInfo] is expected to work anymore.
-func UnsafeDBusAnnotationInfoUnref(d *DBusAnnotationInfo) {
-	C.g_dbus_annotation_info_unref(d.native)
-}
-
-// UnsafeDBusAnnotationInfoToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusAnnotationInfoToGlibNone(d *DBusAnnotationInfo) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// UnsafeDBusAnnotationInfoToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeDBusAnnotationInfoToGlibFull(d *DBusAnnotationInfo) unsafe.Pointer {
-	runtime.SetFinalizer(d.dBusAnnotationInfo, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DBusAnnotationInfo is invalid from here on
-	return _p
-}
-
-// DBusAnnotationInfoLookup wraps g_dbus_annotation_info_lookup
-// 
-// The function takes the following parameters:
-// 
-// 	- annotations []*DBusAnnotationInfo (nullable): A %NULL-terminated array of annotations or %NULL. 
-// 	- name string: The name of the annotation to look up. 
-// 
-// The function returns the following values:
-// 
-// 	- goret string (nullable) 
-//
-// Looks up the value of an annotation.
-// 
-// The cost of this function is O(n) in number of annotations.
-func DBusAnnotationInfoLookup(annotations []*DBusAnnotationInfo, name string) string {
-	var carg1 **C.GDBusAnnotationInfo // in, transfer: none, C Pointers: 2, Name: array[DBusAnnotationInfo], nullable, array (inner: *typesystem.Record, zero-terminated)
-	var carg2 *C.gchar                // in, none, string
-	var cret  *C.gchar                // return, none, string, nullable-string
-
-	_ = annotations
-	_ = carg1
-	panic("unimplemented conversion of []*DBusAnnotationInfo (GDBusAnnotationInfo**)")
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg2))
-
-	cret = C.g_dbus_annotation_info_lookup(carg1, carg2)
-	runtime.KeepAlive(annotations)
-	runtime.KeepAlive(name)
-
-	var goret string
-
-	if cret != nil {
-		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	}
-
-	return goret
-}
-
-// DBusArgInfo wraps GDBusArgInfo
-//
-// Information about an argument for a method or a signal.
-type DBusArgInfo struct {
-	*dBusArgInfo
-}
-
-// dBusArgInfo is the struct that's finalized
-type dBusArgInfo struct {
-	native *C.GDBusArgInfo
-}
-
-var _ gobject.GoValueInitializer = (*DBusArgInfo)(nil)
-
-func marshalDBusArgInfo(p unsafe.Pointer) (interface{}, error) {
-	b := gobject.ValueFromNative(p).Boxed()
-	return UnsafeDBusArgInfoFromGlibBorrow(b), nil
-}
-
-func (r *DBusArgInfo) GoValueType() gobject.Type {
-	return TypeDBusArgInfo
-}
-
-func (r *DBusArgInfo) SetGoValue(v *gobject.Value) {
-	v.SetBoxed(unsafe.Pointer(r.native))
-}
-
-// UnsafeDBusArgInfoFromGlibBorrow is used to convert raw C.GDBusArgInfo pointers to go. This is used by the bindings internally.
-func UnsafeDBusArgInfoFromGlibBorrow(p unsafe.Pointer) *DBusArgInfo {
-	return &DBusArgInfo{&dBusArgInfo{(*C.GDBusArgInfo)(p)}}
-}
-
-// UnsafeDBusArgInfoFromGlibNone is used to convert raw C.GDBusArgInfo pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeDBusArgInfoFromGlibNone(p unsafe.Pointer) *DBusArgInfo {
-	C.g_dbus_arg_info_ref((*C.GDBusArgInfo)(p))
-	wrapped := UnsafeDBusArgInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusArgInfo,
-		func (intern *dBusArgInfo) {
-			C.g_dbus_arg_info_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusArgInfoFromGlibFull is used to convert raw C.GDBusArgInfo pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeDBusArgInfoFromGlibFull(p unsafe.Pointer) *DBusArgInfo {
-	wrapped := UnsafeDBusArgInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusArgInfo,
-		func (intern *dBusArgInfo) {
-			C.g_dbus_arg_info_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusArgInfoRef increases the refcount on the underlying resource. This is used by the bindings internally.
-// 
-// When this is called without an associated call to [DBusArgInfo.UnsafeDBusArgInfoUnref], then [DBusArgInfo] will leak memory.
-func UnsafeDBusArgInfoRef(d *DBusArgInfo) {
-	C.g_dbus_arg_info_ref(d.native)
-}
-
-// UnsafeDBusArgInfoUnref unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusArgInfo] is expected to work anymore.
-func UnsafeDBusArgInfoUnref(d *DBusArgInfo) {
-	C.g_dbus_arg_info_unref(d.native)
-}
-
-// UnsafeDBusArgInfoToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusArgInfoToGlibNone(d *DBusArgInfo) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// UnsafeDBusArgInfoToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeDBusArgInfoToGlibFull(d *DBusArgInfo) unsafe.Pointer {
-	runtime.SetFinalizer(d.dBusArgInfo, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DBusArgInfo is invalid from here on
-	return _p
-}
-
-// DBusErrorEntry wraps GDBusErrorEntry
-//
-// Struct used in g_dbus_error_register_error_domain().
-type DBusErrorEntry struct {
-	*dBusErrorEntry
-}
-
-// dBusErrorEntry is the struct that's finalized
-type dBusErrorEntry struct {
-	native *C.GDBusErrorEntry
-}
-
-// UnsafeDBusErrorEntryFromGlibBorrow is used to convert raw C.GDBusErrorEntry pointers to go. This is used by the bindings internally.
-func UnsafeDBusErrorEntryFromGlibBorrow(p unsafe.Pointer) *DBusErrorEntry {
-	return &DBusErrorEntry{&dBusErrorEntry{(*C.GDBusErrorEntry)(p)}}
-}
-
-// UnsafeDBusErrorEntryFromGlibNone is used to convert raw C.GDBusErrorEntry pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeDBusErrorEntryFromGlibNone(p unsafe.Pointer) *DBusErrorEntry {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeDBusErrorEntryFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusErrorEntry,
-		func (intern *dBusErrorEntry) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusErrorEntryFromGlibFull is used to convert raw C.GDBusErrorEntry pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeDBusErrorEntryFromGlibFull(p unsafe.Pointer) *DBusErrorEntry {
-	wrapped := UnsafeDBusErrorEntryFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusErrorEntry,
-		func (intern *dBusErrorEntry) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusErrorEntryFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusErrorEntry] is expected to work anymore.
-func UnsafeDBusErrorEntryFree(d *DBusErrorEntry) {
-	C.free(unsafe.Pointer(d.native))
-}
-
-// UnsafeDBusErrorEntryToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusErrorEntryToGlibNone(d *DBusErrorEntry) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// UnsafeDBusErrorEntryToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeDBusErrorEntryToGlibFull(d *DBusErrorEntry) unsafe.Pointer {
-	runtime.SetFinalizer(d.dBusErrorEntry, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DBusErrorEntry is invalid from here on
-	return _p
-}
-
-// DBusInterfaceIface wraps GDBusInterfaceIface
-//
-// Base type for D-Bus interfaces.
-type DBusInterfaceIface struct {
-	*dBusInterfaceIface
-}
-
-// dBusInterfaceIface is the struct that's finalized
-type dBusInterfaceIface struct {
-	native *C.GDBusInterfaceIface
-}
-
-// UnsafeDBusInterfaceIfaceFromGlibBorrow is used to convert raw C.GDBusInterfaceIface pointers to go. This is used by the bindings internally.
-func UnsafeDBusInterfaceIfaceFromGlibBorrow(p unsafe.Pointer) *DBusInterfaceIface {
-	return &DBusInterfaceIface{&dBusInterfaceIface{(*C.GDBusInterfaceIface)(p)}}
-}
-
-// UnsafeDBusInterfaceIfaceFromGlibNone is used to convert raw C.GDBusInterfaceIface pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeDBusInterfaceIfaceFromGlibNone(p unsafe.Pointer) *DBusInterfaceIface {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeDBusInterfaceIfaceFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusInterfaceIface,
-		func (intern *dBusInterfaceIface) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusInterfaceIfaceFromGlibFull is used to convert raw C.GDBusInterfaceIface pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeDBusInterfaceIfaceFromGlibFull(p unsafe.Pointer) *DBusInterfaceIface {
-	wrapped := UnsafeDBusInterfaceIfaceFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusInterfaceIface,
-		func (intern *dBusInterfaceIface) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusInterfaceIfaceFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusInterfaceIface] is expected to work anymore.
-func UnsafeDBusInterfaceIfaceFree(d *DBusInterfaceIface) {
-	C.free(unsafe.Pointer(d.native))
-}
-
-// UnsafeDBusInterfaceIfaceToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusInterfaceIfaceToGlibNone(d *DBusInterfaceIface) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// UnsafeDBusInterfaceIfaceToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeDBusInterfaceIfaceToGlibFull(d *DBusInterfaceIface) unsafe.Pointer {
-	runtime.SetFinalizer(d.dBusInterfaceIface, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DBusInterfaceIface is invalid from here on
-	return _p
-}
-
-// DBusInterfaceInfo wraps GDBusInterfaceInfo
-//
-// Information about a D-Bus interface.
-type DBusInterfaceInfo struct {
-	*dBusInterfaceInfo
-}
-
-// dBusInterfaceInfo is the struct that's finalized
-type dBusInterfaceInfo struct {
-	native *C.GDBusInterfaceInfo
-}
-
-var _ gobject.GoValueInitializer = (*DBusInterfaceInfo)(nil)
-
-func marshalDBusInterfaceInfo(p unsafe.Pointer) (interface{}, error) {
-	b := gobject.ValueFromNative(p).Boxed()
-	return UnsafeDBusInterfaceInfoFromGlibBorrow(b), nil
-}
-
-func (r *DBusInterfaceInfo) GoValueType() gobject.Type {
-	return TypeDBusInterfaceInfo
-}
-
-func (r *DBusInterfaceInfo) SetGoValue(v *gobject.Value) {
-	v.SetBoxed(unsafe.Pointer(r.native))
-}
-
-// UnsafeDBusInterfaceInfoFromGlibBorrow is used to convert raw C.GDBusInterfaceInfo pointers to go. This is used by the bindings internally.
-func UnsafeDBusInterfaceInfoFromGlibBorrow(p unsafe.Pointer) *DBusInterfaceInfo {
-	return &DBusInterfaceInfo{&dBusInterfaceInfo{(*C.GDBusInterfaceInfo)(p)}}
-}
-
-// UnsafeDBusInterfaceInfoFromGlibNone is used to convert raw C.GDBusInterfaceInfo pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeDBusInterfaceInfoFromGlibNone(p unsafe.Pointer) *DBusInterfaceInfo {
-	C.g_dbus_interface_info_ref((*C.GDBusInterfaceInfo)(p))
-	wrapped := UnsafeDBusInterfaceInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusInterfaceInfo,
-		func (intern *dBusInterfaceInfo) {
-			C.g_dbus_interface_info_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusInterfaceInfoFromGlibFull is used to convert raw C.GDBusInterfaceInfo pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeDBusInterfaceInfoFromGlibFull(p unsafe.Pointer) *DBusInterfaceInfo {
-	wrapped := UnsafeDBusInterfaceInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusInterfaceInfo,
-		func (intern *dBusInterfaceInfo) {
-			C.g_dbus_interface_info_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusInterfaceInfoRef increases the refcount on the underlying resource. This is used by the bindings internally.
-// 
-// When this is called without an associated call to [DBusInterfaceInfo.UnsafeDBusInterfaceInfoUnref], then [DBusInterfaceInfo] will leak memory.
-func UnsafeDBusInterfaceInfoRef(d *DBusInterfaceInfo) {
-	C.g_dbus_interface_info_ref(d.native)
-}
-
-// UnsafeDBusInterfaceInfoUnref unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusInterfaceInfo] is expected to work anymore.
-func UnsafeDBusInterfaceInfoUnref(d *DBusInterfaceInfo) {
-	C.g_dbus_interface_info_unref(d.native)
-}
-
-// UnsafeDBusInterfaceInfoToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusInterfaceInfoToGlibNone(d *DBusInterfaceInfo) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// UnsafeDBusInterfaceInfoToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeDBusInterfaceInfoToGlibFull(d *DBusInterfaceInfo) unsafe.Pointer {
-	runtime.SetFinalizer(d.dBusInterfaceInfo, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DBusInterfaceInfo is invalid from here on
-	return _p
-}
-
-// CacheBuild wraps g_dbus_interface_info_cache_build
-//
-// Builds a lookup-cache to speed up
-// g_dbus_interface_info_lookup_method(),
-// g_dbus_interface_info_lookup_signal() and
-// g_dbus_interface_info_lookup_property().
-// 
-// If this has already been called with @info, the existing cache is
-// used and its use count is increased.
-// 
-// Note that @info cannot be modified until
-// g_dbus_interface_info_cache_release() is called.
-func (info *DBusInterfaceInfo) CacheBuild() {
-	var carg0 *C.GDBusInterfaceInfo // in, none, converted
-
-	carg0 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
-
-	C.g_dbus_interface_info_cache_build(carg0)
-	runtime.KeepAlive(info)
-}
-
-// CacheRelease wraps g_dbus_interface_info_cache_release
-//
-// Decrements the usage count for the cache for @info built by
-// g_dbus_interface_info_cache_build() (if any) and frees the
-// resources used by the cache if the usage count drops to zero.
-func (info *DBusInterfaceInfo) CacheRelease() {
-	var carg0 *C.GDBusInterfaceInfo // in, none, converted
-
-	carg0 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
-
-	C.g_dbus_interface_info_cache_release(carg0)
-	runtime.KeepAlive(info)
-}
-
-// LookupMethod wraps g_dbus_interface_info_lookup_method
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: A D-Bus method name (typically in CamelCase) 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DBusMethodInfo (nullable) 
-//
-// Looks up information about a method.
-// 
-// The cost of this function is O(n) in number of methods unless
-// g_dbus_interface_info_cache_build() has been used on @info.
-func (info *DBusInterfaceInfo) LookupMethod(name string) *DBusMethodInfo {
-	var carg0 *C.GDBusInterfaceInfo // in, none, converted
-	var carg1 *C.gchar              // in, none, string
-	var cret  *C.GDBusMethodInfo    // return, none, converted, nullable
-
-	carg0 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_dbus_interface_info_lookup_method(carg0, carg1)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(name)
-
-	var goret *DBusMethodInfo
-
-	if cret != nil {
-		goret = UnsafeDBusMethodInfoFromGlibNone(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// LookupProperty wraps g_dbus_interface_info_lookup_property
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: A D-Bus property name (typically in CamelCase). 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DBusPropertyInfo (nullable) 
-//
-// Looks up information about a property.
-// 
-// The cost of this function is O(n) in number of properties unless
-// g_dbus_interface_info_cache_build() has been used on @info.
-func (info *DBusInterfaceInfo) LookupProperty(name string) *DBusPropertyInfo {
-	var carg0 *C.GDBusInterfaceInfo // in, none, converted
-	var carg1 *C.gchar              // in, none, string
-	var cret  *C.GDBusPropertyInfo  // return, none, converted, nullable
-
-	carg0 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_dbus_interface_info_lookup_property(carg0, carg1)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(name)
-
-	var goret *DBusPropertyInfo
-
-	if cret != nil {
-		goret = UnsafeDBusPropertyInfoFromGlibNone(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// LookupSignal wraps g_dbus_interface_info_lookup_signal
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: A D-Bus signal name (typically in CamelCase) 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DBusSignalInfo (nullable) 
-//
-// Looks up information about a signal.
-// 
-// The cost of this function is O(n) in number of signals unless
-// g_dbus_interface_info_cache_build() has been used on @info.
-func (info *DBusInterfaceInfo) LookupSignal(name string) *DBusSignalInfo {
-	var carg0 *C.GDBusInterfaceInfo // in, none, converted
-	var carg1 *C.gchar              // in, none, string
-	var cret  *C.GDBusSignalInfo    // return, none, converted, nullable
-
-	carg0 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_dbus_interface_info_lookup_signal(carg0, carg1)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(name)
-
-	var goret *DBusSignalInfo
-
-	if cret != nil {
-		goret = UnsafeDBusSignalInfoFromGlibNone(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// DBusInterfaceSkeletonClass wraps GDBusInterfaceSkeletonClass
-//
-// Class structure for #GDBusInterfaceSkeleton.
-// 
-// DBusInterfaceSkeletonClass is the type struct for [DBusInterfaceSkeleton]
-type DBusInterfaceSkeletonClass struct {
-	*dBusInterfaceSkeletonClass
-}
-
-// dBusInterfaceSkeletonClass is the struct that's finalized
-type dBusInterfaceSkeletonClass struct {
-	native *C.GDBusInterfaceSkeletonClass
-}
-
-// UnsafeDBusInterfaceSkeletonClassFromGlibBorrow is used to convert raw C.GDBusInterfaceSkeletonClass pointers to go. This is used by the bindings internally.
-func UnsafeDBusInterfaceSkeletonClassFromGlibBorrow(p unsafe.Pointer) *DBusInterfaceSkeletonClass {
-	return &DBusInterfaceSkeletonClass{&dBusInterfaceSkeletonClass{(*C.GDBusInterfaceSkeletonClass)(p)}}
-}
-
-// UnsafeDBusInterfaceSkeletonClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusInterfaceSkeletonClass] is expected to work anymore.
-func UnsafeDBusInterfaceSkeletonClassFree(d *DBusInterfaceSkeletonClass) {
-	C.free(unsafe.Pointer(d.native))
-}
-
-// UnsafeDBusInterfaceSkeletonClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusInterfaceSkeletonClassToGlibNone(d *DBusInterfaceSkeletonClass) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// ParentClass returns the type struct of the parent class of this type struct.
-// This essentially casts the underlying c pointer.
-func (d *DBusInterfaceSkeletonClass) ParentClass() *gobject.ObjectClass {
-	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeDBusInterfaceSkeletonClassToGlibNone(d))
-	// attach a cleanup to keep the instance alive as long as the parent is referenced
-	runtime.AddCleanup(parent, func(_ *DBusInterfaceSkeletonClass) {}, d)
-	return parent
-}
-
-// DBusInterfaceVTable wraps GDBusInterfaceVTable
-//
-// Virtual table for handling properties and method calls for a D-Bus
-// interface.
-// 
-// Since 2.38, if you want to handle getting/setting D-Bus properties
-// asynchronously, give %NULL as your get_property() or set_property()
-// function. The D-Bus call will be directed to your @method_call function,
-// with the provided @interface_name set to "org.freedesktop.DBus.Properties".
-// 
-// Ownership of the #GDBusMethodInvocation object passed to the
-// method_call() function is transferred to your handler; you must
-// call one of the methods of #GDBusMethodInvocation to return a reply
-// (possibly empty), or an error. These functions also take ownership
-// of the passed-in invocation object, so unless the invocation
-// object has otherwise been referenced, it will be then be freed.
-// Calling one of these functions may be done within your
-// method_call() implementation but it also can be done at a later
-// point to handle the method asynchronously.
-// 
-// The usual checks on the validity of the calls is performed. For
-// `Get` calls, an error is automatically returned if the property does
-// not exist or the permissions do not allow access. The same checks are
-// performed for `Set` calls, and the provided value is also checked for
-// being the correct type.
-// 
-// For both `Get` and `Set` calls, the #GDBusMethodInvocation
-// passed to the @method_call handler can be queried with
-// g_dbus_method_invocation_get_property_info() to get a pointer
-// to the #GDBusPropertyInfo of the property.
-// 
-// If you have readable properties specified in your interface info,
-// you must ensure that you either provide a non-%NULL @get_property()
-// function or provide implementations of both the `Get` and `GetAll`
-// methods on org.freedesktop.DBus.Properties interface in your @method_call
-// function. Note that the required return type of the `Get` call is
-// `(v)`, not the type of the property. `GetAll` expects a return value
-// of type `a{sv}`.
-// 
-// If you have writable properties specified in your interface info,
-// you must ensure that you either provide a non-%NULL @set_property()
-// function or provide an implementation of the `Set` call. If implementing
-// the call, you must return the value of type %G_VARIANT_TYPE_UNIT.
-type DBusInterfaceVTable struct {
-	*dBusInterfaceVTable
-}
-
-// dBusInterfaceVTable is the struct that's finalized
-type dBusInterfaceVTable struct {
-	native *C.GDBusInterfaceVTable
-}
-
-// UnsafeDBusInterfaceVTableFromGlibBorrow is used to convert raw C.GDBusInterfaceVTable pointers to go. This is used by the bindings internally.
-func UnsafeDBusInterfaceVTableFromGlibBorrow(p unsafe.Pointer) *DBusInterfaceVTable {
-	return &DBusInterfaceVTable{&dBusInterfaceVTable{(*C.GDBusInterfaceVTable)(p)}}
-}
-
-// UnsafeDBusInterfaceVTableFromGlibNone is used to convert raw C.GDBusInterfaceVTable pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeDBusInterfaceVTableFromGlibNone(p unsafe.Pointer) *DBusInterfaceVTable {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeDBusInterfaceVTableFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusInterfaceVTable,
-		func (intern *dBusInterfaceVTable) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusInterfaceVTableFromGlibFull is used to convert raw C.GDBusInterfaceVTable pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeDBusInterfaceVTableFromGlibFull(p unsafe.Pointer) *DBusInterfaceVTable {
-	wrapped := UnsafeDBusInterfaceVTableFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusInterfaceVTable,
-		func (intern *dBusInterfaceVTable) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusInterfaceVTableFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusInterfaceVTable] is expected to work anymore.
-func UnsafeDBusInterfaceVTableFree(d *DBusInterfaceVTable) {
-	C.free(unsafe.Pointer(d.native))
-}
-
-// UnsafeDBusInterfaceVTableToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusInterfaceVTableToGlibNone(d *DBusInterfaceVTable) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// UnsafeDBusInterfaceVTableToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeDBusInterfaceVTableToGlibFull(d *DBusInterfaceVTable) unsafe.Pointer {
-	runtime.SetFinalizer(d.dBusInterfaceVTable, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DBusInterfaceVTable is invalid from here on
-	return _p
-}
-
-// DBusMethodInfo wraps GDBusMethodInfo
-//
-// Information about a method on a D-Bus interface.
-type DBusMethodInfo struct {
-	*dBusMethodInfo
-}
-
-// dBusMethodInfo is the struct that's finalized
-type dBusMethodInfo struct {
-	native *C.GDBusMethodInfo
-}
-
-var _ gobject.GoValueInitializer = (*DBusMethodInfo)(nil)
-
-func marshalDBusMethodInfo(p unsafe.Pointer) (interface{}, error) {
-	b := gobject.ValueFromNative(p).Boxed()
-	return UnsafeDBusMethodInfoFromGlibBorrow(b), nil
-}
-
-func (r *DBusMethodInfo) GoValueType() gobject.Type {
-	return TypeDBusMethodInfo
-}
-
-func (r *DBusMethodInfo) SetGoValue(v *gobject.Value) {
-	v.SetBoxed(unsafe.Pointer(r.native))
-}
-
-// UnsafeDBusMethodInfoFromGlibBorrow is used to convert raw C.GDBusMethodInfo pointers to go. This is used by the bindings internally.
-func UnsafeDBusMethodInfoFromGlibBorrow(p unsafe.Pointer) *DBusMethodInfo {
-	return &DBusMethodInfo{&dBusMethodInfo{(*C.GDBusMethodInfo)(p)}}
-}
-
-// UnsafeDBusMethodInfoFromGlibNone is used to convert raw C.GDBusMethodInfo pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeDBusMethodInfoFromGlibNone(p unsafe.Pointer) *DBusMethodInfo {
-	C.g_dbus_method_info_ref((*C.GDBusMethodInfo)(p))
-	wrapped := UnsafeDBusMethodInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusMethodInfo,
-		func (intern *dBusMethodInfo) {
-			C.g_dbus_method_info_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusMethodInfoFromGlibFull is used to convert raw C.GDBusMethodInfo pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeDBusMethodInfoFromGlibFull(p unsafe.Pointer) *DBusMethodInfo {
-	wrapped := UnsafeDBusMethodInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusMethodInfo,
-		func (intern *dBusMethodInfo) {
-			C.g_dbus_method_info_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusMethodInfoRef increases the refcount on the underlying resource. This is used by the bindings internally.
-// 
-// When this is called without an associated call to [DBusMethodInfo.UnsafeDBusMethodInfoUnref], then [DBusMethodInfo] will leak memory.
-func UnsafeDBusMethodInfoRef(d *DBusMethodInfo) {
-	C.g_dbus_method_info_ref(d.native)
-}
-
-// UnsafeDBusMethodInfoUnref unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusMethodInfo] is expected to work anymore.
-func UnsafeDBusMethodInfoUnref(d *DBusMethodInfo) {
-	C.g_dbus_method_info_unref(d.native)
-}
-
-// UnsafeDBusMethodInfoToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusMethodInfoToGlibNone(d *DBusMethodInfo) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// UnsafeDBusMethodInfoToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeDBusMethodInfoToGlibFull(d *DBusMethodInfo) unsafe.Pointer {
-	runtime.SetFinalizer(d.dBusMethodInfo, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DBusMethodInfo is invalid from here on
-	return _p
-}
-
-// DBusNodeInfo wraps GDBusNodeInfo
-//
-// Information about nodes in a remote object hierarchy.
-type DBusNodeInfo struct {
-	*dBusNodeInfo
-}
-
-// dBusNodeInfo is the struct that's finalized
-type dBusNodeInfo struct {
-	native *C.GDBusNodeInfo
-}
-
-var _ gobject.GoValueInitializer = (*DBusNodeInfo)(nil)
-
-func marshalDBusNodeInfo(p unsafe.Pointer) (interface{}, error) {
-	b := gobject.ValueFromNative(p).Boxed()
-	return UnsafeDBusNodeInfoFromGlibBorrow(b), nil
-}
-
-func (r *DBusNodeInfo) GoValueType() gobject.Type {
-	return TypeDBusNodeInfo
-}
-
-func (r *DBusNodeInfo) SetGoValue(v *gobject.Value) {
-	v.SetBoxed(unsafe.Pointer(r.native))
-}
-
-// UnsafeDBusNodeInfoFromGlibBorrow is used to convert raw C.GDBusNodeInfo pointers to go. This is used by the bindings internally.
-func UnsafeDBusNodeInfoFromGlibBorrow(p unsafe.Pointer) *DBusNodeInfo {
-	return &DBusNodeInfo{&dBusNodeInfo{(*C.GDBusNodeInfo)(p)}}
-}
-
-// UnsafeDBusNodeInfoFromGlibNone is used to convert raw C.GDBusNodeInfo pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeDBusNodeInfoFromGlibNone(p unsafe.Pointer) *DBusNodeInfo {
-	C.g_dbus_node_info_ref((*C.GDBusNodeInfo)(p))
-	wrapped := UnsafeDBusNodeInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusNodeInfo,
-		func (intern *dBusNodeInfo) {
-			C.g_dbus_node_info_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusNodeInfoFromGlibFull is used to convert raw C.GDBusNodeInfo pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeDBusNodeInfoFromGlibFull(p unsafe.Pointer) *DBusNodeInfo {
-	wrapped := UnsafeDBusNodeInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusNodeInfo,
-		func (intern *dBusNodeInfo) {
-			C.g_dbus_node_info_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusNodeInfoRef increases the refcount on the underlying resource. This is used by the bindings internally.
-// 
-// When this is called without an associated call to [DBusNodeInfo.UnsafeDBusNodeInfoUnref], then [DBusNodeInfo] will leak memory.
-func UnsafeDBusNodeInfoRef(d *DBusNodeInfo) {
-	C.g_dbus_node_info_ref(d.native)
-}
-
-// UnsafeDBusNodeInfoUnref unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusNodeInfo] is expected to work anymore.
-func UnsafeDBusNodeInfoUnref(d *DBusNodeInfo) {
-	C.g_dbus_node_info_unref(d.native)
-}
-
-// UnsafeDBusNodeInfoToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusNodeInfoToGlibNone(d *DBusNodeInfo) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// UnsafeDBusNodeInfoToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeDBusNodeInfoToGlibFull(d *DBusNodeInfo) unsafe.Pointer {
-	runtime.SetFinalizer(d.dBusNodeInfo, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DBusNodeInfo is invalid from here on
-	return _p
-}
-
-// NewDBusNodeInfoForXML wraps g_dbus_node_info_new_for_xml
-// 
-// The function takes the following parameters:
-// 
-// 	- xmlData string: Valid D-Bus introspection XML. 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DBusNodeInfo 
-// 	- _goerr error (nullable): an error 
-//
-// Parses @xml_data and returns a #GDBusNodeInfo representing the data.
-// 
-// The introspection XML must contain exactly one top-level
-// `&lt;node&gt;` element.
-// 
-// Note that this routine is using a
-// [GMarkup](../glib/markup.html)-based
-// parser that only accepts a subset of valid XML documents.
-func NewDBusNodeInfoForXML(xmlData string) (*DBusNodeInfo, error) {
-	var carg1 *C.gchar         // in, none, string
-	var cret  *C.GDBusNodeInfo // return, full, converted
-	var _cerr *C.GError        // out, full, converted, nullable
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(xmlData)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_dbus_node_info_new_for_xml(carg1, &_cerr)
-	runtime.KeepAlive(xmlData)
-
-	var goret  *DBusNodeInfo
-	var _goerr error
-
-	goret = UnsafeDBusNodeInfoFromGlibFull(unsafe.Pointer(cret))
-	if _cerr != nil {
-		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
-	}
-
-	return goret, _goerr
-}
-
-// LookupInterface wraps g_dbus_node_info_lookup_interface
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: A D-Bus interface name. 
-// 
-// The function returns the following values:
-// 
-// 	- goret *DBusInterfaceInfo (nullable) 
-//
-// Looks up information about an interface.
-// 
-// The cost of this function is O(n) in number of interfaces.
-func (info *DBusNodeInfo) LookupInterface(name string) *DBusInterfaceInfo {
-	var carg0 *C.GDBusNodeInfo      // in, none, converted
-	var carg1 *C.gchar              // in, none, string
-	var cret  *C.GDBusInterfaceInfo // return, none, converted, nullable
-
-	carg0 = (*C.GDBusNodeInfo)(UnsafeDBusNodeInfoToGlibNone(info))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_dbus_node_info_lookup_interface(carg0, carg1)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(name)
-
-	var goret *DBusInterfaceInfo
-
-	if cret != nil {
-		goret = UnsafeDBusInterfaceInfoFromGlibNone(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// DBusObjectIface wraps GDBusObjectIface
-//
-// Base object type for D-Bus objects.
-type DBusObjectIface struct {
-	*dBusObjectIface
-}
-
-// dBusObjectIface is the struct that's finalized
-type dBusObjectIface struct {
-	native *C.GDBusObjectIface
-}
-
-// UnsafeDBusObjectIfaceFromGlibBorrow is used to convert raw C.GDBusObjectIface pointers to go. This is used by the bindings internally.
-func UnsafeDBusObjectIfaceFromGlibBorrow(p unsafe.Pointer) *DBusObjectIface {
-	return &DBusObjectIface{&dBusObjectIface{(*C.GDBusObjectIface)(p)}}
-}
-
-// UnsafeDBusObjectIfaceFromGlibNone is used to convert raw C.GDBusObjectIface pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeDBusObjectIfaceFromGlibNone(p unsafe.Pointer) *DBusObjectIface {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeDBusObjectIfaceFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusObjectIface,
-		func (intern *dBusObjectIface) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusObjectIfaceFromGlibFull is used to convert raw C.GDBusObjectIface pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeDBusObjectIfaceFromGlibFull(p unsafe.Pointer) *DBusObjectIface {
-	wrapped := UnsafeDBusObjectIfaceFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusObjectIface,
-		func (intern *dBusObjectIface) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusObjectIfaceFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusObjectIface] is expected to work anymore.
-func UnsafeDBusObjectIfaceFree(d *DBusObjectIface) {
-	C.free(unsafe.Pointer(d.native))
-}
-
-// UnsafeDBusObjectIfaceToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusObjectIfaceToGlibNone(d *DBusObjectIface) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// UnsafeDBusObjectIfaceToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeDBusObjectIfaceToGlibFull(d *DBusObjectIface) unsafe.Pointer {
-	runtime.SetFinalizer(d.dBusObjectIface, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DBusObjectIface is invalid from here on
-	return _p
-}
-
-// DBusObjectManagerClientClass wraps GDBusObjectManagerClientClass
-//
-// Class structure for #GDBusObjectManagerClient.
-// 
-// DBusObjectManagerClientClass is the type struct for [DBusObjectManagerClient]
-type DBusObjectManagerClientClass struct {
-	*dBusObjectManagerClientClass
-}
-
-// dBusObjectManagerClientClass is the struct that's finalized
-type dBusObjectManagerClientClass struct {
-	native *C.GDBusObjectManagerClientClass
-}
-
-// UnsafeDBusObjectManagerClientClassFromGlibBorrow is used to convert raw C.GDBusObjectManagerClientClass pointers to go. This is used by the bindings internally.
-func UnsafeDBusObjectManagerClientClassFromGlibBorrow(p unsafe.Pointer) *DBusObjectManagerClientClass {
-	return &DBusObjectManagerClientClass{&dBusObjectManagerClientClass{(*C.GDBusObjectManagerClientClass)(p)}}
-}
-
-// UnsafeDBusObjectManagerClientClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusObjectManagerClientClass] is expected to work anymore.
-func UnsafeDBusObjectManagerClientClassFree(d *DBusObjectManagerClientClass) {
-	C.free(unsafe.Pointer(d.native))
-}
-
-// UnsafeDBusObjectManagerClientClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusObjectManagerClientClassToGlibNone(d *DBusObjectManagerClientClass) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// ParentClass returns the type struct of the parent class of this type struct.
-// This essentially casts the underlying c pointer.
-func (d *DBusObjectManagerClientClass) ParentClass() *gobject.ObjectClass {
-	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeDBusObjectManagerClientClassToGlibNone(d))
-	// attach a cleanup to keep the instance alive as long as the parent is referenced
-	runtime.AddCleanup(parent, func(_ *DBusObjectManagerClientClass) {}, d)
-	return parent
-}
-
-// DBusObjectManagerIface wraps GDBusObjectManagerIface
-//
-// Base type for D-Bus object managers.
-type DBusObjectManagerIface struct {
-	*dBusObjectManagerIface
-}
-
-// dBusObjectManagerIface is the struct that's finalized
-type dBusObjectManagerIface struct {
-	native *C.GDBusObjectManagerIface
-}
-
-// UnsafeDBusObjectManagerIfaceFromGlibBorrow is used to convert raw C.GDBusObjectManagerIface pointers to go. This is used by the bindings internally.
-func UnsafeDBusObjectManagerIfaceFromGlibBorrow(p unsafe.Pointer) *DBusObjectManagerIface {
-	return &DBusObjectManagerIface{&dBusObjectManagerIface{(*C.GDBusObjectManagerIface)(p)}}
-}
-
-// UnsafeDBusObjectManagerIfaceFromGlibNone is used to convert raw C.GDBusObjectManagerIface pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeDBusObjectManagerIfaceFromGlibNone(p unsafe.Pointer) *DBusObjectManagerIface {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeDBusObjectManagerIfaceFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusObjectManagerIface,
-		func (intern *dBusObjectManagerIface) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusObjectManagerIfaceFromGlibFull is used to convert raw C.GDBusObjectManagerIface pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeDBusObjectManagerIfaceFromGlibFull(p unsafe.Pointer) *DBusObjectManagerIface {
-	wrapped := UnsafeDBusObjectManagerIfaceFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusObjectManagerIface,
-		func (intern *dBusObjectManagerIface) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusObjectManagerIfaceFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusObjectManagerIface] is expected to work anymore.
-func UnsafeDBusObjectManagerIfaceFree(d *DBusObjectManagerIface) {
-	C.free(unsafe.Pointer(d.native))
-}
-
-// UnsafeDBusObjectManagerIfaceToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusObjectManagerIfaceToGlibNone(d *DBusObjectManagerIface) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// UnsafeDBusObjectManagerIfaceToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeDBusObjectManagerIfaceToGlibFull(d *DBusObjectManagerIface) unsafe.Pointer {
-	runtime.SetFinalizer(d.dBusObjectManagerIface, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DBusObjectManagerIface is invalid from here on
-	return _p
-}
-
-// DBusObjectManagerServerClass wraps GDBusObjectManagerServerClass
-//
-// Class structure for #GDBusObjectManagerServer.
-// 
-// DBusObjectManagerServerClass is the type struct for [DBusObjectManagerServer]
-type DBusObjectManagerServerClass struct {
-	*dBusObjectManagerServerClass
-}
-
-// dBusObjectManagerServerClass is the struct that's finalized
-type dBusObjectManagerServerClass struct {
-	native *C.GDBusObjectManagerServerClass
-}
-
-// UnsafeDBusObjectManagerServerClassFromGlibBorrow is used to convert raw C.GDBusObjectManagerServerClass pointers to go. This is used by the bindings internally.
-func UnsafeDBusObjectManagerServerClassFromGlibBorrow(p unsafe.Pointer) *DBusObjectManagerServerClass {
-	return &DBusObjectManagerServerClass{&dBusObjectManagerServerClass{(*C.GDBusObjectManagerServerClass)(p)}}
-}
-
-// UnsafeDBusObjectManagerServerClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusObjectManagerServerClass] is expected to work anymore.
-func UnsafeDBusObjectManagerServerClassFree(d *DBusObjectManagerServerClass) {
-	C.free(unsafe.Pointer(d.native))
-}
-
-// UnsafeDBusObjectManagerServerClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusObjectManagerServerClassToGlibNone(d *DBusObjectManagerServerClass) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// ParentClass returns the type struct of the parent class of this type struct.
-// This essentially casts the underlying c pointer.
-func (d *DBusObjectManagerServerClass) ParentClass() *gobject.ObjectClass {
-	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeDBusObjectManagerServerClassToGlibNone(d))
-	// attach a cleanup to keep the instance alive as long as the parent is referenced
-	runtime.AddCleanup(parent, func(_ *DBusObjectManagerServerClass) {}, d)
-	return parent
-}
-
-// DBusObjectProxyClass wraps GDBusObjectProxyClass
-//
-// Class structure for #GDBusObjectProxy.
-// 
-// DBusObjectProxyClass is the type struct for [DBusObjectProxy]
-type DBusObjectProxyClass struct {
-	*dBusObjectProxyClass
-}
-
-// dBusObjectProxyClass is the struct that's finalized
-type dBusObjectProxyClass struct {
-	native *C.GDBusObjectProxyClass
-}
-
-// UnsafeDBusObjectProxyClassFromGlibBorrow is used to convert raw C.GDBusObjectProxyClass pointers to go. This is used by the bindings internally.
-func UnsafeDBusObjectProxyClassFromGlibBorrow(p unsafe.Pointer) *DBusObjectProxyClass {
-	return &DBusObjectProxyClass{&dBusObjectProxyClass{(*C.GDBusObjectProxyClass)(p)}}
-}
-
-// UnsafeDBusObjectProxyClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusObjectProxyClass] is expected to work anymore.
-func UnsafeDBusObjectProxyClassFree(d *DBusObjectProxyClass) {
-	C.free(unsafe.Pointer(d.native))
-}
-
-// UnsafeDBusObjectProxyClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusObjectProxyClassToGlibNone(d *DBusObjectProxyClass) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// ParentClass returns the type struct of the parent class of this type struct.
-// This essentially casts the underlying c pointer.
-func (d *DBusObjectProxyClass) ParentClass() *gobject.ObjectClass {
-	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeDBusObjectProxyClassToGlibNone(d))
-	// attach a cleanup to keep the instance alive as long as the parent is referenced
-	runtime.AddCleanup(parent, func(_ *DBusObjectProxyClass) {}, d)
-	return parent
-}
-
-// DBusObjectSkeletonClass wraps GDBusObjectSkeletonClass
-//
-// Class structure for #GDBusObjectSkeleton.
-// 
-// DBusObjectSkeletonClass is the type struct for [DBusObjectSkeleton]
-type DBusObjectSkeletonClass struct {
-	*dBusObjectSkeletonClass
-}
-
-// dBusObjectSkeletonClass is the struct that's finalized
-type dBusObjectSkeletonClass struct {
-	native *C.GDBusObjectSkeletonClass
-}
-
-// UnsafeDBusObjectSkeletonClassFromGlibBorrow is used to convert raw C.GDBusObjectSkeletonClass pointers to go. This is used by the bindings internally.
-func UnsafeDBusObjectSkeletonClassFromGlibBorrow(p unsafe.Pointer) *DBusObjectSkeletonClass {
-	return &DBusObjectSkeletonClass{&dBusObjectSkeletonClass{(*C.GDBusObjectSkeletonClass)(p)}}
-}
-
-// UnsafeDBusObjectSkeletonClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusObjectSkeletonClass] is expected to work anymore.
-func UnsafeDBusObjectSkeletonClassFree(d *DBusObjectSkeletonClass) {
-	C.free(unsafe.Pointer(d.native))
-}
-
-// UnsafeDBusObjectSkeletonClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusObjectSkeletonClassToGlibNone(d *DBusObjectSkeletonClass) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// ParentClass returns the type struct of the parent class of this type struct.
-// This essentially casts the underlying c pointer.
-func (d *DBusObjectSkeletonClass) ParentClass() *gobject.ObjectClass {
-	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeDBusObjectSkeletonClassToGlibNone(d))
-	// attach a cleanup to keep the instance alive as long as the parent is referenced
-	runtime.AddCleanup(parent, func(_ *DBusObjectSkeletonClass) {}, d)
-	return parent
-}
-
-// DBusPropertyInfo wraps GDBusPropertyInfo
-//
-// Information about a D-Bus property on a D-Bus interface.
-type DBusPropertyInfo struct {
-	*dBusPropertyInfo
-}
-
-// dBusPropertyInfo is the struct that's finalized
-type dBusPropertyInfo struct {
-	native *C.GDBusPropertyInfo
-}
-
-var _ gobject.GoValueInitializer = (*DBusPropertyInfo)(nil)
-
-func marshalDBusPropertyInfo(p unsafe.Pointer) (interface{}, error) {
-	b := gobject.ValueFromNative(p).Boxed()
-	return UnsafeDBusPropertyInfoFromGlibBorrow(b), nil
-}
-
-func (r *DBusPropertyInfo) GoValueType() gobject.Type {
-	return TypeDBusPropertyInfo
-}
-
-func (r *DBusPropertyInfo) SetGoValue(v *gobject.Value) {
-	v.SetBoxed(unsafe.Pointer(r.native))
-}
-
-// UnsafeDBusPropertyInfoFromGlibBorrow is used to convert raw C.GDBusPropertyInfo pointers to go. This is used by the bindings internally.
-func UnsafeDBusPropertyInfoFromGlibBorrow(p unsafe.Pointer) *DBusPropertyInfo {
-	return &DBusPropertyInfo{&dBusPropertyInfo{(*C.GDBusPropertyInfo)(p)}}
-}
-
-// UnsafeDBusPropertyInfoFromGlibNone is used to convert raw C.GDBusPropertyInfo pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeDBusPropertyInfoFromGlibNone(p unsafe.Pointer) *DBusPropertyInfo {
-	C.g_dbus_property_info_ref((*C.GDBusPropertyInfo)(p))
-	wrapped := UnsafeDBusPropertyInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusPropertyInfo,
-		func (intern *dBusPropertyInfo) {
-			C.g_dbus_property_info_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusPropertyInfoFromGlibFull is used to convert raw C.GDBusPropertyInfo pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeDBusPropertyInfoFromGlibFull(p unsafe.Pointer) *DBusPropertyInfo {
-	wrapped := UnsafeDBusPropertyInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusPropertyInfo,
-		func (intern *dBusPropertyInfo) {
-			C.g_dbus_property_info_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusPropertyInfoRef increases the refcount on the underlying resource. This is used by the bindings internally.
-// 
-// When this is called without an associated call to [DBusPropertyInfo.UnsafeDBusPropertyInfoUnref], then [DBusPropertyInfo] will leak memory.
-func UnsafeDBusPropertyInfoRef(d *DBusPropertyInfo) {
-	C.g_dbus_property_info_ref(d.native)
-}
-
-// UnsafeDBusPropertyInfoUnref unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusPropertyInfo] is expected to work anymore.
-func UnsafeDBusPropertyInfoUnref(d *DBusPropertyInfo) {
-	C.g_dbus_property_info_unref(d.native)
-}
-
-// UnsafeDBusPropertyInfoToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusPropertyInfoToGlibNone(d *DBusPropertyInfo) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// UnsafeDBusPropertyInfoToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeDBusPropertyInfoToGlibFull(d *DBusPropertyInfo) unsafe.Pointer {
-	runtime.SetFinalizer(d.dBusPropertyInfo, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DBusPropertyInfo is invalid from here on
-	return _p
-}
-
-// DBusProxyClass wraps GDBusProxyClass
-//
-// Class structure for #GDBusProxy.
-// 
-// DBusProxyClass is the type struct for [DBusProxy]
-type DBusProxyClass struct {
-	*dBusProxyClass
-}
-
-// dBusProxyClass is the struct that's finalized
-type dBusProxyClass struct {
-	native *C.GDBusProxyClass
-}
-
-// UnsafeDBusProxyClassFromGlibBorrow is used to convert raw C.GDBusProxyClass pointers to go. This is used by the bindings internally.
-func UnsafeDBusProxyClassFromGlibBorrow(p unsafe.Pointer) *DBusProxyClass {
-	return &DBusProxyClass{&dBusProxyClass{(*C.GDBusProxyClass)(p)}}
-}
-
-// UnsafeDBusProxyClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusProxyClass] is expected to work anymore.
-func UnsafeDBusProxyClassFree(d *DBusProxyClass) {
-	C.free(unsafe.Pointer(d.native))
-}
-
-// UnsafeDBusProxyClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusProxyClassToGlibNone(d *DBusProxyClass) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// ParentClass returns the type struct of the parent class of this type struct.
-// This essentially casts the underlying c pointer.
-func (d *DBusProxyClass) ParentClass() *gobject.ObjectClass {
-	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeDBusProxyClassToGlibNone(d))
-	// attach a cleanup to keep the instance alive as long as the parent is referenced
-	runtime.AddCleanup(parent, func(_ *DBusProxyClass) {}, d)
-	return parent
-}
-
-// DBusSignalInfo wraps GDBusSignalInfo
-//
-// Information about a signal on a D-Bus interface.
-type DBusSignalInfo struct {
-	*dBusSignalInfo
-}
-
-// dBusSignalInfo is the struct that's finalized
-type dBusSignalInfo struct {
-	native *C.GDBusSignalInfo
-}
-
-var _ gobject.GoValueInitializer = (*DBusSignalInfo)(nil)
-
-func marshalDBusSignalInfo(p unsafe.Pointer) (interface{}, error) {
-	b := gobject.ValueFromNative(p).Boxed()
-	return UnsafeDBusSignalInfoFromGlibBorrow(b), nil
-}
-
-func (r *DBusSignalInfo) GoValueType() gobject.Type {
-	return TypeDBusSignalInfo
-}
-
-func (r *DBusSignalInfo) SetGoValue(v *gobject.Value) {
-	v.SetBoxed(unsafe.Pointer(r.native))
-}
-
-// UnsafeDBusSignalInfoFromGlibBorrow is used to convert raw C.GDBusSignalInfo pointers to go. This is used by the bindings internally.
-func UnsafeDBusSignalInfoFromGlibBorrow(p unsafe.Pointer) *DBusSignalInfo {
-	return &DBusSignalInfo{&dBusSignalInfo{(*C.GDBusSignalInfo)(p)}}
-}
-
-// UnsafeDBusSignalInfoFromGlibNone is used to convert raw C.GDBusSignalInfo pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeDBusSignalInfoFromGlibNone(p unsafe.Pointer) *DBusSignalInfo {
-	C.g_dbus_signal_info_ref((*C.GDBusSignalInfo)(p))
-	wrapped := UnsafeDBusSignalInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusSignalInfo,
-		func (intern *dBusSignalInfo) {
-			C.g_dbus_signal_info_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusSignalInfoFromGlibFull is used to convert raw C.GDBusSignalInfo pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeDBusSignalInfoFromGlibFull(p unsafe.Pointer) *DBusSignalInfo {
-	wrapped := UnsafeDBusSignalInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusSignalInfo,
-		func (intern *dBusSignalInfo) {
-			C.g_dbus_signal_info_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusSignalInfoRef increases the refcount on the underlying resource. This is used by the bindings internally.
-// 
-// When this is called without an associated call to [DBusSignalInfo.UnsafeDBusSignalInfoUnref], then [DBusSignalInfo] will leak memory.
-func UnsafeDBusSignalInfoRef(d *DBusSignalInfo) {
-	C.g_dbus_signal_info_ref(d.native)
-}
-
-// UnsafeDBusSignalInfoUnref unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusSignalInfo] is expected to work anymore.
-func UnsafeDBusSignalInfoUnref(d *DBusSignalInfo) {
-	C.g_dbus_signal_info_unref(d.native)
-}
-
-// UnsafeDBusSignalInfoToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusSignalInfoToGlibNone(d *DBusSignalInfo) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// UnsafeDBusSignalInfoToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeDBusSignalInfoToGlibFull(d *DBusSignalInfo) unsafe.Pointer {
-	runtime.SetFinalizer(d.dBusSignalInfo, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DBusSignalInfo is invalid from here on
-	return _p
-}
-
-// DBusSubtreeVTable wraps GDBusSubtreeVTable
-//
-// Virtual table for handling subtrees registered with g_dbus_connection_register_subtree().
-type DBusSubtreeVTable struct {
-	*dBusSubtreeVTable
-}
-
-// dBusSubtreeVTable is the struct that's finalized
-type dBusSubtreeVTable struct {
-	native *C.GDBusSubtreeVTable
-}
-
-// UnsafeDBusSubtreeVTableFromGlibBorrow is used to convert raw C.GDBusSubtreeVTable pointers to go. This is used by the bindings internally.
-func UnsafeDBusSubtreeVTableFromGlibBorrow(p unsafe.Pointer) *DBusSubtreeVTable {
-	return &DBusSubtreeVTable{&dBusSubtreeVTable{(*C.GDBusSubtreeVTable)(p)}}
-}
-
-// UnsafeDBusSubtreeVTableFromGlibNone is used to convert raw C.GDBusSubtreeVTable pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeDBusSubtreeVTableFromGlibNone(p unsafe.Pointer) *DBusSubtreeVTable {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeDBusSubtreeVTableFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusSubtreeVTable,
-		func (intern *dBusSubtreeVTable) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusSubtreeVTableFromGlibFull is used to convert raw C.GDBusSubtreeVTable pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeDBusSubtreeVTableFromGlibFull(p unsafe.Pointer) *DBusSubtreeVTable {
-	wrapped := UnsafeDBusSubtreeVTableFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dBusSubtreeVTable,
-		func (intern *dBusSubtreeVTable) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDBusSubtreeVTableFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DBusSubtreeVTable] is expected to work anymore.
-func UnsafeDBusSubtreeVTableFree(d *DBusSubtreeVTable) {
-	C.free(unsafe.Pointer(d.native))
-}
-
-// UnsafeDBusSubtreeVTableToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDBusSubtreeVTableToGlibNone(d *DBusSubtreeVTable) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// UnsafeDBusSubtreeVTableToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeDBusSubtreeVTableToGlibFull(d *DBusSubtreeVTable) unsafe.Pointer {
-	runtime.SetFinalizer(d.dBusSubtreeVTable, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DBusSubtreeVTable is invalid from here on
-	return _p
-}
-
 // DataInputStreamClass wraps GDataInputStreamClass
 // 
 // DataInputStreamClass is the type struct for [DataInputStream]
@@ -130035,7 +114277,7 @@ func (d *DataOutputStreamClass) ParentClass() *FilterOutputStreamClass {
 // Provides an interface for socket-like objects which have datagram semantics,
 // following the Berkeley sockets API. The interface methods are thin wrappers
 // around the corresponding virtual methods, and no pre-processing of inputs is
-// implemented — so implementations of this API must handle all functionality
+// implemented &#x2014; so implementations of this API must handle all functionality
 // documented in the interface methods.
 type DatagramBasedInterface struct {
 	*datagramBasedInterface
@@ -130095,46 +114337,6 @@ func UnsafeDatagramBasedInterfaceToGlibFull(d *DatagramBasedInterface) unsafe.Po
 	_p := unsafe.Pointer(d.native)
 	d.native = nil // DatagramBasedInterface is invalid from here on
 	return _p
-}
-
-// DebugControllerDBusClass wraps GDebugControllerDBusClass
-//
-// The virtual function table for #GDebugControllerDBus.
-// 
-// DebugControllerDBusClass is the type struct for [DebugControllerDBus]
-type DebugControllerDBusClass struct {
-	*debugControllerDBusClass
-}
-
-// debugControllerDBusClass is the struct that's finalized
-type debugControllerDBusClass struct {
-	native *C.GDebugControllerDBusClass
-}
-
-// UnsafeDebugControllerDBusClassFromGlibBorrow is used to convert raw C.GDebugControllerDBusClass pointers to go. This is used by the bindings internally.
-func UnsafeDebugControllerDBusClassFromGlibBorrow(p unsafe.Pointer) *DebugControllerDBusClass {
-	return &DebugControllerDBusClass{&debugControllerDBusClass{(*C.GDebugControllerDBusClass)(p)}}
-}
-
-// UnsafeDebugControllerDBusClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [DebugControllerDBusClass] is expected to work anymore.
-func UnsafeDebugControllerDBusClassFree(d *DebugControllerDBusClass) {
-	C.free(unsafe.Pointer(d.native))
-}
-
-// UnsafeDebugControllerDBusClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeDebugControllerDBusClassToGlibNone(d *DebugControllerDBusClass) unsafe.Pointer {
-	return unsafe.Pointer(d.native)
-}
-
-// ParentClass returns the type struct of the parent class of this type struct.
-// This essentially casts the underlying c pointer.
-func (d *DebugControllerDBusClass) ParentClass() *gobject.ObjectClass {
-	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeDebugControllerDBusClassToGlibNone(d))
-	// attach a cleanup to keep the instance alive as long as the parent is referenced
-	runtime.AddCleanup(parent, func(_ *DebugControllerDBusClass) {}, d)
-	return parent
 }
 
 // DebugControllerInterface wraps GDebugControllerInterface
@@ -134268,7 +118470,7 @@ func (r *ResolverClass) ParentClass() *gobject.ObjectClass {
 // The `GResource` API and the
 // [`glib-compile-resources`](glib-compile-resources.html) program provide a
 // convenient and efficient alternative to this which has some nice properties.
-// You maintain the files as normal files, so it’s easy to edit them, but during
+// You maintain the files as normal files, so it&#x2019;s easy to edit them, but during
 // the build the files are combined into a binary bundle that is linked into the
 // executable. This means that loading the resource files are efficient (as they
 // are already in memory, shared with other instances) and simple (no need to
@@ -134347,7 +118549,7 @@ func (r *ResolverClass) ParentClass() *gobject.ObjectClass {
 // 
 // You can then use [`glib-compile-resources`](glib-compile-resources.html) to
 // compile the XML to a binary bundle that you can load with
-// [func@Gio.Resource.load]. However, it’s more common to use the
+// [func@Gio.Resource.load]. However, it&#x2019;s more common to use the
 // `--generate-source` and `--generate-header` arguments to create a source file
 // and header to link directly into your application.
 // This will generate `get_resource()`, `register_resource()` and
@@ -134564,7 +118766,7 @@ func NewResourceFromData(data *glib.Bytes) (*Resource, error) {
 // to register it with [func@Gio.resources_register].
 // 
 // If @filename is empty or the data in it is corrupt,
-// %G_RESOURCE_ERROR_INTERNAL will be returned. If @filename doesn’t exist, or
+// %G_RESOURCE_ERROR_INTERNAL will be returned. If @filename doesn&#x2019;t exist, or
 // there is an error in reading it, an error from [ctor@GLib.MappedFile.new]
 // will be returned.
 func ResourceLoad(filename string) (*Resource, error) {
@@ -134952,7 +119154,7 @@ func (s *SettingsClass) ParentClass() *gobject.ObjectClass {
 // standard system directories for schemas.
 // 
 // [struct@Gio.SettingsSchemaSource] provides a mechanism for dealing with this
-// by allowing the creation of a new ‘schema source’ from which schemas can
+// by allowing the creation of a new &#x2018;schema source&#x2019; from which schemas can
 // be acquired.  This schema source can then become part of the metadata
 // associated with the plugin and queried whenever the plugin requires
 // access to some settings.
@@ -134962,9 +119164,9 @@ func (s *SettingsClass) ParentClass() *gobject.ObjectClass {
 // ```c
 // typedef struct
 // {
-//    …
+//    &#x2026;
 //    GSettingsSchemaSource *schema_source;
-//    …
+//    &#x2026;
 // } Plugin;
 // 
 // Plugin *
@@ -134972,18 +119174,18 @@ func (s *SettingsClass) ParentClass() *gobject.ObjectClass {
 // {
 //   Plugin *plugin;
 // 
-//   …
+//   &#x2026;
 // 
 //   plugin-&gt;schema_source =
 //     g_settings_schema_source_new_from_directory (dir,
 //       g_settings_schema_source_get_default (), FALSE, NULL);
 // 
-//   …
+//   &#x2026;
 // 
 //   return plugin;
 // }
 // 
-// …
+// &#x2026;
 // 
 // GSettings *
 // plugin_get_settings (Plugin      *plugin,
@@ -134999,7 +119201,7 @@ func (s *SettingsClass) ParentClass() *gobject.ObjectClass {
 // 
 //   if (schema == NULL)
 //     {
-//       … disable the plugin or abort, etc …
+//       &#x2026; disable the plugin or abort, etc &#x2026;
 //     }
 // 
 //   return g_settings_new_full (schema, NULL, NULL);
@@ -135023,7 +119225,7 @@ func (s *SettingsClass) ParentClass() *gobject.ObjectClass {
 // 
 //   settings = plugin_get_settings (self, NULL);
 //   some_value = g_settings_get_int (settings, "some-value");
-//   …
+//   &#x2026;
 // }
 // ```
 // 
@@ -136239,15 +120441,15 @@ func (s *SocketServiceClass) ParentClass() *SocketListenerClass {
 // SRV (service) records are used by some network protocols to provide
 // service-specific aliasing and load-balancing. For example, XMPP
 // (Jabber) uses SRV records to locate the XMPP server for a domain;
-// rather than connecting directly to ‘example.com’ or assuming a
-// specific server hostname like ‘xmpp.example.com’, an XMPP client
-// would look up the `xmpp-client` SRV record for ‘example.com’, and
+// rather than connecting directly to &#x2018;example.com&#x2019; or assuming a
+// specific server hostname like &#x2018;xmpp.example.com&#x2019;, an XMPP client
+// would look up the `xmpp-client` SRV record for &#x2018;example.com&#x2019;, and
 // then connect to whatever host was pointed to by that record.
 // 
 // You can use [method@Gio.Resolver.lookup_service] or
 // [method@Gio.Resolver.lookup_service_async] to find the `GSrvTarget`s
 // for a given service. However, if you are simply planning to connect
-// to the remote service, you can use [class@Gio.NetworkService]’s
+// to the remote service, you can use [class@Gio.NetworkService]&#x2019;s
 // [iface@Gio.SocketConnectable] interface and not need to worry about
 // `GSrvTarget` at all.
 type SrvTarget struct {
@@ -137411,8 +121613,6 @@ func (v *VolumeMonitorClass) ParentClass() *gobject.ObjectClass {
 }
 
 // ZlibCompressorClass wraps GZlibCompressorClass
-// 
-// ZlibCompressorClass is the type struct for [ZlibCompressor]
 type ZlibCompressorClass struct {
 	*zlibCompressorClass
 }
@@ -137427,6 +121627,31 @@ func UnsafeZlibCompressorClassFromGlibBorrow(p unsafe.Pointer) *ZlibCompressorCl
 	return &ZlibCompressorClass{&zlibCompressorClass{(*C.GZlibCompressorClass)(p)}}
 }
 
+// UnsafeZlibCompressorClassFromGlibNone is used to convert raw C.GZlibCompressorClass pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeZlibCompressorClassFromGlibNone(p unsafe.Pointer) *ZlibCompressorClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeZlibCompressorClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.zlibCompressorClass,
+		func (intern *zlibCompressorClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeZlibCompressorClassFromGlibFull is used to convert raw C.GZlibCompressorClass pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeZlibCompressorClassFromGlibFull(p unsafe.Pointer) *ZlibCompressorClass {
+	wrapped := UnsafeZlibCompressorClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.zlibCompressorClass,
+		func (intern *zlibCompressorClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeZlibCompressorClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [ZlibCompressorClass] is expected to work anymore.
@@ -137439,13 +121664,13 @@ func UnsafeZlibCompressorClassToGlibNone(z *ZlibCompressorClass) unsafe.Pointer 
 	return unsafe.Pointer(z.native)
 }
 
-// ParentClass returns the type struct of the parent class of this type struct.
-// This essentially casts the underlying c pointer.
-func (z *ZlibCompressorClass) ParentClass() *gobject.ObjectClass {
-	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeZlibCompressorClassToGlibNone(z))
-	// attach a cleanup to keep the instance alive as long as the parent is referenced
-	runtime.AddCleanup(parent, func(_ *ZlibCompressorClass) {}, z)
-	return parent
+// UnsafeZlibCompressorClassToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeZlibCompressorClassToGlibFull(z *ZlibCompressorClass) unsafe.Pointer {
+	runtime.SetFinalizer(z.zlibCompressorClass, nil)
+	_p := unsafe.Pointer(z.native)
+	z.native = nil // ZlibCompressorClass is invalid from here on
+	return _p
 }
 
 // ZlibDecompressorClass wraps GZlibDecompressorClass

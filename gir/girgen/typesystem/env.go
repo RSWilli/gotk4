@@ -17,6 +17,7 @@ type env struct {
 	namespace *Namespace
 
 	minVersion gir.Version
+	maxVersion gir.Version
 
 	// user overridable settings via [Config]:
 
@@ -85,6 +86,10 @@ func (e *env) skip(parent Type, anygir any) bool {
 		return true
 	}
 
+	if e.ignoreTooNew(name, attrs) {
+		return true
+	}
+
 	for _, m := range e.namespace.Manual {
 		if m.GIRName() == name {
 			e.logger.Info("skipping manually implemented type", "name", name)
@@ -112,6 +117,16 @@ func (e *env) ingoreDeprecated(name string, attrs gir.InfoAttrs) bool {
 	var zeroVersion gir.Version
 	if attrs.Deprecated && e.minVersion != zeroVersion && attrs.DeprecatedVersion.LessEqual(e.minVersion) {
 		e.logger.Info("skipping deprecated", "name", name, "deprecated-since", attrs.DeprecatedVersion, "min-version", e.minVersion)
+		return true
+	}
+
+	return false
+}
+
+func (e *env) ignoreTooNew(name string, attrs gir.InfoAttrs) bool {
+	var zeroVersion gir.Version
+	if attrs.Version != zeroVersion && e.maxVersion != zeroVersion && attrs.Version.Greater(e.maxVersion) {
+		e.logger.Info("skipping too new", "name", name, "introduced-since", attrs.Version, "max-version", e.maxVersion)
 		return true
 	}
 

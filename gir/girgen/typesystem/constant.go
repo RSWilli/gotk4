@@ -11,7 +11,7 @@ type Constant struct {
 	GoValue string
 }
 
-func DeclareConstant(e *env, v gir.Constant) *Constant {
+func DeclareConstant(e *env, v *gir.Constant) *Constant {
 	e = e.sub("constant", v.CType)
 
 	if !v.IsIntrospectable() {

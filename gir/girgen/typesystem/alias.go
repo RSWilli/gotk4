@@ -10,12 +10,12 @@ type Alias struct {
 	Doc
 
 	// gir is used to resolve the aliased type after it has been declared
-	gir gir.Alias
+	gir *gir.Alias
 
 	AliasedType CouldBeForeign[Type]
 }
 
-func DeclareAlias(e *env, v gir.Alias) *Alias {
+func DeclareAlias(e *env, v *gir.Alias) *Alias {
 	e = e.sub("alias", v.Name)
 
 	if !v.IsIntrospectable() {

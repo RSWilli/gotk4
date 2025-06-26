@@ -7,74 +7,67 @@ import (
 
 	"github.com/diamondburned/gotk4/gir"
 	"github.com/diamondburned/gotk4/gir/cmd/gir-generate/genmain"
-	. "github.com/diamondburned/gotk4/gir/girgen/types"
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
-	"github.com/diamondburned/gotk4/gir/internal/ptr"
+	girfiles_gotk4 "github.com/diamondburned/gotk4/girs"
 )
 
 const Module = "github.com/diamondburned/gotk4/pkg"
 
-// Main contains all of gendata's variables as one big genmain.Data value.
-//
-// This stays ugly just because it's the main gotk4 package with exposed
-// gendata. Don't actually do this; just make a global genmain.Data instead.
 var Main = genmain.Data{
 	Module:        Module,
-	Packages:      Packages,
+	GirFiles:      girfiles_gotk4.GirFiles,
 	Preprocessors: Preprocessors,
-	Postprocessors: []typesystem.PostProcessor{
-		// remove all virtual methods from the Atk, Gtk classes and interfaces.
-		// FIXME: this is a workaround to get it to compile. Correct fix would be to rename
-		// all collisions
-		func(r *typesystem.Registry) error {
-			nss := []string{"Atk-1", "Gtk-3"}
+	// Postprocessors: []typesystem.PostProcessor{
+	// 	// remove all virtual methods from the Atk, Gtk classes and interfaces.
+	// 	// FIXME: this is a workaround to get it to compile. Correct fix would be to rename
+	// 	// all collisions
+	// 	func(r *typesystem.Registry) error {
+	// 		nss := []string{"Atk-1", "Gtk-3"}
 
-			for _, nsident := range nss {
-				ns := r.FindNamespaceByName(nsident)
+	// 		for _, nsident := range nss {
+	// 			ns := r.FindNamespaceByName(nsident)
 
-				for _, class := range ns.Classes {
-					class.VirtualMethods = nil
-				}
-				for _, inter := range ns.Interfaces {
-					inter.VirtualMethods = nil
-				}
-			}
+	// 			for _, class := range ns.Classes {
+	// 				class.VirtualMethods = nil
+	// 			}
+	// 			for _, inter := range ns.Interfaces {
+	// 				inter.VirtualMethods = nil
+	// 			}
+	// 		}
 
-			return nil
-		},
-	},
+	// 		return nil
+	// 	},
+	// },
 
 	Config: typesystem.Config{
 		GIRReplacements: map[string]string{
 			"GType": "GObject.Type", // GType is often referred to as a global type instead of GObject scoped
 		},
 		Namespaces: map[string]typesystem.NamespaceConfig{
-			"Graphene-1": {
-				ManualTypes: []typesystem.Type{
-					// graphenes gbooleans are not the same as glib's
-					// these are castable to bool, see below preprocessor
-					&typesystem.CastablePrimitive{
-						BaseType: typesystem.BaseType{
-							GirName: "gotk4-graphene-gboolean",
-							GoTyp:   "bool",
-							CGoTyp:  "C._Bool",
-							CTyp:    "_Bool",
-						},
-					},
-				},
-			},
-			"cairo-1": {
-				Ignored: true, // FIXME: manually implemented
-
-				IgnoredDefinitions: []typesystem.IgnoreFunc{
-					// These are not in gotk3/cairo.
-					typesystem.IgnoreMatching("ScaledFont"),
-					typesystem.IgnoreMatching("FontType"),
-				},
-			},
-			"Atspi-2": {
-				Ignored: true, // Missing AtspiDevice
-			},
+			// "Graphene-1": {
+			// 	ManualTypes: []typesystem.Type{
+			// 		// graphenes gbooleans are not the same as glib's
+			// 		// these are castable to bool, see below preprocessor
+			// 		&typesystem.CastablePrimitive{
+			// 			BaseType: typesystem.BaseType{
+			// 				GirName: "gotk4-graphene-gboolean",
+			// 				GoTyp:   "bool",
+			// 				CGoTyp:  "C._Bool",
+			// 				CTyp:    "_Bool",
+			// 			},
+			// 		},
+			// 	},
+			// },
+			// "cairo-1": {
+			// 	IgnoredDefinitions: []typesystem.IgnoreFunc{
+			// 		// These are not in gotk3/cairo.
+			// 		typesystem.IgnoreMatching("ScaledFont"),
+			// 		typesystem.IgnoreMatching("FontType"),
+			// 	},
+			// },
+			// "Atspi-2": {
+			// 	Ignored: true, // Missing AtspiDevice
+			// },
 			"GLib-2": {
 				MinVersion: "2.80",
 				ManualTypes: []typesystem.Type{
@@ -147,6 +140,38 @@ var Main = genmain.Data{
 					},
 				},
 				IgnoredDefinitions: []typesystem.IgnoreFunc{
+					// not found:
+					typesystem.IgnoreMatching("StatBuf"),
+					typesystem.IgnoreMatching("access"),
+					typesystem.IgnoreMatching("chdir"),
+					typesystem.IgnoreMatching("chmod"),
+					typesystem.IgnoreMatching("close"),
+					typesystem.IgnoreMatching("closefrom"),
+					typesystem.IgnoreMatching("creat"),
+					typesystem.IgnoreMatching("date_get_week_of_year"),
+					typesystem.IgnoreMatching("date_get_weeks_in_year"),
+					typesystem.IgnoreMatching("fdwalk_set_cloexec"),
+					typesystem.IgnoreMatching("fsync"),
+					typesystem.IgnoreMatching("log_get_always_fatal"),
+					typesystem.IgnoreMatching("lstat"),
+					typesystem.IgnoreMatching("mkdir"),
+					typesystem.IgnoreMatching("open"),
+					typesystem.IgnoreMatching("remove"),
+					typesystem.IgnoreMatching("rename"),
+					typesystem.IgnoreMatching("rmdir"),
+					typesystem.IgnoreMatching("source_dup_context"),
+					typesystem.IgnoreMatching("stat"),
+					typesystem.IgnoreMatching("string_copy"),
+					typesystem.IgnoreMatching("unlink"),
+
+					typesystem.IgnoreByRegex("Date.*"),
+					typesystem.IgnoreMatching("Source"),
+					typesystem.IgnoreMatching("TestLogMsg"),
+					typesystem.IgnoreMatching("String"),
+					typesystem.IgnoreMatching("ThreadPool"),
+
+					typesystem.IgnoreMatching("HookFlagMask"), // Has a member of the same name
+
 					typesystem.IgnoreMatching("Variant"),           // TODO: implement manually
 					typesystem.IgnoreMatching("variant_get_gtype"), // implemented with gvalue in gobject
 
@@ -169,35 +194,6 @@ var Main = genmain.Data{
 					typesystem.IgnoreMatching("GLIB_VERSION_MIN_REQUIRED"),
 
 					typesystem.IgnoreMatching("strv_get_type"), // requires gobject
-
-					typesystem.IgnoreByFileNameSubstring("gallocator."),
-					typesystem.IgnoreByFileNameSubstring("gasyncqueue."),
-					typesystem.IgnoreByFileNameSubstring("gatomic."),
-					typesystem.IgnoreByFileNameSubstring("gbacktrace."),
-					typesystem.IgnoreByFileNameSubstring("gbase64."),
-					typesystem.IgnoreByFileNameSubstring("gbitlock."),
-					typesystem.IgnoreByFileNameSubstring("gdataset."),
-					typesystem.IgnoreByFileNameSubstring("gdate."),
-					typesystem.IgnoreByFileNameSubstring("gerror."), // already handled internally
-					typesystem.IgnoreByFileNameSubstring("ghook."),
-					typesystem.IgnoreByFileNameSubstring("glib-unix."),
-					typesystem.IgnoreByFileNameSubstring("gmacros."),
-					typesystem.IgnoreByFileNameSubstring("gmem."),
-					typesystem.IgnoreByFileNameSubstring("gnetworking."), // needs header
-					typesystem.IgnoreByFileNameSubstring("gprintf."),
-					typesystem.IgnoreByFileNameSubstring("grcbox."),
-					typesystem.IgnoreByFileNameSubstring("grefcount."),
-					typesystem.IgnoreByFileNameSubstring("grefstring."),
-					typesystem.IgnoreByFileNameSubstring("gslice."),
-					typesystem.IgnoreByFileNameSubstring("gstdio."),
-					typesystem.IgnoreByFileNameSubstring("gstrfuncs."),
-					typesystem.IgnoreByFileNameSubstring("gstringchunk."),
-					typesystem.IgnoreByFileNameSubstring("gstring."),
-					typesystem.IgnoreByFileNameSubstring("gstrvbuilder."),
-					typesystem.IgnoreByFileNameSubstring("gtestutils."),
-					typesystem.IgnoreByFileNameSubstring("gthread."),
-					typesystem.IgnoreByFileNameSubstring("gthreadpool."),
-					typesystem.IgnoreByFileNameSubstring("gtrashstack."),
 
 					// see https://gitlab.gnome.org/GNOME/gobject-introspection/-/issues/305#note_981623
 					// Container structures that are unused:
@@ -233,11 +229,13 @@ var Main = genmain.Data{
 					typesystem.IgnoreByRegex(".*[Uu]nix.*"),
 					typesystem.IgnoreByRegex(".*Subprocess.*"),
 
-					// These are not found on all systems:
-					typesystem.IgnoreByFileNameSubstring("gsettingsbackend."),
-					typesystem.IgnoreByFileNameSubstring("gdesktopappinfo."),
-					typesystem.IgnoreByFileNameSubstring("gfiledescriptorbased."),
-					typesystem.IgnoreByFileNameSubstring("gthreadedresolver."),
+					typesystem.IgnoreByRegex("FileDescriptorBased"),
+					typesystem.IgnoreByRegex("SettingsBackend"),
+					typesystem.IgnoreByRegex("DesktopAppInfo.*"),
+					typesystem.IgnoreByRegex("DBus.*"),
+					typesystem.IgnoreByRegex("ThreadedResolver.*"),
+
+					typesystem.IgnoreMatching("ZlibCompressor"),
 
 					typesystem.IgnoreMatching("networking_init"),
 
@@ -365,1088 +363,283 @@ var Main = genmain.Data{
 					typesystem.IgnoreMatching("TypeClass"),     // base struct for classes, not needed
 				},
 			},
-			"Atk-1": {
-				MinVersion: "2.50",
-			},
-			"Gdk-3": {
-				MinVersion: "3.24",
-				IgnoredDefinitions: []typesystem.IgnoreFunc{
-					typesystem.IgnoreByFileNameSubstring("gdkprivate"), // not found
+			// "Atk-1": {
+			// 	MinVersion: "2.50",
+			// },
+			// "Gdk-3": {
+			// 	MinVersion: "3.24",
+			// 	IgnoredDefinitions: []typesystem.IgnoreFunc{
+			// 		typesystem.IgnoreByFileNameSubstring("gdkprivate"), // not found
 
-					// These return instance owned GValues, maybe implement them manually?
-					typesystem.IgnoreMatching("Clipboard.read_value_finish"),
-					typesystem.IgnoreMatching("ContentDeserializer.get_value"),
-					typesystem.IgnoreMatching("ContentSerializer.get_value"),
-					typesystem.IgnoreMatching("Drop.read_value_finish"),
-				},
-			},
-			"Gdk-4": {
-				MinVersion: "4.19",
-				IgnoredDefinitions: []typesystem.IgnoreFunc{
-					// These return instance owned GValues, maybe implement them manually?
-					typesystem.IgnoreMatching("Clipboard.read_value_finish"),
-					typesystem.IgnoreMatching("ContentDeserializer.get_value"),
-					typesystem.IgnoreMatching("ContentSerializer.get_value"),
-					typesystem.IgnoreMatching("Drop.read_value_finish"),
-				},
-			},
-			"GdkPixbuf-2": {
-				MinVersion: "2.42",
-				IgnoredDefinitions: []typesystem.IgnoreFunc{
-					// these are not found:
-					typesystem.IgnoreMatching("PixbufModule"),
-					typesystem.IgnoreMatching("PixbufNonAnim"),
-					typesystem.IgnoreMatching("PixbufModulePattern"),
-					typesystem.IgnoreMatching("PixbufFormat.domain"),
-					typesystem.IgnoreMatching("PixbufFormat.flags"),
-					typesystem.IgnoreMatching("PixbufFormat.disabled"),
-					typesystem.IgnoreMatching("PixbufAnimationClass"),
-					typesystem.IgnoreMatching("PixbufAnimationIterClass"),
-				},
-			},
-			"GdkX11-4": {
-				MinVersion: "4.19",
-			},
-			"GdkWayland-4": {
-				MinVersion: "4.19",
-				IgnoredDefinitions: []typesystem.IgnoreFunc{
-					// FIXME: returned type is converted to *unsafe.Pointer? https://docs.gtk.org/gdk4-wayland/method.WaylandDevice.get_xkb_keymap.html
-					typesystem.IgnoreMatching("WaylandDevice.get_xkb_keymap"),
-				},
-			},
-			"Gsk-4": {
-				MinVersion: "4.19",
-				IgnoredDefinitions: []typesystem.IgnoreFunc{
-					typesystem.IgnoreByFileNameSubstring("gsk/broadway/gskbroadwayrenderer.h"),
-				},
-			},
-			"Gtk-3": {
-				MinVersion: "3.24",
-				IgnoredDefinitions: []typesystem.IgnoreFunc{
-					// These are not found.
-					typesystem.IgnoreMatching("HeaderBarAccessibleClass"),
-					typesystem.IgnoreMatching("FileChooserWidgetAccessibleClass"),
-					typesystem.IgnoreMatching("_MountOperationHandler"),
-					typesystem.IgnoreMatching("_MountOperationHandlerIface"),
-					typesystem.IgnoreMatching("_MountOperationHandlerSkeleton"),
-					typesystem.IgnoreMatching("_MountOperationHandlerSkeletonClass"),
-					typesystem.IgnoreMatching("_MountOperationHandlerProxy"),
-					typesystem.IgnoreMatching("_MountOperationHandlerProxyClass"),
-				},
-			},
-			"Gtk-4": {
-				MinVersion: "4.19",
-				IgnoredDefinitions: []typesystem.IgnoreFunc{
-					// These are not found.
-					typesystem.IgnoreByFileNameSubstring("gtkpagesetupunixdialog"),
-					typesystem.IgnoreByFileNameSubstring("gtkprintunixdialog"),
-					typesystem.IgnoreByFileNameSubstring("gtkprinter"),
-					typesystem.IgnoreByFileNameSubstring("gtkprintjob"),
-					typesystem.IgnoreByRegex("Print.*"),
-				},
-			},
+			// 		// These return instance owned GValues, maybe implement them manually?
+			// 		typesystem.IgnoreMatching("Clipboard.read_value_finish"),
+			// 		typesystem.IgnoreMatching("ContentDeserializer.get_value"),
+			// 		typesystem.IgnoreMatching("ContentSerializer.get_value"),
+			// 		typesystem.IgnoreMatching("Drop.read_value_finish"),
+			// 	},
+			// },
+			// "Gdk-4": {
+			// 	MinVersion: "4.19",
+			// 	IgnoredDefinitions: []typesystem.IgnoreFunc{
+			// 		// These return instance owned GValues, maybe implement them manually?
+			// 		typesystem.IgnoreMatching("Clipboard.read_value_finish"),
+			// 		typesystem.IgnoreMatching("ContentDeserializer.get_value"),
+			// 		typesystem.IgnoreMatching("ContentSerializer.get_value"),
+			// 		typesystem.IgnoreMatching("Drop.read_value_finish"),
+			// 	},
+			// },
+			// "GdkPixbuf-2": {
+			// 	MinVersion: "2.42",
+			// 	IgnoredDefinitions: []typesystem.IgnoreFunc{
+			// 		// these are not found:
+			// 		typesystem.IgnoreMatching("PixbufModule"),
+			// 		typesystem.IgnoreMatching("PixbufNonAnim"),
+			// 		typesystem.IgnoreMatching("PixbufModulePattern"),
+			// 		typesystem.IgnoreMatching("PixbufFormat.domain"),
+			// 		typesystem.IgnoreMatching("PixbufFormat.flags"),
+			// 		typesystem.IgnoreMatching("PixbufFormat.disabled"),
+			// 		typesystem.IgnoreMatching("PixbufAnimationClass"),
+			// 		typesystem.IgnoreMatching("PixbufAnimationIterClass"),
+			// 	},
+			// },
+			// "GdkX11-4": {
+			// 	MinVersion: "4.19",
+			// },
+			// "GdkWayland-4": {
+			// 	MinVersion: "4.19",
+			// 	IgnoredDefinitions: []typesystem.IgnoreFunc{
+			// 		// FIXME: returned type is converted to *unsafe.Pointer? https://docs.gtk.org/gdk4-wayland/method.WaylandDevice.get_xkb_keymap.html
+			// 		typesystem.IgnoreMatching("WaylandDevice.get_xkb_keymap"),
+			// 	},
+			// },
+			// "Gsk-4": {
+			// 	MinVersion: "4.19",
+			// 	IgnoredDefinitions: []typesystem.IgnoreFunc{
+			// 		typesystem.IgnoreByFileNameSubstring("gsk/broadway/gskbroadwayrenderer.h"),
+			// 	},
+			// },
+			// "Gtk-3": {
+			// 	MinVersion: "3.24",
+			// 	IgnoredDefinitions: []typesystem.IgnoreFunc{
+			// 		// These are not found.
+			// 		typesystem.IgnoreMatching("HeaderBarAccessibleClass"),
+			// 		typesystem.IgnoreMatching("FileChooserWidgetAccessibleClass"),
+			// 		typesystem.IgnoreMatching("_MountOperationHandler"),
+			// 		typesystem.IgnoreMatching("_MountOperationHandlerIface"),
+			// 		typesystem.IgnoreMatching("_MountOperationHandlerSkeleton"),
+			// 		typesystem.IgnoreMatching("_MountOperationHandlerSkeletonClass"),
+			// 		typesystem.IgnoreMatching("_MountOperationHandlerProxy"),
+			// 		typesystem.IgnoreMatching("_MountOperationHandlerProxyClass"),
+			// 	},
+			// },
+			// "Gtk-4": {
+			// 	MinVersion: "4.19",
+			// 	IgnoredDefinitions: []typesystem.IgnoreFunc{
+			// 		// These are not found.
+			// 		typesystem.IgnoreByFileNameSubstring("gtkpagesetupunixdialog"),
+			// 		typesystem.IgnoreByFileNameSubstring("gtkprintunixdialog"),
+			// 		typesystem.IgnoreByFileNameSubstring("gtkprinter"),
+			// 		typesystem.IgnoreByFileNameSubstring("gtkprintjob"),
+			// 		typesystem.IgnoreByRegex("Print.*"),
+			// 	},
+			// },
 		},
 	},
 }
 
-// Packages lists pkg-config packages and optionally the namespaces to be
-// generated. If the list of namespaces is nil, then everything is generated.
-var Packages = []genmain.Package{
-	{Name: "glib-2.0", Namespaces: []string{
-		"GLib-2",
-		"GObject-2",
-		"Gio-2",
-	}},
-	{Name: "gobject-introspection-1.0", Namespaces: []string{
-		"cairo-1",
-	}},
-	{Name: "gdk-pixbuf-2.0"},
-	{Name: "graphene-1.0"},
-	{Name: "atk"},
-	{Name: "pango", Namespaces: []string{
-		"Pango-1",
-		"PangoCairo-1",
-	}},
-	{Name: "gtk4"},     // includes Gdk
-	{Name: "gtk+-3.0"}, // includes Gdk
-}
-
 // Preprocessors defines a list of preprocessors that the main generator will
 // use. It's mostly used for renaming colliding types/identifiers.
-var Preprocessors = []Preprocessor{
-	// Collision due to case conversions.
-	TypeRenamer("GLib-2.file_test", "test_file"),
-	// This collides with Native().
-	TypeRenamer("Gtk-4.Native", "NativeSurface"),
-	// This collides with Editable()
-	TypeRenamer("Gtk-4.Editable", "EditableTextWidget"),
-	// These collide with structs of the same names.
-	RenameEnumMembers("Pango-1.AttrType", "ATTR_(.*)", "ATTR_TYPE_$1"),
-	RenameEnumMembers("Gsk-4.RenderNodeType", ".*", "${0}_TYPE"),
-	RenameEnumMembers("Gdk-3.EventType", ".*", "${0}_TYPE"),
-	RenameEnumMembers("Gtk-4.GraphicsOffloadEnabled", ".*", "${0}_TYPE"),
+var Preprocessors = []gir.Preprocessor{
+	// // Collision due to case conversions.
+	gir.TypeRenamer("GLib-2.file_test", "test_file"),
+	// // This collides with Native().
+	// TypeRenamer("Gtk-4.Native", "NativeSurface"),
+	// // This collides with Editable()
+	// TypeRenamer("Gtk-4.Editable", "EditableTextWidget"),
+	// // These collide with structs of the same names.
+	// RenameEnumMembers("Pango-1.AttrType", "ATTR_(.*)", "ATTR_TYPE_$1"),
+	// RenameEnumMembers("Gsk-4.RenderNodeType", ".*", "${0}_TYPE"),
+	// RenameEnumMembers("Gdk-3.EventType", ".*", "${0}_TYPE"),
+	// RenameEnumMembers("Gtk-4.GraphicsOffloadEnabled", ".*", "${0}_TYPE"),
 	// See #28.
-	RemoveCIncludes("Gio-2.0.gir", "gio/gdesktopappinfo.h"),
+	gir.RemoveCIncludes("Gio-2.0.gir", "gio/gdesktopappinfo.h"),
 	// These probably shouldn't be built on Windows.
-	RemovePkgconfig("Gio-2.0.gir", "gio-unix-2.0"),
-	RemoveCIncludes("Gio-2.0.gir", "gio/gfiledescriptorbased.h", `/gio/gunix.*\.h/`),
+	gir.RemovePkgconfig("Gio-2.0.gir", "gio-unix-2.0"),
+	gir.RemoveCIncludes("Gio-2.0.gir", "gio/gfiledescriptorbased.h", `gio/gunix.*\.h`),
 
-	// Length and Value are invalid in Go. We manually handle them in GLibLogs.
-	RemoveRecordFields("GLib-2.LogField", "length", "value"),
+	// // Length and Value are invalid in Go. We manually handle them in GLibLogs.
+	gir.RemoveRecordFields("GLib-2.LogField", "length", "value"),
 
-	ModifyParamDirections("Gio-2.InputStream.read", map[string]string{
+	gir.ModifyParamDirections("Gio-2.InputStream.read", map[string]string{
 		"buffer": "in",
 		"count":  "in",
 	}),
-	ModifyParamDirections("Gio-2.InputStream.read_async", map[string]string{
+	gir.ModifyParamDirections("Gio-2.InputStream.read_async", map[string]string{
 		"buffer": "in",
 		"count":  "in",
 	}),
-	ModifyParamDirections("Gio-2.InputStream.read_all", map[string]string{
+	gir.ModifyParamDirections("Gio-2.InputStream.read_all", map[string]string{
 		"buffer": "in",
 		"count":  "in",
 	}),
-	ModifyParamDirections("Gio-2.InputStream.read_all_async", map[string]string{
+	gir.ModifyParamDirections("Gio-2.InputStream.read_all_async", map[string]string{
 		"buffer": "in",
 		"count":  "in",
 	}),
-	ModifyParamDirections("Gio-2.Socket.receive", map[string]string{
+	gir.ModifyParamDirections("Gio-2.Socket.receive", map[string]string{
 		"buffer": "in",
 		"size":   "in",
 	}),
-	ModifyParamDirections("Gio-2.Socket.receive_from", map[string]string{
+	gir.ModifyParamDirections("Gio-2.Socket.receive_from", map[string]string{
 		"buffer": "in",
 		"size":   "in",
 	}),
-	ModifyParamDirections("Gio-2.Socket.receive_with_blocking", map[string]string{
+	gir.ModifyParamDirections("Gio-2.Socket.receive_with_blocking", map[string]string{
 		"buffer": "in",
 		"size":   "in",
 	}),
-	ModifyParamDirections("Gio-2.DBusInterfaceGetPropertyFunc", map[string]string{
+	gir.ModifyParamDirections("Gio-2.DBusInterfaceGetPropertyFunc", map[string]string{
 		"error": "out",
 	}),
 
-	ModifyCallable("Gdk-4.Clipboard.read_async", func(c *gir.CallableAttrs) {
-		// Fix this parameter's type not being a proper array.
-		p := FindParameter(c, "mime_types")
-		p.Array = &gir.Array{
-			CType: "const char**",
-			Type:  &gir.Type{Name: "utf8"},
-		}
-	}),
+	// ModifyCallable("Gdk-4.Clipboard.read_async", func(c *gir.CallableAttrs) {
+	// 	// Fix this parameter's type not being a proper array.
+	// 	p := FindParameter(c, "mime_types")
+	// 	p.Array = &gir.Array{
+	// 		CType: "const char**",
+	// 		Type:  &gir.Type{Name: "utf8"},
+	// 	}
+	// }),
 
-	// These are not introspectable for some reason, even though their
-	// signatures look correct.
-	MustIntrospect("Gdk-4.Clipboard.set_text"),
-	MustIntrospect("Gdk-4.Clipboard.set_texture"),
+	// // These are not introspectable for some reason, even though their
+	// // signatures look correct.
+	// MustIntrospect("Gdk-4.Clipboard.set_text"),
+	// MustIntrospect("Gdk-4.Clipboard.set_texture"),
 
-	// Fix up the return array type for (*Variant).String().
-	ModifyCallable("GLib-2.Variant.get_string", func(c *gir.CallableAttrs) {
-		c.ReturnValue.Type = nil
-		c.ReturnValue.Array = &gir.Array{
-			CType:          "const gchar*",
-			Type:           &gir.Type{Name: "gchar"},
-			Length:         new(int),  // 0
-			ZeroTerminated: new(bool), // false
-		}
-	}),
+	// // Fix up the return array type for (*Variant).String().
+	// ModifyCallable("GLib-2.Variant.get_string", func(c *gir.CallableAttrs) {
+	// 	c.ReturnValue.Type = nil
+	// 	c.ReturnValue.Array = &gir.Array{
+	// 		CType:          "const gchar*",
+	// 		Type:           &gir.Type{Name: "gchar"},
+	// 		Length:         new(int),  // 0
+	// 		ZeroTerminated: new(bool), // false
+	// 	}
+	// }),
 
-	// Fix up Application::open's File type. It's supposed to be a GFile** from
-	// the source code, but that's missing from the GIR data.
-	ModifySignal("Gio-2.Application::open", func(sig *gir.Signal) {
-		param := FindParameterFromSlice(sig.Parameters.Parameters, "files")
-		param.Array.CType = "GFile**"
-	}),
+	// // Fix up Application::open's File type. It's supposed to be a GFile** from
+	// // the source code, but that's missing from the GIR data.
+	// ModifySignal("Gio-2.Application::open", func(sig *gir.Signal) {
+	// 	param := FindParameterFromSlice(sig.Parameters.Parameters, "files")
+	// 	param.Array.CType = "GFile**"
+	// }),
 
-	// Fix up GVariant methods to have nullable returns.
-	PreprocessorFunc(func(repos gir.Repositories) {
-		variant := repos.FindFullType("GLib-2.Variant").Type.(*gir.Record)
-		for _, method := range variant.Methods {
-			returnsGVariant := true &&
-				method.ReturnValue != nil &&
-				method.ReturnValue.Type != nil &&
-				method.ReturnValue.Type.CType == "GVariant*"
+	// // Fix up GVariant methods to have nullable returns.
+	// PreprocessorFunc(func(repos gir.Repositories) {
+	// 	variant := repos.FindFullType("GLib-2.Variant").Type.(*gir.Record)
+	// 	for _, method := range variant.Methods {
+	// 		returnsGVariant := true &&
+	// 			method.ReturnValue != nil &&
+	// 			method.ReturnValue.Type != nil &&
+	// 			method.ReturnValue.Type.CType == "GVariant*"
 
-			if returnsGVariant && !method.ReturnValue.Nullable {
-				// GVariant pointers can be null.
-				method.ReturnValue.Nullable = true
-			}
-		}
-	}),
+	// 		if returnsGVariant && !method.ReturnValue.Nullable {
+	// 			// GVariant pointers can be null.
+	// 			method.ReturnValue.Nullable = true
+	// 		}
+	// 	}
+	// }),
 
 	// Fix GAsyncReadyCallback missing the closure bit for the user_data
 	// parameter.
-	PreprocessorFunc(func(repos gir.Repositories) {
-		callback := repos.FindFullType("Gio-2.AsyncReadyCallback").Type.(*gir.Callback)
+	gir.PreprocessorFunc(func(repos gir.Repositories) {
+		callback := repos.FindFullType("Gio-2.AsyncReadyCallback").(*gir.Callback)
 
 		userDataIx := slices.IndexFunc(
 			callback.Parameters.Parameters,
-			func(p gir.Parameter) bool { return p.Name == "data" },
+			func(p *gir.Parameter) bool { return p.Name == "data" },
 		)
 
-		userData := &callback.Parameters.Parameters[userDataIx]
-		userData.Closure = ptr.To(userDataIx)
+		userData := callback.Parameters.Parameters[userDataIx]
+		userData.Closure = &userDataIx
 	}),
 
-	// Collisions on NoOpObject due to interface implementations:
-	RenameCallable("Atk-1.Action.get_name", "get_action_name"),
-	RenameCallable("Atk-1.Action.get_description", "get_action_description"),
-	RenameCallable("Atk-1.Action.set_description", "set_action_description"),
-	RenameCallable("Atk-1.Text.add_selection", "add_text_selection"),
-	RenameCallable("Atk-1.Text.remove_selection", "remove_text_selection"),
+	// // Collisions on NoOpObject due to interface implementations:
+	// gir.RenameCallable("Atk-1.Action.get_name", "get_action_name"),
+	// gir.RenameCallable("Atk-1.Action.get_description", "get_action_description"),
+	// gir.RenameCallable("Atk-1.Action.set_description", "set_action_description"),
+	// gir.RenameCallable("Atk-1.Text.add_selection", "add_text_selection"),
+	// gir.RenameCallable("Atk-1.Text.remove_selection", "remove_text_selection"),
 
 	// Collide in other namespaces (e.g. Gio) when implementing TypePlugin and TypeModule
-	RenameCallable("GObject-2.TypePlugin.use", "use_plugin"),
-	RenameCallable("GObject-2.TypePlugin.unuse", "unuse_plugin"),
+	gir.RenameCallable("GObject-2.TypePlugin.use", "use_plugin"),
+	gir.RenameCallable("GObject-2.TypePlugin.unuse", "unuse_plugin"),
 
-	// Collide in Gtk-3 when implementing interface:
-	RenameCallable("Gtk-3.Buildable.get_name", "get_buildable_name"),
-	RenameCallable("Gtk-3.Buildable.set_name", "set_buildable_name"),
-	RenameCallable("Gtk-3.ToolShell.get_orientation", "get_tool_shell_orientation"),
-	RenameCallable("Gtk-3.ToolShell.get_icon_size", "get_tool_shell_icon_size"),
-	RenameCallable("Gtk-3.Widget.child_notify", "widget_child_notify"),
-	RenameCallable("Gtk-3.TextView.get_window", "get_text_view_window"),
-	RenameCallable("Gtk-3.ComboBoxText.remove", "remove_combo_box_text"),
-	RenameCallable("Gtk-3.Menu.set_accel_path", "set_menu_accel_path"),
-	RenameCallable("Gtk-3.MenuItem.set_accel_path", "set_menu_item_accel_path"),
-	RenameCallable("Gtk-3.Statusbar.remove", "remove_statusbar"),
-	RenameCallable("Gtk-3.MenuItem.activate", "activate_menu_item"),
-	RenameCallable("Gtk-3.Window.mnemonic_activate", "window_mnemonic_activate"),
-	RenameCallable("Gtk-3.MenuButton.get_direction", "get_menu_button_direction"),
-	RenameCallable("Gtk-3.MenuButton.set_direction", "set_menu_button_direction"),
+	// // Collide in Gtk-3 when implementing interface:
+	// gir.RenameCallable("Gtk-3.Buildable.get_name", "get_buildable_name"),
+	// gir.RenameCallable("Gtk-3.Buildable.set_name", "set_buildable_name"),
+	// gir.RenameCallable("Gtk-3.ToolShell.get_orientation", "get_tool_shell_orientation"),
+	// gir.RenameCallable("Gtk-3.ToolShell.get_icon_size", "get_tool_shell_icon_size"),
+	// gir.RenameCallable("Gtk-3.Widget.child_notify", "widget_child_notify"),
+	// gir.RenameCallable("Gtk-3.TextView.get_window", "get_text_view_window"),
+	// gir.RenameCallable("Gtk-3.ComboBoxText.remove", "remove_combo_box_text"),
+	// gir.RenameCallable("Gtk-3.Menu.set_accel_path", "set_menu_accel_path"),
+	// gir.RenameCallable("Gtk-3.MenuItem.set_accel_path", "set_menu_item_accel_path"),
+	// gir.RenameCallable("Gtk-3.Statusbar.remove", "remove_statusbar"),
+	// gir.RenameCallable("Gtk-3.MenuItem.activate", "activate_menu_item"),
+	// gir.RenameCallable("Gtk-3.Window.mnemonic_activate", "window_mnemonic_activate"),
+	// gir.RenameCallable("Gtk-3.MenuButton.get_direction", "get_menu_button_direction"),
+	// gir.RenameCallable("Gtk-3.MenuButton.set_direction", "set_menu_button_direction"),
 
-	// must rename to allow atk interface to be implemented
-	RenameCallable("Gtk-3.CellAccessibleParent.grab_focus", "cell_accessible_parent_grab_focus"),
+	// // must rename to allow atk interface to be implemented
+	// gir.RenameCallable("Gtk-3.CellAccessibleParent.grab_focus", "cell_accessible_parent_grab_focus"),
 
-	// Collide in Gtk-4 when implementing interface:
-	RenameCallable("Gtk-4.MenuButton.get_direction", "get_menu_button_direction"),
-	RenameCallable("Gtk-4.MenuButton.set_direction", "set_menu_button_direction"),
+	// // Collide in Gtk-4 when implementing interface:
+	// gir.RenameCallable("Gtk-4.MenuButton.get_direction", "get_menu_button_direction"),
+	// gir.RenameCallable("Gtk-4.MenuButton.set_direction", "set_menu_button_direction"),
 
 	// Collide with GObject.Connect:
-	RenameCallable("Gio-2.Socket.connect", "connect_socket"),
-	RenameCallable("Gio-2.SocketClient.connect", "connect_socket_client"),
-	RenameCallable("Gio-2.SocketConnection.connect", "connect_socket_connection"),
-	RenameCallable("Gio-2.Proxy.connect", "connect_proxy"),
+	gir.RenameCallable("Gio-2.Socket.connect", "connect_socket"),
+	gir.RenameCallable("Gio-2.SocketClient.connect", "connect_socket_client"),
+	gir.RenameCallable("Gio-2.SocketConnection.connect", "connect_socket_connection"),
+	gir.RenameCallable("Gio-2.Proxy.connect", "connect_proxy"),
 
 	// Less confusing because C.int differs from int in Go.
-	RenameCallable("GObject-2.param_spec_int", "param_spec_int32"),
+	gir.RenameCallable("GObject-2.param_spec_int", "param_spec_int32"),
 
-	PreprocessorFunc(func(r gir.Repositories) {
-		graphene := r.FindNamespace("Graphene-1")
+	// // Fix Graphenes _Bool return values to be castable to bool.
+	// gir.PreprocessorFunc(func(r gir.Repositories) {
+	// 	graphene := r.Find("Graphene-1").(*gir.Namespace)
 
-		switchBoolReturnType := func(c *gir.CallableAttrs) {
-			if c.ReturnValue == nil || c.ReturnValue.Type == nil {
-				return
-			}
+	// 	switchBoolReturnType := func(c *gir.CallableAttrs) {
+	// 		if c.ReturnValue == nil || c.ReturnValue.Type == nil {
+	// 			return
+	// 		}
 
-			if c.ReturnValue.Type.CType == "_Bool" {
-				c.ReturnValue.Type.Name = "gotk4-graphene-gboolean" // referenced above in ManualTypes
-			}
-		}
+	// 		if c.ReturnValue.Type.CType == "_Bool" {
+	// 			c.ReturnValue.Type.Name = "gotk4-graphene-gboolean" // referenced above in ManualTypes
+	// 		}
+	// 	}
 
-		for _, f := range graphene.Namespace.Functions {
-			switchBoolReturnType(&f.CallableAttrs)
-		}
+	// 	for _, f := range graphene.Functions {
+	// 		switchBoolReturnType(&f.CallableAttrs)
+	// 	}
 
-		for _, r := range graphene.Namespace.Records {
-			for _, m := range r.Methods {
-				switchBoolReturnType(&m.CallableAttrs)
-			}
-			for _, f := range r.Functions {
-				switchBoolReturnType(&f.CallableAttrs)
-			}
-		}
-		for _, c := range graphene.Namespace.Classes {
-			for _, m := range c.Methods {
-				switchBoolReturnType(&m.CallableAttrs)
-			}
-			for _, f := range c.Functions {
-				switchBoolReturnType(&f.CallableAttrs)
-			}
-		}
-	}),
+	// 	for _, r := range graphene.Records {
+	// 		for _, m := range r.Methods {
+	// 			switchBoolReturnType(&m.CallableAttrs)
+	// 		}
+	// 		for _, f := range r.Functions {
+	// 			switchBoolReturnType(&f.CallableAttrs)
+	// 		}
+	// 	}
+	// 	for _, c := range graphene.Classes {
+	// 		for _, m := range c.Methods {
+	// 			switchBoolReturnType(&m.CallableAttrs)
+	// 		}
+	// 		for _, f := range c.Functions {
+	// 			switchBoolReturnType(&f.CallableAttrs)
+	// 		}
+	// 	}
+	// }),
 }
-
-// FIXME: override or manually implement this
-// var ConversionProcessors = []ConversionProcessor{
-// 	ProcessCallback("Gio-2.AsyncReadyCallback", func(conv *Converter) {
-// 		// Don't include the first parameter in Go.
-// 		conv.Results[0].Skip = true
-// 	}),
-// }
-
-// Filters defines a list of GIR types to be filtered. The map key is the
-// namespace, and the values are list of names.
-var Filters = []FilterMatcher{
-	AbsoluteFilter("C.cairo_image_surface_create"),
-	AbsoluteFilter("C.gsk_path_builder_add_cairo_path"),
-
-	// This seems to be macro-guarded between x86 and arm64.
-	AbsoluteFilter("GLib.VA_COPY_AS_ARRAY"),
-
-	// Broadway is not included, so we don't generate code for it.
-	FileFilter("gsk/broadway/gskbroadwayrenderer.h"),
-	// Output buffer parameter is not actually array.
-	AbsoluteFilter("GLib.unichar_to_utf8"),
-	// This is useless.
-	AbsoluteFilter("GLib.nullify_pointer"),
-	// We already alias this from coreglib.
-	AbsoluteFilter("GLib.idle_add_full"),
-	AbsoluteFilter("GLib.timeout_add_full"),
-	AbsoluteFilter("GLib.timeout_add_seconds_full"),
-	// We manually wrote these before the code was able to generate them.
-	AbsoluteFilter("GLib.log_set_writer_func"),
-	AbsoluteFilter("GLib.log_set_handler_full"),
-	// Requires special header, is optional function.
-	AbsoluteFilter("GLib.unix_error_quark"),
-	AbsoluteFilter("Gio.networking_init"),
-	// Not an array type but expects an array.
-	AbsoluteFilter("Gio.SimpleProxyResolver.set_ignore_hosts"),
-	// These are not found.
-	AbsoluteFilter("C.GdkPixbufModule"),
-	AbsoluteFilter("GdkPixbuf.PixbufNonAnim"),
-	AbsoluteFilter("GdkPixbuf.PixbufModulePattern"),
-	AbsoluteFilter("GdkPixbuf.PixbufFormat.domain"),
-	AbsoluteFilter("GdkPixbuf.PixbufFormat.flags"),
-	AbsoluteFilter("GdkPixbuf.PixbufFormat.disabled"),
-	// Incomplete GArray implementation
-	AbsoluteFilter("Atk.Document.get_text_selections"),
-	AbsoluteFilter("Atk.Document.set_text_selections"),
-
-	// Not available on Windows.
-	RegexFilter(`GLib.Source\..*unix.*`),
-	RegexFilter(`Gio.Subprocess`),
-	RegexFilter(`Gio.SubprocessLauncher`), // useless without Subprocess
-	// Nothing "Unix" is going to be available on Windows.
-	RegexFilter(`Gio..*[Uu]nix.*`),
-	// Type is different across platforms, which the generator isn't prepared
-	// for. Use os/exec instead.
-	AbsoluteFilter("GLib.Pid"),
-	// PollFD needs fd to be int on Unix and syscall.Handle on Windows, We can
-	// handle this later. Go doesn't need this.
-	AbsoluteFilter("GLib.PollFD"),
-	// These are removed in Preprocessors.
-	FileFilter("gfiledescriptorbased."),
-	FileFilter("gunix"),
-
-	FileFilterNamespace("GLib", "gasyncqueue."),
-	FileFilterNamespace("GLib", "gatomic."),
-	FileFilterNamespace("GLib", "gbacktrace."),
-	FileFilterNamespace("GLib", "gbase64."),
-	FileFilterNamespace("GLib", "gbitlock."),
-	FileFilterNamespace("GLib", "gdataset."),
-	FileFilterNamespace("GLib", "gdate."),
-	FileFilterNamespace("GLib", "gerror."), // already handled internally
-	FileFilterNamespace("GLib", "ghook."),
-	FileFilterNamespace("GLib", "glib-unix."),
-	FileFilterNamespace("GLib", "glist."),
-	FileFilterNamespace("GLib", "gmacros."),
-	FileFilterNamespace("GLib", "gmem."),
-	FileFilterNamespace("GLib", "gnetworking."), // needs header
-	FileFilterNamespace("GLib", "gprintf."),
-	FileFilterNamespace("GLib", "grcbox."),
-	FileFilterNamespace("GLib", "grefcount."),
-	FileFilterNamespace("GLib", "grefstring."),
-	FileFilterNamespace("GLib", "gslice."),
-	FileFilterNamespace("GLib", "gslist."),
-	FileFilterNamespace("GLib", "gstdio."),
-	FileFilterNamespace("GLib", "gstrfuncs."),
-	FileFilterNamespace("GLib", "gstringchunk."),
-	FileFilterNamespace("GLib", "gstring."),
-	FileFilterNamespace("GLib", "gstrvbuilder."),
-	FileFilterNamespace("GLib", "gtestutils."),
-	FileFilterNamespace("GLib", "gthread."),
-	FileFilterNamespace("GLib", "gthreadpool."),
-	FileFilterNamespace("GLib", "gtrashstack."),
-	FileFilterNamespace("Gio", "gsettingsbackend."),
-
-	// Header-specific.
-	FileFilter("gskglrenderer."),
-	FileFilter("gsknglrenderer."),
-	FileFilter("gskvulkanrenderer."),
-	FileFilter("gdesktopappinfo."), // See #28.
-	// These are not found in GTK4 for some reason, but we're ignoring it for
-	// GTK3 as well.
-	FileFilter("gtkpagesetupunixdialog"),
-	FileFilter("gtkprintunixdialog"),
-	FileFilter("gtkprinter"),
-	FileFilter("gtkprintjob"),
-	FileFilter("gdkprivate"),
-
-	// These are missing on build for some reason.
-	AbsoluteFilter("C.g_array_get_type"),
-	AbsoluteFilter("C.g_byte_array_get_type"),
-	AbsoluteFilter("C.g_bytes_get_type"),
-	AbsoluteFilter("C.g_ptr_array_get_type"),
-	AbsoluteFilter("C.gtk_header_bar_accessible_get_type"),
-	AbsoluteFilter("C.gdk_pixbuf_non_anim_get_type"),
-	AbsoluteFilter("C.gdk_window_destroy_notify"),
-	AbsoluteFilter("C.gtk_print_capabilities_get_type"),
-	AbsoluteFilter("C.GdkPixbufAnimationClass"),
-	AbsoluteFilter("C.GdkPixbufAnimationIterClass"),
-	AbsoluteFilter("C.GThreadedResolverClass"),
-	AbsoluteFilter("C.g_threaded_resolver_get_type"),
-	AbsoluteFilter("C.GtkFileChooserWidgetAccessibleClass"),
-	AbsoluteFilter("C.gtk_file_chooser_widget_accessible_get_type"),
-
-	// Missing.
-	AbsoluteFilter("Gtk-3.HeaderBarAccessibleClass"),
-
-	// Already handled in GLibAliases.
-	AbsoluteFilter("C.g_source_remove"),
-}
-
-// // ImportGError ensures that gerror is imported.
-// func ImportGError(nsgen *girgen.NamespaceGenerator) error {
-// 	core := file.ImportCore("gerror")
-
-// 	for _, f := range nsgen.Files {
-// 		if f.Header().HasImport(core) {
-// 			return nil
-// 		}
-// 	}
-
-// 	f := nsgen.MakeFile("")
-// 	f.Header().DashImport(core)
-
-// 	return nil
-// }
-
-// func GLibVariantIter(nsgen *girgen.NamespaceGenerator) error {
-// 	fg, ok := nsgen.Files["gvariant.go"]
-// 	if !ok {
-// 		fg = nsgen.MakeFile("")
-// 	}
-
-// 	h := fg.Header()
-// 	h.Import("unsafe")
-// 	h.Import("runtime")
-// 	h.ImportCore("gextras")
-// 	h.NeedsExternGLib()
-// 	h.AddMarshaler("coreglib.TypeVariant", "Variant")
-
-// 	p := fg.Pen()
-// 	p.Line(`
-// 		func marshalVariant(p uintptr) (interface{}, error) {
-// 			_cret := C.g_value_dup_variant((*C.GValue)(unsafe.Pointer(p)))
-// 			if _cret == nil {
-// 				return (*Variant)(nil), nil
-// 			}
-
-// 			_variant := (*Variant)(gextras.NewStructNative(unsafe.Pointer(_cret)))
-// 			runtime.SetFinalizer(
-// 				gextras.StructIntern(unsafe.Pointer(_variant)),
-// 				func(intern *struct{ C unsafe.Pointer }) {
-// 					C.g_variant_unref((*C.GVariant)(intern.C))
-// 				},
-// 			)
-// 			return _variant, nil
-// 		}
-
-// 		// ForEach iterates over items in value. The iteration breaks out once f
-// 		// returns true. This method wraps around g_variant_iter_new.
-// 		func (value *Variant) ForEach(f func(*Variant) (stop bool)) {
-// 			valueNative := (*C.GVariant)(gextras.StructNative(unsafe.Pointer(value)))
-
-// 			var iter C.GVariantIter
-// 			C.g_variant_iter_init(&iter, valueNative)
-
-// 			next := func() *Variant {
-// 				item := C.g_variant_iter_next_value(&iter)
-// 				if item == nil {
-// 					return nil
-// 				}
-
-// 				variant := (*Variant)(gextras.NewStructNative(unsafe.Pointer(item)))
-// 				runtime.SetFinalizer(
-// 					gextras.StructIntern(unsafe.Pointer(variant)),
-// 					func(intern *struct{ C unsafe.Pointer }) {
-// 						C.g_variant_unref((*C.GVariant)(intern.C))
-// 					},
-// 				)
-
-// 				return variant
-// 			}
-
-// 			for item := next(); item != nil; item = next() {
-// 				if f(item) {
-// 					break
-// 				}
-// 			}
-
-// 			runtime.KeepAlive(value)
-// 		}
-// 	`)
-
-// 	return nil
-// }
-
-// // GLibDateTime generates NewTimeZoneFromGo and NewDateTimeFromGo.
-// func GLibDateTime(nsgen *girgen.NamespaceGenerator) error {
-// 	fg, ok := nsgen.Files["gdatetime.go"]
-// 	if !ok {
-// 		fg = nsgen.MakeFile("")
-// 	}
-
-// 	h := fg.Header()
-// 	h.Import("time")
-
-// 	p := fg.Pen()
-// 	p.Line(`
-// 		// NewTimeZoneFromGo creates a new TimeZone instance from Go's Location.
-// 		// The location's accuracy is down to the second.
-// 		func NewTimeZoneFromGo(loc *time.Location) *TimeZone {
-// 			switch loc {
-// 			case time.UTC:
-// 				return NewTimeZoneUTC()
-// 			case time.Local:
-// 				return NewTimeZoneLocal()
-// 			}
-
-// 			t1 := time.Date(2009, time.November, 10, 23, 0, 0, 0, loc)
-// 			t2 := time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC)
-// 			return NewTimeZoneOffset(int32(t2.Sub(t1) / time.Second))
-// 		}
-
-// 		// NewDateTimeFromGo creates a new DateTime instance from Go's Time. The
-// 		// TimeZone of the DateTime will be implicitly converted from the Time.
-// 		func NewDateTimeFromGo(t time.Time) *DateTime {
-// 			tz := NewTimeZoneFromGo(t.Location())
-
-// 			Y, M, D := t.Date()
-// 			h, m, s := t.Clock()
-
-// 			// Second offset within a minute in nanoseconds.
-// 			seconds := (time.Duration(s) * time.Second) + time.Duration(t.Nanosecond())
-
-// 			return NewDateTime(tz, int(Y), int(M), int(D), int(h), int(m), seconds.Seconds())
-// 		}
-// 	`)
-
-// 	return nil
-// }
-
-// func GLibObjectComparer(nsgen *girgen.NamespaceGenerator) error {
-// 	fg, ok := nsgen.Files["gobjectcomparer.go"]
-// 	if !ok {
-// 		fg = nsgen.MakeFile("")
-// 	}
-
-// 	h := fg.Header()
-// 	h.NeedsExternGLib()
-
-// 	p := fg.Pen()
-// 	p.Line(`
-// 		// NewObjectComparer returns a CompareDataFunc that uses the given function to
-// 		// compare two objects of type T. If the underlying objects are not of type T,
-// 		// then the function panics. If the underlying pointers aren't objects, then the
-// 		// behavior is undefined.
-// 		func NewObjectComparer[T Objector](f func(a, b T) int) CompareDataFunc {
-// 			return func(a, b unsafe.Pointer) int {
-// 				var aobj, bobj T
-// 				if a != nil {
-// 					aobj = coreglib.Take(a).Cast().(T)
-// 				}
-// 				if b != nil {
-// 					bobj = coreglib.Take(b).Cast().(T)
-// 				}
-// 				return f(aobj, bobj)
-// 			}
-// 		}
-// 	`)
-
-// 	return nil
-// }
-
-// // GioArrayUseBytes is the postprocessor that adds gio/v2.UseBytes.
-// func GioArrayUseBytes(nsgen *girgen.NamespaceGenerator) error {
-// 	fg, ok := nsgen.Files["garray.go"]
-// 	if !ok {
-// 		fg = nsgen.MakeFile("")
-// 	}
-
-// 	h := fg.Header()
-// 	h.Import("runtime")
-// 	h.Import("reflect")
-// 	h.ImportCore("gbox")
-// 	h.ImportCore("gextras")
-// 	h.CallbackDelete = true
-
-// 	// We can use the gbox.Assign API for this. The type doesn't matter much,
-// 	// since we're not actually going to access the data through it.
-
-// 	p := fg.Pen()
-// 	p.Line(`
-// 		// NewBytesWithGo is similar to NewBytes, except the given Go byte slice
-// 		// is not copied, but will be kept alive for the lifetime of the GBytes.
-// 		// Note that the user must NOT modify data.
-// 		//
-// 		// Refer to g_bytes_new_with_free_func() for more information.
-// 		func NewBytesWithGo(data []byte) *Bytes {
-// 			byteID := gbox.Assign(data)
-
-// 			v := C.g_bytes_new_with_free_func(
-// 				C.gconstpointer(unsafe.Pointer(&data[0])),
-// 				C.gsize(len(data)),
-// 				C.GDestroyNotify((*[0]byte)(C.callbackDelete)),
-// 				C.gpointer(byteID),
-// 			)
-
-// 			_bytes := (*Bytes)(gextras.NewStructNative(unsafe.Pointer(v)))
-// 			runtime.SetFinalizer(
-// 				gextras.StructIntern(unsafe.Pointer(_bytes)),
-// 				func(intern *struct{ C unsafe.Pointer }) {
-// 					C.g_bytes_unref((*C.GBytes)(intern.C))
-// 				},
-// 			)
-
-// 			return _bytes
-// 		}
-
-// 		// Use calls f with Bytes' internal byte slice without making a copy. f
-// 		// must NOT move the byte slice to outside of the closure, since the
-// 		// slice's internal array buffer may be freed after.
-// 		func (b *Bytes) Use(f func([]byte)) {
-// 			var ptr C.gconstpointer // in
-// 			var len C.gsize         // in
-
-// 			ptr = C.g_bytes_get_data(
-// 				(*C.GBytes)(gextras.StructNative(unsafe.Pointer(b))),
-// 				&len,
-// 			)
-
-// 			var buf []byte
-
-// 			h := (*reflect.SliceHeader)(unsafe.Pointer(&buf))
-// 			h.Data = uintptr(ptr)
-// 			h.Len = int(len)
-// 			h.Cap = int(len)
-
-// 			f(buf)
-// 			runtime.KeepAlive(b)
-// 		}
-// 	`)
-
-// 	return nil
-// }
-
-// // GLibAliases generates aliases in the glib/v2 package to the core/glib
-// // package. It is generated so that users don't have to import both glib
-// // packages.
-// func GLibAliases(nsgen *girgen.NamespaceGenerator) error {
-// 	fg := nsgen.MakeFile("coreglib.go")
-
-// 	h := fg.Header()
-// 	h.NeedsExternGLib()
-
-// 	h.Import("unsafe")
-// 	h.ImportCore("gextras")
-
-// 	// Needed for GValue.
-// 	h.IncludeC("glib-object.h")
-// 	h.AddPackage("gobject-2.0")
-
-// 	type fn struct {
-// 		Name   string
-// 		Params []string
-// 		Return string
-// 	}
-
-// 	fns := []fn{
-// 		{"IdleAdd", []string{"f interface{}"}, "SourceHandle"},
-// 		{"IdleAddPriority", []string{"p Priority", "f interface{}"}, "SourceHandle"},
-// 		{"TimeoutAdd", []string{"ms uint", "f interface{}"}, "SourceHandle"},
-// 		{"TimeoutAddPriority", []string{"ms uint", "p Priority", "f interface{}"}, "SourceHandle"},
-// 		{"TimeoutSecondsAdd", []string{"s uint", "f interface{}"}, "SourceHandle"},
-// 		{"TimeoutSecondsAddPriority", []string{"s uint", "p Priority", "f interface{}"}, "SourceHandle"},
-// 		{"TypeFromName", []string{"typeName string"}, "Type"},
-// 		{"NewValue", []string{"v interface{}"}, "*Value"},
-// 		{"SourceRemove", []string{"src SourceHandle"}, "bool"},
-// 		{"ObjectEq", []string{"obj1 Objector", "obj2 Objector"}, "bool"},
-// 		{"BaseObject", []string{"obj Objector"}, "*Object"},
-// 	}
-
-// 	p := fg.Pen()
-
-// 	for _, fn := range fns {
-// 		names := make([]string, len(fn.Params))
-// 		for i := range fn.Params {
-// 			names[i] = strings.Split(fn.Params[i], " ")[0]
-// 		}
-
-// 		p.Linef("// %s is an alias for pkg/core/glib.%[1]s.", fn.Name)
-// 		p.Linef("func %s(%s) %s {", fn.Name, strings.Join(fn.Params, ", "), fn.Return)
-// 		p.Linef("  return coreglib.%s(%s)", fn.Name, strings.Join(names, ", "))
-// 		p.Linef("}")
-// 	}
-
-// 	// TODO: right now, we have both coreglib.Variant and glib.Variant.
-// 	// coreglib's implementation is more idiomatic and clean, but glib's
-// 	// generated implementation is more faithful.
-// 	//
-// 	// For now, we'll keep the generated implementation, since it appears more
-// 	// complete, but in the future, if there are too many incorrect methods that
-// 	// users may fall for, then it's better to switch to coreglib.
-
-// 	types := []string{
-// 		"Object",
-// 		"Objector",
-// 		"Type",
-// 		"Value",
-// 		"Priority",
-// 		"SourceHandle",
-// 		"SignalHandle",
-// 	}
-
-// 	for _, t := range types {
-// 		p.Linef("// %s is an alias for pkg/core/glib.%[1]s.", t)
-// 		p.Linef("type %s = coreglib.%[1]s", t)
-// 	}
-
-// 	consts := []string{
-// 		"TypeInvalid",
-// 		"TypeNone",
-// 		"TypeInterface",
-// 		"TypeChar",
-// 		"TypeUchar",
-// 		"TypeBoolean",
-// 		"TypeInt",
-// 		"TypeUint",
-// 		"TypeLong",
-// 		"TypeUlong",
-// 		"TypeInt64",
-// 		"TypeUint64",
-// 		"TypeEnum",
-// 		"TypeFlags",
-// 		"TypeFloat",
-// 		"TypeDouble",
-// 		"TypeString",
-// 		"TypePointer",
-// 		"TypeBoxed",
-// 		"TypeParam",
-// 		"TypeObject",
-// 		"TypeVariant",
-// 		"",
-// 		"PriorityHigh",
-// 		"PriorityDefault",
-// 		"PriorityHighIdle",
-// 		"PriorityDefaultIdle",
-// 		"PriorityLow",
-// 	}
-
-// 	p.Linef("// Constant aliases from pkg/core/glib.")
-// 	p.Linef("const (")
-// 	for _, c := range consts {
-// 		if c == "" {
-// 			p.EmptyLine()
-// 			continue
-// 		}
-// 		p.Linef("%s = coreglib.%[1]s", c)
-// 	}
-// 	p.Linef(")")
-
-// 	p.Linef("// NewVariantValue creates a new GValue from a GVariant. This function")
-// 	p.Linef("// only exists as a workaround for coreglib's cyclical imports. It")
-// 	p.Linef("// be removed in the future once coreglib is merged in.")
-// 	p.Linef("func NewVariantValue(variant *Variant) *coreglib.Value {")
-// 	p.Linef("  value := coreglib.InitValue(coreglib.TypeVariant)")
-// 	p.Linef("  C.g_value_set_variant(")
-// 	p.Linef("    (*C.GValue)(unsafe.Pointer(value.Native())),")
-// 	p.Linef("    (*C.GVariant)(gextras.StructNative(unsafe.Pointer(variant))),")
-// 	p.Linef("  )")
-// 	p.Linef("  return value")
-// 	p.Linef("}")
-
-// 	return nil
-// }
-
-// // GLibLogs adds the following g_log_* functions:
-// //
-// //   - g_log_set_handler
-// //   - g_log_set_handler_full
-// func GLibLogs(nsgen *girgen.NamespaceGenerator) error {
-// 	fg, ok := nsgen.File("gmessages.go")
-// 	if !ok {
-// 		fg = nsgen.MakeFile("")
-// 	}
-
-// 	h := fg.Header()
-// 	h.Import("os")
-// 	h.Import("context")
-// 	h.Import("log/slog")
-// 	h.Import("strings")
-// 	h.ImportCore("gbox")
-// 	h.CallbackDelete = true
-
-// 	r := nsgen.Repositories()
-
-// 	AddCallbackHeader(nsgen, h, r.FindFullType("GLib-2.LogFunc").Type.(*gir.Callback))
-// 	AddCallbackHeader(nsgen, h, r.FindFullType("GLib-2.LogWriterFunc").Type.(*gir.Callback))
-
-// 	p := fg.Pen()
-// 	p.Line(`
-// 		// Value returns the field's value.
-// 		func (l *LogField) Value() string {
-// 			if l.native.length == -1 {
-// 				return C.GoString((*C.gchar)(unsafe.Pointer(l.native.value)))
-// 			}
-// 			return C.GoStringN((*C.gchar)(unsafe.Pointer(l.native.value)), C.int(l.native.length))
-// 		}
-
-// 		// logSetWriter sets the log writer to the given callback, which should
-// 		// take in a list of pair of key-value strings and return true if the
-// 		// log has been successfully written. It is a wrapper around
-// 		// g_log_set_writer_func.
-// 		func logSetWriter(f LogWriterFunc) {
-// 			data := gbox.Assign(f)
-// 			C.g_log_set_writer_func(
-// 				C.GLogWriterFunc((*[0]byte)(C._gotk4_glib2_LogWriterFunc)),
-// 				C.gpointer(data),
-// 				C.GDestroyNotify((*[0]byte)(C.callbackDelete)),
-// 			)
-// 		}
-
-// 		func init() {
-// 			logSetWriter(func(lvl LogLevelFlags, fields []LogField) LogWriterOutput {
-// 				handle := newSlogWriterFunc(slog.Default())
-// 				handle(lvl, fields)
-// 				return LogWriterHandled
-// 			})
-// 		}
-
-// 		// Support $G_MESSAGES_DEBUG.
-// 		var debugDomains = func() map[string]struct{} {
-// 			debugDomains := make(map[string]struct{})
-// 			for _, debugDomain := range strings.Fields(os.Getenv("G_MESSAGES_DEBUG")) {
-// 				debugDomains[debugDomain] = struct{}{}
-// 			}
-// 			return debugDomains
-// 		}()
-
-// 		// Special case: G_MESSAGES_DEBUG=all.
-// 		var _, debugAllDomains = debugDomains["all"]
-
-// 		// newSlogWriterFunc returns a new LogWriterFunc that writes to the given
-// 		// slog.Logger.
-// 		func newSlogWriterFunc(l *slog.Logger) LogWriterFunc {
-// 			return func(lvl LogLevelFlags, fields []LogField) LogWriterOutput {
-// 				attrs := make([]slog.Attr, 0, len(fields))
-// 				var message, domain string
-
-// 				for _, field := range fields {
-// 					k := field.Key()
-// 					v := field.Value()
-// 					if k == "MESSAGE" {
-// 						message = v
-// 					} else {
-// 						if k == "GLIB_DOMAIN" {
-// 							domain = v
-// 						}
-// 						k = strings.ToLower(k)
-// 						attrs = append(attrs, slog.String(k, v))
-// 					}
-// 				}
-
-// 				if !debugAllDomains && (lvl&LogLevelDebug != 0) && domain != "" {
-// 					if _, ok := debugDomains[domain]; !ok {
-// 						return LogWriterHandled
-// 					}
-// 				}
-
-// 				slogLevel := slog.LevelInfo
-// 				switch {
-// 				case lvl.Has(LogLevelError), lvl.Has(LogLevelCritical):
-// 					slogLevel = slog.LevelError
-// 				case lvl.Has(LogLevelWarning):
-// 					slogLevel = slog.LevelWarn
-// 				case lvl.Has(LogLevelMessage), lvl.Has(LogLevelInfo):
-// 					slogLevel = slog.LevelInfo
-// 				case lvl.Has(LogLevelDebug):
-// 					slogLevel = slog.LevelDebug
-// 				}
-
-// 				l.LogAttrs(context.Background(), slogLevel, message, attrs...)
-
-// 				if lvl.Has(LogFlagFatal) {
-// 					panic(message)
-// 				}
-
-// 				return LogWriterHandled
-// 			}
-// 		}
-// 	`)
-
-// 	return nil
-// }
-
-// func GtkNewDialog(nsgen *girgen.NamespaceGenerator) error {
-// 	name := fmt.Sprintf(
-// 		"_gotk4_gtk%s_dialog_new2",
-// 		gir.MajorVersion(nsgen.Namespace().Namespace.Version.String()),
-// 	)
-
-// 	fg := nsgen.MakeFile("gtkdialog-new.go")
-
-// 	h := fg.Header()
-// 	h.Import("unsafe")
-// 	h.Import("runtime")
-// 	h.NeedsExternGLib()
-
-// 	h.AddCBlock(fmt.Sprintf(`
-// 		GtkWidget* %s(const gchar* title, GtkWindow* parent, GtkDialogFlags flags) {
-// 			return gtk_dialog_new_with_buttons(title, parent, flags, NULL, NULL);
-// 		}`,
-// 		name,
-// 	))
-
-// 	p := fg.Pen()
-// 	p.Linef(`
-// 		// NewDialogWithFlags is a slightly more advanced version of NewDialog,
-// 		// allowing the user to construct a new dialog with the given
-// 		// constructor-only dialog flags.
-// 		//
-// 		// It is a wrapper around Gtk.Dialog.new_with_buttons in C.
-// 		func NewDialogWithFlags(title string, parent *Window, flags DialogFlags) *Dialog {
-// 			ctitle := C.CString(title)
-// 			defer C.free(unsafe.Pointer(ctitle))
-
-// 			w := C.%s(
-// 				(*C.gchar)(unsafe.Pointer(ctitle)),
-// 				(*C.GtkWindow)(unsafe.Pointer(coreglib.InternObject(parent).Native())),
-// 				(C.GtkDialogFlags)(flags),
-// 			)
-// 			runtime.KeepAlive(parent)
-
-// 			return wrapDialog(coreglib.Take(unsafe.Pointer(w)))
-// 		}
-// 	`, name)
-
-// 	return nil
-// }
-
-// const cGTKMessageDialogNew2 = `
-// 	GtkWidget* _gotk4_gtk_message_dialog_new2(GtkWindow* parent, GtkDialogFlags flags, GtkMessageType type, GtkButtonsType buttons) {
-// 		return gtk_message_dialog_new_with_markup(parent, flags, type, buttons, NULL);
-// 	}
-// `
-
-// func GtkNewMessageDialog(nsgen *girgen.NamespaceGenerator) error {
-// 	fg, ok := nsgen.File("gtkmessagedialog.go")
-// 	if !ok {
-// 		fg = nsgen.MakeFile("")
-// 	}
-
-// 	h := fg.Header()
-// 	h.Import("unsafe")
-// 	h.Import("runtime")
-// 	h.AddCBlock(cGTKMessageDialogNew2)
-
-// 	p := fg.Pen()
-// 	p.Line(`
-// 		// NewMessageDialog creates a new message dialog. This is a simple
-// 		// dialog with some text taht the user may want to see. When the user
-// 		// clicks a button, a "response" signal is emitted with response IDs
-// 		// from ResponseType.
-// 		func NewMessageDialog(parent *Window, flags DialogFlags, typ MessageType, buttons ButtonsType) *MessageDialog {
-// 			w := C._gotk4_gtk_message_dialog_new2(
-// 				(*C.GtkWindow)(unsafe.Pointer(coreglib.InternObject(parent).Native())),
-// 				(C.GtkDialogFlags)(flags),
-// 				(C.GtkMessageType)(typ),
-// 				(C.GtkButtonsType)(buttons),
-// 			)
-// 			runtime.KeepAlive(parent)
-
-// 			return wrapMessageDialog(coreglib.Take(unsafe.Pointer(w)))
-// 		}
-// 	`)
-
-// 	return nil
-// }
-
-// func GtkLockOSThread(nsgen *girgen.NamespaceGenerator) error {
-// 	// LockOSThread potentially induces additional overhead, so we're limiting
-// 	// it to only the platforms that need it.
-// 	fg := nsgen.MakeFile("gtk_darwin.go")
-// 	fg.Header().Import("runtime")
-
-// 	p := fg.Pen()
-// 	p.Line(`
-// 		func init() {
-// 			runtime.LockOSThread()
-// 		}
-// 	`)
-
-// 	return nil
-// }
-
-// func GtkInvalidListItem(nsgen *girgen.NamespaceGenerator) error {
-// 	fg := nsgen.MakeFile("gtk.go")
-// 	fg.Header().Import("math")
-
-// 	p := fg.Pen()
-// 	p.Line(`
-// 		// InvalidListPosition is the value used to refer to a guaranteed
-// 		// invalid position in a [gio.ListModel].
-// 		//
-// 		// This value may be returned from some functions, others may accept it
-// 		// as input. Its interpretation may differ for different functions.
-// 		//
-// 		// Refer to each function’s documentation for if this value is allowed
-// 		// and what it does.
-// 		const InvalidListPosition = math.MaxUint32
-// 	`)
-
-// 	return nil
-// }
-
-// func GdkPixbufFromImage(nsgen *girgen.NamespaceGenerator) error {
-// 	fg := nsgen.MakeFile("gdk-pixbuf-core-go.go")
-// 	fg.Header().Import("image")
-// 	fg.Header().Import("image/draw")
-// 	fg.Header().Import(Module + "/glib/v2")
-// 	fg.Header().Import(Module + "/cairo/swizzle")
-
-// 	p := fg.Pen()
-// 	p.Line(`
-// 		// NewPixbufFromImage creates a new Pixbuf from a stdlib image.Image. It
-// 		// contains a fast path for *image.RGBA while resorting to
-// 		// copying/converting the image otherwise.
-// 		func NewPixbufFromImage(img image.Image) *Pixbuf {
-// 			bounds := img.Bounds()
-// 			var pixbuf *Pixbuf
-
-// 			switch img := img.(type) {
-// 			case *image.RGBA:
-// 				bytes := glib.NewBytesWithGo(img.Pix)
-// 				pixbuf = NewPixbufFromBytes(bytes, ColorspaceRGB, true, 8, bounds.Dx(), bounds.Dy(), img.Stride)
-// 			default:
-// 				pixbuf = NewPixbuf(ColorspaceRGB, true, 8, bounds.Dx(), bounds.Dy())
-// 				pixbuf.ReadPixelBytes().Use(func(b []byte) {
-// 					// For information on how this works, refer to
-// 					// pkg/cairo/surface_image.go.
-// 					rgba := image.RGBA{
-// 						Pix:    b,
-// 						Stride: bounds.Dx(),
-// 						Rect:   bounds,
-// 					}
-// 					draw.Draw(&rgba, rgba.Rect, img, image.Point{}, draw.Over)
-// 					swizzle.BGRA(rgba.Pix)
-// 				})
-// 			}
-
-// 			return pixbuf
-// 		}
-// 	`)
-
-// 	return nil
-// }
-
-// // Postprocessors is similar to Append, except the caller can mutate the package
-// // in a more flexible manner.
-// var Postprocessors = map[string][]girgen.Postprocessor{
-// 	"GLib-2":      {ImportGError, GioArrayUseBytes, GLibVariantIter, GLibAliases, GLibLogs, GLibDateTime, GLibObjectComparer},
-// 	"GdkPixbuf-2": {GdkPixbufFromImage},
-// 	"Gio-2":       {ImportGError},
-// 	"Gtk-3":       {ImportGError, GtkNewDialog, GtkNewMessageDialog, GtkLockOSThread},
-// 	"Gtk-4":       {ImportGError, GtkNewDialog, GtkNewMessageDialog, GtkLockOSThread, GtkInvalidListItem},
-// }

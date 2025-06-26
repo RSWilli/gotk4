@@ -80,7 +80,7 @@ func (c *ContainerInstance) GoType(pointers int) string {
 	return c.MakeGoType(c.InnerTypes)
 }
 
-func (e *env) resolveContainerInnerTypes(c *Container, inner []gir.Type) Type {
+func (e *env) resolveContainerInnerTypes(c *Container, inner []*gir.Type) Type {
 	if len(inner) != c.NumInnerTypes {
 		e.logger.Warn("container inner type count is mismatched", "type", c.GirName, "inner-types", inner, "desired", c.NumInnerTypes)
 		return nil
@@ -89,7 +89,7 @@ func (e *env) resolveContainerInnerTypes(c *Container, inner []gir.Type) Type {
 	innerTypes := make([]CouldBeForeign[Type], 0, len(inner))
 
 	for _, t := range inner {
-		ns, typ := e.findOuterType(&t)
+		ns, typ := e.findOuterType(t)
 
 		if typ == nil {
 			return nil

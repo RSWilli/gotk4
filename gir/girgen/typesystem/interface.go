@@ -11,7 +11,7 @@ import (
 type Interface struct {
 	Doc
 	BaseType
-	gir gir.Interface
+	gir *gir.Interface
 
 	TypeStruct *Record
 
@@ -68,7 +68,7 @@ func (a *Interface) maxPointersAllowed() int {
 	return 1
 }
 
-func DeclareInterface(e *env, v gir.Interface) *Interface {
+func DeclareInterface(e *env, v *gir.Interface) *Interface {
 	e = e.sub("interface", v.CType)
 
 	if !v.IsIntrospectable() {
