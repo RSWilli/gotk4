@@ -80,7 +80,7 @@ func (g *BitfieldGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "var parts []string\n")
 	for _, member := range g.Members {
 		fmt.Fprintf(w.Go(), "if (f & %s) != 0 {\n", member.GoIndentifier())
-		fmt.Fprintf(w.Go(), "\tparts = append(parts, \"%s\")\n", strcases.SnakeToGo(true, member.GoIndentifier()))
+		fmt.Fprintf(w.Go(), "\tparts = append(parts, \"%s\")\n", member.GoIndentifier())
 		fmt.Fprintf(w.Go(), "}\n")
 	}
 	fmt.Fprintf(w.Go(), "return \"%s(\" + strings.Join(parts, \"|\") + \")\"\n", g.GoType(0))

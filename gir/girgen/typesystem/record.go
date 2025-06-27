@@ -59,23 +59,25 @@ func DeclareRecord(e *env, v *gir.Record) *Record {
 		return nil
 	}
 
+	gotyp := e.identifierToGo(v.CType)
+
 	return &Record{
 		Doc:           NewDoc(&v.InfoAttrs, &v.InfoElements),
-		PrivateGoType: strcases.UnexportPascal(v.Name),
+		PrivateGoType: strcases.Unexport(gotyp),
 
 		BaseConversions: newDefaultBaseConversions(v.Name),
 
-		GoUnsafeUnrefFunction:   fmt.Sprintf("Unsafe%sFree", v.Name),
+		GoUnsafeUnrefFunction:   fmt.Sprintf("Unsafe%sFree", gotyp),
 		CgoUnrefFunction:        "C.free", // replaced below if an unref or custom free method is found
 		CgoUnrefNeedsUnsafeCast: true,
 
 		BaseType: BaseType{
 			GirName: v.Name,
-			GoTyp:   v.Name,
+			GoTyp:   gotyp,
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
 		},
-		Marshaler: e.newDefaultMarshaler(v.GLibGetType, v.Name),
+		Marshaler: e.newDefaultMarshaler(v.GLibGetType, gotyp),
 
 		gir: v,
 	}

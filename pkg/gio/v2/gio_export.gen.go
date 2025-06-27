@@ -35,15 +35,15 @@ func _gotk4_gio2_AsyncReadyCallback(carg1 *C.GObject, carg2 *C.GAsyncResult, car
 	fn(sourceObject, res)
 }
 
-//export _gotk4_gio2_VFSFileLookupFunc
-func _gotk4_gio2_VFSFileLookupFunc(carg1 *C.GVfs, carg2 *C.char, carg3 C.gpointer) (cret *C.GFile) {
-	var fn VFSFileLookupFunc
+//export _gotk4_gio2_VfsFileLookupFunc
+func _gotk4_gio2_VfsFileLookupFunc(carg1 *C.GVfs, carg2 *C.char, carg3 C.gpointer) (cret *C.GFile) {
+	var fn VfsFileLookupFunc
 	{
 		v := userdata.Load(unsafe.Pointer(carg3))
 		if v == nil {
 			panic(`callback not found`)
 		}
-		fn = v.(VFSFileLookupFunc)
+		fn = v.(VfsFileLookupFunc)
 	}
 
 	var vfs        Vfs    // in, none, converted

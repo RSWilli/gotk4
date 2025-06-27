@@ -4,8 +4,7 @@
 package strcases
 
 import (
-	"log"
-	"regexp"
+	"log/slog"
 	"strings"
 	"unicode"
 	"unicode/utf8"
@@ -13,77 +12,41 @@ import (
 	_ "embed"
 )
 
-//go:embed capitalized.txt
-var capitalizedTXT string
-
-//go:embed replaced.txt
-var replacedTXT string
-
-var (
-	// goIdentRegex matches valid go identifiers (must not start with a number)
-	goIdentRegex   = regexp.MustCompile(`^[_A-Za-z]\w+`)
-	snakeRegex     = regexp.MustCompile(`[_0-9]+\w`)
-	pascalSpecials = strings.Split(capitalizedTXT, "\n")
-	pascalWords    = map[string]string{}
-
-	pascalRegex        *regexp.Regexp
-	pascalPostReplacer *strings.Replacer
-)
-
-func initPascalWords() {
-	for _, line := range strings.Split(replacedTXT, "\n") {
-		if line == "" || strings.HasPrefix(line, "#") {
-			continue
-		}
-
-		words := strings.Split(line, "->")
-		if len(words) != 2 {
-			log.Fatalf("invalid replace %q", line)
-		}
-
-		words[0] = strings.TrimSpace(words[0])
-		words[1] = strings.TrimSpace(words[1])
-		pascalWords[words[0]] = words[1]
-	}
-}
-
-func initPascalRegex() {
-	fullRegex := strings.Builder{}
-	fullRegex.Grow(256)
-	fullRegex.WriteByte('(')
-
-	for i, special := range pascalSpecials {
-		if special == "" {
-			continue
-		}
-		if i > 0 {
-			fullRegex.WriteByte('|')
-		}
-		fullRegex.WriteString(special)
-	}
-
-	fullRegex.WriteByte(')')
-
-	// Must account for the next character being either EOF or a capitalized
-	// letter to avoid cases like "IDentifier".
-	fullRegex.WriteString("([A-Z0-9]|$)")
-
-	pascalRegex = regexp.MustCompile(fullRegex.String())
-}
-
-func initPascalPostReplacer() {
-	postReplacerArgs := make([]string, len(pascalWords)*2)
-	for from, to := range pascalWords {
-		postReplacerArgs = append(postReplacerArgs, from, to)
-	}
-
-	pascalPostReplacer = strings.NewReplacer(postReplacerArgs...)
-}
-
-func init() {
-	initPascalWords()
-	initPascalRegex()
-	initPascalPostReplacer()
+var snakeToPascalSpecialWords = map[string]string{
+	// general acromnyms:
+	"api":  "API",
+	"id":   "ID",
+	"ids":  "IDs",
+	"uri":  "URI",
+	"json": "JSON",
+	"ok":   "OK",
+	"eof":  "EOF",
+	"io":   "IO",
+	// encodings:
+	"utf8":  "UTF8",
+	"utf16": "UTF16",
+	"ascii": "ASCII",
+	"ucs4":  "UCS4",
+	// unicode normalization forms:
+	"nfc":  "NFC",
+	"nfd":  "NFD",
+	"nfkc": "NFKC",
+	"nfkd": "NFKD",
+	// special casing:
+	"foreach": "ForEach",
+	// hashes:
+	"md5":    "MD5",
+	"sha1":   "SHA1",
+	"sha256": "SHA256",
+	"sha384": "SHA384",
+	"sha512": "SHA512",
+	// gnome names:
+	"dbus":      "DBus",
+	"gsettings": "GSettings",
+	"gtype":     "GType",
+	"vfs":       "VFS",
+	// gstreamer names:
+	"eos": "EOS",
 }
 
 // isLower returns true if the string is all lower-cased.
@@ -91,105 +54,83 @@ func isLower(s string) bool {
 	return strings.IndexFunc(s, unicode.IsUpper) == -1
 }
 
-// guessSnake guesses if the given name is snake-cased or not.
-func guessSnake(name string) (snake bool) {
-	return strings.Contains(name, "_") || isLower(name)
+// isUpper returns true if the string is all upper-cased.
+func isUpper(s string) bool {
+	return strings.IndexFunc(s, unicode.IsLower) == -1
 }
 
-// Go converts either pascal or snake case to the Go name. The original casing
-// is inferred from the given name.
-func Go(name string) string {
-	if guessSnake(name) {
-		return SnakeToGo(true, name)
-	} else {
-		return PascalToGo(name)
-	}
-}
-
-// PascalToGo converts regular Pascal case to Go.
-func PascalToGo(pascal string) string {
-	// Use a for loop so that we can handle cases where acronyms are next to
-	// each other, such as "SkuId" -> "SKUId" -> "SKUID".
-	for {
-		pascal2 := pascalRegex.ReplaceAllStringFunc(pascal, strings.ToUpper)
-		if pascal2 == pascal {
-			break
-		}
-		pascal = pascal2
+// firstToUpper returns the first letter in upper-case.
+func firstToUpper(s string) string {
+	if len(s) == 0 {
+		return s
 	}
 
-	pascal = pascalPostReplacer.Replace(pascal)
-
-	if pascal == "" {
-		panic("empty pascal string")
-	}
-
-	if !goIdentRegex.MatchString(pascal) {
-		// This is a last resort to ensure that the string is a valid Go
-		pascal = "Gotk" + pascal
-	}
-
-	return pascal
-}
-
-// ReceiverName returns the first letter in lower-case.
-func ParamNameToGo(p string) string {
-	return SnakeToGo(false, p)
-}
-
-// ReceiverName returns the first letter in lower-case.
-func ReceiverName(p string) string {
-	r, sz := utf8.DecodeRuneInString(p)
+	r, sz := utf8.DecodeRuneInString(s)
 	if sz > 0 && r != utf8.RuneError {
-		// FIXME: this could return "_" which is not a valid receiver
-		return string(unicode.ToLower(r))
+		return string(unicode.ToUpper(r)) + s[sz:]
 	}
 
-	return string(p[0]) // fallback
+	// impossible for non empty UTF-8 string
+	panic("firstToUpper: invalid string " + s)
 }
 
-// UnexportPascal converts the PascalToGo string to be unexported.
-func UnexportPascal(pascal string) string {
-	runes := []rune(pascal)
-	if len(runes) < 1 {
-		return snakeNoGo(strings.ToLower(pascal))
+// ParamNameToGo turns snake_case to camelCase and makes sure it does not collide with
+// Go keywords or built-in types. No special replacements are done
+func ParamNameToGo(p string) string {
+	snakeWords := snakeWords(p)
+
+	var camelWords []string
+	for i, word := range snakeWords {
+		if word == "" {
+			continue
+		}
+
+		word = strings.ToLower(word)
+
+		if i == 0 {
+			camelWords = append(camelWords, word)
+			continue
+		}
+
+		camelWords = append(camelWords, firstToUpper(word))
 	}
+	camelString := strings.Join(camelWords, "")
 
-	var i int
-	for i < len(runes) && unicode.IsUpper(runes[i]) {
-		i++
-	}
-
-	if i > 1 {
-		i--
-	}
-
-	pascal = strings.ToLower(string(runes[:i])) + string(runes[i:])
-	pascal = snakeNoGo(pascal)
-
-	return pascal
+	return noGoReserved(camelString)
 }
 
 // SnakeToGo converts snake case to Go's special case. If Pascal is true, then
 // the first letter is capitalized.
 func SnakeToGo(pascal bool, snakeString string) string {
-	if pascal {
-		snakeString = "_" + snakeString
+	if !isLower(snakeString) {
+		slog.Warn("SnakeToGo: snake case string is not all lower-case", "snakeString", snakeString, "pascal", pascal)
 	}
 
-	snakeString = snakeRegex.ReplaceAllStringFunc(snakeString,
-		func(orig string) string {
-			orig = strings.ToUpper(orig)
-			orig = strings.Replace(orig, "_", "", 2)
-			return orig
-		},
-	)
+	snakeWords := snakeWords(snakeString)
 
-	if !pascal {
-		return snakeNoGo(snakeString)
+	var pascalWords []string
+	for i, word := range snakeWords {
+		if word == "" {
+			continue
+		}
+
+		word := strings.ToLower(word)
+
+		if i == 0 && !pascal {
+			pascalWords = append(pascalWords, word)
+			continue
+		}
+
+		if special, ok := snakeToPascalSpecialWords[word]; ok {
+			pascalWords = append(pascalWords, special)
+			continue
+		}
+
+		pascalWords = append(pascalWords, firstToUpper(word))
 	}
+	pascalString := strings.Join(pascalWords, "")
 
-	return PascalToGo(snakeString)
+	return noGoReserved(pascalString)
 }
 
 // KebabToGo converts kebab case to Go's special case. See SnakeToGo.
@@ -258,6 +199,42 @@ var GoBuiltinTypes = map[string]string{
 	"uintptr":    "",
 }
 
+// ReceiverName returns the first letter in lower-case.
+func ReceiverName(p string) string {
+	if len(p) == 0 {
+		panic("ReceiverName: empty string")
+	}
+
+	r, sz := utf8.DecodeRuneInString(p)
+	if sz > 0 && r != utf8.RuneError {
+		if r == '_' {
+			panic("ReceiverName: invalid string with underscore " + p)
+		}
+
+		return string(unicode.ToLower(r))
+	}
+
+	panic("ReceiverName: invalid string " + p)
+}
+
+// Unexport takes a string and returns it with the first letter in lower-case. It also checks for
+// reserved Go keywords and built-in types, returning a modified version if necessary.
+func Unexport(s string) string {
+	if len(s) == 0 {
+		return s
+	}
+
+	r, sz := utf8.DecodeRuneInString(s)
+	if sz > 0 && r != utf8.RuneError {
+		s = string(unicode.ToLower(r)) + s[sz:]
+
+		return noGoReserved(s)
+	}
+
+	// impossible for non empty UTF-8 string
+	panic("Unexport: invalid string " + s)
+}
+
 // CGoField formats the C field name to not be confused with a Go keyword.
 // See https://golang.org/cmd/cgo/#hdr-Go_references_to_C.
 func CGoField(field string) string {
@@ -268,8 +245,8 @@ func CGoField(field string) string {
 	return field
 }
 
-// snakeNoGo ensures the snake-case string is never a Go keyword.
-func snakeNoGo(snake string) string {
+// noGoReserved ensures the snake-case string is never a Go keyword.
+func noGoReserved(snake string) string {
 	s, isKeyword := GoKeywords[snake]
 	if isKeyword {
 		if s != "" {
@@ -287,4 +264,9 @@ func snakeNoGo(snake string) string {
 	}
 
 	return snake
+}
+
+// snakeWords splits the snake case string into words.
+func snakeWords(snake string) []string {
+	return strings.Split(snake, "_")
 }

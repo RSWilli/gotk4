@@ -2,7 +2,6 @@ package typesystem
 
 import (
 	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 )
 
 // Bitfield is always a wrapper type for int in go
@@ -34,7 +33,7 @@ func DeclareBitfield(e *env, v *gir.Bitfield) *Bitfield {
 		gir: v,
 		BaseType: BaseType{
 			GirName: v.Name,
-			GoTyp:   strcases.PascalToGo(v.Name),
+			GoTyp:   e.identifierToGo(v.CType),
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
 		},

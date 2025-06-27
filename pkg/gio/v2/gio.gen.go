@@ -18,7 +18,7 @@ import (
 // #cgo pkg-config: gio-2.0
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gio/gio.h>
-// extern GFile* _gotk4_gio2_VFSFileLookupFunc(GVfs*, const char*, gpointer);
+// extern GFile* _gotk4_gio2_VfsFileLookupFunc(GVfs*, const char*, gpointer);
 // extern gboolean _gotk4_glib2_SourceFunc(gpointer);
 // extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
 // extern void destroyUserdata(gpointer);
@@ -1712,15 +1712,15 @@ func init() {
 		gobject.TypeMarshaler{T: TypeSocketListenerEvent, F: marshalSocketListenerEvent},
 		gobject.TypeMarshaler{T: TypeSocketProtocol, F: marshalSocketProtocol},
 		gobject.TypeMarshaler{T: TypeSocketType, F: marshalSocketType},
-		gobject.TypeMarshaler{T: TypeTlsAuthenticationMode, F: marshalTLSAuthenticationMode},
-		gobject.TypeMarshaler{T: TypeTlsCertificateRequestFlags, F: marshalTLSCertificateRequestFlags},
-		gobject.TypeMarshaler{T: TypeTlsChannelBindingError, F: marshalTLSChannelBindingError},
-		gobject.TypeMarshaler{T: TypeTlsChannelBindingType, F: marshalTLSChannelBindingType},
-		gobject.TypeMarshaler{T: TypeTlsDatabaseLookupFlags, F: marshalTLSDatabaseLookupFlags},
-		gobject.TypeMarshaler{T: TypeTlsError, F: marshalTLSError},
-		gobject.TypeMarshaler{T: TypeTlsInteractionResult, F: marshalTLSInteractionResult},
-		gobject.TypeMarshaler{T: TypeTlsProtocolVersion, F: marshalTLSProtocolVersion},
-		gobject.TypeMarshaler{T: TypeTlsRehandshakeMode, F: marshalTLSRehandshakeMode},
+		gobject.TypeMarshaler{T: TypeTlsAuthenticationMode, F: marshalTlsAuthenticationMode},
+		gobject.TypeMarshaler{T: TypeTlsCertificateRequestFlags, F: marshalTlsCertificateRequestFlags},
+		gobject.TypeMarshaler{T: TypeTlsChannelBindingError, F: marshalTlsChannelBindingError},
+		gobject.TypeMarshaler{T: TypeTlsChannelBindingType, F: marshalTlsChannelBindingType},
+		gobject.TypeMarshaler{T: TypeTlsDatabaseLookupFlags, F: marshalTlsDatabaseLookupFlags},
+		gobject.TypeMarshaler{T: TypeTlsError, F: marshalTlsError},
+		gobject.TypeMarshaler{T: TypeTlsInteractionResult, F: marshalTlsInteractionResult},
+		gobject.TypeMarshaler{T: TypeTlsProtocolVersion, F: marshalTlsProtocolVersion},
+		gobject.TypeMarshaler{T: TypeTlsRehandshakeMode, F: marshalTlsRehandshakeMode},
 		gobject.TypeMarshaler{T: TypeZlibCompressorFormat, F: marshalZlibCompressorFormat},
 		gobject.TypeMarshaler{T: TypeAppInfoCreateFlags, F: marshalAppInfoCreateFlags},
 		gobject.TypeMarshaler{T: TypeApplicationFlags, F: marshalApplicationFlags},
@@ -1744,9 +1744,9 @@ func init() {
 		gobject.TypeMarshaler{T: TypeResourceLookupFlags, F: marshalResourceLookupFlags},
 		gobject.TypeMarshaler{T: TypeSettingsBindFlags, F: marshalSettingsBindFlags},
 		gobject.TypeMarshaler{T: TypeSocketMsgFlags, F: marshalSocketMsgFlags},
-		gobject.TypeMarshaler{T: TypeTlsCertificateFlags, F: marshalTLSCertificateFlags},
-		gobject.TypeMarshaler{T: TypeTlsDatabaseVerifyFlags, F: marshalTLSDatabaseVerifyFlags},
-		gobject.TypeMarshaler{T: TypeTlsPasswordFlags, F: marshalTLSPasswordFlags},
+		gobject.TypeMarshaler{T: TypeTlsCertificateFlags, F: marshalTlsCertificateFlags},
+		gobject.TypeMarshaler{T: TypeTlsDatabaseVerifyFlags, F: marshalTlsDatabaseVerifyFlags},
+		gobject.TypeMarshaler{T: TypeTlsPasswordFlags, F: marshalTlsPasswordFlags},
 		gobject.TypeMarshaler{T: TypeAction, F: marshalActionInstance},
 		gobject.TypeMarshaler{T: TypeActionGroup, F: marshalActionGroupInstance},
 		gobject.TypeMarshaler{T: TypeActionMap, F: marshalActionMapInstance},
@@ -1882,19 +1882,19 @@ const MENU_EXPORTER_MAX_SECTION_SIZE = 1000
 type BusType C.int
 
 const (
-	// BusTypeStarter wraps BUS_TYPE_STARTER
+	// BusTypeStarter wraps G_BUS_TYPE_STARTER
 	//
 	// An alias for the message bus that activated the process, if any.
 	BusTypeStarter BusType = -1
-	// BusTypeNone wraps BUS_TYPE_NONE
+	// BusTypeNone wraps G_BUS_TYPE_NONE
 	//
 	// Not a message bus.
 	BusTypeNone BusType = 0
-	// BusTypeSystem wraps BUS_TYPE_SYSTEM
+	// BusTypeSystem wraps G_BUS_TYPE_SYSTEM
 	//
 	// The system-wide message bus.
 	BusTypeSystem BusType = 1
-	// BusTypeSession wraps BUS_TYPE_SESSION
+	// BusTypeSession wraps G_BUS_TYPE_SESSION
 	//
 	// The login session message bus.
 	BusTypeSession BusType = 2
@@ -1930,19 +1930,19 @@ func (e BusType) String() string {
 type ConverterResult C.int
 
 const (
-	// ConverterError wraps CONVERTER_ERROR
+	// ConverterError wraps G_CONVERTER_ERROR
 	//
 	// There was an error during conversion.
 	ConverterError ConverterResult = 0
-	// ConverterConverted wraps CONVERTER_CONVERTED
+	// ConverterConverted wraps G_CONVERTER_CONVERTED
 	//
 	// Some data was consumed or produced
 	ConverterConverted ConverterResult = 1
-	// ConverterFinished wraps CONVERTER_FINISHED
+	// ConverterFinished wraps G_CONVERTER_FINISHED
 	//
 	// The conversion is finished
 	ConverterFinished ConverterResult = 2
-	// ConverterFlushed wraps CONVERTER_FLUSHED
+	// ConverterFlushed wraps G_CONVERTER_FLUSHED
 	//
 	// Flushing is finished
 	ConverterFlushed ConverterResult = 3
@@ -1978,35 +1978,35 @@ func (e ConverterResult) String() string {
 type CredentialsType C.int
 
 const (
-	// CredentialsTypeInvalid wraps CREDENTIALS_TYPE_INVALID
+	// CredentialsTypeInvalid wraps G_CREDENTIALS_TYPE_INVALID
 	//
 	// Indicates an invalid native credential type.
 	CredentialsTypeInvalid CredentialsType = 0
-	// CredentialsTypeLinuxUcred wraps CREDENTIALS_TYPE_LINUX_UCRED
+	// CredentialsTypeLinuxUcred wraps G_CREDENTIALS_TYPE_LINUX_UCRED
 	//
 	// The native credentials type is a `struct ucred`.
 	CredentialsTypeLinuxUcred CredentialsType = 1
-	// CredentialsTypeFreebsdCmsgcred wraps CREDENTIALS_TYPE_FREEBSD_CMSGCRED
+	// CredentialsTypeFreebsdCmsgcred wraps G_CREDENTIALS_TYPE_FREEBSD_CMSGCRED
 	//
 	// The native credentials type is a `struct cmsgcred`.
 	CredentialsTypeFreebsdCmsgcred CredentialsType = 2
-	// CredentialsTypeOpenbsdSockpeercred wraps CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED
+	// CredentialsTypeOpenbsdSockpeercred wraps G_CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED
 	//
 	// The native credentials type is a `struct sockpeercred`. Added in 2.30.
 	CredentialsTypeOpenbsdSockpeercred CredentialsType = 3
-	// CredentialsTypeSolarisUcred wraps CREDENTIALS_TYPE_SOLARIS_UCRED
+	// CredentialsTypeSolarisUcred wraps G_CREDENTIALS_TYPE_SOLARIS_UCRED
 	//
 	// The native credentials type is a `ucred_t`. Added in 2.40.
 	CredentialsTypeSolarisUcred CredentialsType = 4
-	// CredentialsTypeNetbsdUnpcbid wraps CREDENTIALS_TYPE_NETBSD_UNPCBID
+	// CredentialsTypeNetbsdUnpcbid wraps G_CREDENTIALS_TYPE_NETBSD_UNPCBID
 	//
 	// The native credentials type is a `struct unpcbid`. Added in 2.42.
 	CredentialsTypeNetbsdUnpcbid CredentialsType = 5
-	// CredentialsTypeAppleXucred wraps CREDENTIALS_TYPE_APPLE_XUCRED
+	// CredentialsTypeAppleXucred wraps G_CREDENTIALS_TYPE_APPLE_XUCRED
 	//
 	// The native credentials type is a `struct xucred`. Added in 2.66.
 	CredentialsTypeAppleXucred CredentialsType = 6
-	// CredentialsTypeWin32Pid wraps CREDENTIALS_TYPE_WIN32_PID
+	// CredentialsTypeWin32Pid wraps G_CREDENTIALS_TYPE_WIN32_PID
 	//
 	// The native credentials type is a PID `DWORD`. Added in 2.72.
 	CredentialsTypeWin32Pid CredentialsType = 7
@@ -2047,15 +2047,15 @@ func (e CredentialsType) String() string {
 type DataStreamByteOrder C.int
 
 const (
-	// DataStreamByteOrderBigEndian wraps DATA_STREAM_BYTE_ORDER_BIG_ENDIAN
+	// DataStreamByteOrderBigEndian wraps G_DATA_STREAM_BYTE_ORDER_BIG_ENDIAN
 	//
 	// Selects Big Endian byte order.
 	DataStreamByteOrderBigEndian DataStreamByteOrder = 0
-	// DataStreamByteOrderLittleEndian wraps DATA_STREAM_BYTE_ORDER_LITTLE_ENDIAN
+	// DataStreamByteOrderLittleEndian wraps G_DATA_STREAM_BYTE_ORDER_LITTLE_ENDIAN
 	//
 	// Selects Little Endian byte order.
 	DataStreamByteOrderLittleEndian DataStreamByteOrder = 1
-	// DataStreamByteOrderHostEndian wraps DATA_STREAM_BYTE_ORDER_HOST_ENDIAN
+	// DataStreamByteOrderHostEndian wraps G_DATA_STREAM_BYTE_ORDER_HOST_ENDIAN
 	//
 	// Selects endianness based on host machine's architecture.
 	DataStreamByteOrderHostEndian DataStreamByteOrder = 2
@@ -2090,19 +2090,19 @@ func (e DataStreamByteOrder) String() string {
 type DataStreamNewlineType C.int
 
 const (
-	// DataStreamNewlineTypeLf wraps DATA_STREAM_NEWLINE_TYPE_LF
+	// DataStreamNewlineTypeLf wraps G_DATA_STREAM_NEWLINE_TYPE_LF
 	//
 	// Selects "LF" line endings, common on most modern UNIX platforms.
 	DataStreamNewlineTypeLf DataStreamNewlineType = 0
-	// DataStreamNewlineTypeCr wraps DATA_STREAM_NEWLINE_TYPE_CR
+	// DataStreamNewlineTypeCr wraps G_DATA_STREAM_NEWLINE_TYPE_CR
 	//
 	// Selects "CR" line endings.
 	DataStreamNewlineTypeCr DataStreamNewlineType = 1
-	// DataStreamNewlineTypeCrLf wraps DATA_STREAM_NEWLINE_TYPE_CR_LF
+	// DataStreamNewlineTypeCrLf wraps G_DATA_STREAM_NEWLINE_TYPE_CR_LF
 	//
 	// Selects "CR, LF" line ending, common on Microsoft Windows.
 	DataStreamNewlineTypeCrLf DataStreamNewlineType = 2
-	// DataStreamNewlineTypeAny wraps DATA_STREAM_NEWLINE_TYPE_ANY
+	// DataStreamNewlineTypeAny wraps G_DATA_STREAM_NEWLINE_TYPE_ANY
 	//
 	// Automatically try to handle any line ending type.
 	DataStreamNewlineTypeAny DataStreamNewlineType = 3
@@ -2138,29 +2138,29 @@ func (e DataStreamNewlineType) String() string {
 type DriveStartStopType C.int
 
 const (
-	// DriveStartStopTypeUnknown wraps DRIVE_START_STOP_TYPE_UNKNOWN
+	// DriveStartStopTypeUnknown wraps G_DRIVE_START_STOP_TYPE_UNKNOWN
 	//
 	// Unknown or drive doesn't support
 	//    start/stop.
 	DriveStartStopTypeUnknown DriveStartStopType = 0
-	// DriveStartStopTypeShutdown wraps DRIVE_START_STOP_TYPE_SHUTDOWN
+	// DriveStartStopTypeShutdown wraps G_DRIVE_START_STOP_TYPE_SHUTDOWN
 	//
 	// The stop method will physically
 	//    shut down the drive and e.g. power down the port the drive is
 	//    attached to.
 	DriveStartStopTypeShutdown DriveStartStopType = 1
-	// DriveStartStopTypeNetwork wraps DRIVE_START_STOP_TYPE_NETWORK
+	// DriveStartStopTypeNetwork wraps G_DRIVE_START_STOP_TYPE_NETWORK
 	//
 	// The start/stop methods are used
 	//    for connecting/disconnect to the drive over the network.
 	DriveStartStopTypeNetwork DriveStartStopType = 2
-	// DriveStartStopTypeMultidisk wraps DRIVE_START_STOP_TYPE_MULTIDISK
+	// DriveStartStopTypeMultidisk wraps G_DRIVE_START_STOP_TYPE_MULTIDISK
 	//
 	// The start/stop methods will
 	//    assemble/disassemble a virtual drive from several physical
 	//    drives.
 	DriveStartStopTypeMultidisk DriveStartStopType = 3
-	// DriveStartStopTypePassword wraps DRIVE_START_STOP_TYPE_PASSWORD
+	// DriveStartStopTypePassword wraps G_DRIVE_START_STOP_TYPE_PASSWORD
 	//
 	// The start/stop methods will
 	//    unlock/lock the disk (for example using the ATA `SECURITY UNLOCK
@@ -2200,19 +2200,19 @@ func (e DriveStartStopType) String() string {
 type EmblemOrigin C.int
 
 const (
-	// EmblemOriginUnknown wraps EMBLEM_ORIGIN_UNKNOWN
+	// EmblemOriginUnknown wraps G_EMBLEM_ORIGIN_UNKNOWN
 	//
 	// Emblem of unknown origin
 	EmblemOriginUnknown EmblemOrigin = 0
-	// EmblemOriginDevice wraps EMBLEM_ORIGIN_DEVICE
+	// EmblemOriginDevice wraps G_EMBLEM_ORIGIN_DEVICE
 	//
 	// Emblem adds device-specific information
 	EmblemOriginDevice EmblemOrigin = 1
-	// EmblemOriginLivemetadata wraps EMBLEM_ORIGIN_LIVEMETADATA
+	// EmblemOriginLivemetadata wraps G_EMBLEM_ORIGIN_LIVEMETADATA
 	//
 	// Emblem depicts live metadata, such as "readonly"
 	EmblemOriginLivemetadata EmblemOrigin = 2
-	// EmblemOriginTag wraps EMBLEM_ORIGIN_TAG
+	// EmblemOriginTag wraps G_EMBLEM_ORIGIN_TAG
 	//
 	// Emblem comes from a user-defined tag, e.g. set by nautilus (in the future)
 	EmblemOriginTag EmblemOrigin = 3
@@ -2248,15 +2248,15 @@ func (e EmblemOrigin) String() string {
 type FileAttributeStatus C.int
 
 const (
-	// FileAttributeStatusUnset wraps FILE_ATTRIBUTE_STATUS_UNSET
+	// FileAttributeStatusUnset wraps G_FILE_ATTRIBUTE_STATUS_UNSET
 	//
 	// Attribute value is unset (empty).
 	FileAttributeStatusUnset FileAttributeStatus = 0
-	// FileAttributeStatusSet wraps FILE_ATTRIBUTE_STATUS_SET
+	// FileAttributeStatusSet wraps G_FILE_ATTRIBUTE_STATUS_SET
 	//
 	// Attribute value is set.
 	FileAttributeStatusSet FileAttributeStatus = 1
-	// FileAttributeStatusErrorSetting wraps FILE_ATTRIBUTE_STATUS_ERROR_SETTING
+	// FileAttributeStatusErrorSetting wraps G_FILE_ATTRIBUTE_STATUS_ERROR_SETTING
 	//
 	// Indicates an error in setting the value.
 	FileAttributeStatusErrorSetting FileAttributeStatus = 2
@@ -2291,43 +2291,43 @@ func (e FileAttributeStatus) String() string {
 type FileAttributeType C.int
 
 const (
-	// FileAttributeTypeInvalid wraps FILE_ATTRIBUTE_TYPE_INVALID
+	// FileAttributeTypeInvalid wraps G_FILE_ATTRIBUTE_TYPE_INVALID
 	//
 	// indicates an invalid or uninitialized type.
 	FileAttributeTypeInvalid FileAttributeType = 0
-	// FileAttributeTypeString wraps FILE_ATTRIBUTE_TYPE_STRING
+	// FileAttributeTypeString wraps G_FILE_ATTRIBUTE_TYPE_STRING
 	//
 	// a null terminated UTF8 string.
 	FileAttributeTypeString FileAttributeType = 1
-	// FileAttributeTypeByteString wraps FILE_ATTRIBUTE_TYPE_BYTE_STRING
+	// FileAttributeTypeByteString wraps G_FILE_ATTRIBUTE_TYPE_BYTE_STRING
 	//
 	// a zero terminated string of non-zero bytes.
 	FileAttributeTypeByteString FileAttributeType = 2
-	// FileAttributeTypeBoolean wraps FILE_ATTRIBUTE_TYPE_BOOLEAN
+	// FileAttributeTypeBoolean wraps G_FILE_ATTRIBUTE_TYPE_BOOLEAN
 	//
 	// a boolean value.
 	FileAttributeTypeBoolean FileAttributeType = 3
-	// FileAttributeTypeUint32 wraps FILE_ATTRIBUTE_TYPE_UINT32
+	// FileAttributeTypeUint32 wraps G_FILE_ATTRIBUTE_TYPE_UINT32
 	//
 	// an unsigned 4-byte/32-bit integer.
 	FileAttributeTypeUint32 FileAttributeType = 4
-	// FileAttributeTypeInt32 wraps FILE_ATTRIBUTE_TYPE_INT32
+	// FileAttributeTypeInt32 wraps G_FILE_ATTRIBUTE_TYPE_INT32
 	//
 	// a signed 4-byte/32-bit integer.
 	FileAttributeTypeInt32 FileAttributeType = 5
-	// FileAttributeTypeUint64 wraps FILE_ATTRIBUTE_TYPE_UINT64
+	// FileAttributeTypeUint64 wraps G_FILE_ATTRIBUTE_TYPE_UINT64
 	//
 	// an unsigned 8-byte/64-bit integer.
 	FileAttributeTypeUint64 FileAttributeType = 6
-	// FileAttributeTypeInt64 wraps FILE_ATTRIBUTE_TYPE_INT64
+	// FileAttributeTypeInt64 wraps G_FILE_ATTRIBUTE_TYPE_INT64
 	//
 	// a signed 8-byte/64-bit integer.
 	FileAttributeTypeInt64 FileAttributeType = 7
-	// FileAttributeTypeObject wraps FILE_ATTRIBUTE_TYPE_OBJECT
+	// FileAttributeTypeObject wraps G_FILE_ATTRIBUTE_TYPE_OBJECT
 	//
 	// a #GObject.
 	FileAttributeTypeObject FileAttributeType = 8
-	// FileAttributeTypeStringv wraps FILE_ATTRIBUTE_TYPE_STRINGV
+	// FileAttributeTypeStringv wraps G_FILE_ATTRIBUTE_TYPE_STRINGV
 	//
 	// a %NULL terminated char **. Since 2.22
 	FileAttributeTypeStringv FileAttributeType = 9
@@ -2369,52 +2369,52 @@ func (e FileAttributeType) String() string {
 type FileMonitorEvent C.int
 
 const (
-	// FileMonitorEventChanged wraps FILE_MONITOR_EVENT_CHANGED
+	// FileMonitorEventChanged wraps G_FILE_MONITOR_EVENT_CHANGED
 	//
 	// a file changed.
 	FileMonitorEventChanged FileMonitorEvent = 0
-	// FileMonitorEventChangesDoneHint wraps FILE_MONITOR_EVENT_CHANGES_DONE_HINT
+	// FileMonitorEventChangesDoneHint wraps G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT
 	//
 	// a hint that this was probably the last change in a set of changes.
 	FileMonitorEventChangesDoneHint FileMonitorEvent = 1
-	// FileMonitorEventDeleted wraps FILE_MONITOR_EVENT_DELETED
+	// FileMonitorEventDeleted wraps G_FILE_MONITOR_EVENT_DELETED
 	//
 	// a file was deleted.
 	FileMonitorEventDeleted FileMonitorEvent = 2
-	// FileMonitorEventCreated wraps FILE_MONITOR_EVENT_CREATED
+	// FileMonitorEventCreated wraps G_FILE_MONITOR_EVENT_CREATED
 	//
 	// a file was created.
 	FileMonitorEventCreated FileMonitorEvent = 3
-	// FileMonitorEventAttributeChanged wraps FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED
+	// FileMonitorEventAttributeChanged wraps G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED
 	//
 	// a file attribute was changed.
 	FileMonitorEventAttributeChanged FileMonitorEvent = 4
-	// FileMonitorEventPreUnmount wraps FILE_MONITOR_EVENT_PRE_UNMOUNT
+	// FileMonitorEventPreUnmount wraps G_FILE_MONITOR_EVENT_PRE_UNMOUNT
 	//
 	// the file location will soon be unmounted.
 	FileMonitorEventPreUnmount FileMonitorEvent = 5
-	// FileMonitorEventUnmounted wraps FILE_MONITOR_EVENT_UNMOUNTED
+	// FileMonitorEventUnmounted wraps G_FILE_MONITOR_EVENT_UNMOUNTED
 	//
 	// the file location was unmounted.
 	FileMonitorEventUnmounted FileMonitorEvent = 6
-	// FileMonitorEventMoved wraps FILE_MONITOR_EVENT_MOVED
+	// FileMonitorEventMoved wraps G_FILE_MONITOR_EVENT_MOVED
 	//
 	// the file was moved -- only sent if the
 	//   (deprecated) %G_FILE_MONITOR_SEND_MOVED flag is set
 	FileMonitorEventMoved FileMonitorEvent = 7
-	// FileMonitorEventRenamed wraps FILE_MONITOR_EVENT_RENAMED
+	// FileMonitorEventRenamed wraps G_FILE_MONITOR_EVENT_RENAMED
 	//
 	// the file was renamed within the
 	//   current directory -- only sent if the %G_FILE_MONITOR_WATCH_MOVES
 	//   flag is set.  Since: 2.46.
 	FileMonitorEventRenamed FileMonitorEvent = 8
-	// FileMonitorEventMovedIn wraps FILE_MONITOR_EVENT_MOVED_IN
+	// FileMonitorEventMovedIn wraps G_FILE_MONITOR_EVENT_MOVED_IN
 	//
 	// the file was moved into the
 	//   monitored directory from another location -- only sent if the
 	//   %G_FILE_MONITOR_WATCH_MOVES flag is set.  Since: 2.46.
 	FileMonitorEventMovedIn FileMonitorEvent = 9
-	// FileMonitorEventMovedOut wraps FILE_MONITOR_EVENT_MOVED_OUT
+	// FileMonitorEventMovedOut wraps G_FILE_MONITOR_EVENT_MOVED_OUT
 	//
 	// the file was moved out of the
 	//   monitored directory to another location -- only sent if the
@@ -2468,33 +2468,33 @@ func (e FileMonitorEvent) String() string {
 type FileType C.int
 
 const (
-	// FileTypeUnknown wraps FILE_TYPE_UNKNOWN
+	// FileTypeUnknown wraps G_FILE_TYPE_UNKNOWN
 	//
 	// File's type is unknown.
 	FileTypeUnknown FileType = 0
-	// FileTypeRegular wraps FILE_TYPE_REGULAR
+	// FileTypeRegular wraps G_FILE_TYPE_REGULAR
 	//
 	// File handle represents a regular file.
 	FileTypeRegular FileType = 1
-	// FileTypeDirectory wraps FILE_TYPE_DIRECTORY
+	// FileTypeDirectory wraps G_FILE_TYPE_DIRECTORY
 	//
 	// File handle represents a directory.
 	FileTypeDirectory FileType = 2
-	// FileTypeSymbolicLink wraps FILE_TYPE_SYMBOLIC_LINK
+	// FileTypeSymbolicLink wraps G_FILE_TYPE_SYMBOLIC_LINK
 	//
 	// File handle represents a symbolic link
 	//    (Unix systems).
 	FileTypeSymbolicLink FileType = 3
-	// FileTypeSpecial wraps FILE_TYPE_SPECIAL
+	// FileTypeSpecial wraps G_FILE_TYPE_SPECIAL
 	//
 	// File is a "special" file, such as a socket, fifo,
 	//    block device, or character device.
 	FileTypeSpecial FileType = 4
-	// FileTypeShortcut wraps FILE_TYPE_SHORTCUT
+	// FileTypeShortcut wraps G_FILE_TYPE_SHORTCUT
 	//
 	// File is a shortcut (Windows systems).
 	FileTypeShortcut FileType = 5
-	// FileTypeMountable wraps FILE_TYPE_MOUNTABLE
+	// FileTypeMountable wraps G_FILE_TYPE_MOUNTABLE
 	//
 	// File is a mountable location.
 	FileTypeMountable FileType = 6
@@ -2535,15 +2535,15 @@ func (e FileType) String() string {
 type FilesystemPreviewType C.int
 
 const (
-	// FilesystemPreviewTypeIfAlways wraps FILESYSTEM_PREVIEW_TYPE_IF_ALWAYS
+	// FilesystemPreviewTypeIfAlways wraps G_FILESYSTEM_PREVIEW_TYPE_IF_ALWAYS
 	//
 	// Only preview files if user has explicitly requested it.
 	FilesystemPreviewTypeIfAlways FilesystemPreviewType = 0
-	// FilesystemPreviewTypeIfLocal wraps FILESYSTEM_PREVIEW_TYPE_IF_LOCAL
+	// FilesystemPreviewTypeIfLocal wraps G_FILESYSTEM_PREVIEW_TYPE_IF_LOCAL
 	//
 	// Preview files if user has requested preview of "local" files.
 	FilesystemPreviewTypeIfLocal FilesystemPreviewType = 1
-	// FilesystemPreviewTypeNever wraps FILESYSTEM_PREVIEW_TYPE_NEVER
+	// FilesystemPreviewTypeNever wraps G_FILESYSTEM_PREVIEW_TYPE_NEVER
 	//
 	// Never preview files.
 	FilesystemPreviewTypeNever FilesystemPreviewType = 2
@@ -2595,155 +2595,155 @@ func (e FilesystemPreviewType) String() string {
 type IOErrorEnum C.int
 
 const (
-	// IOErrorFailed wraps IO_ERROR_FAILED
+	// IOErrorFailed wraps G_IO_ERROR_FAILED
 	//
 	// Generic error condition for when an operation fails
 	//     and no more specific #GIOErrorEnum value is defined.
 	IOErrorFailed IOErrorEnum = 0
-	// IOErrorNotFound wraps IO_ERROR_NOT_FOUND
+	// IOErrorNotFound wraps G_IO_ERROR_NOT_FOUND
 	//
 	// File not found.
 	IOErrorNotFound IOErrorEnum = 1
-	// IOErrorExists wraps IO_ERROR_EXISTS
+	// IOErrorExists wraps G_IO_ERROR_EXISTS
 	//
 	// File already exists.
 	IOErrorExists IOErrorEnum = 2
-	// IOErrorIsDirectory wraps IO_ERROR_IS_DIRECTORY
+	// IOErrorIsDirectory wraps G_IO_ERROR_IS_DIRECTORY
 	//
 	// File is a directory.
 	IOErrorIsDirectory IOErrorEnum = 3
-	// IOErrorNotDirectory wraps IO_ERROR_NOT_DIRECTORY
+	// IOErrorNotDirectory wraps G_IO_ERROR_NOT_DIRECTORY
 	//
 	// File is not a directory.
 	IOErrorNotDirectory IOErrorEnum = 4
-	// IOErrorNotEmpty wraps IO_ERROR_NOT_EMPTY
+	// IOErrorNotEmpty wraps G_IO_ERROR_NOT_EMPTY
 	//
 	// File is a directory that isn't empty.
 	IOErrorNotEmpty IOErrorEnum = 5
-	// IOErrorNotRegularFile wraps IO_ERROR_NOT_REGULAR_FILE
+	// IOErrorNotRegularFile wraps G_IO_ERROR_NOT_REGULAR_FILE
 	//
 	// File is not a regular file.
 	IOErrorNotRegularFile IOErrorEnum = 6
-	// IOErrorNotSymbolicLink wraps IO_ERROR_NOT_SYMBOLIC_LINK
+	// IOErrorNotSymbolicLink wraps G_IO_ERROR_NOT_SYMBOLIC_LINK
 	//
 	// File is not a symbolic link.
 	IOErrorNotSymbolicLink IOErrorEnum = 7
-	// IOErrorNotMountableFile wraps IO_ERROR_NOT_MOUNTABLE_FILE
+	// IOErrorNotMountableFile wraps G_IO_ERROR_NOT_MOUNTABLE_FILE
 	//
 	// File cannot be mounted.
 	IOErrorNotMountableFile IOErrorEnum = 8
-	// IOErrorFilenameTooLong wraps IO_ERROR_FILENAME_TOO_LONG
+	// IOErrorFilenameTooLong wraps G_IO_ERROR_FILENAME_TOO_LONG
 	//
 	// Filename is too many characters.
 	IOErrorFilenameTooLong IOErrorEnum = 9
-	// IOErrorInvalidFilename wraps IO_ERROR_INVALID_FILENAME
+	// IOErrorInvalidFilename wraps G_IO_ERROR_INVALID_FILENAME
 	//
 	// Filename is invalid or contains invalid characters.
 	IOErrorInvalidFilename IOErrorEnum = 10
-	// IOErrorTooManyLinks wraps IO_ERROR_TOO_MANY_LINKS
+	// IOErrorTooManyLinks wraps G_IO_ERROR_TOO_MANY_LINKS
 	//
 	// File contains too many symbolic links.
 	IOErrorTooManyLinks IOErrorEnum = 11
-	// IOErrorNoSpace wraps IO_ERROR_NO_SPACE
+	// IOErrorNoSpace wraps G_IO_ERROR_NO_SPACE
 	//
 	// No space left on drive.
 	IOErrorNoSpace IOErrorEnum = 12
-	// IOErrorInvalidArgument wraps IO_ERROR_INVALID_ARGUMENT
+	// IOErrorInvalidArgument wraps G_IO_ERROR_INVALID_ARGUMENT
 	//
 	// Invalid argument.
 	IOErrorInvalidArgument IOErrorEnum = 13
-	// IOErrorPermissionDenied wraps IO_ERROR_PERMISSION_DENIED
+	// IOErrorPermissionDenied wraps G_IO_ERROR_PERMISSION_DENIED
 	//
 	// Permission denied.
 	IOErrorPermissionDenied IOErrorEnum = 14
-	// IOErrorNotSupported wraps IO_ERROR_NOT_SUPPORTED
+	// IOErrorNotSupported wraps G_IO_ERROR_NOT_SUPPORTED
 	//
 	// Operation (or one of its parameters) not supported
 	IOErrorNotSupported IOErrorEnum = 15
-	// IOErrorNotMounted wraps IO_ERROR_NOT_MOUNTED
+	// IOErrorNotMounted wraps G_IO_ERROR_NOT_MOUNTED
 	//
 	// File isn't mounted.
 	IOErrorNotMounted IOErrorEnum = 16
-	// IOErrorAlreadyMounted wraps IO_ERROR_ALREADY_MOUNTED
+	// IOErrorAlreadyMounted wraps G_IO_ERROR_ALREADY_MOUNTED
 	//
 	// File is already mounted.
 	IOErrorAlreadyMounted IOErrorEnum = 17
-	// IOErrorClosed wraps IO_ERROR_CLOSED
+	// IOErrorClosed wraps G_IO_ERROR_CLOSED
 	//
 	// File was closed.
 	IOErrorClosed IOErrorEnum = 18
-	// IOErrorCancelled wraps IO_ERROR_CANCELLED
+	// IOErrorCancelled wraps G_IO_ERROR_CANCELLED
 	//
 	// Operation was cancelled. See #GCancellable.
 	IOErrorCancelled IOErrorEnum = 19
-	// IOErrorPending wraps IO_ERROR_PENDING
+	// IOErrorPending wraps G_IO_ERROR_PENDING
 	//
 	// Operations are still pending.
 	IOErrorPending IOErrorEnum = 20
-	// IOErrorReadOnly wraps IO_ERROR_READ_ONLY
+	// IOErrorReadOnly wraps G_IO_ERROR_READ_ONLY
 	//
 	// File is read only.
 	IOErrorReadOnly IOErrorEnum = 21
-	// IOErrorCantCreateBackup wraps IO_ERROR_CANT_CREATE_BACKUP
+	// IOErrorCantCreateBackup wraps G_IO_ERROR_CANT_CREATE_BACKUP
 	//
 	// Backup couldn't be created.
 	IOErrorCantCreateBackup IOErrorEnum = 22
-	// IOErrorWrongETag wraps IO_ERROR_WRONG_ETAG
+	// IOErrorWrongEtag wraps G_IO_ERROR_WRONG_ETAG
 	//
 	// File's Entity Tag was incorrect.
-	IOErrorWrongETag IOErrorEnum = 23
-	// IOErrorTimedOut wraps IO_ERROR_TIMED_OUT
+	IOErrorWrongEtag IOErrorEnum = 23
+	// IOErrorTimedOut wraps G_IO_ERROR_TIMED_OUT
 	//
 	// Operation timed out.
 	IOErrorTimedOut IOErrorEnum = 24
-	// IOErrorWouldRecurse wraps IO_ERROR_WOULD_RECURSE
+	// IOErrorWouldRecurse wraps G_IO_ERROR_WOULD_RECURSE
 	//
 	// Operation would be recursive.
 	IOErrorWouldRecurse IOErrorEnum = 25
-	// IOErrorBusy wraps IO_ERROR_BUSY
+	// IOErrorBusy wraps G_IO_ERROR_BUSY
 	//
 	// File is busy.
 	IOErrorBusy IOErrorEnum = 26
-	// IOErrorWouldBlock wraps IO_ERROR_WOULD_BLOCK
+	// IOErrorWouldBlock wraps G_IO_ERROR_WOULD_BLOCK
 	//
 	// Operation would block.
 	IOErrorWouldBlock IOErrorEnum = 27
-	// IOErrorHostNotFound wraps IO_ERROR_HOST_NOT_FOUND
+	// IOErrorHostNotFound wraps G_IO_ERROR_HOST_NOT_FOUND
 	//
 	// Host couldn't be found (remote operations).
 	IOErrorHostNotFound IOErrorEnum = 28
-	// IOErrorWouldMerge wraps IO_ERROR_WOULD_MERGE
+	// IOErrorWouldMerge wraps G_IO_ERROR_WOULD_MERGE
 	//
 	// Operation would merge files.
 	IOErrorWouldMerge IOErrorEnum = 29
-	// IOErrorFailedHandled wraps IO_ERROR_FAILED_HANDLED
+	// IOErrorFailedHandled wraps G_IO_ERROR_FAILED_HANDLED
 	//
 	// Operation failed and a helper program has
 	//     already interacted with the user. Do not display any error dialog.
 	IOErrorFailedHandled IOErrorEnum = 30
-	// IOErrorTooManyOpenFiles wraps IO_ERROR_TOO_MANY_OPEN_FILES
+	// IOErrorTooManyOpenFiles wraps G_IO_ERROR_TOO_MANY_OPEN_FILES
 	//
 	// The current process has too many files
 	//     open and can't open any more. Duplicate descriptors do count toward
 	//     this limit. Since 2.20
 	IOErrorTooManyOpenFiles IOErrorEnum = 31
-	// IOErrorNotInitialized wraps IO_ERROR_NOT_INITIALIZED
+	// IOErrorNotInitialized wraps G_IO_ERROR_NOT_INITIALIZED
 	//
 	// The object has not been initialized. Since 2.22
 	IOErrorNotInitialized IOErrorEnum = 32
-	// IOErrorAddressInUse wraps IO_ERROR_ADDRESS_IN_USE
+	// IOErrorAddressInUse wraps G_IO_ERROR_ADDRESS_IN_USE
 	//
 	// The requested address is already in use. Since 2.22
 	IOErrorAddressInUse IOErrorEnum = 33
-	// IOErrorPartialInput wraps IO_ERROR_PARTIAL_INPUT
+	// IOErrorPartialInput wraps G_IO_ERROR_PARTIAL_INPUT
 	//
 	// Need more input to finish operation. Since 2.24
 	IOErrorPartialInput IOErrorEnum = 34
-	// IOErrorInvalidData wraps IO_ERROR_INVALID_DATA
+	// IOErrorInvalidData wraps G_IO_ERROR_INVALID_DATA
 	//
 	// The input data was invalid. Since 2.24
 	IOErrorInvalidData IOErrorEnum = 35
-	// IOErrorDBusError wraps IO_ERROR_DBUS_ERROR
+	// IOErrorDBusError wraps G_IO_ERROR_DBUS_ERROR
 	//
 	// A remote object generated an error that
 	//     doesn't correspond to a locally registered #GError error
@@ -2751,40 +2751,40 @@ const (
 	//     error name and g_dbus_error_strip_remote_error() to fix up the
 	//     message so it matches what was received on the wire. Since 2.26.
 	IOErrorDBusError IOErrorEnum = 36
-	// IOErrorHostUnreachable wraps IO_ERROR_HOST_UNREACHABLE
+	// IOErrorHostUnreachable wraps G_IO_ERROR_HOST_UNREACHABLE
 	//
 	// Host unreachable. Since 2.26
 	IOErrorHostUnreachable IOErrorEnum = 37
-	// IOErrorNetworkUnreachable wraps IO_ERROR_NETWORK_UNREACHABLE
+	// IOErrorNetworkUnreachable wraps G_IO_ERROR_NETWORK_UNREACHABLE
 	//
 	// Network unreachable. Since 2.26
 	IOErrorNetworkUnreachable IOErrorEnum = 38
-	// IOErrorConnectionRefused wraps IO_ERROR_CONNECTION_REFUSED
+	// IOErrorConnectionRefused wraps G_IO_ERROR_CONNECTION_REFUSED
 	//
 	// Connection refused. Since 2.26
 	IOErrorConnectionRefused IOErrorEnum = 39
-	// IOErrorProxyFailed wraps IO_ERROR_PROXY_FAILED
+	// IOErrorProxyFailed wraps G_IO_ERROR_PROXY_FAILED
 	//
 	// Connection to proxy server failed. Since 2.26
 	IOErrorProxyFailed IOErrorEnum = 40
-	// IOErrorProxyAuthFailed wraps IO_ERROR_PROXY_AUTH_FAILED
+	// IOErrorProxyAuthFailed wraps G_IO_ERROR_PROXY_AUTH_FAILED
 	//
 	// Proxy authentication failed. Since 2.26
 	IOErrorProxyAuthFailed IOErrorEnum = 41
-	// IOErrorProxyNeedAuth wraps IO_ERROR_PROXY_NEED_AUTH
+	// IOErrorProxyNeedAuth wraps G_IO_ERROR_PROXY_NEED_AUTH
 	//
 	// Proxy server needs authentication. Since 2.26
 	IOErrorProxyNeedAuth IOErrorEnum = 42
-	// IOErrorProxyNotAllowed wraps IO_ERROR_PROXY_NOT_ALLOWED
+	// IOErrorProxyNotAllowed wraps G_IO_ERROR_PROXY_NOT_ALLOWED
 	//
 	// Proxy connection is not allowed by ruleset.
 	//     Since 2.26
 	IOErrorProxyNotAllowed IOErrorEnum = 43
-	// IOErrorBrokenPipe wraps IO_ERROR_BROKEN_PIPE
+	// IOErrorBrokenPipe wraps G_IO_ERROR_BROKEN_PIPE
 	//
 	// Broken pipe. Since 2.36
 	IOErrorBrokenPipe IOErrorEnum = 44
-	// IOErrorConnectionClosed wraps IO_ERROR_CONNECTION_CLOSED
+	// IOErrorConnectionClosed wraps G_IO_ERROR_CONNECTION_CLOSED
 	//
 	// Connection closed by peer. Note that this
 	//     is the same code as %G_IO_ERROR_BROKEN_PIPE; before 2.44 some
@@ -2792,19 +2792,19 @@ const (
 	//     returned %G_IO_ERROR_FAILED. Now they should all return the same
 	//     value, which has this more logical name. Since 2.44.
 	IOErrorConnectionClosed IOErrorEnum = 44
-	// IOErrorNotConnected wraps IO_ERROR_NOT_CONNECTED
+	// IOErrorNotConnected wraps G_IO_ERROR_NOT_CONNECTED
 	//
 	// Transport endpoint is not connected. Since 2.44
 	IOErrorNotConnected IOErrorEnum = 45
-	// IOErrorMessageTooLarge wraps IO_ERROR_MESSAGE_TOO_LARGE
+	// IOErrorMessageTooLarge wraps G_IO_ERROR_MESSAGE_TOO_LARGE
 	//
 	// Message too large. Since 2.48.
 	IOErrorMessageTooLarge IOErrorEnum = 46
-	// IOErrorNoSuchDevice wraps IO_ERROR_NO_SUCH_DEVICE
+	// IOErrorNoSuchDevice wraps G_IO_ERROR_NO_SUCH_DEVICE
 	//
 	// No such device found. Since 2.74
 	IOErrorNoSuchDevice IOErrorEnum = 47
-	// IOErrorDestinationUnset wraps IO_ERROR_DESTINATION_UNSET
+	// IOErrorDestinationUnset wraps G_IO_ERROR_DESTINATION_UNSET
 	//
 	// Destination address unset. Since 2.80
 	IOErrorDestinationUnset IOErrorEnum = 48
@@ -2874,7 +2874,7 @@ func (e IOErrorEnum) String() string {
 		case IOErrorWouldBlock: return "IOErrorWouldBlock"
 		case IOErrorWouldMerge: return "IOErrorWouldMerge"
 		case IOErrorWouldRecurse: return "IOErrorWouldRecurse"
-		case IOErrorWrongETag: return "IOErrorWrongETag"
+		case IOErrorWrongEtag: return "IOErrorWrongEtag"
 		default: return fmt.Sprintf("IOErrorEnum(%d)", e)
 	}
 }
@@ -2885,11 +2885,11 @@ func (e IOErrorEnum) String() string {
 type IOModuleScopeFlags C.int
 
 const (
-	// IOModuleScopeNone wraps IO_MODULE_SCOPE_NONE
+	// IOModuleScopeNone wraps G_IO_MODULE_SCOPE_NONE
 	//
 	// No module scan flags
 	IOModuleScopeNone IOModuleScopeFlags = 0
-	// IOModuleScopeBlockDuplicates wraps IO_MODULE_SCOPE_BLOCK_DUPLICATES
+	// IOModuleScopeBlockDuplicates wraps G_IO_MODULE_SCOPE_BLOCK_DUPLICATES
 	//
 	// When using this scope to load or
 	//     scan modules, automatically block a modules which has the same base
@@ -2932,20 +2932,20 @@ func (e IOModuleScopeFlags) String() string {
 type MemoryMonitorWarningLevel C.int
 
 const (
-	// MemoryMonitorWarningLevelLow wraps MEMORY_MONITOR_WARNING_LEVEL_LOW
+	// MemoryMonitorWarningLevelLow wraps G_MEMORY_MONITOR_WARNING_LEVEL_LOW
 	//
 	// Memory on the device is low, processes
 	//   should free up unneeded resources (for example, in-memory caches) so they can
 	//   be used elsewhere.
 	MemoryMonitorWarningLevelLow MemoryMonitorWarningLevel = 50
-	// MemoryMonitorWarningLevelMedium wraps MEMORY_MONITOR_WARNING_LEVEL_MEDIUM
+	// MemoryMonitorWarningLevelMedium wraps G_MEMORY_MONITOR_WARNING_LEVEL_MEDIUM
 	//
 	// Same as @G_MEMORY_MONITOR_WARNING_LEVEL_LOW
 	//   but the device has even less free memory, so processes should try harder to free
 	//   up unneeded resources. If your process does not need to stay running, it is a
 	//   good time for it to quit.
 	MemoryMonitorWarningLevelMedium MemoryMonitorWarningLevel = 100
-	// MemoryMonitorWarningLevelCritical wraps MEMORY_MONITOR_WARNING_LEVEL_CRITICAL
+	// MemoryMonitorWarningLevelCritical wraps G_MEMORY_MONITOR_WARNING_LEVEL_CRITICAL
 	//
 	// The system will soon start terminating
 	//   processes to reclaim memory, including background processes.
@@ -2982,17 +2982,17 @@ func (e MemoryMonitorWarningLevel) String() string {
 type MountOperationResult C.int
 
 const (
-	// MountOperationHandled wraps MOUNT_OPERATION_HANDLED
+	// MountOperationHandled wraps G_MOUNT_OPERATION_HANDLED
 	//
 	// The request was fulfilled and the
 	//     user specified data is now available
 	MountOperationHandled MountOperationResult = 0
-	// MountOperationAborted wraps MOUNT_OPERATION_ABORTED
+	// MountOperationAborted wraps G_MOUNT_OPERATION_ABORTED
 	//
 	// The user requested the mount operation
 	//     to be aborted
 	MountOperationAborted MountOperationResult = 1
-	// MountOperationUnhandled wraps MOUNT_OPERATION_UNHANDLED
+	// MountOperationUnhandled wraps G_MOUNT_OPERATION_UNHANDLED
 	//
 	// The request was unhandled (i.e. not
 	//     implemented)
@@ -3028,24 +3028,24 @@ func (e MountOperationResult) String() string {
 type NetworkConnectivity C.int
 
 const (
-	// NetworkConnectivityLocal wraps NETWORK_CONNECTIVITY_LOCAL
+	// NetworkConnectivityLocal wraps G_NETWORK_CONNECTIVITY_LOCAL
 	//
 	// The host is not configured with a
 	//   route to the Internet; it may or may not be connected to a local
 	//   network.
 	NetworkConnectivityLocal NetworkConnectivity = 1
-	// NetworkConnectivityLimited wraps NETWORK_CONNECTIVITY_LIMITED
+	// NetworkConnectivityLimited wraps G_NETWORK_CONNECTIVITY_LIMITED
 	//
 	// The host is connected to a network, but
 	//   does not appear to be able to reach the full Internet, perhaps
 	//   due to upstream network problems.
 	NetworkConnectivityLimited NetworkConnectivity = 2
-	// NetworkConnectivityPortal wraps NETWORK_CONNECTIVITY_PORTAL
+	// NetworkConnectivityPortal wraps G_NETWORK_CONNECTIVITY_PORTAL
 	//
 	// The host is behind a captive portal and
 	//   cannot reach the full Internet.
 	NetworkConnectivityPortal NetworkConnectivity = 3
-	// NetworkConnectivityFull wraps NETWORK_CONNECTIVITY_FULL
+	// NetworkConnectivityFull wraps G_NETWORK_CONNECTIVITY_FULL
 	//
 	// The host is connected to a network, and
 	//   appears to be able to reach the full Internet.
@@ -3082,25 +3082,25 @@ func (e NetworkConnectivity) String() string {
 type NotificationPriority C.int
 
 const (
-	// NotificationPriorityNormal wraps NOTIFICATION_PRIORITY_NORMAL
+	// NotificationPriorityNormal wraps G_NOTIFICATION_PRIORITY_NORMAL
 	//
 	// the default priority, to be used for the
 	//   majority of notifications (for example email messages, software updates,
 	//   completed download/sync operations)
 	NotificationPriorityNormal NotificationPriority = 0
-	// NotificationPriorityLow wraps NOTIFICATION_PRIORITY_LOW
+	// NotificationPriorityLow wraps G_NOTIFICATION_PRIORITY_LOW
 	//
 	// for notifications that do not require
 	//   immediate attention - typically used for contextual background
 	//   information, such as contact birthdays or local weather
 	NotificationPriorityLow NotificationPriority = 1
-	// NotificationPriorityHigh wraps NOTIFICATION_PRIORITY_HIGH
+	// NotificationPriorityHigh wraps G_NOTIFICATION_PRIORITY_HIGH
 	//
 	// for events that require more attention,
 	//   usually because responses are time-sensitive (for example chat and SMS
 	//   messages or alarms)
 	NotificationPriorityHigh NotificationPriority = 2
-	// NotificationPriorityUrgent wraps NOTIFICATION_PRIORITY_URGENT
+	// NotificationPriorityUrgent wraps G_NOTIFICATION_PRIORITY_URGENT
 	//
 	// for urgent notifications, or notifications
 	//   that require a response in a short space of time (for example phone calls
@@ -3141,15 +3141,15 @@ func (e NotificationPriority) String() string {
 type PasswordSave C.int
 
 const (
-	// PasswordSaveNever wraps PASSWORD_SAVE_NEVER
+	// PasswordSaveNever wraps G_PASSWORD_SAVE_NEVER
 	//
 	// never save a password.
 	PasswordSaveNever PasswordSave = 0
-	// PasswordSaveForSession wraps PASSWORD_SAVE_FOR_SESSION
+	// PasswordSaveForSession wraps G_PASSWORD_SAVE_FOR_SESSION
 	//
 	// save a password for the session.
 	PasswordSaveForSession PasswordSave = 1
-	// PasswordSavePermanently wraps PASSWORD_SAVE_PERMANENTLY
+	// PasswordSavePermanently wraps G_PASSWORD_SAVE_PERMANENTLY
 	//
 	// save a password permanently.
 	PasswordSavePermanently PasswordSave = 2
@@ -3192,15 +3192,15 @@ func (e PasswordSave) String() string {
 type PollableReturn C.int
 
 const (
-	// PollableReturnFailed wraps POLLABLE_RETURN_FAILED
+	// PollableReturnFailed wraps G_POLLABLE_RETURN_FAILED
 	//
 	// Generic error condition for when an operation fails.
 	PollableReturnFailed PollableReturn = 0
-	// PollableReturnOK wraps POLLABLE_RETURN_OK
+	// PollableReturnOK wraps G_POLLABLE_RETURN_OK
 	//
 	// The operation was successfully finished.
 	PollableReturnOK PollableReturn = 1
-	// PollableReturnWouldBlock wraps POLLABLE_RETURN_WOULD_BLOCK
+	// PollableReturnWouldBlock wraps G_POLLABLE_RETURN_WOULD_BLOCK
 	//
 	// The operation would block.
 	PollableReturnWouldBlock PollableReturn = -27
@@ -3236,17 +3236,17 @@ func (e PollableReturn) String() string {
 type ResolverError C.int
 
 const (
-	// ResolverErrorNotFound wraps RESOLVER_ERROR_NOT_FOUND
+	// ResolverErrorNotFound wraps G_RESOLVER_ERROR_NOT_FOUND
 	//
 	// the requested name/address/service was not
 	//     found
 	ResolverErrorNotFound ResolverError = 0
-	// ResolverErrorTemporaryFailure wraps RESOLVER_ERROR_TEMPORARY_FAILURE
+	// ResolverErrorTemporaryFailure wraps G_RESOLVER_ERROR_TEMPORARY_FAILURE
 	//
 	// the requested information could not
 	//     be looked up due to a network error or similar problem
 	ResolverErrorTemporaryFailure ResolverError = 1
-	// ResolverErrorInternal wraps RESOLVER_ERROR_INTERNAL
+	// ResolverErrorInternal wraps G_RESOLVER_ERROR_INTERNAL
 	//
 	// unknown error
 	ResolverErrorInternal ResolverError = 2
@@ -3329,23 +3329,23 @@ func ResolverErrorQuark() glib.Quark {
 type ResolverRecordType C.int
 
 const (
-	// ResolverRecordSrv wraps RESOLVER_RECORD_SRV
+	// ResolverRecordSrv wraps G_RESOLVER_RECORD_SRV
 	//
 	// look up DNS SRV records for a domain
 	ResolverRecordSrv ResolverRecordType = 1
-	// ResolverRecordMx wraps RESOLVER_RECORD_MX
+	// ResolverRecordMx wraps G_RESOLVER_RECORD_MX
 	//
 	// look up DNS MX records for a domain
 	ResolverRecordMx ResolverRecordType = 2
-	// ResolverRecordTxt wraps RESOLVER_RECORD_TXT
+	// ResolverRecordTxt wraps G_RESOLVER_RECORD_TXT
 	//
 	// look up DNS TXT records for a name
 	ResolverRecordTxt ResolverRecordType = 3
-	// ResolverRecordSoa wraps RESOLVER_RECORD_SOA
+	// ResolverRecordSoa wraps G_RESOLVER_RECORD_SOA
 	//
 	// look up DNS SOA records for a zone
 	ResolverRecordSoa ResolverRecordType = 4
-	// ResolverRecordNs wraps RESOLVER_RECORD_NS
+	// ResolverRecordNs wraps G_RESOLVER_RECORD_NS
 	//
 	// look up DNS NS records for a domain
 	ResolverRecordNs ResolverRecordType = 5
@@ -3383,11 +3383,11 @@ func (e ResolverRecordType) String() string {
 type ResourceError C.int
 
 const (
-	// ResourceErrorNotFound wraps RESOURCE_ERROR_NOT_FOUND
+	// ResourceErrorNotFound wraps G_RESOURCE_ERROR_NOT_FOUND
 	//
 	// no file was found at the requested path
 	ResourceErrorNotFound ResourceError = 0
-	// ResourceErrorInternal wraps RESOURCE_ERROR_INTERNAL
+	// ResourceErrorInternal wraps G_RESOURCE_ERROR_INTERNAL
 	//
 	// unknown error
 	ResourceErrorInternal ResourceError = 1
@@ -3443,45 +3443,45 @@ func ResourceErrorQuark() glib.Quark {
 type SocketClientEvent C.int
 
 const (
-	// SocketClientResolving wraps SOCKET_CLIENT_RESOLVING
+	// SocketClientResolving wraps G_SOCKET_CLIENT_RESOLVING
 	//
 	// The client is doing a DNS lookup.
 	SocketClientResolving SocketClientEvent = 0
-	// SocketClientResolved wraps SOCKET_CLIENT_RESOLVED
+	// SocketClientResolved wraps G_SOCKET_CLIENT_RESOLVED
 	//
 	// The client has completed a DNS lookup.
 	SocketClientResolved SocketClientEvent = 1
-	// SocketClientConnecting wraps SOCKET_CLIENT_CONNECTING
+	// SocketClientConnecting wraps G_SOCKET_CLIENT_CONNECTING
 	//
 	// The client is connecting to a remote
 	//   host (either a proxy or the destination server).
 	SocketClientConnecting SocketClientEvent = 2
-	// SocketClientConnected wraps SOCKET_CLIENT_CONNECTED
+	// SocketClientConnected wraps G_SOCKET_CLIENT_CONNECTED
 	//
 	// The client has connected to a remote
 	//   host.
 	SocketClientConnected SocketClientEvent = 3
-	// SocketClientProxyNegotiating wraps SOCKET_CLIENT_PROXY_NEGOTIATING
+	// SocketClientProxyNegotiating wraps G_SOCKET_CLIENT_PROXY_NEGOTIATING
 	//
 	// The client is negotiating
 	//   with a proxy to connect to the destination server.
 	SocketClientProxyNegotiating SocketClientEvent = 4
-	// SocketClientProxyNegotiated wraps SOCKET_CLIENT_PROXY_NEGOTIATED
+	// SocketClientProxyNegotiated wraps G_SOCKET_CLIENT_PROXY_NEGOTIATED
 	//
 	// The client has negotiated
 	//   with the proxy server.
 	SocketClientProxyNegotiated SocketClientEvent = 5
-	// SocketClientTLSHandshaking wraps SOCKET_CLIENT_TLS_HANDSHAKING
+	// SocketClientTlsHandshaking wraps G_SOCKET_CLIENT_TLS_HANDSHAKING
 	//
 	// The client is performing a
 	//   TLS handshake.
-	SocketClientTLSHandshaking SocketClientEvent = 6
-	// SocketClientTLSHandshaked wraps SOCKET_CLIENT_TLS_HANDSHAKED
+	SocketClientTlsHandshaking SocketClientEvent = 6
+	// SocketClientTlsHandshaked wraps G_SOCKET_CLIENT_TLS_HANDSHAKED
 	//
 	// The client has performed a
 	//   TLS handshake.
-	SocketClientTLSHandshaked SocketClientEvent = 7
-	// SocketClientComplete wraps SOCKET_CLIENT_COMPLETE
+	SocketClientTlsHandshaked SocketClientEvent = 7
+	// SocketClientComplete wraps G_SOCKET_CLIENT_COMPLETE
 	//
 	// The client is done with a particular
 	//   #GSocketConnectable.
@@ -3511,8 +3511,8 @@ func (e SocketClientEvent) String() string {
 		case SocketClientProxyNegotiating: return "SocketClientProxyNegotiating"
 		case SocketClientResolved: return "SocketClientResolved"
 		case SocketClientResolving: return "SocketClientResolving"
-		case SocketClientTLSHandshaked: return "SocketClientTLSHandshaked"
-		case SocketClientTLSHandshaking: return "SocketClientTLSHandshaking"
+		case SocketClientTlsHandshaked: return "SocketClientTlsHandshaked"
+		case SocketClientTlsHandshaking: return "SocketClientTlsHandshaking"
 		default: return fmt.Sprintf("SocketClientEvent(%d)", e)
 	}
 }
@@ -3525,18 +3525,18 @@ func (e SocketClientEvent) String() string {
 type SocketFamily C.int
 
 const (
-	// SocketFamilyInvalid wraps SOCKET_FAMILY_INVALID
+	// SocketFamilyInvalid wraps G_SOCKET_FAMILY_INVALID
 	//
 	// no address family
 	SocketFamilyInvalid SocketFamily = 0
-	// SocketFamilyIPv4 wraps SOCKET_FAMILY_IPV4
+	// SocketFamilyIpv4 wraps G_SOCKET_FAMILY_IPV4
 	//
 	// the IPv4 family
-	SocketFamilyIPv4 SocketFamily = 2
-	// SocketFamilyIPv6 wraps SOCKET_FAMILY_IPV6
+	SocketFamilyIpv4 SocketFamily = 2
+	// SocketFamilyIpv6 wraps G_SOCKET_FAMILY_IPV6
 	//
 	// the IPv6 family
-	SocketFamilyIPv6 SocketFamily = 10
+	SocketFamilyIpv6 SocketFamily = 10
 )
 
 func marshalSocketFamily(p unsafe.Pointer) (any, error) {
@@ -3555,9 +3555,9 @@ func (e SocketFamily) SetGoValue(v *gobject.Value) {
 
 func (e SocketFamily) String() string {
 	switch e {
-		case SocketFamilyIPv4: return "SocketFamilyIPv4"
-		case SocketFamilyIPv6: return "SocketFamilyIPv6"
 		case SocketFamilyInvalid: return "SocketFamilyInvalid"
+		case SocketFamilyIpv4: return "SocketFamilyIpv4"
+		case SocketFamilyIpv6: return "SocketFamilyIpv6"
 		default: return fmt.Sprintf("SocketFamily(%d)", e)
 	}
 }
@@ -3571,20 +3571,20 @@ func (e SocketFamily) String() string {
 type SocketListenerEvent C.int
 
 const (
-	// SocketListenerBinding wraps SOCKET_LISTENER_BINDING
+	// SocketListenerBinding wraps G_SOCKET_LISTENER_BINDING
 	//
 	// The listener is about to bind a socket.
 	SocketListenerBinding SocketListenerEvent = 0
-	// SocketListenerBound wraps SOCKET_LISTENER_BOUND
+	// SocketListenerBound wraps G_SOCKET_LISTENER_BOUND
 	//
 	// The listener has bound a socket.
 	SocketListenerBound SocketListenerEvent = 1
-	// SocketListenerListening wraps SOCKET_LISTENER_LISTENING
+	// SocketListenerListening wraps G_SOCKET_LISTENER_LISTENING
 	//
 	// The listener is about to start
 	//    listening on this socket.
 	SocketListenerListening SocketListenerEvent = 2
-	// SocketListenerListened wraps SOCKET_LISTENER_LISTENED
+	// SocketListenerListened wraps G_SOCKET_LISTENER_LISTENED
 	//
 	// The listener is now listening on
 	//   this socket.
@@ -3627,26 +3627,26 @@ func (e SocketListenerEvent) String() string {
 type SocketProtocol C.int
 
 const (
-	// SocketProtocolUnknown wraps SOCKET_PROTOCOL_UNKNOWN
+	// SocketProtocolUnknown wraps G_SOCKET_PROTOCOL_UNKNOWN
 	//
 	// The protocol type is unknown
 	SocketProtocolUnknown SocketProtocol = -1
-	// SocketProtocolDefault wraps SOCKET_PROTOCOL_DEFAULT
+	// SocketProtocolDefault wraps G_SOCKET_PROTOCOL_DEFAULT
 	//
 	// The default protocol for the family/type
 	SocketProtocolDefault SocketProtocol = 0
-	// SocketProtocolTCP wraps SOCKET_PROTOCOL_TCP
+	// SocketProtocolTcp wraps G_SOCKET_PROTOCOL_TCP
 	//
 	// TCP over IP
-	SocketProtocolTCP SocketProtocol = 6
-	// SocketProtocolUDP wraps SOCKET_PROTOCOL_UDP
+	SocketProtocolTcp SocketProtocol = 6
+	// SocketProtocolUdp wraps G_SOCKET_PROTOCOL_UDP
 	//
 	// UDP over IP
-	SocketProtocolUDP SocketProtocol = 17
-	// SocketProtocolSCTP wraps SOCKET_PROTOCOL_SCTP
+	SocketProtocolUdp SocketProtocol = 17
+	// SocketProtocolSctp wraps G_SOCKET_PROTOCOL_SCTP
 	//
 	// SCTP over IP
-	SocketProtocolSCTP SocketProtocol = 132
+	SocketProtocolSctp SocketProtocol = 132
 )
 
 func marshalSocketProtocol(p unsafe.Pointer) (any, error) {
@@ -3666,9 +3666,9 @@ func (e SocketProtocol) SetGoValue(v *gobject.Value) {
 func (e SocketProtocol) String() string {
 	switch e {
 		case SocketProtocolDefault: return "SocketProtocolDefault"
-		case SocketProtocolSCTP: return "SocketProtocolSCTP"
-		case SocketProtocolTCP: return "SocketProtocolTCP"
-		case SocketProtocolUDP: return "SocketProtocolUDP"
+		case SocketProtocolSctp: return "SocketProtocolSctp"
+		case SocketProtocolTcp: return "SocketProtocolTcp"
+		case SocketProtocolUdp: return "SocketProtocolUdp"
 		case SocketProtocolUnknown: return "SocketProtocolUnknown"
 		default: return fmt.Sprintf("SocketProtocol(%d)", e)
 	}
@@ -3681,20 +3681,20 @@ func (e SocketProtocol) String() string {
 type SocketType C.int
 
 const (
-	// SocketTypeInvalid wraps SOCKET_TYPE_INVALID
+	// SocketTypeInvalid wraps G_SOCKET_TYPE_INVALID
 	//
 	// Type unknown or wrong
 	SocketTypeInvalid SocketType = 0
-	// SocketTypeStream wraps SOCKET_TYPE_STREAM
+	// SocketTypeStream wraps G_SOCKET_TYPE_STREAM
 	//
 	// Reliable connection-based byte streams (e.g. TCP).
 	SocketTypeStream SocketType = 1
-	// SocketTypeDatagram wraps SOCKET_TYPE_DATAGRAM
+	// SocketTypeDatagram wraps G_SOCKET_TYPE_DATAGRAM
 	//
 	// Connectionless, unreliable datagram passing.
 	//     (e.g. UDP)
 	SocketTypeDatagram SocketType = 2
-	// SocketTypeSeqpacket wraps SOCKET_TYPE_SEQPACKET
+	// SocketTypeSeqpacket wraps G_SOCKET_TYPE_SEQPACKET
 	//
 	// Reliable connection-based passing of datagrams
 	//     of fixed maximum length (e.g. SCTP).
@@ -3725,157 +3725,157 @@ func (e SocketType) String() string {
 	}
 }
 
-// TLSAuthenticationMode wraps GTlsAuthenticationMode
+// TlsAuthenticationMode wraps GTlsAuthenticationMode
 //
 // The client authentication mode for a #GTlsServerConnection.
-type TLSAuthenticationMode C.int
+type TlsAuthenticationMode C.int
 
 const (
-	// TLSAuthenticationNone wraps TLS_AUTHENTICATION_NONE
+	// TlsAuthenticationNone wraps G_TLS_AUTHENTICATION_NONE
 	//
 	// client authentication not required
-	TLSAuthenticationNone TLSAuthenticationMode = 0
-	// TLSAuthenticationRequested wraps TLS_AUTHENTICATION_REQUESTED
+	TlsAuthenticationNone TlsAuthenticationMode = 0
+	// TlsAuthenticationRequested wraps G_TLS_AUTHENTICATION_REQUESTED
 	//
 	// client authentication is requested
-	TLSAuthenticationRequested TLSAuthenticationMode = 1
-	// TLSAuthenticationRequired wraps TLS_AUTHENTICATION_REQUIRED
+	TlsAuthenticationRequested TlsAuthenticationMode = 1
+	// TlsAuthenticationRequired wraps G_TLS_AUTHENTICATION_REQUIRED
 	//
 	// client authentication is required
-	TLSAuthenticationRequired TLSAuthenticationMode = 2
+	TlsAuthenticationRequired TlsAuthenticationMode = 2
 )
 
-func marshalTLSAuthenticationMode(p unsafe.Pointer) (any, error) {
-	return TLSAuthenticationMode(gobject.ValueFromNative(p).Enum()), nil
+func marshalTlsAuthenticationMode(p unsafe.Pointer) (any, error) {
+	return TlsAuthenticationMode(gobject.ValueFromNative(p).Enum()), nil
 }
 
-var _ gobject.GoValueInitializer = TLSAuthenticationMode(0)
+var _ gobject.GoValueInitializer = TlsAuthenticationMode(0)
 
-func (e TLSAuthenticationMode) GoValueType() gobject.Type {
+func (e TlsAuthenticationMode) GoValueType() gobject.Type {
 	return TypeTlsAuthenticationMode
 }
 
-func (e TLSAuthenticationMode) SetGoValue(v *gobject.Value) {
+func (e TlsAuthenticationMode) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
-func (e TLSAuthenticationMode) String() string {
+func (e TlsAuthenticationMode) String() string {
 	switch e {
-		case TLSAuthenticationNone: return "TLSAuthenticationNone"
-		case TLSAuthenticationRequested: return "TLSAuthenticationRequested"
-		case TLSAuthenticationRequired: return "TLSAuthenticationRequired"
-		default: return fmt.Sprintf("TLSAuthenticationMode(%d)", e)
+		case TlsAuthenticationNone: return "TlsAuthenticationNone"
+		case TlsAuthenticationRequested: return "TlsAuthenticationRequested"
+		case TlsAuthenticationRequired: return "TlsAuthenticationRequired"
+		default: return fmt.Sprintf("TlsAuthenticationMode(%d)", e)
 	}
 }
 
-// TLSCertificateRequestFlags wraps GTlsCertificateRequestFlags
+// TlsCertificateRequestFlags wraps GTlsCertificateRequestFlags
 //
 // Flags for g_tls_interaction_request_certificate(),
 // g_tls_interaction_request_certificate_async(), and
 // g_tls_interaction_invoke_request_certificate().
-type TLSCertificateRequestFlags C.int
+type TlsCertificateRequestFlags C.int
 
 const (
-	// TLSCertificateRequestNone wraps TLS_CERTIFICATE_REQUEST_NONE
+	// TlsCertificateRequestNone wraps G_TLS_CERTIFICATE_REQUEST_NONE
 	//
 	// No flags
-	TLSCertificateRequestNone TLSCertificateRequestFlags = 0
+	TlsCertificateRequestNone TlsCertificateRequestFlags = 0
 )
 
-func marshalTLSCertificateRequestFlags(p unsafe.Pointer) (any, error) {
-	return TLSCertificateRequestFlags(gobject.ValueFromNative(p).Enum()), nil
+func marshalTlsCertificateRequestFlags(p unsafe.Pointer) (any, error) {
+	return TlsCertificateRequestFlags(gobject.ValueFromNative(p).Enum()), nil
 }
 
-var _ gobject.GoValueInitializer = TLSCertificateRequestFlags(0)
+var _ gobject.GoValueInitializer = TlsCertificateRequestFlags(0)
 
-func (e TLSCertificateRequestFlags) GoValueType() gobject.Type {
+func (e TlsCertificateRequestFlags) GoValueType() gobject.Type {
 	return TypeTlsCertificateRequestFlags
 }
 
-func (e TLSCertificateRequestFlags) SetGoValue(v *gobject.Value) {
+func (e TlsCertificateRequestFlags) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
-func (e TLSCertificateRequestFlags) String() string {
+func (e TlsCertificateRequestFlags) String() string {
 	switch e {
-		case TLSCertificateRequestNone: return "TLSCertificateRequestNone"
-		default: return fmt.Sprintf("TLSCertificateRequestFlags(%d)", e)
+		case TlsCertificateRequestNone: return "TlsCertificateRequestNone"
+		default: return fmt.Sprintf("TlsCertificateRequestFlags(%d)", e)
 	}
 }
 
-// TLSChannelBindingError wraps GTlsChannelBindingError
+// TlsChannelBindingError wraps GTlsChannelBindingError
 //
 // An error code used with %G_TLS_CHANNEL_BINDING_ERROR in a #GError to
 // indicate a TLS channel binding retrieval error.
-type TLSChannelBindingError C.int
+type TlsChannelBindingError C.int
 
 const (
-	// TLSChannelBindingErrorNotImplemented wraps TLS_CHANNEL_BINDING_ERROR_NOT_IMPLEMENTED
+	// TlsChannelBindingErrorNotImplemented wraps G_TLS_CHANNEL_BINDING_ERROR_NOT_IMPLEMENTED
 	//
 	// Either entire binding
 	//    retrieval facility or specific binding type is not implemented in the
 	//    TLS backend.
-	TLSChannelBindingErrorNotImplemented TLSChannelBindingError = 0
-	// TLSChannelBindingErrorInvalidState wraps TLS_CHANNEL_BINDING_ERROR_INVALID_STATE
+	TlsChannelBindingErrorNotImplemented TlsChannelBindingError = 0
+	// TlsChannelBindingErrorInvalidState wraps G_TLS_CHANNEL_BINDING_ERROR_INVALID_STATE
 	//
 	// The handshake is not yet
 	//    complete on the connection which is a strong requirement for any existing
 	//    binding type.
-	TLSChannelBindingErrorInvalidState TLSChannelBindingError = 1
-	// TLSChannelBindingErrorNotAvailable wraps TLS_CHANNEL_BINDING_ERROR_NOT_AVAILABLE
+	TlsChannelBindingErrorInvalidState TlsChannelBindingError = 1
+	// TlsChannelBindingErrorNotAvailable wraps G_TLS_CHANNEL_BINDING_ERROR_NOT_AVAILABLE
 	//
 	// Handshake is complete but
 	//    binding data is not available. That normally indicates the TLS
 	//    implementation failed to provide the binding data. For example, some
 	//    implementations do not provide a peer certificate for resumed connections.
-	TLSChannelBindingErrorNotAvailable TLSChannelBindingError = 2
-	// TLSChannelBindingErrorNotSupported wraps TLS_CHANNEL_BINDING_ERROR_NOT_SUPPORTED
+	TlsChannelBindingErrorNotAvailable TlsChannelBindingError = 2
+	// TlsChannelBindingErrorNotSupported wraps G_TLS_CHANNEL_BINDING_ERROR_NOT_SUPPORTED
 	//
 	// Binding type is not supported
 	//    on the current connection. This error could be triggered when requesting
 	//    `tls-server-end-point` binding data for a certificate which has no hash
 	//    function or uses multiple hash functions.
-	TLSChannelBindingErrorNotSupported TLSChannelBindingError = 3
-	// TLSChannelBindingErrorGeneralError wraps TLS_CHANNEL_BINDING_ERROR_GENERAL_ERROR
+	TlsChannelBindingErrorNotSupported TlsChannelBindingError = 3
+	// TlsChannelBindingErrorGeneralError wraps G_TLS_CHANNEL_BINDING_ERROR_GENERAL_ERROR
 	//
 	// Any other backend error
 	//    preventing binding data retrieval.
-	TLSChannelBindingErrorGeneralError TLSChannelBindingError = 4
+	TlsChannelBindingErrorGeneralError TlsChannelBindingError = 4
 )
 
-func marshalTLSChannelBindingError(p unsafe.Pointer) (any, error) {
-	return TLSChannelBindingError(gobject.ValueFromNative(p).Enum()), nil
+func marshalTlsChannelBindingError(p unsafe.Pointer) (any, error) {
+	return TlsChannelBindingError(gobject.ValueFromNative(p).Enum()), nil
 }
 
-var _ gobject.GoValueInitializer = TLSChannelBindingError(0)
+var _ gobject.GoValueInitializer = TlsChannelBindingError(0)
 
-func (e TLSChannelBindingError) GoValueType() gobject.Type {
+func (e TlsChannelBindingError) GoValueType() gobject.Type {
 	return TypeTlsChannelBindingError
 }
 
-func (e TLSChannelBindingError) SetGoValue(v *gobject.Value) {
+func (e TlsChannelBindingError) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
-func (e TLSChannelBindingError) String() string {
+func (e TlsChannelBindingError) String() string {
 	switch e {
-		case TLSChannelBindingErrorGeneralError: return "TLSChannelBindingErrorGeneralError"
-		case TLSChannelBindingErrorInvalidState: return "TLSChannelBindingErrorInvalidState"
-		case TLSChannelBindingErrorNotAvailable: return "TLSChannelBindingErrorNotAvailable"
-		case TLSChannelBindingErrorNotImplemented: return "TLSChannelBindingErrorNotImplemented"
-		case TLSChannelBindingErrorNotSupported: return "TLSChannelBindingErrorNotSupported"
-		default: return fmt.Sprintf("TLSChannelBindingError(%d)", e)
+		case TlsChannelBindingErrorGeneralError: return "TlsChannelBindingErrorGeneralError"
+		case TlsChannelBindingErrorInvalidState: return "TlsChannelBindingErrorInvalidState"
+		case TlsChannelBindingErrorNotAvailable: return "TlsChannelBindingErrorNotAvailable"
+		case TlsChannelBindingErrorNotImplemented: return "TlsChannelBindingErrorNotImplemented"
+		case TlsChannelBindingErrorNotSupported: return "TlsChannelBindingErrorNotSupported"
+		default: return fmt.Sprintf("TlsChannelBindingError(%d)", e)
 	}
 }
 
-// TLSChannelBindingErrorQuark wraps g_tls_channel_binding_error_quark
+// TlsChannelBindingErrorQuark wraps g_tls_channel_binding_error_quark
 // 
 // The function returns the following values:
 // 
 // 	- goret glib.Quark 
 //
 // Gets the TLS channel binding error quark.
-func TLSChannelBindingErrorQuark() glib.Quark {
+func TlsChannelBindingErrorQuark() glib.Quark {
 	var cret C.GQuark // return, none, casted, alias
 
 	cret = C.g_tls_channel_binding_error_quark()
@@ -3887,188 +3887,188 @@ func TLSChannelBindingErrorQuark() glib.Quark {
 	return goret
 }
 
-// TLSChannelBindingType wraps GTlsChannelBindingType
+// TlsChannelBindingType wraps GTlsChannelBindingType
 //
 // The type of TLS channel binding data to retrieve from #GTlsConnection
 // or #GDtlsConnection, as documented by RFC 5929 or RFC 9266. The
 // [`tls-unique-for-telnet`](https://tools.ietf.org/html/rfc5929#section-5)
 // binding type is not currently implemented.
-type TLSChannelBindingType C.int
+type TlsChannelBindingType C.int
 
 const (
-	// TLSChannelBindingTLSUnique wraps TLS_CHANNEL_BINDING_TLS_UNIQUE
+	// TlsChannelBindingTlsUnique wraps G_TLS_CHANNEL_BINDING_TLS_UNIQUE
 	//
 	// [`tls-unique`](https://tools.ietf.org/html/rfc5929#section-3) binding
 	//    type
-	TLSChannelBindingTLSUnique TLSChannelBindingType = 0
-	// TLSChannelBindingTLSServerEndPoint wraps TLS_CHANNEL_BINDING_TLS_SERVER_END_POINT
+	TlsChannelBindingTlsUnique TlsChannelBindingType = 0
+	// TlsChannelBindingTlsServerEndPoint wraps G_TLS_CHANNEL_BINDING_TLS_SERVER_END_POINT
 	//
 	// [`tls-server-end-point`](https://tools.ietf.org/html/rfc5929#section-4)
 	//    binding type
-	TLSChannelBindingTLSServerEndPoint TLSChannelBindingType = 1
-	// TLSChannelBindingTLSExporter wraps TLS_CHANNEL_BINDING_TLS_EXPORTER
+	TlsChannelBindingTlsServerEndPoint TlsChannelBindingType = 1
+	// TlsChannelBindingTlsExporter wraps G_TLS_CHANNEL_BINDING_TLS_EXPORTER
 	//
 	// [`tls-exporter`](https://www.rfc-editor.org/rfc/rfc9266.html) binding
 	//    type. Since: 2.74
-	TLSChannelBindingTLSExporter TLSChannelBindingType = 2
+	TlsChannelBindingTlsExporter TlsChannelBindingType = 2
 )
 
-func marshalTLSChannelBindingType(p unsafe.Pointer) (any, error) {
-	return TLSChannelBindingType(gobject.ValueFromNative(p).Enum()), nil
+func marshalTlsChannelBindingType(p unsafe.Pointer) (any, error) {
+	return TlsChannelBindingType(gobject.ValueFromNative(p).Enum()), nil
 }
 
-var _ gobject.GoValueInitializer = TLSChannelBindingType(0)
+var _ gobject.GoValueInitializer = TlsChannelBindingType(0)
 
-func (e TLSChannelBindingType) GoValueType() gobject.Type {
+func (e TlsChannelBindingType) GoValueType() gobject.Type {
 	return TypeTlsChannelBindingType
 }
 
-func (e TLSChannelBindingType) SetGoValue(v *gobject.Value) {
+func (e TlsChannelBindingType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
-func (e TLSChannelBindingType) String() string {
+func (e TlsChannelBindingType) String() string {
 	switch e {
-		case TLSChannelBindingTLSExporter: return "TLSChannelBindingTLSExporter"
-		case TLSChannelBindingTLSServerEndPoint: return "TLSChannelBindingTLSServerEndPoint"
-		case TLSChannelBindingTLSUnique: return "TLSChannelBindingTLSUnique"
-		default: return fmt.Sprintf("TLSChannelBindingType(%d)", e)
+		case TlsChannelBindingTlsExporter: return "TlsChannelBindingTlsExporter"
+		case TlsChannelBindingTlsServerEndPoint: return "TlsChannelBindingTlsServerEndPoint"
+		case TlsChannelBindingTlsUnique: return "TlsChannelBindingTlsUnique"
+		default: return fmt.Sprintf("TlsChannelBindingType(%d)", e)
 	}
 }
 
-// TLSDatabaseLookupFlags wraps GTlsDatabaseLookupFlags
+// TlsDatabaseLookupFlags wraps GTlsDatabaseLookupFlags
 //
 // Flags for g_tls_database_lookup_certificate_for_handle(),
 // g_tls_database_lookup_certificate_issuer(),
 // and g_tls_database_lookup_certificates_issued_by().
-type TLSDatabaseLookupFlags C.int
+type TlsDatabaseLookupFlags C.int
 
 const (
-	// TLSDatabaseLookupNone wraps TLS_DATABASE_LOOKUP_NONE
+	// TlsDatabaseLookupNone wraps G_TLS_DATABASE_LOOKUP_NONE
 	//
 	// No lookup flags
-	TLSDatabaseLookupNone TLSDatabaseLookupFlags = 0
-	// TLSDatabaseLookupKeypair wraps TLS_DATABASE_LOOKUP_KEYPAIR
+	TlsDatabaseLookupNone TlsDatabaseLookupFlags = 0
+	// TlsDatabaseLookupKeypair wraps G_TLS_DATABASE_LOOKUP_KEYPAIR
 	//
 	// Restrict lookup to certificates that have
 	//     a private key.
-	TLSDatabaseLookupKeypair TLSDatabaseLookupFlags = 1
+	TlsDatabaseLookupKeypair TlsDatabaseLookupFlags = 1
 )
 
-func marshalTLSDatabaseLookupFlags(p unsafe.Pointer) (any, error) {
-	return TLSDatabaseLookupFlags(gobject.ValueFromNative(p).Enum()), nil
+func marshalTlsDatabaseLookupFlags(p unsafe.Pointer) (any, error) {
+	return TlsDatabaseLookupFlags(gobject.ValueFromNative(p).Enum()), nil
 }
 
-var _ gobject.GoValueInitializer = TLSDatabaseLookupFlags(0)
+var _ gobject.GoValueInitializer = TlsDatabaseLookupFlags(0)
 
-func (e TLSDatabaseLookupFlags) GoValueType() gobject.Type {
+func (e TlsDatabaseLookupFlags) GoValueType() gobject.Type {
 	return TypeTlsDatabaseLookupFlags
 }
 
-func (e TLSDatabaseLookupFlags) SetGoValue(v *gobject.Value) {
+func (e TlsDatabaseLookupFlags) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
-func (e TLSDatabaseLookupFlags) String() string {
+func (e TlsDatabaseLookupFlags) String() string {
 	switch e {
-		case TLSDatabaseLookupKeypair: return "TLSDatabaseLookupKeypair"
-		case TLSDatabaseLookupNone: return "TLSDatabaseLookupNone"
-		default: return fmt.Sprintf("TLSDatabaseLookupFlags(%d)", e)
+		case TlsDatabaseLookupKeypair: return "TlsDatabaseLookupKeypair"
+		case TlsDatabaseLookupNone: return "TlsDatabaseLookupNone"
+		default: return fmt.Sprintf("TlsDatabaseLookupFlags(%d)", e)
 	}
 }
 
-// TLSError wraps GTlsError
+// TlsError wraps GTlsError
 //
 // An error code used with %G_TLS_ERROR in a #GError returned from a
 // TLS-related routine.
-type TLSError C.int
+type TlsError C.int
 
 const (
-	// TLSErrorUnavailable wraps TLS_ERROR_UNAVAILABLE
+	// TlsErrorUnavailable wraps G_TLS_ERROR_UNAVAILABLE
 	//
 	// No TLS provider is available
-	TLSErrorUnavailable TLSError = 0
-	// TLSErrorMisc wraps TLS_ERROR_MISC
+	TlsErrorUnavailable TlsError = 0
+	// TlsErrorMisc wraps G_TLS_ERROR_MISC
 	//
 	// Miscellaneous TLS error
-	TLSErrorMisc TLSError = 1
-	// TLSErrorBadCertificate wraps TLS_ERROR_BAD_CERTIFICATE
+	TlsErrorMisc TlsError = 1
+	// TlsErrorBadCertificate wraps G_TLS_ERROR_BAD_CERTIFICATE
 	//
 	// The certificate presented could not
 	//   be parsed or failed validation.
-	TLSErrorBadCertificate TLSError = 2
-	// TLSErrorNotTLS wraps TLS_ERROR_NOT_TLS
+	TlsErrorBadCertificate TlsError = 2
+	// TlsErrorNotTls wraps G_TLS_ERROR_NOT_TLS
 	//
 	// The TLS handshake failed because the
 	//   peer does not seem to be a TLS server.
-	TLSErrorNotTLS TLSError = 3
-	// TLSErrorHandshake wraps TLS_ERROR_HANDSHAKE
+	TlsErrorNotTls TlsError = 3
+	// TlsErrorHandshake wraps G_TLS_ERROR_HANDSHAKE
 	//
 	// The TLS handshake failed because the
 	//   peer's certificate was not acceptable.
-	TLSErrorHandshake TLSError = 4
-	// TLSErrorCertificateRequired wraps TLS_ERROR_CERTIFICATE_REQUIRED
+	TlsErrorHandshake TlsError = 4
+	// TlsErrorCertificateRequired wraps G_TLS_ERROR_CERTIFICATE_REQUIRED
 	//
 	// The TLS handshake failed because
 	//   the server requested a client-side certificate, but none was
 	//   provided. See g_tls_connection_set_certificate().
-	TLSErrorCertificateRequired TLSError = 5
-	// TLSErrorEOF wraps TLS_ERROR_EOF
+	TlsErrorCertificateRequired TlsError = 5
+	// TlsErrorEOF wraps G_TLS_ERROR_EOF
 	//
 	// The TLS connection was closed without proper
 	//   notice, which may indicate an attack. See
 	//   g_tls_connection_set_require_close_notify().
-	TLSErrorEOF TLSError = 6
-	// TLSErrorInappropriateFallback wraps TLS_ERROR_INAPPROPRIATE_FALLBACK
+	TlsErrorEOF TlsError = 6
+	// TlsErrorInappropriateFallback wraps G_TLS_ERROR_INAPPROPRIATE_FALLBACK
 	//
 	// The TLS handshake failed
 	//   because the client sent the fallback SCSV, indicating a protocol
 	//   downgrade attack. Since: 2.60
-	TLSErrorInappropriateFallback TLSError = 7
-	// TLSErrorBadCertificatePassword wraps TLS_ERROR_BAD_CERTIFICATE_PASSWORD
+	TlsErrorInappropriateFallback TlsError = 7
+	// TlsErrorBadCertificatePassword wraps G_TLS_ERROR_BAD_CERTIFICATE_PASSWORD
 	//
 	// The certificate failed
 	//   to load because a password was incorrect. Since: 2.72
-	TLSErrorBadCertificatePassword TLSError = 8
+	TlsErrorBadCertificatePassword TlsError = 8
 )
 
-func marshalTLSError(p unsafe.Pointer) (any, error) {
-	return TLSError(gobject.ValueFromNative(p).Enum()), nil
+func marshalTlsError(p unsafe.Pointer) (any, error) {
+	return TlsError(gobject.ValueFromNative(p).Enum()), nil
 }
 
-var _ gobject.GoValueInitializer = TLSError(0)
+var _ gobject.GoValueInitializer = TlsError(0)
 
-func (e TLSError) GoValueType() gobject.Type {
+func (e TlsError) GoValueType() gobject.Type {
 	return TypeTlsError
 }
 
-func (e TLSError) SetGoValue(v *gobject.Value) {
+func (e TlsError) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
-func (e TLSError) String() string {
+func (e TlsError) String() string {
 	switch e {
-		case TLSErrorBadCertificate: return "TLSErrorBadCertificate"
-		case TLSErrorBadCertificatePassword: return "TLSErrorBadCertificatePassword"
-		case TLSErrorCertificateRequired: return "TLSErrorCertificateRequired"
-		case TLSErrorEOF: return "TLSErrorEOF"
-		case TLSErrorHandshake: return "TLSErrorHandshake"
-		case TLSErrorInappropriateFallback: return "TLSErrorInappropriateFallback"
-		case TLSErrorMisc: return "TLSErrorMisc"
-		case TLSErrorNotTLS: return "TLSErrorNotTLS"
-		case TLSErrorUnavailable: return "TLSErrorUnavailable"
-		default: return fmt.Sprintf("TLSError(%d)", e)
+		case TlsErrorBadCertificate: return "TlsErrorBadCertificate"
+		case TlsErrorBadCertificatePassword: return "TlsErrorBadCertificatePassword"
+		case TlsErrorCertificateRequired: return "TlsErrorCertificateRequired"
+		case TlsErrorEOF: return "TlsErrorEOF"
+		case TlsErrorHandshake: return "TlsErrorHandshake"
+		case TlsErrorInappropriateFallback: return "TlsErrorInappropriateFallback"
+		case TlsErrorMisc: return "TlsErrorMisc"
+		case TlsErrorNotTls: return "TlsErrorNotTls"
+		case TlsErrorUnavailable: return "TlsErrorUnavailable"
+		default: return fmt.Sprintf("TlsError(%d)", e)
 	}
 }
 
-// TLSErrorQuark wraps g_tls_error_quark
+// TlsErrorQuark wraps g_tls_error_quark
 // 
 // The function returns the following values:
 // 
 // 	- goret glib.Quark 
 //
 // Gets the TLS error quark.
-func TLSErrorQuark() glib.Quark {
+func TlsErrorQuark() glib.Quark {
 	var cret C.GQuark // return, none, casted, alias
 
 	cret = C.g_tls_error_quark()
@@ -4080,54 +4080,54 @@ func TLSErrorQuark() glib.Quark {
 	return goret
 }
 
-// TLSInteractionResult wraps GTlsInteractionResult
+// TlsInteractionResult wraps GTlsInteractionResult
 //
 // #GTlsInteractionResult is returned by various functions in #GTlsInteraction
 // when finishing an interaction request.
-type TLSInteractionResult C.int
+type TlsInteractionResult C.int
 
 const (
-	// TLSInteractionUnhandled wraps TLS_INTERACTION_UNHANDLED
+	// TlsInteractionUnhandled wraps G_TLS_INTERACTION_UNHANDLED
 	//
 	// The interaction was unhandled (i.e. not
 	//     implemented).
-	TLSInteractionUnhandled TLSInteractionResult = 0
-	// TLSInteractionHandled wraps TLS_INTERACTION_HANDLED
+	TlsInteractionUnhandled TlsInteractionResult = 0
+	// TlsInteractionHandled wraps G_TLS_INTERACTION_HANDLED
 	//
 	// The interaction completed, and resulting data
 	//     is available.
-	TLSInteractionHandled TLSInteractionResult = 1
-	// TLSInteractionFailed wraps TLS_INTERACTION_FAILED
+	TlsInteractionHandled TlsInteractionResult = 1
+	// TlsInteractionFailed wraps G_TLS_INTERACTION_FAILED
 	//
 	// The interaction has failed, or was cancelled.
 	//     and the operation should be aborted.
-	TLSInteractionFailed TLSInteractionResult = 2
+	TlsInteractionFailed TlsInteractionResult = 2
 )
 
-func marshalTLSInteractionResult(p unsafe.Pointer) (any, error) {
-	return TLSInteractionResult(gobject.ValueFromNative(p).Enum()), nil
+func marshalTlsInteractionResult(p unsafe.Pointer) (any, error) {
+	return TlsInteractionResult(gobject.ValueFromNative(p).Enum()), nil
 }
 
-var _ gobject.GoValueInitializer = TLSInteractionResult(0)
+var _ gobject.GoValueInitializer = TlsInteractionResult(0)
 
-func (e TLSInteractionResult) GoValueType() gobject.Type {
+func (e TlsInteractionResult) GoValueType() gobject.Type {
 	return TypeTlsInteractionResult
 }
 
-func (e TLSInteractionResult) SetGoValue(v *gobject.Value) {
+func (e TlsInteractionResult) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
-func (e TLSInteractionResult) String() string {
+func (e TlsInteractionResult) String() string {
 	switch e {
-		case TLSInteractionFailed: return "TLSInteractionFailed"
-		case TLSInteractionHandled: return "TLSInteractionHandled"
-		case TLSInteractionUnhandled: return "TLSInteractionUnhandled"
-		default: return fmt.Sprintf("TLSInteractionResult(%d)", e)
+		case TlsInteractionFailed: return "TlsInteractionFailed"
+		case TlsInteractionHandled: return "TlsInteractionHandled"
+		case TlsInteractionUnhandled: return "TlsInteractionUnhandled"
+		default: return fmt.Sprintf("TlsInteractionResult(%d)", e)
 	}
 }
 
-// TLSProtocolVersion wraps GTlsProtocolVersion
+// TlsProtocolVersion wraps GTlsProtocolVersion
 //
 // The TLS or DTLS protocol version used by a #GTlsConnection or
 // #GDtlsConnection. The integer values of these versions are sequential
@@ -4138,72 +4138,72 @@ func (e TLSInteractionResult) String() string {
 // protocol version that GLib does not yet know about. This means that
 // it's possible for an unknown DTLS protocol version to compare less
 // than the TLS protocol versions.
-type TLSProtocolVersion C.int
+type TlsProtocolVersion C.int
 
 const (
-	// TLSProtocolVersionUnknown wraps TLS_PROTOCOL_VERSION_UNKNOWN
+	// TlsProtocolVersionUnknown wraps G_TLS_PROTOCOL_VERSION_UNKNOWN
 	//
 	// No protocol version or unknown protocol version
-	TLSProtocolVersionUnknown TLSProtocolVersion = 0
-	// TLSProtocolVersionSSL30 wraps TLS_PROTOCOL_VERSION_SSL_3_0
+	TlsProtocolVersionUnknown TlsProtocolVersion = 0
+	// TlsProtocolVersionSsl30 wraps G_TLS_PROTOCOL_VERSION_SSL_3_0
 	//
 	// SSL 3.0, which is insecure and should not be used
-	TLSProtocolVersionSSL30 TLSProtocolVersion = 1
-	// TLSProtocolVersionTLS10 wraps TLS_PROTOCOL_VERSION_TLS_1_0
+	TlsProtocolVersionSsl30 TlsProtocolVersion = 1
+	// TlsProtocolVersionTls10 wraps G_TLS_PROTOCOL_VERSION_TLS_1_0
 	//
 	// TLS 1.0, which is insecure and should not be used
-	TLSProtocolVersionTLS10 TLSProtocolVersion = 2
-	// TLSProtocolVersionTLS11 wraps TLS_PROTOCOL_VERSION_TLS_1_1
+	TlsProtocolVersionTls10 TlsProtocolVersion = 2
+	// TlsProtocolVersionTls11 wraps G_TLS_PROTOCOL_VERSION_TLS_1_1
 	//
 	// TLS 1.1, which is insecure and should not be used
-	TLSProtocolVersionTLS11 TLSProtocolVersion = 3
-	// TLSProtocolVersionTLS12 wraps TLS_PROTOCOL_VERSION_TLS_1_2
+	TlsProtocolVersionTls11 TlsProtocolVersion = 3
+	// TlsProtocolVersionTls12 wraps G_TLS_PROTOCOL_VERSION_TLS_1_2
 	//
 	// TLS 1.2, defined by [RFC 5246](https://datatracker.ietf.org/doc/html/rfc5246)
-	TLSProtocolVersionTLS12 TLSProtocolVersion = 4
-	// TLSProtocolVersionTLS13 wraps TLS_PROTOCOL_VERSION_TLS_1_3
+	TlsProtocolVersionTls12 TlsProtocolVersion = 4
+	// TlsProtocolVersionTls13 wraps G_TLS_PROTOCOL_VERSION_TLS_1_3
 	//
 	// TLS 1.3, defined by [RFC 8446](https://datatracker.ietf.org/doc/html/rfc8446)
-	TLSProtocolVersionTLS13 TLSProtocolVersion = 5
-	// TLSProtocolVersionDTLS10 wraps TLS_PROTOCOL_VERSION_DTLS_1_0
+	TlsProtocolVersionTls13 TlsProtocolVersion = 5
+	// TlsProtocolVersionDtls10 wraps G_TLS_PROTOCOL_VERSION_DTLS_1_0
 	//
 	// DTLS 1.0, which is insecure and should not be used
-	TLSProtocolVersionDTLS10 TLSProtocolVersion = 201
-	// TLSProtocolVersionDTLS12 wraps TLS_PROTOCOL_VERSION_DTLS_1_2
+	TlsProtocolVersionDtls10 TlsProtocolVersion = 201
+	// TlsProtocolVersionDtls12 wraps G_TLS_PROTOCOL_VERSION_DTLS_1_2
 	//
 	// DTLS 1.2, defined by [RFC 6347](https://datatracker.ietf.org/doc/html/rfc6347)
-	TLSProtocolVersionDTLS12 TLSProtocolVersion = 202
+	TlsProtocolVersionDtls12 TlsProtocolVersion = 202
 )
 
-func marshalTLSProtocolVersion(p unsafe.Pointer) (any, error) {
-	return TLSProtocolVersion(gobject.ValueFromNative(p).Enum()), nil
+func marshalTlsProtocolVersion(p unsafe.Pointer) (any, error) {
+	return TlsProtocolVersion(gobject.ValueFromNative(p).Enum()), nil
 }
 
-var _ gobject.GoValueInitializer = TLSProtocolVersion(0)
+var _ gobject.GoValueInitializer = TlsProtocolVersion(0)
 
-func (e TLSProtocolVersion) GoValueType() gobject.Type {
+func (e TlsProtocolVersion) GoValueType() gobject.Type {
 	return TypeTlsProtocolVersion
 }
 
-func (e TLSProtocolVersion) SetGoValue(v *gobject.Value) {
+func (e TlsProtocolVersion) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
-func (e TLSProtocolVersion) String() string {
+func (e TlsProtocolVersion) String() string {
 	switch e {
-		case TLSProtocolVersionDTLS10: return "TLSProtocolVersionDTLS10"
-		case TLSProtocolVersionDTLS12: return "TLSProtocolVersionDTLS12"
-		case TLSProtocolVersionSSL30: return "TLSProtocolVersionSSL30"
-		case TLSProtocolVersionTLS10: return "TLSProtocolVersionTLS10"
-		case TLSProtocolVersionTLS11: return "TLSProtocolVersionTLS11"
-		case TLSProtocolVersionTLS12: return "TLSProtocolVersionTLS12"
-		case TLSProtocolVersionTLS13: return "TLSProtocolVersionTLS13"
-		case TLSProtocolVersionUnknown: return "TLSProtocolVersionUnknown"
-		default: return fmt.Sprintf("TLSProtocolVersion(%d)", e)
+		case TlsProtocolVersionDtls10: return "TlsProtocolVersionDtls10"
+		case TlsProtocolVersionDtls12: return "TlsProtocolVersionDtls12"
+		case TlsProtocolVersionSsl30: return "TlsProtocolVersionSsl30"
+		case TlsProtocolVersionTls10: return "TlsProtocolVersionTls10"
+		case TlsProtocolVersionTls11: return "TlsProtocolVersionTls11"
+		case TlsProtocolVersionTls12: return "TlsProtocolVersionTls12"
+		case TlsProtocolVersionTls13: return "TlsProtocolVersionTls13"
+		case TlsProtocolVersionUnknown: return "TlsProtocolVersionUnknown"
+		default: return fmt.Sprintf("TlsProtocolVersion(%d)", e)
 	}
 }
 
-// TLSRehandshakeMode wraps GTlsRehandshakeMode
+// TlsRehandshakeMode wraps GTlsRehandshakeMode
 //
 // When to allow rehandshaking. See
 // g_tls_connection_set_rehandshake_mode().
@@ -4211,43 +4211,43 @@ func (e TLSProtocolVersion) String() string {
 // Deprecated: (since 2.60.0) Changing the rehandshake mode is no longer
 //   required for compatibility. Also, rehandshaking has been removed
 //   from the TLS protocol in TLS 1.3.
-type TLSRehandshakeMode C.int
+type TlsRehandshakeMode C.int
 
 const (
-	// TLSRehandshakeNever wraps TLS_REHANDSHAKE_NEVER
+	// TlsRehandshakeNever wraps G_TLS_REHANDSHAKE_NEVER
 	//
 	// Never allow rehandshaking
-	TLSRehandshakeNever TLSRehandshakeMode = 0
-	// TLSRehandshakeSafely wraps TLS_REHANDSHAKE_SAFELY
+	TlsRehandshakeNever TlsRehandshakeMode = 0
+	// TlsRehandshakeSafely wraps G_TLS_REHANDSHAKE_SAFELY
 	//
 	// Allow safe rehandshaking only
-	TLSRehandshakeSafely TLSRehandshakeMode = 1
-	// TLSRehandshakeUnsafely wraps TLS_REHANDSHAKE_UNSAFELY
+	TlsRehandshakeSafely TlsRehandshakeMode = 1
+	// TlsRehandshakeUnsafely wraps G_TLS_REHANDSHAKE_UNSAFELY
 	//
 	// Allow unsafe rehandshaking
-	TLSRehandshakeUnsafely TLSRehandshakeMode = 2
+	TlsRehandshakeUnsafely TlsRehandshakeMode = 2
 )
 
-func marshalTLSRehandshakeMode(p unsafe.Pointer) (any, error) {
-	return TLSRehandshakeMode(gobject.ValueFromNative(p).Enum()), nil
+func marshalTlsRehandshakeMode(p unsafe.Pointer) (any, error) {
+	return TlsRehandshakeMode(gobject.ValueFromNative(p).Enum()), nil
 }
 
-var _ gobject.GoValueInitializer = TLSRehandshakeMode(0)
+var _ gobject.GoValueInitializer = TlsRehandshakeMode(0)
 
-func (e TLSRehandshakeMode) GoValueType() gobject.Type {
+func (e TlsRehandshakeMode) GoValueType() gobject.Type {
 	return TypeTlsRehandshakeMode
 }
 
-func (e TLSRehandshakeMode) SetGoValue(v *gobject.Value) {
+func (e TlsRehandshakeMode) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
-func (e TLSRehandshakeMode) String() string {
+func (e TlsRehandshakeMode) String() string {
 	switch e {
-		case TLSRehandshakeNever: return "TLSRehandshakeNever"
-		case TLSRehandshakeSafely: return "TLSRehandshakeSafely"
-		case TLSRehandshakeUnsafely: return "TLSRehandshakeUnsafely"
-		default: return fmt.Sprintf("TLSRehandshakeMode(%d)", e)
+		case TlsRehandshakeNever: return "TlsRehandshakeNever"
+		case TlsRehandshakeSafely: return "TlsRehandshakeSafely"
+		case TlsRehandshakeUnsafely: return "TlsRehandshakeUnsafely"
+		default: return fmt.Sprintf("TlsRehandshakeMode(%d)", e)
 	}
 }
 
@@ -4258,15 +4258,15 @@ func (e TLSRehandshakeMode) String() string {
 type ZlibCompressorFormat C.int
 
 const (
-	// ZlibCompressorFormatZlib wraps ZLIB_COMPRESSOR_FORMAT_ZLIB
+	// ZlibCompressorFormatZlib wraps G_ZLIB_COMPRESSOR_FORMAT_ZLIB
 	//
 	// deflate compression with zlib header
 	ZlibCompressorFormatZlib ZlibCompressorFormat = 0
-	// ZlibCompressorFormatGzip wraps ZLIB_COMPRESSOR_FORMAT_GZIP
+	// ZlibCompressorFormatGzip wraps G_ZLIB_COMPRESSOR_FORMAT_GZIP
 	//
 	// gzip file format
 	ZlibCompressorFormatGzip ZlibCompressorFormat = 1
-	// ZlibCompressorFormatRaw wraps ZLIB_COMPRESSOR_FORMAT_RAW
+	// ZlibCompressorFormatRaw wraps G_ZLIB_COMPRESSOR_FORMAT_RAW
 	//
 	// deflate compression with no header
 	ZlibCompressorFormatRaw ZlibCompressorFormat = 2
@@ -4301,19 +4301,19 @@ func (e ZlibCompressorFormat) String() string {
 type AppInfoCreateFlags C.gint
 
 const (
-	// AppInfoCreateNone wraps APP_INFO_CREATE_NONE
+	// AppInfoCreateNone wraps G_APP_INFO_CREATE_NONE
 	//
 	// No flags.
 	AppInfoCreateNone AppInfoCreateFlags = 0
-	// AppInfoCreateNeedsTerminal wraps APP_INFO_CREATE_NEEDS_TERMINAL
+	// AppInfoCreateNeedsTerminal wraps G_APP_INFO_CREATE_NEEDS_TERMINAL
 	//
 	// Application opens in a terminal window.
 	AppInfoCreateNeedsTerminal AppInfoCreateFlags = 1
-	// AppInfoCreateSupportsURIs wraps APP_INFO_CREATE_SUPPORTS_URIS
+	// AppInfoCreateSupportsUris wraps G_APP_INFO_CREATE_SUPPORTS_URIS
 	//
 	// Application supports URI arguments.
-	AppInfoCreateSupportsURIs AppInfoCreateFlags = 2
-	// AppInfoCreateSupportsStartupNotification wraps APP_INFO_CREATE_SUPPORTS_STARTUP_NOTIFICATION
+	AppInfoCreateSupportsUris AppInfoCreateFlags = 2
+	// AppInfoCreateSupportsStartupNotification wraps G_APP_INFO_CREATE_SUPPORTS_STARTUP_NOTIFICATION
 	//
 	// Application supports startup notification. Since 2.26
 	AppInfoCreateSupportsStartupNotification AppInfoCreateFlags = 4
@@ -4349,8 +4349,8 @@ func (f AppInfoCreateFlags) String() string {
 	if (f & AppInfoCreateNeedsTerminal) != 0 {
 		parts = append(parts, "AppInfoCreateNeedsTerminal")
 	}
-	if (f & AppInfoCreateSupportsURIs) != 0 {
-		parts = append(parts, "AppInfoCreateSupportsURIs")
+	if (f & AppInfoCreateSupportsUris) != 0 {
+		parts = append(parts, "AppInfoCreateSupportsUris")
 	}
 	if (f & AppInfoCreateSupportsStartupNotification) != 0 {
 		parts = append(parts, "AppInfoCreateSupportsStartupNotification")
@@ -4364,28 +4364,28 @@ func (f AppInfoCreateFlags) String() string {
 type ApplicationFlags C.gint
 
 const (
-	// ApplicationFlagsNone wraps APPLICATION_FLAGS_NONE
+	// ApplicationFlagsNone wraps G_APPLICATION_FLAGS_NONE
 	//
 	// Default flags.
 	//
 	// Deprecated: (since 2.74.0) Use [flags@Gio.ApplicationFlags.DEFAULT_FLAGS].
 	ApplicationFlagsNone ApplicationFlags = 0
-	// ApplicationDefaultFlags wraps APPLICATION_DEFAULT_FLAGS
+	// ApplicationDefaultFlags wraps G_APPLICATION_DEFAULT_FLAGS
 	//
 	// Default flags.
 	ApplicationDefaultFlags ApplicationFlags = 0
-	// ApplicationIsService wraps APPLICATION_IS_SERVICE
+	// ApplicationIsService wraps G_APPLICATION_IS_SERVICE
 	//
 	// Run as a service. In this mode, registration
 	//      fails if the service is already running, and the application
 	//      will initially wait up to 10 seconds for an initial activation
 	//      message to arrive.
 	ApplicationIsService ApplicationFlags = 1
-	// ApplicationIsLauncher wraps APPLICATION_IS_LAUNCHER
+	// ApplicationIsLauncher wraps G_APPLICATION_IS_LAUNCHER
 	//
 	// Don't try to become the primary instance.
 	ApplicationIsLauncher ApplicationFlags = 2
-	// ApplicationHandlesOpen wraps APPLICATION_HANDLES_OPEN
+	// ApplicationHandlesOpen wraps G_APPLICATION_HANDLES_OPEN
 	//
 	// This application handles opening files (in
 	//     the primary instance). Note that this flag only affects the default
@@ -4393,14 +4393,14 @@ const (
 	//     %G_APPLICATION_HANDLES_COMMAND_LINE is given.
 	//     See g_application_run() for details.
 	ApplicationHandlesOpen ApplicationFlags = 4
-	// ApplicationHandlesCommandLine wraps APPLICATION_HANDLES_COMMAND_LINE
+	// ApplicationHandlesCommandLine wraps G_APPLICATION_HANDLES_COMMAND_LINE
 	//
 	// This application handles command line
 	//     arguments (in the primary instance). Note that this flag only affect
 	//     the default implementation of local_command_line().
 	//     See g_application_run() for details.
 	ApplicationHandlesCommandLine ApplicationFlags = 8
-	// ApplicationSendEnvironment wraps APPLICATION_SEND_ENVIRONMENT
+	// ApplicationSendEnvironment wraps G_APPLICATION_SEND_ENVIRONMENT
 	//
 	// Send the environment of the
 	//     launching process to the primary instance. Set this flag if your
@@ -4411,7 +4411,7 @@ const (
 	//     to the #GApplication::command-line signal handler, via
 	//     g_application_command_line_getenv().
 	ApplicationSendEnvironment ApplicationFlags = 16
-	// ApplicationNonUnique wraps APPLICATION_NON_UNIQUE
+	// ApplicationNonUnique wraps G_APPLICATION_NON_UNIQUE
 	//
 	// Make no attempts to do any of the typical
 	//     single-instance application negotiation, even if the application
@@ -4420,18 +4420,18 @@ const (
 	//     owner already exists.  Everything occurs in the local process.
 	//     Since: 2.30.
 	ApplicationNonUnique ApplicationFlags = 32
-	// ApplicationCanOverrideAppID wraps APPLICATION_CAN_OVERRIDE_APP_ID
+	// ApplicationCanOverrideAppID wraps G_APPLICATION_CAN_OVERRIDE_APP_ID
 	//
 	// Allow users to override the
 	//     application ID from the command line with `--gapplication-app-id`.
 	//     Since: 2.48
 	ApplicationCanOverrideAppID ApplicationFlags = 64
-	// ApplicationAllowReplacement wraps APPLICATION_ALLOW_REPLACEMENT
+	// ApplicationAllowReplacement wraps G_APPLICATION_ALLOW_REPLACEMENT
 	//
 	// Allow another instance to take over
 	//     the bus name. Since: 2.60
 	ApplicationAllowReplacement ApplicationFlags = 128
-	// ApplicationReplace wraps APPLICATION_REPLACE
+	// ApplicationReplace wraps G_APPLICATION_REPLACE
 	//
 	// Take over from another instance. This flag is
 	//     usually set by passing `--gapplication-replace` on the commandline.
@@ -4507,27 +4507,27 @@ func (f ApplicationFlags) String() string {
 type AskPasswordFlags C.gint
 
 const (
-	// AskPasswordNeedPassword wraps ASK_PASSWORD_NEED_PASSWORD
+	// AskPasswordNeedPassword wraps G_ASK_PASSWORD_NEED_PASSWORD
 	//
 	// operation requires a password.
 	AskPasswordNeedPassword AskPasswordFlags = 1
-	// AskPasswordNeedUsername wraps ASK_PASSWORD_NEED_USERNAME
+	// AskPasswordNeedUsername wraps G_ASK_PASSWORD_NEED_USERNAME
 	//
 	// operation requires a username.
 	AskPasswordNeedUsername AskPasswordFlags = 2
-	// AskPasswordNeedDomain wraps ASK_PASSWORD_NEED_DOMAIN
+	// AskPasswordNeedDomain wraps G_ASK_PASSWORD_NEED_DOMAIN
 	//
 	// operation requires a domain.
 	AskPasswordNeedDomain AskPasswordFlags = 4
-	// AskPasswordSavingSupported wraps ASK_PASSWORD_SAVING_SUPPORTED
+	// AskPasswordSavingSupported wraps G_ASK_PASSWORD_SAVING_SUPPORTED
 	//
 	// operation supports saving settings.
 	AskPasswordSavingSupported AskPasswordFlags = 8
-	// AskPasswordAnonymousSupported wraps ASK_PASSWORD_ANONYMOUS_SUPPORTED
+	// AskPasswordAnonymousSupported wraps G_ASK_PASSWORD_ANONYMOUS_SUPPORTED
 	//
 	// operation supports anonymous users.
 	AskPasswordAnonymousSupported AskPasswordFlags = 16
-	// AskPasswordTcrypt wraps ASK_PASSWORD_TCRYPT
+	// AskPasswordTcrypt wraps G_ASK_PASSWORD_TCRYPT
 	//
 	// operation takes TCRYPT parameters (Since: 2.58)
 	AskPasswordTcrypt AskPasswordFlags = 32
@@ -4584,20 +4584,20 @@ func (f AskPasswordFlags) String() string {
 type BusNameOwnerFlags C.gint
 
 const (
-	// BusNameOwnerFlagsNone wraps BUS_NAME_OWNER_FLAGS_NONE
+	// BusNameOwnerFlagsNone wraps G_BUS_NAME_OWNER_FLAGS_NONE
 	//
 	// No flags set.
 	BusNameOwnerFlagsNone BusNameOwnerFlags = 0
-	// BusNameOwnerFlagsAllowReplacement wraps BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT
+	// BusNameOwnerFlagsAllowReplacement wraps G_BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT
 	//
 	// Allow another message bus connection to claim the name.
 	BusNameOwnerFlagsAllowReplacement BusNameOwnerFlags = 1
-	// BusNameOwnerFlagsReplace wraps BUS_NAME_OWNER_FLAGS_REPLACE
+	// BusNameOwnerFlagsReplace wraps G_BUS_NAME_OWNER_FLAGS_REPLACE
 	//
 	// If another message bus connection owns the name and have
 	// specified %G_BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT, then take the name from the other connection.
 	BusNameOwnerFlagsReplace BusNameOwnerFlags = 2
-	// BusNameOwnerFlagsDoNotQueue wraps BUS_NAME_OWNER_FLAGS_DO_NOT_QUEUE
+	// BusNameOwnerFlagsDoNotQueue wraps G_BUS_NAME_OWNER_FLAGS_DO_NOT_QUEUE
 	//
 	// If another message bus connection owns the name, immediately return an error
 	// from [func@Gio.bus_own_name] rather than entering the waiting queue for that
@@ -4650,11 +4650,11 @@ func (f BusNameOwnerFlags) String() string {
 type BusNameWatcherFlags C.gint
 
 const (
-	// BusNameWatcherFlagsNone wraps BUS_NAME_WATCHER_FLAGS_NONE
+	// BusNameWatcherFlagsNone wraps G_BUS_NAME_WATCHER_FLAGS_NONE
 	//
 	// No flags set.
 	BusNameWatcherFlagsNone BusNameWatcherFlags = 0
-	// BusNameWatcherFlagsAutoStart wraps BUS_NAME_WATCHER_FLAGS_AUTO_START
+	// BusNameWatcherFlagsAutoStart wraps G_BUS_NAME_WATCHER_FLAGS_AUTO_START
 	//
 	// If no-one owns the name when
 	// beginning to watch the name, ask the bus to launch an owner for the
@@ -4701,15 +4701,15 @@ func (f BusNameWatcherFlags) String() string {
 type ConverterFlags C.gint
 
 const (
-	// ConverterNoFlags wraps CONVERTER_NO_FLAGS
+	// ConverterNoFlags wraps G_CONVERTER_NO_FLAGS
 	//
 	// No flags.
 	ConverterNoFlags ConverterFlags = 0
-	// ConverterInputAtEnd wraps CONVERTER_INPUT_AT_END
+	// ConverterInputAtEnd wraps G_CONVERTER_INPUT_AT_END
 	//
 	// At end of input data
 	ConverterInputAtEnd ConverterFlags = 1
-	// ConverterFlush wraps CONVERTER_FLUSH
+	// ConverterFlush wraps G_CONVERTER_FLUSH
 	//
 	// Flush data
 	ConverterFlush ConverterFlags = 2
@@ -4757,7 +4757,7 @@ func (f ConverterFlags) String() string {
 type DriveStartFlags C.gint
 
 const (
-	// DriveStartNone wraps DRIVE_START_NONE
+	// DriveStartNone wraps G_DRIVE_START_NONE
 	//
 	// No flags set.
 	DriveStartNone DriveStartFlags = 0
@@ -4799,15 +4799,15 @@ func (f DriveStartFlags) String() string {
 type FileAttributeInfoFlags C.gint
 
 const (
-	// FileAttributeInfoNone wraps FILE_ATTRIBUTE_INFO_NONE
+	// FileAttributeInfoNone wraps G_FILE_ATTRIBUTE_INFO_NONE
 	//
 	// no flags set.
 	FileAttributeInfoNone FileAttributeInfoFlags = 0
-	// FileAttributeInfoCopyWithFile wraps FILE_ATTRIBUTE_INFO_COPY_WITH_FILE
+	// FileAttributeInfoCopyWithFile wraps G_FILE_ATTRIBUTE_INFO_COPY_WITH_FILE
 	//
 	// copy the attribute values when the file is copied.
 	FileAttributeInfoCopyWithFile FileAttributeInfoFlags = 1
-	// FileAttributeInfoCopyWhenMoved wraps FILE_ATTRIBUTE_INFO_COPY_WHEN_MOVED
+	// FileAttributeInfoCopyWhenMoved wraps G_FILE_ATTRIBUTE_INFO_COPY_WHEN_MOVED
 	//
 	// copy the attribute values when the file is moved.
 	FileAttributeInfoCopyWhenMoved FileAttributeInfoFlags = 2
@@ -4855,35 +4855,35 @@ func (f FileAttributeInfoFlags) String() string {
 type FileCopyFlags C.gint
 
 const (
-	// FileCopyNone wraps FILE_COPY_NONE
+	// FileCopyNone wraps G_FILE_COPY_NONE
 	//
 	// No flags set.
 	FileCopyNone FileCopyFlags = 0
-	// FileCopyOverwrite wraps FILE_COPY_OVERWRITE
+	// FileCopyOverwrite wraps G_FILE_COPY_OVERWRITE
 	//
 	// Overwrite any existing files
 	FileCopyOverwrite FileCopyFlags = 1
-	// FileCopyBackup wraps FILE_COPY_BACKUP
+	// FileCopyBackup wraps G_FILE_COPY_BACKUP
 	//
 	// Make a backup of any existing files.
 	FileCopyBackup FileCopyFlags = 2
-	// FileCopyNofollowSymlinks wraps FILE_COPY_NOFOLLOW_SYMLINKS
+	// FileCopyNofollowSymlinks wraps G_FILE_COPY_NOFOLLOW_SYMLINKS
 	//
 	// Don't follow symlinks.
 	FileCopyNofollowSymlinks FileCopyFlags = 4
-	// FileCopyAllMetadata wraps FILE_COPY_ALL_METADATA
+	// FileCopyAllMetadata wraps G_FILE_COPY_ALL_METADATA
 	//
 	// Copy all file metadata instead of just default set used for copy (see #GFileInfo).
 	FileCopyAllMetadata FileCopyFlags = 8
-	// FileCopyNoFallbackForMove wraps FILE_COPY_NO_FALLBACK_FOR_MOVE
+	// FileCopyNoFallbackForMove wraps G_FILE_COPY_NO_FALLBACK_FOR_MOVE
 	//
 	// Don't use copy and delete fallback if native move not supported.
 	FileCopyNoFallbackForMove FileCopyFlags = 16
-	// FileCopyTargetDefaultPerms wraps FILE_COPY_TARGET_DEFAULT_PERMS
+	// FileCopyTargetDefaultPerms wraps G_FILE_COPY_TARGET_DEFAULT_PERMS
 	//
 	// Leaves target file with default perms, instead of setting the source file perms.
 	FileCopyTargetDefaultPerms FileCopyFlags = 32
-	// FileCopyTargetDefaultModifiedTime wraps FILE_COPY_TARGET_DEFAULT_MODIFIED_TIME
+	// FileCopyTargetDefaultModifiedTime wraps G_FILE_COPY_TARGET_DEFAULT_MODIFIED_TIME
 	//
 	// Use default modification
 	//     timestamps instead of copying them from the source file. Since 2.80
@@ -4947,16 +4947,16 @@ func (f FileCopyFlags) String() string {
 type FileCreateFlags C.gint
 
 const (
-	// FileCreateNone wraps FILE_CREATE_NONE
+	// FileCreateNone wraps G_FILE_CREATE_NONE
 	//
 	// No flags set.
 	FileCreateNone FileCreateFlags = 0
-	// FileCreatePrivate wraps FILE_CREATE_PRIVATE
+	// FileCreatePrivate wraps G_FILE_CREATE_PRIVATE
 	//
 	// Create a file that can only be
 	//    accessed by the current user.
 	FileCreatePrivate FileCreateFlags = 1
-	// FileCreateReplaceDestination wraps FILE_CREATE_REPLACE_DESTINATION
+	// FileCreateReplaceDestination wraps G_FILE_CREATE_REPLACE_DESTINATION
 	//
 	// Replace the destination
 	//    as if it didn't exist before. Don't try to keep any old
@@ -5013,17 +5013,17 @@ func (f FileCreateFlags) String() string {
 type FileMeasureFlags C.gint
 
 const (
-	// FileMeasureNone wraps FILE_MEASURE_NONE
+	// FileMeasureNone wraps G_FILE_MEASURE_NONE
 	//
 	// No flags set.
 	FileMeasureNone FileMeasureFlags = 0
-	// FileMeasureReportAnyError wraps FILE_MEASURE_REPORT_ANY_ERROR
+	// FileMeasureReportAnyError wraps G_FILE_MEASURE_REPORT_ANY_ERROR
 	//
 	// Report any error encountered
 	//   while traversing the directory tree.  Normally errors are only
 	//   reported for the toplevel file.
 	FileMeasureReportAnyError FileMeasureFlags = 2
-	// FileMeasureApparentSize wraps FILE_MEASURE_APPARENT_SIZE
+	// FileMeasureApparentSize wraps G_FILE_MEASURE_APPARENT_SIZE
 	//
 	// Tally usage based on apparent file
 	//   sizes.  Normally, the block-size is used, if available, as this is a
@@ -5033,7 +5033,7 @@ const (
 	//   ignore the sizes of file types other than regular files and links, as the
 	//   sizes of other file types are not specified in a standard way.
 	FileMeasureApparentSize FileMeasureFlags = 4
-	// FileMeasureNoXdev wraps FILE_MEASURE_NO_XDEV
+	// FileMeasureNoXdev wraps G_FILE_MEASURE_NO_XDEV
 	//
 	// Do not cross mount point boundaries.
 	//   Compare with `du -x`.
@@ -5085,15 +5085,15 @@ func (f FileMeasureFlags) String() string {
 type FileMonitorFlags C.gint
 
 const (
-	// FileMonitorNone wraps FILE_MONITOR_NONE
+	// FileMonitorNone wraps G_FILE_MONITOR_NONE
 	//
 	// No flags set.
 	FileMonitorNone FileMonitorFlags = 0
-	// FileMonitorWatchMounts wraps FILE_MONITOR_WATCH_MOUNTS
+	// FileMonitorWatchMounts wraps G_FILE_MONITOR_WATCH_MOUNTS
 	//
 	// Watch for mount events.
 	FileMonitorWatchMounts FileMonitorFlags = 1
-	// FileMonitorSendMoved wraps FILE_MONITOR_SEND_MOVED
+	// FileMonitorSendMoved wraps G_FILE_MONITOR_SEND_MOVED
 	//
 	// Pair DELETED and CREATED events caused
 	//   by file renames (moves) and send a single G_FILE_MONITOR_EVENT_MOVED
@@ -5102,12 +5102,12 @@ const (
 	//   and CREATED events).  Deprecated since 2.46: use
 	//   %G_FILE_MONITOR_WATCH_MOVES instead.
 	FileMonitorSendMoved FileMonitorFlags = 2
-	// FileMonitorWatchHardLinks wraps FILE_MONITOR_WATCH_HARD_LINKS
+	// FileMonitorWatchHardLinks wraps G_FILE_MONITOR_WATCH_HARD_LINKS
 	//
 	// Watch for changes to the file made
 	//   via another hard link. Since 2.36.
 	FileMonitorWatchHardLinks FileMonitorFlags = 4
-	// FileMonitorWatchMoves wraps FILE_MONITOR_WATCH_MOVES
+	// FileMonitorWatchMoves wraps G_FILE_MONITOR_WATCH_MOVES
 	//
 	// Watch for rename operations on a
 	//   monitored directory.  This causes %G_FILE_MONITOR_EVENT_RENAMED,
@@ -5164,11 +5164,11 @@ func (f FileMonitorFlags) String() string {
 type FileQueryInfoFlags C.gint
 
 const (
-	// FileQueryInfoNone wraps FILE_QUERY_INFO_NONE
+	// FileQueryInfoNone wraps G_FILE_QUERY_INFO_NONE
 	//
 	// No flags set.
 	FileQueryInfoNone FileQueryInfoFlags = 0
-	// FileQueryInfoNofollowSymlinks wraps FILE_QUERY_INFO_NOFOLLOW_SYMLINKS
+	// FileQueryInfoNofollowSymlinks wraps G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS
 	//
 	// Don't follow symlinks.
 	FileQueryInfoNofollowSymlinks FileQueryInfoFlags = 1
@@ -5213,21 +5213,21 @@ func (f FileQueryInfoFlags) String() string {
 type IOStreamSpliceFlags C.gint
 
 const (
-	// IOStreamSpliceNone wraps IO_STREAM_SPLICE_NONE
+	// IOStreamSpliceNone wraps G_IO_STREAM_SPLICE_NONE
 	//
 	// Do not close either stream.
 	IOStreamSpliceNone IOStreamSpliceFlags = 0
-	// IOStreamSpliceCloseStream1 wraps IO_STREAM_SPLICE_CLOSE_STREAM1
+	// IOStreamSpliceCloseStream1 wraps G_IO_STREAM_SPLICE_CLOSE_STREAM1
 	//
 	// Close the first stream after
 	//     the splice.
 	IOStreamSpliceCloseStream1 IOStreamSpliceFlags = 1
-	// IOStreamSpliceCloseStream2 wraps IO_STREAM_SPLICE_CLOSE_STREAM2
+	// IOStreamSpliceCloseStream2 wraps G_IO_STREAM_SPLICE_CLOSE_STREAM2
 	//
 	// Close the second stream after
 	//     the splice.
 	IOStreamSpliceCloseStream2 IOStreamSpliceFlags = 2
-	// IOStreamSpliceWaitForBoth wraps IO_STREAM_SPLICE_WAIT_FOR_BOTH
+	// IOStreamSpliceWaitForBoth wraps G_IO_STREAM_SPLICE_WAIT_FOR_BOTH
 	//
 	// Wait for both splice operations to finish
 	//     before calling the callback.
@@ -5279,7 +5279,7 @@ func (f IOStreamSpliceFlags) String() string {
 type MountMountFlags C.gint
 
 const (
-	// MountMountNone wraps MOUNT_MOUNT_NONE
+	// MountMountNone wraps G_MOUNT_MOUNT_NONE
 	//
 	// No flags set.
 	MountMountNone MountMountFlags = 0
@@ -5321,11 +5321,11 @@ func (f MountMountFlags) String() string {
 type MountUnmountFlags C.gint
 
 const (
-	// MountUnmountNone wraps MOUNT_UNMOUNT_NONE
+	// MountUnmountNone wraps G_MOUNT_UNMOUNT_NONE
 	//
 	// No flags set.
 	MountUnmountNone MountUnmountFlags = 0
-	// MountUnmountForce wraps MOUNT_UNMOUNT_FORCE
+	// MountUnmountForce wraps G_MOUNT_UNMOUNT_FORCE
 	//
 	// Unmount even if there are outstanding
 	//  file operations on the mount.
@@ -5371,16 +5371,16 @@ func (f MountUnmountFlags) String() string {
 type OutputStreamSpliceFlags C.gint
 
 const (
-	// OutputStreamSpliceNone wraps OUTPUT_STREAM_SPLICE_NONE
+	// OutputStreamSpliceNone wraps G_OUTPUT_STREAM_SPLICE_NONE
 	//
 	// Do not close either stream.
 	OutputStreamSpliceNone OutputStreamSpliceFlags = 0
-	// OutputStreamSpliceCloseSource wraps OUTPUT_STREAM_SPLICE_CLOSE_SOURCE
+	// OutputStreamSpliceCloseSource wraps G_OUTPUT_STREAM_SPLICE_CLOSE_SOURCE
 	//
 	// Close the source stream after
 	//     the splice.
 	OutputStreamSpliceCloseSource OutputStreamSpliceFlags = 1
-	// OutputStreamSpliceCloseTarget wraps OUTPUT_STREAM_SPLICE_CLOSE_TARGET
+	// OutputStreamSpliceCloseTarget wraps G_OUTPUT_STREAM_SPLICE_CLOSE_TARGET
 	//
 	// Close the target stream after
 	//     the splice.
@@ -5429,18 +5429,18 @@ func (f OutputStreamSpliceFlags) String() string {
 type ResolverNameLookupFlags C.gint
 
 const (
-	// ResolverNameLookupFlagsDefault wraps RESOLVER_NAME_LOOKUP_FLAGS_DEFAULT
+	// ResolverNameLookupFlagsDefault wraps G_RESOLVER_NAME_LOOKUP_FLAGS_DEFAULT
 	//
 	// default behavior (same as g_resolver_lookup_by_name())
 	ResolverNameLookupFlagsDefault ResolverNameLookupFlags = 0
-	// ResolverNameLookupFlagsIPv4Only wraps RESOLVER_NAME_LOOKUP_FLAGS_IPV4_ONLY
+	// ResolverNameLookupFlagsIpv4Only wraps G_RESOLVER_NAME_LOOKUP_FLAGS_IPV4_ONLY
 	//
 	// only resolve ipv4 addresses
-	ResolverNameLookupFlagsIPv4Only ResolverNameLookupFlags = 1
-	// ResolverNameLookupFlagsIPv6Only wraps RESOLVER_NAME_LOOKUP_FLAGS_IPV6_ONLY
+	ResolverNameLookupFlagsIpv4Only ResolverNameLookupFlags = 1
+	// ResolverNameLookupFlagsIpv6Only wraps G_RESOLVER_NAME_LOOKUP_FLAGS_IPV6_ONLY
 	//
 	// only resolve ipv6 addresses
-	ResolverNameLookupFlagsIPv6Only ResolverNameLookupFlags = 2
+	ResolverNameLookupFlagsIpv6Only ResolverNameLookupFlags = 2
 )
 
 func marshalResolverNameLookupFlags(p unsafe.Pointer) (any, error) {
@@ -5470,11 +5470,11 @@ func (f ResolverNameLookupFlags) String() string {
 	if (f & ResolverNameLookupFlagsDefault) != 0 {
 		parts = append(parts, "ResolverNameLookupFlagsDefault")
 	}
-	if (f & ResolverNameLookupFlagsIPv4Only) != 0 {
-		parts = append(parts, "ResolverNameLookupFlagsIPv4Only")
+	if (f & ResolverNameLookupFlagsIpv4Only) != 0 {
+		parts = append(parts, "ResolverNameLookupFlagsIpv4Only")
 	}
-	if (f & ResolverNameLookupFlagsIPv6Only) != 0 {
-		parts = append(parts, "ResolverNameLookupFlagsIPv6Only")
+	if (f & ResolverNameLookupFlagsIpv6Only) != 0 {
+		parts = append(parts, "ResolverNameLookupFlagsIpv6Only")
 	}
 	return "ResolverNameLookupFlags(" + strings.Join(parts, "|") + ")"
 }
@@ -5486,11 +5486,11 @@ func (f ResolverNameLookupFlags) String() string {
 type ResourceFlags C.gint
 
 const (
-	// ResourceFlagsNone wraps RESOURCE_FLAGS_NONE
+	// ResourceFlagsNone wraps G_RESOURCE_FLAGS_NONE
 	//
 	// No flags set.
 	ResourceFlagsNone ResourceFlags = 0
-	// ResourceFlagsCompressed wraps RESOURCE_FLAGS_COMPRESSED
+	// ResourceFlagsCompressed wraps G_RESOURCE_FLAGS_COMPRESSED
 	//
 	// The file is compressed.
 	ResourceFlagsCompressed ResourceFlags = 1
@@ -5535,7 +5535,7 @@ func (f ResourceFlags) String() string {
 type ResourceLookupFlags C.gint
 
 const (
-	// ResourceLookupFlagsNone wraps RESOURCE_LOOKUP_FLAGS_NONE
+	// ResourceLookupFlagsNone wraps G_RESOURCE_LOOKUP_FLAGS_NONE
 	//
 	// No flags set.
 	ResourceLookupFlagsNone ResourceLookupFlags = 0
@@ -5580,31 +5580,31 @@ func (f ResourceLookupFlags) String() string {
 type SettingsBindFlags C.gint
 
 const (
-	// SettingsBindDefault wraps SETTINGS_BIND_DEFAULT
+	// SettingsBindDefault wraps G_SETTINGS_BIND_DEFAULT
 	//
 	// Equivalent to `G_SETTINGS_BIND_GET|G_SETTINGS_BIND_SET`
 	SettingsBindDefault SettingsBindFlags = 0
-	// SettingsBindGet wraps SETTINGS_BIND_GET
+	// SettingsBindGet wraps G_SETTINGS_BIND_GET
 	//
 	// Update the [class@GObject.Object] property when the setting changes.
 	//   It is an error to use this flag if the property is not writable.
 	SettingsBindGet SettingsBindFlags = 1
-	// SettingsBindSet wraps SETTINGS_BIND_SET
+	// SettingsBindSet wraps G_SETTINGS_BIND_SET
 	//
 	// Update the setting when the [class@GObject.Object] property changes.
 	//   It is an error to use this flag if the property is not readable.
 	SettingsBindSet SettingsBindFlags = 2
-	// SettingsBindNoSensitivity wraps SETTINGS_BIND_NO_SENSITIVITY
+	// SettingsBindNoSensitivity wraps G_SETTINGS_BIND_NO_SENSITIVITY
 	//
 	// Do not try to bind a &#x2018;sensitivity&#x2019; property to the writability of the setting
 	SettingsBindNoSensitivity SettingsBindFlags = 4
-	// SettingsBindGetNoChanges wraps SETTINGS_BIND_GET_NO_CHANGES
+	// SettingsBindGetNoChanges wraps G_SETTINGS_BIND_GET_NO_CHANGES
 	//
 	// When set in addition to [flags@Gio.SettingsBindFlags.GET],
 	//   set the [class@GObject.Object] property
 	//   value initially from the setting, but do not listen for changes of the setting
 	SettingsBindGetNoChanges SettingsBindFlags = 8
-	// SettingsBindInvertBoolean wraps SETTINGS_BIND_INVERT_BOOLEAN
+	// SettingsBindInvertBoolean wraps G_SETTINGS_BIND_INVERT_BOOLEAN
 	//
 	// When passed to [method@Gio.Settings.bind],
 	//   uses a pair of mapping functions that invert
@@ -5668,20 +5668,20 @@ func (f SettingsBindFlags) String() string {
 type SocketMsgFlags C.gint
 
 const (
-	// SocketMsgNone wraps SOCKET_MSG_NONE
+	// SocketMsgNone wraps G_SOCKET_MSG_NONE
 	//
 	// No flags.
 	SocketMsgNone SocketMsgFlags = 0
-	// SocketMsgOob wraps SOCKET_MSG_OOB
+	// SocketMsgOob wraps G_SOCKET_MSG_OOB
 	//
 	// Request to send/receive out of band data.
 	SocketMsgOob SocketMsgFlags = 1
-	// SocketMsgPeek wraps SOCKET_MSG_PEEK
+	// SocketMsgPeek wraps G_SOCKET_MSG_PEEK
 	//
 	// Read data from the socket without removing it from
 	//     the queue.
 	SocketMsgPeek SocketMsgFlags = 2
-	// SocketMsgDontroute wraps SOCKET_MSG_DONTROUTE
+	// SocketMsgDontroute wraps G_SOCKET_MSG_DONTROUTE
 	//
 	// Don't use a gateway to send out the packet,
 	//     only send to hosts on directly connected networks.
@@ -5727,7 +5727,7 @@ func (f SocketMsgFlags) String() string {
 	return "SocketMsgFlags(" + strings.Join(parts, "|") + ")"
 }
 
-// TLSCertificateFlags wraps GTlsCertificateFlags
+// TlsCertificateFlags wraps GTlsCertificateFlags
 //
 // A set of flags describing TLS certification validation. This can be
 // used to describe why a particular certificate was rejected (for
@@ -5740,237 +5740,237 @@ func (f SocketMsgFlags) String() string {
 // %G_TLS_CERTIFICATE_EXPIRED if you want to allow expired certificates,
 // because this could potentially be the only error flag set even if
 // other problems exist with the certificate.
-type TLSCertificateFlags C.gint
+type TlsCertificateFlags C.gint
 
 const (
-	// TLSCertificateNoFlags wraps TLS_CERTIFICATE_NO_FLAGS
+	// TlsCertificateNoFlags wraps G_TLS_CERTIFICATE_NO_FLAGS
 	//
 	// No flags set. Since: 2.74
-	TLSCertificateNoFlags TLSCertificateFlags = 0
-	// TLSCertificateUnknownCa wraps TLS_CERTIFICATE_UNKNOWN_CA
+	TlsCertificateNoFlags TlsCertificateFlags = 0
+	// TlsCertificateUnknownCa wraps G_TLS_CERTIFICATE_UNKNOWN_CA
 	//
 	// The signing certificate authority is
 	//   not known.
-	TLSCertificateUnknownCa TLSCertificateFlags = 1
-	// TLSCertificateBadIdentity wraps TLS_CERTIFICATE_BAD_IDENTITY
+	TlsCertificateUnknownCa TlsCertificateFlags = 1
+	// TlsCertificateBadIdentity wraps G_TLS_CERTIFICATE_BAD_IDENTITY
 	//
 	// The certificate does not match the
 	//   expected identity of the site that it was retrieved from.
-	TLSCertificateBadIdentity TLSCertificateFlags = 2
-	// TLSCertificateNotActivated wraps TLS_CERTIFICATE_NOT_ACTIVATED
+	TlsCertificateBadIdentity TlsCertificateFlags = 2
+	// TlsCertificateNotActivated wraps G_TLS_CERTIFICATE_NOT_ACTIVATED
 	//
 	// The certificate's activation time
 	//   is still in the future
-	TLSCertificateNotActivated TLSCertificateFlags = 4
-	// TLSCertificateExpired wraps TLS_CERTIFICATE_EXPIRED
+	TlsCertificateNotActivated TlsCertificateFlags = 4
+	// TlsCertificateExpired wraps G_TLS_CERTIFICATE_EXPIRED
 	//
 	// The certificate has expired
-	TLSCertificateExpired TLSCertificateFlags = 8
-	// TLSCertificateRevoked wraps TLS_CERTIFICATE_REVOKED
+	TlsCertificateExpired TlsCertificateFlags = 8
+	// TlsCertificateRevoked wraps G_TLS_CERTIFICATE_REVOKED
 	//
 	// The certificate has been revoked
 	//   according to the #GTlsConnection's certificate revocation list.
-	TLSCertificateRevoked TLSCertificateFlags = 16
-	// TLSCertificateInsecure wraps TLS_CERTIFICATE_INSECURE
+	TlsCertificateRevoked TlsCertificateFlags = 16
+	// TlsCertificateInsecure wraps G_TLS_CERTIFICATE_INSECURE
 	//
 	// The certificate's algorithm is
 	//   considered insecure.
-	TLSCertificateInsecure TLSCertificateFlags = 32
-	// TLSCertificateGenericError wraps TLS_CERTIFICATE_GENERIC_ERROR
+	TlsCertificateInsecure TlsCertificateFlags = 32
+	// TlsCertificateGenericError wraps G_TLS_CERTIFICATE_GENERIC_ERROR
 	//
 	// Some other error occurred validating
 	//   the certificate
-	TLSCertificateGenericError TLSCertificateFlags = 64
-	// TLSCertificateValidateAll wraps TLS_CERTIFICATE_VALIDATE_ALL
+	TlsCertificateGenericError TlsCertificateFlags = 64
+	// TlsCertificateValidateAll wraps G_TLS_CERTIFICATE_VALIDATE_ALL
 	//
 	// the combination of all of the above
 	//   flags
-	TLSCertificateValidateAll TLSCertificateFlags = 127
+	TlsCertificateValidateAll TlsCertificateFlags = 127
 )
 
-func marshalTLSCertificateFlags(p unsafe.Pointer) (any, error) {
-	return TLSCertificateFlags(gobject.ValueFromNative(p).Flags()), nil
+func marshalTlsCertificateFlags(p unsafe.Pointer) (any, error) {
+	return TlsCertificateFlags(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if t contains other
-func (t TLSCertificateFlags) Has(other TLSCertificateFlags) bool {
+func (t TlsCertificateFlags) Has(other TlsCertificateFlags) bool {
 	return (t & other) == other
 }
 
-var _ gobject.GoValueInitializer = TLSCertificateFlags(0)
+var _ gobject.GoValueInitializer = TlsCertificateFlags(0)
 
-func (f TLSCertificateFlags) GoValueType() gobject.Type {
+func (f TlsCertificateFlags) GoValueType() gobject.Type {
 	return TypeTlsCertificateFlags
 }
 
-func (f TLSCertificateFlags) SetGoValue(v *gobject.Value) {
+func (f TlsCertificateFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
-func (f TLSCertificateFlags) String() string {
+func (f TlsCertificateFlags) String() string {
 	if f == 0 {
-		return "TLSCertificateFlags(0)"
+		return "TlsCertificateFlags(0)"
 	}
 
 	var parts []string
-	if (f & TLSCertificateNoFlags) != 0 {
-		parts = append(parts, "TLSCertificateNoFlags")
+	if (f & TlsCertificateNoFlags) != 0 {
+		parts = append(parts, "TlsCertificateNoFlags")
 	}
-	if (f & TLSCertificateUnknownCa) != 0 {
-		parts = append(parts, "TLSCertificateUnknownCa")
+	if (f & TlsCertificateUnknownCa) != 0 {
+		parts = append(parts, "TlsCertificateUnknownCa")
 	}
-	if (f & TLSCertificateBadIdentity) != 0 {
-		parts = append(parts, "TLSCertificateBadIdentity")
+	if (f & TlsCertificateBadIdentity) != 0 {
+		parts = append(parts, "TlsCertificateBadIdentity")
 	}
-	if (f & TLSCertificateNotActivated) != 0 {
-		parts = append(parts, "TLSCertificateNotActivated")
+	if (f & TlsCertificateNotActivated) != 0 {
+		parts = append(parts, "TlsCertificateNotActivated")
 	}
-	if (f & TLSCertificateExpired) != 0 {
-		parts = append(parts, "TLSCertificateExpired")
+	if (f & TlsCertificateExpired) != 0 {
+		parts = append(parts, "TlsCertificateExpired")
 	}
-	if (f & TLSCertificateRevoked) != 0 {
-		parts = append(parts, "TLSCertificateRevoked")
+	if (f & TlsCertificateRevoked) != 0 {
+		parts = append(parts, "TlsCertificateRevoked")
 	}
-	if (f & TLSCertificateInsecure) != 0 {
-		parts = append(parts, "TLSCertificateInsecure")
+	if (f & TlsCertificateInsecure) != 0 {
+		parts = append(parts, "TlsCertificateInsecure")
 	}
-	if (f & TLSCertificateGenericError) != 0 {
-		parts = append(parts, "TLSCertificateGenericError")
+	if (f & TlsCertificateGenericError) != 0 {
+		parts = append(parts, "TlsCertificateGenericError")
 	}
-	if (f & TLSCertificateValidateAll) != 0 {
-		parts = append(parts, "TLSCertificateValidateAll")
+	if (f & TlsCertificateValidateAll) != 0 {
+		parts = append(parts, "TlsCertificateValidateAll")
 	}
-	return "TLSCertificateFlags(" + strings.Join(parts, "|") + ")"
+	return "TlsCertificateFlags(" + strings.Join(parts, "|") + ")"
 }
 
-// TLSDatabaseVerifyFlags wraps GTlsDatabaseVerifyFlags
+// TlsDatabaseVerifyFlags wraps GTlsDatabaseVerifyFlags
 //
 // Flags for g_tls_database_verify_chain().
-type TLSDatabaseVerifyFlags C.gint
+type TlsDatabaseVerifyFlags C.gint
 
 const (
-	// TLSDatabaseVerifyNone wraps TLS_DATABASE_VERIFY_NONE
+	// TlsDatabaseVerifyNone wraps G_TLS_DATABASE_VERIFY_NONE
 	//
 	// No verification flags
-	TLSDatabaseVerifyNone TLSDatabaseVerifyFlags = 0
+	TlsDatabaseVerifyNone TlsDatabaseVerifyFlags = 0
 )
 
-func marshalTLSDatabaseVerifyFlags(p unsafe.Pointer) (any, error) {
-	return TLSDatabaseVerifyFlags(gobject.ValueFromNative(p).Flags()), nil
+func marshalTlsDatabaseVerifyFlags(p unsafe.Pointer) (any, error) {
+	return TlsDatabaseVerifyFlags(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if t contains other
-func (t TLSDatabaseVerifyFlags) Has(other TLSDatabaseVerifyFlags) bool {
+func (t TlsDatabaseVerifyFlags) Has(other TlsDatabaseVerifyFlags) bool {
 	return (t & other) == other
 }
 
-var _ gobject.GoValueInitializer = TLSDatabaseVerifyFlags(0)
+var _ gobject.GoValueInitializer = TlsDatabaseVerifyFlags(0)
 
-func (f TLSDatabaseVerifyFlags) GoValueType() gobject.Type {
+func (f TlsDatabaseVerifyFlags) GoValueType() gobject.Type {
 	return TypeTlsDatabaseVerifyFlags
 }
 
-func (f TLSDatabaseVerifyFlags) SetGoValue(v *gobject.Value) {
+func (f TlsDatabaseVerifyFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
-func (f TLSDatabaseVerifyFlags) String() string {
+func (f TlsDatabaseVerifyFlags) String() string {
 	if f == 0 {
-		return "TLSDatabaseVerifyFlags(0)"
+		return "TlsDatabaseVerifyFlags(0)"
 	}
 
 	var parts []string
-	if (f & TLSDatabaseVerifyNone) != 0 {
-		parts = append(parts, "TLSDatabaseVerifyNone")
+	if (f & TlsDatabaseVerifyNone) != 0 {
+		parts = append(parts, "TlsDatabaseVerifyNone")
 	}
-	return "TLSDatabaseVerifyFlags(" + strings.Join(parts, "|") + ")"
+	return "TlsDatabaseVerifyFlags(" + strings.Join(parts, "|") + ")"
 }
 
-// TLSPasswordFlags wraps GTlsPasswordFlags
+// TlsPasswordFlags wraps GTlsPasswordFlags
 //
 // Various flags for the password.
-type TLSPasswordFlags C.gint
+type TlsPasswordFlags C.gint
 
 const (
-	// TLSPasswordNone wraps TLS_PASSWORD_NONE
+	// TlsPasswordNone wraps G_TLS_PASSWORD_NONE
 	//
 	// No flags
-	TLSPasswordNone TLSPasswordFlags = 0
-	// TLSPasswordRetry wraps TLS_PASSWORD_RETRY
+	TlsPasswordNone TlsPasswordFlags = 0
+	// TlsPasswordRetry wraps G_TLS_PASSWORD_RETRY
 	//
 	// The password was wrong, and the user should retry.
-	TLSPasswordRetry TLSPasswordFlags = 2
-	// TLSPasswordManyTries wraps TLS_PASSWORD_MANY_TRIES
+	TlsPasswordRetry TlsPasswordFlags = 2
+	// TlsPasswordManyTries wraps G_TLS_PASSWORD_MANY_TRIES
 	//
 	// Hint to the user that the password has been
 	//    wrong many times, and the user may not have many chances left.
-	TLSPasswordManyTries TLSPasswordFlags = 4
-	// TLSPasswordFinalTry wraps TLS_PASSWORD_FINAL_TRY
+	TlsPasswordManyTries TlsPasswordFlags = 4
+	// TlsPasswordFinalTry wraps G_TLS_PASSWORD_FINAL_TRY
 	//
 	// Hint to the user that this is the last try to get
 	//    this password right.
-	TLSPasswordFinalTry TLSPasswordFlags = 8
-	// TLSPasswordPKCS11User wraps TLS_PASSWORD_PKCS11_USER
+	TlsPasswordFinalTry TlsPasswordFlags = 8
+	// TlsPasswordPkcs11User wraps G_TLS_PASSWORD_PKCS11_USER
 	//
 	// For PKCS #11, the user PIN is required.
 	//    Since: 2.70.
-	TLSPasswordPKCS11User TLSPasswordFlags = 16
-	// TLSPasswordPKCS11SecurityOfficer wraps TLS_PASSWORD_PKCS11_SECURITY_OFFICER
+	TlsPasswordPkcs11User TlsPasswordFlags = 16
+	// TlsPasswordPkcs11SecurityOfficer wraps G_TLS_PASSWORD_PKCS11_SECURITY_OFFICER
 	//
 	// For PKCS #11, the security officer
 	//    PIN is required. Since: 2.70.
-	TLSPasswordPKCS11SecurityOfficer TLSPasswordFlags = 32
-	// TLSPasswordPKCS11ContextSpecific wraps TLS_PASSWORD_PKCS11_CONTEXT_SPECIFIC
+	TlsPasswordPkcs11SecurityOfficer TlsPasswordFlags = 32
+	// TlsPasswordPkcs11ContextSpecific wraps G_TLS_PASSWORD_PKCS11_CONTEXT_SPECIFIC
 	//
 	// For PKCS #11, the context-specific
 	//    PIN is required. Since: 2.70.
-	TLSPasswordPKCS11ContextSpecific TLSPasswordFlags = 64
+	TlsPasswordPkcs11ContextSpecific TlsPasswordFlags = 64
 )
 
-func marshalTLSPasswordFlags(p unsafe.Pointer) (any, error) {
-	return TLSPasswordFlags(gobject.ValueFromNative(p).Flags()), nil
+func marshalTlsPasswordFlags(p unsafe.Pointer) (any, error) {
+	return TlsPasswordFlags(gobject.ValueFromNative(p).Flags()), nil
 }
 // Has returns true if t contains other
-func (t TLSPasswordFlags) Has(other TLSPasswordFlags) bool {
+func (t TlsPasswordFlags) Has(other TlsPasswordFlags) bool {
 	return (t & other) == other
 }
 
-var _ gobject.GoValueInitializer = TLSPasswordFlags(0)
+var _ gobject.GoValueInitializer = TlsPasswordFlags(0)
 
-func (f TLSPasswordFlags) GoValueType() gobject.Type {
+func (f TlsPasswordFlags) GoValueType() gobject.Type {
 	return TypeTlsPasswordFlags
 }
 
-func (f TLSPasswordFlags) SetGoValue(v *gobject.Value) {
+func (f TlsPasswordFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
-func (f TLSPasswordFlags) String() string {
+func (f TlsPasswordFlags) String() string {
 	if f == 0 {
-		return "TLSPasswordFlags(0)"
+		return "TlsPasswordFlags(0)"
 	}
 
 	var parts []string
-	if (f & TLSPasswordNone) != 0 {
-		parts = append(parts, "TLSPasswordNone")
+	if (f & TlsPasswordNone) != 0 {
+		parts = append(parts, "TlsPasswordNone")
 	}
-	if (f & TLSPasswordRetry) != 0 {
-		parts = append(parts, "TLSPasswordRetry")
+	if (f & TlsPasswordRetry) != 0 {
+		parts = append(parts, "TlsPasswordRetry")
 	}
-	if (f & TLSPasswordManyTries) != 0 {
-		parts = append(parts, "TLSPasswordManyTries")
+	if (f & TlsPasswordManyTries) != 0 {
+		parts = append(parts, "TlsPasswordManyTries")
 	}
-	if (f & TLSPasswordFinalTry) != 0 {
-		parts = append(parts, "TLSPasswordFinalTry")
+	if (f & TlsPasswordFinalTry) != 0 {
+		parts = append(parts, "TlsPasswordFinalTry")
 	}
-	if (f & TLSPasswordPKCS11User) != 0 {
-		parts = append(parts, "TLSPasswordPKCS11User")
+	if (f & TlsPasswordPkcs11User) != 0 {
+		parts = append(parts, "TlsPasswordPkcs11User")
 	}
-	if (f & TLSPasswordPKCS11SecurityOfficer) != 0 {
-		parts = append(parts, "TLSPasswordPKCS11SecurityOfficer")
+	if (f & TlsPasswordPkcs11SecurityOfficer) != 0 {
+		parts = append(parts, "TlsPasswordPkcs11SecurityOfficer")
 	}
-	if (f & TLSPasswordPKCS11ContextSpecific) != 0 {
-		parts = append(parts, "TLSPasswordPKCS11ContextSpecific")
+	if (f & TlsPasswordPkcs11ContextSpecific) != 0 {
+		parts = append(parts, "TlsPasswordPkcs11ContextSpecific")
 	}
-	return "TLSPasswordFlags(" + strings.Join(parts, "|") + ")"
+	return "TlsPasswordFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // AsyncReadyCallback wraps GAsyncReadyCallback
@@ -5994,7 +5994,7 @@ func (f TLSPasswordFlags) String() string {
 // after this callback returns.
 type AsyncReadyCallback func(sourceObject gobject.Object, res AsyncResult)
 
-// VFSFileLookupFunc wraps GVfsFileLookupFunc
+// VfsFileLookupFunc wraps GVfsFileLookupFunc
 // 
 // The function takes the following parameters:
 // 
@@ -6012,7 +6012,7 @@ type AsyncReadyCallback func(sourceObject gobject.Object, res AsyncResult)
 // 
 // The client should return a reference to the new file that has been
 // created for @uri, or %NULL to continue with the default implementation.
-type VFSFileLookupFunc func(vfs Vfs, identifier string) (goret File)
+type VfsFileLookupFunc func(vfs Vfs, identifier string) (goret File)
 
 // BusGet wraps g_bus_get
 // 
@@ -6163,7 +6163,7 @@ func ContentTypeEquals(type1 string, type2 string) bool {
 	return goret
 }
 
-// ContentTypeFromMIMEType wraps g_content_type_from_mime_type
+// ContentTypeFromMimeType wraps g_content_type_from_mime_type
 // 
 // The function takes the following parameters:
 // 
@@ -6174,7 +6174,7 @@ func ContentTypeEquals(type1 string, type2 string) bool {
 // 	- goret string (nullable) 
 //
 // Tries to find a content type based on the mime type name.
-func ContentTypeFromMIMEType(mimeType string) string {
+func ContentTypeFromMimeType(mimeType string) string {
 	var carg1 *C.gchar // in, none, string
 	var cret  *C.gchar // return, full, string, nullable-string
 
@@ -6286,7 +6286,7 @@ func ContentTypeGetIcon(typ string) Icon {
 	return goret
 }
 
-// ContentTypeGetMIMEDirs wraps g_content_type_get_mime_dirs
+// ContentTypeGetMimeDirs wraps g_content_type_get_mime_dirs
 // 
 // The function returns the following values:
 // 
@@ -6294,7 +6294,7 @@ func ContentTypeGetIcon(typ string) Icon {
 //
 // Get the list of directories which MIME data is loaded from. See
 // g_content_type_set_mime_dirs() for details.
-func ContentTypeGetMIMEDirs() []string {
+func ContentTypeGetMimeDirs() []string {
 	var cret **C.gchar // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	cret = C.g_content_type_get_mime_dirs()
@@ -6308,7 +6308,7 @@ func ContentTypeGetMIMEDirs() []string {
 	return goret
 }
 
-// ContentTypeGetMIMEType wraps g_content_type_get_mime_type
+// ContentTypeGetMimeType wraps g_content_type_get_mime_type
 // 
 // The function takes the following parameters:
 // 
@@ -6319,7 +6319,7 @@ func ContentTypeGetMIMEDirs() []string {
 // 	- goret string (nullable) 
 //
 // Gets the mime type for the content type, if one is registered.
-func ContentTypeGetMIMEType(typ string) string {
+func ContentTypeGetMimeType(typ string) string {
 	var carg1 *C.gchar // in, none, string
 	var cret  *C.gchar // return, full, string, nullable-string
 
@@ -6491,7 +6491,7 @@ func ContentTypeIsA(typ string, supertype string) bool {
 	return goret
 }
 
-// ContentTypeIsMIMEType wraps g_content_type_is_mime_type
+// ContentTypeIsMimeType wraps g_content_type_is_mime_type
 // 
 // The function takes the following parameters:
 // 
@@ -6504,7 +6504,7 @@ func ContentTypeIsA(typ string, supertype string) bool {
 //
 // Determines if @type is a subset of @mime_type.
 // Convenience wrapper around g_content_type_is_a().
-func ContentTypeIsMIMEType(typ string, mimeType string) bool {
+func ContentTypeIsMimeType(typ string, mimeType string) bool {
 	var carg1 *C.gchar   // in, none, string
 	var carg2 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
@@ -6560,7 +6560,7 @@ func ContentTypeIsUnknown(typ string) bool {
 	return goret
 }
 
-// ContentTypeSetMIMEDirs wraps g_content_type_set_mime_dirs
+// ContentTypeSetMimeDirs wraps g_content_type_set_mime_dirs
 // 
 // The function takes the following parameters:
 // 
@@ -6591,7 +6591,7 @@ func ContentTypeIsUnknown(typ string) bool {
 // 
 //   return g_test_run ();
 // ]|
-func ContentTypeSetMIMEDirs(dirs []string) {
+func ContentTypeSetMimeDirs(dirs []string) {
 	var carg1 **C.gchar // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	_ = dirs
@@ -6926,7 +6926,7 @@ func DBusEscapeObjectPathBytestring(bytes []uint8) string {
 	return goret
 }
 
-// DBusGenerateGUID wraps g_dbus_generate_guid
+// DBusGenerateGuid wraps g_dbus_generate_guid
 // 
 // The function returns the following values:
 // 
@@ -6943,7 +6943,7 @@ func DBusEscapeObjectPathBytestring(bytes []uint8) string {
 // 
 // Note that D-Bus GUIDs do not follow
 // [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122).
-func DBusGenerateGUID() string {
+func DBusGenerateGuid() string {
 	var cret *C.gchar // return, full, string
 
 	cret = C.g_dbus_generate_guid()
@@ -7025,7 +7025,7 @@ func DBusIsErrorName(str string) bool {
 	return goret
 }
 
-// DBusIsGUID wraps g_dbus_is_guid
+// DBusIsGuid wraps g_dbus_is_guid
 // 
 // The function takes the following parameters:
 // 
@@ -7039,7 +7039,7 @@ func DBusIsErrorName(str string) bool {
 // 
 // See the documentation for g_dbus_generate_guid() for more information about
 // the format of a GUID.
-func DBusIsGUID(str string) bool {
+func DBusIsGuid(str string) bool {
 	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
 
@@ -7882,7 +7882,7 @@ func ResourcesUnregister(resource *Resource) {
 	runtime.KeepAlive(resource)
 }
 
-// SimpleAsyncReportGErrorInIdle wraps g_simple_async_report_gerror_in_idle
+// SimpleAsyncReportGerrorInIdle wraps g_simple_async_report_gerror_in_idle
 // 
 // The function takes the following parameters:
 // 
@@ -7895,7 +7895,7 @@ func ResourcesUnregister(resource *Resource) {
 // than building a new one.
 //
 // Deprecated: (since 2.46.0) Use g_task_report_error().
-func SimpleAsyncReportGErrorInIdle(object gobject.Object, callback AsyncReadyCallback, err error) {
+func SimpleAsyncReportGerrorInIdle(object gobject.Object, callback AsyncReadyCallback, err error) {
 	var carg1 *C.GObject            // in, none, converted, nullable
 	var carg2 C.GAsyncReadyCallback // callback, scope: async, closure: carg3, nullable
 	var carg3 C.gpointer            // implicit
@@ -10525,7 +10525,7 @@ type AppInfo interface {
 	// [method@Gio.AppInfo.add_supports_type], but only those exported directly by
 	// the application.
 	GetSupportedTypes() []string
-	// LaunchURIsFinish wraps g_app_info_launch_uris_finish
+	// LaunchUrisFinish wraps g_app_info_launch_uris_finish
 	// 
 	// The function takes the following parameters:
 	// 
@@ -10537,7 +10537,7 @@ type AppInfo interface {
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes a [method@Gio.AppInfo.launch_uris_async] operation.
-	LaunchURIsFinish(AsyncResult) (bool, error)
+	LaunchUrisFinish(AsyncResult) (bool, error)
 	// RemoveSupportsType wraps g_app_info_remove_supports_type
 	// 
 	// The function takes the following parameters:
@@ -10611,14 +10611,14 @@ type AppInfo interface {
 	//
 	// Checks if the application accepts files as arguments.
 	SupportsFiles() bool
-	// SupportsURIs wraps g_app_info_supports_uris
+	// SupportsUris wraps g_app_info_supports_uris
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Checks if the application supports reading files and directories from URIs.
-	SupportsURIs() bool
+	SupportsUris() bool
 
 	// chain up virtual methods:
 
@@ -10784,7 +10784,7 @@ type AppInfo interface {
 	// [method@Gio.AppInfo.add_supports_type], but only those exported directly by
 	// the application.
 	ParentGetSupportedTypes() []string
-	// ParentLaunchURIsFinish calls the default implementations of the launch_uris_finish virtual method.
+	// ParentLaunchUrisFinish calls the default implementations of the launch_uris_finish virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -10797,7 +10797,7 @@ type AppInfo interface {
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes a [method@Gio.AppInfo.launch_uris_async] operation.
-	ParentLaunchURIsFinish(result AsyncResult) (bool, error)
+	ParentLaunchUrisFinish(result AsyncResult) (bool, error)
 	// ParentRemoveSupportsType calls the default implementations of the remove_supports_type virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -10877,7 +10877,7 @@ type AppInfo interface {
 	//
 	// Checks if the application accepts files as arguments.
 	ParentSupportsFiles() bool
-	// ParentSupportsURIs calls the default implementations of the supports_uris virtual method.
+	// ParentSupportsUris calls the default implementations of the supports_uris virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -10885,7 +10885,7 @@ type AppInfo interface {
 	// 	- goret bool 
 	//
 	// Checks if the application supports reading files and directories from URIs.
-	ParentSupportsURIs() bool
+	ParentSupportsUris() bool
 }
 
 var _ AppInfo = (*AppInfoInstance)(nil)
@@ -11897,7 +11897,7 @@ func (appinfo *AppInfoInstance) GetSupportedTypes() []string {
 	return goret
 }
 
-// LaunchURIsFinish wraps g_app_info_launch_uris_finish
+// LaunchUrisFinish wraps g_app_info_launch_uris_finish
 // 
 // The function takes the following parameters:
 // 
@@ -11909,7 +11909,7 @@ func (appinfo *AppInfoInstance) GetSupportedTypes() []string {
 // 	- _goerr error (nullable): an error 
 //
 // Finishes a [method@Gio.AppInfo.launch_uris_async] operation.
-func (appinfo *AppInfoInstance) LaunchURIsFinish(result AsyncResult) (bool, error) {
+func (appinfo *AppInfoInstance) LaunchUrisFinish(result AsyncResult) (bool, error) {
 	var carg0 *C.GAppInfo     // in, none, converted
 	var carg1 *C.GAsyncResult // in, none, converted
 	var cret  C.gboolean      // return
@@ -12146,14 +12146,14 @@ func (appinfo *AppInfoInstance) SupportsFiles() bool {
 	return goret
 }
 
-// SupportsURIs wraps g_app_info_supports_uris
+// SupportsUris wraps g_app_info_supports_uris
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 //
 // Checks if the application supports reading files and directories from URIs.
-func (appinfo *AppInfoInstance) SupportsURIs() bool {
+func (appinfo *AppInfoInstance) SupportsUris() bool {
 	var carg0 *C.GAppInfo // in, none, converted
 	var cret  C.gboolean  // return
 
@@ -12322,7 +12322,7 @@ type AppInfoOverrides[Instance AppInfo] struct {
 	// [method@Gio.AppInfo.add_supports_type], but only those exported directly by
 	// the application.
 	GetSupportedTypes func(Instance) []string
-	// // LaunchURIsFinish allows you to override the implementation of the virtual method launch_uris_finish.
+	// // LaunchUrisFinish allows you to override the implementation of the virtual method launch_uris_finish.
 	// 
 	// The function takes the following parameters:
 	// 
@@ -12334,7 +12334,7 @@ type AppInfoOverrides[Instance AppInfo] struct {
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes a [method@Gio.AppInfo.launch_uris_async] operation.
-	LaunchURIsFinish func(Instance, AsyncResult) (bool, error)
+	LaunchUrisFinish func(Instance, AsyncResult) (bool, error)
 	// // RemoveSupportsType allows you to override the implementation of the virtual method remove_supports_type.
 	// 
 	// The function takes the following parameters:
@@ -12408,14 +12408,14 @@ type AppInfoOverrides[Instance AppInfo] struct {
 	//
 	// Checks if the application accepts files as arguments.
 	SupportsFiles func(Instance) bool
-	// // SupportsURIs allows you to override the implementation of the virtual method supports_uris.
+	// // SupportsUris allows you to override the implementation of the virtual method supports_uris.
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Checks if the application supports reading files and directories from URIs.
-	SupportsURIs func(Instance) bool
+	SupportsUris func(Instance) bool
 }
 
 // UnsafeApplyAppInfoOverrides applies the overrides to init the gclass by setting the trampoline functions.
@@ -12735,7 +12735,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 		)
 	}
 
-	if overrides.LaunchURIsFinish != nil {
+	if overrides.LaunchUrisFinish != nil {
 		pclass.launch_uris_finish = (*[0]byte)(C._gotk4_gio2_AppInfo_launch_uris_finish)
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
@@ -12749,7 +12749,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
-				goret, _goerr = overrides.LaunchURIsFinish(appinfo, result)
+				goret, _goerr = overrides.LaunchUrisFinish(appinfo, result)
 
 				if goret {
 					cret = C.TRUE
@@ -12909,7 +12909,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 		)
 	}
 
-	if overrides.SupportsURIs != nil {
+	if overrides.SupportsUris != nil {
 		pclass.supports_uris = (*[0]byte)(C._gotk4_gio2_AppInfo_supports_uris)
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
@@ -12920,7 +12920,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 
 				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
-				goret = overrides.SupportsURIs(appinfo)
+				goret = overrides.SupportsUris(appinfo)
 
 				if goret {
 					cret = C.TRUE
@@ -13364,7 +13364,7 @@ func (appinfo *AppInfoInstance) ParentGetSupportedTypes() []string {
 	return goret
 }
 
-// ParentLaunchURIsFinish calls the default implementations of the launch_uris_finish virtual method.
+// ParentLaunchUrisFinish calls the default implementations of the launch_uris_finish virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -13377,7 +13377,7 @@ func (appinfo *AppInfoInstance) ParentGetSupportedTypes() []string {
 // 	- _goerr error (nullable): an error 
 //
 // Finishes a [method@Gio.AppInfo.launch_uris_async] operation.
-func (appinfo *AppInfoInstance) ParentLaunchURIsFinish(result AsyncResult) (bool, error) {
+func (appinfo *AppInfoInstance) ParentLaunchUrisFinish(result AsyncResult) (bool, error) {
 	var carg0 *C.GAppInfo
 	var carg1 *C.GAsyncResult // in, none, converted
 	var cret  C.gboolean      // return
@@ -13634,7 +13634,7 @@ func (appinfo *AppInfoInstance) ParentSupportsFiles() bool {
 	return goret
 }
 
-// ParentSupportsURIs calls the default implementations of the supports_uris virtual method.
+// ParentSupportsUris calls the default implementations of the supports_uris virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13642,7 +13642,7 @@ func (appinfo *AppInfoInstance) ParentSupportsFiles() bool {
 // 	- goret bool 
 //
 // Checks if the application supports reading files and directories from URIs.
-func (appinfo *AppInfoInstance) ParentSupportsURIs() bool {
+func (appinfo *AppInfoInstance) ParentSupportsUris() bool {
 	var carg0 *C.GAppInfo
 	var cret  C.gboolean // return
 
@@ -20058,7 +20058,7 @@ type DtlsConnection interface {
 	// The function takes the following parameters:
 	// 
 	// 	- peerCert TlsCertificate: the peer's #GTlsCertificate 
-	// 	- errors TLSCertificateFlags: the problems with @peer_cert 
+	// 	- errors TlsCertificateFlags: the problems with @peer_cert 
 	// 
 	// The function returns the following values:
 	// 
@@ -20066,7 +20066,7 @@ type DtlsConnection interface {
 	//
 	// Used by #GDtlsConnection implementations to emit the
 	// #GDtlsConnection::accept-certificate signal.
-	EmitAcceptCertificate(TlsCertificate, TLSCertificateFlags) bool
+	EmitAcceptCertificate(TlsCertificate, TlsCertificateFlags) bool
 	// GetCertificate wraps g_dtls_connection_get_certificate
 	// 
 	// The function returns the following values:
@@ -20138,28 +20138,28 @@ type DtlsConnection interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSCertificateFlags 
+	// 	- goret TlsCertificateFlags 
 	//
 	// Gets the errors associated with validating @conn's peer's
 	// certificate, after the handshake has completed or failed. (It is
 	// not set during the emission of #GDtlsConnection::accept-certificate.)
-	GetPeerCertificateErrors() TLSCertificateFlags
+	GetPeerCertificateErrors() TlsCertificateFlags
 	// GetProtocolVersion wraps g_dtls_connection_get_protocol_version
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSProtocolVersion 
+	// 	- goret TlsProtocolVersion 
 	//
 	// Returns the current DTLS protocol version, which may be
 	// %G_TLS_PROTOCOL_VERSION_UNKNOWN if the connection has not handshaked, or
 	// has been closed, or if the TLS backend has implemented a protocol version
 	// that is not a recognized #GTlsProtocolVersion.
-	GetProtocolVersion() TLSProtocolVersion
+	GetProtocolVersion() TlsProtocolVersion
 	// GetRehandshakeMode wraps g_dtls_connection_get_rehandshake_mode
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSRehandshakeMode 
+	// 	- goret TlsRehandshakeMode 
 	//
 	// Gets @conn rehandshaking mode. See
 	// g_dtls_connection_set_rehandshake_mode() for details.
@@ -20167,7 +20167,7 @@ type DtlsConnection interface {
 	// Deprecated: (since 2.64.0) Changing the rehandshake mode is no longer
 	//   required for compatibility. Also, rehandshaking has been removed
 	//   from the TLS protocol in TLS 1.3.
-	GetRehandshakeMode() TLSRehandshakeMode
+	GetRehandshakeMode() TlsRehandshakeMode
 	// GetRequireCloseNotify wraps g_dtls_connection_get_require_close_notify
 	// 
 	// The function returns the following values:
@@ -20319,7 +20319,7 @@ type DtlsConnection interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- mode TLSRehandshakeMode: the rehandshaking mode 
+	// 	- mode TlsRehandshakeMode: the rehandshaking mode 
 	//
 	// Since GLib 2.64, changing the rehandshake mode is no longer supported
 	// and will have no effect. With TLS 1.3, rehandshaking has been removed from
@@ -20329,7 +20329,7 @@ type DtlsConnection interface {
 	// Deprecated: (since 2.60.0) Changing the rehandshake mode is no longer
 	//   required for compatibility. Also, rehandshaking has been removed
 	//   from the TLS protocol in TLS 1.3.
-	SetRehandshakeMode(TLSRehandshakeMode)
+	SetRehandshakeMode(TlsRehandshakeMode)
 	// SetRequireCloseNotify wraps g_dtls_connection_set_require_close_notify
 	// 
 	// The function takes the following parameters:
@@ -20463,7 +20463,7 @@ type DtlsConnection interface {
 	// If you are doing I/O in another thread, you do not
 	// need to worry about this, and can simply block in the signal
 	// handler until the UI thread returns an answer.
-	ConnectAcceptCertificate(func(DtlsConnection, TlsCertificate, TLSCertificateFlags) bool) gobject.SignalHandle
+	ConnectAcceptCertificate(func(DtlsConnection, TlsCertificate, TlsCertificateFlags) bool) gobject.SignalHandle
 
 	// chain up virtual methods:
 
@@ -20473,14 +20473,14 @@ type DtlsConnection interface {
 	// The function takes the following parameters:
 	// 
 	// 	- peerCert TlsCertificate 
-	// 	- errors TLSCertificateFlags 
+	// 	- errors TlsCertificateFlags 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Check whether to accept a certificate.
-	ParentAcceptCertificate(peerCert TlsCertificate, errors TLSCertificateFlags) bool
+	ParentAcceptCertificate(peerCert TlsCertificate, errors TlsCertificateFlags) bool
 	// ParentGetNegotiatedProtocol calls the default implementations of the get_negotiated_protocol virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -20796,7 +20796,7 @@ func (conn *DtlsConnectionInstance) CloseFinish(result AsyncResult) (bool, error
 // The function takes the following parameters:
 // 
 // 	- peerCert TlsCertificate: the peer's #GTlsCertificate 
-// 	- errors TLSCertificateFlags: the problems with @peer_cert 
+// 	- errors TlsCertificateFlags: the problems with @peer_cert 
 // 
 // The function returns the following values:
 // 
@@ -20804,7 +20804,7 @@ func (conn *DtlsConnectionInstance) CloseFinish(result AsyncResult) (bool, error
 //
 // Used by #GDtlsConnection implementations to emit the
 // #GDtlsConnection::accept-certificate signal.
-func (conn *DtlsConnectionInstance) EmitAcceptCertificate(peerCert TlsCertificate, errors TLSCertificateFlags) bool {
+func (conn *DtlsConnectionInstance) EmitAcceptCertificate(peerCert TlsCertificate, errors TlsCertificateFlags) bool {
 	var carg0 *C.GDtlsConnection     // in, none, converted
 	var carg1 *C.GTlsCertificate     // in, none, converted
 	var carg2 C.GTlsCertificateFlags // in, none, casted
@@ -21002,12 +21002,12 @@ func (conn *DtlsConnectionInstance) GetPeerCertificate() TlsCertificate {
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSCertificateFlags 
+// 	- goret TlsCertificateFlags 
 //
 // Gets the errors associated with validating @conn's peer's
 // certificate, after the handshake has completed or failed. (It is
 // not set during the emission of #GDtlsConnection::accept-certificate.)
-func (conn *DtlsConnectionInstance) GetPeerCertificateErrors() TLSCertificateFlags {
+func (conn *DtlsConnectionInstance) GetPeerCertificateErrors() TlsCertificateFlags {
 	var carg0 *C.GDtlsConnection     // in, none, converted
 	var cret  C.GTlsCertificateFlags // return, none, casted
 
@@ -21016,9 +21016,9 @@ func (conn *DtlsConnectionInstance) GetPeerCertificateErrors() TLSCertificateFla
 	cret = C.g_dtls_connection_get_peer_certificate_errors(carg0)
 	runtime.KeepAlive(conn)
 
-	var goret TLSCertificateFlags
+	var goret TlsCertificateFlags
 
-	goret = TLSCertificateFlags(cret)
+	goret = TlsCertificateFlags(cret)
 
 	return goret
 }
@@ -21027,13 +21027,13 @@ func (conn *DtlsConnectionInstance) GetPeerCertificateErrors() TLSCertificateFla
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSProtocolVersion 
+// 	- goret TlsProtocolVersion 
 //
 // Returns the current DTLS protocol version, which may be
 // %G_TLS_PROTOCOL_VERSION_UNKNOWN if the connection has not handshaked, or
 // has been closed, or if the TLS backend has implemented a protocol version
 // that is not a recognized #GTlsProtocolVersion.
-func (conn *DtlsConnectionInstance) GetProtocolVersion() TLSProtocolVersion {
+func (conn *DtlsConnectionInstance) GetProtocolVersion() TlsProtocolVersion {
 	var carg0 *C.GDtlsConnection    // in, none, converted
 	var cret  C.GTlsProtocolVersion // return, none, casted
 
@@ -21042,9 +21042,9 @@ func (conn *DtlsConnectionInstance) GetProtocolVersion() TLSProtocolVersion {
 	cret = C.g_dtls_connection_get_protocol_version(carg0)
 	runtime.KeepAlive(conn)
 
-	var goret TLSProtocolVersion
+	var goret TlsProtocolVersion
 
-	goret = TLSProtocolVersion(cret)
+	goret = TlsProtocolVersion(cret)
 
 	return goret
 }
@@ -21053,7 +21053,7 @@ func (conn *DtlsConnectionInstance) GetProtocolVersion() TLSProtocolVersion {
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSRehandshakeMode 
+// 	- goret TlsRehandshakeMode 
 //
 // Gets @conn rehandshaking mode. See
 // g_dtls_connection_set_rehandshake_mode() for details.
@@ -21061,7 +21061,7 @@ func (conn *DtlsConnectionInstance) GetProtocolVersion() TLSProtocolVersion {
 // Deprecated: (since 2.64.0) Changing the rehandshake mode is no longer
 //   required for compatibility. Also, rehandshaking has been removed
 //   from the TLS protocol in TLS 1.3.
-func (conn *DtlsConnectionInstance) GetRehandshakeMode() TLSRehandshakeMode {
+func (conn *DtlsConnectionInstance) GetRehandshakeMode() TlsRehandshakeMode {
 	var carg0 *C.GDtlsConnection    // in, none, converted
 	var cret  C.GTlsRehandshakeMode // return, none, casted
 
@@ -21070,9 +21070,9 @@ func (conn *DtlsConnectionInstance) GetRehandshakeMode() TLSRehandshakeMode {
 	cret = C.g_dtls_connection_get_rehandshake_mode(carg0)
 	runtime.KeepAlive(conn)
 
-	var goret TLSRehandshakeMode
+	var goret TlsRehandshakeMode
 
-	goret = TLSRehandshakeMode(cret)
+	goret = TlsRehandshakeMode(cret)
 
 	return goret
 }
@@ -21370,7 +21370,7 @@ func (conn *DtlsConnectionInstance) SetInteraction(interaction TlsInteraction) {
 // 
 // The function takes the following parameters:
 // 
-// 	- mode TLSRehandshakeMode: the rehandshaking mode 
+// 	- mode TlsRehandshakeMode: the rehandshaking mode 
 //
 // Since GLib 2.64, changing the rehandshake mode is no longer supported
 // and will have no effect. With TLS 1.3, rehandshaking has been removed from
@@ -21380,7 +21380,7 @@ func (conn *DtlsConnectionInstance) SetInteraction(interaction TlsInteraction) {
 // Deprecated: (since 2.60.0) Changing the rehandshake mode is no longer
 //   required for compatibility. Also, rehandshaking has been removed
 //   from the TLS protocol in TLS 1.3.
-func (conn *DtlsConnectionInstance) SetRehandshakeMode(mode TLSRehandshakeMode) {
+func (conn *DtlsConnectionInstance) SetRehandshakeMode(mode TlsRehandshakeMode) {
 	var carg0 *C.GDtlsConnection    // in, none, converted
 	var carg1 C.GTlsRehandshakeMode // in, none, casted
 
@@ -21633,7 +21633,7 @@ func (conn *DtlsConnectionInstance) ShutdownFinish(result AsyncResult) (bool, er
 // If you are doing I/O in another thread, you do not
 // need to worry about this, and can simply block in the signal
 // handler until the UI thread returns an answer.
-func (o *DtlsConnectionInstance) ConnectAcceptCertificate(fn func(DtlsConnection, TlsCertificate, TLSCertificateFlags) bool) gobject.SignalHandle {
+func (o *DtlsConnectionInstance) ConnectAcceptCertificate(fn func(DtlsConnection, TlsCertificate, TlsCertificateFlags) bool) gobject.SignalHandle {
 	return o.Instance.Connect("accept-certificate", fn)
 }
 
@@ -21645,14 +21645,14 @@ type DtlsConnectionOverrides[Instance DtlsConnection] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- peerCert TlsCertificate 
-	// 	- errors TLSCertificateFlags 
+	// 	- errors TlsCertificateFlags 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Check whether to accept a certificate.
-	AcceptCertificate func(Instance, TlsCertificate, TLSCertificateFlags) bool
+	AcceptCertificate func(Instance, TlsCertificate, TlsCertificateFlags) bool
 	// // GetNegotiatedProtocol allows you to override the implementation of the virtual method get_negotiated_protocol.
 	// 
 	// The function returns the following values:
@@ -21796,12 +21796,12 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 			func(carg0 *C.GDtlsConnection, carg1 *C.GTlsCertificate, carg2 C.GTlsCertificateFlags) (cret C.gboolean) {
 				var connection Instance            // go GDtlsConnection subclass
 				var peerCert   TlsCertificate      // in, none, converted
-				var errors     TLSCertificateFlags // in, none, casted
+				var errors     TlsCertificateFlags // in, none, casted
 				var goret      bool                // return
 
 				connection = UnsafeDtlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				peerCert = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(carg1))
-				errors = TLSCertificateFlags(carg2)
+				errors = TlsCertificateFlags(carg2)
 
 				goret = overrides.AcceptCertificate(connection, peerCert, errors)
 
@@ -21979,14 +21979,14 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 // The function takes the following parameters:
 // 
 // 	- peerCert TlsCertificate 
-// 	- errors TLSCertificateFlags 
+// 	- errors TlsCertificateFlags 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 //
 // Check whether to accept a certificate.
-func (connection *DtlsConnectionInstance) ParentAcceptCertificate(peerCert TlsCertificate, errors TLSCertificateFlags) bool {
+func (connection *DtlsConnectionInstance) ParentAcceptCertificate(peerCert TlsCertificate, errors TlsCertificateFlags) bool {
 	var carg0 *C.GDtlsConnection
 	var carg1 *C.GTlsCertificate     // in, none, converted
 	var carg2 C.GTlsCertificateFlags // in, none, converted
@@ -38892,7 +38892,7 @@ type Icon interface {
 	//
 	// Checks if two icons are equal.
 	Equal(Icon) bool
-	// ToString wraps g_icon_to_string
+	// String wraps g_icon_to_string
 	// 
 	// The function returns the following values:
 	// 
@@ -38914,7 +38914,7 @@ type Icon interface {
 	// 
 	// - If @icon is a #GThemedIcon with exactly one name and no fallbacks,
 	//   the encoding is simply the name (such as `network-server`).
-	ToString() string
+	String() string
 
 	// chain up virtual methods:
 
@@ -39058,7 +39058,7 @@ func (icon1 *IconInstance) Equal(icon2 Icon) bool {
 	return goret
 }
 
-// ToString wraps g_icon_to_string
+// String wraps g_icon_to_string
 // 
 // The function returns the following values:
 // 
@@ -39080,7 +39080,7 @@ func (icon1 *IconInstance) Equal(icon2 Icon) bool {
 // 
 // - If @icon is a #GThemedIcon with exactly one name and no fallbacks,
 //   the encoding is simply the name (such as `network-server`).
-func (icon *IconInstance) ToString() string {
+func (icon *IconInstance) String() string {
 	var carg0 *C.GIcon // in, none, converted
 	var cret  *C.gchar // return, full, string, nullable-string
 
@@ -41070,7 +41070,7 @@ type Mount interface {
 	//
 	// Gets the symbolic icon for @mount.
 	GetSymbolicIcon() Icon
-	// GetUUID wraps g_mount_get_uuid
+	// GetUuid wraps g_mount_get_uuid
 	// 
 	// The function returns the following values:
 	// 
@@ -41080,7 +41080,7 @@ type Mount interface {
 	// the file system UUID for the mount in question and should be
 	// considered an opaque string. Returns %NULL if there is no UUID
 	// available.
-	GetUUID() string
+	GetUuid() string
 	// GetVolume wraps g_mount_get_volume
 	// 
 	// The function returns the following values:
@@ -41431,7 +41431,7 @@ type Mount interface {
 	//
 	// Gets the symbolic icon for @mount.
 	ParentGetSymbolicIcon() Icon
-	// ParentGetUUID calls the default implementations of the get_uuid virtual method.
+	// ParentGetUuid calls the default implementations of the get_uuid virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -41442,7 +41442,7 @@ type Mount interface {
 	// the file system UUID for the mount in question and should be
 	// considered an opaque string. Returns %NULL if there is no UUID
 	// available.
-	ParentGetUUID() string
+	ParentGetUuid() string
 	// ParentGetVolume calls the default implementations of the get_volume virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -41976,7 +41976,7 @@ func (mount *MountInstance) GetSymbolicIcon() Icon {
 	return goret
 }
 
-// GetUUID wraps g_mount_get_uuid
+// GetUuid wraps g_mount_get_uuid
 // 
 // The function returns the following values:
 // 
@@ -41986,7 +41986,7 @@ func (mount *MountInstance) GetSymbolicIcon() Icon {
 // the file system UUID for the mount in question and should be
 // considered an opaque string. Returns %NULL if there is no UUID
 // available.
-func (mount *MountInstance) GetUUID() string {
+func (mount *MountInstance) GetUuid() string {
 	var carg0 *C.GMount // in, none, converted
 	var cret  *C.char   // return, full, string, nullable-string
 
@@ -42638,7 +42638,7 @@ type MountOverrides[Instance Mount] struct {
 	//
 	// Gets the symbolic icon for @mount.
 	GetSymbolicIcon func(Instance) Icon
-	// // GetUUID allows you to override the implementation of the virtual method get_uuid.
+	// // GetUuid allows you to override the implementation of the virtual method get_uuid.
 	// 
 	// The function returns the following values:
 	// 
@@ -42648,7 +42648,7 @@ type MountOverrides[Instance Mount] struct {
 	// the file system UUID for the mount in question and should be
 	// considered an opaque string. Returns %NULL if there is no UUID
 	// available.
-	GetUUID func(Instance) string
+	GetUuid func(Instance) string
 	// // GetVolume allows you to override the implementation of the virtual method get_volume.
 	// 
 	// The function returns the following values:
@@ -43012,7 +43012,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 		)
 	}
 
-	if overrides.GetUUID != nil {
+	if overrides.GetUuid != nil {
 		pclass.get_uuid = (*[0]byte)(C._gotk4_gio2_Mount_get_uuid)
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
@@ -43023,7 +43023,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 
 				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
-				goret = overrides.GetUUID(mount)
+				goret = overrides.GetUuid(mount)
 
 				if goret != "" {
 					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
@@ -43572,7 +43572,7 @@ func (mount *MountInstance) ParentGetSymbolicIcon() Icon {
 	return goret
 }
 
-// ParentGetUUID calls the default implementations of the get_uuid virtual method.
+// ParentGetUuid calls the default implementations of the get_uuid virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -43583,7 +43583,7 @@ func (mount *MountInstance) ParentGetSymbolicIcon() Icon {
 // the file system UUID for the mount in question and should be
 // considered an opaque string. Returns %NULL if there is no UUID
 // available.
-func (mount *MountInstance) ParentGetUUID() string {
+func (mount *MountInstance) ParentGetUuid() string {
 	var carg0 *C.GMount
 	var cret  *C.char // return, full, string, nullable-string
 
@@ -48319,7 +48319,7 @@ type SocketConnectable interface {
 	// g_socket_connectable_proxy_enumerate(), this will fall back to
 	// calling g_socket_connectable_enumerate().
 	ProxyEnumerate() SocketAddressEnumerator
-	// ToString wraps g_socket_connectable_to_string
+	// String wraps g_socket_connectable_to_string
 	// 
 	// The function returns the following values:
 	// 
@@ -48332,7 +48332,7 @@ type SocketConnectable interface {
 	// 
 	// If the #GSocketConnectable implementation does not support string formatting,
 	// the implementation&#x2019;s type name will be returned as a fallback.
-	ToString() string
+	String() string
 
 	// chain up virtual methods:
 
@@ -48472,7 +48472,7 @@ func (connectable *SocketConnectableInstance) ProxyEnumerate() SocketAddressEnum
 	return goret
 }
 
-// ToString wraps g_socket_connectable_to_string
+// String wraps g_socket_connectable_to_string
 // 
 // The function returns the following values:
 // 
@@ -48485,7 +48485,7 @@ func (connectable *SocketConnectableInstance) ProxyEnumerate() SocketAddressEnum
 // 
 // If the #GSocketConnectable implementation does not support string formatting,
 // the implementation&#x2019;s type name will be returned as a fallback.
-func (connectable *SocketConnectableInstance) ToString() string {
+func (connectable *SocketConnectableInstance) String() string {
 	var carg0 *C.GSocketConnectable // in, none, converted
 	var cret  *C.gchar              // return, full, string
 
@@ -48740,22 +48740,22 @@ type TlsBackend interface {
 	//
 	// Gets the default #GTlsDatabase used to verify TLS connections.
 	GetDefaultDatabase() TlsDatabase
-	// GetDTLSClientConnectionType wraps g_tls_backend_get_dtls_client_connection_type
+	// GetDtlsClientConnectionType wraps g_tls_backend_get_dtls_client_connection_type
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret gobject.Type 
 	//
 	// Gets the #GType of @backend&#x2019;s #GDtlsClientConnection implementation.
-	GetDTLSClientConnectionType() gobject.Type
-	// GetDTLSServerConnectionType wraps g_tls_backend_get_dtls_server_connection_type
+	GetDtlsClientConnectionType() gobject.Type
+	// GetDtlsServerConnectionType wraps g_tls_backend_get_dtls_server_connection_type
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret gobject.Type 
 	//
 	// Gets the #GType of @backend&#x2019;s #GDtlsServerConnection implementation.
-	GetDTLSServerConnectionType() gobject.Type
+	GetDtlsServerConnectionType() gobject.Type
 	// GetFileDatabaseType wraps g_tls_backend_get_file_database_type
 	// 
 	// The function returns the following values:
@@ -48787,7 +48787,7 @@ type TlsBackend interface {
 	// Setting a %NULL default database will reset to using the system default
 	// database as if g_tls_backend_set_default_database() had never been called.
 	SetDefaultDatabase(TlsDatabase)
-	// SupportsDTLS wraps g_tls_backend_supports_dtls
+	// SupportsDtls wraps g_tls_backend_supports_dtls
 	// 
 	// The function returns the following values:
 	// 
@@ -48795,8 +48795,8 @@ type TlsBackend interface {
 	//
 	// Checks if DTLS is supported. DTLS support may not be available even if TLS
 	// support is available, and vice-versa.
-	SupportsDTLS() bool
-	// SupportsTLS wraps g_tls_backend_supports_tls
+	SupportsDtls() bool
+	// SupportsTls wraps g_tls_backend_supports_tls
 	// 
 	// The function returns the following values:
 	// 
@@ -48804,7 +48804,7 @@ type TlsBackend interface {
 	//
 	// Checks if TLS is supported; if this returns %FALSE for the default
 	// #GTlsBackend, it means no "real" TLS backend is available.
-	SupportsTLS() bool
+	SupportsTls() bool
 
 	// chain up virtual methods:
 
@@ -48817,7 +48817,7 @@ type TlsBackend interface {
 	//
 	// Gets the default #GTlsDatabase used to verify TLS connections.
 	ParentGetDefaultDatabase() TlsDatabase
-	// ParentSupportsDTLS calls the default implementations of the supports_dtls virtual method.
+	// ParentSupportsDtls calls the default implementations of the supports_dtls virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -48826,8 +48826,8 @@ type TlsBackend interface {
 	//
 	// Checks if DTLS is supported. DTLS support may not be available even if TLS
 	// support is available, and vice-versa.
-	ParentSupportsDTLS() bool
-	// ParentSupportsTLS calls the default implementations of the supports_tls virtual method.
+	ParentSupportsDtls() bool
+	// ParentSupportsTls calls the default implementations of the supports_tls virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -48836,7 +48836,7 @@ type TlsBackend interface {
 	//
 	// Checks if TLS is supported; if this returns %FALSE for the default
 	// #GTlsBackend, it means no "real" TLS backend is available.
-	ParentSupportsTLS() bool
+	ParentSupportsTls() bool
 }
 
 var _ TlsBackend = (*TlsBackendInstance)(nil)
@@ -48970,14 +48970,14 @@ func (backend *TlsBackendInstance) GetDefaultDatabase() TlsDatabase {
 	return goret
 }
 
-// GetDTLSClientConnectionType wraps g_tls_backend_get_dtls_client_connection_type
+// GetDtlsClientConnectionType wraps g_tls_backend_get_dtls_client_connection_type
 // 
 // The function returns the following values:
 // 
 // 	- goret gobject.Type 
 //
 // Gets the #GType of @backend&#x2019;s #GDtlsClientConnection implementation.
-func (backend *TlsBackendInstance) GetDTLSClientConnectionType() gobject.Type {
+func (backend *TlsBackendInstance) GetDtlsClientConnectionType() gobject.Type {
 	var carg0 *C.GTlsBackend // in, none, converted
 	var cret  C.GType        // return, none, casted, alias
 
@@ -48993,14 +48993,14 @@ func (backend *TlsBackendInstance) GetDTLSClientConnectionType() gobject.Type {
 	return goret
 }
 
-// GetDTLSServerConnectionType wraps g_tls_backend_get_dtls_server_connection_type
+// GetDtlsServerConnectionType wraps g_tls_backend_get_dtls_server_connection_type
 // 
 // The function returns the following values:
 // 
 // 	- goret gobject.Type 
 //
 // Gets the #GType of @backend&#x2019;s #GDtlsServerConnection implementation.
-func (backend *TlsBackendInstance) GetDTLSServerConnectionType() gobject.Type {
+func (backend *TlsBackendInstance) GetDtlsServerConnectionType() gobject.Type {
 	var carg0 *C.GTlsBackend // in, none, converted
 	var cret  C.GType        // return, none, casted, alias
 
@@ -49090,7 +49090,7 @@ func (backend *TlsBackendInstance) SetDefaultDatabase(database TlsDatabase) {
 	runtime.KeepAlive(database)
 }
 
-// SupportsDTLS wraps g_tls_backend_supports_dtls
+// SupportsDtls wraps g_tls_backend_supports_dtls
 // 
 // The function returns the following values:
 // 
@@ -49098,7 +49098,7 @@ func (backend *TlsBackendInstance) SetDefaultDatabase(database TlsDatabase) {
 //
 // Checks if DTLS is supported. DTLS support may not be available even if TLS
 // support is available, and vice-versa.
-func (backend *TlsBackendInstance) SupportsDTLS() bool {
+func (backend *TlsBackendInstance) SupportsDtls() bool {
 	var carg0 *C.GTlsBackend // in, none, converted
 	var cret  C.gboolean     // return
 
@@ -49116,7 +49116,7 @@ func (backend *TlsBackendInstance) SupportsDTLS() bool {
 	return goret
 }
 
-// SupportsTLS wraps g_tls_backend_supports_tls
+// SupportsTls wraps g_tls_backend_supports_tls
 // 
 // The function returns the following values:
 // 
@@ -49124,7 +49124,7 @@ func (backend *TlsBackendInstance) SupportsDTLS() bool {
 //
 // Checks if TLS is supported; if this returns %FALSE for the default
 // #GTlsBackend, it means no "real" TLS backend is available.
-func (backend *TlsBackendInstance) SupportsTLS() bool {
+func (backend *TlsBackendInstance) SupportsTls() bool {
 	var carg0 *C.GTlsBackend // in, none, converted
 	var cret  C.gboolean     // return
 
@@ -49153,7 +49153,7 @@ type TlsBackendOverrides[Instance TlsBackend] struct {
 	//
 	// Gets the default #GTlsDatabase used to verify TLS connections.
 	GetDefaultDatabase func(Instance) TlsDatabase
-	// // SupportsDTLS allows you to override the implementation of the virtual method supports_dtls.
+	// // SupportsDtls allows you to override the implementation of the virtual method supports_dtls.
 	// 
 	// The function returns the following values:
 	// 
@@ -49161,8 +49161,8 @@ type TlsBackendOverrides[Instance TlsBackend] struct {
 	//
 	// Checks if DTLS is supported. DTLS support may not be available even if TLS
 	// support is available, and vice-versa.
-	SupportsDTLS func(Instance) bool
-	// // SupportsTLS allows you to override the implementation of the virtual method supports_tls.
+	SupportsDtls func(Instance) bool
+	// // SupportsTls allows you to override the implementation of the virtual method supports_tls.
 	// 
 	// The function returns the following values:
 	// 
@@ -49170,7 +49170,7 @@ type TlsBackendOverrides[Instance TlsBackend] struct {
 	//
 	// Checks if TLS is supported; if this returns %FALSE for the default
 	// #GTlsBackend, it means no "real" TLS backend is available.
-	SupportsTLS func(Instance) bool
+	SupportsTls func(Instance) bool
 }
 
 // UnsafeApplyTlsBackendOverrides applies the overrides to init the gclass by setting the trampoline functions.
@@ -49198,7 +49198,7 @@ func UnsafeApplyTlsBackendOverrides[Instance TlsBackend](gclass unsafe.Pointer, 
 		)
 	}
 
-	if overrides.SupportsDTLS != nil {
+	if overrides.SupportsDtls != nil {
 		pclass.supports_dtls = (*[0]byte)(C._gotk4_gio2_TlsBackend_supports_dtls)
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
@@ -49209,7 +49209,7 @@ func UnsafeApplyTlsBackendOverrides[Instance TlsBackend](gclass unsafe.Pointer, 
 
 				backend = UnsafeTlsBackendFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
-				goret = overrides.SupportsDTLS(backend)
+				goret = overrides.SupportsDtls(backend)
 
 				if goret {
 					cret = C.TRUE
@@ -49220,7 +49220,7 @@ func UnsafeApplyTlsBackendOverrides[Instance TlsBackend](gclass unsafe.Pointer, 
 		)
 	}
 
-	if overrides.SupportsTLS != nil {
+	if overrides.SupportsTls != nil {
 		pclass.supports_tls = (*[0]byte)(C._gotk4_gio2_TlsBackend_supports_tls)
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
@@ -49231,7 +49231,7 @@ func UnsafeApplyTlsBackendOverrides[Instance TlsBackend](gclass unsafe.Pointer, 
 
 				backend = UnsafeTlsBackendFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
-				goret = overrides.SupportsTLS(backend)
+				goret = overrides.SupportsTls(backend)
 
 				if goret {
 					cret = C.TRUE
@@ -49269,7 +49269,7 @@ func (backend *TlsBackendInstance) ParentGetDefaultDatabase() TlsDatabase {
 	return goret
 }
 
-// ParentSupportsDTLS calls the default implementations of the supports_dtls virtual method.
+// ParentSupportsDtls calls the default implementations of the supports_dtls virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -49278,7 +49278,7 @@ func (backend *TlsBackendInstance) ParentGetDefaultDatabase() TlsDatabase {
 //
 // Checks if DTLS is supported. DTLS support may not be available even if TLS
 // support is available, and vice-versa.
-func (backend *TlsBackendInstance) ParentSupportsDTLS() bool {
+func (backend *TlsBackendInstance) ParentSupportsDtls() bool {
 	var carg0 *C.GTlsBackend
 	var cret  C.gboolean // return
 
@@ -49298,7 +49298,7 @@ func (backend *TlsBackendInstance) ParentSupportsDTLS() bool {
 	return goret
 }
 
-// ParentSupportsTLS calls the default implementations of the supports_tls virtual method.
+// ParentSupportsTls calls the default implementations of the supports_tls virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -49307,7 +49307,7 @@ func (backend *TlsBackendInstance) ParentSupportsDTLS() bool {
 //
 // Checks if TLS is supported; if this returns %FALSE for the default
 // #GTlsBackend, it means no "real" TLS backend is available.
-func (backend *TlsBackendInstance) ParentSupportsTLS() bool {
+func (backend *TlsBackendInstance) ParentSupportsTls() bool {
 	var carg0 *C.GTlsBackend
 	var cret  C.gboolean // return
 
@@ -49385,7 +49385,7 @@ type TlsClientConnection interface {
 	//
 	// Gets @conn's expected server identity
 	GetServerIdentity() SocketConnectable
-	// GetUseSSL3 wraps g_tls_client_connection_get_use_ssl3
+	// GetUseSsl3 wraps g_tls_client_connection_get_use_ssl3
 	// 
 	// The function returns the following values:
 	// 
@@ -49395,12 +49395,12 @@ type TlsClientConnection interface {
 	// g_tls_client_connection_set_use_ssl3() for details.
 	//
 	// Deprecated: (since 2.56.0) SSL 3.0 is insecure.
-	GetUseSSL3() bool
+	GetUseSsl3() bool
 	// GetValidationFlags wraps g_tls_client_connection_get_validation_flags
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSCertificateFlags 
+	// 	- goret TlsCertificateFlags 
 	//
 	// Gets @conn's validation flags
 	// 
@@ -49409,7 +49409,7 @@ type TlsClientConnection interface {
 	// information.
 	//
 	// Deprecated: (since 2.72.0) Do not attempt to ignore validation errors.
-	GetValidationFlags() TLSCertificateFlags
+	GetValidationFlags() TlsCertificateFlags
 	// SetServerIdentity wraps g_tls_client_connection_set_server_identity
 	// 
 	// The function takes the following parameters:
@@ -49421,7 +49421,7 @@ type TlsClientConnection interface {
 	// to let @conn know what name to look for in the certificate when
 	// performing %G_TLS_CERTIFICATE_BAD_IDENTITY validation, if enabled.
 	SetServerIdentity(SocketConnectable)
-	// SetUseSSL3 wraps g_tls_client_connection_set_use_ssl3
+	// SetUseSsl3 wraps g_tls_client_connection_set_use_ssl3
 	// 
 	// The function takes the following parameters:
 	// 
@@ -49439,12 +49439,12 @@ type TlsClientConnection interface {
 	// Since GLib 2.64, this function does nothing.
 	//
 	// Deprecated: (since 2.56.0) SSL 3.0 is insecure.
-	SetUseSSL3(bool)
+	SetUseSsl3(bool)
 	// SetValidationFlags wraps g_tls_client_connection_set_validation_flags
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- flags TLSCertificateFlags: the #GTlsCertificateFlags to use 
+	// 	- flags TlsCertificateFlags: the #GTlsCertificateFlags to use 
 	//
 	// Sets @conn's validation flags, to override the default set of
 	// checks performed when validating a server certificate. By default,
@@ -49455,7 +49455,7 @@ type TlsClientConnection interface {
 	// information.
 	//
 	// Deprecated: (since 2.72.0) Do not attempt to ignore validation errors.
-	SetValidationFlags(TLSCertificateFlags)
+	SetValidationFlags(TlsCertificateFlags)
 
 	// chain up virtual methods:
 
@@ -49656,7 +49656,7 @@ func (conn *TlsClientConnectionInstance) GetServerIdentity() SocketConnectable {
 	return goret
 }
 
-// GetUseSSL3 wraps g_tls_client_connection_get_use_ssl3
+// GetUseSsl3 wraps g_tls_client_connection_get_use_ssl3
 // 
 // The function returns the following values:
 // 
@@ -49666,7 +49666,7 @@ func (conn *TlsClientConnectionInstance) GetServerIdentity() SocketConnectable {
 // g_tls_client_connection_set_use_ssl3() for details.
 //
 // Deprecated: (since 2.56.0) SSL 3.0 is insecure.
-func (conn *TlsClientConnectionInstance) GetUseSSL3() bool {
+func (conn *TlsClientConnectionInstance) GetUseSsl3() bool {
 	var carg0 *C.GTlsClientConnection // in, none, converted
 	var cret  C.gboolean              // return
 
@@ -49688,7 +49688,7 @@ func (conn *TlsClientConnectionInstance) GetUseSSL3() bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSCertificateFlags 
+// 	- goret TlsCertificateFlags 
 //
 // Gets @conn's validation flags
 // 
@@ -49697,7 +49697,7 @@ func (conn *TlsClientConnectionInstance) GetUseSSL3() bool {
 // information.
 //
 // Deprecated: (since 2.72.0) Do not attempt to ignore validation errors.
-func (conn *TlsClientConnectionInstance) GetValidationFlags() TLSCertificateFlags {
+func (conn *TlsClientConnectionInstance) GetValidationFlags() TlsCertificateFlags {
 	var carg0 *C.GTlsClientConnection // in, none, converted
 	var cret  C.GTlsCertificateFlags  // return, none, casted
 
@@ -49706,9 +49706,9 @@ func (conn *TlsClientConnectionInstance) GetValidationFlags() TLSCertificateFlag
 	cret = C.g_tls_client_connection_get_validation_flags(carg0)
 	runtime.KeepAlive(conn)
 
-	var goret TLSCertificateFlags
+	var goret TlsCertificateFlags
 
-	goret = TLSCertificateFlags(cret)
+	goret = TlsCertificateFlags(cret)
 
 	return goret
 }
@@ -49735,7 +49735,7 @@ func (conn *TlsClientConnectionInstance) SetServerIdentity(identity SocketConnec
 	runtime.KeepAlive(identity)
 }
 
-// SetUseSSL3 wraps g_tls_client_connection_set_use_ssl3
+// SetUseSsl3 wraps g_tls_client_connection_set_use_ssl3
 // 
 // The function takes the following parameters:
 // 
@@ -49753,7 +49753,7 @@ func (conn *TlsClientConnectionInstance) SetServerIdentity(identity SocketConnec
 // Since GLib 2.64, this function does nothing.
 //
 // Deprecated: (since 2.56.0) SSL 3.0 is insecure.
-func (conn *TlsClientConnectionInstance) SetUseSSL3(useSsl3 bool) {
+func (conn *TlsClientConnectionInstance) SetUseSsl3(useSsl3 bool) {
 	var carg0 *C.GTlsClientConnection // in, none, converted
 	var carg1 C.gboolean              // in
 
@@ -49771,7 +49771,7 @@ func (conn *TlsClientConnectionInstance) SetUseSSL3(useSsl3 bool) {
 // 
 // The function takes the following parameters:
 // 
-// 	- flags TLSCertificateFlags: the #GTlsCertificateFlags to use 
+// 	- flags TlsCertificateFlags: the #GTlsCertificateFlags to use 
 //
 // Sets @conn's validation flags, to override the default set of
 // checks performed when validating a server certificate. By default,
@@ -49782,7 +49782,7 @@ func (conn *TlsClientConnectionInstance) SetUseSSL3(useSsl3 bool) {
 // information.
 //
 // Deprecated: (since 2.72.0) Do not attempt to ignore validation errors.
-func (conn *TlsClientConnectionInstance) SetValidationFlags(flags TLSCertificateFlags) {
+func (conn *TlsClientConnectionInstance) SetValidationFlags(flags TlsCertificateFlags) {
 	var carg0 *C.GTlsClientConnection // in, none, converted
 	var carg1 C.GTlsCertificateFlags  // in, none, casted
 
@@ -50368,7 +50368,7 @@ type Volume interface {
 	//
 	// Gets the symbolic icon for @volume.
 	GetSymbolicIcon() Icon
-	// GetUUID wraps g_volume_get_uuid
+	// GetUuid wraps g_volume_get_uuid
 	// 
 	// The function returns the following values:
 	// 
@@ -50378,7 +50378,7 @@ type Volume interface {
 	// the file system UUID for the volume in question and should be
 	// considered an opaque string. Returns %NULL if there is no UUID
 	// available.
-	GetUUID() string
+	GetUuid() string
 	// Mount wraps g_volume_mount
 	// 
 	// The function takes the following parameters:
@@ -50600,7 +50600,7 @@ type Volume interface {
 	//
 	// Gets the symbolic icon for @volume.
 	ParentGetSymbolicIcon() Icon
-	// ParentGetUUID calls the default implementations of the get_uuid virtual method.
+	// ParentGetUuid calls the default implementations of the get_uuid virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -50611,7 +50611,7 @@ type Volume interface {
 	// the file system UUID for the volume in question and should be
 	// considered an opaque string. Returns %NULL if there is no UUID
 	// available.
-	ParentGetUUID() string
+	ParentGetUuid() string
 	// ParentMountFinish calls the default implementations of the mount_finish virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -51157,7 +51157,7 @@ func (volume *VolumeInstance) GetSymbolicIcon() Icon {
 	return goret
 }
 
-// GetUUID wraps g_volume_get_uuid
+// GetUuid wraps g_volume_get_uuid
 // 
 // The function returns the following values:
 // 
@@ -51167,7 +51167,7 @@ func (volume *VolumeInstance) GetSymbolicIcon() Icon {
 // the file system UUID for the volume in question and should be
 // considered an opaque string. Returns %NULL if there is no UUID
 // available.
-func (volume *VolumeInstance) GetUUID() string {
+func (volume *VolumeInstance) GetUuid() string {
 	var carg0 *C.GVolume // in, none, converted
 	var cret  *C.char    // return, full, string, nullable-string
 
@@ -51469,7 +51469,7 @@ type VolumeOverrides[Instance Volume] struct {
 	//
 	// Gets the symbolic icon for @volume.
 	GetSymbolicIcon func(Instance) Icon
-	// // GetUUID allows you to override the implementation of the virtual method get_uuid.
+	// // GetUuid allows you to override the implementation of the virtual method get_uuid.
 	// 
 	// The function returns the following values:
 	// 
@@ -51479,7 +51479,7 @@ type VolumeOverrides[Instance Volume] struct {
 	// the file system UUID for the volume in question and should be
 	// considered an opaque string. Returns %NULL if there is no UUID
 	// available.
-	GetUUID func(Instance) string
+	GetUuid func(Instance) string
 	// // MountFinish allows you to override the implementation of the virtual method mount_finish.
 	// 
 	// The function takes the following parameters:
@@ -51824,7 +51824,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 		)
 	}
 
-	if overrides.GetUUID != nil {
+	if overrides.GetUuid != nil {
 		pclass.get_uuid = (*[0]byte)(C._gotk4_gio2_Volume_get_uuid)
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
@@ -51835,7 +51835,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 
 				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
-				goret = overrides.GetUUID(volume)
+				goret = overrides.GetUuid(volume)
 
 				if goret != "" {
 					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
@@ -52351,7 +52351,7 @@ func (volume *VolumeInstance) ParentGetSymbolicIcon() Icon {
 	return goret
 }
 
-// ParentGetUUID calls the default implementations of the get_uuid virtual method.
+// ParentGetUuid calls the default implementations of the get_uuid virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -52362,7 +52362,7 @@ func (volume *VolumeInstance) ParentGetSymbolicIcon() Icon {
 // the file system UUID for the volume in question and should be
 // considered an opaque string. Returns %NULL if there is no UUID
 // available.
-func (volume *VolumeInstance) ParentGetUUID() string {
+func (volume *VolumeInstance) ParentGetUuid() string {
 	var carg0 *C.GVolume
 	var cret  *C.char // return, full, string, nullable-string
 
@@ -52648,7 +52648,7 @@ type DtlsClientConnection interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSCertificateFlags 
+	// 	- goret TlsCertificateFlags 
 	//
 	// Gets @conn's validation flags
 	// 
@@ -52657,7 +52657,7 @@ type DtlsClientConnection interface {
 	// information.
 	//
 	// Deprecated: (since 2.74.0) Do not attempt to ignore validation errors.
-	GetValidationFlags() TLSCertificateFlags
+	GetValidationFlags() TlsCertificateFlags
 	// SetServerIdentity wraps g_dtls_client_connection_set_server_identity
 	// 
 	// The function takes the following parameters:
@@ -52673,7 +52673,7 @@ type DtlsClientConnection interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- flags TLSCertificateFlags: the #GTlsCertificateFlags to use 
+	// 	- flags TlsCertificateFlags: the #GTlsCertificateFlags to use 
 	//
 	// Sets @conn's validation flags, to override the default set of
 	// checks performed when validating a server certificate. By default,
@@ -52684,7 +52684,7 @@ type DtlsClientConnection interface {
 	// information.
 	//
 	// Deprecated: (since 2.74.0) Do not attempt to ignore validation errors.
-	SetValidationFlags(TLSCertificateFlags)
+	SetValidationFlags(TlsCertificateFlags)
 
 	// chain up virtual methods:
 }
@@ -52799,7 +52799,7 @@ func (conn *DtlsClientConnectionInstance) GetServerIdentity() SocketConnectable 
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSCertificateFlags 
+// 	- goret TlsCertificateFlags 
 //
 // Gets @conn's validation flags
 // 
@@ -52808,7 +52808,7 @@ func (conn *DtlsClientConnectionInstance) GetServerIdentity() SocketConnectable 
 // information.
 //
 // Deprecated: (since 2.74.0) Do not attempt to ignore validation errors.
-func (conn *DtlsClientConnectionInstance) GetValidationFlags() TLSCertificateFlags {
+func (conn *DtlsClientConnectionInstance) GetValidationFlags() TlsCertificateFlags {
 	var carg0 *C.GDtlsClientConnection // in, none, converted
 	var cret  C.GTlsCertificateFlags   // return, none, casted
 
@@ -52817,9 +52817,9 @@ func (conn *DtlsClientConnectionInstance) GetValidationFlags() TLSCertificateFla
 	cret = C.g_dtls_client_connection_get_validation_flags(carg0)
 	runtime.KeepAlive(conn)
 
-	var goret TLSCertificateFlags
+	var goret TlsCertificateFlags
 
-	goret = TLSCertificateFlags(cret)
+	goret = TlsCertificateFlags(cret)
 
 	return goret
 }
@@ -52850,7 +52850,7 @@ func (conn *DtlsClientConnectionInstance) SetServerIdentity(identity SocketConne
 // 
 // The function takes the following parameters:
 // 
-// 	- flags TLSCertificateFlags: the #GTlsCertificateFlags to use 
+// 	- flags TlsCertificateFlags: the #GTlsCertificateFlags to use 
 //
 // Sets @conn's validation flags, to override the default set of
 // checks performed when validating a server certificate. By default,
@@ -52861,7 +52861,7 @@ func (conn *DtlsClientConnectionInstance) SetServerIdentity(identity SocketConne
 // information.
 //
 // Deprecated: (since 2.74.0) Do not attempt to ignore validation errors.
-func (conn *DtlsClientConnectionInstance) SetValidationFlags(flags TLSCertificateFlags) {
+func (conn *DtlsClientConnectionInstance) SetValidationFlags(flags TlsCertificateFlags) {
 	var carg0 *C.GDtlsClientConnection // in, none, converted
 	var carg1 C.GTlsCertificateFlags   // in, none, casted
 
@@ -58027,7 +58027,7 @@ type Credentials interface {
 	// This operation can fail if #GCredentials is not supported on the
 	// the OS.
 	IsSameUser(Credentials) (bool, error)
-	// ToString wraps g_credentials_to_string
+	// String wraps g_credentials_to_string
 	// 
 	// The function returns the following values:
 	// 
@@ -58036,7 +58036,7 @@ type Credentials interface {
 	// Creates a human-readable textual representation of @credentials
 	// that can be used in logging and debug messages. The format of the
 	// returned string may change in future GLib release.
-	ToString() string
+	String() string
 }
 
 func unsafeWrapCredentials(base *gobject.ObjectInstance) *CredentialsInstance {
@@ -58148,7 +58148,7 @@ func (credentials *CredentialsInstance) IsSameUser(otherCredentials Credentials)
 	return goret, _goerr
 }
 
-// ToString wraps g_credentials_to_string
+// String wraps g_credentials_to_string
 // 
 // The function returns the following values:
 // 
@@ -58157,7 +58157,7 @@ func (credentials *CredentialsInstance) IsSameUser(otherCredentials Credentials)
 // Creates a human-readable textual representation of @credentials
 // that can be used in logging and debug messages. The format of the
 // returned string may change in future GLib release.
-func (credentials *CredentialsInstance) ToString() string {
+func (credentials *CredentialsInstance) String() string {
 	var carg0 *C.GCredentials // in, none, converted
 	var cret  *C.gchar        // return, full, string
 
@@ -60440,7 +60440,7 @@ type FileInfo interface {
 	// It is an error to call this if the #GFileInfo does not contain
 	// %G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME.
 	GetEditName() string
-	// GetETag wraps g_file_info_get_etag
+	// GetEtag wraps g_file_info_get_etag
 	// 
 	// The function returns the following values:
 	// 
@@ -60451,7 +60451,7 @@ type FileInfo interface {
 	// 
 	// It is an error to call this if the #GFileInfo does not contain
 	// %G_FILE_ATTRIBUTE_ETAG_VALUE.
-	GetETag() string
+	GetEtag() string
 	// GetFileType wraps g_file_info_get_file_type
 	// 
 	// The function returns the following values:
@@ -61514,7 +61514,7 @@ func (info *FileInfoInstance) GetEditName() string {
 	return goret
 }
 
-// GetETag wraps g_file_info_get_etag
+// GetEtag wraps g_file_info_get_etag
 // 
 // The function returns the following values:
 // 
@@ -61525,7 +61525,7 @@ func (info *FileInfoInstance) GetEditName() string {
 // 
 // It is an error to call this if the #GFileInfo does not contain
 // %G_FILE_ATTRIBUTE_ETAG_VALUE.
-func (info *FileInfoInstance) GetETag() string {
+func (info *FileInfoInstance) GetEtag() string {
 	var carg0 *C.GFileInfo // in, none, converted
 	var cret  *C.char      // return, none, string, nullable-string
 
@@ -64431,14 +64431,14 @@ type InetAddress interface {
 	// Gets the size of the native raw binary address for @address. This
 	// is the size of the data that you get from g_inet_address_to_bytes().
 	GetNativeSize() uint
-	// ToString wraps g_inet_address_to_string
+	// String wraps g_inet_address_to_string
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
 	//
 	// Converts @address to string form.
-	ToString() string
+	String() string
 
 	// chain up virtual methods:
 
@@ -64920,14 +64920,14 @@ func (address *InetAddressInstance) GetNativeSize() uint {
 	return goret
 }
 
-// ToString wraps g_inet_address_to_string
+// String wraps g_inet_address_to_string
 // 
 // The function returns the following values:
 // 
 // 	- goret string 
 //
 // Converts @address to string form.
-func (address *InetAddressInstance) ToString() string {
+func (address *InetAddressInstance) String() string {
 	var carg0 *C.GInetAddress // in, none, converted
 	var cret  *C.gchar        // return, full, string
 
@@ -65107,14 +65107,14 @@ type InetAddressMask interface {
 	//
 	// Tests if @address falls within the range described by @mask.
 	Matches(InetAddress) bool
-	// ToString wraps g_inet_address_mask_to_string
+	// String wraps g_inet_address_mask_to_string
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
 	//
 	// Converts @mask back to its corresponding string form.
-	ToString() string
+	String() string
 
 	// chain up virtual methods:
 }
@@ -65375,14 +65375,14 @@ func (mask *InetAddressMaskInstance) Matches(address InetAddress) bool {
 	return goret
 }
 
-// ToString wraps g_inet_address_mask_to_string
+// String wraps g_inet_address_mask_to_string
 // 
 // The function returns the following values:
 // 
 // 	- goret string 
 //
 // Converts @mask back to its corresponding string form.
-func (mask *InetAddressMaskInstance) ToString() string {
+func (mask *InetAddressMaskInstance) String() string {
 	var carg0 *C.GInetAddressMask // in, none, converted
 	var cret  *C.gchar            // return, full, string
 
@@ -83481,7 +83481,7 @@ type Socket interface {
 	// default), outgoing multicast packets will be looped back to
 	// multicast listeners on the same host.
 	GetMulticastLoopback() bool
-	// GetMulticastTTL wraps g_socket_get_multicast_ttl
+	// GetMulticastTtl wraps g_socket_get_multicast_ttl
 	// 
 	// The function returns the following values:
 	// 
@@ -83489,7 +83489,7 @@ type Socket interface {
 	//
 	// Gets the multicast time-to-live setting on @socket; see
 	// g_socket_set_multicast_ttl() for more details.
-	GetMulticastTTL() uint
+	GetMulticastTtl() uint
 	// GetOption wraps g_socket_get_option
 	// 
 	// The function takes the following parameters:
@@ -83553,7 +83553,7 @@ type Socket interface {
 	// Gets the timeout setting of the socket. For details on this, see
 	// g_socket_set_timeout().
 	GetTimeout() uint
-	// GetTTL wraps g_socket_get_ttl
+	// GetTtl wraps g_socket_get_ttl
 	// 
 	// The function returns the following values:
 	// 
@@ -83561,7 +83561,7 @@ type Socket interface {
 	//
 	// Gets the unicast time-to-live setting on @socket; see
 	// g_socket_set_ttl() for more details.
-	GetTTL() uint
+	GetTtl() uint
 	// IsClosed wraps g_socket_is_closed
 	// 
 	// The function returns the following values:
@@ -83612,7 +83612,7 @@ type Socket interface {
 	// To bind to a given source-specific multicast address, use
 	// g_socket_join_multicast_group_ssm() instead.
 	JoinMulticastGroup(InetAddress, bool, string) (bool, error)
-	// JoinMulticastGroupSSM wraps g_socket_join_multicast_group_ssm
+	// JoinMulticastGroupSsm wraps g_socket_join_multicast_group_ssm
 	// 
 	// The function takes the following parameters:
 	// 
@@ -83641,7 +83641,7 @@ type Socket interface {
 	// Note that this function can be called multiple times for the same
 	// @group with different @source_specific in order to receive multicast
 	// packets from more than one source.
-	JoinMulticastGroupSSM(InetAddress, InetAddress, string) (bool, error)
+	JoinMulticastGroupSsm(InetAddress, InetAddress, string) (bool, error)
 	// LeaveMulticastGroup wraps g_socket_leave_multicast_group
 	// 
 	// The function takes the following parameters:
@@ -83665,7 +83665,7 @@ type Socket interface {
 	// To unbind to a given source-specific multicast address, use
 	// g_socket_leave_multicast_group_ssm() instead.
 	LeaveMulticastGroup(InetAddress, bool, string) (bool, error)
-	// LeaveMulticastGroupSSM wraps g_socket_leave_multicast_group_ssm
+	// LeaveMulticastGroupSsm wraps g_socket_leave_multicast_group_ssm
 	// 
 	// The function takes the following parameters:
 	// 
@@ -83685,7 +83685,7 @@ type Socket interface {
 	// 
 	// @socket remains bound to its address and port, and can still receive
 	// unicast messages after calling this.
-	LeaveMulticastGroupSSM(InetAddress, InetAddress, string) (bool, error)
+	LeaveMulticastGroupSsm(InetAddress, InetAddress, string) (bool, error)
 	// Listen wraps g_socket_listen
 	// 
 	// The function returns the following values:
@@ -84173,7 +84173,7 @@ type Socket interface {
 	// listening on that multicast address on the same host. This is %TRUE
 	// by default.
 	SetMulticastLoopback(bool)
-	// SetMulticastTTL wraps g_socket_set_multicast_ttl
+	// SetMulticastTtl wraps g_socket_set_multicast_ttl
 	// 
 	// The function takes the following parameters:
 	// 
@@ -84182,7 +84182,7 @@ type Socket interface {
 	// Sets the time-to-live for outgoing multicast datagrams on @socket.
 	// By default, this is 1, meaning that multicast packets will not leave
 	// the local network.
-	SetMulticastTTL(uint)
+	SetMulticastTtl(uint)
 	// SetOption wraps g_socket_set_option
 	// 
 	// The function takes the following parameters:
@@ -84233,7 +84233,7 @@ type Socket interface {
 	// Note that if an I/O operation is interrupted by a signal, this may
 	// cause the timeout to be reset.
 	SetTimeout(uint)
-	// SetTTL wraps g_socket_set_ttl
+	// SetTtl wraps g_socket_set_ttl
 	// 
 	// The function takes the following parameters:
 	// 
@@ -84241,7 +84241,7 @@ type Socket interface {
 	//
 	// Sets the time-to-live for outgoing unicast packets on @socket.
 	// By default the platform-specific default value is used.
-	SetTTL(uint)
+	SetTtl(uint)
 	// Shutdown wraps g_socket_shutdown
 	// 
 	// The function takes the following parameters:
@@ -84269,7 +84269,7 @@ type Socket interface {
 	// then wait for the other side to close the connection, thus ensuring that the
 	// other side saw all sent data.
 	Shutdown(bool, bool) (bool, error)
-	// SpeaksIPv4 wraps g_socket_speaks_ipv4
+	// SpeaksIpv4 wraps g_socket_speaks_ipv4
 	// 
 	// The function returns the following values:
 	// 
@@ -84284,7 +84284,7 @@ type Socket interface {
 	// 
 	// No other types of sockets are currently considered as being capable
 	// of speaking IPv4.
-	SpeaksIPv4() bool
+	SpeaksIpv4() bool
 
 	// chain up virtual methods:
 }
@@ -85178,7 +85178,7 @@ func (socket *SocketInstance) GetMulticastLoopback() bool {
 	return goret
 }
 
-// GetMulticastTTL wraps g_socket_get_multicast_ttl
+// GetMulticastTtl wraps g_socket_get_multicast_ttl
 // 
 // The function returns the following values:
 // 
@@ -85186,7 +85186,7 @@ func (socket *SocketInstance) GetMulticastLoopback() bool {
 //
 // Gets the multicast time-to-live setting on @socket; see
 // g_socket_set_multicast_ttl() for more details.
-func (socket *SocketInstance) GetMulticastTTL() uint {
+func (socket *SocketInstance) GetMulticastTtl() uint {
 	var carg0 *C.GSocket // in, none, converted
 	var cret  C.guint    // return, none, casted
 
@@ -85361,7 +85361,7 @@ func (socket *SocketInstance) GetTimeout() uint {
 	return goret
 }
 
-// GetTTL wraps g_socket_get_ttl
+// GetTtl wraps g_socket_get_ttl
 // 
 // The function returns the following values:
 // 
@@ -85369,7 +85369,7 @@ func (socket *SocketInstance) GetTimeout() uint {
 //
 // Gets the unicast time-to-live setting on @socket; see
 // g_socket_set_ttl() for more details.
-func (socket *SocketInstance) GetTTL() uint {
+func (socket *SocketInstance) GetTtl() uint {
 	var carg0 *C.GSocket // in, none, converted
 	var cret  C.guint    // return, none, casted
 
@@ -85505,7 +85505,7 @@ func (socket *SocketInstance) JoinMulticastGroup(group InetAddress, sourceSpecif
 	return goret, _goerr
 }
 
-// JoinMulticastGroupSSM wraps g_socket_join_multicast_group_ssm
+// JoinMulticastGroupSsm wraps g_socket_join_multicast_group_ssm
 // 
 // The function takes the following parameters:
 // 
@@ -85534,7 +85534,7 @@ func (socket *SocketInstance) JoinMulticastGroup(group InetAddress, sourceSpecif
 // Note that this function can be called multiple times for the same
 // @group with different @source_specific in order to receive multicast
 // packets from more than one source.
-func (socket *SocketInstance) JoinMulticastGroupSSM(group InetAddress, sourceSpecific InetAddress, iface string) (bool, error) {
+func (socket *SocketInstance) JoinMulticastGroupSsm(group InetAddress, sourceSpecific InetAddress, iface string) (bool, error) {
 	var carg0 *C.GSocket      // in, none, converted
 	var carg1 *C.GInetAddress // in, none, converted
 	var carg2 *C.GInetAddress // in, none, converted, nullable
@@ -85630,7 +85630,7 @@ func (socket *SocketInstance) LeaveMulticastGroup(group InetAddress, sourceSpeci
 	return goret, _goerr
 }
 
-// LeaveMulticastGroupSSM wraps g_socket_leave_multicast_group_ssm
+// LeaveMulticastGroupSsm wraps g_socket_leave_multicast_group_ssm
 // 
 // The function takes the following parameters:
 // 
@@ -85650,7 +85650,7 @@ func (socket *SocketInstance) LeaveMulticastGroup(group InetAddress, sourceSpeci
 // 
 // @socket remains bound to its address and port, and can still receive
 // unicast messages after calling this.
-func (socket *SocketInstance) LeaveMulticastGroupSSM(group InetAddress, sourceSpecific InetAddress, iface string) (bool, error) {
+func (socket *SocketInstance) LeaveMulticastGroupSsm(group InetAddress, sourceSpecific InetAddress, iface string) (bool, error) {
 	var carg0 *C.GSocket      // in, none, converted
 	var carg1 *C.GInetAddress // in, none, converted
 	var carg2 *C.GInetAddress // in, none, converted, nullable
@@ -86704,7 +86704,7 @@ func (socket *SocketInstance) SetMulticastLoopback(loopback bool) {
 	runtime.KeepAlive(loopback)
 }
 
-// SetMulticastTTL wraps g_socket_set_multicast_ttl
+// SetMulticastTtl wraps g_socket_set_multicast_ttl
 // 
 // The function takes the following parameters:
 // 
@@ -86713,7 +86713,7 @@ func (socket *SocketInstance) SetMulticastLoopback(loopback bool) {
 // Sets the time-to-live for outgoing multicast datagrams on @socket.
 // By default, this is 1, meaning that multicast packets will not leave
 // the local network.
-func (socket *SocketInstance) SetMulticastTTL(ttl uint) {
+func (socket *SocketInstance) SetMulticastTtl(ttl uint) {
 	var carg0 *C.GSocket // in, none, converted
 	var carg1 C.guint    // in, none, casted
 
@@ -86817,7 +86817,7 @@ func (socket *SocketInstance) SetTimeout(timeout uint) {
 	runtime.KeepAlive(timeout)
 }
 
-// SetTTL wraps g_socket_set_ttl
+// SetTtl wraps g_socket_set_ttl
 // 
 // The function takes the following parameters:
 // 
@@ -86825,7 +86825,7 @@ func (socket *SocketInstance) SetTimeout(timeout uint) {
 //
 // Sets the time-to-live for outgoing unicast packets on @socket.
 // By default the platform-specific default value is used.
-func (socket *SocketInstance) SetTTL(ttl uint) {
+func (socket *SocketInstance) SetTtl(ttl uint) {
 	var carg0 *C.GSocket // in, none, converted
 	var carg1 C.guint    // in, none, casted
 
@@ -86896,7 +86896,7 @@ func (socket *SocketInstance) Shutdown(shutdownRead bool, shutdownWrite bool) (b
 	return goret, _goerr
 }
 
-// SpeaksIPv4 wraps g_socket_speaks_ipv4
+// SpeaksIpv4 wraps g_socket_speaks_ipv4
 // 
 // The function returns the following values:
 // 
@@ -86911,7 +86911,7 @@ func (socket *SocketInstance) Shutdown(shutdownRead bool, shutdownWrite bool) (b
 // 
 // No other types of sockets are currently considered as being capable
 // of speaking IPv4.
-func (socket *SocketInstance) SpeaksIPv4() bool {
+func (socket *SocketInstance) SpeaksIpv4() bool {
 	var carg0 *C.GSocket // in, none, converted
 	var cret  C.gboolean // return
 
@@ -88199,7 +88199,7 @@ type SocketClient interface {
 	// 
 	// See g_socket_client_set_timeout() for details.
 	GetTimeout() uint
-	// GetTLS wraps g_socket_client_get_tls
+	// GetTls wraps g_socket_client_get_tls
 	// 
 	// The function returns the following values:
 	// 
@@ -88207,12 +88207,12 @@ type SocketClient interface {
 	//
 	// Gets whether @client creates TLS connections. See
 	// g_socket_client_set_tls() for details.
-	GetTLS() bool
-	// GetTLSValidationFlags wraps g_socket_client_get_tls_validation_flags
+	GetTls() bool
+	// GetTlsValidationFlags wraps g_socket_client_get_tls_validation_flags
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSCertificateFlags 
+	// 	- goret TlsCertificateFlags 
 	//
 	// Gets the TLS validation flags used creating TLS connections via
 	// @client.
@@ -88222,7 +88222,7 @@ type SocketClient interface {
 	// information.
 	//
 	// Deprecated: (since 2.72.0) Do not attempt to ignore validation errors.
-	GetTLSValidationFlags() TLSCertificateFlags
+	GetTlsValidationFlags() TlsCertificateFlags
 	// SetEnableProxy wraps g_socket_client_set_enable_proxy
 	// 
 	// The function takes the following parameters:
@@ -88319,7 +88319,7 @@ type SocketClient interface {
 	// so setting this may cause calls to g_socket_client_connect(), etc,
 	// to fail with %G_IO_ERROR_TIMED_OUT.
 	SetTimeout(uint)
-	// SetTLS wraps g_socket_client_set_tls
+	// SetTls wraps g_socket_client_set_tls
 	// 
 	// The function takes the following parameters:
 	// 
@@ -88343,12 +88343,12 @@ type SocketClient interface {
 	// emitted with %G_SOCKET_CLIENT_TLS_HANDSHAKING, which will give you
 	// a chance to see the #GTlsClientConnection before the handshake
 	// starts.
-	SetTLS(bool)
-	// SetTLSValidationFlags wraps g_socket_client_set_tls_validation_flags
+	SetTls(bool)
+	// SetTlsValidationFlags wraps g_socket_client_set_tls_validation_flags
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- flags TLSCertificateFlags: the validation flags 
+	// 	- flags TlsCertificateFlags: the validation flags 
 	//
 	// Sets the TLS validation flags used when creating TLS connections
 	// via @client. The default value is %G_TLS_CERTIFICATE_VALIDATE_ALL.
@@ -88358,7 +88358,7 @@ type SocketClient interface {
 	// information.
 	//
 	// Deprecated: (since 2.72.0) Do not attempt to ignore validation errors.
-	SetTLSValidationFlags(TLSCertificateFlags)
+	SetTlsValidationFlags(TlsCertificateFlags)
 	// ConnectEvent connects the provided callback to the "event" signal
 	//
 	// Emitted when @client's activity on @connectable changes state.
@@ -89284,7 +89284,7 @@ func (client *SocketClientInstance) GetTimeout() uint {
 	return goret
 }
 
-// GetTLS wraps g_socket_client_get_tls
+// GetTls wraps g_socket_client_get_tls
 // 
 // The function returns the following values:
 // 
@@ -89292,7 +89292,7 @@ func (client *SocketClientInstance) GetTimeout() uint {
 //
 // Gets whether @client creates TLS connections. See
 // g_socket_client_set_tls() for details.
-func (client *SocketClientInstance) GetTLS() bool {
+func (client *SocketClientInstance) GetTls() bool {
 	var carg0 *C.GSocketClient // in, none, converted
 	var cret  C.gboolean       // return
 
@@ -89310,11 +89310,11 @@ func (client *SocketClientInstance) GetTLS() bool {
 	return goret
 }
 
-// GetTLSValidationFlags wraps g_socket_client_get_tls_validation_flags
+// GetTlsValidationFlags wraps g_socket_client_get_tls_validation_flags
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSCertificateFlags 
+// 	- goret TlsCertificateFlags 
 //
 // Gets the TLS validation flags used creating TLS connections via
 // @client.
@@ -89324,7 +89324,7 @@ func (client *SocketClientInstance) GetTLS() bool {
 // information.
 //
 // Deprecated: (since 2.72.0) Do not attempt to ignore validation errors.
-func (client *SocketClientInstance) GetTLSValidationFlags() TLSCertificateFlags {
+func (client *SocketClientInstance) GetTlsValidationFlags() TlsCertificateFlags {
 	var carg0 *C.GSocketClient       // in, none, converted
 	var cret  C.GTlsCertificateFlags // return, none, casted
 
@@ -89333,9 +89333,9 @@ func (client *SocketClientInstance) GetTLSValidationFlags() TLSCertificateFlags 
 	cret = C.g_socket_client_get_tls_validation_flags(carg0)
 	runtime.KeepAlive(client)
 
-	var goret TLSCertificateFlags
+	var goret TlsCertificateFlags
 
-	goret = TLSCertificateFlags(cret)
+	goret = TlsCertificateFlags(cret)
 
 	return goret
 }
@@ -89519,7 +89519,7 @@ func (client *SocketClientInstance) SetTimeout(timeout uint) {
 	runtime.KeepAlive(timeout)
 }
 
-// SetTLS wraps g_socket_client_set_tls
+// SetTls wraps g_socket_client_set_tls
 // 
 // The function takes the following parameters:
 // 
@@ -89543,7 +89543,7 @@ func (client *SocketClientInstance) SetTimeout(timeout uint) {
 // emitted with %G_SOCKET_CLIENT_TLS_HANDSHAKING, which will give you
 // a chance to see the #GTlsClientConnection before the handshake
 // starts.
-func (client *SocketClientInstance) SetTLS(tls bool) {
+func (client *SocketClientInstance) SetTls(tls bool) {
 	var carg0 *C.GSocketClient // in, none, converted
 	var carg1 C.gboolean       // in
 
@@ -89557,11 +89557,11 @@ func (client *SocketClientInstance) SetTLS(tls bool) {
 	runtime.KeepAlive(tls)
 }
 
-// SetTLSValidationFlags wraps g_socket_client_set_tls_validation_flags
+// SetTlsValidationFlags wraps g_socket_client_set_tls_validation_flags
 // 
 // The function takes the following parameters:
 // 
-// 	- flags TLSCertificateFlags: the validation flags 
+// 	- flags TlsCertificateFlags: the validation flags 
 //
 // Sets the TLS validation flags used when creating TLS connections
 // via @client. The default value is %G_TLS_CERTIFICATE_VALIDATE_ALL.
@@ -89571,7 +89571,7 @@ func (client *SocketClientInstance) SetTLS(tls bool) {
 // information.
 //
 // Deprecated: (since 2.72.0) Do not attempt to ignore validation errors.
-func (client *SocketClientInstance) SetTLSValidationFlags(flags TLSCertificateFlags) {
+func (client *SocketClientInstance) SetTlsValidationFlags(flags TlsCertificateFlags) {
 	var carg0 *C.GSocketClient       // in, none, converted
 	var carg1 C.GTlsCertificateFlags // in, none, casted
 
@@ -94667,7 +94667,7 @@ type TlsCertificate interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSCertificateFlags 
+	// 	- goret TlsCertificateFlags 
 	//
 	// This verifies @cert and returns a set of #GTlsCertificateFlags
 	// indicating any problems found with it. This can be used to verify a
@@ -94702,7 +94702,7 @@ type TlsCertificate interface {
 	// revocation checks may not be performed. The best way to verify TLS
 	// certificates used by a TLS connection is to let #GTlsConnection
 	// handle the verification.
-	Verify(SocketConnectable, TlsCertificate) TLSCertificateFlags
+	Verify(SocketConnectable, TlsCertificate) TlsCertificateFlags
 
 	// chain up virtual methods:
 
@@ -94716,7 +94716,7 @@ type TlsCertificate interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSCertificateFlags 
+	// 	- goret TlsCertificateFlags 
 	//
 	// This verifies @cert and returns a set of #GTlsCertificateFlags
 	// indicating any problems found with it. This can be used to verify a
@@ -94751,7 +94751,7 @@ type TlsCertificate interface {
 	// revocation checks may not be performed. The best way to verify TLS
 	// certificates used by a TLS connection is to let #GTlsConnection
 	// handle the verification.
-	ParentVerify(identity SocketConnectable, trustedCa TlsCertificate) TLSCertificateFlags
+	ParentVerify(identity SocketConnectable, trustedCa TlsCertificate) TlsCertificateFlags
 }
 
 func unsafeWrapTlsCertificate(base *gobject.ObjectInstance) *TlsCertificateInstance {
@@ -94995,7 +94995,7 @@ func NewTlsCertificateFromPem(data string, length int) (TlsCertificate, error) {
 	return goret, _goerr
 }
 
-// NewTlsCertificateFromPKCS11URIs wraps g_tls_certificate_new_from_pkcs11_uris
+// NewTlsCertificateFromPkcs11Uris wraps g_tls_certificate_new_from_pkcs11_uris
 // 
 // The function takes the following parameters:
 // 
@@ -95031,7 +95031,7 @@ func NewTlsCertificateFromPem(data string, length int) (TlsCertificate, error) {
 // @private_key_pkcs11_uri allows using a private key exposed under a different URI.
 // 
 // Note that the private key is not accessed until usage and may fail or require a PIN later.
-func NewTlsCertificateFromPKCS11URIs(pkcs11Uri string, privateKeyPkcs11Uri string) (TlsCertificate, error) {
+func NewTlsCertificateFromPkcs11Uris(pkcs11Uri string, privateKeyPkcs11Uri string) (TlsCertificate, error) {
 	var carg1 *C.gchar           // in, none, string
 	var carg2 *C.gchar           // in, none, string, nullable-string
 	var cret  *C.GTlsCertificate // return, full, converted
@@ -95059,7 +95059,7 @@ func NewTlsCertificateFromPKCS11URIs(pkcs11Uri string, privateKeyPkcs11Uri strin
 	return goret, _goerr
 }
 
-// NewTlsCertificateFromPKCS12 wraps g_tls_certificate_new_from_pkcs12
+// NewTlsCertificateFromPkcs12 wraps g_tls_certificate_new_from_pkcs12
 // 
 // The function takes the following parameters:
 // 
@@ -95088,7 +95088,7 @@ func NewTlsCertificateFromPKCS11URIs(pkcs11Uri string, privateKeyPkcs11Uri strin
 // %G_IO_ERROR_NOT_SUPPORTED.
 // 
 // Other parsing failures will error with %G_TLS_ERROR_BAD_CERTIFICATE.
-func NewTlsCertificateFromPKCS12(data []uint8, password string) (TlsCertificate, error) {
+func NewTlsCertificateFromPkcs12(data []uint8, password string) (TlsCertificate, error) {
 	var carg1 *C.guint8          // in, transfer: none, C Pointers: 1, Name: array[guint8], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
 	var carg2 C.gsize            // implicit
 	var carg3 *C.gchar           // in, none, string, nullable-string
@@ -95286,7 +95286,7 @@ func (certOne *TlsCertificateInstance) IsSame(certTwo TlsCertificate) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSCertificateFlags 
+// 	- goret TlsCertificateFlags 
 //
 // This verifies @cert and returns a set of #GTlsCertificateFlags
 // indicating any problems found with it. This can be used to verify a
@@ -95321,7 +95321,7 @@ func (certOne *TlsCertificateInstance) IsSame(certTwo TlsCertificate) bool {
 // revocation checks may not be performed. The best way to verify TLS
 // certificates used by a TLS connection is to let #GTlsConnection
 // handle the verification.
-func (cert *TlsCertificateInstance) Verify(identity SocketConnectable, trustedCa TlsCertificate) TLSCertificateFlags {
+func (cert *TlsCertificateInstance) Verify(identity SocketConnectable, trustedCa TlsCertificate) TlsCertificateFlags {
 	var carg0 *C.GTlsCertificate     // in, none, converted
 	var carg1 *C.GSocketConnectable  // in, none, converted, nullable
 	var carg2 *C.GTlsCertificate     // in, none, converted, nullable
@@ -95340,9 +95340,9 @@ func (cert *TlsCertificateInstance) Verify(identity SocketConnectable, trustedCa
 	runtime.KeepAlive(identity)
 	runtime.KeepAlive(trustedCa)
 
-	var goret TLSCertificateFlags
+	var goret TlsCertificateFlags
 
-	goret = TLSCertificateFlags(cret)
+	goret = TlsCertificateFlags(cret)
 
 	return goret
 }
@@ -95362,7 +95362,7 @@ type TlsCertificateOverrides[Instance TlsCertificate] struct {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSCertificateFlags 
+	// 	- goret TlsCertificateFlags 
 	//
 	// This verifies @cert and returns a set of #GTlsCertificateFlags
 	// indicating any problems found with it. This can be used to verify a
@@ -95397,7 +95397,7 @@ type TlsCertificateOverrides[Instance TlsCertificate] struct {
 	// revocation checks may not be performed. The best way to verify TLS
 	// certificates used by a TLS connection is to let #GTlsConnection
 	// handle the verification.
-	Verify func(Instance, SocketConnectable, TlsCertificate) TLSCertificateFlags
+	Verify func(Instance, SocketConnectable, TlsCertificate) TlsCertificateFlags
 }
 
 // UnsafeApplyTlsCertificateOverrides applies the overrides to init the gclass by setting the trampoline functions.
@@ -95416,7 +95416,7 @@ func UnsafeApplyTlsCertificateOverrides[Instance TlsCertificate](gclass unsafe.P
 				var cert      Instance            // go GTlsCertificate subclass
 				var identity  SocketConnectable   // in, none, converted, nullable
 				var trustedCa TlsCertificate      // in, none, converted, nullable
-				var goret     TLSCertificateFlags // return, none, casted
+				var goret     TlsCertificateFlags // return, none, casted
 
 				cert = UnsafeTlsCertificateFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
@@ -95446,7 +95446,7 @@ func UnsafeApplyTlsCertificateOverrides[Instance TlsCertificate](gclass unsafe.P
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSCertificateFlags 
+// 	- goret TlsCertificateFlags 
 //
 // This verifies @cert and returns a set of #GTlsCertificateFlags
 // indicating any problems found with it. This can be used to verify a
@@ -95481,7 +95481,7 @@ func UnsafeApplyTlsCertificateOverrides[Instance TlsCertificate](gclass unsafe.P
 // revocation checks may not be performed. The best way to verify TLS
 // certificates used by a TLS connection is to let #GTlsConnection
 // handle the verification.
-func (cert *TlsCertificateInstance) ParentVerify(identity SocketConnectable, trustedCa TlsCertificate) TLSCertificateFlags {
+func (cert *TlsCertificateInstance) ParentVerify(identity SocketConnectable, trustedCa TlsCertificate) TlsCertificateFlags {
 	var carg0 *C.GTlsCertificate
 	var carg1 *C.GSocketConnectable  // in, none, converted
 	var carg2 *C.GTlsCertificate     // in, none, converted, nullable
@@ -95502,9 +95502,9 @@ func (cert *TlsCertificateInstance) ParentVerify(identity SocketConnectable, tru
 	runtime.KeepAlive(identity)
 	runtime.KeepAlive(trustedCa)
 
-	var goret TLSCertificateFlags
+	var goret TlsCertificateFlags
 
-	goret = TLSCertificateFlags(cret)
+	goret = TlsCertificateFlags(cret)
 
 	return goret
 }
@@ -95561,7 +95561,7 @@ type TlsConnection interface {
 	// The function takes the following parameters:
 	// 
 	// 	- peerCert TlsCertificate: the peer's #GTlsCertificate 
-	// 	- errors TLSCertificateFlags: the problems with @peer_cert 
+	// 	- errors TlsCertificateFlags: the problems with @peer_cert 
 	// 
 	// The function returns the following values:
 	// 
@@ -95569,7 +95569,7 @@ type TlsConnection interface {
 	//
 	// Used by #GTlsConnection implementations to emit the
 	// #GTlsConnection::accept-certificate signal.
-	EmitAcceptCertificate(TlsCertificate, TLSCertificateFlags) bool
+	EmitAcceptCertificate(TlsCertificate, TlsCertificateFlags) bool
 	// GetCertificate wraps g_tls_connection_get_certificate
 	// 
 	// The function returns the following values:
@@ -95641,30 +95641,30 @@ type TlsConnection interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSCertificateFlags 
+	// 	- goret TlsCertificateFlags 
 	//
 	// Gets the errors associated with validating @conn's peer's
 	// certificate, after the handshake has completed or failed. (It is
 	// not set during the emission of #GTlsConnection::accept-certificate.)
 	// 
 	// See #GTlsConnection:peer-certificate-errors for more information.
-	GetPeerCertificateErrors() TLSCertificateFlags
+	GetPeerCertificateErrors() TlsCertificateFlags
 	// GetProtocolVersion wraps g_tls_connection_get_protocol_version
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSProtocolVersion 
+	// 	- goret TlsProtocolVersion 
 	//
 	// Returns the current TLS protocol version, which may be
 	// %G_TLS_PROTOCOL_VERSION_UNKNOWN if the connection has not handshaked, or
 	// has been closed, or if the TLS backend has implemented a protocol version
 	// that is not a recognized #GTlsProtocolVersion.
-	GetProtocolVersion() TLSProtocolVersion
+	GetProtocolVersion() TlsProtocolVersion
 	// GetRehandshakeMode wraps g_tls_connection_get_rehandshake_mode
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSRehandshakeMode 
+	// 	- goret TlsRehandshakeMode 
 	//
 	// Gets @conn rehandshaking mode. See
 	// g_tls_connection_set_rehandshake_mode() for details.
@@ -95672,7 +95672,7 @@ type TlsConnection interface {
 	// Deprecated: (since 2.60.0) Changing the rehandshake mode is no longer
 	//   required for compatibility. Also, rehandshaking has been removed
 	//   from the TLS protocol in TLS 1.3.
-	GetRehandshakeMode() TLSRehandshakeMode
+	GetRehandshakeMode() TlsRehandshakeMode
 	// GetRequireCloseNotify wraps g_tls_connection_get_require_close_notify
 	// 
 	// The function returns the following values:
@@ -95683,7 +95683,7 @@ type TlsConnection interface {
 	// when the connection is closed. See
 	// g_tls_connection_set_require_close_notify() for details.
 	GetRequireCloseNotify() bool
-	// GetUseSystemCertDB wraps g_tls_connection_get_use_system_certdb
+	// GetUseSystemCertdb wraps g_tls_connection_get_use_system_certdb
 	// 
 	// The function returns the following values:
 	// 
@@ -95693,7 +95693,7 @@ type TlsConnection interface {
 	// peer certificates. See g_tls_connection_set_use_system_certdb().
 	//
 	// Deprecated: (since 2.30.0) Use g_tls_connection_get_database() instead
-	GetUseSystemCertDB() bool
+	GetUseSystemCertdb() bool
 	// Handshake wraps g_tls_connection_handshake
 	// 
 	// The function takes the following parameters:
@@ -95840,7 +95840,7 @@ type TlsConnection interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- mode TLSRehandshakeMode: the rehandshaking mode 
+	// 	- mode TlsRehandshakeMode: the rehandshaking mode 
 	//
 	// Since GLib 2.64, changing the rehandshake mode is no longer supported
 	// and will have no effect. With TLS 1.3, rehandshaking has been removed from
@@ -95850,7 +95850,7 @@ type TlsConnection interface {
 	// Deprecated: (since 2.60.0) Changing the rehandshake mode is no longer
 	//   required for compatibility. Also, rehandshaking has been removed
 	//   from the TLS protocol in TLS 1.3.
-	SetRehandshakeMode(TLSRehandshakeMode)
+	SetRehandshakeMode(TlsRehandshakeMode)
 	// SetRequireCloseNotify wraps g_tls_connection_set_require_close_notify
 	// 
 	// The function takes the following parameters:
@@ -95885,7 +95885,7 @@ type TlsConnection interface {
 	// than closing @conn itself, but note that this may only be done when no other
 	// operations are pending on @conn or the base I/O stream.
 	SetRequireCloseNotify(bool)
-	// SetUseSystemCertDB wraps g_tls_connection_set_use_system_certdb
+	// SetUseSystemCertdb wraps g_tls_connection_set_use_system_certdb
 	// 
 	// The function takes the following parameters:
 	// 
@@ -95900,7 +95900,7 @@ type TlsConnection interface {
 	// #GTlsClientConnection:validation-flags).
 	//
 	// Deprecated: (since 2.30.0) Use g_tls_connection_set_database() instead
-	SetUseSystemCertDB(bool)
+	SetUseSystemCertdb(bool)
 	// ConnectAcceptCertificate connects the provided callback to the "accept-certificate" signal
 	//
 	// Emitted during the TLS handshake after the peer certificate has
@@ -95945,7 +95945,7 @@ type TlsConnection interface {
 	// If you are doing I/O in another thread, you do not
 	// need to worry about this, and can simply block in the signal
 	// handler until the UI thread returns an answer.
-	ConnectAcceptCertificate(func(TlsConnection, TlsCertificate, TLSCertificateFlags) bool) gobject.SignalHandle
+	ConnectAcceptCertificate(func(TlsConnection, TlsCertificate, TlsCertificateFlags) bool) gobject.SignalHandle
 
 	// chain up virtual methods:
 
@@ -95955,14 +95955,14 @@ type TlsConnection interface {
 	// The function takes the following parameters:
 	// 
 	// 	- peerCert TlsCertificate 
-	// 	- errors TLSCertificateFlags 
+	// 	- errors TlsCertificateFlags 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Check whether to accept a certificate.
-	ParentAcceptCertificate(peerCert TlsCertificate, errors TLSCertificateFlags) bool
+	ParentAcceptCertificate(peerCert TlsCertificate, errors TlsCertificateFlags) bool
 	// ParentGetNegotiatedProtocol calls the default implementations of the get_negotiated_protocol virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -96094,7 +96094,7 @@ func UnsafeTlsConnectionToGlibFull(c TlsConnection) unsafe.Pointer {
 // The function takes the following parameters:
 // 
 // 	- peerCert TlsCertificate: the peer's #GTlsCertificate 
-// 	- errors TLSCertificateFlags: the problems with @peer_cert 
+// 	- errors TlsCertificateFlags: the problems with @peer_cert 
 // 
 // The function returns the following values:
 // 
@@ -96102,7 +96102,7 @@ func UnsafeTlsConnectionToGlibFull(c TlsConnection) unsafe.Pointer {
 //
 // Used by #GTlsConnection implementations to emit the
 // #GTlsConnection::accept-certificate signal.
-func (conn *TlsConnectionInstance) EmitAcceptCertificate(peerCert TlsCertificate, errors TLSCertificateFlags) bool {
+func (conn *TlsConnectionInstance) EmitAcceptCertificate(peerCert TlsCertificate, errors TlsCertificateFlags) bool {
 	var carg0 *C.GTlsConnection      // in, none, converted
 	var carg1 *C.GTlsCertificate     // in, none, converted
 	var carg2 C.GTlsCertificateFlags // in, none, casted
@@ -96300,14 +96300,14 @@ func (conn *TlsConnectionInstance) GetPeerCertificate() TlsCertificate {
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSCertificateFlags 
+// 	- goret TlsCertificateFlags 
 //
 // Gets the errors associated with validating @conn's peer's
 // certificate, after the handshake has completed or failed. (It is
 // not set during the emission of #GTlsConnection::accept-certificate.)
 // 
 // See #GTlsConnection:peer-certificate-errors for more information.
-func (conn *TlsConnectionInstance) GetPeerCertificateErrors() TLSCertificateFlags {
+func (conn *TlsConnectionInstance) GetPeerCertificateErrors() TlsCertificateFlags {
 	var carg0 *C.GTlsConnection      // in, none, converted
 	var cret  C.GTlsCertificateFlags // return, none, casted
 
@@ -96316,9 +96316,9 @@ func (conn *TlsConnectionInstance) GetPeerCertificateErrors() TLSCertificateFlag
 	cret = C.g_tls_connection_get_peer_certificate_errors(carg0)
 	runtime.KeepAlive(conn)
 
-	var goret TLSCertificateFlags
+	var goret TlsCertificateFlags
 
-	goret = TLSCertificateFlags(cret)
+	goret = TlsCertificateFlags(cret)
 
 	return goret
 }
@@ -96327,13 +96327,13 @@ func (conn *TlsConnectionInstance) GetPeerCertificateErrors() TLSCertificateFlag
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSProtocolVersion 
+// 	- goret TlsProtocolVersion 
 //
 // Returns the current TLS protocol version, which may be
 // %G_TLS_PROTOCOL_VERSION_UNKNOWN if the connection has not handshaked, or
 // has been closed, or if the TLS backend has implemented a protocol version
 // that is not a recognized #GTlsProtocolVersion.
-func (conn *TlsConnectionInstance) GetProtocolVersion() TLSProtocolVersion {
+func (conn *TlsConnectionInstance) GetProtocolVersion() TlsProtocolVersion {
 	var carg0 *C.GTlsConnection     // in, none, converted
 	var cret  C.GTlsProtocolVersion // return, none, casted
 
@@ -96342,9 +96342,9 @@ func (conn *TlsConnectionInstance) GetProtocolVersion() TLSProtocolVersion {
 	cret = C.g_tls_connection_get_protocol_version(carg0)
 	runtime.KeepAlive(conn)
 
-	var goret TLSProtocolVersion
+	var goret TlsProtocolVersion
 
-	goret = TLSProtocolVersion(cret)
+	goret = TlsProtocolVersion(cret)
 
 	return goret
 }
@@ -96353,7 +96353,7 @@ func (conn *TlsConnectionInstance) GetProtocolVersion() TLSProtocolVersion {
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSRehandshakeMode 
+// 	- goret TlsRehandshakeMode 
 //
 // Gets @conn rehandshaking mode. See
 // g_tls_connection_set_rehandshake_mode() for details.
@@ -96361,7 +96361,7 @@ func (conn *TlsConnectionInstance) GetProtocolVersion() TLSProtocolVersion {
 // Deprecated: (since 2.60.0) Changing the rehandshake mode is no longer
 //   required for compatibility. Also, rehandshaking has been removed
 //   from the TLS protocol in TLS 1.3.
-func (conn *TlsConnectionInstance) GetRehandshakeMode() TLSRehandshakeMode {
+func (conn *TlsConnectionInstance) GetRehandshakeMode() TlsRehandshakeMode {
 	var carg0 *C.GTlsConnection     // in, none, converted
 	var cret  C.GTlsRehandshakeMode // return, none, casted
 
@@ -96370,9 +96370,9 @@ func (conn *TlsConnectionInstance) GetRehandshakeMode() TLSRehandshakeMode {
 	cret = C.g_tls_connection_get_rehandshake_mode(carg0)
 	runtime.KeepAlive(conn)
 
-	var goret TLSRehandshakeMode
+	var goret TlsRehandshakeMode
 
-	goret = TLSRehandshakeMode(cret)
+	goret = TlsRehandshakeMode(cret)
 
 	return goret
 }
@@ -96404,7 +96404,7 @@ func (conn *TlsConnectionInstance) GetRequireCloseNotify() bool {
 	return goret
 }
 
-// GetUseSystemCertDB wraps g_tls_connection_get_use_system_certdb
+// GetUseSystemCertdb wraps g_tls_connection_get_use_system_certdb
 // 
 // The function returns the following values:
 // 
@@ -96414,7 +96414,7 @@ func (conn *TlsConnectionInstance) GetRequireCloseNotify() bool {
 // peer certificates. See g_tls_connection_set_use_system_certdb().
 //
 // Deprecated: (since 2.30.0) Use g_tls_connection_get_database() instead
-func (conn *TlsConnectionInstance) GetUseSystemCertDB() bool {
+func (conn *TlsConnectionInstance) GetUseSystemCertdb() bool {
 	var carg0 *C.GTlsConnection // in, none, converted
 	var cret  C.gboolean        // return
 
@@ -96703,7 +96703,7 @@ func (conn *TlsConnectionInstance) SetInteraction(interaction TlsInteraction) {
 // 
 // The function takes the following parameters:
 // 
-// 	- mode TLSRehandshakeMode: the rehandshaking mode 
+// 	- mode TlsRehandshakeMode: the rehandshaking mode 
 //
 // Since GLib 2.64, changing the rehandshake mode is no longer supported
 // and will have no effect. With TLS 1.3, rehandshaking has been removed from
@@ -96713,7 +96713,7 @@ func (conn *TlsConnectionInstance) SetInteraction(interaction TlsInteraction) {
 // Deprecated: (since 2.60.0) Changing the rehandshake mode is no longer
 //   required for compatibility. Also, rehandshaking has been removed
 //   from the TLS protocol in TLS 1.3.
-func (conn *TlsConnectionInstance) SetRehandshakeMode(mode TLSRehandshakeMode) {
+func (conn *TlsConnectionInstance) SetRehandshakeMode(mode TlsRehandshakeMode) {
 	var carg0 *C.GTlsConnection     // in, none, converted
 	var carg1 C.GTlsRehandshakeMode // in, none, casted
 
@@ -96772,7 +96772,7 @@ func (conn *TlsConnectionInstance) SetRequireCloseNotify(requireCloseNotify bool
 	runtime.KeepAlive(requireCloseNotify)
 }
 
-// SetUseSystemCertDB wraps g_tls_connection_set_use_system_certdb
+// SetUseSystemCertdb wraps g_tls_connection_set_use_system_certdb
 // 
 // The function takes the following parameters:
 // 
@@ -96787,7 +96787,7 @@ func (conn *TlsConnectionInstance) SetRequireCloseNotify(requireCloseNotify bool
 // #GTlsClientConnection:validation-flags).
 //
 // Deprecated: (since 2.30.0) Use g_tls_connection_set_database() instead
-func (conn *TlsConnectionInstance) SetUseSystemCertDB(useSystemCertdb bool) {
+func (conn *TlsConnectionInstance) SetUseSystemCertdb(useSystemCertdb bool) {
 	var carg0 *C.GTlsConnection // in, none, converted
 	var carg1 C.gboolean        // in
 
@@ -96845,7 +96845,7 @@ func (conn *TlsConnectionInstance) SetUseSystemCertDB(useSystemCertdb bool) {
 // If you are doing I/O in another thread, you do not
 // need to worry about this, and can simply block in the signal
 // handler until the UI thread returns an answer.
-func (o *TlsConnectionInstance) ConnectAcceptCertificate(fn func(TlsConnection, TlsCertificate, TLSCertificateFlags) bool) gobject.SignalHandle {
+func (o *TlsConnectionInstance) ConnectAcceptCertificate(fn func(TlsConnection, TlsCertificate, TlsCertificateFlags) bool) gobject.SignalHandle {
 	return o.Connect("accept-certificate", fn)
 }
 
@@ -96860,14 +96860,14 @@ type TlsConnectionOverrides[Instance TlsConnection] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- peerCert TlsCertificate 
-	// 	- errors TLSCertificateFlags 
+	// 	- errors TlsCertificateFlags 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Check whether to accept a certificate.
-	AcceptCertificate func(Instance, TlsCertificate, TLSCertificateFlags) bool
+	AcceptCertificate func(Instance, TlsCertificate, TlsCertificateFlags) bool
 	// // GetNegotiatedProtocol allows you to override the implementation of the virtual method get_negotiated_protocol.
 	// 
 	// The function returns the following values:
@@ -96956,12 +96956,12 @@ func UnsafeApplyTlsConnectionOverrides[Instance TlsConnection](gclass unsafe.Poi
 			func(carg0 *C.GTlsConnection, carg1 *C.GTlsCertificate, carg2 C.GTlsCertificateFlags) (cret C.gboolean) {
 				var connection Instance            // go GTlsConnection subclass
 				var peerCert   TlsCertificate      // in, none, converted
-				var errors     TLSCertificateFlags // in, none, casted
+				var errors     TlsCertificateFlags // in, none, casted
 				var goret      bool                // return
 
 				connection = UnsafeTlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				peerCert = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(carg1))
-				errors = TLSCertificateFlags(carg2)
+				errors = TlsCertificateFlags(carg2)
 
 				goret = overrides.AcceptCertificate(connection, peerCert, errors)
 
@@ -97058,14 +97058,14 @@ func UnsafeApplyTlsConnectionOverrides[Instance TlsConnection](gclass unsafe.Poi
 // The function takes the following parameters:
 // 
 // 	- peerCert TlsCertificate 
-// 	- errors TLSCertificateFlags 
+// 	- errors TlsCertificateFlags 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 //
 // Check whether to accept a certificate.
-func (connection *TlsConnectionInstance) ParentAcceptCertificate(peerCert TlsCertificate, errors TLSCertificateFlags) bool {
+func (connection *TlsConnectionInstance) ParentAcceptCertificate(peerCert TlsCertificate, errors TlsCertificateFlags) bool {
 	var carg0 *C.GTlsConnection
 	var carg1 *C.GTlsCertificate     // in, none, converted
 	var carg2 C.GTlsCertificateFlags // in, none, converted
@@ -97315,7 +97315,7 @@ type TlsDatabase interface {
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 	// 	- handle string: a certificate handle 
 	// 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-	// 	- flags TLSDatabaseLookupFlags: Flags which affect the lookup. 
+	// 	- flags TlsDatabaseLookupFlags: Flags which affect the lookup. 
 	// 
 	// The function returns the following values:
 	// 
@@ -97334,7 +97334,7 @@ type TlsDatabase interface {
 	// 
 	// This function can block, use g_tls_database_lookup_certificate_for_handle_async() to perform
 	// the lookup operation asynchronously.
-	LookupCertificateForHandle(context.Context, string, TlsInteraction, TLSDatabaseLookupFlags) (TlsCertificate, error)
+	LookupCertificateForHandle(context.Context, string, TlsInteraction, TlsDatabaseLookupFlags) (TlsCertificate, error)
 	// LookupCertificateForHandleAsync wraps g_tls_database_lookup_certificate_for_handle_async
 	// 
 	// The function takes the following parameters:
@@ -97342,12 +97342,12 @@ type TlsDatabase interface {
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 	// 	- handle string: a certificate handle 
 	// 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-	// 	- flags TLSDatabaseLookupFlags: Flags which affect the lookup. 
+	// 	- flags TlsDatabaseLookupFlags: Flags which affect the lookup. 
 	// 	- callback AsyncReadyCallback (nullable): callback to call when the operation completes 
 	//
 	// Asynchronously look up a certificate by its handle in the database. See
 	// g_tls_database_lookup_certificate_for_handle() for more information.
-	LookupCertificateForHandleAsync(context.Context, string, TlsInteraction, TLSDatabaseLookupFlags, AsyncReadyCallback)
+	LookupCertificateForHandleAsync(context.Context, string, TlsInteraction, TlsDatabaseLookupFlags, AsyncReadyCallback)
 	// LookupCertificateForHandleFinish wraps g_tls_database_lookup_certificate_for_handle_finish
 	// 
 	// The function takes the following parameters:
@@ -97372,7 +97372,7 @@ type TlsDatabase interface {
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 	// 	- certificate TlsCertificate: a #GTlsCertificate 
 	// 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-	// 	- flags TLSDatabaseLookupFlags: flags which affect the lookup operation 
+	// 	- flags TlsDatabaseLookupFlags: flags which affect the lookup operation 
 	// 
 	// The function returns the following values:
 	// 
@@ -97399,7 +97399,7 @@ type TlsDatabase interface {
 	// certificate. Accordingly, this function cannot be used to make
 	// security-related decisions. Only GLib itself should make security
 	// decisions about TLS certificates.
-	LookupCertificateIssuer(context.Context, TlsCertificate, TlsInteraction, TLSDatabaseLookupFlags) (TlsCertificate, error)
+	LookupCertificateIssuer(context.Context, TlsCertificate, TlsInteraction, TlsDatabaseLookupFlags) (TlsCertificate, error)
 	// LookupCertificateIssuerAsync wraps g_tls_database_lookup_certificate_issuer_async
 	// 
 	// The function takes the following parameters:
@@ -97407,12 +97407,12 @@ type TlsDatabase interface {
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 	// 	- certificate TlsCertificate: a #GTlsCertificate 
 	// 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-	// 	- flags TLSDatabaseLookupFlags: flags which affect the lookup operation 
+	// 	- flags TlsDatabaseLookupFlags: flags which affect the lookup operation 
 	// 	- callback AsyncReadyCallback (nullable): callback to call when the operation completes 
 	//
 	// Asynchronously look up the issuer of @certificate in the database. See
 	// g_tls_database_lookup_certificate_issuer() for more information.
-	LookupCertificateIssuerAsync(context.Context, TlsCertificate, TlsInteraction, TLSDatabaseLookupFlags, AsyncReadyCallback)
+	LookupCertificateIssuerAsync(context.Context, TlsCertificate, TlsInteraction, TlsDatabaseLookupFlags, AsyncReadyCallback)
 	// LookupCertificateIssuerFinish wraps g_tls_database_lookup_certificate_issuer_finish
 	// 
 	// The function takes the following parameters:
@@ -97450,11 +97450,11 @@ type TlsDatabase interface {
 	// 	- purpose string: the purpose that this certificate chain will be used for. 
 	// 	- identity SocketConnectable (nullable): the expected peer identity 
 	// 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-	// 	- flags TLSDatabaseVerifyFlags: additional verify flags 
+	// 	- flags TlsDatabaseVerifyFlags: additional verify flags 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSCertificateFlags 
+	// 	- goret TlsCertificateFlags 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Determines the validity of a certificate chain, outside the context
@@ -97517,7 +97517,7 @@ type TlsDatabase interface {
 	// 
 	// This function can block. Use g_tls_database_verify_chain_async() to
 	// perform the verification operation asynchronously.
-	VerifyChain(context.Context, TlsCertificate, string, SocketConnectable, TlsInteraction, TLSDatabaseVerifyFlags) (TLSCertificateFlags, error)
+	VerifyChain(context.Context, TlsCertificate, string, SocketConnectable, TlsInteraction, TlsDatabaseVerifyFlags) (TlsCertificateFlags, error)
 	// VerifyChainAsync wraps g_tls_database_verify_chain_async
 	// 
 	// The function takes the following parameters:
@@ -97527,13 +97527,13 @@ type TlsDatabase interface {
 	// 	- purpose string: the purpose that this certificate chain will be used for. 
 	// 	- identity SocketConnectable (nullable): the expected peer identity 
 	// 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-	// 	- flags TLSDatabaseVerifyFlags: additional verify flags 
+	// 	- flags TlsDatabaseVerifyFlags: additional verify flags 
 	// 	- callback AsyncReadyCallback (nullable): callback to call when the operation completes 
 	//
 	// Asynchronously determines the validity of a certificate chain after
 	// looking up and adding any missing certificates to the chain. See
 	// g_tls_database_verify_chain() for more information.
-	VerifyChainAsync(context.Context, TlsCertificate, string, SocketConnectable, TlsInteraction, TLSDatabaseVerifyFlags, AsyncReadyCallback)
+	VerifyChainAsync(context.Context, TlsCertificate, string, SocketConnectable, TlsInteraction, TlsDatabaseVerifyFlags, AsyncReadyCallback)
 	// VerifyChainFinish wraps g_tls_database_verify_chain_finish
 	// 
 	// The function takes the following parameters:
@@ -97542,7 +97542,7 @@ type TlsDatabase interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSCertificateFlags 
+	// 	- goret TlsCertificateFlags 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finish an asynchronous verify chain operation. See
@@ -97556,7 +97556,7 @@ type TlsDatabase interface {
 	// %G_TLS_CERTIFICATE_GENERIC_ERROR and @error will be set
 	// accordingly. @error is not set when @chain is successfully analyzed
 	// but found to be invalid.
-	VerifyChainFinish(AsyncResult) (TLSCertificateFlags, error)
+	VerifyChainFinish(AsyncResult) (TlsCertificateFlags, error)
 
 	// chain up virtual methods:
 
@@ -97588,7 +97588,7 @@ type TlsDatabase interface {
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 	// 	- handle string: a certificate handle 
 	// 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-	// 	- flags TLSDatabaseLookupFlags: Flags which affect the lookup. 
+	// 	- flags TlsDatabaseLookupFlags: Flags which affect the lookup. 
 	// 
 	// The function returns the following values:
 	// 
@@ -97607,7 +97607,7 @@ type TlsDatabase interface {
 	// 
 	// This function can block, use g_tls_database_lookup_certificate_for_handle_async() to perform
 	// the lookup operation asynchronously.
-	ParentLookupCertificateForHandle(cancellable context.Context, handle string, interaction TlsInteraction, flags TLSDatabaseLookupFlags) (TlsCertificate, error)
+	ParentLookupCertificateForHandle(cancellable context.Context, handle string, interaction TlsInteraction, flags TlsDatabaseLookupFlags) (TlsCertificate, error)
 	// ParentLookupCertificateForHandleFinish calls the default implementations of the lookup_certificate_for_handle_finish virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -97634,7 +97634,7 @@ type TlsDatabase interface {
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 	// 	- certificate TlsCertificate: a #GTlsCertificate 
 	// 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-	// 	- flags TLSDatabaseLookupFlags: flags which affect the lookup operation 
+	// 	- flags TlsDatabaseLookupFlags: flags which affect the lookup operation 
 	// 
 	// The function returns the following values:
 	// 
@@ -97661,7 +97661,7 @@ type TlsDatabase interface {
 	// certificate. Accordingly, this function cannot be used to make
 	// security-related decisions. Only GLib itself should make security
 	// decisions about TLS certificates.
-	ParentLookupCertificateIssuer(cancellable context.Context, certificate TlsCertificate, interaction TlsInteraction, flags TLSDatabaseLookupFlags) (TlsCertificate, error)
+	ParentLookupCertificateIssuer(cancellable context.Context, certificate TlsCertificate, interaction TlsInteraction, flags TlsDatabaseLookupFlags) (TlsCertificate, error)
 	// ParentLookupCertificateIssuerFinish calls the default implementations of the lookup_certificate_issuer_finish virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -97702,11 +97702,11 @@ type TlsDatabase interface {
 	// 	- purpose string: the purpose that this certificate chain will be used for. 
 	// 	- identity SocketConnectable (nullable): the expected peer identity 
 	// 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-	// 	- flags TLSDatabaseVerifyFlags: additional verify flags 
+	// 	- flags TlsDatabaseVerifyFlags: additional verify flags 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSCertificateFlags 
+	// 	- goret TlsCertificateFlags 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Determines the validity of a certificate chain, outside the context
@@ -97769,7 +97769,7 @@ type TlsDatabase interface {
 	// 
 	// This function can block. Use g_tls_database_verify_chain_async() to
 	// perform the verification operation asynchronously.
-	ParentVerifyChain(cancellable context.Context, chain TlsCertificate, purpose string, identity SocketConnectable, interaction TlsInteraction, flags TLSDatabaseVerifyFlags) (TLSCertificateFlags, error)
+	ParentVerifyChain(cancellable context.Context, chain TlsCertificate, purpose string, identity SocketConnectable, interaction TlsInteraction, flags TlsDatabaseVerifyFlags) (TlsCertificateFlags, error)
 	// ParentVerifyChainFinish calls the default implementations of the verify_chain_finish virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -97779,7 +97779,7 @@ type TlsDatabase interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSCertificateFlags 
+	// 	- goret TlsCertificateFlags 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finish an asynchronous verify chain operation. See
@@ -97793,7 +97793,7 @@ type TlsDatabase interface {
 	// %G_TLS_CERTIFICATE_GENERIC_ERROR and @error will be set
 	// accordingly. @error is not set when @chain is successfully analyzed
 	// but found to be invalid.
-	ParentVerifyChainFinish(result AsyncResult) (TLSCertificateFlags, error)
+	ParentVerifyChainFinish(result AsyncResult) (TlsCertificateFlags, error)
 }
 
 func unsafeWrapTlsDatabase(base *gobject.ObjectInstance) *TlsDatabaseInstance {
@@ -97891,7 +97891,7 @@ func (self *TlsDatabaseInstance) CreateCertificateHandle(certificate TlsCertific
 // 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 // 	- handle string: a certificate handle 
 // 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-// 	- flags TLSDatabaseLookupFlags: Flags which affect the lookup. 
+// 	- flags TlsDatabaseLookupFlags: Flags which affect the lookup. 
 // 
 // The function returns the following values:
 // 
@@ -97910,7 +97910,7 @@ func (self *TlsDatabaseInstance) CreateCertificateHandle(certificate TlsCertific
 // 
 // This function can block, use g_tls_database_lookup_certificate_for_handle_async() to perform
 // the lookup operation asynchronously.
-func (self *TlsDatabaseInstance) LookupCertificateForHandle(cancellable context.Context, handle string, interaction TlsInteraction, flags TLSDatabaseLookupFlags) (TlsCertificate, error) {
+func (self *TlsDatabaseInstance) LookupCertificateForHandle(cancellable context.Context, handle string, interaction TlsInteraction, flags TlsDatabaseLookupFlags) (TlsCertificate, error) {
 	var carg0 *C.GTlsDatabase           // in, none, converted
 	var carg4 *C.GCancellable           // in, none, converted, nullable
 	var carg1 *C.gchar                  // in, none, string
@@ -97957,12 +97957,12 @@ func (self *TlsDatabaseInstance) LookupCertificateForHandle(cancellable context.
 // 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 // 	- handle string: a certificate handle 
 // 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-// 	- flags TLSDatabaseLookupFlags: Flags which affect the lookup. 
+// 	- flags TlsDatabaseLookupFlags: Flags which affect the lookup. 
 // 	- callback AsyncReadyCallback (nullable): callback to call when the operation completes 
 //
 // Asynchronously look up a certificate by its handle in the database. See
 // g_tls_database_lookup_certificate_for_handle() for more information.
-func (self *TlsDatabaseInstance) LookupCertificateForHandleAsync(cancellable context.Context, handle string, interaction TlsInteraction, flags TLSDatabaseLookupFlags, callback AsyncReadyCallback) {
+func (self *TlsDatabaseInstance) LookupCertificateForHandleAsync(cancellable context.Context, handle string, interaction TlsInteraction, flags TlsDatabaseLookupFlags, callback AsyncReadyCallback) {
 	var carg0 *C.GTlsDatabase           // in, none, converted
 	var carg4 *C.GCancellable           // in, none, converted, nullable
 	var carg1 *C.gchar                  // in, none, string
@@ -98042,7 +98042,7 @@ func (self *TlsDatabaseInstance) LookupCertificateForHandleFinish(result AsyncRe
 // 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 // 	- certificate TlsCertificate: a #GTlsCertificate 
 // 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-// 	- flags TLSDatabaseLookupFlags: flags which affect the lookup operation 
+// 	- flags TlsDatabaseLookupFlags: flags which affect the lookup operation 
 // 
 // The function returns the following values:
 // 
@@ -98069,7 +98069,7 @@ func (self *TlsDatabaseInstance) LookupCertificateForHandleFinish(result AsyncRe
 // certificate. Accordingly, this function cannot be used to make
 // security-related decisions. Only GLib itself should make security
 // decisions about TLS certificates.
-func (self *TlsDatabaseInstance) LookupCertificateIssuer(cancellable context.Context, certificate TlsCertificate, interaction TlsInteraction, flags TLSDatabaseLookupFlags) (TlsCertificate, error) {
+func (self *TlsDatabaseInstance) LookupCertificateIssuer(cancellable context.Context, certificate TlsCertificate, interaction TlsInteraction, flags TlsDatabaseLookupFlags) (TlsCertificate, error) {
 	var carg0 *C.GTlsDatabase           // in, none, converted
 	var carg4 *C.GCancellable           // in, none, converted, nullable
 	var carg1 *C.GTlsCertificate        // in, none, converted
@@ -98113,12 +98113,12 @@ func (self *TlsDatabaseInstance) LookupCertificateIssuer(cancellable context.Con
 // 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 // 	- certificate TlsCertificate: a #GTlsCertificate 
 // 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-// 	- flags TLSDatabaseLookupFlags: flags which affect the lookup operation 
+// 	- flags TlsDatabaseLookupFlags: flags which affect the lookup operation 
 // 	- callback AsyncReadyCallback (nullable): callback to call when the operation completes 
 //
 // Asynchronously look up the issuer of @certificate in the database. See
 // g_tls_database_lookup_certificate_issuer() for more information.
-func (self *TlsDatabaseInstance) LookupCertificateIssuerAsync(cancellable context.Context, certificate TlsCertificate, interaction TlsInteraction, flags TLSDatabaseLookupFlags, callback AsyncReadyCallback) {
+func (self *TlsDatabaseInstance) LookupCertificateIssuerAsync(cancellable context.Context, certificate TlsCertificate, interaction TlsInteraction, flags TlsDatabaseLookupFlags, callback AsyncReadyCallback) {
 	var carg0 *C.GTlsDatabase           // in, none, converted
 	var carg4 *C.GCancellable           // in, none, converted, nullable
 	var carg1 *C.GTlsCertificate        // in, none, converted
@@ -98240,11 +98240,11 @@ func (self *TlsDatabaseInstance) LookupCertificatesIssuedByFinish(result AsyncRe
 // 	- purpose string: the purpose that this certificate chain will be used for. 
 // 	- identity SocketConnectable (nullable): the expected peer identity 
 // 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-// 	- flags TLSDatabaseVerifyFlags: additional verify flags 
+// 	- flags TlsDatabaseVerifyFlags: additional verify flags 
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSCertificateFlags 
+// 	- goret TlsCertificateFlags 
 // 	- _goerr error (nullable): an error 
 //
 // Determines the validity of a certificate chain, outside the context
@@ -98307,7 +98307,7 @@ func (self *TlsDatabaseInstance) LookupCertificatesIssuedByFinish(result AsyncRe
 // 
 // This function can block. Use g_tls_database_verify_chain_async() to
 // perform the verification operation asynchronously.
-func (self *TlsDatabaseInstance) VerifyChain(cancellable context.Context, chain TlsCertificate, purpose string, identity SocketConnectable, interaction TlsInteraction, flags TLSDatabaseVerifyFlags) (TLSCertificateFlags, error) {
+func (self *TlsDatabaseInstance) VerifyChain(cancellable context.Context, chain TlsCertificate, purpose string, identity SocketConnectable, interaction TlsInteraction, flags TlsDatabaseVerifyFlags) (TlsCertificateFlags, error) {
 	var carg0 *C.GTlsDatabase           // in, none, converted
 	var carg6 *C.GCancellable           // in, none, converted, nullable
 	var carg1 *C.GTlsCertificate        // in, none, converted
@@ -98342,10 +98342,10 @@ func (self *TlsDatabaseInstance) VerifyChain(cancellable context.Context, chain 
 	runtime.KeepAlive(interaction)
 	runtime.KeepAlive(flags)
 
-	var goret  TLSCertificateFlags
+	var goret  TlsCertificateFlags
 	var _goerr error
 
-	goret = TLSCertificateFlags(cret)
+	goret = TlsCertificateFlags(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -98362,13 +98362,13 @@ func (self *TlsDatabaseInstance) VerifyChain(cancellable context.Context, chain 
 // 	- purpose string: the purpose that this certificate chain will be used for. 
 // 	- identity SocketConnectable (nullable): the expected peer identity 
 // 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-// 	- flags TLSDatabaseVerifyFlags: additional verify flags 
+// 	- flags TlsDatabaseVerifyFlags: additional verify flags 
 // 	- callback AsyncReadyCallback (nullable): callback to call when the operation completes 
 //
 // Asynchronously determines the validity of a certificate chain after
 // looking up and adding any missing certificates to the chain. See
 // g_tls_database_verify_chain() for more information.
-func (self *TlsDatabaseInstance) VerifyChainAsync(cancellable context.Context, chain TlsCertificate, purpose string, identity SocketConnectable, interaction TlsInteraction, flags TLSDatabaseVerifyFlags, callback AsyncReadyCallback) {
+func (self *TlsDatabaseInstance) VerifyChainAsync(cancellable context.Context, chain TlsCertificate, purpose string, identity SocketConnectable, interaction TlsInteraction, flags TlsDatabaseVerifyFlags, callback AsyncReadyCallback) {
 	var carg0 *C.GTlsDatabase           // in, none, converted
 	var carg6 *C.GCancellable           // in, none, converted, nullable
 	var carg1 *C.GTlsCertificate        // in, none, converted
@@ -98417,7 +98417,7 @@ func (self *TlsDatabaseInstance) VerifyChainAsync(cancellable context.Context, c
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSCertificateFlags 
+// 	- goret TlsCertificateFlags 
 // 	- _goerr error (nullable): an error 
 //
 // Finish an asynchronous verify chain operation. See
@@ -98431,7 +98431,7 @@ func (self *TlsDatabaseInstance) VerifyChainAsync(cancellable context.Context, c
 // %G_TLS_CERTIFICATE_GENERIC_ERROR and @error will be set
 // accordingly. @error is not set when @chain is successfully analyzed
 // but found to be invalid.
-func (self *TlsDatabaseInstance) VerifyChainFinish(result AsyncResult) (TLSCertificateFlags, error) {
+func (self *TlsDatabaseInstance) VerifyChainFinish(result AsyncResult) (TlsCertificateFlags, error) {
 	var carg0 *C.GTlsDatabase        // in, none, converted
 	var carg1 *C.GAsyncResult        // in, none, converted
 	var cret  C.GTlsCertificateFlags // return, none, casted
@@ -98444,10 +98444,10 @@ func (self *TlsDatabaseInstance) VerifyChainFinish(result AsyncResult) (TLSCerti
 	runtime.KeepAlive(self)
 	runtime.KeepAlive(result)
 
-	var goret  TLSCertificateFlags
+	var goret  TlsCertificateFlags
 	var _goerr error
 
-	goret = TLSCertificateFlags(cret)
+	goret = TlsCertificateFlags(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -98487,7 +98487,7 @@ type TlsDatabaseOverrides[Instance TlsDatabase] struct {
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 	// 	- handle string: a certificate handle 
 	// 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-	// 	- flags TLSDatabaseLookupFlags: Flags which affect the lookup. 
+	// 	- flags TlsDatabaseLookupFlags: Flags which affect the lookup. 
 	// 
 	// The function returns the following values:
 	// 
@@ -98506,7 +98506,7 @@ type TlsDatabaseOverrides[Instance TlsDatabase] struct {
 	// 
 	// This function can block, use g_tls_database_lookup_certificate_for_handle_async() to perform
 	// the lookup operation asynchronously.
-	LookupCertificateForHandle func(Instance, context.Context, string, TlsInteraction, TLSDatabaseLookupFlags) (TlsCertificate, error)
+	LookupCertificateForHandle func(Instance, context.Context, string, TlsInteraction, TlsDatabaseLookupFlags) (TlsCertificate, error)
 	// // LookupCertificateForHandleFinish allows you to override the implementation of the virtual method lookup_certificate_for_handle_finish.
 	// 
 	// The function takes the following parameters:
@@ -98531,7 +98531,7 @@ type TlsDatabaseOverrides[Instance TlsDatabase] struct {
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 	// 	- certificate TlsCertificate: a #GTlsCertificate 
 	// 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-	// 	- flags TLSDatabaseLookupFlags: flags which affect the lookup operation 
+	// 	- flags TlsDatabaseLookupFlags: flags which affect the lookup operation 
 	// 
 	// The function returns the following values:
 	// 
@@ -98558,7 +98558,7 @@ type TlsDatabaseOverrides[Instance TlsDatabase] struct {
 	// certificate. Accordingly, this function cannot be used to make
 	// security-related decisions. Only GLib itself should make security
 	// decisions about TLS certificates.
-	LookupCertificateIssuer func(Instance, context.Context, TlsCertificate, TlsInteraction, TLSDatabaseLookupFlags) (TlsCertificate, error)
+	LookupCertificateIssuer func(Instance, context.Context, TlsCertificate, TlsInteraction, TlsDatabaseLookupFlags) (TlsCertificate, error)
 	// // LookupCertificateIssuerFinish allows you to override the implementation of the virtual method lookup_certificate_issuer_finish.
 	// 
 	// The function takes the following parameters:
@@ -98596,11 +98596,11 @@ type TlsDatabaseOverrides[Instance TlsDatabase] struct {
 	// 	- purpose string: the purpose that this certificate chain will be used for. 
 	// 	- identity SocketConnectable (nullable): the expected peer identity 
 	// 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-	// 	- flags TLSDatabaseVerifyFlags: additional verify flags 
+	// 	- flags TlsDatabaseVerifyFlags: additional verify flags 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSCertificateFlags 
+	// 	- goret TlsCertificateFlags 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Determines the validity of a certificate chain, outside the context
@@ -98663,7 +98663,7 @@ type TlsDatabaseOverrides[Instance TlsDatabase] struct {
 	// 
 	// This function can block. Use g_tls_database_verify_chain_async() to
 	// perform the verification operation asynchronously.
-	VerifyChain func(Instance, context.Context, TlsCertificate, string, SocketConnectable, TlsInteraction, TLSDatabaseVerifyFlags) (TLSCertificateFlags, error)
+	VerifyChain func(Instance, context.Context, TlsCertificate, string, SocketConnectable, TlsInteraction, TlsDatabaseVerifyFlags) (TlsCertificateFlags, error)
 	// // VerifyChainFinish allows you to override the implementation of the virtual method verify_chain_finish.
 	// 
 	// The function takes the following parameters:
@@ -98672,7 +98672,7 @@ type TlsDatabaseOverrides[Instance TlsDatabase] struct {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSCertificateFlags 
+	// 	- goret TlsCertificateFlags 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finish an asynchronous verify chain operation. See
@@ -98686,7 +98686,7 @@ type TlsDatabaseOverrides[Instance TlsDatabase] struct {
 	// %G_TLS_CERTIFICATE_GENERIC_ERROR and @error will be set
 	// accordingly. @error is not set when @chain is successfully analyzed
 	// but found to be invalid.
-	VerifyChainFinish func(Instance, AsyncResult) (TLSCertificateFlags, error)
+	VerifyChainFinish func(Instance, AsyncResult) (TlsCertificateFlags, error)
 }
 
 // UnsafeApplyTlsDatabaseOverrides applies the overrides to init the gclass by setting the trampoline functions.
@@ -98730,7 +98730,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				var cancellable context.Context        // in, none, converted, nullable
 				var handle      string                 // in, none, string
 				var interaction TlsInteraction         // in, none, converted, nullable
-				var flags       TLSDatabaseLookupFlags // in, none, casted
+				var flags       TlsDatabaseLookupFlags // in, none, casted
 				var goret       TlsCertificate         // return, full, converted, nullable
 				var _goerr      error                  // out, full, converted
 
@@ -98742,7 +98742,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				if carg2 != nil {
 					interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg2))
 				}
-				flags = TLSDatabaseLookupFlags(carg3)
+				flags = TlsDatabaseLookupFlags(carg3)
 
 				goret, _goerr = overrides.LookupCertificateForHandle(self, cancellable, handle, interaction, flags)
 
@@ -98790,7 +98790,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				var cancellable context.Context        // in, none, converted, nullable
 				var certificate TlsCertificate         // in, none, converted
 				var interaction TlsInteraction         // in, none, converted, nullable
-				var flags       TLSDatabaseLookupFlags // in, none, casted
+				var flags       TlsDatabaseLookupFlags // in, none, casted
 				var goret       TlsCertificate         // return, full, converted
 				var _goerr      error                  // out, full, converted
 
@@ -98802,7 +98802,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				if carg2 != nil {
 					interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg2))
 				}
-				flags = TLSDatabaseLookupFlags(carg3)
+				flags = TlsDatabaseLookupFlags(carg3)
 
 				goret, _goerr = overrides.LookupCertificateIssuer(self, cancellable, certificate, interaction, flags)
 
@@ -98876,8 +98876,8 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				var purpose     string                 // in, none, string
 				var identity    SocketConnectable      // in, none, converted, nullable
 				var interaction TlsInteraction         // in, none, converted, nullable
-				var flags       TLSDatabaseVerifyFlags // in, none, casted
-				var goret       TLSCertificateFlags    // return, none, casted
+				var flags       TlsDatabaseVerifyFlags // in, none, casted
+				var goret       TlsCertificateFlags    // return, none, casted
 				var _goerr      error                  // out, full, converted
 
 				self = UnsafeTlsDatabaseFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -98892,7 +98892,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				if carg4 != nil {
 					interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg4))
 				}
-				flags = TLSDatabaseVerifyFlags(carg5)
+				flags = TlsDatabaseVerifyFlags(carg5)
 
 				goret, _goerr = overrides.VerifyChain(self, cancellable, chain, purpose, identity, interaction, flags)
 
@@ -98912,7 +98912,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 			func(carg0 *C.GTlsDatabase, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.GTlsCertificateFlags) {
 				var self   Instance            // go GTlsDatabase subclass
 				var result AsyncResult         // in, none, converted
-				var goret  TLSCertificateFlags // return, none, casted
+				var goret  TlsCertificateFlags // return, none, casted
 				var _goerr error               // out, full, converted
 
 				self = UnsafeTlsDatabaseFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -98980,7 +98980,7 @@ func (self *TlsDatabaseInstance) ParentCreateCertificateHandle(certificate TlsCe
 // 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 // 	- handle string: a certificate handle 
 // 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-// 	- flags TLSDatabaseLookupFlags: Flags which affect the lookup. 
+// 	- flags TlsDatabaseLookupFlags: Flags which affect the lookup. 
 // 
 // The function returns the following values:
 // 
@@ -98999,7 +98999,7 @@ func (self *TlsDatabaseInstance) ParentCreateCertificateHandle(certificate TlsCe
 // 
 // This function can block, use g_tls_database_lookup_certificate_for_handle_async() to perform
 // the lookup operation asynchronously.
-func (self *TlsDatabaseInstance) ParentLookupCertificateForHandle(cancellable context.Context, handle string, interaction TlsInteraction, flags TLSDatabaseLookupFlags) (TlsCertificate, error) {
+func (self *TlsDatabaseInstance) ParentLookupCertificateForHandle(cancellable context.Context, handle string, interaction TlsInteraction, flags TlsDatabaseLookupFlags) (TlsCertificate, error) {
 	var carg0 *C.GTlsDatabase
 	var carg4 *C.GCancellable           // in, none, converted
 	var carg1 *C.gchar                  // in, none, converted, nullable
@@ -99092,7 +99092,7 @@ func (self *TlsDatabaseInstance) ParentLookupCertificateForHandleFinish(result A
 // 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 // 	- certificate TlsCertificate: a #GTlsCertificate 
 // 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-// 	- flags TLSDatabaseLookupFlags: flags which affect the lookup operation 
+// 	- flags TlsDatabaseLookupFlags: flags which affect the lookup operation 
 // 
 // The function returns the following values:
 // 
@@ -99119,7 +99119,7 @@ func (self *TlsDatabaseInstance) ParentLookupCertificateForHandleFinish(result A
 // certificate. Accordingly, this function cannot be used to make
 // security-related decisions. Only GLib itself should make security
 // decisions about TLS certificates.
-func (self *TlsDatabaseInstance) ParentLookupCertificateIssuer(cancellable context.Context, certificate TlsCertificate, interaction TlsInteraction, flags TLSDatabaseLookupFlags) (TlsCertificate, error) {
+func (self *TlsDatabaseInstance) ParentLookupCertificateIssuer(cancellable context.Context, certificate TlsCertificate, interaction TlsInteraction, flags TlsDatabaseLookupFlags) (TlsCertificate, error) {
 	var carg0 *C.GTlsDatabase
 	var carg4 *C.GCancellable           // in, none, converted
 	var carg1 *C.GTlsCertificate        // in, none, converted, nullable
@@ -99255,11 +99255,11 @@ func (self *TlsDatabaseInstance) ParentLookupCertificatesIssuedByFinish(result A
 // 	- purpose string: the purpose that this certificate chain will be used for. 
 // 	- identity SocketConnectable (nullable): the expected peer identity 
 // 	- interaction TlsInteraction (nullable): used to interact with the user if necessary 
-// 	- flags TLSDatabaseVerifyFlags: additional verify flags 
+// 	- flags TlsDatabaseVerifyFlags: additional verify flags 
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSCertificateFlags 
+// 	- goret TlsCertificateFlags 
 // 	- _goerr error (nullable): an error 
 //
 // Determines the validity of a certificate chain, outside the context
@@ -99322,7 +99322,7 @@ func (self *TlsDatabaseInstance) ParentLookupCertificatesIssuedByFinish(result A
 // 
 // This function can block. Use g_tls_database_verify_chain_async() to
 // perform the verification operation asynchronously.
-func (self *TlsDatabaseInstance) ParentVerifyChain(cancellable context.Context, chain TlsCertificate, purpose string, identity SocketConnectable, interaction TlsInteraction, flags TLSDatabaseVerifyFlags) (TLSCertificateFlags, error) {
+func (self *TlsDatabaseInstance) ParentVerifyChain(cancellable context.Context, chain TlsCertificate, purpose string, identity SocketConnectable, interaction TlsInteraction, flags TlsDatabaseVerifyFlags) (TlsCertificateFlags, error) {
 	var carg0 *C.GTlsDatabase
 	var carg6 *C.GCancellable           // in, none, converted
 	var carg1 *C.GTlsCertificate        // in, none, converted, nullable
@@ -99359,10 +99359,10 @@ func (self *TlsDatabaseInstance) ParentVerifyChain(cancellable context.Context, 
 	runtime.KeepAlive(interaction)
 	runtime.KeepAlive(flags)
 
-	var goret  TLSCertificateFlags
+	var goret  TlsCertificateFlags
 	var _goerr error
 
-	goret = TLSCertificateFlags(cret)
+	goret = TlsCertificateFlags(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -99379,7 +99379,7 @@ func (self *TlsDatabaseInstance) ParentVerifyChain(cancellable context.Context, 
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSCertificateFlags 
+// 	- goret TlsCertificateFlags 
 // 	- _goerr error (nullable): an error 
 //
 // Finish an asynchronous verify chain operation. See
@@ -99393,7 +99393,7 @@ func (self *TlsDatabaseInstance) ParentVerifyChain(cancellable context.Context, 
 // %G_TLS_CERTIFICATE_GENERIC_ERROR and @error will be set
 // accordingly. @error is not set when @chain is successfully analyzed
 // but found to be invalid.
-func (self *TlsDatabaseInstance) ParentVerifyChainFinish(result AsyncResult) (TLSCertificateFlags, error) {
+func (self *TlsDatabaseInstance) ParentVerifyChainFinish(result AsyncResult) (TlsCertificateFlags, error) {
 	var carg0 *C.GTlsDatabase
 	var carg1 *C.GAsyncResult        // in, none, converted
 	var cret  C.GTlsCertificateFlags // return, none, casted
@@ -99408,10 +99408,10 @@ func (self *TlsDatabaseInstance) ParentVerifyChainFinish(result AsyncResult) (TL
 	runtime.KeepAlive(self)
 	runtime.KeepAlive(result)
 
-	var goret  TLSCertificateFlags
+	var goret  TlsCertificateFlags
 	var _goerr error
 
-	goret = TLSCertificateFlags(cret)
+	goret = TlsCertificateFlags(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -99488,7 +99488,7 @@ type TlsInteraction interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSInteractionResult 
+	// 	- goret TlsInteractionResult 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Run synchronous interaction to ask the user for a password. In general,
@@ -99504,7 +99504,7 @@ type TlsInteraction interface {
 	// user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 	// contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 	// not support immediate cancellation.
-	AskPassword(context.Context, TlsPassword) (TLSInteractionResult, error)
+	AskPassword(context.Context, TlsPassword) (TlsInteractionResult, error)
 	// AskPasswordAsync wraps g_tls_interaction_ask_password_async
 	// 
 	// The function takes the following parameters:
@@ -99537,7 +99537,7 @@ type TlsInteraction interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSInteractionResult 
+	// 	- goret TlsInteractionResult 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Complete an ask password user interaction request. This should be once
@@ -99549,7 +99549,7 @@ type TlsInteraction interface {
 	// If the interaction is cancelled by the cancellation object, or by the
 	// user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 	// contains a %G_IO_ERROR_CANCELLED error code.
-	AskPasswordFinish(AsyncResult) (TLSInteractionResult, error)
+	AskPasswordFinish(AsyncResult) (TlsInteractionResult, error)
 	// InvokeAskPassword wraps g_tls_interaction_invoke_ask_password
 	// 
 	// The function takes the following parameters:
@@ -99559,7 +99559,7 @@ type TlsInteraction interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSInteractionResult 
+	// 	- goret TlsInteractionResult 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Invoke the interaction to ask the user for a password. It invokes this
@@ -99581,18 +99581,18 @@ type TlsInteraction interface {
 	// user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 	// contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 	// not support immediate cancellation.
-	InvokeAskPassword(context.Context, TlsPassword) (TLSInteractionResult, error)
+	InvokeAskPassword(context.Context, TlsPassword) (TlsInteractionResult, error)
 	// InvokeRequestCertificate wraps g_tls_interaction_invoke_request_certificate
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): an optional #GCancellable cancellation object 
 	// 	- connection TlsConnection: a #GTlsConnection object 
-	// 	- flags TLSCertificateRequestFlags: flags providing more information about the request 
+	// 	- flags TlsCertificateRequestFlags: flags providing more information about the request 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSInteractionResult 
+	// 	- goret TlsInteractionResult 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Invoke the interaction to ask the user to choose a certificate to
@@ -99615,18 +99615,18 @@ type TlsInteraction interface {
 	// user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 	// contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 	// not support immediate cancellation.
-	InvokeRequestCertificate(context.Context, TlsConnection, TLSCertificateRequestFlags) (TLSInteractionResult, error)
+	InvokeRequestCertificate(context.Context, TlsConnection, TlsCertificateRequestFlags) (TlsInteractionResult, error)
 	// RequestCertificate wraps g_tls_interaction_request_certificate
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): an optional #GCancellable cancellation object 
 	// 	- connection TlsConnection: a #GTlsConnection object 
-	// 	- flags TLSCertificateRequestFlags: flags providing more information about the request 
+	// 	- flags TlsCertificateRequestFlags: flags providing more information about the request 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSInteractionResult 
+	// 	- goret TlsInteractionResult 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Run synchronous interaction to ask the user to choose a certificate to use
@@ -99645,14 +99645,14 @@ type TlsInteraction interface {
 	// user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 	// contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 	// not support immediate cancellation.
-	RequestCertificate(context.Context, TlsConnection, TLSCertificateRequestFlags) (TLSInteractionResult, error)
+	RequestCertificate(context.Context, TlsConnection, TlsCertificateRequestFlags) (TlsInteractionResult, error)
 	// RequestCertificateAsync wraps g_tls_interaction_request_certificate_async
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): an optional #GCancellable cancellation object 
 	// 	- connection TlsConnection: a #GTlsConnection object 
-	// 	- flags TLSCertificateRequestFlags: flags providing more information about the request 
+	// 	- flags TlsCertificateRequestFlags: flags providing more information about the request 
 	// 	- callback AsyncReadyCallback (nullable): will be called when the interaction completes 
 	//
 	// Run asynchronous interaction to ask the user for a certificate to use with
@@ -99663,7 +99663,7 @@ type TlsInteraction interface {
 	// also choose to provide a certificate from elsewhere. @callback will be called
 	// when the operation completes. Alternatively the user may abort this certificate
 	// request, which will usually abort the TLS connection.
-	RequestCertificateAsync(context.Context, TlsConnection, TLSCertificateRequestFlags, AsyncReadyCallback)
+	RequestCertificateAsync(context.Context, TlsConnection, TlsCertificateRequestFlags, AsyncReadyCallback)
 	// RequestCertificateFinish wraps g_tls_interaction_request_certificate_finish
 	// 
 	// The function takes the following parameters:
@@ -99672,7 +99672,7 @@ type TlsInteraction interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSInteractionResult 
+	// 	- goret TlsInteractionResult 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Complete a request certificate user interaction request. This should be once
@@ -99685,7 +99685,7 @@ type TlsInteraction interface {
 	// If the interaction is cancelled by the cancellation object, or by the
 	// user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 	// contains a %G_IO_ERROR_CANCELLED error code.
-	RequestCertificateFinish(AsyncResult) (TLSInteractionResult, error)
+	RequestCertificateFinish(AsyncResult) (TlsInteractionResult, error)
 
 	// chain up virtual methods:
 
@@ -99699,7 +99699,7 @@ type TlsInteraction interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSInteractionResult 
+	// 	- goret TlsInteractionResult 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Run synchronous interaction to ask the user for a password. In general,
@@ -99715,7 +99715,7 @@ type TlsInteraction interface {
 	// user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 	// contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 	// not support immediate cancellation.
-	ParentAskPassword(cancellable context.Context, password TlsPassword) (TLSInteractionResult, error)
+	ParentAskPassword(cancellable context.Context, password TlsPassword) (TlsInteractionResult, error)
 	// ParentAskPasswordFinish calls the default implementations of the ask_password_finish virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -99725,7 +99725,7 @@ type TlsInteraction interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSInteractionResult 
+	// 	- goret TlsInteractionResult 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Complete an ask password user interaction request. This should be once
@@ -99737,7 +99737,7 @@ type TlsInteraction interface {
 	// If the interaction is cancelled by the cancellation object, or by the
 	// user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 	// contains a %G_IO_ERROR_CANCELLED error code.
-	ParentAskPasswordFinish(result AsyncResult) (TLSInteractionResult, error)
+	ParentAskPasswordFinish(result AsyncResult) (TlsInteractionResult, error)
 	// ParentRequestCertificate calls the default implementations of the request_certificate virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -99745,11 +99745,11 @@ type TlsInteraction interface {
 	// 
 	// 	- cancellable context.Context (nullable): an optional #GCancellable cancellation object 
 	// 	- connection TlsConnection: a #GTlsConnection object 
-	// 	- flags TLSCertificateRequestFlags: flags providing more information about the request 
+	// 	- flags TlsCertificateRequestFlags: flags providing more information about the request 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSInteractionResult 
+	// 	- goret TlsInteractionResult 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Run synchronous interaction to ask the user to choose a certificate to use
@@ -99768,7 +99768,7 @@ type TlsInteraction interface {
 	// user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 	// contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 	// not support immediate cancellation.
-	ParentRequestCertificate(cancellable context.Context, connection TlsConnection, flags TLSCertificateRequestFlags) (TLSInteractionResult, error)
+	ParentRequestCertificate(cancellable context.Context, connection TlsConnection, flags TlsCertificateRequestFlags) (TlsInteractionResult, error)
 	// ParentRequestCertificateFinish calls the default implementations of the request_certificate_finish virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -99778,7 +99778,7 @@ type TlsInteraction interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSInteractionResult 
+	// 	- goret TlsInteractionResult 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Complete a request certificate user interaction request. This should be once
@@ -99791,7 +99791,7 @@ type TlsInteraction interface {
 	// If the interaction is cancelled by the cancellation object, or by the
 	// user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 	// contains a %G_IO_ERROR_CANCELLED error code.
-	ParentRequestCertificateFinish(result AsyncResult) (TLSInteractionResult, error)
+	ParentRequestCertificateFinish(result AsyncResult) (TlsInteractionResult, error)
 }
 
 func unsafeWrapTlsInteraction(base *gobject.ObjectInstance) *TlsInteractionInstance {
@@ -99851,7 +99851,7 @@ func UnsafeTlsInteractionToGlibFull(c TlsInteraction) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSInteractionResult 
+// 	- goret TlsInteractionResult 
 // 	- _goerr error (nullable): an error 
 //
 // Run synchronous interaction to ask the user for a password. In general,
@@ -99867,7 +99867,7 @@ func UnsafeTlsInteractionToGlibFull(c TlsInteraction) unsafe.Pointer {
 // user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 // contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 // not support immediate cancellation.
-func (interaction *TlsInteractionInstance) AskPassword(cancellable context.Context, password TlsPassword) (TLSInteractionResult, error) {
+func (interaction *TlsInteractionInstance) AskPassword(cancellable context.Context, password TlsPassword) (TlsInteractionResult, error) {
 	var carg0 *C.GTlsInteraction      // in, none, converted
 	var carg2 *C.GCancellable         // in, none, converted, nullable
 	var carg1 *C.GTlsPassword         // in, none, converted
@@ -99885,10 +99885,10 @@ func (interaction *TlsInteractionInstance) AskPassword(cancellable context.Conte
 	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(password)
 
-	var goret  TLSInteractionResult
+	var goret  TlsInteractionResult
 	var _goerr error
 
-	goret = TLSInteractionResult(cret)
+	goret = TlsInteractionResult(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -99951,7 +99951,7 @@ func (interaction *TlsInteractionInstance) AskPasswordAsync(cancellable context.
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSInteractionResult 
+// 	- goret TlsInteractionResult 
 // 	- _goerr error (nullable): an error 
 //
 // Complete an ask password user interaction request. This should be once
@@ -99963,7 +99963,7 @@ func (interaction *TlsInteractionInstance) AskPasswordAsync(cancellable context.
 // If the interaction is cancelled by the cancellation object, or by the
 // user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 // contains a %G_IO_ERROR_CANCELLED error code.
-func (interaction *TlsInteractionInstance) AskPasswordFinish(result AsyncResult) (TLSInteractionResult, error) {
+func (interaction *TlsInteractionInstance) AskPasswordFinish(result AsyncResult) (TlsInteractionResult, error) {
 	var carg0 *C.GTlsInteraction      // in, none, converted
 	var carg1 *C.GAsyncResult         // in, none, converted
 	var cret  C.GTlsInteractionResult // return, none, casted
@@ -99976,10 +99976,10 @@ func (interaction *TlsInteractionInstance) AskPasswordFinish(result AsyncResult)
 	runtime.KeepAlive(interaction)
 	runtime.KeepAlive(result)
 
-	var goret  TLSInteractionResult
+	var goret  TlsInteractionResult
 	var _goerr error
 
-	goret = TLSInteractionResult(cret)
+	goret = TlsInteractionResult(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -99996,7 +99996,7 @@ func (interaction *TlsInteractionInstance) AskPasswordFinish(result AsyncResult)
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSInteractionResult 
+// 	- goret TlsInteractionResult 
 // 	- _goerr error (nullable): an error 
 //
 // Invoke the interaction to ask the user for a password. It invokes this
@@ -100018,7 +100018,7 @@ func (interaction *TlsInteractionInstance) AskPasswordFinish(result AsyncResult)
 // user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 // contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 // not support immediate cancellation.
-func (interaction *TlsInteractionInstance) InvokeAskPassword(cancellable context.Context, password TlsPassword) (TLSInteractionResult, error) {
+func (interaction *TlsInteractionInstance) InvokeAskPassword(cancellable context.Context, password TlsPassword) (TlsInteractionResult, error) {
 	var carg0 *C.GTlsInteraction      // in, none, converted
 	var carg2 *C.GCancellable         // in, none, converted, nullable
 	var carg1 *C.GTlsPassword         // in, none, converted
@@ -100036,10 +100036,10 @@ func (interaction *TlsInteractionInstance) InvokeAskPassword(cancellable context
 	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(password)
 
-	var goret  TLSInteractionResult
+	var goret  TlsInteractionResult
 	var _goerr error
 
-	goret = TLSInteractionResult(cret)
+	goret = TlsInteractionResult(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -100053,11 +100053,11 @@ func (interaction *TlsInteractionInstance) InvokeAskPassword(cancellable context
 // 
 // 	- cancellable context.Context (nullable): an optional #GCancellable cancellation object 
 // 	- connection TlsConnection: a #GTlsConnection object 
-// 	- flags TLSCertificateRequestFlags: flags providing more information about the request 
+// 	- flags TlsCertificateRequestFlags: flags providing more information about the request 
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSInteractionResult 
+// 	- goret TlsInteractionResult 
 // 	- _goerr error (nullable): an error 
 //
 // Invoke the interaction to ask the user to choose a certificate to
@@ -100080,7 +100080,7 @@ func (interaction *TlsInteractionInstance) InvokeAskPassword(cancellable context
 // user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 // contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 // not support immediate cancellation.
-func (interaction *TlsInteractionInstance) InvokeRequestCertificate(cancellable context.Context, connection TlsConnection, flags TLSCertificateRequestFlags) (TLSInteractionResult, error) {
+func (interaction *TlsInteractionInstance) InvokeRequestCertificate(cancellable context.Context, connection TlsConnection, flags TlsCertificateRequestFlags) (TlsInteractionResult, error) {
 	var carg0 *C.GTlsInteraction            // in, none, converted
 	var carg3 *C.GCancellable               // in, none, converted, nullable
 	var carg1 *C.GTlsConnection             // in, none, converted
@@ -100101,10 +100101,10 @@ func (interaction *TlsInteractionInstance) InvokeRequestCertificate(cancellable 
 	runtime.KeepAlive(connection)
 	runtime.KeepAlive(flags)
 
-	var goret  TLSInteractionResult
+	var goret  TlsInteractionResult
 	var _goerr error
 
-	goret = TLSInteractionResult(cret)
+	goret = TlsInteractionResult(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -100118,11 +100118,11 @@ func (interaction *TlsInteractionInstance) InvokeRequestCertificate(cancellable 
 // 
 // 	- cancellable context.Context (nullable): an optional #GCancellable cancellation object 
 // 	- connection TlsConnection: a #GTlsConnection object 
-// 	- flags TLSCertificateRequestFlags: flags providing more information about the request 
+// 	- flags TlsCertificateRequestFlags: flags providing more information about the request 
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSInteractionResult 
+// 	- goret TlsInteractionResult 
 // 	- _goerr error (nullable): an error 
 //
 // Run synchronous interaction to ask the user to choose a certificate to use
@@ -100141,7 +100141,7 @@ func (interaction *TlsInteractionInstance) InvokeRequestCertificate(cancellable 
 // user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 // contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 // not support immediate cancellation.
-func (interaction *TlsInteractionInstance) RequestCertificate(cancellable context.Context, connection TlsConnection, flags TLSCertificateRequestFlags) (TLSInteractionResult, error) {
+func (interaction *TlsInteractionInstance) RequestCertificate(cancellable context.Context, connection TlsConnection, flags TlsCertificateRequestFlags) (TlsInteractionResult, error) {
 	var carg0 *C.GTlsInteraction            // in, none, converted
 	var carg3 *C.GCancellable               // in, none, converted, nullable
 	var carg1 *C.GTlsConnection             // in, none, converted
@@ -100162,10 +100162,10 @@ func (interaction *TlsInteractionInstance) RequestCertificate(cancellable contex
 	runtime.KeepAlive(connection)
 	runtime.KeepAlive(flags)
 
-	var goret  TLSInteractionResult
+	var goret  TlsInteractionResult
 	var _goerr error
 
-	goret = TLSInteractionResult(cret)
+	goret = TlsInteractionResult(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -100179,7 +100179,7 @@ func (interaction *TlsInteractionInstance) RequestCertificate(cancellable contex
 // 
 // 	- cancellable context.Context (nullable): an optional #GCancellable cancellation object 
 // 	- connection TlsConnection: a #GTlsConnection object 
-// 	- flags TLSCertificateRequestFlags: flags providing more information about the request 
+// 	- flags TlsCertificateRequestFlags: flags providing more information about the request 
 // 	- callback AsyncReadyCallback (nullable): will be called when the interaction completes 
 //
 // Run asynchronous interaction to ask the user for a certificate to use with
@@ -100190,7 +100190,7 @@ func (interaction *TlsInteractionInstance) RequestCertificate(cancellable contex
 // also choose to provide a certificate from elsewhere. @callback will be called
 // when the operation completes. Alternatively the user may abort this certificate
 // request, which will usually abort the TLS connection.
-func (interaction *TlsInteractionInstance) RequestCertificateAsync(cancellable context.Context, connection TlsConnection, flags TLSCertificateRequestFlags, callback AsyncReadyCallback) {
+func (interaction *TlsInteractionInstance) RequestCertificateAsync(cancellable context.Context, connection TlsConnection, flags TlsCertificateRequestFlags, callback AsyncReadyCallback) {
 	var carg0 *C.GTlsInteraction            // in, none, converted
 	var carg3 *C.GCancellable               // in, none, converted, nullable
 	var carg1 *C.GTlsConnection             // in, none, converted
@@ -100225,7 +100225,7 @@ func (interaction *TlsInteractionInstance) RequestCertificateAsync(cancellable c
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSInteractionResult 
+// 	- goret TlsInteractionResult 
 // 	- _goerr error (nullable): an error 
 //
 // Complete a request certificate user interaction request. This should be once
@@ -100238,7 +100238,7 @@ func (interaction *TlsInteractionInstance) RequestCertificateAsync(cancellable c
 // If the interaction is cancelled by the cancellation object, or by the
 // user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 // contains a %G_IO_ERROR_CANCELLED error code.
-func (interaction *TlsInteractionInstance) RequestCertificateFinish(result AsyncResult) (TLSInteractionResult, error) {
+func (interaction *TlsInteractionInstance) RequestCertificateFinish(result AsyncResult) (TlsInteractionResult, error) {
 	var carg0 *C.GTlsInteraction      // in, none, converted
 	var carg1 *C.GAsyncResult         // in, none, converted
 	var cret  C.GTlsInteractionResult // return, none, casted
@@ -100251,10 +100251,10 @@ func (interaction *TlsInteractionInstance) RequestCertificateFinish(result Async
 	runtime.KeepAlive(interaction)
 	runtime.KeepAlive(result)
 
-	var goret  TLSInteractionResult
+	var goret  TlsInteractionResult
 	var _goerr error
 
-	goret = TLSInteractionResult(cret)
+	goret = TlsInteractionResult(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -100277,7 +100277,7 @@ type TlsInteractionOverrides[Instance TlsInteraction] struct {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSInteractionResult 
+	// 	- goret TlsInteractionResult 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Run synchronous interaction to ask the user for a password. In general,
@@ -100293,7 +100293,7 @@ type TlsInteractionOverrides[Instance TlsInteraction] struct {
 	// user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 	// contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 	// not support immediate cancellation.
-	AskPassword func(Instance, context.Context, TlsPassword) (TLSInteractionResult, error)
+	AskPassword func(Instance, context.Context, TlsPassword) (TlsInteractionResult, error)
 	// // AskPasswordFinish allows you to override the implementation of the virtual method ask_password_finish.
 	// 
 	// The function takes the following parameters:
@@ -100302,7 +100302,7 @@ type TlsInteractionOverrides[Instance TlsInteraction] struct {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSInteractionResult 
+	// 	- goret TlsInteractionResult 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Complete an ask password user interaction request. This should be once
@@ -100314,18 +100314,18 @@ type TlsInteractionOverrides[Instance TlsInteraction] struct {
 	// If the interaction is cancelled by the cancellation object, or by the
 	// user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 	// contains a %G_IO_ERROR_CANCELLED error code.
-	AskPasswordFinish func(Instance, AsyncResult) (TLSInteractionResult, error)
+	AskPasswordFinish func(Instance, AsyncResult) (TlsInteractionResult, error)
 	// // RequestCertificate allows you to override the implementation of the virtual method request_certificate.
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): an optional #GCancellable cancellation object 
 	// 	- connection TlsConnection: a #GTlsConnection object 
-	// 	- flags TLSCertificateRequestFlags: flags providing more information about the request 
+	// 	- flags TlsCertificateRequestFlags: flags providing more information about the request 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSInteractionResult 
+	// 	- goret TlsInteractionResult 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Run synchronous interaction to ask the user to choose a certificate to use
@@ -100344,7 +100344,7 @@ type TlsInteractionOverrides[Instance TlsInteraction] struct {
 	// user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 	// contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 	// not support immediate cancellation.
-	RequestCertificate func(Instance, context.Context, TlsConnection, TLSCertificateRequestFlags) (TLSInteractionResult, error)
+	RequestCertificate func(Instance, context.Context, TlsConnection, TlsCertificateRequestFlags) (TlsInteractionResult, error)
 	// // RequestCertificateFinish allows you to override the implementation of the virtual method request_certificate_finish.
 	// 
 	// The function takes the following parameters:
@@ -100353,7 +100353,7 @@ type TlsInteractionOverrides[Instance TlsInteraction] struct {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSInteractionResult 
+	// 	- goret TlsInteractionResult 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Complete a request certificate user interaction request. This should be once
@@ -100366,7 +100366,7 @@ type TlsInteractionOverrides[Instance TlsInteraction] struct {
 	// If the interaction is cancelled by the cancellation object, or by the
 	// user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 	// contains a %G_IO_ERROR_CANCELLED error code.
-	RequestCertificateFinish func(Instance, AsyncResult) (TLSInteractionResult, error)
+	RequestCertificateFinish func(Instance, AsyncResult) (TlsInteractionResult, error)
 }
 
 // UnsafeApplyTlsInteractionOverrides applies the overrides to init the gclass by setting the trampoline functions.
@@ -100385,7 +100385,7 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 				var interaction Instance             // go GTlsInteraction subclass
 				var cancellable context.Context      // in, none, converted, nullable
 				var password    TlsPassword          // in, none, converted
-				var goret       TLSInteractionResult // return, none, casted
+				var goret       TlsInteractionResult // return, none, casted
 				var _goerr      error                // out, full, converted
 
 				interaction = UnsafeTlsInteractionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -100412,7 +100412,7 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 			func(carg0 *C.GTlsInteraction, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.GTlsInteractionResult) {
 				var interaction Instance             // go GTlsInteraction subclass
 				var result      AsyncResult          // in, none, converted
-				var goret       TLSInteractionResult // return, none, casted
+				var goret       TlsInteractionResult // return, none, casted
 				var _goerr      error                // out, full, converted
 
 				interaction = UnsafeTlsInteractionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -100437,8 +100437,8 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 				var interaction Instance                   // go GTlsInteraction subclass
 				var cancellable context.Context            // in, none, converted, nullable
 				var connection  TlsConnection              // in, none, converted
-				var flags       TLSCertificateRequestFlags // in, none, casted
-				var goret       TLSInteractionResult       // return, none, casted
+				var flags       TlsCertificateRequestFlags // in, none, casted
+				var goret       TlsInteractionResult       // return, none, casted
 				var _goerr      error                      // out, full, converted
 
 				interaction = UnsafeTlsInteractionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -100446,7 +100446,7 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
 				connection = UnsafeTlsConnectionFromGlibNone(unsafe.Pointer(carg1))
-				flags = TLSCertificateRequestFlags(carg2)
+				flags = TlsCertificateRequestFlags(carg2)
 
 				goret, _goerr = overrides.RequestCertificate(interaction, cancellable, connection, flags)
 
@@ -100466,7 +100466,7 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 			func(carg0 *C.GTlsInteraction, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.GTlsInteractionResult) {
 				var interaction Instance             // go GTlsInteraction subclass
 				var result      AsyncResult          // in, none, converted
-				var goret       TLSInteractionResult // return, none, casted
+				var goret       TlsInteractionResult // return, none, casted
 				var _goerr      error                // out, full, converted
 
 				interaction = UnsafeTlsInteractionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -100493,7 +100493,7 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSInteractionResult 
+// 	- goret TlsInteractionResult 
 // 	- _goerr error (nullable): an error 
 //
 // Run synchronous interaction to ask the user for a password. In general,
@@ -100509,7 +100509,7 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 // user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 // contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 // not support immediate cancellation.
-func (interaction *TlsInteractionInstance) ParentAskPassword(cancellable context.Context, password TlsPassword) (TLSInteractionResult, error) {
+func (interaction *TlsInteractionInstance) ParentAskPassword(cancellable context.Context, password TlsPassword) (TlsInteractionResult, error) {
 	var carg0 *C.GTlsInteraction
 	var carg2 *C.GCancellable         // in, none, converted
 	var carg1 *C.GTlsPassword         // in, none, converted, nullable
@@ -100529,10 +100529,10 @@ func (interaction *TlsInteractionInstance) ParentAskPassword(cancellable context
 	runtime.KeepAlive(cancellable)
 	runtime.KeepAlive(password)
 
-	var goret  TLSInteractionResult
+	var goret  TlsInteractionResult
 	var _goerr error
 
-	goret = TLSInteractionResult(cret)
+	goret = TlsInteractionResult(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -100549,7 +100549,7 @@ func (interaction *TlsInteractionInstance) ParentAskPassword(cancellable context
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSInteractionResult 
+// 	- goret TlsInteractionResult 
 // 	- _goerr error (nullable): an error 
 //
 // Complete an ask password user interaction request. This should be once
@@ -100561,7 +100561,7 @@ func (interaction *TlsInteractionInstance) ParentAskPassword(cancellable context
 // If the interaction is cancelled by the cancellation object, or by the
 // user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 // contains a %G_IO_ERROR_CANCELLED error code.
-func (interaction *TlsInteractionInstance) ParentAskPasswordFinish(result AsyncResult) (TLSInteractionResult, error) {
+func (interaction *TlsInteractionInstance) ParentAskPasswordFinish(result AsyncResult) (TlsInteractionResult, error) {
 	var carg0 *C.GTlsInteraction
 	var carg1 *C.GAsyncResult         // in, none, converted
 	var cret  C.GTlsInteractionResult // return, none, casted
@@ -100576,10 +100576,10 @@ func (interaction *TlsInteractionInstance) ParentAskPasswordFinish(result AsyncR
 	runtime.KeepAlive(interaction)
 	runtime.KeepAlive(result)
 
-	var goret  TLSInteractionResult
+	var goret  TlsInteractionResult
 	var _goerr error
 
-	goret = TLSInteractionResult(cret)
+	goret = TlsInteractionResult(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -100594,11 +100594,11 @@ func (interaction *TlsInteractionInstance) ParentAskPasswordFinish(result AsyncR
 // 
 // 	- cancellable context.Context (nullable): an optional #GCancellable cancellation object 
 // 	- connection TlsConnection: a #GTlsConnection object 
-// 	- flags TLSCertificateRequestFlags: flags providing more information about the request 
+// 	- flags TlsCertificateRequestFlags: flags providing more information about the request 
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSInteractionResult 
+// 	- goret TlsInteractionResult 
 // 	- _goerr error (nullable): an error 
 //
 // Run synchronous interaction to ask the user to choose a certificate to use
@@ -100617,7 +100617,7 @@ func (interaction *TlsInteractionInstance) ParentAskPasswordFinish(result AsyncR
 // user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 // contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 // not support immediate cancellation.
-func (interaction *TlsInteractionInstance) ParentRequestCertificate(cancellable context.Context, connection TlsConnection, flags TLSCertificateRequestFlags) (TLSInteractionResult, error) {
+func (interaction *TlsInteractionInstance) ParentRequestCertificate(cancellable context.Context, connection TlsConnection, flags TlsCertificateRequestFlags) (TlsInteractionResult, error) {
 	var carg0 *C.GTlsInteraction
 	var carg3 *C.GCancellable               // in, none, converted
 	var carg1 *C.GTlsConnection             // in, none, converted, nullable
@@ -100640,10 +100640,10 @@ func (interaction *TlsInteractionInstance) ParentRequestCertificate(cancellable 
 	runtime.KeepAlive(connection)
 	runtime.KeepAlive(flags)
 
-	var goret  TLSInteractionResult
+	var goret  TlsInteractionResult
 	var _goerr error
 
-	goret = TLSInteractionResult(cret)
+	goret = TlsInteractionResult(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -100660,7 +100660,7 @@ func (interaction *TlsInteractionInstance) ParentRequestCertificate(cancellable 
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSInteractionResult 
+// 	- goret TlsInteractionResult 
 // 	- _goerr error (nullable): an error 
 //
 // Complete a request certificate user interaction request. This should be once
@@ -100673,7 +100673,7 @@ func (interaction *TlsInteractionInstance) ParentRequestCertificate(cancellable 
 // If the interaction is cancelled by the cancellation object, or by the
 // user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 // contains a %G_IO_ERROR_CANCELLED error code.
-func (interaction *TlsInteractionInstance) ParentRequestCertificateFinish(result AsyncResult) (TLSInteractionResult, error) {
+func (interaction *TlsInteractionInstance) ParentRequestCertificateFinish(result AsyncResult) (TlsInteractionResult, error) {
 	var carg0 *C.GTlsInteraction
 	var carg1 *C.GAsyncResult         // in, none, converted
 	var cret  C.GTlsInteractionResult // return, none, casted
@@ -100688,10 +100688,10 @@ func (interaction *TlsInteractionInstance) ParentRequestCertificateFinish(result
 	runtime.KeepAlive(interaction)
 	runtime.KeepAlive(result)
 
-	var goret  TLSInteractionResult
+	var goret  TlsInteractionResult
 	var _goerr error
 
-	goret = TLSInteractionResult(cret)
+	goret = TlsInteractionResult(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -100753,10 +100753,10 @@ type TlsPassword interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TLSPasswordFlags 
+	// 	- goret TlsPasswordFlags 
 	//
 	// Get flags about the password.
-	GetFlags() TLSPasswordFlags
+	GetFlags() TlsPasswordFlags
 	// GetValue wraps g_tls_password_get_value
 	// 
 	// The function returns the following values:
@@ -100792,10 +100792,10 @@ type TlsPassword interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- flags TLSPasswordFlags: The flags about the password 
+	// 	- flags TlsPasswordFlags: The flags about the password 
 	//
 	// Set flags about the password.
-	SetFlags(TLSPasswordFlags)
+	SetFlags(TlsPasswordFlags)
 	// SetValue wraps g_tls_password_set_value
 	// 
 	// The function takes the following parameters:
@@ -100901,7 +100901,7 @@ func UnsafeTlsPasswordToGlibFull(c TlsPassword) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- flags TLSPasswordFlags: the password flags 
+// 	- flags TlsPasswordFlags: the password flags 
 // 	- description string: description of what the password is for 
 // 
 // The function returns the following values:
@@ -100909,7 +100909,7 @@ func UnsafeTlsPasswordToGlibFull(c TlsPassword) unsafe.Pointer {
 // 	- goret TlsPassword 
 //
 // Create a new #GTlsPassword object.
-func NewTlsPassword(flags TLSPasswordFlags, description string) TlsPassword {
+func NewTlsPassword(flags TlsPasswordFlags, description string) TlsPassword {
 	var carg1 C.GTlsPasswordFlags // in, none, casted
 	var carg2 *C.gchar            // in, none, string
 	var cret  *C.GTlsPassword     // return, full, converted
@@ -100956,10 +100956,10 @@ func (password *TlsPasswordInstance) GetDescription() string {
 // 
 // The function returns the following values:
 // 
-// 	- goret TLSPasswordFlags 
+// 	- goret TlsPasswordFlags 
 //
 // Get flags about the password.
-func (password *TlsPasswordInstance) GetFlags() TLSPasswordFlags {
+func (password *TlsPasswordInstance) GetFlags() TlsPasswordFlags {
 	var carg0 *C.GTlsPassword     // in, none, converted
 	var cret  C.GTlsPasswordFlags // return, none, casted
 
@@ -100968,9 +100968,9 @@ func (password *TlsPasswordInstance) GetFlags() TLSPasswordFlags {
 	cret = C.g_tls_password_get_flags(carg0)
 	runtime.KeepAlive(password)
 
-	var goret TLSPasswordFlags
+	var goret TlsPasswordFlags
 
-	goret = TLSPasswordFlags(cret)
+	goret = TlsPasswordFlags(cret)
 
 	return goret
 }
@@ -101059,10 +101059,10 @@ func (password *TlsPasswordInstance) SetDescription(description string) {
 // 
 // The function takes the following parameters:
 // 
-// 	- flags TLSPasswordFlags: The flags about the password 
+// 	- flags TlsPasswordFlags: The flags about the password 
 //
 // Set flags about the password.
-func (password *TlsPasswordInstance) SetFlags(flags TLSPasswordFlags) {
+func (password *TlsPasswordInstance) SetFlags(flags TlsPasswordFlags) {
 	var carg0 *C.GTlsPassword     // in, none, converted
 	var carg1 C.GTlsPasswordFlags // in, none, casted
 
@@ -101379,8 +101379,8 @@ type Vfs interface {
 	// The function takes the following parameters:
 	// 
 	// 	- scheme string: an URI scheme, e.g. "http" 
-	// 	- uriFunc VFSFileLookupFunc (nullable): a #GVfsFileLookupFunc 
-	// 	- parseNameFunc VFSFileLookupFunc (nullable): a #GVfsFileLookupFunc 
+	// 	- uriFunc VfsFileLookupFunc (nullable): a #GVfsFileLookupFunc 
+	// 	- parseNameFunc VfsFileLookupFunc (nullable): a #GVfsFileLookupFunc 
 	// 
 	// The function returns the following values:
 	// 
@@ -101406,7 +101406,7 @@ type Vfs interface {
 	// 
 	// It's an error to call this function twice with the same scheme. To unregister
 	// a custom URI scheme, use g_vfs_unregister_uri_scheme().
-	RegisterURIScheme(string, VFSFileLookupFunc, VFSFileLookupFunc) bool
+	RegisterURIScheme(string, VfsFileLookupFunc, VfsFileLookupFunc) bool
 	// UnregisterURIScheme wraps g_vfs_unregister_uri_scheme
 	// 
 	// The function takes the following parameters:
@@ -101765,8 +101765,8 @@ func (vfs *VfsInstance) ParseName(parseName string) File {
 // The function takes the following parameters:
 // 
 // 	- scheme string: an URI scheme, e.g. "http" 
-// 	- uriFunc VFSFileLookupFunc (nullable): a #GVfsFileLookupFunc 
-// 	- parseNameFunc VFSFileLookupFunc (nullable): a #GVfsFileLookupFunc 
+// 	- uriFunc VfsFileLookupFunc (nullable): a #GVfsFileLookupFunc 
+// 	- parseNameFunc VfsFileLookupFunc (nullable): a #GVfsFileLookupFunc 
 // 
 // The function returns the following values:
 // 
@@ -101792,7 +101792,7 @@ func (vfs *VfsInstance) ParseName(parseName string) File {
 // 
 // It's an error to call this function twice with the same scheme. To unregister
 // a custom URI scheme, use g_vfs_unregister_uri_scheme().
-func (vfs *VfsInstance) RegisterURIScheme(scheme string, uriFunc VFSFileLookupFunc, parseNameFunc VFSFileLookupFunc) bool {
+func (vfs *VfsInstance) RegisterURIScheme(scheme string, uriFunc VfsFileLookupFunc, parseNameFunc VfsFileLookupFunc) bool {
 	var carg0 *C.GVfs              // in, none, converted
 	var carg1 *C.char              // in, none, string
 	var carg2 C.GVfsFileLookupFunc // callback, scope: notified, closure: carg3, destroy: carg4, nullable
@@ -101807,12 +101807,12 @@ func (vfs *VfsInstance) RegisterURIScheme(scheme string, uriFunc VFSFileLookupFu
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(scheme)))
 	defer C.free(unsafe.Pointer(carg1))
 	if uriFunc != nil {
-		carg2 = (*[0]byte)(C._gotk4_gio2_VFSFileLookupFunc)
+		carg2 = (*[0]byte)(C._gotk4_gio2_VfsFileLookupFunc)
 		carg3 = C.gpointer(userdata.Register(uriFunc))
 		carg4 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
 	if parseNameFunc != nil {
-		carg5 = (*[0]byte)(C._gotk4_gio2_VFSFileLookupFunc)
+		carg5 = (*[0]byte)(C._gotk4_gio2_VfsFileLookupFunc)
 		carg6 = C.gpointer(userdata.Register(parseNameFunc))
 		carg7 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
 	}
@@ -102517,7 +102517,7 @@ type VolumeMonitor interface {
 	// The returned list should be freed with g_list_free(), after
 	// its elements have been unreffed with g_object_unref().
 	GetConnectedDrives() []Drive
-	// GetMountForUUID wraps g_volume_monitor_get_mount_for_uuid
+	// GetMountForUuid wraps g_volume_monitor_get_mount_for_uuid
 	// 
 	// The function takes the following parameters:
 	// 
@@ -102528,7 +102528,7 @@ type VolumeMonitor interface {
 	// 	- goret Mount (nullable) 
 	//
 	// Finds a #GMount object by its UUID (see g_mount_get_uuid())
-	GetMountForUUID(string) Mount
+	GetMountForUuid(string) Mount
 	// GetMounts wraps g_volume_monitor_get_mounts
 	// 
 	// The function returns the following values:
@@ -102540,7 +102540,7 @@ type VolumeMonitor interface {
 	// The returned list should be freed with g_list_free(), after
 	// its elements have been unreffed with g_object_unref().
 	GetMounts() []Mount
-	// GetVolumeForUUID wraps g_volume_monitor_get_volume_for_uuid
+	// GetVolumeForUuid wraps g_volume_monitor_get_volume_for_uuid
 	// 
 	// The function takes the following parameters:
 	// 
@@ -102551,7 +102551,7 @@ type VolumeMonitor interface {
 	// 	- goret Volume (nullable) 
 	//
 	// Finds a #GVolume object by its UUID (see g_volume_get_uuid())
-	GetVolumeForUUID(string) Volume
+	GetVolumeForUuid(string) Volume
 	// GetVolumes wraps g_volume_monitor_get_volumes
 	// 
 	// The function returns the following values:
@@ -102664,7 +102664,7 @@ type VolumeMonitor interface {
 	// The returned list should be freed with g_list_free(), after
 	// its elements have been unreffed with g_object_unref().
 	ParentGetConnectedDrives() []Drive
-	// ParentGetMountForUUID calls the default implementations of the get_mount_for_uuid virtual method.
+	// ParentGetMountForUuid calls the default implementations of the get_mount_for_uuid virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -102676,7 +102676,7 @@ type VolumeMonitor interface {
 	// 	- goret Mount (nullable) 
 	//
 	// Finds a #GMount object by its UUID (see g_mount_get_uuid())
-	ParentGetMountForUUID(uuid string) Mount
+	ParentGetMountForUuid(uuid string) Mount
 	// ParentGetMounts calls the default implementations of the get_mounts virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -102689,7 +102689,7 @@ type VolumeMonitor interface {
 	// The returned list should be freed with g_list_free(), after
 	// its elements have been unreffed with g_object_unref().
 	ParentGetMounts() []Mount
-	// ParentGetVolumeForUUID calls the default implementations of the get_volume_for_uuid virtual method.
+	// ParentGetVolumeForUuid calls the default implementations of the get_volume_for_uuid virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -102701,7 +102701,7 @@ type VolumeMonitor interface {
 	// 	- goret Volume (nullable) 
 	//
 	// Finds a #GVolume object by its UUID (see g_volume_get_uuid())
-	ParentGetVolumeForUUID(uuid string) Volume
+	ParentGetVolumeForUuid(uuid string) Volume
 	// ParentGetVolumes calls the default implementations of the get_volumes virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -102925,7 +102925,7 @@ func (volumeMonitor *VolumeMonitorInstance) GetConnectedDrives() []Drive {
 	return goret
 }
 
-// GetMountForUUID wraps g_volume_monitor_get_mount_for_uuid
+// GetMountForUuid wraps g_volume_monitor_get_mount_for_uuid
 // 
 // The function takes the following parameters:
 // 
@@ -102936,7 +102936,7 @@ func (volumeMonitor *VolumeMonitorInstance) GetConnectedDrives() []Drive {
 // 	- goret Mount (nullable) 
 //
 // Finds a #GMount object by its UUID (see g_mount_get_uuid())
-func (volumeMonitor *VolumeMonitorInstance) GetMountForUUID(uuid string) Mount {
+func (volumeMonitor *VolumeMonitorInstance) GetMountForUuid(uuid string) Mount {
 	var carg0 *C.GVolumeMonitor // in, none, converted
 	var carg1 *C.char           // in, none, string
 	var cret  *C.GMount         // return, full, converted, nullable
@@ -102991,7 +102991,7 @@ func (volumeMonitor *VolumeMonitorInstance) GetMounts() []Mount {
 	return goret
 }
 
-// GetVolumeForUUID wraps g_volume_monitor_get_volume_for_uuid
+// GetVolumeForUuid wraps g_volume_monitor_get_volume_for_uuid
 // 
 // The function takes the following parameters:
 // 
@@ -103002,7 +103002,7 @@ func (volumeMonitor *VolumeMonitorInstance) GetMounts() []Mount {
 // 	- goret Volume (nullable) 
 //
 // Finds a #GVolume object by its UUID (see g_volume_get_uuid())
-func (volumeMonitor *VolumeMonitorInstance) GetVolumeForUUID(uuid string) Volume {
+func (volumeMonitor *VolumeMonitorInstance) GetVolumeForUuid(uuid string) Volume {
 	var carg0 *C.GVolumeMonitor // in, none, converted
 	var carg1 *C.char           // in, none, string
 	var cret  *C.GVolume        // return, full, converted, nullable
@@ -103191,7 +103191,7 @@ type VolumeMonitorOverrides[Instance VolumeMonitor] struct {
 	// The returned list should be freed with g_list_free(), after
 	// its elements have been unreffed with g_object_unref().
 	GetConnectedDrives func(Instance) []Drive
-	// // GetMountForUUID allows you to override the implementation of the virtual method get_mount_for_uuid.
+	// // GetMountForUuid allows you to override the implementation of the virtual method get_mount_for_uuid.
 	// 
 	// The function takes the following parameters:
 	// 
@@ -103202,7 +103202,7 @@ type VolumeMonitorOverrides[Instance VolumeMonitor] struct {
 	// 	- goret Mount (nullable) 
 	//
 	// Finds a #GMount object by its UUID (see g_mount_get_uuid())
-	GetMountForUUID func(Instance, string) Mount
+	GetMountForUuid func(Instance, string) Mount
 	// // GetMounts allows you to override the implementation of the virtual method get_mounts.
 	// 
 	// The function returns the following values:
@@ -103214,7 +103214,7 @@ type VolumeMonitorOverrides[Instance VolumeMonitor] struct {
 	// The returned list should be freed with g_list_free(), after
 	// its elements have been unreffed with g_object_unref().
 	GetMounts func(Instance) []Mount
-	// // GetVolumeForUUID allows you to override the implementation of the virtual method get_volume_for_uuid.
+	// // GetVolumeForUuid allows you to override the implementation of the virtual method get_volume_for_uuid.
 	// 
 	// The function takes the following parameters:
 	// 
@@ -103225,7 +103225,7 @@ type VolumeMonitorOverrides[Instance VolumeMonitor] struct {
 	// 	- goret Volume (nullable) 
 	//
 	// Finds a #GVolume object by its UUID (see g_volume_get_uuid())
-	GetVolumeForUUID func(Instance, string) Volume
+	GetVolumeForUuid func(Instance, string) Volume
 	// // GetVolumes allows you to override the implementation of the virtual method get_volumes.
 	// 
 	// The function returns the following values:
@@ -103395,7 +103395,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 		)
 	}
 
-	if overrides.GetMountForUUID != nil {
+	if overrides.GetMountForUuid != nil {
 		pclass.get_mount_for_uuid = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_get_mount_for_uuid)
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
@@ -103408,7 +103408,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				uuid = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
-				goret = overrides.GetMountForUUID(volumeMonitor, uuid)
+				goret = overrides.GetMountForUuid(volumeMonitor, uuid)
 
 				if goret != nil {
 					cret = (*C.GMount)(UnsafeMountToGlibFull(goret))
@@ -103441,7 +103441,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 		)
 	}
 
-	if overrides.GetVolumeForUUID != nil {
+	if overrides.GetVolumeForUuid != nil {
 		pclass.get_volume_for_uuid = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_get_volume_for_uuid)
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
@@ -103454,7 +103454,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				uuid = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
-				goret = overrides.GetVolumeForUUID(volumeMonitor, uuid)
+				goret = overrides.GetVolumeForUuid(volumeMonitor, uuid)
 
 				if goret != nil {
 					cret = (*C.GVolume)(UnsafeVolumeToGlibFull(goret))
@@ -103743,7 +103743,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentGetConnectedDrives() []Drive {
 	return goret
 }
 
-// ParentGetMountForUUID calls the default implementations of the get_mount_for_uuid virtual method.
+// ParentGetMountForUuid calls the default implementations of the get_mount_for_uuid virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -103755,7 +103755,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentGetConnectedDrives() []Drive {
 // 	- goret Mount (nullable) 
 //
 // Finds a #GMount object by its UUID (see g_mount_get_uuid())
-func (volumeMonitor *VolumeMonitorInstance) ParentGetMountForUUID(uuid string) Mount {
+func (volumeMonitor *VolumeMonitorInstance) ParentGetMountForUuid(uuid string) Mount {
 	var carg0 *C.GVolumeMonitor
 	var carg1 *C.char   // in, none, converted
 	var cret  *C.GMount // return, full, converted, nullable
@@ -103815,7 +103815,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentGetMounts() []Mount {
 	return goret
 }
 
-// ParentGetVolumeForUUID calls the default implementations of the get_volume_for_uuid virtual method.
+// ParentGetVolumeForUuid calls the default implementations of the get_volume_for_uuid virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -103827,7 +103827,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentGetMounts() []Mount {
 // 	- goret Volume (nullable) 
 //
 // Finds a #GVolume object by its UUID (see g_volume_get_uuid())
-func (volumeMonitor *VolumeMonitorInstance) ParentGetVolumeForUUID(uuid string) Volume {
+func (volumeMonitor *VolumeMonitorInstance) ParentGetVolumeForUuid(uuid string) Volume {
 	var carg0 *C.GVolumeMonitor
 	var carg1 *C.char    // in, none, converted
 	var cret  *C.GVolume // return, full, converted, nullable
@@ -104257,7 +104257,7 @@ type FileIOStream interface {
 	Seekable
 	upcastToGFileIOStream() *FileIOStreamInstance
 
-	// GetETag wraps g_file_io_stream_get_etag
+	// GetEtag wraps g_file_io_stream_get_etag
 	// 
 	// The function returns the following values:
 	// 
@@ -104266,7 +104266,7 @@ type FileIOStream interface {
 	// Gets the entity tag for the file when it has been written.
 	// This must be called after the stream has been written
 	// and closed, as the etag can change while writing.
-	GetETag() string
+	GetEtag() string
 	// QueryInfo wraps g_file_io_stream_query_info
 	// 
 	// The function takes the following parameters:
@@ -104346,7 +104346,7 @@ type FileIOStream interface {
 	// 
 	// 	- goret bool 
 	ParentCanTruncate() bool
-	// ParentGetETag calls the default implementations of the get_etag virtual method.
+	// ParentGetEtag calls the default implementations of the get_etag virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -104356,7 +104356,7 @@ type FileIOStream interface {
 	// Gets the entity tag for the file when it has been written.
 	// This must be called after the stream has been written
 	// and closed, as the etag can change while writing.
-	ParentGetETag() string
+	ParentGetEtag() string
 	// ParentQueryInfo calls the default implementations of the query_info virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -104492,7 +104492,7 @@ func UnsafeFileIOStreamToGlibFull(c FileIOStream) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// GetETag wraps g_file_io_stream_get_etag
+// GetEtag wraps g_file_io_stream_get_etag
 // 
 // The function returns the following values:
 // 
@@ -104501,7 +104501,7 @@ func UnsafeFileIOStreamToGlibFull(c FileIOStream) unsafe.Pointer {
 // Gets the entity tag for the file when it has been written.
 // This must be called after the stream has been written
 // and closed, as the etag can change while writing.
-func (stream *FileIOStreamInstance) GetETag() string {
+func (stream *FileIOStreamInstance) GetEtag() string {
 	var carg0 *C.GFileIOStream // in, none, converted
 	var cret  *C.char          // return, full, string, nullable-string
 
@@ -104679,7 +104679,7 @@ type FileIOStreamOverrides[Instance FileIOStream] struct {
 	// 
 	// 	- goret bool 
 	CanTruncate func(Instance) bool
-	// // GetETag allows you to override the implementation of the virtual method get_etag.
+	// // GetEtag allows you to override the implementation of the virtual method get_etag.
 	// 
 	// The function returns the following values:
 	// 
@@ -104688,7 +104688,7 @@ type FileIOStreamOverrides[Instance FileIOStream] struct {
 	// Gets the entity tag for the file when it has been written.
 	// This must be called after the stream has been written
 	// and closed, as the etag can change while writing.
-	GetETag func(Instance) string
+	GetEtag func(Instance) string
 	// // QueryInfo allows you to override the implementation of the virtual method query_info.
 	// 
 	// The function takes the following parameters:
@@ -104817,7 +104817,7 @@ func UnsafeApplyFileIOStreamOverrides[Instance FileIOStream](gclass unsafe.Point
 		)
 	}
 
-	if overrides.GetETag != nil {
+	if overrides.GetEtag != nil {
 		pclass.get_etag = (*[0]byte)(C._gotk4_gio2_FileIOStream_get_etag)
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
@@ -104828,7 +104828,7 @@ func UnsafeApplyFileIOStreamOverrides[Instance FileIOStream](gclass unsafe.Point
 
 				stream = UnsafeFileIOStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
-				goret = overrides.GetETag(stream)
+				goret = overrides.GetEtag(stream)
 
 				if goret != "" {
 					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
@@ -105026,7 +105026,7 @@ func (stream *FileIOStreamInstance) ParentCanTruncate() bool {
 	return goret
 }
 
-// ParentGetETag calls the default implementations of the get_etag virtual method.
+// ParentGetEtag calls the default implementations of the get_etag virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -105036,7 +105036,7 @@ func (stream *FileIOStreamInstance) ParentCanTruncate() bool {
 // Gets the entity tag for the file when it has been written.
 // This must be called after the stream has been written
 // and closed, as the etag can change while writing.
-func (stream *FileIOStreamInstance) ParentGetETag() string {
+func (stream *FileIOStreamInstance) ParentGetEtag() string {
 	var carg0 *C.GFileIOStream
 	var cret  *C.char // return, full, string, nullable-string
 
@@ -106076,7 +106076,7 @@ type FileOutputStream interface {
 	Seekable
 	upcastToGFileOutputStream() *FileOutputStreamInstance
 
-	// GetETag wraps g_file_output_stream_get_etag
+	// GetEtag wraps g_file_output_stream_get_etag
 	// 
 	// The function returns the following values:
 	// 
@@ -106085,7 +106085,7 @@ type FileOutputStream interface {
 	// Gets the entity tag for the file when it has been written.
 	// This must be called after the stream has been written
 	// and closed, as the etag can change while writing.
-	GetETag() string
+	GetEtag() string
 	// QueryInfo wraps g_file_output_stream_query_info
 	// 
 	// The function takes the following parameters:
@@ -106164,7 +106164,7 @@ type FileOutputStream interface {
 	// 
 	// 	- goret bool 
 	ParentCanTruncate() bool
-	// ParentGetETag calls the default implementations of the get_etag virtual method.
+	// ParentGetEtag calls the default implementations of the get_etag virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -106174,7 +106174,7 @@ type FileOutputStream interface {
 	// Gets the entity tag for the file when it has been written.
 	// This must be called after the stream has been written
 	// and closed, as the etag can change while writing.
-	ParentGetETag() string
+	ParentGetEtag() string
 	// ParentQueryInfo calls the default implementations of the query_info virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -106310,7 +106310,7 @@ func UnsafeFileOutputStreamToGlibFull(c FileOutputStream) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// GetETag wraps g_file_output_stream_get_etag
+// GetEtag wraps g_file_output_stream_get_etag
 // 
 // The function returns the following values:
 // 
@@ -106319,7 +106319,7 @@ func UnsafeFileOutputStreamToGlibFull(c FileOutputStream) unsafe.Pointer {
 // Gets the entity tag for the file when it has been written.
 // This must be called after the stream has been written
 // and closed, as the etag can change while writing.
-func (stream *FileOutputStreamInstance) GetETag() string {
+func (stream *FileOutputStreamInstance) GetEtag() string {
 	var carg0 *C.GFileOutputStream // in, none, converted
 	var cret  *C.char              // return, full, string, nullable-string
 
@@ -106496,7 +106496,7 @@ type FileOutputStreamOverrides[Instance FileOutputStream] struct {
 	// 
 	// 	- goret bool 
 	CanTruncate func(Instance) bool
-	// // GetETag allows you to override the implementation of the virtual method get_etag.
+	// // GetEtag allows you to override the implementation of the virtual method get_etag.
 	// 
 	// The function returns the following values:
 	// 
@@ -106505,7 +106505,7 @@ type FileOutputStreamOverrides[Instance FileOutputStream] struct {
 	// Gets the entity tag for the file when it has been written.
 	// This must be called after the stream has been written
 	// and closed, as the etag can change while writing.
-	GetETag func(Instance) string
+	GetEtag func(Instance) string
 	// // QueryInfo allows you to override the implementation of the virtual method query_info.
 	// 
 	// The function takes the following parameters:
@@ -106634,7 +106634,7 @@ func UnsafeApplyFileOutputStreamOverrides[Instance FileOutputStream](gclass unsa
 		)
 	}
 
-	if overrides.GetETag != nil {
+	if overrides.GetEtag != nil {
 		pclass.get_etag = (*[0]byte)(C._gotk4_gio2_FileOutputStream_get_etag)
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
@@ -106645,7 +106645,7 @@ func UnsafeApplyFileOutputStreamOverrides[Instance FileOutputStream](gclass unsa
 
 				stream = UnsafeFileOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
-				goret = overrides.GetETag(stream)
+				goret = overrides.GetEtag(stream)
 
 				if goret != "" {
 					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
@@ -106843,7 +106843,7 @@ func (stream *FileOutputStreamInstance) ParentCanTruncate() bool {
 	return goret
 }
 
-// ParentGetETag calls the default implementations of the get_etag virtual method.
+// ParentGetEtag calls the default implementations of the get_etag virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -106853,7 +106853,7 @@ func (stream *FileOutputStreamInstance) ParentCanTruncate() bool {
 // Gets the entity tag for the file when it has been written.
 // This must be called after the stream has been written
 // and closed, as the etag can change while writing.
-func (stream *FileOutputStreamInstance) ParentGetETag() string {
+func (stream *FileOutputStreamInstance) ParentGetEtag() string {
 	var carg0 *C.GFileOutputStream
 	var cret  *C.char // return, full, string, nullable-string
 
@@ -115285,7 +115285,7 @@ func (matcher *FileAttributeMatcher) Subtract(subtract *FileAttributeMatcher) *F
 	return goret
 }
 
-// ToString wraps g_file_attribute_matcher_to_string
+// String wraps g_file_attribute_matcher_to_string
 // 
 // The function returns the following values:
 // 
@@ -115295,7 +115295,7 @@ func (matcher *FileAttributeMatcher) Subtract(subtract *FileAttributeMatcher) *F
 // equal to the format passed to g_file_attribute_matcher_new().
 // The output however, might not be identical, as the matcher may
 // decide to use a different order or omit needless parts.
-func (matcher *FileAttributeMatcher) ToString() string {
+func (matcher *FileAttributeMatcher) String() string {
 	var carg0 *C.GFileAttributeMatcher // in, none, converted
 	var cret  *C.char                  // return, full, string
 
@@ -115760,17 +115760,17 @@ func (f *FilterOutputStreamClass) ParentClass() *OutputStreamClass {
 // #GIOExtension is an opaque data structure and can only be accessed
 // using the following functions.
 type IOExtension struct {
-	*ioExtension
+	*iOExtension
 }
 
-// ioExtension is the struct that's finalized
-type ioExtension struct {
+// iOExtension is the struct that's finalized
+type iOExtension struct {
 	native *C.GIOExtension
 }
 
 // UnsafeIOExtensionFromGlibBorrow is used to convert raw C.GIOExtension pointers to go. This is used by the bindings internally.
 func UnsafeIOExtensionFromGlibBorrow(p unsafe.Pointer) *IOExtension {
-	return &IOExtension{&ioExtension{(*C.GIOExtension)(p)}}
+	return &IOExtension{&iOExtension{(*C.GIOExtension)(p)}}
 }
 
 // UnsafeIOExtensionFromGlibNone is used to convert raw C.GIOExtension pointers to go without transferring ownership. This is used by the bindings internally.
@@ -115778,8 +115778,8 @@ func UnsafeIOExtensionFromGlibNone(p unsafe.Pointer) *IOExtension {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeIOExtensionFromGlibBorrow(p)
 	runtime.SetFinalizer(
-		wrapped.ioExtension,
-		func (intern *ioExtension) {
+		wrapped.iOExtension,
+		func (intern *iOExtension) {
 			C.free(unsafe.Pointer(intern.native))
 		},
 	)
@@ -115790,8 +115790,8 @@ func UnsafeIOExtensionFromGlibNone(p unsafe.Pointer) *IOExtension {
 func UnsafeIOExtensionFromGlibFull(p unsafe.Pointer) *IOExtension {
 	wrapped := UnsafeIOExtensionFromGlibBorrow(p)
 	runtime.SetFinalizer(
-		wrapped.ioExtension,
-		func (intern *ioExtension) {
+		wrapped.iOExtension,
+		func (intern *iOExtension) {
 			C.free(unsafe.Pointer(intern.native))
 		},
 	)
@@ -115813,7 +115813,7 @@ func UnsafeIOExtensionToGlibNone(i *IOExtension) unsafe.Pointer {
 // UnsafeIOExtensionToGlibFull returns the underlying C pointer and gives up ownership.
 // This is used by the bindings internally.
 func UnsafeIOExtensionToGlibFull(i *IOExtension) unsafe.Pointer {
-	runtime.SetFinalizer(i.ioExtension, nil)
+	runtime.SetFinalizer(i.iOExtension, nil)
 	_p := unsafe.Pointer(i.native)
 	i.native = nil // IOExtension is invalid from here on
 	return _p
@@ -115945,17 +115945,17 @@ func (extension *IOExtension) GetType() gobject.Type {
 //  directories are specified GIO will load modules from the built-in
 //  directory last.
 type IOExtensionPoint struct {
-	*ioExtensionPoint
+	*iOExtensionPoint
 }
 
-// ioExtensionPoint is the struct that's finalized
-type ioExtensionPoint struct {
+// iOExtensionPoint is the struct that's finalized
+type iOExtensionPoint struct {
 	native *C.GIOExtensionPoint
 }
 
 // UnsafeIOExtensionPointFromGlibBorrow is used to convert raw C.GIOExtensionPoint pointers to go. This is used by the bindings internally.
 func UnsafeIOExtensionPointFromGlibBorrow(p unsafe.Pointer) *IOExtensionPoint {
-	return &IOExtensionPoint{&ioExtensionPoint{(*C.GIOExtensionPoint)(p)}}
+	return &IOExtensionPoint{&iOExtensionPoint{(*C.GIOExtensionPoint)(p)}}
 }
 
 // UnsafeIOExtensionPointFromGlibNone is used to convert raw C.GIOExtensionPoint pointers to go without transferring ownership. This is used by the bindings internally.
@@ -115963,8 +115963,8 @@ func UnsafeIOExtensionPointFromGlibNone(p unsafe.Pointer) *IOExtensionPoint {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeIOExtensionPointFromGlibBorrow(p)
 	runtime.SetFinalizer(
-		wrapped.ioExtensionPoint,
-		func (intern *ioExtensionPoint) {
+		wrapped.iOExtensionPoint,
+		func (intern *iOExtensionPoint) {
 			C.free(unsafe.Pointer(intern.native))
 		},
 	)
@@ -115975,8 +115975,8 @@ func UnsafeIOExtensionPointFromGlibNone(p unsafe.Pointer) *IOExtensionPoint {
 func UnsafeIOExtensionPointFromGlibFull(p unsafe.Pointer) *IOExtensionPoint {
 	wrapped := UnsafeIOExtensionPointFromGlibBorrow(p)
 	runtime.SetFinalizer(
-		wrapped.ioExtensionPoint,
-		func (intern *ioExtensionPoint) {
+		wrapped.iOExtensionPoint,
+		func (intern *iOExtensionPoint) {
 			C.free(unsafe.Pointer(intern.native))
 		},
 	)
@@ -115998,7 +115998,7 @@ func UnsafeIOExtensionPointToGlibNone(i *IOExtensionPoint) unsafe.Pointer {
 // UnsafeIOExtensionPointToGlibFull returns the underlying C pointer and gives up ownership.
 // This is used by the bindings internally.
 func UnsafeIOExtensionPointToGlibFull(i *IOExtensionPoint) unsafe.Pointer {
-	runtime.SetFinalizer(i.ioExtensionPoint, nil)
+	runtime.SetFinalizer(i.iOExtensionPoint, nil)
 	_p := unsafe.Pointer(i.native)
 	i.native = nil // IOExtensionPoint is invalid from here on
 	return _p
@@ -116214,17 +116214,17 @@ func (extensionPoint *IOExtensionPoint) SetRequiredType(typ gobject.Type) {
 // 
 // IOModuleClass is the type struct for [IOModule]
 type IOModuleClass struct {
-	*ioModuleClass
+	*iOModuleClass
 }
 
-// ioModuleClass is the struct that's finalized
-type ioModuleClass struct {
+// iOModuleClass is the struct that's finalized
+type iOModuleClass struct {
 	native *C.GIOModuleClass
 }
 
 // UnsafeIOModuleClassFromGlibBorrow is used to convert raw C.GIOModuleClass pointers to go. This is used by the bindings internally.
 func UnsafeIOModuleClassFromGlibBorrow(p unsafe.Pointer) *IOModuleClass {
-	return &IOModuleClass{&ioModuleClass{(*C.GIOModuleClass)(p)}}
+	return &IOModuleClass{&iOModuleClass{(*C.GIOModuleClass)(p)}}
 }
 
 // UnsafeIOModuleClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
@@ -116247,17 +116247,17 @@ func UnsafeIOModuleClassToGlibNone(i *IOModuleClass) unsafe.Pointer {
 // The scope can be used with g_io_modules_load_all_in_directory_with_scope()
 // or g_io_modules_scan_all_in_directory_with_scope().
 type IOModuleScope struct {
-	*ioModuleScope
+	*iOModuleScope
 }
 
-// ioModuleScope is the struct that's finalized
-type ioModuleScope struct {
+// iOModuleScope is the struct that's finalized
+type iOModuleScope struct {
 	native *C.GIOModuleScope
 }
 
 // UnsafeIOModuleScopeFromGlibBorrow is used to convert raw C.GIOModuleScope pointers to go. This is used by the bindings internally.
 func UnsafeIOModuleScopeFromGlibBorrow(p unsafe.Pointer) *IOModuleScope {
-	return &IOModuleScope{&ioModuleScope{(*C.GIOModuleScope)(p)}}
+	return &IOModuleScope{&iOModuleScope{(*C.GIOModuleScope)(p)}}
 }
 
 // UnsafeIOModuleScopeFromGlibNone is used to convert raw C.GIOModuleScope pointers to go without transferring ownership. This is used by the bindings internally.
@@ -116265,8 +116265,8 @@ func UnsafeIOModuleScopeFromGlibNone(p unsafe.Pointer) *IOModuleScope {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeIOModuleScopeFromGlibBorrow(p)
 	runtime.SetFinalizer(
-		wrapped.ioModuleScope,
-		func (intern *ioModuleScope) {
+		wrapped.iOModuleScope,
+		func (intern *iOModuleScope) {
 			C.g_io_module_scope_free(intern.native)
 		},
 	)
@@ -116277,8 +116277,8 @@ func UnsafeIOModuleScopeFromGlibNone(p unsafe.Pointer) *IOModuleScope {
 func UnsafeIOModuleScopeFromGlibFull(p unsafe.Pointer) *IOModuleScope {
 	wrapped := UnsafeIOModuleScopeFromGlibBorrow(p)
 	runtime.SetFinalizer(
-		wrapped.ioModuleScope,
-		func (intern *ioModuleScope) {
+		wrapped.iOModuleScope,
+		func (intern *iOModuleScope) {
 			C.g_io_module_scope_free(intern.native)
 		},
 	)
@@ -116300,7 +116300,7 @@ func UnsafeIOModuleScopeToGlibNone(i *IOModuleScope) unsafe.Pointer {
 // UnsafeIOModuleScopeToGlibFull returns the underlying C pointer and gives up ownership.
 // This is used by the bindings internally.
 func UnsafeIOModuleScopeToGlibFull(i *IOModuleScope) unsafe.Pointer {
-	runtime.SetFinalizer(i.ioModuleScope, nil)
+	runtime.SetFinalizer(i.iOModuleScope, nil)
 	_p := unsafe.Pointer(i.native)
 	i.native = nil // IOModuleScope is invalid from here on
 	return _p
@@ -116335,17 +116335,17 @@ func (scope *IOModuleScope) Block(basename string) {
 // Deprecated: (since 2.36.0) Use [struct@GLib.ThreadPool] or
 //   [method@Gio.Task.run_in_thread]
 type IOSchedulerJob struct {
-	*ioSchedulerJob
+	*iOSchedulerJob
 }
 
-// ioSchedulerJob is the struct that's finalized
-type ioSchedulerJob struct {
+// iOSchedulerJob is the struct that's finalized
+type iOSchedulerJob struct {
 	native *C.GIOSchedulerJob
 }
 
 // UnsafeIOSchedulerJobFromGlibBorrow is used to convert raw C.GIOSchedulerJob pointers to go. This is used by the bindings internally.
 func UnsafeIOSchedulerJobFromGlibBorrow(p unsafe.Pointer) *IOSchedulerJob {
-	return &IOSchedulerJob{&ioSchedulerJob{(*C.GIOSchedulerJob)(p)}}
+	return &IOSchedulerJob{&iOSchedulerJob{(*C.GIOSchedulerJob)(p)}}
 }
 
 // UnsafeIOSchedulerJobFromGlibNone is used to convert raw C.GIOSchedulerJob pointers to go without transferring ownership. This is used by the bindings internally.
@@ -116353,8 +116353,8 @@ func UnsafeIOSchedulerJobFromGlibNone(p unsafe.Pointer) *IOSchedulerJob {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeIOSchedulerJobFromGlibBorrow(p)
 	runtime.SetFinalizer(
-		wrapped.ioSchedulerJob,
-		func (intern *ioSchedulerJob) {
+		wrapped.iOSchedulerJob,
+		func (intern *iOSchedulerJob) {
 			C.free(unsafe.Pointer(intern.native))
 		},
 	)
@@ -116365,8 +116365,8 @@ func UnsafeIOSchedulerJobFromGlibNone(p unsafe.Pointer) *IOSchedulerJob {
 func UnsafeIOSchedulerJobFromGlibFull(p unsafe.Pointer) *IOSchedulerJob {
 	wrapped := UnsafeIOSchedulerJobFromGlibBorrow(p)
 	runtime.SetFinalizer(
-		wrapped.ioSchedulerJob,
-		func (intern *ioSchedulerJob) {
+		wrapped.iOSchedulerJob,
+		func (intern *iOSchedulerJob) {
 			C.free(unsafe.Pointer(intern.native))
 		},
 	)
@@ -116388,7 +116388,7 @@ func UnsafeIOSchedulerJobToGlibNone(i *IOSchedulerJob) unsafe.Pointer {
 // UnsafeIOSchedulerJobToGlibFull returns the underlying C pointer and gives up ownership.
 // This is used by the bindings internally.
 func UnsafeIOSchedulerJobToGlibFull(i *IOSchedulerJob) unsafe.Pointer {
-	runtime.SetFinalizer(i.ioSchedulerJob, nil)
+	runtime.SetFinalizer(i.iOSchedulerJob, nil)
 	_p := unsafe.Pointer(i.native)
 	i.native = nil // IOSchedulerJob is invalid from here on
 	return _p
@@ -116469,17 +116469,17 @@ func (job *IOSchedulerJob) SendToMainloopAsync(fn glib.SourceFunc) {
 
 // IOStreamAdapter wraps GIOStreamAdapter
 type IOStreamAdapter struct {
-	*ioStreamAdapter
+	*iOStreamAdapter
 }
 
-// ioStreamAdapter is the struct that's finalized
-type ioStreamAdapter struct {
+// iOStreamAdapter is the struct that's finalized
+type iOStreamAdapter struct {
 	native *C.GIOStreamAdapter
 }
 
 // UnsafeIOStreamAdapterFromGlibBorrow is used to convert raw C.GIOStreamAdapter pointers to go. This is used by the bindings internally.
 func UnsafeIOStreamAdapterFromGlibBorrow(p unsafe.Pointer) *IOStreamAdapter {
-	return &IOStreamAdapter{&ioStreamAdapter{(*C.GIOStreamAdapter)(p)}}
+	return &IOStreamAdapter{&iOStreamAdapter{(*C.GIOStreamAdapter)(p)}}
 }
 
 // UnsafeIOStreamAdapterFromGlibNone is used to convert raw C.GIOStreamAdapter pointers to go without transferring ownership. This is used by the bindings internally.
@@ -116487,8 +116487,8 @@ func UnsafeIOStreamAdapterFromGlibNone(p unsafe.Pointer) *IOStreamAdapter {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeIOStreamAdapterFromGlibBorrow(p)
 	runtime.SetFinalizer(
-		wrapped.ioStreamAdapter,
-		func (intern *ioStreamAdapter) {
+		wrapped.iOStreamAdapter,
+		func (intern *iOStreamAdapter) {
 			C.free(unsafe.Pointer(intern.native))
 		},
 	)
@@ -116499,8 +116499,8 @@ func UnsafeIOStreamAdapterFromGlibNone(p unsafe.Pointer) *IOStreamAdapter {
 func UnsafeIOStreamAdapterFromGlibFull(p unsafe.Pointer) *IOStreamAdapter {
 	wrapped := UnsafeIOStreamAdapterFromGlibBorrow(p)
 	runtime.SetFinalizer(
-		wrapped.ioStreamAdapter,
-		func (intern *ioStreamAdapter) {
+		wrapped.iOStreamAdapter,
+		func (intern *iOStreamAdapter) {
 			C.free(unsafe.Pointer(intern.native))
 		},
 	)
@@ -116522,7 +116522,7 @@ func UnsafeIOStreamAdapterToGlibNone(i *IOStreamAdapter) unsafe.Pointer {
 // UnsafeIOStreamAdapterToGlibFull returns the underlying C pointer and gives up ownership.
 // This is used by the bindings internally.
 func UnsafeIOStreamAdapterToGlibFull(i *IOStreamAdapter) unsafe.Pointer {
-	runtime.SetFinalizer(i.ioStreamAdapter, nil)
+	runtime.SetFinalizer(i.iOStreamAdapter, nil)
 	_p := unsafe.Pointer(i.native)
 	i.native = nil // IOStreamAdapter is invalid from here on
 	return _p
@@ -116532,17 +116532,17 @@ func UnsafeIOStreamAdapterToGlibFull(i *IOStreamAdapter) unsafe.Pointer {
 // 
 // IOStreamClass is the type struct for [IOStream]
 type IOStreamClass struct {
-	*ioStreamClass
+	*iOStreamClass
 }
 
-// ioStreamClass is the struct that's finalized
-type ioStreamClass struct {
+// iOStreamClass is the struct that's finalized
+type iOStreamClass struct {
 	native *C.GIOStreamClass
 }
 
 // UnsafeIOStreamClassFromGlibBorrow is used to convert raw C.GIOStreamClass pointers to go. This is used by the bindings internally.
 func UnsafeIOStreamClassFromGlibBorrow(p unsafe.Pointer) *IOStreamClass {
-	return &IOStreamClass{&ioStreamClass{(*C.GIOStreamClass)(p)}}
+	return &IOStreamClass{&iOStreamClass{(*C.GIOStreamClass)(p)}}
 }
 
 // UnsafeIOStreamClassFree unrefs/frees the underlying resource. This is used by the bindings internally.

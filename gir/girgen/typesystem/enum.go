@@ -2,7 +2,6 @@ package typesystem
 
 import (
 	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 )
 
 type Enum struct {
@@ -33,7 +32,7 @@ func DeclareEnum(e *env, v *gir.Enum) *Enum {
 		gir: v,
 		BaseType: BaseType{
 			GirName: v.Name,
-			GoTyp:   strcases.PascalToGo(v.Name),
+			GoTyp:   e.identifierToGo(v.CType),
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
 		},

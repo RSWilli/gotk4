@@ -39,7 +39,7 @@ type NamespaceConfig struct {
 	ManualTypes []Type
 }
 
-func (cfg Config) getNamespaceEnv(namespace *Namespace) *env {
+func (cfg Config) getNamespaceEnv(girNs *gir.Namespace, namespace *Namespace) *env {
 	nsCfg := cfg.Namespaces[fmt.Sprintf("%s-%d", namespace.Name, namespace.Version.Major)]
 
 	if nsCfg.Ignored {
@@ -63,8 +63,9 @@ func (cfg Config) getNamespaceEnv(namespace *Namespace) *env {
 		if err != nil {
 			panic(err)
 		}
-
 	}
+
+	identPrefixes, symbolPrefixes := girNs.Prefixes()
 
 	return &env{
 		cfg:        cfg,
@@ -74,6 +75,9 @@ func (cfg Config) getNamespaceEnv(namespace *Namespace) *env {
 		ignore:     ignoreOr(nsCfg.IgnoredDefinitions...),
 		namespace:  namespace,
 		logger:     slog.Default().With(slog.String("namespace", namespace.v.String())),
+
+		symbolPrefixes:     symbolPrefixes,
+		identifierPrefixes: identPrefixes,
 	}
 }
 

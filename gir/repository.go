@@ -11,10 +11,7 @@ import (
 // includes, C includes and namespaces of a single gir file.
 type Repository struct {
 	XMLName xml.Name `xml:"http://www.gtk.org/introspection/core/1.0 repository"`
-
-	Version             Version `xml:"version,attr"`
-	CIdentifierPrefixes string  `xml:"http://www.gtk.org/introspection/c/1.0 identifier-prefixes,attr"`
-	CSymbolPrefixes     string  `xml:"http://www.gtk.org/introspection/c/1.0 symbol-prefixes,attr"`
+	Version Version  `xml:"version,attr"`
 
 	Includes   []*Include   `xml:"http://www.gtk.org/introspection/core/1.0 include"`
 	CIncludes  []*CInclude  `xml:"http://www.gtk.org/introspection/c/1.0 include"`

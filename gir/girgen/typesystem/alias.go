@@ -2,7 +2,6 @@ package typesystem
 
 import (
 	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 )
 
 type Alias struct {
@@ -30,7 +29,7 @@ func DeclareAlias(e *env, v *gir.Alias) *Alias {
 	a := &Alias{
 		BaseType: BaseType{
 			GirName: v.Name,
-			GoTyp:   strcases.PascalToGo(v.Name),
+			GoTyp:   v.Name,
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
 		},

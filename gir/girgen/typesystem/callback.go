@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/diamondburned/gotk4/gir"
-	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 )
 
 type Callback struct {
@@ -36,17 +35,15 @@ func DeclareCallback(e *env, v *gir.Callback) *Callback {
 		return nil
 	}
 
-	goType := strcases.PascalToGo(v.Name)
-
 	return &Callback{
 		BaseType: BaseType{
 			GirName: v.Name,
-			GoTyp:   goType,
+			GoTyp:   e.identifierToGo(v.CType),
 			CGoTyp:  "C." + v.CType,
 			CTyp:    v.CType,
 		},
 		// e.g. _gotk4_gtk4_AssistantPageFunc
-		TrampolineName: fmt.Sprintf("%s_%s", e.trampolinePrefix(), goType),
+		TrampolineName: fmt.Sprintf("%s_%s", e.trampolinePrefix(), v.Name),
 		Parameters:     nil,
 		gir:            v,
 	}

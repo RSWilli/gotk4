@@ -7,6 +7,11 @@ import (
 	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 )
 
+var specialCallableNames = map[string]string{
+	// automatically implement Stringer interface
+	"to_string": "String",
+}
+
 // CallableIdentifier is an identifier that prefixes the parent type, so that renaming the
 // parent struct reflects to renaming the constructors / methods. It has a special case for
 // constructors, which are prefixed with "New" and the parent type name.
@@ -30,6 +35,10 @@ func (c *CallableIdentifier) CIndentifier() string {
 //
 // e.g. BufferList.new_sized -> NewBufferListSized
 func (c *CallableIdentifier) GoIndentifier() string {
+	if specialName, ok := specialCallableNames[c.Girname]; ok {
+		return specialName
+	}
+
 	pascal := strcases.SnakeToGo(true, c.Girname)
 
 	pascal, hasNewPrefix := strings.CutPrefix(pascal, "New")

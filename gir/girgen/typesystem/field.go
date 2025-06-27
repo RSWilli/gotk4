@@ -12,11 +12,13 @@ type Field struct {
 
 	Identifier
 
-	Type          CouldBeForeign[Type]
-	CTypePointers int
+	Type CouldBeForeign[Type]
 
-	GoGetterName string
-	GoSetterName string
+	// TODO: handle getters and setters. This is not as trivial as it seems.
+	// even a simple "int" field could mean the length of an array and thus create
+	// memory curruption if misused. Also the owner of the field is not always clear.
+	// GoGetterName string
+	// GoSetterName string
 
 	Readable bool
 	Writable bool
@@ -39,39 +41,6 @@ func NewField(e *env, parent Type, v *gir.Field) *Field {
 		return nil // TODO: what does bits mean?
 	}
 
-	var t CouldBeForeign[Type]
-	var getterName string
-	var setterName string
-	var pointers int
-
-	// Callback fields are fields for virtual methods that can be overwritten
-	//
-	// this will be done by the bindings and not exposed to the user
-	if v.Callback == nil {
-		ns, typ := e.findAnyType(v.AnyType)
-
-		if typ == nil {
-			return nil
-		}
-
-		t = CouldBeForeign[Type]{
-			Namespace: ns,
-			Type:      typ,
-		}
-
-		pointers = CountCTypePointers(CTypeFromAnytype(v.AnyType))
-
-		if v.IsReadable() {
-			// TODO: check if this getter collides with any method
-			getterName = strcases.SnakeToGo(true, v.Name) // no get prefix as per go convention
-		}
-
-		if v.Writable {
-			// TODO: check if this setter collides with any method
-			setterName = strcases.SnakeToGo(true, "set_"+v.Name)
-		}
-	}
-
 	return &Field{
 		Doc:    NewSimpleDoc(v.Doc),
 		Parent: parent,
@@ -80,13 +49,8 @@ func NewField(e *env, parent Type, v *gir.Field) *Field {
 			cGoIndentifier: strcases.CGoField(v.Name),
 			goIndentifier:  strcases.CGoField(v.Name),
 		},
-		Bits:          v.Bits,
-		Type:          t,
-		Readable:      v.IsReadable(),
-		Writable:      v.Writable,
-		CTypePointers: pointers,
-
-		GoGetterName: getterName,
-		GoSetterName: setterName,
+		Bits:     v.Bits,
+		Readable: v.IsReadable(),
+		Writable: v.Writable,
 	}
 }

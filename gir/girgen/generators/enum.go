@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/diamondburned/gotk4/gir/girgen/file"
-	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 	"github.com/diamondburned/gotk4/gir/girgen/typesystem"
 )
 
@@ -75,7 +74,7 @@ func (g *EnumGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "switch e {\n")
 	w.Go().Indent()
 	for _, member := range g.Enum.Members.Uniques() {
-		fmt.Fprintf(w.Go(), "case %s: return \"%s\"\n", member.GoIndentifier(), strcases.SnakeToGo(true, member.GoIndentifier()))
+		fmt.Fprintf(w.Go(), "case %s: return \"%s\"\n", member.GoIndentifier(), member.GoIndentifier())
 	}
 	fmt.Fprintf(w.Go(), "default: return fmt.Sprintf(\"%s(%%d)\", e)\n", g.GoType(0))
 	w.Go().Unindent()

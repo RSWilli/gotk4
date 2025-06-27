@@ -9,12 +9,19 @@ import (
 type Namespace struct {
 	XMLName xml.Name `xml:"http://www.gtk.org/introspection/core/1.0 namespace"`
 
-	Name                string  `xml:"name,attr"`
-	Version             Version `xml:"version,attr"`
-	CIdentifierPrefixes string  `xml:"http://www.gtk.org/introspection/c/1.0 identifier-prefixes,attr"`
-	CSymbolPrefixes     string  `xml:"http://www.gtk.org/introspection/c/1.0 symbol-prefixes,attr"`
-	Prefix              string  `xml:"http://www.gtk.org/introspection/c/1.0 prefix,attr"`
-	SharedLibrary       string  `xml:"shared-library,attr"`
+	Name    string  `xml:"name,attr"`
+	Version Version `xml:"version,attr"`
+
+	// CIdentifierPrefixes contains a list of prefixes that need to be stripped from data structures and types
+	CIdentifierPrefixes CommaSeparated `xml:"http://www.gtk.org/introspection/c/1.0 identifier-prefixes,attr"`
+
+	// CSymbolPrefixes contains a list of prefixes that need to be stripped from c functions
+	CSymbolPrefixes CommaSeparated `xml:"http://www.gtk.org/introspection/c/1.0 symbol-prefixes,attr"`
+
+	// Deprecated: Prefix is deprecated, use CIdentifierPrefixes instead.
+	Prefix string `xml:"http://www.gtk.org/introspection/c/1.0 prefix,attr"`
+
+	SharedLibrary string `xml:"shared-library,attr"`
 
 	Aliases     []*Alias      `xml:"http://www.gtk.org/introspection/core/1.0 alias"`
 	Classes     []*Class      `xml:"http://www.gtk.org/introspection/core/1.0 class"`
@@ -30,8 +37,17 @@ type Namespace struct {
 	Boxeds      []*Boxed      `xml:"http://www.gtk.org/introspection/core/1.0 boxed"`
 }
 
+// Prefixes returns the CIdentifierPrefixes and CSymbolPrefixes to use.
+func (ns *Namespace) Prefixes() (cIdentifierPrefixes, cSymbolPrefixes []string) {
+	if len(ns.CSymbolPrefixes) == 0 {
+		return ns.CIdentifierPrefixes, ns.CIdentifierPrefixes
+	}
+
+	return ns.CIdentifierPrefixes, ns.CSymbolPrefixes
+}
+
 // Find implements Searchable.
-func (n Namespace) Find(typ string) any {
+func (n *Namespace) Find(typ string) any {
 	for _, alias := range n.Aliases {
 		if alias.Name != typ {
 			continue

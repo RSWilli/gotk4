@@ -68,16 +68,14 @@ func (reg *Registry) newNamespace(cfg Config, ns *namespaceWithIncludes) *Namesp
 		namespace.Packages = append(namespace.Packages, pkg.Name)
 	}
 
-	e := cfg.getNamespaceEnv(namespace)
+	e := cfg.getNamespaceEnv(ns.Namespace, namespace)
 
 	if e == nil {
 		log.Printf("ignoring ignored namespace %s", ns.versionedName)
 		return nil
 	}
 
-	for _, t := range e.nsCfg.ManualTypes {
-		namespace.Manual = append(namespace.Manual, t)
-	}
+	namespace.Manual = e.nsCfg.ManualTypes
 
 	// these types are directly valid and will only omit child declarations afterwards:
 	for _, v := range ns.Unions {
@@ -165,6 +163,8 @@ func (reg *Registry) newNamespace(cfg Config, ns *namespaceWithIncludes) *Namesp
 			namespace.Constants = append(namespace.Constants, t)
 		}
 	}
+
+	e.logger = nil // disable the logger
 
 	return namespace
 }
