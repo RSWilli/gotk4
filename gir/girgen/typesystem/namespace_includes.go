@@ -1,8 +1,10 @@
 package typesystem
 
 import (
+	"cmp"
 	"fmt"
 	"log"
+	"log/slog"
 	"maps"
 	"slices"
 
@@ -14,7 +16,11 @@ import (
 // it is used as a preprocessing step before resolving all the types in the namespace
 type namespaceWithIncludes struct {
 	versionedName versionedName
-	includes      map[string]*namespaceWithIncludes
+	// resolveIndex is used to keep track of the order in which the namespaces are resolved
+	// lower index means the namespace is resolved earlier, meaning it has less dependencies
+	// and must be processed first
+	resolveIndex int
+	includes     map[string]*namespaceWithIncludes
 
 	repository *gir.Repository
 	*gir.Namespace
@@ -78,10 +84,18 @@ func resolveNamespaceIncludes(repos gir.Repositories) []*repoWithIncludes {
 
 	var collectIncludes func(n *namespaceWithIncludes) map[string]*namespaceWithIncludes
 
+	// resolvedNamespaces keeps track of how many namespaces we have resolved
+	// this is used for the resolveIndex
+	resolvedNamespaces := 0
+
 	collectIncludes = func(n *namespaceWithIncludes) map[string]*namespaceWithIncludes {
 		if _, ok := visited[n.versionedName]; ok {
+			slog.Info("includes already resolved", "name", n.versionedName)
 			return n.includes // includes are already resolved
 		}
+
+		slog.Info("collecting includes for namespace", "name", n.versionedName)
+
 		visited[n.versionedName] = struct{}{}
 
 		// the includes are still only prefilled, meaning we have the name and version,
@@ -91,6 +105,8 @@ func resolveNamespaceIncludes(repos gir.Repositories) []*repoWithIncludes {
 
 		for _, inc := range n.includes {
 			if incNs, ok := namespacesByName[inc.versionedName]; ok {
+				slog.Info("included namespace found", "name", n.versionedName, "include", inc.versionedName)
+
 				resolvedIncludes[inc.versionedName.name] = incNs
 
 				transitiveIncludes := collectIncludes(incNs)
@@ -103,6 +119,9 @@ func resolveNamespaceIncludes(repos gir.Repositories) []*repoWithIncludes {
 
 		n.includes = resolvedIncludes
 
+		n.resolveIndex = resolvedNamespaces
+		resolvedNamespaces++
+
 		return resolvedIncludes
 	}
 
@@ -111,28 +130,14 @@ func resolveNamespaceIncludes(repos gir.Repositories) []*repoWithIncludes {
 	}
 
 	// to make further processing easier we sort the repositories in a way that moves the base dependencies
-	// to the front, so that we can resolve them first. Since we have the transitive includes resolved, we can just look at the includes
+	// to the front. We tracked the resolveIndex so we know which namespaces were resolved first.
 
 	slices.SortFunc(outRepos, func(a, b *repoWithIncludes) int {
-		// if any namespace in b includes a namespace in a, then a should come first
-		for _, nsA := range a.namespaces {
-			for _, nsB := range b.namespaces {
-				if _, ok := nsB.includes[nsA.versionedName.name]; ok {
-					return -1 // a comes before b
-				}
-			}
+		if len(a.namespaces) != 1 || len(b.namespaces) != 1 {
+			panic("expected exactly one namespace per repository for sorting")
 		}
 
-		// if any namespace in a includes a namespace in b, then b should come first
-		for _, nsB := range b.namespaces {
-			for _, nsA := range a.namespaces {
-				if _, ok := nsA.includes[nsB.versionedName.name]; ok {
-					return 1 // b comes before a
-				}
-			}
-		}
-
-		return 0
+		return cmp.Compare(a.namespaces[0].resolveIndex, b.namespaces[0].resolveIndex)
 	})
 
 	return outRepos

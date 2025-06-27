@@ -5,6 +5,8 @@ import (
 	"fmt"
 )
 
+// https://gitlab.gnome.org/GNOME/gobject-introspection/-/blob/HEAD/docs/gir-1.2.rnc
+
 // Repository represents a GObject Introspection Repository, which contains the
 // includes, C includes and namespaces of a single gir file.
 type Repository struct {

@@ -1,6 +1,7 @@
 package typesystem
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/diamondburned/gotk4/gir"
@@ -52,8 +53,9 @@ func (reg *Registry) newNamespace(cfg Config, ns *namespaceWithIncludes) *Namesp
 		reffedNS := reg.findNamespace(incl.versionedName)
 
 		if reffedNS == nil {
-			log.Printf("could not find referenced namespace %s for %s\n", incl.versionedName, ns.versionedName)
-			continue
+			// this should never happen because the includes are resolved and ordered in a way that
+			// the referenced namespace is always before the including namespace
+			panic(fmt.Sprintf("could not find referenced namespace %s for %s", incl.versionedName, ns.versionedName))
 		}
 
 		namespace.Included[ident] = reffedNS
