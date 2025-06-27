@@ -35,11 +35,13 @@ func (c *CallableIdentifier) CIndentifier() string {
 //
 // e.g. BufferList.new_sized -> NewBufferListSized
 func (c *CallableIdentifier) GoIndentifier() string {
+	girname := c.Girname
+
 	if specialName, ok := specialCallableNames[c.Girname]; ok {
-		return specialName
+		girname = specialName
 	}
 
-	pascal := strcases.SnakeToGo(true, c.Girname)
+	pascal := strcases.SnakeToGo(true, girname)
 
 	pascal, hasNewPrefix := strings.CutPrefix(pascal, "New")
 	pascal, hasNewSuffix := strings.CutSuffix(pascal, "New")
@@ -47,13 +49,17 @@ func (c *CallableIdentifier) GoIndentifier() string {
 	var parentTypeName string
 
 	if c.Parent != nil {
-		parentTypeName = c.Parent.GoType(0)
+		if c.Parent.CType(0) == "GstAudioFormatInfo" {
+			println("foo")
+		}
 
 		switch p := c.Parent.(type) {
 		case *Class:
 			parentTypeName = p.GoInterfaceName
 		case *Interface:
 			parentTypeName = p.GoInterfaceName
+		default:
+			parentTypeName = c.Parent.GoType(0)
 		}
 	}
 
