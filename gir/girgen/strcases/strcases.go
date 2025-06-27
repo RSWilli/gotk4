@@ -71,13 +71,6 @@ func initPascalRegex() {
 	pascalRegex = regexp.MustCompile(fullRegex.String())
 }
 
-// AddPascalSpecials adds the given list of regexes into the list of cases that
-// will be fully capitalized during case conversion to Go.
-func AddPascalSpecials(regexes []string) {
-	pascalSpecials = append(pascalSpecials, regexes...)
-	initPascalRegex()
-}
-
 func initPascalPostReplacer() {
 	postReplacerArgs := make([]string, len(pascalWords)*2)
 	for from, to := range pascalWords {
@@ -87,54 +80,26 @@ func initPascalPostReplacer() {
 	pascalPostReplacer = strings.NewReplacer(postReplacerArgs...)
 }
 
-// SetPascalWords sets the given map of words to be replaced after the pascal
-// specials stage as a method of fixing edge cases.
-func SetPascalWords(words map[string]string) {
-	for from, to := range words {
-		pascalWords[from] = to
-	}
-	initPascalPostReplacer()
-}
-
 func init() {
 	initPascalWords()
 	initPascalRegex()
 	initPascalPostReplacer()
 }
 
-// Dots is a helper function to join strings in dots for debugging.
-func Dots(parts ...string) string {
-	nonEmptyParts := parts[:0]
-
-	for _, part := range parts {
-		if part == "" {
-			continue
-		}
-
-		if strings.Contains(part, "*") {
-			part = "(" + part + ")"
-		}
-
-		nonEmptyParts = append(nonEmptyParts, part)
-	}
-
-	return strings.Join(nonEmptyParts, ".")
-}
-
-// IsLower returns true if the string is all lower-cased.
-func IsLower(s string) bool {
+// isLower returns true if the string is all lower-cased.
+func isLower(s string) bool {
 	return strings.IndexFunc(s, unicode.IsUpper) == -1
 }
 
-// GuessSnake guesses if the given name is snake-cased or not.
-func GuessSnake(name string) (snake bool) {
-	return strings.Contains(name, "_") || IsLower(name)
+// guessSnake guesses if the given name is snake-cased or not.
+func guessSnake(name string) (snake bool) {
+	return strings.Contains(name, "_") || isLower(name)
 }
 
 // Go converts either pascal or snake case to the Go name. The original casing
 // is inferred from the given name.
 func Go(name string) string {
-	if GuessSnake(name) {
+	if guessSnake(name) {
 		return SnakeToGo(true, name)
 	} else {
 		return PascalToGo(name)
@@ -143,11 +108,6 @@ func Go(name string) string {
 
 // PascalToGo converts regular Pascal case to Go.
 func PascalToGo(pascal string) string {
-	// Force constructors to have a New prefix instead of suffix.
-	if strings.HasSuffix(pascal, "New") {
-		pascal = "New" + strings.TrimSuffix(pascal, "New")
-	}
-
 	// Use a for loop so that we can handle cases where acronyms are next to
 	// each other, such as "SkuId" -> "SKUId" -> "SKUID".
 	for {
@@ -192,7 +152,7 @@ func ReceiverName(p string) string {
 func UnexportPascal(pascal string) string {
 	runes := []rune(pascal)
 	if len(runes) < 1 {
-		return SnakeNoGo(strings.ToLower(pascal))
+		return snakeNoGo(strings.ToLower(pascal))
 	}
 
 	var i int
@@ -205,7 +165,7 @@ func UnexportPascal(pascal string) string {
 	}
 
 	pascal = strings.ToLower(string(runes[:i])) + string(runes[i:])
-	pascal = SnakeNoGo(pascal)
+	pascal = snakeNoGo(pascal)
 
 	return pascal
 }
@@ -226,7 +186,7 @@ func SnakeToGo(pascal bool, snakeString string) string {
 	)
 
 	if !pascal {
-		return SnakeNoGo(snakeString)
+		return snakeNoGo(snakeString)
 	}
 
 	return PascalToGo(snakeString)
@@ -308,8 +268,8 @@ func CGoField(field string) string {
 	return field
 }
 
-// SnakeNoGo ensures the snake-case string is never a Go keyword.
-func SnakeNoGo(snake string) string {
+// snakeNoGo ensures the snake-case string is never a Go keyword.
+func snakeNoGo(snake string) string {
 	s, isKeyword := GoKeywords[snake]
 	if isKeyword {
 		if s != "" {
@@ -327,91 +287,4 @@ func SnakeNoGo(snake string) string {
 	}
 
 	return snake
-}
-
-var vowels = [255]bool{
-	'a': true,
-	'i': true,
-	'u': true,
-	'e': true,
-	'o': true,
-}
-
-// Interfacify appends the -er suffix into the given word to idiomatically
-// adhere to Go's interface naming convention. If the word already ends with an
-// -er suffix, then another suffix will be added.
-func Interfacify(word string) string {
-	// https://www.englishclub.com/spelling/rules-add-er-est.htm
-	// https://www.thefreedictionary.com/Commonly-Confused-Suffixes-er-or-ar.htm
-	// https://ginsengenglish.com/blog/cvc-words
-	switch {
-	case wordConsonantAndSuffix(word, 'e'):
-		fallthrough
-	case wordConsonantAndSuffix(word, 'a'):
-		fallthrough
-	case wordConsonantAndSuffix(word, 'o'):
-		return word + "r"
-
-	case wordConsonantAndSuffix(word, 'y'):
-		return word[:len(word)-1] + "ier"
-
-	case strings.HasSuffix(word, "it") && !wordIsOrException(word):
-		fallthrough
-	case strings.HasSuffix(word, "ct"):
-		return word + "or"
-
-	// CVC form is bad. It's ugly.
-	case wordIsCVC(word) && !strings.HasSuffix(word, "er"):
-		return word + string(word[len(word)-1]) + "er"
-
-	case wordEndsInConsonant(word):
-		fallthrough
-	default:
-		return word + "er"
-	}
-}
-
-var orExceptions = []string{"delimit", "profit", "recruit"}
-
-func wordIsOrException(word string) bool {
-	for _, exc := range orExceptions {
-		if strings.EqualFold(exc, word) {
-			return true
-		}
-	}
-	return false
-}
-
-// wordConsonantAndSuffix returns true if the word ends with a consonant and the
-// given suffix character.
-func wordConsonantAndSuffix(word string, char byte) bool {
-	if len(word) < 2 {
-		return false
-	}
-
-	last2 := word[len(word)-2:]
-	return !vowels[last2[0]] && last2[1] == char
-}
-
-// wordEndsInConsonant returns true if the word ends with a consonant.
-func wordEndsInConsonant(word string) bool {
-	return len(word) > 1 && !vowels[word[len(word)-1]]
-}
-
-var cvcExceptions = [255]bool{
-	'w': true,
-	'x': true,
-	'y': true,
-}
-
-// wordIsCVC returns true if the given word follows the C+V+C form.
-func wordIsCVC(word string) bool {
-	if len(word) < 3 {
-		return false
-	}
-
-	last3 := word[len(word)-3:]
-
-	return !cvcExceptions[last3[2]] &&
-		!vowels[last3[0]] && vowels[last3[1]] && !vowels[last3[2]]
 }
