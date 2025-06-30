@@ -455,7 +455,7 @@ func NewVirtualMethodGenerator(vfunc *typesystem.VirtualMethod) *VirtualMethodGe
 			fmt.Sprintf("// %s allows you to override the implementation of the virtual method %s.\n", vfunc.GoName, vfunc.Invoker.CIndentifier()),
 		),
 		ParentDoc: doc.WithPrependParagraphs(
-			fmt.Sprintf("%s calls the default implementations of the %s virtual method.\nThis function's behavior is not defined when the parent does not implement the virtual method.\n", vfunc.ParentName, vfunc.Invoker.CIndentifier()),
+			fmt.Sprintf("%s calls the default implementations of the `%s.%s` virtual method.\nThis function's behavior is not defined when the parent does not implement the virtual method.\n", vfunc.ParentName, vfunc.Parent.CType(0), vfunc.Invoker.CIndentifier()),
 		),
 		VirtualMethod: vfunc,
 	}

@@ -8015,7 +8015,7 @@ type Action interface {
 
 	// chain up virtual methods:
 
-	// ParentGetEnabled calls the default implementations of the get_enabled virtual method.
+	// ParentGetEnabled calls the default implementations of the `GAction.get_enabled` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -8027,7 +8027,7 @@ type Action interface {
 	// An action must be enabled in order to be activated or in order to
 	// have its state changed from outside callers.
 	ParentGetEnabled() bool
-	// ParentGetName calls the default implementations of the get_name virtual method.
+	// ParentGetName calls the default implementations of the `GAction.get_name` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -8036,7 +8036,7 @@ type Action interface {
 	//
 	// Queries the name of @action.
 	ParentGetName() string
-	// ParentGetParameterType calls the default implementations of the get_parameter_type virtual method.
+	// ParentGetParameterType calls the default implementations of the `GAction.get_parameter_type` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -8053,7 +8053,7 @@ type Action interface {
 	// In the case that this function returns `NULL`, you must not give any
 	// [type@GLib.Variant], but `NULL` instead.
 	ParentGetParameterType() *glib.VariantType
-	// ParentGetStateType calls the default implementations of the get_state_type virtual method.
+	// ParentGetStateType calls the default implementations of the `GAction.get_state_type` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -8426,7 +8426,7 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 	}
 }
 
-// ParentGetEnabled calls the default implementations of the get_enabled virtual method.
+// ParentGetEnabled calls the default implementations of the `GAction.get_enabled` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -8457,7 +8457,7 @@ func (action *ActionInstance) ParentGetEnabled() bool {
 	return goret
 }
 
-// ParentGetName calls the default implementations of the get_name virtual method.
+// ParentGetName calls the default implementations of the `GAction.get_name` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -8483,7 +8483,7 @@ func (action *ActionInstance) ParentGetName() string {
 	return goret
 }
 
-// ParentGetParameterType calls the default implementations of the get_parameter_type virtual method.
+// ParentGetParameterType calls the default implementations of the `GAction.get_parameter_type` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -8519,7 +8519,7 @@ func (action *ActionInstance) ParentGetParameterType() *glib.VariantType {
 	return goret
 }
 
-// ParentGetStateType calls the default implementations of the get_state_type virtual method.
+// ParentGetStateType calls the default implementations of the `GAction.get_state_type` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -8756,7 +8756,7 @@ type ActionGroup interface {
 
 	// chain up virtual methods:
 
-	// ParentActionAdded calls the default implementations of the action_added virtual method.
+	// ParentActionAdded calls the default implementations of the `GActionGroup.action_added` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -8767,7 +8767,7 @@ type ActionGroup interface {
 	// 
 	// This function should only be called by [type@Gio.ActionGroup] implementations.
 	ParentActionAdded(actionName string)
-	// ParentActionEnabledChanged calls the default implementations of the action_enabled_changed virtual method.
+	// ParentActionEnabledChanged calls the default implementations of the `GActionGroup.action_enabled_changed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -8779,7 +8779,7 @@ type ActionGroup interface {
 	// 
 	// This function should only be called by [type@Gio.ActionGroup] implementations.
 	ParentActionEnabledChanged(actionName string, enabled bool)
-	// ParentActionRemoved calls the default implementations of the action_removed virtual method.
+	// ParentActionRemoved calls the default implementations of the `GActionGroup.action_removed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -8790,7 +8790,7 @@ type ActionGroup interface {
 	// 
 	// This function should only be called by [type@Gio.ActionGroup] implementations.
 	ParentActionRemoved(actionName string)
-	// ParentGetActionEnabled calls the default implementations of the get_action_enabled virtual method.
+	// ParentGetActionEnabled calls the default implementations of the `GActionGroup.get_action_enabled` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -8806,7 +8806,7 @@ type ActionGroup interface {
 	// An action must be enabled in order to be activated or in order to
 	// have its state changed from outside callers.
 	ParentGetActionEnabled(actionName string) bool
-	// ParentGetActionParameterType calls the default implementations of the get_action_parameter_type virtual method.
+	// ParentGetActionParameterType calls the default implementations of the `GActionGroup.get_action_parameter_type` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -8831,7 +8831,7 @@ type ActionGroup interface {
 	// possible for an action to be removed and for a new action to be added
 	// with the same name but a different parameter type.
 	ParentGetActionParameterType(actionName string) *glib.VariantType
-	// ParentGetActionStateType calls the default implementations of the get_action_state_type virtual method.
+	// ParentGetActionStateType calls the default implementations of the `GActionGroup.get_action_state_type` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -8859,7 +8859,7 @@ type ActionGroup interface {
 	// possible for an action to be removed and for a new action to be added
 	// with the same name but a different state type.
 	ParentGetActionStateType(actionName string) *glib.VariantType
-	// ParentHasAction calls the default implementations of the has_action virtual method.
+	// ParentHasAction calls the default implementations of the `GActionGroup.has_action` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -8872,7 +8872,7 @@ type ActionGroup interface {
 	//
 	// Checks if the named action exists within @action_group.
 	ParentHasAction(actionName string) bool
-	// ParentListActions calls the default implementations of the list_actions virtual method.
+	// ParentListActions calls the default implementations of the `GActionGroup.list_actions` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -9522,7 +9522,7 @@ func UnsafeApplyActionGroupOverrides[Instance ActionGroup](gclass unsafe.Pointer
 	}
 }
 
-// ParentActionAdded calls the default implementations of the action_added virtual method.
+// ParentActionAdded calls the default implementations of the `GActionGroup.action_added` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -9547,7 +9547,7 @@ func (actionGroup *ActionGroupInstance) ParentActionAdded(actionName string) {
 	runtime.KeepAlive(actionName)
 }
 
-// ParentActionEnabledChanged calls the default implementations of the action_enabled_changed virtual method.
+// ParentActionEnabledChanged calls the default implementations of the `GActionGroup.action_enabled_changed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -9578,7 +9578,7 @@ func (actionGroup *ActionGroupInstance) ParentActionEnabledChanged(actionName st
 	runtime.KeepAlive(enabled)
 }
 
-// ParentActionRemoved calls the default implementations of the action_removed virtual method.
+// ParentActionRemoved calls the default implementations of the `GActionGroup.action_removed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -9603,7 +9603,7 @@ func (actionGroup *ActionGroupInstance) ParentActionRemoved(actionName string) {
 	runtime.KeepAlive(actionName)
 }
 
-// ParentGetActionEnabled calls the default implementations of the get_action_enabled virtual method.
+// ParentGetActionEnabled calls the default implementations of the `GActionGroup.get_action_enabled` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -9642,7 +9642,7 @@ func (actionGroup *ActionGroupInstance) ParentGetActionEnabled(actionName string
 	return goret
 }
 
-// ParentGetActionParameterType calls the default implementations of the get_action_parameter_type virtual method.
+// ParentGetActionParameterType calls the default implementations of the `GActionGroup.get_action_parameter_type` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -9690,7 +9690,7 @@ func (actionGroup *ActionGroupInstance) ParentGetActionParameterType(actionName 
 	return goret
 }
 
-// ParentGetActionStateType calls the default implementations of the get_action_state_type virtual method.
+// ParentGetActionStateType calls the default implementations of the `GActionGroup.get_action_state_type` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -9741,7 +9741,7 @@ func (actionGroup *ActionGroupInstance) ParentGetActionStateType(actionName stri
 	return goret
 }
 
-// ParentHasAction calls the default implementations of the has_action virtual method.
+// ParentHasAction calls the default implementations of the `GActionGroup.has_action` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -9777,7 +9777,7 @@ func (actionGroup *ActionGroupInstance) ParentHasAction(actionName string) bool 
 	return goret
 }
 
-// ParentListActions calls the default implementations of the list_actions virtual method.
+// ParentListActions calls the default implementations of the `GActionGroup.list_actions` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -9902,7 +9902,7 @@ type ActionMap interface {
 
 	// chain up virtual methods:
 
-	// ParentAddAction calls the default implementations of the add_action virtual method.
+	// ParentAddAction calls the default implementations of the `GActionMap.add_action` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -9916,7 +9916,7 @@ type ActionMap interface {
 	// 
 	// The action map takes its own reference on @action.
 	ParentAddAction(action Action)
-	// ParentLookupAction calls the default implementations of the lookup_action virtual method.
+	// ParentLookupAction calls the default implementations of the `GActionMap.lookup_action` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -9931,7 +9931,7 @@ type ActionMap interface {
 	// 
 	// If no such action exists, returns `NULL`.
 	ParentLookupAction(actionName string) Action
-	// ParentRemoveAction calls the default implementations of the remove_action virtual method.
+	// ParentRemoveAction calls the default implementations of the `GActionMap.remove_action` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -10219,7 +10219,7 @@ func UnsafeApplyActionMapOverrides[Instance ActionMap](gclass unsafe.Pointer, ov
 	}
 }
 
-// ParentAddAction calls the default implementations of the add_action virtual method.
+// ParentAddAction calls the default implementations of the `GActionMap.add_action` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -10246,7 +10246,7 @@ func (actionMap *ActionMapInstance) ParentAddAction(action Action) {
 	runtime.KeepAlive(action)
 }
 
-// ParentLookupAction calls the default implementations of the lookup_action virtual method.
+// ParentLookupAction calls the default implementations of the `GActionMap.lookup_action` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -10284,7 +10284,7 @@ func (actionMap *ActionMapInstance) ParentLookupAction(actionName string) Action
 	return goret
 }
 
-// ParentRemoveAction calls the default implementations of the remove_action virtual method.
+// ParentRemoveAction calls the default implementations of the `GActionMap.remove_action` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -10622,7 +10622,7 @@ type AppInfo interface {
 
 	// chain up virtual methods:
 
-	// ParentAddSupportsType calls the default implementations of the add_supports_type virtual method.
+	// ParentAddSupportsType calls the default implementations of the `GAppInfo.add_supports_type` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -10637,7 +10637,7 @@ type AppInfo interface {
 	// Adds a content type to the application information to indicate the
 	// application is capable of opening files with the given content type.
 	ParentAddSupportsType(contentType string) (bool, error)
-	// ParentCanDelete calls the default implementations of the can_delete virtual method.
+	// ParentCanDelete calls the default implementations of the `GAppInfo.can_delete` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -10647,7 +10647,7 @@ type AppInfo interface {
 	// Obtains the information whether the [iface@Gio.AppInfo] can be deleted.
 	// See [method@Gio.AppInfo.delete].
 	ParentCanDelete() bool
-	// ParentCanRemoveSupportsType calls the default implementations of the can_remove_supports_type virtual method.
+	// ParentCanRemoveSupportsType calls the default implementations of the `GAppInfo.can_remove_supports_type` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -10656,7 +10656,7 @@ type AppInfo interface {
 	//
 	// Checks if a supported content type can be removed from an application.
 	ParentCanRemoveSupportsType() bool
-	// ParentDoDelete calls the default implementations of the do_delete virtual method.
+	// ParentDoDelete calls the default implementations of the `GAppInfo.do_delete` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -10669,7 +10669,7 @@ type AppInfo interface {
 	// [iface@Gio.AppInfo]s which can be deleted, and system-wide ones which cannot.
 	// See [method@Gio.AppInfo.can_delete].
 	ParentDoDelete() bool
-	// ParentDup calls the default implementations of the dup virtual method.
+	// ParentDup calls the default implementations of the `GAppInfo.dup` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -10678,7 +10678,7 @@ type AppInfo interface {
 	//
 	// Creates a duplicate of a [iface@Gio.AppInfo].
 	ParentDup() AppInfo
-	// ParentEqual calls the default implementations of the equal virtual method.
+	// ParentEqual calls the default implementations of the `GAppInfo.equal` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -10695,7 +10695,7 @@ type AppInfo interface {
 	// an identity check. In case detecting changes in the contents is needed,
 	// program code must additionally compare relevant fields.
 	ParentEqual(appinfo2 AppInfo) bool
-	// ParentGetCommandline calls the default implementations of the get_commandline virtual method.
+	// ParentGetCommandline calls the default implementations of the `GAppInfo.get_commandline` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -10705,7 +10705,7 @@ type AppInfo interface {
 	// Gets the commandline with which the application will be
 	// started.
 	ParentGetCommandline() string
-	// ParentGetDescription calls the default implementations of the get_description virtual method.
+	// ParentGetDescription calls the default implementations of the `GAppInfo.get_description` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -10714,7 +10714,7 @@ type AppInfo interface {
 	//
 	// Gets a human-readable description of an installed application.
 	ParentGetDescription() string
-	// ParentGetDisplayName calls the default implementations of the get_display_name virtual method.
+	// ParentGetDisplayName calls the default implementations of the `GAppInfo.get_display_name` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -10724,7 +10724,7 @@ type AppInfo interface {
 	// Gets the display name of the application. The display name is often more
 	// descriptive to the user than the name itself.
 	ParentGetDisplayName() string
-	// ParentGetExecutable calls the default implementations of the get_executable virtual method.
+	// ParentGetExecutable calls the default implementations of the `GAppInfo.get_executable` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -10737,7 +10737,7 @@ type AppInfo interface {
 	// to be run. To launch the executable, use [method@Gio.AppInfo.launch] and related
 	// functions, rather than spawning the return value from this function.
 	ParentGetExecutable() string
-	// ParentGetIcon calls the default implementations of the get_icon virtual method.
+	// ParentGetIcon calls the default implementations of the `GAppInfo.get_icon` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -10746,7 +10746,7 @@ type AppInfo interface {
 	//
 	// Gets the icon for the application.
 	ParentGetIcon() Icon
-	// ParentGetID calls the default implementations of the get_id virtual method.
+	// ParentGetID calls the default implementations of the `GAppInfo.get_id` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -10760,7 +10760,7 @@ type AppInfo interface {
 	// Note that the returned ID may be `NULL`, depending on how the @appinfo has
 	// been constructed.
 	ParentGetID() string
-	// ParentGetName calls the default implementations of the get_name virtual method.
+	// ParentGetName calls the default implementations of the `GAppInfo.get_name` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -10769,7 +10769,7 @@ type AppInfo interface {
 	//
 	// Gets the installed name of the application.
 	ParentGetName() string
-	// ParentGetSupportedTypes calls the default implementations of the get_supported_types virtual method.
+	// ParentGetSupportedTypes calls the default implementations of the `GAppInfo.get_supported_types` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -10784,7 +10784,7 @@ type AppInfo interface {
 	// [method@Gio.AppInfo.add_supports_type], but only those exported directly by
 	// the application.
 	ParentGetSupportedTypes() []string
-	// ParentLaunchUrisFinish calls the default implementations of the launch_uris_finish virtual method.
+	// ParentLaunchUrisFinish calls the default implementations of the `GAppInfo.launch_uris_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -10798,7 +10798,7 @@ type AppInfo interface {
 	//
 	// Finishes a [method@Gio.AppInfo.launch_uris_async] operation.
 	ParentLaunchUrisFinish(result AsyncResult) (bool, error)
-	// ParentRemoveSupportsType calls the default implementations of the remove_supports_type virtual method.
+	// ParentRemoveSupportsType calls the default implementations of the `GAppInfo.remove_supports_type` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -10812,7 +10812,7 @@ type AppInfo interface {
 	//
 	// Removes a supported type from an application, if possible.
 	ParentRemoveSupportsType(contentType string) (bool, error)
-	// ParentSetAsDefaultForExtension calls the default implementations of the set_as_default_for_extension virtual method.
+	// ParentSetAsDefaultForExtension calls the default implementations of the `GAppInfo.set_as_default_for_extension` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -10827,7 +10827,7 @@ type AppInfo interface {
 	//
 	// Sets the application as the default handler for the given file extension.
 	ParentSetAsDefaultForExtension(extension string) (bool, error)
-	// ParentSetAsDefaultForType calls the default implementations of the set_as_default_for_type virtual method.
+	// ParentSetAsDefaultForType calls the default implementations of the `GAppInfo.set_as_default_for_type` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -10841,7 +10841,7 @@ type AppInfo interface {
 	//
 	// Sets the application as the default handler for a given type.
 	ParentSetAsDefaultForType(contentType string) (bool, error)
-	// ParentSetAsLastUsedForType calls the default implementations of the set_as_last_used_for_type virtual method.
+	// ParentSetAsLastUsedForType calls the default implementations of the `GAppInfo.set_as_last_used_for_type` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -10858,7 +10858,7 @@ type AppInfo interface {
 	// [func@Gio.AppInfo.get_recommended_for_type], regardless of the default
 	// application for that content type.
 	ParentSetAsLastUsedForType(contentType string) (bool, error)
-	// ParentShouldShow calls the default implementations of the should_show virtual method.
+	// ParentShouldShow calls the default implementations of the `GAppInfo.should_show` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -10868,7 +10868,7 @@ type AppInfo interface {
 	// Checks if the application info should be shown in menus that
 	// list available applications.
 	ParentShouldShow() bool
-	// ParentSupportsFiles calls the default implementations of the supports_files virtual method.
+	// ParentSupportsFiles calls the default implementations of the `GAppInfo.supports_files` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -10877,7 +10877,7 @@ type AppInfo interface {
 	//
 	// Checks if the application accepts files as arguments.
 	ParentSupportsFiles() bool
-	// ParentSupportsUris calls the default implementations of the supports_uris virtual method.
+	// ParentSupportsUris calls the default implementations of the `GAppInfo.supports_uris` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -12932,7 +12932,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 	}
 }
 
-// ParentAddSupportsType calls the default implementations of the add_supports_type virtual method.
+// ParentAddSupportsType calls the default implementations of the `GAppInfo.add_supports_type` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -12975,7 +12975,7 @@ func (appinfo *AppInfoInstance) ParentAddSupportsType(contentType string) (bool,
 	return goret, _goerr
 }
 
-// ParentCanDelete calls the default implementations of the can_delete virtual method.
+// ParentCanDelete calls the default implementations of the `GAppInfo.can_delete` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13004,7 +13004,7 @@ func (appinfo *AppInfoInstance) ParentCanDelete() bool {
 	return goret
 }
 
-// ParentCanRemoveSupportsType calls the default implementations of the can_remove_supports_type virtual method.
+// ParentCanRemoveSupportsType calls the default implementations of the `GAppInfo.can_remove_supports_type` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13032,7 +13032,7 @@ func (appinfo *AppInfoInstance) ParentCanRemoveSupportsType() bool {
 	return goret
 }
 
-// ParentDoDelete calls the default implementations of the do_delete virtual method.
+// ParentDoDelete calls the default implementations of the `GAppInfo.do_delete` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13064,7 +13064,7 @@ func (appinfo *AppInfoInstance) ParentDoDelete() bool {
 	return goret
 }
 
-// ParentDup calls the default implementations of the dup virtual method.
+// ParentDup calls the default implementations of the `GAppInfo.dup` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13090,7 +13090,7 @@ func (appinfo *AppInfoInstance) ParentDup() AppInfo {
 	return goret
 }
 
-// ParentEqual calls the default implementations of the equal virtual method.
+// ParentEqual calls the default implementations of the `GAppInfo.equal` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -13129,7 +13129,7 @@ func (appinfo1 *AppInfoInstance) ParentEqual(appinfo2 AppInfo) bool {
 	return goret
 }
 
-// ParentGetCommandline calls the default implementations of the get_commandline virtual method.
+// ParentGetCommandline calls the default implementations of the `GAppInfo.get_commandline` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13158,7 +13158,7 @@ func (appinfo *AppInfoInstance) ParentGetCommandline() string {
 	return goret
 }
 
-// ParentGetDescription calls the default implementations of the get_description virtual method.
+// ParentGetDescription calls the default implementations of the `GAppInfo.get_description` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13186,7 +13186,7 @@ func (appinfo *AppInfoInstance) ParentGetDescription() string {
 	return goret
 }
 
-// ParentGetDisplayName calls the default implementations of the get_display_name virtual method.
+// ParentGetDisplayName calls the default implementations of the `GAppInfo.get_display_name` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13213,7 +13213,7 @@ func (appinfo *AppInfoInstance) ParentGetDisplayName() string {
 	return goret
 }
 
-// ParentGetExecutable calls the default implementations of the get_executable virtual method.
+// ParentGetExecutable calls the default implementations of the `GAppInfo.get_executable` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13243,7 +13243,7 @@ func (appinfo *AppInfoInstance) ParentGetExecutable() string {
 	return goret
 }
 
-// ParentGetIcon calls the default implementations of the get_icon virtual method.
+// ParentGetIcon calls the default implementations of the `GAppInfo.get_icon` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13271,7 +13271,7 @@ func (appinfo *AppInfoInstance) ParentGetIcon() Icon {
 	return goret
 }
 
-// ParentGetID calls the default implementations of the get_id virtual method.
+// ParentGetID calls the default implementations of the `GAppInfo.get_id` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13304,7 +13304,7 @@ func (appinfo *AppInfoInstance) ParentGetID() string {
 	return goret
 }
 
-// ParentGetName calls the default implementations of the get_name virtual method.
+// ParentGetName calls the default implementations of the `GAppInfo.get_name` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13330,7 +13330,7 @@ func (appinfo *AppInfoInstance) ParentGetName() string {
 	return goret
 }
 
-// ParentGetSupportedTypes calls the default implementations of the get_supported_types virtual method.
+// ParentGetSupportedTypes calls the default implementations of the `GAppInfo.get_supported_types` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13364,7 +13364,7 @@ func (appinfo *AppInfoInstance) ParentGetSupportedTypes() []string {
 	return goret
 }
 
-// ParentLaunchUrisFinish calls the default implementations of the launch_uris_finish virtual method.
+// ParentLaunchUrisFinish calls the default implementations of the `GAppInfo.launch_uris_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -13405,7 +13405,7 @@ func (appinfo *AppInfoInstance) ParentLaunchUrisFinish(result AsyncResult) (bool
 	return goret, _goerr
 }
 
-// ParentRemoveSupportsType calls the default implementations of the remove_supports_type virtual method.
+// ParentRemoveSupportsType calls the default implementations of the `GAppInfo.remove_supports_type` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -13447,7 +13447,7 @@ func (appinfo *AppInfoInstance) ParentRemoveSupportsType(contentType string) (bo
 	return goret, _goerr
 }
 
-// ParentSetAsDefaultForExtension calls the default implementations of the set_as_default_for_extension virtual method.
+// ParentSetAsDefaultForExtension calls the default implementations of the `GAppInfo.set_as_default_for_extension` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -13490,7 +13490,7 @@ func (appinfo *AppInfoInstance) ParentSetAsDefaultForExtension(extension string)
 	return goret, _goerr
 }
 
-// ParentSetAsDefaultForType calls the default implementations of the set_as_default_for_type virtual method.
+// ParentSetAsDefaultForType calls the default implementations of the `GAppInfo.set_as_default_for_type` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -13532,7 +13532,7 @@ func (appinfo *AppInfoInstance) ParentSetAsDefaultForType(contentType string) (b
 	return goret, _goerr
 }
 
-// ParentSetAsLastUsedForType calls the default implementations of the set_as_last_used_for_type virtual method.
+// ParentSetAsLastUsedForType calls the default implementations of the `GAppInfo.set_as_last_used_for_type` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -13577,7 +13577,7 @@ func (appinfo *AppInfoInstance) ParentSetAsLastUsedForType(contentType string) (
 	return goret, _goerr
 }
 
-// ParentShouldShow calls the default implementations of the should_show virtual method.
+// ParentShouldShow calls the default implementations of the `GAppInfo.should_show` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13606,7 +13606,7 @@ func (appinfo *AppInfoInstance) ParentShouldShow() bool {
 	return goret
 }
 
-// ParentSupportsFiles calls the default implementations of the supports_files virtual method.
+// ParentSupportsFiles calls the default implementations of the `GAppInfo.supports_files` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13634,7 +13634,7 @@ func (appinfo *AppInfoInstance) ParentSupportsFiles() bool {
 	return goret
 }
 
-// ParentSupportsUris calls the default implementations of the supports_uris virtual method.
+// ParentSupportsUris calls the default implementations of the `GAppInfo.supports_uris` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -13852,7 +13852,7 @@ type AsyncInitable interface {
 
 	// chain up virtual methods:
 
-	// ParentInitFinish calls the default implementations of the init_finish virtual method.
+	// ParentInitFinish calls the default implementations of the `GAsyncInitable.init_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -14107,7 +14107,7 @@ func UnsafeApplyAsyncInitableOverrides[Instance AsyncInitable](gclass unsafe.Poi
 	}
 }
 
-// ParentInitFinish calls the default implementations of the init_finish virtual method.
+// ParentInitFinish calls the default implementations of the `GAsyncInitable.init_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -14276,7 +14276,7 @@ type AsyncResult interface {
 
 	// chain up virtual methods:
 
-	// ParentGetSourceObject calls the default implementations of the get_source_object virtual method.
+	// ParentGetSourceObject calls the default implementations of the `GAsyncResult.get_source_object` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -14436,7 +14436,7 @@ func UnsafeApplyAsyncResultOverrides[Instance AsyncResult](gclass unsafe.Pointer
 	}
 }
 
-// ParentGetSourceObject calls the default implementations of the get_source_object virtual method.
+// ParentGetSourceObject calls the default implementations of the `GAsyncResult.get_source_object` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -14610,7 +14610,7 @@ type Converter interface {
 
 	// chain up virtual methods:
 
-	// ParentConvert calls the default implementations of the convert virtual method.
+	// ParentConvert calls the default implementations of the `GConverter.convert` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -14713,7 +14713,7 @@ type Converter interface {
 	// to produce as much output as possible and then return an error
 	// (typically %G_IO_ERROR_PARTIAL_INPUT).
 	ParentConvert(inbuf []byte, outbuf []byte, flags ConverterFlags) (uint, uint, ConverterResult, error)
-	// ParentReset calls the default implementations of the reset virtual method.
+	// ParentReset calls the default implementations of the `GConverter.reset` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Resets all internal state in the converter, making it behave
@@ -15132,7 +15132,7 @@ func UnsafeApplyConverterOverrides[Instance Converter](gclass unsafe.Pointer, ov
 	}
 }
 
-// ParentConvert calls the default implementations of the convert virtual method.
+// ParentConvert calls the default implementations of the `GConverter.convert` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -15280,7 +15280,7 @@ func (converter *ConverterInstance) ParentConvert(inbuf []byte, outbuf []byte, f
 	return bytesRead, bytesWritten, goret, _goerr
 }
 
-// ParentReset calls the default implementations of the reset virtual method.
+// ParentReset calls the default implementations of the `GConverter.reset` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Resets all internal state in the converter, making it behave
@@ -15553,7 +15553,7 @@ type DatagramBased interface {
 
 	// chain up virtual methods:
 
-	// ParentConditionCheck calls the default implementations of the condition_check virtual method.
+	// ParentConditionCheck calls the default implementations of the `GDatagramBased.condition_check` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -15601,7 +15601,7 @@ type DatagramBased interface {
 	// 
 	// This call never blocks.
 	ParentConditionCheck(condition glib.IOCondition) glib.IOCondition
-	// ParentConditionWait calls the default implementations of the condition_wait virtual method.
+	// ParentConditionWait calls the default implementations of the `GDatagramBased.condition_wait` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -15623,7 +15623,7 @@ type DatagramBased interface {
 	// reached before the condition is met, then %FALSE is returned and @error is
 	// set appropriately (%G_IO_ERROR_CANCELLED or %G_IO_ERROR_TIMED_OUT).
 	ParentConditionWait(cancellable context.Context, condition glib.IOCondition, timeout int64) (bool, error)
-	// ParentReceiveMessages calls the default implementations of the receive_messages virtual method.
+	// ParentReceiveMessages calls the default implementations of the `GDatagramBased.receive_messages` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -15690,7 +15690,7 @@ type DatagramBased interface {
 	// @cancellable is cancelled, %G_IO_ERROR_CANCELLED is returned as with any
 	// other error.
 	ParentReceiveMessages(cancellable context.Context, messages []InputMessage, flags int32, timeout int64) (int32, error)
-	// ParentSendMessages calls the default implementations of the send_messages virtual method.
+	// ParentSendMessages calls the default implementations of the `GDatagramBased.send_messages` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -16437,7 +16437,7 @@ func UnsafeApplyDatagramBasedOverrides[Instance DatagramBased](gclass unsafe.Poi
 	}
 }
 
-// ParentConditionCheck calls the default implementations of the condition_check virtual method.
+// ParentConditionCheck calls the default implementations of the `GDatagramBased.condition_check` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -16505,7 +16505,7 @@ func (datagramBased *DatagramBasedInstance) ParentConditionCheck(condition glib.
 	return goret
 }
 
-// ParentConditionWait calls the default implementations of the condition_wait virtual method.
+// ParentConditionWait calls the default implementations of the `GDatagramBased.condition_wait` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -16562,7 +16562,7 @@ func (datagramBased *DatagramBasedInstance) ParentConditionWait(cancellable cont
 	return goret, _goerr
 }
 
-// ParentReceiveMessages calls the default implementations of the receive_messages virtual method.
+// ParentReceiveMessages calls the default implementations of the `GDatagramBased.receive_messages` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -16669,7 +16669,7 @@ func (datagramBased *DatagramBasedInstance) ParentReceiveMessages(cancellable co
 	return goret, _goerr
 }
 
-// ParentSendMessages calls the default implementations of the send_messages virtual method.
+// ParentSendMessages calls the default implementations of the `GDatagramBased.send_messages` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -17131,7 +17131,7 @@ type Drive interface {
 
 	// chain up virtual methods:
 
-	// ParentCanEject calls the default implementations of the can_eject virtual method.
+	// ParentCanEject calls the default implementations of the `GDrive.can_eject` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17140,7 +17140,7 @@ type Drive interface {
 	//
 	// Checks if a drive can be ejected.
 	ParentCanEject() bool
-	// ParentCanPollForMedia calls the default implementations of the can_poll_for_media virtual method.
+	// ParentCanPollForMedia calls the default implementations of the `GDrive.can_poll_for_media` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17149,7 +17149,7 @@ type Drive interface {
 	//
 	// Checks if a drive can be polled for media changes.
 	ParentCanPollForMedia() bool
-	// ParentCanStart calls the default implementations of the can_start virtual method.
+	// ParentCanStart calls the default implementations of the `GDrive.can_start` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17158,7 +17158,7 @@ type Drive interface {
 	//
 	// Checks if a drive can be started.
 	ParentCanStart() bool
-	// ParentCanStartDegraded calls the default implementations of the can_start_degraded virtual method.
+	// ParentCanStartDegraded calls the default implementations of the `GDrive.can_start_degraded` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17167,7 +17167,7 @@ type Drive interface {
 	//
 	// Checks if a drive can be started degraded.
 	ParentCanStartDegraded() bool
-	// ParentCanStop calls the default implementations of the can_stop virtual method.
+	// ParentCanStop calls the default implementations of the `GDrive.can_stop` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17176,22 +17176,22 @@ type Drive interface {
 	//
 	// Checks if a drive can be stopped.
 	ParentCanStop() bool
-	// ParentChanged calls the default implementations of the changed virtual method.
+	// ParentChanged calls the default implementations of the `GDrive.changed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Signal emitted when the drive is changed.
 	ParentChanged()
-	// ParentDisconnected calls the default implementations of the disconnected virtual method.
+	// ParentDisconnected calls the default implementations of the `GDrive.disconnected` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// The removed signal that is emitted when the #GDrive have been disconnected. If the recipient is holding references to the object they should release them so the object can be finalized.
 	ParentDisconnected()
-	// ParentEjectButton calls the default implementations of the eject_button virtual method.
+	// ParentEjectButton calls the default implementations of the `GDrive.eject_button` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Signal emitted when the physical eject button (if any) of a drive have been pressed.
 	ParentEjectButton()
-	// ParentEjectFinish calls the default implementations of the eject_finish virtual method.
+	// ParentEjectFinish calls the default implementations of the `GDrive.eject_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -17207,7 +17207,7 @@ type Drive interface {
 	//
 	// Deprecated: (since 2.22.0) Use g_drive_eject_with_operation_finish() instead.
 	ParentEjectFinish(result AsyncResult) (bool, error)
-	// ParentEjectWithOperationFinish calls the default implementations of the eject_with_operation_finish virtual method.
+	// ParentEjectWithOperationFinish calls the default implementations of the `GDrive.eject_with_operation_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -17222,7 +17222,7 @@ type Drive interface {
 	// Finishes ejecting a drive. If any errors occurred during the operation,
 	// @error will be set to contain the errors and %FALSE will be returned.
 	ParentEjectWithOperationFinish(result AsyncResult) (bool, error)
-	// ParentEnumerateIdentifiers calls the default implementations of the enumerate_identifiers virtual method.
+	// ParentEnumerateIdentifiers calls the default implementations of the `GDrive.enumerate_identifiers` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17233,7 +17233,7 @@ type Drive interface {
 	// Use g_drive_get_identifier() to obtain the identifiers
 	// themselves.
 	ParentEnumerateIdentifiers() []string
-	// ParentGetIcon calls the default implementations of the get_icon virtual method.
+	// ParentGetIcon calls the default implementations of the `GDrive.get_icon` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17242,7 +17242,7 @@ type Drive interface {
 	//
 	// Gets the icon for @drive.
 	ParentGetIcon() Icon
-	// ParentGetIdentifier calls the default implementations of the get_identifier virtual method.
+	// ParentGetIdentifier calls the default implementations of the `GDrive.get_identifier` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -17257,7 +17257,7 @@ type Drive interface {
 	// identifier currently available is
 	// %G_DRIVE_IDENTIFIER_KIND_UNIX_DEVICE.
 	ParentGetIdentifier(kind string) string
-	// ParentGetName calls the default implementations of the get_name virtual method.
+	// ParentGetName calls the default implementations of the `GDrive.get_name` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17266,7 +17266,7 @@ type Drive interface {
 	//
 	// Gets the name of @drive.
 	ParentGetName() string
-	// ParentGetSortKey calls the default implementations of the get_sort_key virtual method.
+	// ParentGetSortKey calls the default implementations of the `GDrive.get_sort_key` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17275,7 +17275,7 @@ type Drive interface {
 	//
 	// Gets the sort key for @drive, if any.
 	ParentGetSortKey() string
-	// ParentGetStartStopType calls the default implementations of the get_start_stop_type virtual method.
+	// ParentGetStartStopType calls the default implementations of the `GDrive.get_start_stop_type` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17284,7 +17284,7 @@ type Drive interface {
 	//
 	// Gets a hint about how a drive can be started/stopped.
 	ParentGetStartStopType() DriveStartStopType
-	// ParentGetSymbolicIcon calls the default implementations of the get_symbolic_icon virtual method.
+	// ParentGetSymbolicIcon calls the default implementations of the `GDrive.get_symbolic_icon` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17293,7 +17293,7 @@ type Drive interface {
 	//
 	// Gets the icon for @drive.
 	ParentGetSymbolicIcon() Icon
-	// ParentGetVolumes calls the default implementations of the get_volumes virtual method.
+	// ParentGetVolumes calls the default implementations of the `GDrive.get_volumes` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17305,7 +17305,7 @@ type Drive interface {
 	// The returned list should be freed with g_list_free(), after
 	// its elements have been unreffed with g_object_unref().
 	ParentGetVolumes() []Volume
-	// ParentHasMedia calls the default implementations of the has_media virtual method.
+	// ParentHasMedia calls the default implementations of the `GDrive.has_media` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17316,7 +17316,7 @@ type Drive interface {
 	// the drive for media changes; see g_drive_is_media_check_automatic()
 	// for more details.
 	ParentHasMedia() bool
-	// ParentHasVolumes calls the default implementations of the has_volumes virtual method.
+	// ParentHasVolumes calls the default implementations of the `GDrive.has_volumes` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17325,7 +17325,7 @@ type Drive interface {
 	//
 	// Check if @drive has any mountable volumes.
 	ParentHasVolumes() bool
-	// ParentIsMediaCheckAutomatic calls the default implementations of the is_media_check_automatic virtual method.
+	// ParentIsMediaCheckAutomatic calls the default implementations of the `GDrive.is_media_check_automatic` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17334,7 +17334,7 @@ type Drive interface {
 	//
 	// Checks if @drive is capable of automatically detecting media changes.
 	ParentIsMediaCheckAutomatic() bool
-	// ParentIsMediaRemovable calls the default implementations of the is_media_removable virtual method.
+	// ParentIsMediaRemovable calls the default implementations of the `GDrive.is_media_removable` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17343,7 +17343,7 @@ type Drive interface {
 	//
 	// Checks if the @drive supports removable media.
 	ParentIsMediaRemovable() bool
-	// ParentIsRemovable calls the default implementations of the is_removable virtual method.
+	// ParentIsRemovable calls the default implementations of the `GDrive.is_removable` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -17353,7 +17353,7 @@ type Drive interface {
 	// Checks if the #GDrive and/or its media is considered removable by the user.
 	// See g_drive_is_media_removable().
 	ParentIsRemovable() bool
-	// ParentPollForMediaFinish calls the default implementations of the poll_for_media_finish virtual method.
+	// ParentPollForMediaFinish calls the default implementations of the `GDrive.poll_for_media_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -17367,7 +17367,7 @@ type Drive interface {
 	//
 	// Finishes an operation started with g_drive_poll_for_media() on a drive.
 	ParentPollForMediaFinish(result AsyncResult) (bool, error)
-	// ParentStartFinish calls the default implementations of the start_finish virtual method.
+	// ParentStartFinish calls the default implementations of the `GDrive.start_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -17381,12 +17381,12 @@ type Drive interface {
 	//
 	// Finishes starting a drive.
 	ParentStartFinish(result AsyncResult) (bool, error)
-	// ParentStopButton calls the default implementations of the stop_button virtual method.
+	// ParentStopButton calls the default implementations of the `GDrive.stop_button` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Signal emitted when the physical stop button (if any) of a drive have been pressed. Since 2.22.
 	ParentStopButton()
-	// ParentStopFinish calls the default implementations of the stop_finish virtual method.
+	// ParentStopFinish calls the default implementations of the `GDrive.stop_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -19174,7 +19174,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 	}
 }
 
-// ParentCanEject calls the default implementations of the can_eject virtual method.
+// ParentCanEject calls the default implementations of the `GDrive.can_eject` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19202,7 +19202,7 @@ func (drive *DriveInstance) ParentCanEject() bool {
 	return goret
 }
 
-// ParentCanPollForMedia calls the default implementations of the can_poll_for_media virtual method.
+// ParentCanPollForMedia calls the default implementations of the `GDrive.can_poll_for_media` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19230,7 +19230,7 @@ func (drive *DriveInstance) ParentCanPollForMedia() bool {
 	return goret
 }
 
-// ParentCanStart calls the default implementations of the can_start virtual method.
+// ParentCanStart calls the default implementations of the `GDrive.can_start` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19258,7 +19258,7 @@ func (drive *DriveInstance) ParentCanStart() bool {
 	return goret
 }
 
-// ParentCanStartDegraded calls the default implementations of the can_start_degraded virtual method.
+// ParentCanStartDegraded calls the default implementations of the `GDrive.can_start_degraded` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19286,7 +19286,7 @@ func (drive *DriveInstance) ParentCanStartDegraded() bool {
 	return goret
 }
 
-// ParentCanStop calls the default implementations of the can_stop virtual method.
+// ParentCanStop calls the default implementations of the `GDrive.can_stop` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19314,7 +19314,7 @@ func (drive *DriveInstance) ParentCanStop() bool {
 	return goret
 }
 
-// ParentChanged calls the default implementations of the changed virtual method.
+// ParentChanged calls the default implementations of the `GDrive.changed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Signal emitted when the drive is changed.
@@ -19329,7 +19329,7 @@ func (drive *DriveInstance) ParentChanged() {
 	runtime.KeepAlive(drive)
 }
 
-// ParentDisconnected calls the default implementations of the disconnected virtual method.
+// ParentDisconnected calls the default implementations of the `GDrive.disconnected` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // The removed signal that is emitted when the #GDrive have been disconnected. If the recipient is holding references to the object they should release them so the object can be finalized.
@@ -19344,7 +19344,7 @@ func (drive *DriveInstance) ParentDisconnected() {
 	runtime.KeepAlive(drive)
 }
 
-// ParentEjectButton calls the default implementations of the eject_button virtual method.
+// ParentEjectButton calls the default implementations of the `GDrive.eject_button` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Signal emitted when the physical eject button (if any) of a drive have been pressed.
@@ -19359,7 +19359,7 @@ func (drive *DriveInstance) ParentEjectButton() {
 	runtime.KeepAlive(drive)
 }
 
-// ParentEjectFinish calls the default implementations of the eject_finish virtual method.
+// ParentEjectFinish calls the default implementations of the `GDrive.eject_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -19402,7 +19402,7 @@ func (drive *DriveInstance) ParentEjectFinish(result AsyncResult) (bool, error) 
 	return goret, _goerr
 }
 
-// ParentEjectWithOperationFinish calls the default implementations of the eject_with_operation_finish virtual method.
+// ParentEjectWithOperationFinish calls the default implementations of the `GDrive.eject_with_operation_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -19444,7 +19444,7 @@ func (drive *DriveInstance) ParentEjectWithOperationFinish(result AsyncResult) (
 	return goret, _goerr
 }
 
-// ParentEnumerateIdentifiers calls the default implementations of the enumerate_identifiers virtual method.
+// ParentEnumerateIdentifiers calls the default implementations of the `GDrive.enumerate_identifiers` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19474,7 +19474,7 @@ func (drive *DriveInstance) ParentEnumerateIdentifiers() []string {
 	return goret
 }
 
-// ParentGetIcon calls the default implementations of the get_icon virtual method.
+// ParentGetIcon calls the default implementations of the `GDrive.get_icon` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19500,7 +19500,7 @@ func (drive *DriveInstance) ParentGetIcon() Icon {
 	return goret
 }
 
-// ParentGetIdentifier calls the default implementations of the get_identifier virtual method.
+// ParentGetIdentifier calls the default implementations of the `GDrive.get_identifier` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -19539,7 +19539,7 @@ func (drive *DriveInstance) ParentGetIdentifier(kind string) string {
 	return goret
 }
 
-// ParentGetName calls the default implementations of the get_name virtual method.
+// ParentGetName calls the default implementations of the `GDrive.get_name` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19566,7 +19566,7 @@ func (drive *DriveInstance) ParentGetName() string {
 	return goret
 }
 
-// ParentGetSortKey calls the default implementations of the get_sort_key virtual method.
+// ParentGetSortKey calls the default implementations of the `GDrive.get_sort_key` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19594,7 +19594,7 @@ func (drive *DriveInstance) ParentGetSortKey() string {
 	return goret
 }
 
-// ParentGetStartStopType calls the default implementations of the get_start_stop_type virtual method.
+// ParentGetStartStopType calls the default implementations of the `GDrive.get_start_stop_type` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19620,7 +19620,7 @@ func (drive *DriveInstance) ParentGetStartStopType() DriveStartStopType {
 	return goret
 }
 
-// ParentGetSymbolicIcon calls the default implementations of the get_symbolic_icon virtual method.
+// ParentGetSymbolicIcon calls the default implementations of the `GDrive.get_symbolic_icon` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19646,7 +19646,7 @@ func (drive *DriveInstance) ParentGetSymbolicIcon() Icon {
 	return goret
 }
 
-// ParentGetVolumes calls the default implementations of the get_volumes virtual method.
+// ParentGetVolumes calls the default implementations of the `GDrive.get_volumes` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19682,7 +19682,7 @@ func (drive *DriveInstance) ParentGetVolumes() []Volume {
 	return goret
 }
 
-// ParentHasMedia calls the default implementations of the has_media virtual method.
+// ParentHasMedia calls the default implementations of the `GDrive.has_media` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19712,7 +19712,7 @@ func (drive *DriveInstance) ParentHasMedia() bool {
 	return goret
 }
 
-// ParentHasVolumes calls the default implementations of the has_volumes virtual method.
+// ParentHasVolumes calls the default implementations of the `GDrive.has_volumes` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19740,7 +19740,7 @@ func (drive *DriveInstance) ParentHasVolumes() bool {
 	return goret
 }
 
-// ParentIsMediaCheckAutomatic calls the default implementations of the is_media_check_automatic virtual method.
+// ParentIsMediaCheckAutomatic calls the default implementations of the `GDrive.is_media_check_automatic` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19768,7 +19768,7 @@ func (drive *DriveInstance) ParentIsMediaCheckAutomatic() bool {
 	return goret
 }
 
-// ParentIsMediaRemovable calls the default implementations of the is_media_removable virtual method.
+// ParentIsMediaRemovable calls the default implementations of the `GDrive.is_media_removable` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19796,7 +19796,7 @@ func (drive *DriveInstance) ParentIsMediaRemovable() bool {
 	return goret
 }
 
-// ParentIsRemovable calls the default implementations of the is_removable virtual method.
+// ParentIsRemovable calls the default implementations of the `GDrive.is_removable` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -19825,7 +19825,7 @@ func (drive *DriveInstance) ParentIsRemovable() bool {
 	return goret
 }
 
-// ParentPollForMediaFinish calls the default implementations of the poll_for_media_finish virtual method.
+// ParentPollForMediaFinish calls the default implementations of the `GDrive.poll_for_media_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -19866,7 +19866,7 @@ func (drive *DriveInstance) ParentPollForMediaFinish(result AsyncResult) (bool, 
 	return goret, _goerr
 }
 
-// ParentStartFinish calls the default implementations of the start_finish virtual method.
+// ParentStartFinish calls the default implementations of the `GDrive.start_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -19907,7 +19907,7 @@ func (drive *DriveInstance) ParentStartFinish(result AsyncResult) (bool, error) 
 	return goret, _goerr
 }
 
-// ParentStopButton calls the default implementations of the stop_button virtual method.
+// ParentStopButton calls the default implementations of the `GDrive.stop_button` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Signal emitted when the physical stop button (if any) of a drive have been pressed. Since 2.22.
@@ -19922,7 +19922,7 @@ func (drive *DriveInstance) ParentStopButton() {
 	runtime.KeepAlive(drive)
 }
 
-// ParentStopFinish calls the default implementations of the stop_finish virtual method.
+// ParentStopFinish calls the default implementations of the `GDrive.stop_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -20467,7 +20467,7 @@ type DtlsConnection interface {
 
 	// chain up virtual methods:
 
-	// ParentAcceptCertificate calls the default implementations of the accept_certificate virtual method.
+	// ParentAcceptCertificate calls the default implementations of the `GDtlsConnection.accept_certificate` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -20481,7 +20481,7 @@ type DtlsConnection interface {
 	//
 	// Check whether to accept a certificate.
 	ParentAcceptCertificate(peerCert TlsCertificate, errors TlsCertificateFlags) bool
-	// ParentGetNegotiatedProtocol calls the default implementations of the get_negotiated_protocol virtual method.
+	// ParentGetNegotiatedProtocol calls the default implementations of the `GDtlsConnection.get_negotiated_protocol` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -20496,7 +20496,7 @@ type DtlsConnection interface {
 	// does not support ALPN, then this will be %NULL. See
 	// g_dtls_connection_set_advertised_protocols().
 	ParentGetNegotiatedProtocol() string
-	// ParentHandshake calls the default implementations of the handshake virtual method.
+	// ParentHandshake calls the default implementations of the `GDtlsConnection.handshake` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -20535,7 +20535,7 @@ type DtlsConnection interface {
 	// #GDtlsConnection::accept_certificate may be emitted during the
 	// handshake.
 	ParentHandshake(cancellable context.Context) (bool, error)
-	// ParentHandshakeFinish calls the default implementations of the handshake_finish virtual method.
+	// ParentHandshakeFinish calls the default implementations of the `GDtlsConnection.handshake_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -20550,7 +20550,7 @@ type DtlsConnection interface {
 	// Finish an asynchronous TLS handshake operation. See
 	// g_dtls_connection_handshake() for more information.
 	ParentHandshakeFinish(result AsyncResult) (bool, error)
-	// ParentSetAdvertisedProtocols calls the default implementations of the set_advertised_protocols virtual method.
+	// ParentSetAdvertisedProtocols calls the default implementations of the `GDtlsConnection.set_advertised_protocols` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -20569,7 +20569,7 @@ type DtlsConnection interface {
 	// See [IANA TLS ALPN Protocol IDs](https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids)
 	// for a list of registered protocol IDs.
 	ParentSetAdvertisedProtocols(protocols []string)
-	// ParentShutdown calls the default implementations of the shutdown virtual method.
+	// ParentShutdown calls the default implementations of the `GDtlsConnection.shutdown` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -20600,7 +20600,7 @@ type DtlsConnection interface {
 	// partially-closed and any pending untransmitted data may be lost. Call
 	// g_dtls_connection_shutdown() again to complete closing the #GDtlsConnection.
 	ParentShutdown(cancellable context.Context, shutdownRead bool, shutdownWrite bool) (bool, error)
-	// ParentShutdownFinish calls the default implementations of the shutdown_finish virtual method.
+	// ParentShutdownFinish calls the default implementations of the `GDtlsConnection.shutdown_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -21973,7 +21973,7 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 	}
 }
 
-// ParentAcceptCertificate calls the default implementations of the accept_certificate virtual method.
+// ParentAcceptCertificate calls the default implementations of the `GDtlsConnection.accept_certificate` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -22012,7 +22012,7 @@ func (connection *DtlsConnectionInstance) ParentAcceptCertificate(peerCert TlsCe
 	return goret
 }
 
-// ParentGetNegotiatedProtocol calls the default implementations of the get_negotiated_protocol virtual method.
+// ParentGetNegotiatedProtocol calls the default implementations of the `GDtlsConnection.get_negotiated_protocol` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -22046,7 +22046,7 @@ func (conn *DtlsConnectionInstance) ParentGetNegotiatedProtocol() string {
 	return goret
 }
 
-// ParentHandshake calls the default implementations of the handshake virtual method.
+// ParentHandshake calls the default implementations of the `GDtlsConnection.handshake` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -22114,7 +22114,7 @@ func (conn *DtlsConnectionInstance) ParentHandshake(cancellable context.Context)
 	return goret, _goerr
 }
 
-// ParentHandshakeFinish calls the default implementations of the handshake_finish virtual method.
+// ParentHandshakeFinish calls the default implementations of the `GDtlsConnection.handshake_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -22156,7 +22156,7 @@ func (conn *DtlsConnectionInstance) ParentHandshakeFinish(result AsyncResult) (b
 	return goret, _goerr
 }
 
-// ParentSetAdvertisedProtocols calls the default implementations of the set_advertised_protocols virtual method.
+// ParentSetAdvertisedProtocols calls the default implementations of the `GDtlsConnection.set_advertised_protocols` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -22190,7 +22190,7 @@ func (conn *DtlsConnectionInstance) ParentSetAdvertisedProtocols(protocols []str
 	runtime.KeepAlive(protocols)
 }
 
-// ParentShutdown calls the default implementations of the shutdown virtual method.
+// ParentShutdown calls the default implementations of the `GDtlsConnection.shutdown` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -22260,7 +22260,7 @@ func (conn *DtlsConnectionInstance) ParentShutdown(cancellable context.Context, 
 	return goret, _goerr
 }
 
-// ParentShutdownFinish calls the default implementations of the shutdown_finish virtual method.
+// ParentShutdownFinish calls the default implementations of the `GDtlsConnection.shutdown_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -25006,7 +25006,7 @@ type File interface {
 
 	// chain up virtual methods:
 
-	// ParentAppendTo calls the default implementations of the append_to virtual method.
+	// ParentAppendTo calls the default implementations of the `GFile.append_to` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25038,7 +25038,7 @@ type File interface {
 	// %G_IO_ERROR_IS_DIRECTORY error will be returned. Other errors are
 	// possible too, and depend on what kind of filesystem the file is on.
 	ParentAppendTo(cancellable context.Context, flags FileCreateFlags) (FileOutputStream, error)
-	// ParentAppendToFinish calls the default implementations of the append_to_finish virtual method.
+	// ParentAppendToFinish calls the default implementations of the `GFile.append_to_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25053,7 +25053,7 @@ type File interface {
 	// Finishes an asynchronous file append operation started with
 	// g_file_append_to_async().
 	ParentAppendToFinish(res AsyncResult) (FileOutputStream, error)
-	// ParentCopyFinish calls the default implementations of the copy_finish virtual method.
+	// ParentCopyFinish calls the default implementations of the `GFile.copy_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25067,7 +25067,7 @@ type File interface {
 	//
 	// Finishes copying the file started with g_file_copy_async().
 	ParentCopyFinish(res AsyncResult) (bool, error)
-	// ParentCreate calls the default implementations of the create virtual method.
+	// ParentCreate calls the default implementations of the `GFile.create` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25101,7 +25101,7 @@ type File interface {
 	// be returned. Other errors are possible too, and depend on what kind
 	// of filesystem the file is on.
 	ParentCreate(cancellable context.Context, flags FileCreateFlags) (FileOutputStream, error)
-	// ParentCreateFinish calls the default implementations of the create_finish virtual method.
+	// ParentCreateFinish calls the default implementations of the `GFile.create_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25116,7 +25116,7 @@ type File interface {
 	// Finishes an asynchronous file create operation started with
 	// g_file_create_async().
 	ParentCreateFinish(res AsyncResult) (FileOutputStream, error)
-	// ParentCreateReadwrite calls the default implementations of the create_readwrite virtual method.
+	// ParentCreateReadwrite calls the default implementations of the `GFile.create_readwrite` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25154,7 +25154,7 @@ type File interface {
 	// not supported, so make sure you really need to do read and write
 	// streaming, rather than just opening for reading or writing.
 	ParentCreateReadwrite(cancellable context.Context, flags FileCreateFlags) (FileIOStream, error)
-	// ParentCreateReadwriteFinish calls the default implementations of the create_readwrite_finish virtual method.
+	// ParentCreateReadwriteFinish calls the default implementations of the `GFile.create_readwrite_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25169,7 +25169,7 @@ type File interface {
 	// Finishes an asynchronous file create operation started with
 	// g_file_create_readwrite_async().
 	ParentCreateReadwriteFinish(res AsyncResult) (FileIOStream, error)
-	// ParentDeleteFile calls the default implementations of the delete_file virtual method.
+	// ParentDeleteFile calls the default implementations of the `GFile.delete_file` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25204,7 +25204,7 @@ type File interface {
 	// triggering the cancellable object from another thread. If the operation
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 	ParentDeleteFile(cancellable context.Context) (bool, error)
-	// ParentDeleteFileFinish calls the default implementations of the delete_file_finish virtual method.
+	// ParentDeleteFileFinish calls the default implementations of the `GFile.delete_file_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25218,7 +25218,7 @@ type File interface {
 	//
 	// Finishes deleting a file started with g_file_delete_async().
 	ParentDeleteFileFinish(result AsyncResult) (bool, error)
-	// ParentDup calls the default implementations of the dup virtual method.
+	// ParentDup calls the default implementations of the `GFile.dup` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -25236,7 +25236,7 @@ type File interface {
 	// 
 	// This call does no blocking I/O.
 	ParentDup() File
-	// ParentEjectMountableFinish calls the default implementations of the eject_mountable_finish virtual method.
+	// ParentEjectMountableFinish calls the default implementations of the `GFile.eject_mountable_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25254,7 +25254,7 @@ type File interface {
 	// Deprecated: (since 2.22.0) Use g_file_eject_mountable_with_operation_finish()
 	//   instead.
 	ParentEjectMountableFinish(result AsyncResult) (bool, error)
-	// ParentEjectMountableWithOperationFinish calls the default implementations of the eject_mountable_with_operation_finish virtual method.
+	// ParentEjectMountableWithOperationFinish calls the default implementations of the `GFile.eject_mountable_with_operation_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25269,7 +25269,7 @@ type File interface {
 	// Finishes an asynchronous eject operation started by
 	// g_file_eject_mountable_with_operation().
 	ParentEjectMountableWithOperationFinish(result AsyncResult) (bool, error)
-	// ParentEnumerateChildren calls the default implementations of the enumerate_children virtual method.
+	// ParentEnumerateChildren calls the default implementations of the `GFile.enumerate_children` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25310,7 +25310,7 @@ type File interface {
 	// be returned. If the file is not a directory, the %G_IO_ERROR_NOT_DIRECTORY
 	// error will be returned. Other errors are possible too.
 	ParentEnumerateChildren(cancellable context.Context, attributes string, flags FileQueryInfoFlags) (FileEnumerator, error)
-	// ParentEnumerateChildrenFinish calls the default implementations of the enumerate_children_finish virtual method.
+	// ParentEnumerateChildrenFinish calls the default implementations of the `GFile.enumerate_children_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25325,7 +25325,7 @@ type File interface {
 	// Finishes an async enumerate children operation.
 	// See g_file_enumerate_children_async().
 	ParentEnumerateChildrenFinish(res AsyncResult) (FileEnumerator, error)
-	// ParentEqual calls the default implementations of the equal virtual method.
+	// ParentEqual calls the default implementations of the `GFile.equal` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25344,7 +25344,7 @@ type File interface {
 	// 
 	// This call does no blocking I/O.
 	ParentEqual(file2 File) bool
-	// ParentFindEnclosingMount calls the default implementations of the find_enclosing_mount virtual method.
+	// ParentFindEnclosingMount calls the default implementations of the `GFile.find_enclosing_mount` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25367,7 +25367,7 @@ type File interface {
 	// triggering the cancellable object from another thread. If the operation
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 	ParentFindEnclosingMount(cancellable context.Context) (Mount, error)
-	// ParentFindEnclosingMountFinish calls the default implementations of the find_enclosing_mount_finish virtual method.
+	// ParentFindEnclosingMountFinish calls the default implementations of the `GFile.find_enclosing_mount_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25382,7 +25382,7 @@ type File interface {
 	// Finishes an asynchronous find mount request.
 	// See g_file_find_enclosing_mount_async().
 	ParentFindEnclosingMountFinish(res AsyncResult) (Mount, error)
-	// ParentGetBasename calls the default implementations of the get_basename virtual method.
+	// ParentGetBasename calls the default implementations of the `GFile.get_basename` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -25403,7 +25403,7 @@ type File interface {
 	// 
 	// This call does no blocking I/O.
 	ParentGetBasename() string
-	// ParentGetChildForDisplayName calls the default implementations of the get_child_for_display_name virtual method.
+	// ParentGetChildForDisplayName calls the default implementations of the `GFile.get_child_for_display_name` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25424,7 +25424,7 @@ type File interface {
 	// 
 	// This call does no blocking I/O.
 	ParentGetChildForDisplayName(displayName string) (File, error)
-	// ParentGetParent calls the default implementations of the get_parent virtual method.
+	// ParentGetParent calls the default implementations of the `GFile.get_parent` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -25437,7 +25437,7 @@ type File interface {
 	// 
 	// This call does no blocking I/O.
 	ParentGetParent() File
-	// ParentGetParseName calls the default implementations of the get_parse_name virtual method.
+	// ParentGetParseName calls the default implementations of the `GFile.get_parse_name` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -25459,7 +25459,7 @@ type File interface {
 	// 
 	// This call does no blocking I/O.
 	ParentGetParseName() string
-	// ParentGetPath calls the default implementations of the get_path virtual method.
+	// ParentGetPath calls the default implementations of the `GFile.get_path` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -25471,7 +25471,7 @@ type File interface {
 	// 
 	// This call does no blocking I/O.
 	ParentGetPath() string
-	// ParentGetRelativePath calls the default implementations of the get_relative_path virtual method.
+	// ParentGetRelativePath calls the default implementations of the `GFile.get_relative_path` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25486,7 +25486,7 @@ type File interface {
 	// 
 	// This call does no blocking I/O.
 	ParentGetRelativePath(descendant File) string
-	// ParentGetURI calls the default implementations of the get_uri virtual method.
+	// ParentGetURI calls the default implementations of the `GFile.get_uri` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -25497,7 +25497,7 @@ type File interface {
 	// 
 	// This call does no blocking I/O.
 	ParentGetURI() string
-	// ParentGetURIScheme calls the default implementations of the get_uri_scheme virtual method.
+	// ParentGetURIScheme calls the default implementations of the `GFile.get_uri_scheme` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -25516,7 +25516,7 @@ type File interface {
 	// 
 	// This call does no blocking I/O.
 	ParentGetURIScheme() string
-	// ParentHasURIScheme calls the default implementations of the has_uri_scheme virtual method.
+	// ParentHasURIScheme calls the default implementations of the `GFile.has_uri_scheme` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25531,7 +25531,7 @@ type File interface {
 	// 
 	// This call does no blocking I/O.
 	ParentHasURIScheme(uriScheme string) bool
-	// ParentHash calls the default implementations of the hash virtual method.
+	// ParentHash calls the default implementations of the `GFile.hash` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -25542,7 +25542,7 @@ type File interface {
 	// 
 	// This call does no blocking I/O.
 	ParentHash() uint
-	// ParentIsNative calls the default implementations of the is_native virtual method.
+	// ParentIsNative calls the default implementations of the `GFile.is_native` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -25561,7 +25561,7 @@ type File interface {
 	// 
 	// This call does no blocking I/O.
 	ParentIsNative() bool
-	// ParentMakeDirectory calls the default implementations of the make_directory virtual method.
+	// ParentMakeDirectory calls the default implementations of the `GFile.make_directory` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25593,7 +25593,7 @@ type File interface {
 	// triggering the cancellable object from another thread. If the operation
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 	ParentMakeDirectory(cancellable context.Context) (bool, error)
-	// ParentMakeDirectoryFinish calls the default implementations of the make_directory_finish virtual method.
+	// ParentMakeDirectoryFinish calls the default implementations of the `GFile.make_directory_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25608,7 +25608,7 @@ type File interface {
 	// Finishes an asynchronous directory creation, started with
 	// g_file_make_directory_async().
 	ParentMakeDirectoryFinish(result AsyncResult) (bool, error)
-	// ParentMakeSymbolicLink calls the default implementations of the make_symbolic_link virtual method.
+	// ParentMakeSymbolicLink calls the default implementations of the `GFile.make_symbolic_link` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25630,7 +25630,7 @@ type File interface {
 	// triggering the cancellable object from another thread. If the operation
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 	ParentMakeSymbolicLink(cancellable context.Context, symlinkValue string) (bool, error)
-	// ParentMakeSymbolicLinkFinish calls the default implementations of the make_symbolic_link_finish virtual method.
+	// ParentMakeSymbolicLinkFinish calls the default implementations of the `GFile.make_symbolic_link_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25645,7 +25645,7 @@ type File interface {
 	// Finishes an asynchronous symbolic link creation, started with
 	// g_file_make_symbolic_link_async().
 	ParentMakeSymbolicLinkFinish(result AsyncResult) (bool, error)
-	// ParentMeasureDiskUsageFinish calls the default implementations of the measure_disk_usage_finish virtual method.
+	// ParentMeasureDiskUsageFinish calls the default implementations of the `GFile.measure_disk_usage_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25664,7 +25664,7 @@ type File interface {
 	// g_file_measure_disk_usage_async().  See g_file_measure_disk_usage() for
 	// more information.
 	ParentMeasureDiskUsageFinish(result AsyncResult) (uint64, uint64, uint64, bool, error)
-	// ParentMonitorDir calls the default implementations of the monitor_dir virtual method.
+	// ParentMonitorDir calls the default implementations of the `GFile.monitor_dir` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25691,7 +25691,7 @@ type File interface {
 	// directory for changes made via hard links; if you want to do this then
 	// you must register individual watches with g_file_monitor().
 	ParentMonitorDir(cancellable context.Context, flags FileMonitorFlags) (FileMonitor, error)
-	// ParentMonitorFile calls the default implementations of the monitor_file virtual method.
+	// ParentMonitorFile calls the default implementations of the `GFile.monitor_file` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25720,7 +25720,7 @@ type File interface {
 	// usage, and may not have any effect depending on the #GFileMonitor
 	// backend and/or filesystem type.
 	ParentMonitorFile(cancellable context.Context, flags FileMonitorFlags) (FileMonitor, error)
-	// ParentMountEnclosingVolumeFinish calls the default implementations of the mount_enclosing_volume_finish virtual method.
+	// ParentMountEnclosingVolumeFinish calls the default implementations of the `GFile.mount_enclosing_volume_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25734,7 +25734,7 @@ type File interface {
 	//
 	// Finishes a mount operation started by g_file_mount_enclosing_volume().
 	ParentMountEnclosingVolumeFinish(result AsyncResult) (bool, error)
-	// ParentMountMountableFinish calls the default implementations of the mount_mountable_finish virtual method.
+	// ParentMountMountableFinish calls the default implementations of the `GFile.mount_mountable_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25751,7 +25751,7 @@ type File interface {
 	// Finish an asynchronous mount operation that was started
 	// with g_file_mount_mountable().
 	ParentMountMountableFinish(result AsyncResult) (File, error)
-	// ParentMoveFinish calls the default implementations of the move_finish virtual method.
+	// ParentMoveFinish calls the default implementations of the `GFile.move_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25766,7 +25766,7 @@ type File interface {
 	// Finishes an asynchronous file movement, started with
 	// g_file_move_async().
 	ParentMoveFinish(result AsyncResult) (bool, error)
-	// ParentOpenReadwrite calls the default implementations of the open_readwrite virtual method.
+	// ParentOpenReadwrite calls the default implementations of the `GFile.open_readwrite` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25795,7 +25795,7 @@ type File interface {
 	// really need to do read and write streaming, rather than just opening
 	// for reading or writing.
 	ParentOpenReadwrite(cancellable context.Context) (FileIOStream, error)
-	// ParentOpenReadwriteFinish calls the default implementations of the open_readwrite_finish virtual method.
+	// ParentOpenReadwriteFinish calls the default implementations of the `GFile.open_readwrite_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25810,7 +25810,7 @@ type File interface {
 	// Finishes an asynchronous file read operation started with
 	// g_file_open_readwrite_async().
 	ParentOpenReadwriteFinish(res AsyncResult) (FileIOStream, error)
-	// ParentPollMountableFinish calls the default implementations of the poll_mountable_finish virtual method.
+	// ParentPollMountableFinish calls the default implementations of the `GFile.poll_mountable_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25827,7 +25827,7 @@ type File interface {
 	// Finish an asynchronous poll operation that was polled
 	// with g_file_poll_mountable().
 	ParentPollMountableFinish(result AsyncResult) (bool, error)
-	// ParentPrefixMatches calls the default implementations of the prefix_matches virtual method.
+	// ParentPrefixMatches calls the default implementations of the `GFile.prefix_matches` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25853,7 +25853,7 @@ type File interface {
 	// filesystem point of view), because the prefix of @file is an alias
 	// of @prefix.
 	ParentPrefixMatches(file File) bool
-	// ParentQueryExists calls the default implementations of the query_exists virtual method.
+	// ParentQueryExists calls the default implementations of the `GFile.query_exists` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25891,7 +25891,7 @@ type File interface {
 	// dialog. If you do this, you should make sure to also handle the errors
 	// that can happen due to races when you execute the operation.
 	ParentQueryExists(cancellable context.Context) bool
-	// ParentQueryFilesystemInfo calls the default implementations of the query_filesystem_info virtual method.
+	// ParentQueryFilesystemInfo calls the default implementations of the `GFile.query_filesystem_info` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25931,7 +25931,7 @@ type File interface {
 	// be returned. Other errors are possible too, and depend on what
 	// kind of filesystem the file is on.
 	ParentQueryFilesystemInfo(cancellable context.Context, attributes string) (FileInfo, error)
-	// ParentQueryFilesystemInfoFinish calls the default implementations of the query_filesystem_info_finish virtual method.
+	// ParentQueryFilesystemInfoFinish calls the default implementations of the `GFile.query_filesystem_info_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -25946,7 +25946,7 @@ type File interface {
 	// Finishes an asynchronous filesystem info query.
 	// See g_file_query_filesystem_info_async().
 	ParentQueryFilesystemInfoFinish(res AsyncResult) (FileInfo, error)
-	// ParentQueryInfo calls the default implementations of the query_info virtual method.
+	// ParentQueryInfo calls the default implementations of the `GFile.query_info` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26004,7 +26004,7 @@ type File interface {
 	// returned. Other errors are possible too, and depend on what kind of
 	// file system the file is on.
 	ParentQueryInfo(cancellable context.Context, attributes string, flags FileQueryInfoFlags) (FileInfo, error)
-	// ParentQueryInfoFinish calls the default implementations of the query_info_finish virtual method.
+	// ParentQueryInfoFinish calls the default implementations of the `GFile.query_info_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26019,7 +26019,7 @@ type File interface {
 	// Finishes an asynchronous file info query.
 	// See g_file_query_info_async().
 	ParentQueryInfoFinish(res AsyncResult) (FileInfo, error)
-	// ParentQuerySettableAttributes calls the default implementations of the query_settable_attributes virtual method.
+	// ParentQuerySettableAttributes calls the default implementations of the `GFile.query_settable_attributes` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26043,7 +26043,7 @@ type File interface {
 	// triggering the cancellable object from another thread. If the operation
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 	ParentQuerySettableAttributes(cancellable context.Context) (*FileAttributeInfoList, error)
-	// ParentQueryWritableNamespaces calls the default implementations of the query_writable_namespaces virtual method.
+	// ParentQueryWritableNamespaces calls the default implementations of the `GFile.query_writable_namespaces` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26064,7 +26064,7 @@ type File interface {
 	// triggering the cancellable object from another thread. If the operation
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 	ParentQueryWritableNamespaces(cancellable context.Context) (*FileAttributeInfoList, error)
-	// ParentReadFinish calls the default implementations of the read_finish virtual method.
+	// ParentReadFinish calls the default implementations of the `GFile.read_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26079,7 +26079,7 @@ type File interface {
 	// Finishes an asynchronous file read operation started with
 	// g_file_read_async().
 	ParentReadFinish(res AsyncResult) (FileInputStream, error)
-	// ParentReadFn calls the default implementations of the read_fn virtual method.
+	// ParentReadFn calls the default implementations of the `GFile.read_fn` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26103,7 +26103,7 @@ type File interface {
 	// error will be returned. Other errors are possible too, and depend
 	// on what kind of filesystem the file is on.
 	ParentReadFn(cancellable context.Context) (FileInputStream, error)
-	// ParentReplace calls the default implementations of the replace virtual method.
+	// ParentReplace calls the default implementations of the `GFile.replace` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26162,7 +26162,7 @@ type File interface {
 	// %G_IO_ERROR_FILENAME_TOO_LONG will be returned. Other errors are
 	// possible too, and depend on what kind of filesystem the file is on.
 	ParentReplace(cancellable context.Context, etag string, makeBackup bool, flags FileCreateFlags) (FileOutputStream, error)
-	// ParentReplaceFinish calls the default implementations of the replace_finish virtual method.
+	// ParentReplaceFinish calls the default implementations of the `GFile.replace_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26177,7 +26177,7 @@ type File interface {
 	// Finishes an asynchronous file replace operation started with
 	// g_file_replace_async().
 	ParentReplaceFinish(res AsyncResult) (FileOutputStream, error)
-	// ParentReplaceReadwrite calls the default implementations of the replace_readwrite virtual method.
+	// ParentReplaceReadwrite calls the default implementations of the `GFile.replace_readwrite` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26205,7 +26205,7 @@ type File interface {
 	// supported, so make sure you really need to do read and write streaming,
 	// rather than just opening for reading or writing.
 	ParentReplaceReadwrite(cancellable context.Context, etag string, makeBackup bool, flags FileCreateFlags) (FileIOStream, error)
-	// ParentReplaceReadwriteFinish calls the default implementations of the replace_readwrite_finish virtual method.
+	// ParentReplaceReadwriteFinish calls the default implementations of the `GFile.replace_readwrite_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26220,7 +26220,7 @@ type File interface {
 	// Finishes an asynchronous file replace operation started with
 	// g_file_replace_readwrite_async().
 	ParentReplaceReadwriteFinish(res AsyncResult) (FileIOStream, error)
-	// ParentResolveRelativePath calls the default implementations of the resolve_relative_path virtual method.
+	// ParentResolveRelativePath calls the default implementations of the `GFile.resolve_relative_path` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26238,7 +26238,7 @@ type File interface {
 	// If the @relative_path is an absolute path name, the resolution
 	// is done absolutely (without taking @file path as base).
 	ParentResolveRelativePath(relativePath string) File
-	// ParentSetAttributesFinish calls the default implementations of the set_attributes_finish virtual method.
+	// ParentSetAttributesFinish calls the default implementations of the `GFile.set_attributes_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26253,7 +26253,7 @@ type File interface {
 	//
 	// Finishes setting an attribute started in g_file_set_attributes_async().
 	ParentSetAttributesFinish(result AsyncResult) (FileInfo, bool, error)
-	// ParentSetAttributesFromInfo calls the default implementations of the set_attributes_from_info virtual method.
+	// ParentSetAttributesFromInfo calls the default implementations of the `GFile.set_attributes_from_info` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26281,7 +26281,7 @@ type File interface {
 	// triggering the cancellable object from another thread. If the operation
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 	ParentSetAttributesFromInfo(cancellable context.Context, info FileInfo, flags FileQueryInfoFlags) (bool, error)
-	// ParentSetDisplayName calls the default implementations of the set_display_name virtual method.
+	// ParentSetDisplayName calls the default implementations of the `GFile.set_display_name` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26311,7 +26311,7 @@ type File interface {
 	// triggering the cancellable object from another thread. If the operation
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 	ParentSetDisplayName(cancellable context.Context, displayName string) (File, error)
-	// ParentSetDisplayNameFinish calls the default implementations of the set_display_name_finish virtual method.
+	// ParentSetDisplayNameFinish calls the default implementations of the `GFile.set_display_name_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26326,7 +26326,7 @@ type File interface {
 	// Finishes setting a display name started with
 	// g_file_set_display_name_async().
 	ParentSetDisplayNameFinish(res AsyncResult) (File, error)
-	// ParentStartMountableFinish calls the default implementations of the start_mountable_finish virtual method.
+	// ParentStartMountableFinish calls the default implementations of the `GFile.start_mountable_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26343,7 +26343,7 @@ type File interface {
 	// Finish an asynchronous start operation that was started
 	// with g_file_start_mountable().
 	ParentStartMountableFinish(result AsyncResult) (bool, error)
-	// ParentStopMountableFinish calls the default implementations of the stop_mountable_finish virtual method.
+	// ParentStopMountableFinish calls the default implementations of the `GFile.stop_mountable_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26360,7 +26360,7 @@ type File interface {
 	// Finish an asynchronous stop operation that was started
 	// with g_file_stop_mountable().
 	ParentStopMountableFinish(result AsyncResult) (bool, error)
-	// ParentTrash calls the default implementations of the trash virtual method.
+	// ParentTrash calls the default implementations of the `GFile.trash` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26387,7 +26387,7 @@ type File interface {
 	// triggering the cancellable object from another thread. If the operation
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 	ParentTrash(cancellable context.Context) (bool, error)
-	// ParentTrashFinish calls the default implementations of the trash_finish virtual method.
+	// ParentTrashFinish calls the default implementations of the `GFile.trash_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26402,7 +26402,7 @@ type File interface {
 	// Finishes an asynchronous file trashing operation, started with
 	// g_file_trash_async().
 	ParentTrashFinish(result AsyncResult) (bool, error)
-	// ParentUnmountMountableFinish calls the default implementations of the unmount_mountable_finish virtual method.
+	// ParentUnmountMountableFinish calls the default implementations of the `GFile.unmount_mountable_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -26422,7 +26422,7 @@ type File interface {
 	// Deprecated: (since 2.22.0) Use g_file_unmount_mountable_with_operation_finish()
 	//   instead.
 	ParentUnmountMountableFinish(result AsyncResult) (bool, error)
-	// ParentUnmountMountableWithOperationFinish calls the default implementations of the unmount_mountable_with_operation_finish virtual method.
+	// ParentUnmountMountableWithOperationFinish calls the default implementations of the `GFile.unmount_mountable_with_operation_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -35653,7 +35653,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 	}
 }
 
-// ParentAppendTo calls the default implementations of the append_to virtual method.
+// ParentAppendTo calls the default implementations of the `GFile.append_to` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -35715,7 +35715,7 @@ func (file *FileInstance) ParentAppendTo(cancellable context.Context, flags File
 	return goret, _goerr
 }
 
-// ParentAppendToFinish calls the default implementations of the append_to_finish virtual method.
+// ParentAppendToFinish calls the default implementations of the `GFile.append_to_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -35755,7 +35755,7 @@ func (file *FileInstance) ParentAppendToFinish(res AsyncResult) (FileOutputStrea
 	return goret, _goerr
 }
 
-// ParentCopyFinish calls the default implementations of the copy_finish virtual method.
+// ParentCopyFinish calls the default implementations of the `GFile.copy_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -35796,7 +35796,7 @@ func (file *FileInstance) ParentCopyFinish(res AsyncResult) (bool, error) {
 	return goret, _goerr
 }
 
-// ParentCreate calls the default implementations of the create virtual method.
+// ParentCreate calls the default implementations of the `GFile.create` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -35860,7 +35860,7 @@ func (file *FileInstance) ParentCreate(cancellable context.Context, flags FileCr
 	return goret, _goerr
 }
 
-// ParentCreateFinish calls the default implementations of the create_finish virtual method.
+// ParentCreateFinish calls the default implementations of the `GFile.create_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -35900,7 +35900,7 @@ func (file *FileInstance) ParentCreateFinish(res AsyncResult) (FileOutputStream,
 	return goret, _goerr
 }
 
-// ParentCreateReadwrite calls the default implementations of the create_readwrite virtual method.
+// ParentCreateReadwrite calls the default implementations of the `GFile.create_readwrite` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -35968,7 +35968,7 @@ func (file *FileInstance) ParentCreateReadwrite(cancellable context.Context, fla
 	return goret, _goerr
 }
 
-// ParentCreateReadwriteFinish calls the default implementations of the create_readwrite_finish virtual method.
+// ParentCreateReadwriteFinish calls the default implementations of the `GFile.create_readwrite_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -36008,7 +36008,7 @@ func (file *FileInstance) ParentCreateReadwriteFinish(res AsyncResult) (FileIOSt
 	return goret, _goerr
 }
 
-// ParentDeleteFile calls the default implementations of the delete_file virtual method.
+// ParentDeleteFile calls the default implementations of the `GFile.delete_file` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -36072,7 +36072,7 @@ func (file *FileInstance) ParentDeleteFile(cancellable context.Context) (bool, e
 	return goret, _goerr
 }
 
-// ParentDeleteFileFinish calls the default implementations of the delete_file_finish virtual method.
+// ParentDeleteFileFinish calls the default implementations of the `GFile.delete_file_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -36113,7 +36113,7 @@ func (file *FileInstance) ParentDeleteFileFinish(result AsyncResult) (bool, erro
 	return goret, _goerr
 }
 
-// ParentDup calls the default implementations of the dup virtual method.
+// ParentDup calls the default implementations of the `GFile.dup` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -36148,7 +36148,7 @@ func (file *FileInstance) ParentDup() File {
 	return goret
 }
 
-// ParentEjectMountableFinish calls the default implementations of the eject_mountable_finish virtual method.
+// ParentEjectMountableFinish calls the default implementations of the `GFile.eject_mountable_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -36193,7 +36193,7 @@ func (file *FileInstance) ParentEjectMountableFinish(result AsyncResult) (bool, 
 	return goret, _goerr
 }
 
-// ParentEjectMountableWithOperationFinish calls the default implementations of the eject_mountable_with_operation_finish virtual method.
+// ParentEjectMountableWithOperationFinish calls the default implementations of the `GFile.eject_mountable_with_operation_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -36235,7 +36235,7 @@ func (file *FileInstance) ParentEjectMountableWithOperationFinish(result AsyncRe
 	return goret, _goerr
 }
 
-// ParentEnumerateChildren calls the default implementations of the enumerate_children virtual method.
+// ParentEnumerateChildren calls the default implementations of the `GFile.enumerate_children` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -36310,7 +36310,7 @@ func (file *FileInstance) ParentEnumerateChildren(cancellable context.Context, a
 	return goret, _goerr
 }
 
-// ParentEnumerateChildrenFinish calls the default implementations of the enumerate_children_finish virtual method.
+// ParentEnumerateChildrenFinish calls the default implementations of the `GFile.enumerate_children_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -36350,7 +36350,7 @@ func (file *FileInstance) ParentEnumerateChildrenFinish(res AsyncResult) (FileEn
 	return goret, _goerr
 }
 
-// ParentEqual calls the default implementations of the equal virtual method.
+// ParentEqual calls the default implementations of the `GFile.equal` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -36391,7 +36391,7 @@ func (file1 *FileInstance) ParentEqual(file2 File) bool {
 	return goret
 }
 
-// ParentFindEnclosingMount calls the default implementations of the find_enclosing_mount virtual method.
+// ParentFindEnclosingMount calls the default implementations of the `GFile.find_enclosing_mount` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -36441,7 +36441,7 @@ func (file *FileInstance) ParentFindEnclosingMount(cancellable context.Context) 
 	return goret, _goerr
 }
 
-// ParentFindEnclosingMountFinish calls the default implementations of the find_enclosing_mount_finish virtual method.
+// ParentFindEnclosingMountFinish calls the default implementations of the `GFile.find_enclosing_mount_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -36481,7 +36481,7 @@ func (file *FileInstance) ParentFindEnclosingMountFinish(res AsyncResult) (Mount
 	return goret, _goerr
 }
 
-// ParentGetBasename calls the default implementations of the get_basename virtual method.
+// ParentGetBasename calls the default implementations of the `GFile.get_basename` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -36522,7 +36522,7 @@ func (file *FileInstance) ParentGetBasename() string {
 	return goret
 }
 
-// ParentGetChildForDisplayName calls the default implementations of the get_child_for_display_name virtual method.
+// ParentGetChildForDisplayName calls the default implementations of the `GFile.get_child_for_display_name` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -36569,7 +36569,7 @@ func (file *FileInstance) ParentGetChildForDisplayName(displayName string) (File
 	return goret, _goerr
 }
 
-// ParentGetParent calls the default implementations of the get_parent virtual method.
+// ParentGetParent calls the default implementations of the `GFile.get_parent` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -36601,7 +36601,7 @@ func (file *FileInstance) ParentGetParent() File {
 	return goret
 }
 
-// ParentGetParseName calls the default implementations of the get_parse_name virtual method.
+// ParentGetParseName calls the default implementations of the `GFile.get_parse_name` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -36641,7 +36641,7 @@ func (file *FileInstance) ParentGetParseName() string {
 	return goret
 }
 
-// ParentGetPath calls the default implementations of the get_path virtual method.
+// ParentGetPath calls the default implementations of the `GFile.get_path` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -36673,7 +36673,7 @@ func (file *FileInstance) ParentGetPath() string {
 	return goret
 }
 
-// ParentGetRelativePath calls the default implementations of the get_relative_path virtual method.
+// ParentGetRelativePath calls the default implementations of the `GFile.get_relative_path` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -36711,7 +36711,7 @@ func (parent *FileInstance) ParentGetRelativePath(descendant File) string {
 	return goret
 }
 
-// ParentGetURI calls the default implementations of the get_uri virtual method.
+// ParentGetURI calls the default implementations of the `GFile.get_uri` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -36740,7 +36740,7 @@ func (file *FileInstance) ParentGetURI() string {
 	return goret
 }
 
-// ParentGetURIScheme calls the default implementations of the get_uri_scheme virtual method.
+// ParentGetURIScheme calls the default implementations of the `GFile.get_uri_scheme` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -36779,7 +36779,7 @@ func (file *FileInstance) ParentGetURIScheme() string {
 	return goret
 }
 
-// ParentHasURIScheme calls the default implementations of the has_uri_scheme virtual method.
+// ParentHasURIScheme calls the default implementations of the `GFile.has_uri_scheme` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -36817,7 +36817,7 @@ func (file *FileInstance) ParentHasURIScheme(uriScheme string) bool {
 	return goret
 }
 
-// ParentHash calls the default implementations of the hash virtual method.
+// ParentHash calls the default implementations of the `GFile.hash` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -36845,7 +36845,7 @@ func (file *FileInstance) ParentHash() uint {
 	return goret
 }
 
-// ParentIsNative calls the default implementations of the is_native virtual method.
+// ParentIsNative calls the default implementations of the `GFile.is_native` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -36883,7 +36883,7 @@ func (file *FileInstance) ParentIsNative() bool {
 	return goret
 }
 
-// ParentMakeDirectory calls the default implementations of the make_directory virtual method.
+// ParentMakeDirectory calls the default implementations of the `GFile.make_directory` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -36944,7 +36944,7 @@ func (file *FileInstance) ParentMakeDirectory(cancellable context.Context) (bool
 	return goret, _goerr
 }
 
-// ParentMakeDirectoryFinish calls the default implementations of the make_directory_finish virtual method.
+// ParentMakeDirectoryFinish calls the default implementations of the `GFile.make_directory_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -36986,7 +36986,7 @@ func (file *FileInstance) ParentMakeDirectoryFinish(result AsyncResult) (bool, e
 	return goret, _goerr
 }
 
-// ParentMakeSymbolicLink calls the default implementations of the make_symbolic_link virtual method.
+// ParentMakeSymbolicLink calls the default implementations of the `GFile.make_symbolic_link` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37041,7 +37041,7 @@ func (file *FileInstance) ParentMakeSymbolicLink(cancellable context.Context, sy
 	return goret, _goerr
 }
 
-// ParentMakeSymbolicLinkFinish calls the default implementations of the make_symbolic_link_finish virtual method.
+// ParentMakeSymbolicLinkFinish calls the default implementations of the `GFile.make_symbolic_link_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37083,7 +37083,7 @@ func (file *FileInstance) ParentMakeSymbolicLinkFinish(result AsyncResult) (bool
 	return goret, _goerr
 }
 
-// ParentMeasureDiskUsageFinish calls the default implementations of the measure_disk_usage_finish virtual method.
+// ParentMeasureDiskUsageFinish calls the default implementations of the `GFile.measure_disk_usage_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37138,7 +37138,7 @@ func (file *FileInstance) ParentMeasureDiskUsageFinish(result AsyncResult) (uint
 	return diskUsage, numDirs, numFiles, goret, _goerr
 }
 
-// ParentMonitorDir calls the default implementations of the monitor_dir virtual method.
+// ParentMonitorDir calls the default implementations of the `GFile.monitor_dir` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37195,7 +37195,7 @@ func (file *FileInstance) ParentMonitorDir(cancellable context.Context, flags Fi
 	return goret, _goerr
 }
 
-// ParentMonitorFile calls the default implementations of the monitor_file virtual method.
+// ParentMonitorFile calls the default implementations of the `GFile.monitor_file` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37254,7 +37254,7 @@ func (file *FileInstance) ParentMonitorFile(cancellable context.Context, flags F
 	return goret, _goerr
 }
 
-// ParentMountEnclosingVolumeFinish calls the default implementations of the mount_enclosing_volume_finish virtual method.
+// ParentMountEnclosingVolumeFinish calls the default implementations of the `GFile.mount_enclosing_volume_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37295,7 +37295,7 @@ func (location *FileInstance) ParentMountEnclosingVolumeFinish(result AsyncResul
 	return goret, _goerr
 }
 
-// ParentMountMountableFinish calls the default implementations of the mount_mountable_finish virtual method.
+// ParentMountMountableFinish calls the default implementations of the `GFile.mount_mountable_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37337,7 +37337,7 @@ func (file *FileInstance) ParentMountMountableFinish(result AsyncResult) (File, 
 	return goret, _goerr
 }
 
-// ParentMoveFinish calls the default implementations of the move_finish virtual method.
+// ParentMoveFinish calls the default implementations of the `GFile.move_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37379,7 +37379,7 @@ func (file *FileInstance) ParentMoveFinish(result AsyncResult) (bool, error) {
 	return goret, _goerr
 }
 
-// ParentOpenReadwrite calls the default implementations of the open_readwrite virtual method.
+// ParentOpenReadwrite calls the default implementations of the `GFile.open_readwrite` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37435,7 +37435,7 @@ func (file *FileInstance) ParentOpenReadwrite(cancellable context.Context) (File
 	return goret, _goerr
 }
 
-// ParentOpenReadwriteFinish calls the default implementations of the open_readwrite_finish virtual method.
+// ParentOpenReadwriteFinish calls the default implementations of the `GFile.open_readwrite_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37475,7 +37475,7 @@ func (file *FileInstance) ParentOpenReadwriteFinish(res AsyncResult) (FileIOStre
 	return goret, _goerr
 }
 
-// ParentPollMountableFinish calls the default implementations of the poll_mountable_finish virtual method.
+// ParentPollMountableFinish calls the default implementations of the `GFile.poll_mountable_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37519,7 +37519,7 @@ func (file *FileInstance) ParentPollMountableFinish(result AsyncResult) (bool, e
 	return goret, _goerr
 }
 
-// ParentPrefixMatches calls the default implementations of the prefix_matches virtual method.
+// ParentPrefixMatches calls the default implementations of the `GFile.prefix_matches` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37567,7 +37567,7 @@ func (prefix *FileInstance) ParentPrefixMatches(file File) bool {
 	return goret
 }
 
-// ParentQueryExists calls the default implementations of the query_exists virtual method.
+// ParentQueryExists calls the default implementations of the `GFile.query_exists` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37629,7 +37629,7 @@ func (file *FileInstance) ParentQueryExists(cancellable context.Context) bool {
 	return goret
 }
 
-// ParentQueryFilesystemInfo calls the default implementations of the query_filesystem_info virtual method.
+// ParentQueryFilesystemInfo calls the default implementations of the `GFile.query_filesystem_info` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37700,7 +37700,7 @@ func (file *FileInstance) ParentQueryFilesystemInfo(cancellable context.Context,
 	return goret, _goerr
 }
 
-// ParentQueryFilesystemInfoFinish calls the default implementations of the query_filesystem_info_finish virtual method.
+// ParentQueryFilesystemInfoFinish calls the default implementations of the `GFile.query_filesystem_info_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37740,7 +37740,7 @@ func (file *FileInstance) ParentQueryFilesystemInfoFinish(res AsyncResult) (File
 	return goret, _goerr
 }
 
-// ParentQueryInfo calls the default implementations of the query_info virtual method.
+// ParentQueryInfo calls the default implementations of the `GFile.query_info` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37832,7 +37832,7 @@ func (file *FileInstance) ParentQueryInfo(cancellable context.Context, attribute
 	return goret, _goerr
 }
 
-// ParentQueryInfoFinish calls the default implementations of the query_info_finish virtual method.
+// ParentQueryInfoFinish calls the default implementations of the `GFile.query_info_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37872,7 +37872,7 @@ func (file *FileInstance) ParentQueryInfoFinish(res AsyncResult) (FileInfo, erro
 	return goret, _goerr
 }
 
-// ParentQuerySettableAttributes calls the default implementations of the query_settable_attributes virtual method.
+// ParentQuerySettableAttributes calls the default implementations of the `GFile.query_settable_attributes` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37923,7 +37923,7 @@ func (file *FileInstance) ParentQuerySettableAttributes(cancellable context.Cont
 	return goret, _goerr
 }
 
-// ParentQueryWritableNamespaces calls the default implementations of the query_writable_namespaces virtual method.
+// ParentQueryWritableNamespaces calls the default implementations of the `GFile.query_writable_namespaces` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -37971,7 +37971,7 @@ func (file *FileInstance) ParentQueryWritableNamespaces(cancellable context.Cont
 	return goret, _goerr
 }
 
-// ParentReadFinish calls the default implementations of the read_finish virtual method.
+// ParentReadFinish calls the default implementations of the `GFile.read_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38011,7 +38011,7 @@ func (file *FileInstance) ParentReadFinish(res AsyncResult) (FileInputStream, er
 	return goret, _goerr
 }
 
-// ParentReadFn calls the default implementations of the read_fn virtual method.
+// ParentReadFn calls the default implementations of the `GFile.read_fn` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38062,7 +38062,7 @@ func (file *FileInstance) ParentReadFn(cancellable context.Context) (FileInputSt
 	return goret, _goerr
 }
 
-// ParentReplace calls the default implementations of the replace virtual method.
+// ParentReplace calls the default implementations of the `GFile.replace` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38162,7 +38162,7 @@ func (file *FileInstance) ParentReplace(cancellable context.Context, etag string
 	return goret, _goerr
 }
 
-// ParentReplaceFinish calls the default implementations of the replace_finish virtual method.
+// ParentReplaceFinish calls the default implementations of the `GFile.replace_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38202,7 +38202,7 @@ func (file *FileInstance) ParentReplaceFinish(res AsyncResult) (FileOutputStream
 	return goret, _goerr
 }
 
-// ParentReplaceReadwrite calls the default implementations of the replace_readwrite virtual method.
+// ParentReplaceReadwrite calls the default implementations of the `GFile.replace_readwrite` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38271,7 +38271,7 @@ func (file *FileInstance) ParentReplaceReadwrite(cancellable context.Context, et
 	return goret, _goerr
 }
 
-// ParentReplaceReadwriteFinish calls the default implementations of the replace_readwrite_finish virtual method.
+// ParentReplaceReadwriteFinish calls the default implementations of the `GFile.replace_readwrite_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38311,7 +38311,7 @@ func (file *FileInstance) ParentReplaceReadwriteFinish(res AsyncResult) (FileIOS
 	return goret, _goerr
 }
 
-// ParentResolveRelativePath calls the default implementations of the resolve_relative_path virtual method.
+// ParentResolveRelativePath calls the default implementations of the `GFile.resolve_relative_path` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38350,7 +38350,7 @@ func (file *FileInstance) ParentResolveRelativePath(relativePath string) File {
 	return goret
 }
 
-// ParentSetAttributesFinish calls the default implementations of the set_attributes_finish virtual method.
+// ParentSetAttributesFinish calls the default implementations of the `GFile.set_attributes_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38395,7 +38395,7 @@ func (file *FileInstance) ParentSetAttributesFinish(result AsyncResult) (FileInf
 	return info, goret, _goerr
 }
 
-// ParentSetAttributesFromInfo calls the default implementations of the set_attributes_from_info virtual method.
+// ParentSetAttributesFromInfo calls the default implementations of the `GFile.set_attributes_from_info` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38458,7 +38458,7 @@ func (file *FileInstance) ParentSetAttributesFromInfo(cancellable context.Contex
 	return goret, _goerr
 }
 
-// ParentSetDisplayName calls the default implementations of the set_display_name virtual method.
+// ParentSetDisplayName calls the default implementations of the `GFile.set_display_name` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38519,7 +38519,7 @@ func (file *FileInstance) ParentSetDisplayName(cancellable context.Context, disp
 	return goret, _goerr
 }
 
-// ParentSetDisplayNameFinish calls the default implementations of the set_display_name_finish virtual method.
+// ParentSetDisplayNameFinish calls the default implementations of the `GFile.set_display_name_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38559,7 +38559,7 @@ func (file *FileInstance) ParentSetDisplayNameFinish(res AsyncResult) (File, err
 	return goret, _goerr
 }
 
-// ParentStartMountableFinish calls the default implementations of the start_mountable_finish virtual method.
+// ParentStartMountableFinish calls the default implementations of the `GFile.start_mountable_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38603,7 +38603,7 @@ func (file *FileInstance) ParentStartMountableFinish(result AsyncResult) (bool, 
 	return goret, _goerr
 }
 
-// ParentStopMountableFinish calls the default implementations of the stop_mountable_finish virtual method.
+// ParentStopMountableFinish calls the default implementations of the `GFile.stop_mountable_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38647,7 +38647,7 @@ func (file *FileInstance) ParentStopMountableFinish(result AsyncResult) (bool, e
 	return goret, _goerr
 }
 
-// ParentTrash calls the default implementations of the trash virtual method.
+// ParentTrash calls the default implementations of the `GFile.trash` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38703,7 +38703,7 @@ func (file *FileInstance) ParentTrash(cancellable context.Context) (bool, error)
 	return goret, _goerr
 }
 
-// ParentTrashFinish calls the default implementations of the trash_finish virtual method.
+// ParentTrashFinish calls the default implementations of the `GFile.trash_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38745,7 +38745,7 @@ func (file *FileInstance) ParentTrashFinish(result AsyncResult) (bool, error) {
 	return goret, _goerr
 }
 
-// ParentUnmountMountableFinish calls the default implementations of the unmount_mountable_finish virtual method.
+// ParentUnmountMountableFinish calls the default implementations of the `GFile.unmount_mountable_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38792,7 +38792,7 @@ func (file *FileInstance) ParentUnmountMountableFinish(result AsyncResult) (bool
 	return goret, _goerr
 }
 
-// ParentUnmountMountableWithOperationFinish calls the default implementations of the unmount_mountable_with_operation_finish virtual method.
+// ParentUnmountMountableWithOperationFinish calls the default implementations of the `GFile.unmount_mountable_with_operation_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -38918,7 +38918,7 @@ type Icon interface {
 
 	// chain up virtual methods:
 
-	// ParentEqual calls the default implementations of the equal virtual method.
+	// ParentEqual calls the default implementations of the `GIcon.equal` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -38931,7 +38931,7 @@ type Icon interface {
 	//
 	// Checks if two icons are equal.
 	ParentEqual(icon2 Icon) bool
-	// ParentHash calls the default implementations of the hash virtual method.
+	// ParentHash calls the default implementations of the `GIcon.hash` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -39176,7 +39176,7 @@ func UnsafeApplyIconOverrides[Instance Icon](gclass unsafe.Pointer, overrides Ic
 	}
 }
 
-// ParentEqual calls the default implementations of the equal virtual method.
+// ParentEqual calls the default implementations of the `GIcon.equal` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -39213,7 +39213,7 @@ func (icon1 *IconInstance) ParentEqual(icon2 Icon) bool {
 	return goret
 }
 
-// ParentHash calls the default implementations of the hash virtual method.
+// ParentHash calls the default implementations of the `GIcon.hash` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -39329,7 +39329,7 @@ type Initable interface {
 
 	// chain up virtual methods:
 
-	// ParentInit calls the default implementations of the init virtual method.
+	// ParentInit calls the default implementations of the `GInitable.init` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -39591,7 +39591,7 @@ func UnsafeApplyInitableOverrides[Instance Initable](gclass unsafe.Pointer, over
 	}
 }
 
-// ParentInit calls the default implementations of the init virtual method.
+// ParentInit calls the default implementations of the `GInitable.init` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -39839,7 +39839,7 @@ type ListModel interface {
 
 	// chain up virtual methods:
 
-	// ParentGetItemType calls the default implementations of the get_item_type virtual method.
+	// ParentGetItemType calls the default implementations of the `GListModel.get_item_type` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -39855,7 +39855,7 @@ type ListModel interface {
 	// The item type of a #GListModel can not change during the life of the
 	// model.
 	ParentGetItemType() gobject.Type
-	// ParentGetNItems calls the default implementations of the get_n_items virtual method.
+	// ParentGetNItems calls the default implementations of the `GListModel.get_n_items` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -40149,7 +40149,7 @@ func UnsafeApplyListModelOverrides[Instance ListModel](gclass unsafe.Pointer, ov
 	}
 }
 
-// ParentGetItemType calls the default implementations of the get_item_type virtual method.
+// ParentGetItemType calls the default implementations of the `GListModel.get_item_type` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -40182,7 +40182,7 @@ func (list *ListModelInstance) ParentGetItemType() gobject.Type {
 	return goret
 }
 
-// ParentGetNItems calls the default implementations of the get_n_items virtual method.
+// ParentGetNItems calls the default implementations of the `GListModel.get_n_items` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -40276,7 +40276,7 @@ type LoadableIcon interface {
 
 	// chain up virtual methods:
 
-	// ParentLoad calls the default implementations of the load virtual method.
+	// ParentLoad calls the default implementations of the `GLoadableIcon.load` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -40295,7 +40295,7 @@ type LoadableIcon interface {
 	// Loads a loadable icon. For the asynchronous version of this function,
 	// see g_loadable_icon_load_async().
 	ParentLoad(cancellable context.Context, size int32) (string, InputStream, error)
-	// ParentLoadFinish calls the default implementations of the load_finish virtual method.
+	// ParentLoadFinish calls the default implementations of the `GLoadableIcon.load_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -40584,7 +40584,7 @@ func UnsafeApplyLoadableIconOverrides[Instance LoadableIcon](gclass unsafe.Point
 	}
 }
 
-// ParentLoad calls the default implementations of the load virtual method.
+// ParentLoad calls the default implementations of the `GLoadableIcon.load` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -40637,7 +40637,7 @@ func (icon *LoadableIconInstance) ParentLoad(cancellable context.Context, size i
 	return typ, goret, _goerr
 }
 
-// ParentLoadFinish calls the default implementations of the load_finish virtual method.
+// ParentLoadFinish calls the default implementations of the `GLoadableIcon.load_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -40753,7 +40753,7 @@ type MemoryMonitor interface {
 
 	// chain up virtual methods:
 
-	// ParentLowMemoryWarning calls the default implementations of the low_memory_warning virtual method.
+	// ParentLowMemoryWarning calls the default implementations of the `GMemoryMonitor.low_memory_warning` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -40874,7 +40874,7 @@ func UnsafeApplyMemoryMonitorOverrides[Instance MemoryMonitor](gclass unsafe.Poi
 	}
 }
 
-// ParentLowMemoryWarning calls the default implementations of the low_memory_warning virtual method.
+// ParentLowMemoryWarning calls the default implementations of the `GMemoryMonitor.low_memory_warning` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -41308,7 +41308,7 @@ type Mount interface {
 
 	// chain up virtual methods:
 
-	// ParentCanEject calls the default implementations of the can_eject virtual method.
+	// ParentCanEject calls the default implementations of the `GMount.can_eject` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -41317,7 +41317,7 @@ type Mount interface {
 	//
 	// Checks if @mount can be ejected.
 	ParentCanEject() bool
-	// ParentCanUnmount calls the default implementations of the can_unmount virtual method.
+	// ParentCanUnmount calls the default implementations of the `GMount.can_unmount` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -41326,12 +41326,12 @@ type Mount interface {
 	//
 	// Checks if @mount can be unmounted.
 	ParentCanUnmount() bool
-	// ParentChanged calls the default implementations of the changed virtual method.
+	// ParentChanged calls the default implementations of the `GMount.changed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Changed signal that is emitted when the mount's state has changed.
 	ParentChanged()
-	// ParentEjectFinish calls the default implementations of the eject_finish virtual method.
+	// ParentEjectFinish calls the default implementations of the `GMount.eject_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -41348,7 +41348,7 @@ type Mount interface {
 	//
 	// Deprecated: (since 2.22.0) Use g_mount_eject_with_operation_finish() instead.
 	ParentEjectFinish(result AsyncResult) (bool, error)
-	// ParentEjectWithOperationFinish calls the default implementations of the eject_with_operation_finish virtual method.
+	// ParentEjectWithOperationFinish calls the default implementations of the `GMount.eject_with_operation_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -41363,7 +41363,7 @@ type Mount interface {
 	// Finishes ejecting a mount. If any errors occurred during the operation,
 	// @error will be set to contain the errors and %FALSE will be returned.
 	ParentEjectWithOperationFinish(result AsyncResult) (bool, error)
-	// ParentGetDefaultLocation calls the default implementations of the get_default_location virtual method.
+	// ParentGetDefaultLocation calls the default implementations of the `GMount.get_default_location` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -41374,7 +41374,7 @@ type Mount interface {
 	// @mount is a path that reflects the main entry point for the user (e.g.
 	// the home directory, or the root of the volume).
 	ParentGetDefaultLocation() File
-	// ParentGetDrive calls the default implementations of the get_drive virtual method.
+	// ParentGetDrive calls the default implementations of the `GMount.get_drive` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -41386,7 +41386,7 @@ type Mount interface {
 	// This is a convenience method for getting the #GVolume and then
 	// using that object to get the #GDrive.
 	ParentGetDrive() Drive
-	// ParentGetIcon calls the default implementations of the get_icon virtual method.
+	// ParentGetIcon calls the default implementations of the `GMount.get_icon` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -41395,7 +41395,7 @@ type Mount interface {
 	//
 	// Gets the icon for @mount.
 	ParentGetIcon() Icon
-	// ParentGetName calls the default implementations of the get_name virtual method.
+	// ParentGetName calls the default implementations of the `GMount.get_name` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -41404,7 +41404,7 @@ type Mount interface {
 	//
 	// Gets the name of @mount.
 	ParentGetName() string
-	// ParentGetRoot calls the default implementations of the get_root virtual method.
+	// ParentGetRoot calls the default implementations of the `GMount.get_root` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -41413,7 +41413,7 @@ type Mount interface {
 	//
 	// Gets the root directory on @mount.
 	ParentGetRoot() File
-	// ParentGetSortKey calls the default implementations of the get_sort_key virtual method.
+	// ParentGetSortKey calls the default implementations of the `GMount.get_sort_key` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -41422,7 +41422,7 @@ type Mount interface {
 	//
 	// Gets the sort key for @mount, if any.
 	ParentGetSortKey() string
-	// ParentGetSymbolicIcon calls the default implementations of the get_symbolic_icon virtual method.
+	// ParentGetSymbolicIcon calls the default implementations of the `GMount.get_symbolic_icon` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -41431,7 +41431,7 @@ type Mount interface {
 	//
 	// Gets the symbolic icon for @mount.
 	ParentGetSymbolicIcon() Icon
-	// ParentGetUuid calls the default implementations of the get_uuid virtual method.
+	// ParentGetUuid calls the default implementations of the `GMount.get_uuid` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -41443,7 +41443,7 @@ type Mount interface {
 	// considered an opaque string. Returns %NULL if there is no UUID
 	// available.
 	ParentGetUuid() string
-	// ParentGetVolume calls the default implementations of the get_volume virtual method.
+	// ParentGetVolume calls the default implementations of the `GMount.get_volume` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -41452,7 +41452,7 @@ type Mount interface {
 	//
 	// Gets the volume for the @mount.
 	ParentGetVolume() Volume
-	// ParentGuessContentTypeFinish calls the default implementations of the guess_content_type_finish virtual method.
+	// ParentGuessContentTypeFinish calls the default implementations of the `GMount.guess_content_type_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -41470,7 +41470,7 @@ type Mount interface {
 	// %G_IO_ERROR_NOT_SUPPORTED if the mount does not support content
 	// guessing.
 	ParentGuessContentTypeFinish(result AsyncResult) ([]string, error)
-	// ParentGuessContentTypeSync calls the default implementations of the guess_content_type_sync virtual method.
+	// ParentGuessContentTypeSync calls the default implementations of the `GMount.guess_content_type_sync` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -41494,12 +41494,12 @@ type Mount interface {
 	// This is a synchronous operation and as such may block doing IO;
 	// see g_mount_guess_content_type() for the asynchronous version.
 	ParentGuessContentTypeSync(cancellable context.Context, forceRescan bool) ([]string, error)
-	// ParentPreUnmount calls the default implementations of the pre_unmount virtual method.
+	// ParentPreUnmount calls the default implementations of the `GMount.pre_unmount` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// The ::pre-unmount signal that is emitted when the #GMount will soon be emitted. If the recipient is somehow holding the mount open by keeping an open file on it it should close the file.
 	ParentPreUnmount()
-	// ParentRemountFinish calls the default implementations of the remount_finish virtual method.
+	// ParentRemountFinish calls the default implementations of the `GMount.remount_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -41514,7 +41514,7 @@ type Mount interface {
 	// Finishes remounting a mount. If any errors occurred during the operation,
 	// @error will be set to contain the errors and %FALSE will be returned.
 	ParentRemountFinish(result AsyncResult) (bool, error)
-	// ParentUnmountFinish calls the default implementations of the unmount_finish virtual method.
+	// ParentUnmountFinish calls the default implementations of the `GMount.unmount_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -41531,7 +41531,7 @@ type Mount interface {
 	//
 	// Deprecated: (since 2.22.0) Use g_mount_unmount_with_operation_finish() instead.
 	ParentUnmountFinish(result AsyncResult) (bool, error)
-	// ParentUnmountWithOperationFinish calls the default implementations of the unmount_with_operation_finish virtual method.
+	// ParentUnmountWithOperationFinish calls the default implementations of the `GMount.unmount_with_operation_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -41546,7 +41546,7 @@ type Mount interface {
 	// Finishes unmounting a mount. If any errors occurred during the operation,
 	// @error will be set to contain the errors and %FALSE will be returned.
 	ParentUnmountWithOperationFinish(result AsyncResult) (bool, error)
-	// ParentUnmounted calls the default implementations of the unmounted virtual method.
+	// ParentUnmounted calls the default implementations of the `GMount.unmounted` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// The unmounted signal that is emitted when the #GMount have been unmounted. If the recipient is holding references to the object they should release them so the object can be finalized.
@@ -43223,7 +43223,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 	}
 }
 
-// ParentCanEject calls the default implementations of the can_eject virtual method.
+// ParentCanEject calls the default implementations of the `GMount.can_eject` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -43251,7 +43251,7 @@ func (mount *MountInstance) ParentCanEject() bool {
 	return goret
 }
 
-// ParentCanUnmount calls the default implementations of the can_unmount virtual method.
+// ParentCanUnmount calls the default implementations of the `GMount.can_unmount` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -43279,7 +43279,7 @@ func (mount *MountInstance) ParentCanUnmount() bool {
 	return goret
 }
 
-// ParentChanged calls the default implementations of the changed virtual method.
+// ParentChanged calls the default implementations of the `GMount.changed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Changed signal that is emitted when the mount's state has changed.
@@ -43294,7 +43294,7 @@ func (mount *MountInstance) ParentChanged() {
 	runtime.KeepAlive(mount)
 }
 
-// ParentEjectFinish calls the default implementations of the eject_finish virtual method.
+// ParentEjectFinish calls the default implementations of the `GMount.eject_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -43338,7 +43338,7 @@ func (mount *MountInstance) ParentEjectFinish(result AsyncResult) (bool, error) 
 	return goret, _goerr
 }
 
-// ParentEjectWithOperationFinish calls the default implementations of the eject_with_operation_finish virtual method.
+// ParentEjectWithOperationFinish calls the default implementations of the `GMount.eject_with_operation_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -43380,7 +43380,7 @@ func (mount *MountInstance) ParentEjectWithOperationFinish(result AsyncResult) (
 	return goret, _goerr
 }
 
-// ParentGetDefaultLocation calls the default implementations of the get_default_location virtual method.
+// ParentGetDefaultLocation calls the default implementations of the `GMount.get_default_location` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -43408,7 +43408,7 @@ func (mount *MountInstance) ParentGetDefaultLocation() File {
 	return goret
 }
 
-// ParentGetDrive calls the default implementations of the get_drive virtual method.
+// ParentGetDrive calls the default implementations of the `GMount.get_drive` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -43439,7 +43439,7 @@ func (mount *MountInstance) ParentGetDrive() Drive {
 	return goret
 }
 
-// ParentGetIcon calls the default implementations of the get_icon virtual method.
+// ParentGetIcon calls the default implementations of the `GMount.get_icon` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -43465,7 +43465,7 @@ func (mount *MountInstance) ParentGetIcon() Icon {
 	return goret
 }
 
-// ParentGetName calls the default implementations of the get_name virtual method.
+// ParentGetName calls the default implementations of the `GMount.get_name` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -43492,7 +43492,7 @@ func (mount *MountInstance) ParentGetName() string {
 	return goret
 }
 
-// ParentGetRoot calls the default implementations of the get_root virtual method.
+// ParentGetRoot calls the default implementations of the `GMount.get_root` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -43518,7 +43518,7 @@ func (mount *MountInstance) ParentGetRoot() File {
 	return goret
 }
 
-// ParentGetSortKey calls the default implementations of the get_sort_key virtual method.
+// ParentGetSortKey calls the default implementations of the `GMount.get_sort_key` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -43546,7 +43546,7 @@ func (mount *MountInstance) ParentGetSortKey() string {
 	return goret
 }
 
-// ParentGetSymbolicIcon calls the default implementations of the get_symbolic_icon virtual method.
+// ParentGetSymbolicIcon calls the default implementations of the `GMount.get_symbolic_icon` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -43572,7 +43572,7 @@ func (mount *MountInstance) ParentGetSymbolicIcon() Icon {
 	return goret
 }
 
-// ParentGetUuid calls the default implementations of the get_uuid virtual method.
+// ParentGetUuid calls the default implementations of the `GMount.get_uuid` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -43604,7 +43604,7 @@ func (mount *MountInstance) ParentGetUuid() string {
 	return goret
 }
 
-// ParentGetVolume calls the default implementations of the get_volume virtual method.
+// ParentGetVolume calls the default implementations of the `GMount.get_volume` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -43632,7 +43632,7 @@ func (mount *MountInstance) ParentGetVolume() Volume {
 	return goret
 }
 
-// ParentGuessContentTypeFinish calls the default implementations of the guess_content_type_finish virtual method.
+// ParentGuessContentTypeFinish calls the default implementations of the `GMount.guess_content_type_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -43677,7 +43677,7 @@ func (mount *MountInstance) ParentGuessContentTypeFinish(result AsyncResult) ([]
 	return goret, _goerr
 }
 
-// ParentGuessContentTypeSync calls the default implementations of the guess_content_type_sync virtual method.
+// ParentGuessContentTypeSync calls the default implementations of the `GMount.guess_content_type_sync` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -43735,7 +43735,7 @@ func (mount *MountInstance) ParentGuessContentTypeSync(cancellable context.Conte
 	return goret, _goerr
 }
 
-// ParentPreUnmount calls the default implementations of the pre_unmount virtual method.
+// ParentPreUnmount calls the default implementations of the `GMount.pre_unmount` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // The ::pre-unmount signal that is emitted when the #GMount will soon be emitted. If the recipient is somehow holding the mount open by keeping an open file on it it should close the file.
@@ -43750,7 +43750,7 @@ func (mount *MountInstance) ParentPreUnmount() {
 	runtime.KeepAlive(mount)
 }
 
-// ParentRemountFinish calls the default implementations of the remount_finish virtual method.
+// ParentRemountFinish calls the default implementations of the `GMount.remount_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -43792,7 +43792,7 @@ func (mount *MountInstance) ParentRemountFinish(result AsyncResult) (bool, error
 	return goret, _goerr
 }
 
-// ParentUnmountFinish calls the default implementations of the unmount_finish virtual method.
+// ParentUnmountFinish calls the default implementations of the `GMount.unmount_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -43836,7 +43836,7 @@ func (mount *MountInstance) ParentUnmountFinish(result AsyncResult) (bool, error
 	return goret, _goerr
 }
 
-// ParentUnmountWithOperationFinish calls the default implementations of the unmount_with_operation_finish virtual method.
+// ParentUnmountWithOperationFinish calls the default implementations of the `GMount.unmount_with_operation_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -43878,7 +43878,7 @@ func (mount *MountInstance) ParentUnmountWithOperationFinish(result AsyncResult)
 	return goret, _goerr
 }
 
-// ParentUnmounted calls the default implementations of the unmounted virtual method.
+// ParentUnmounted calls the default implementations of the `GMount.unmounted` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // The unmounted signal that is emitted when the #GMount have been unmounted. If the recipient is holding references to the object they should release them so the object can be finalized.
@@ -44028,7 +44028,7 @@ type NetworkMonitor interface {
 
 	// chain up virtual methods:
 
-	// ParentCanReach calls the default implementations of the can_reach virtual method.
+	// ParentCanReach calls the default implementations of the `GNetworkMonitor.can_reach` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -44059,7 +44059,7 @@ type NetworkMonitor interface {
 	// trying to do multicast DNS on the local network), so if you do not
 	// want to block, you should use g_network_monitor_can_reach_async().
 	ParentCanReach(cancellable context.Context, connectable SocketConnectable) (bool, error)
-	// ParentCanReachFinish calls the default implementations of the can_reach_finish virtual method.
+	// ParentCanReachFinish calls the default implementations of the `GNetworkMonitor.can_reach_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -44074,7 +44074,7 @@ type NetworkMonitor interface {
 	// Finishes an async network connectivity test.
 	// See g_network_monitor_can_reach_async().
 	ParentCanReachFinish(result AsyncResult) (bool, error)
-	// ParentNetworkChanged calls the default implementations of the network_changed virtual method.
+	// ParentNetworkChanged calls the default implementations of the `GNetworkMonitor.network_changed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -44530,7 +44530,7 @@ func UnsafeApplyNetworkMonitorOverrides[Instance NetworkMonitor](gclass unsafe.P
 	}
 }
 
-// ParentCanReach calls the default implementations of the can_reach virtual method.
+// ParentCanReach calls the default implementations of the `GNetworkMonitor.can_reach` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -44593,7 +44593,7 @@ func (monitor *NetworkMonitorInstance) ParentCanReach(cancellable context.Contex
 	return goret, _goerr
 }
 
-// ParentCanReachFinish calls the default implementations of the can_reach_finish virtual method.
+// ParentCanReachFinish calls the default implementations of the `GNetworkMonitor.can_reach_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -44635,7 +44635,7 @@ func (monitor *NetworkMonitorInstance) ParentCanReachFinish(result AsyncResult) 
 	return goret, _goerr
 }
 
-// ParentNetworkChanged calls the default implementations of the network_changed virtual method.
+// ParentNetworkChanged calls the default implementations of the `GNetworkMonitor.network_changed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -44717,7 +44717,7 @@ type PollableInputStream interface {
 
 	// chain up virtual methods:
 
-	// ParentCanPoll calls the default implementations of the can_poll virtual method.
+	// ParentCanPoll calls the default implementations of the `GPollableInputStream.can_poll` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -44732,7 +44732,7 @@ type PollableInputStream interface {
 	// For any given stream, the value returned by this method is constant;
 	// a stream cannot switch from pollable to non-pollable or vice versa.
 	ParentCanPoll() bool
-	// ParentIsReadable calls the default implementations of the is_readable virtual method.
+	// ParentIsReadable calls the default implementations of the `GPollableInputStream.is_readable` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -44949,7 +44949,7 @@ func UnsafeApplyPollableInputStreamOverrides[Instance PollableInputStream](gclas
 	}
 }
 
-// ParentCanPoll calls the default implementations of the can_poll virtual method.
+// ParentCanPoll calls the default implementations of the `GPollableInputStream.can_poll` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -44983,7 +44983,7 @@ func (stream *PollableInputStreamInstance) ParentCanPoll() bool {
 	return goret
 }
 
-// ParentIsReadable calls the default implementations of the is_readable virtual method.
+// ParentIsReadable calls the default implementations of the `GPollableInputStream.is_readable` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -45144,7 +45144,7 @@ type PollableOutputStream interface {
 
 	// chain up virtual methods:
 
-	// ParentCanPoll calls the default implementations of the can_poll virtual method.
+	// ParentCanPoll calls the default implementations of the `GPollableOutputStream.can_poll` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -45159,7 +45159,7 @@ type PollableOutputStream interface {
 	// For any given stream, the value returned by this method is constant;
 	// a stream cannot switch from pollable to non-pollable or vice versa.
 	ParentCanPoll() bool
-	// ParentIsWritable calls the default implementations of the is_writable virtual method.
+	// ParentIsWritable calls the default implementations of the `GPollableOutputStream.is_writable` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -45178,7 +45178,7 @@ type PollableOutputStream interface {
 	// The behaviour of this method is undefined if
 	// g_pollable_output_stream_can_poll() returns %FALSE for @stream.
 	ParentIsWritable() bool
-	// ParentWriteNonblocking calls the default implementations of the write_nonblocking virtual method.
+	// ParentWriteNonblocking calls the default implementations of the `GPollableOutputStream.write_nonblocking` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -45210,7 +45210,7 @@ type PollableOutputStream interface {
 	// The behaviour of this method is undefined if
 	// g_pollable_output_stream_can_poll() returns %FALSE for @stream.
 	ParentWriteNonblocking(buffer []byte) (int, error)
-	// ParentWritevNonblocking calls the default implementations of the writev_nonblocking virtual method.
+	// ParentWritevNonblocking calls the default implementations of the `GPollableOutputStream.writev_nonblocking` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -45695,7 +45695,7 @@ func UnsafeApplyPollableOutputStreamOverrides[Instance PollableOutputStream](gcl
 	}
 }
 
-// ParentCanPoll calls the default implementations of the can_poll virtual method.
+// ParentCanPoll calls the default implementations of the `GPollableOutputStream.can_poll` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -45729,7 +45729,7 @@ func (stream *PollableOutputStreamInstance) ParentCanPoll() bool {
 	return goret
 }
 
-// ParentIsWritable calls the default implementations of the is_writable virtual method.
+// ParentIsWritable calls the default implementations of the `GPollableOutputStream.is_writable` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -45767,7 +45767,7 @@ func (stream *PollableOutputStreamInstance) ParentIsWritable() bool {
 	return goret
 }
 
-// ParentWriteNonblocking calls the default implementations of the write_nonblocking virtual method.
+// ParentWriteNonblocking calls the default implementations of the `GPollableOutputStream.write_nonblocking` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -45828,7 +45828,7 @@ func (stream *PollableOutputStreamInstance) ParentWriteNonblocking(buffer []byte
 	return goret, _goerr
 }
 
-// ParentWritevNonblocking calls the default implementations of the writev_nonblocking virtual method.
+// ParentWritevNonblocking calls the default implementations of the `GPollableOutputStream.writev_nonblocking` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -46126,7 +46126,7 @@ type Proxy interface {
 
 	// chain up virtual methods:
 
-	// ParentConnect calls the default implementations of the connect virtual method.
+	// ParentConnect calls the default implementations of the `GProxy.connect` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -46145,7 +46145,7 @@ type Proxy interface {
 	// does the necessary handshake to connect to @proxy_address, and if
 	// required, wraps the #GIOStream to handle proxy payload.
 	ParentConnect(cancellable context.Context, connection IOStream, proxyAddress ProxyAddress) (IOStream, error)
-	// ParentConnectFinish calls the default implementations of the connect_finish virtual method.
+	// ParentConnectFinish calls the default implementations of the `GProxy.connect_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -46159,7 +46159,7 @@ type Proxy interface {
 	//
 	// See g_proxy_connect().
 	ParentConnectFinish(result AsyncResult) (IOStream, error)
-	// ParentSupportsHostname calls the default implementations of the supports_hostname virtual method.
+	// ParentSupportsHostname calls the default implementations of the `GProxy.supports_hostname` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -46535,7 +46535,7 @@ func UnsafeApplyProxyOverrides[Instance Proxy](gclass unsafe.Pointer, overrides 
 	}
 }
 
-// ParentConnect calls the default implementations of the connect virtual method.
+// ParentConnect calls the default implementations of the `GProxy.connect` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -46587,7 +46587,7 @@ func (proxy *ProxyInstance) ParentConnect(cancellable context.Context, connectio
 	return goret, _goerr
 }
 
-// ParentConnectFinish calls the default implementations of the connect_finish virtual method.
+// ParentConnectFinish calls the default implementations of the `GProxy.connect_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -46626,7 +46626,7 @@ func (proxy *ProxyInstance) ParentConnectFinish(result AsyncResult) (IOStream, e
 	return goret, _goerr
 }
 
-// ParentSupportsHostname calls the default implementations of the supports_hostname virtual method.
+// ParentSupportsHostname calls the default implementations of the `GProxy.supports_hostname` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -46748,7 +46748,7 @@ type ProxyResolver interface {
 
 	// chain up virtual methods:
 
-	// ParentIsSupported calls the default implementations of the is_supported virtual method.
+	// ParentIsSupported calls the default implementations of the `GProxyResolver.is_supported` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -46759,7 +46759,7 @@ type ProxyResolver interface {
 	// internally; g_proxy_resolver_get_default() will only return a proxy
 	// resolver that returns %TRUE for this method.)
 	ParentIsSupported() bool
-	// ParentLookup calls the default implementations of the lookup virtual method.
+	// ParentLookup calls the default implementations of the `GProxyResolver.lookup` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -46788,7 +46788,7 @@ type ProxyResolver interface {
 	// Direct connection should not be attempted unless it is part of the
 	// returned array of proxies.
 	ParentLookup(cancellable context.Context, uri string) ([]string, error)
-	// ParentLookupFinish calls the default implementations of the lookup_finish virtual method.
+	// ParentLookupFinish calls the default implementations of the `GProxyResolver.lookup_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -47171,7 +47171,7 @@ func UnsafeApplyProxyResolverOverrides[Instance ProxyResolver](gclass unsafe.Poi
 	}
 }
 
-// ParentIsSupported calls the default implementations of the is_supported virtual method.
+// ParentIsSupported calls the default implementations of the `GProxyResolver.is_supported` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -47201,7 +47201,7 @@ func (resolver *ProxyResolverInstance) ParentIsSupported() bool {
 	return goret
 }
 
-// ParentLookup calls the default implementations of the lookup virtual method.
+// ParentLookup calls the default implementations of the `GProxyResolver.lookup` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -47263,7 +47263,7 @@ func (resolver *ProxyResolverInstance) ParentLookup(cancellable context.Context,
 	return goret, _goerr
 }
 
-// ParentLookupFinish calls the default implementations of the lookup_finish virtual method.
+// ParentLookupFinish calls the default implementations of the `GProxyResolver.lookup_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -47501,7 +47501,7 @@ type Seekable interface {
 
 	// chain up virtual methods:
 
-	// ParentCanSeek calls the default implementations of the can_seek virtual method.
+	// ParentCanSeek calls the default implementations of the `GSeekable.can_seek` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -47510,7 +47510,7 @@ type Seekable interface {
 	//
 	// Tests if the stream supports the #GSeekableIface.
 	ParentCanSeek() bool
-	// ParentCanTruncate calls the default implementations of the can_truncate virtual method.
+	// ParentCanTruncate calls the default implementations of the `GSeekable.can_truncate` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -47520,7 +47520,7 @@ type Seekable interface {
 	// Tests if the length of the stream can be adjusted with
 	// g_seekable_truncate().
 	ParentCanTruncate() bool
-	// ParentSeek calls the default implementations of the seek virtual method.
+	// ParentSeek calls the default implementations of the `GSeekable.seek` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -47549,7 +47549,7 @@ type Seekable interface {
 	// triggering the cancellable object from another thread. If the operation
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 	ParentSeek(cancellable context.Context, offset int64, typ glib.SeekType) (bool, error)
-	// ParentTell calls the default implementations of the tell virtual method.
+	// ParentTell calls the default implementations of the `GSeekable.tell` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -47558,7 +47558,7 @@ type Seekable interface {
 	//
 	// Tells the current position within the stream.
 	ParentTell() int64
-	// ParentTruncateFn calls the default implementations of the truncate_fn virtual method.
+	// ParentTruncateFn calls the default implementations of the `GSeekable.truncate_fn` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -48025,7 +48025,7 @@ func UnsafeApplySeekableOverrides[Instance Seekable](gclass unsafe.Pointer, over
 	}
 }
 
-// ParentCanSeek calls the default implementations of the can_seek virtual method.
+// ParentCanSeek calls the default implementations of the `GSeekable.can_seek` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -48053,7 +48053,7 @@ func (seekable *SeekableInstance) ParentCanSeek() bool {
 	return goret
 }
 
-// ParentCanTruncate calls the default implementations of the can_truncate virtual method.
+// ParentCanTruncate calls the default implementations of the `GSeekable.can_truncate` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -48082,7 +48082,7 @@ func (seekable *SeekableInstance) ParentCanTruncate() bool {
 	return goret
 }
 
-// ParentSeek calls the default implementations of the seek virtual method.
+// ParentSeek calls the default implementations of the `GSeekable.seek` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -48146,7 +48146,7 @@ func (seekable *SeekableInstance) ParentSeek(cancellable context.Context, offset
 	return goret, _goerr
 }
 
-// ParentTell calls the default implementations of the tell virtual method.
+// ParentTell calls the default implementations of the `GSeekable.tell` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -48172,7 +48172,7 @@ func (seekable *SeekableInstance) ParentTell() int64 {
 	return goret
 }
 
-// ParentTruncateFn calls the default implementations of the truncate_fn virtual method.
+// ParentTruncateFn calls the default implementations of the `GSeekable.truncate_fn` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -48336,7 +48336,7 @@ type SocketConnectable interface {
 
 	// chain up virtual methods:
 
-	// ParentEnumerate calls the default implementations of the enumerate virtual method.
+	// ParentEnumerate calls the default implementations of the `GSocketConnectable.enumerate` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -48345,7 +48345,7 @@ type SocketConnectable interface {
 	//
 	// Creates a #GSocketAddressEnumerator for @connectable.
 	ParentEnumerate() SocketAddressEnumerator
-	// ParentProxyEnumerate calls the default implementations of the proxy_enumerate virtual method.
+	// ParentProxyEnumerate calls the default implementations of the `GSocketConnectable.proxy_enumerate` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -48360,7 +48360,7 @@ type SocketConnectable interface {
 	// g_socket_connectable_proxy_enumerate(), this will fall back to
 	// calling g_socket_connectable_enumerate().
 	ParentProxyEnumerate() SocketAddressEnumerator
-	// ParentToString calls the default implementations of the to_string virtual method.
+	// ParentToString calls the default implementations of the `GSocketConnectable.to_string` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -48609,7 +48609,7 @@ func UnsafeApplySocketConnectableOverrides[Instance SocketConnectable](gclass un
 	}
 }
 
-// ParentEnumerate calls the default implementations of the enumerate virtual method.
+// ParentEnumerate calls the default implementations of the `GSocketConnectable.enumerate` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -48635,7 +48635,7 @@ func (connectable *SocketConnectableInstance) ParentEnumerate() SocketAddressEnu
 	return goret
 }
 
-// ParentProxyEnumerate calls the default implementations of the proxy_enumerate virtual method.
+// ParentProxyEnumerate calls the default implementations of the `GSocketConnectable.proxy_enumerate` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -48667,7 +48667,7 @@ func (connectable *SocketConnectableInstance) ParentProxyEnumerate() SocketAddre
 	return goret
 }
 
-// ParentToString calls the default implementations of the to_string virtual method.
+// ParentToString calls the default implementations of the `GSocketConnectable.to_string` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -48808,7 +48808,7 @@ type TlsBackend interface {
 
 	// chain up virtual methods:
 
-	// ParentGetDefaultDatabase calls the default implementations of the get_default_database virtual method.
+	// ParentGetDefaultDatabase calls the default implementations of the `GTlsBackend.get_default_database` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -48817,7 +48817,7 @@ type TlsBackend interface {
 	//
 	// Gets the default #GTlsDatabase used to verify TLS connections.
 	ParentGetDefaultDatabase() TlsDatabase
-	// ParentSupportsDtls calls the default implementations of the supports_dtls virtual method.
+	// ParentSupportsDtls calls the default implementations of the `GTlsBackend.supports_dtls` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -48827,7 +48827,7 @@ type TlsBackend interface {
 	// Checks if DTLS is supported. DTLS support may not be available even if TLS
 	// support is available, and vice-versa.
 	ParentSupportsDtls() bool
-	// ParentSupportsTls calls the default implementations of the supports_tls virtual method.
+	// ParentSupportsTls calls the default implementations of the `GTlsBackend.supports_tls` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -49243,7 +49243,7 @@ func UnsafeApplyTlsBackendOverrides[Instance TlsBackend](gclass unsafe.Pointer, 
 	}
 }
 
-// ParentGetDefaultDatabase calls the default implementations of the get_default_database virtual method.
+// ParentGetDefaultDatabase calls the default implementations of the `GTlsBackend.get_default_database` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -49269,7 +49269,7 @@ func (backend *TlsBackendInstance) ParentGetDefaultDatabase() TlsDatabase {
 	return goret
 }
 
-// ParentSupportsDtls calls the default implementations of the supports_dtls virtual method.
+// ParentSupportsDtls calls the default implementations of the `GTlsBackend.supports_dtls` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -49298,7 +49298,7 @@ func (backend *TlsBackendInstance) ParentSupportsDtls() bool {
 	return goret
 }
 
-// ParentSupportsTls calls the default implementations of the supports_tls virtual method.
+// ParentSupportsTls calls the default implementations of the `GTlsBackend.supports_tls` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -49459,7 +49459,7 @@ type TlsClientConnection interface {
 
 	// chain up virtual methods:
 
-	// ParentCopySessionState calls the default implementations of the copy_session_state virtual method.
+	// ParentCopySessionState calls the default implementations of the `GTlsClientConnection.copy_session_state` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -49857,7 +49857,7 @@ func UnsafeApplyTlsClientConnectionOverrides[Instance TlsClientConnection](gclas
 	}
 }
 
-// ParentCopySessionState calls the default implementations of the copy_session_state virtual method.
+// ParentCopySessionState calls the default implementations of the `GTlsClientConnection.copy_session_state` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -50432,7 +50432,7 @@ type Volume interface {
 
 	// chain up virtual methods:
 
-	// ParentCanEject calls the default implementations of the can_eject virtual method.
+	// ParentCanEject calls the default implementations of the `GVolume.can_eject` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -50441,7 +50441,7 @@ type Volume interface {
 	//
 	// Checks if a volume can be ejected.
 	ParentCanEject() bool
-	// ParentCanMount calls the default implementations of the can_mount virtual method.
+	// ParentCanMount calls the default implementations of the `GVolume.can_mount` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -50450,12 +50450,12 @@ type Volume interface {
 	//
 	// Checks if a volume can be mounted.
 	ParentCanMount() bool
-	// ParentChanged calls the default implementations of the changed virtual method.
+	// ParentChanged calls the default implementations of the `GVolume.changed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Changed signal that is emitted when the volume's state has changed.
 	ParentChanged()
-	// ParentEjectFinish calls the default implementations of the eject_finish virtual method.
+	// ParentEjectFinish calls the default implementations of the `GVolume.eject_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -50472,7 +50472,7 @@ type Volume interface {
 	//
 	// Deprecated: (since 2.22.0) Use g_volume_eject_with_operation_finish() instead.
 	ParentEjectFinish(result AsyncResult) (bool, error)
-	// ParentEjectWithOperationFinish calls the default implementations of the eject_with_operation_finish virtual method.
+	// ParentEjectWithOperationFinish calls the default implementations of the `GVolume.eject_with_operation_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -50487,7 +50487,7 @@ type Volume interface {
 	// Finishes ejecting a volume. If any errors occurred during the operation,
 	// @error will be set to contain the errors and %FALSE will be returned.
 	ParentEjectWithOperationFinish(result AsyncResult) (bool, error)
-	// ParentEnumerateIdentifiers calls the default implementations of the enumerate_identifiers virtual method.
+	// ParentEnumerateIdentifiers calls the default implementations of the `GVolume.enumerate_identifiers` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -50497,7 +50497,7 @@ type Volume interface {
 	// Gets the kinds of [identifiers](#volume-identifiers) that @volume has.
 	// Use g_volume_get_identifier() to obtain the identifiers themselves.
 	ParentEnumerateIdentifiers() []string
-	// ParentGetActivationRoot calls the default implementations of the get_activation_root virtual method.
+	// ParentGetActivationRoot calls the default implementations of the `GVolume.get_activation_root` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -50531,7 +50531,7 @@ type Volume interface {
 	// implementations to find the underlying mount to shadow, see
 	// g_mount_is_shadowed() for more details.
 	ParentGetActivationRoot() File
-	// ParentGetDrive calls the default implementations of the get_drive virtual method.
+	// ParentGetDrive calls the default implementations of the `GVolume.get_drive` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -50540,7 +50540,7 @@ type Volume interface {
 	//
 	// Gets the drive for the @volume.
 	ParentGetDrive() Drive
-	// ParentGetIcon calls the default implementations of the get_icon virtual method.
+	// ParentGetIcon calls the default implementations of the `GVolume.get_icon` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -50549,7 +50549,7 @@ type Volume interface {
 	//
 	// Gets the icon for @volume.
 	ParentGetIcon() Icon
-	// ParentGetIdentifier calls the default implementations of the get_identifier virtual method.
+	// ParentGetIdentifier calls the default implementations of the `GVolume.get_identifier` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -50564,7 +50564,7 @@ type Volume interface {
 	// See the [introduction](#volume-identifiers) for more
 	// information about volume identifiers.
 	ParentGetIdentifier(kind string) string
-	// ParentGetMount calls the default implementations of the get_mount virtual method.
+	// ParentGetMount calls the default implementations of the `GVolume.get_mount` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -50573,7 +50573,7 @@ type Volume interface {
 	//
 	// Gets the mount for the @volume.
 	ParentGetMount() Mount
-	// ParentGetName calls the default implementations of the get_name virtual method.
+	// ParentGetName calls the default implementations of the `GVolume.get_name` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -50582,7 +50582,7 @@ type Volume interface {
 	//
 	// Gets the name of @volume.
 	ParentGetName() string
-	// ParentGetSortKey calls the default implementations of the get_sort_key virtual method.
+	// ParentGetSortKey calls the default implementations of the `GVolume.get_sort_key` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -50591,7 +50591,7 @@ type Volume interface {
 	//
 	// Gets the sort key for @volume, if any.
 	ParentGetSortKey() string
-	// ParentGetSymbolicIcon calls the default implementations of the get_symbolic_icon virtual method.
+	// ParentGetSymbolicIcon calls the default implementations of the `GVolume.get_symbolic_icon` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -50600,7 +50600,7 @@ type Volume interface {
 	//
 	// Gets the symbolic icon for @volume.
 	ParentGetSymbolicIcon() Icon
-	// ParentGetUuid calls the default implementations of the get_uuid virtual method.
+	// ParentGetUuid calls the default implementations of the `GVolume.get_uuid` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -50612,7 +50612,7 @@ type Volume interface {
 	// considered an opaque string. Returns %NULL if there is no UUID
 	// available.
 	ParentGetUuid() string
-	// ParentMountFinish calls the default implementations of the mount_finish virtual method.
+	// ParentMountFinish calls the default implementations of the `GVolume.mount_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -50632,12 +50632,12 @@ type Volume interface {
 	// function; there's no need to listen for the 'mount-added' signal on
 	// #GVolumeMonitor.
 	ParentMountFinish(result AsyncResult) (bool, error)
-	// ParentRemoved calls the default implementations of the removed virtual method.
+	// ParentRemoved calls the default implementations of the `GVolume.removed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// The removed signal that is emitted when the #GVolume have been removed. If the recipient is holding references to the object they should release them so the object can be finalized.
 	ParentRemoved()
-	// ParentShouldAutomount calls the default implementations of the should_automount virtual method.
+	// ParentShouldAutomount calls the default implementations of the `GVolume.should_automount` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -51910,7 +51910,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 	}
 }
 
-// ParentCanEject calls the default implementations of the can_eject virtual method.
+// ParentCanEject calls the default implementations of the `GVolume.can_eject` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -51938,7 +51938,7 @@ func (volume *VolumeInstance) ParentCanEject() bool {
 	return goret
 }
 
-// ParentCanMount calls the default implementations of the can_mount virtual method.
+// ParentCanMount calls the default implementations of the `GVolume.can_mount` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -51966,7 +51966,7 @@ func (volume *VolumeInstance) ParentCanMount() bool {
 	return goret
 }
 
-// ParentChanged calls the default implementations of the changed virtual method.
+// ParentChanged calls the default implementations of the `GVolume.changed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Changed signal that is emitted when the volume's state has changed.
@@ -51981,7 +51981,7 @@ func (volume *VolumeInstance) ParentChanged() {
 	runtime.KeepAlive(volume)
 }
 
-// ParentEjectFinish calls the default implementations of the eject_finish virtual method.
+// ParentEjectFinish calls the default implementations of the `GVolume.eject_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -52025,7 +52025,7 @@ func (volume *VolumeInstance) ParentEjectFinish(result AsyncResult) (bool, error
 	return goret, _goerr
 }
 
-// ParentEjectWithOperationFinish calls the default implementations of the eject_with_operation_finish virtual method.
+// ParentEjectWithOperationFinish calls the default implementations of the `GVolume.eject_with_operation_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -52067,7 +52067,7 @@ func (volume *VolumeInstance) ParentEjectWithOperationFinish(result AsyncResult)
 	return goret, _goerr
 }
 
-// ParentEnumerateIdentifiers calls the default implementations of the enumerate_identifiers virtual method.
+// ParentEnumerateIdentifiers calls the default implementations of the `GVolume.enumerate_identifiers` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -52096,7 +52096,7 @@ func (volume *VolumeInstance) ParentEnumerateIdentifiers() []string {
 	return goret
 }
 
-// ParentGetActivationRoot calls the default implementations of the get_activation_root virtual method.
+// ParentGetActivationRoot calls the default implementations of the `GVolume.get_activation_root` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -52149,7 +52149,7 @@ func (volume *VolumeInstance) ParentGetActivationRoot() File {
 	return goret
 }
 
-// ParentGetDrive calls the default implementations of the get_drive virtual method.
+// ParentGetDrive calls the default implementations of the `GVolume.get_drive` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -52177,7 +52177,7 @@ func (volume *VolumeInstance) ParentGetDrive() Drive {
 	return goret
 }
 
-// ParentGetIcon calls the default implementations of the get_icon virtual method.
+// ParentGetIcon calls the default implementations of the `GVolume.get_icon` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -52203,7 +52203,7 @@ func (volume *VolumeInstance) ParentGetIcon() Icon {
 	return goret
 }
 
-// ParentGetIdentifier calls the default implementations of the get_identifier virtual method.
+// ParentGetIdentifier calls the default implementations of the `GVolume.get_identifier` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -52242,7 +52242,7 @@ func (volume *VolumeInstance) ParentGetIdentifier(kind string) string {
 	return goret
 }
 
-// ParentGetMount calls the default implementations of the get_mount virtual method.
+// ParentGetMount calls the default implementations of the `GVolume.get_mount` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -52270,7 +52270,7 @@ func (volume *VolumeInstance) ParentGetMount() Mount {
 	return goret
 }
 
-// ParentGetName calls the default implementations of the get_name virtual method.
+// ParentGetName calls the default implementations of the `GVolume.get_name` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -52297,7 +52297,7 @@ func (volume *VolumeInstance) ParentGetName() string {
 	return goret
 }
 
-// ParentGetSortKey calls the default implementations of the get_sort_key virtual method.
+// ParentGetSortKey calls the default implementations of the `GVolume.get_sort_key` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -52325,7 +52325,7 @@ func (volume *VolumeInstance) ParentGetSortKey() string {
 	return goret
 }
 
-// ParentGetSymbolicIcon calls the default implementations of the get_symbolic_icon virtual method.
+// ParentGetSymbolicIcon calls the default implementations of the `GVolume.get_symbolic_icon` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -52351,7 +52351,7 @@ func (volume *VolumeInstance) ParentGetSymbolicIcon() Icon {
 	return goret
 }
 
-// ParentGetUuid calls the default implementations of the get_uuid virtual method.
+// ParentGetUuid calls the default implementations of the `GVolume.get_uuid` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -52383,7 +52383,7 @@ func (volume *VolumeInstance) ParentGetUuid() string {
 	return goret
 }
 
-// ParentMountFinish calls the default implementations of the mount_finish virtual method.
+// ParentMountFinish calls the default implementations of the `GVolume.mount_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -52430,7 +52430,7 @@ func (volume *VolumeInstance) ParentMountFinish(result AsyncResult) (bool, error
 	return goret, _goerr
 }
 
-// ParentRemoved calls the default implementations of the removed virtual method.
+// ParentRemoved calls the default implementations of the `GVolume.removed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // The removed signal that is emitted when the #GVolume have been removed. If the recipient is holding references to the object they should release them so the object can be finalized.
@@ -52445,7 +52445,7 @@ func (volume *VolumeInstance) ParentRemoved() {
 	runtime.KeepAlive(volume)
 }
 
-// ParentShouldAutomount calls the default implementations of the should_automount virtual method.
+// ParentShouldAutomount calls the default implementations of the `GVolume.should_automount` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -53101,7 +53101,7 @@ type AppLaunchContext interface {
 
 	// chain up virtual methods:
 
-	// ParentLaunchFailed calls the default implementations of the launch_failed virtual method.
+	// ParentLaunchFailed calls the default implementations of the `GAppLaunchContext.launch_failed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -53339,7 +53339,7 @@ func UnsafeApplyAppLaunchContextOverrides[Instance AppLaunchContext](gclass unsa
 	}
 }
 
-// ParentLaunchFailed calls the default implementations of the launch_failed virtual method.
+// ParentLaunchFailed calls the default implementations of the `GAppLaunchContext.launch_failed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -54267,7 +54267,7 @@ type Application interface {
 
 	// chain up virtual methods:
 
-	// ParentActivate calls the default implementations of the activate virtual method.
+	// ParentActivate calls the default implementations of the `GApplication.activate` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Activates the application.
@@ -54277,7 +54277,7 @@ type Application interface {
 	// 
 	// The application must be registered before calling this function.
 	ParentActivate()
-	// ParentAddPlatformData calls the default implementations of the add_platform_data virtual method.
+	// ParentAddPlatformData calls the default implementations of the `GApplication.add_platform_data` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -54287,7 +54287,7 @@ type Application interface {
 	// invoked (locally) to add 'platform data' to be sent to
 	//     the primary instance when activating, opening or invoking actions
 	ParentAddPlatformData(builder *glib.VariantBuilder)
-	// ParentCommandLine calls the default implementations of the command_line virtual method.
+	// ParentCommandLine calls the default implementations of the `GApplication.command_line` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -54301,7 +54301,7 @@ type Application interface {
 	// invoked on the primary instance when a command-line is
 	//   not handled locally
 	ParentCommandLine(commandLine ApplicationCommandLine) int32
-	// ParentHandleLocalOptions calls the default implementations of the handle_local_options virtual method.
+	// ParentHandleLocalOptions calls the default implementations of the `GApplication.handle_local_options` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -54315,7 +54315,7 @@ type Application interface {
 	// invoked locally after the parsing of the commandline
 	//  options has occurred. Since: 2.40
 	ParentHandleLocalOptions(options *glib.VariantDict) int32
-	// ParentNameLost calls the default implementations of the name_lost virtual method.
+	// ParentNameLost calls the default implementations of the `GApplication.name_lost` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -54324,7 +54324,7 @@ type Application interface {
 	//
 	// invoked when another instance is taking over the name. Since: 2.60
 	ParentNameLost() bool
-	// ParentOpen calls the default implementations of the open virtual method.
+	// ParentOpen calls the default implementations of the `GApplication.open` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -54347,14 +54347,14 @@ type Application interface {
 	// The application must be registered before calling this function
 	// and it must have the %G_APPLICATION_HANDLES_OPEN flag set.
 	ParentOpen(files []File, hint string)
-	// ParentQuitMainloop calls the default implementations of the quit_mainloop virtual method.
+	// ParentQuitMainloop calls the default implementations of the `GApplication.quit_mainloop` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Used to be invoked on the primary instance when the use
 	//     count of the application drops to zero (and after any inactivity
 	//     timeout, if requested). Not used anymore since 2.32
 	ParentQuitMainloop()
-	// ParentRunMainloop calls the default implementations of the run_mainloop virtual method.
+	// ParentRunMainloop calls the default implementations of the `GApplication.run_mainloop` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Used to be invoked on the primary instance from
@@ -54362,13 +54362,13 @@ type Application interface {
 	//     GApplication is iterating the main context directly and is not
 	//     using @run_mainloop anymore
 	ParentRunMainloop()
-	// ParentShutdown calls the default implementations of the shutdown virtual method.
+	// ParentShutdown calls the default implementations of the `GApplication.shutdown` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// invoked only on the registered primary instance immediately
 	//      after the main loop terminates
 	ParentShutdown()
-	// ParentStartup calls the default implementations of the startup virtual method.
+	// ParentStartup calls the default implementations of the `GApplication.startup` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// invoked on the primary instance immediately after registration
@@ -56087,7 +56087,7 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 	}
 }
 
-// ParentActivate calls the default implementations of the activate virtual method.
+// ParentActivate calls the default implementations of the `GApplication.activate` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Activates the application.
@@ -56107,7 +56107,7 @@ func (application *ApplicationInstance) ParentActivate() {
 	runtime.KeepAlive(application)
 }
 
-// ParentAddPlatformData calls the default implementations of the add_platform_data virtual method.
+// ParentAddPlatformData calls the default implementations of the `GApplication.add_platform_data` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -56130,7 +56130,7 @@ func (application *ApplicationInstance) ParentAddPlatformData(builder *glib.Vari
 	runtime.KeepAlive(builder)
 }
 
-// ParentCommandLine calls the default implementations of the command_line virtual method.
+// ParentCommandLine calls the default implementations of the `GApplication.command_line` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -56164,7 +56164,7 @@ func (application *ApplicationInstance) ParentCommandLine(commandLine Applicatio
 	return goret
 }
 
-// ParentHandleLocalOptions calls the default implementations of the handle_local_options virtual method.
+// ParentHandleLocalOptions calls the default implementations of the `GApplication.handle_local_options` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -56198,7 +56198,7 @@ func (application *ApplicationInstance) ParentHandleLocalOptions(options *glib.V
 	return goret
 }
 
-// ParentNameLost calls the default implementations of the name_lost virtual method.
+// ParentNameLost calls the default implementations of the `GApplication.name_lost` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -56226,7 +56226,7 @@ func (application *ApplicationInstance) ParentNameLost() bool {
 	return goret
 }
 
-// ParentOpen calls the default implementations of the open virtual method.
+// ParentOpen calls the default implementations of the `GApplication.open` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -56270,7 +56270,7 @@ func (application *ApplicationInstance) ParentOpen(files []File, hint string) {
 	runtime.KeepAlive(hint)
 }
 
-// ParentQuitMainloop calls the default implementations of the quit_mainloop virtual method.
+// ParentQuitMainloop calls the default implementations of the `GApplication.quit_mainloop` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Used to be invoked on the primary instance when the use
@@ -56287,7 +56287,7 @@ func (application *ApplicationInstance) ParentQuitMainloop() {
 	runtime.KeepAlive(application)
 }
 
-// ParentRunMainloop calls the default implementations of the run_mainloop virtual method.
+// ParentRunMainloop calls the default implementations of the `GApplication.run_mainloop` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Used to be invoked on the primary instance from
@@ -56305,7 +56305,7 @@ func (application *ApplicationInstance) ParentRunMainloop() {
 	runtime.KeepAlive(application)
 }
 
-// ParentShutdown calls the default implementations of the shutdown virtual method.
+// ParentShutdown calls the default implementations of the `GApplication.shutdown` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // invoked only on the registered primary instance immediately
@@ -56321,7 +56321,7 @@ func (application *ApplicationInstance) ParentShutdown() {
 	runtime.KeepAlive(application)
 }
 
-// ParentStartup calls the default implementations of the startup virtual method.
+// ParentStartup calls the default implementations of the `GApplication.startup` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // invoked on the primary instance immediately after registration
@@ -56768,7 +56768,7 @@ type ApplicationCommandLine interface {
 
 	// chain up virtual methods:
 
-	// ParentDone calls the default implementations of the done virtual method.
+	// ParentDone calls the default implementations of the `GApplicationCommandLine.done` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Signals that command line processing is completed.
@@ -56787,7 +56787,7 @@ type ApplicationCommandLine interface {
 	// object is disposed &#x2014; so you can omit the call in non-garbage collected
 	// languages.
 	ParentDone()
-	// ParentGetStdin calls the default implementations of the get_stdin virtual method.
+	// ParentGetStdin calls the default implementations of the `GApplicationCommandLine.get_stdin` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -56805,7 +56805,7 @@ type ApplicationCommandLine interface {
 	// 
 	// You must only call this function once per commandline invocation.
 	ParentGetStdin() InputStream
-	// ParentPrintLiteral calls the default implementations of the print_literal virtual method.
+	// ParentPrintLiteral calls the default implementations of the `GApplicationCommandLine.print_literal` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -56818,7 +56818,7 @@ type ApplicationCommandLine interface {
 	// format string. Use this function if @message contains text you don't have
 	// control over, that could include `printf()` escape sequences.
 	ParentPrintLiteral(message string)
-	// ParentPrinterrLiteral calls the default implementations of the printerr_literal virtual method.
+	// ParentPrinterrLiteral calls the default implementations of the `GApplicationCommandLine.printerr_literal` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -57449,7 +57449,7 @@ func UnsafeApplyApplicationCommandLineOverrides[Instance ApplicationCommandLine]
 	}
 }
 
-// ParentDone calls the default implementations of the done virtual method.
+// ParentDone calls the default implementations of the `GApplicationCommandLine.done` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Signals that command line processing is completed.
@@ -57478,7 +57478,7 @@ func (cmdline *ApplicationCommandLineInstance) ParentDone() {
 	runtime.KeepAlive(cmdline)
 }
 
-// ParentGetStdin calls the default implementations of the get_stdin virtual method.
+// ParentGetStdin calls the default implementations of the `GApplicationCommandLine.get_stdin` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -57515,7 +57515,7 @@ func (cmdline *ApplicationCommandLineInstance) ParentGetStdin() InputStream {
 	return goret
 }
 
-// ParentPrintLiteral calls the default implementations of the print_literal virtual method.
+// ParentPrintLiteral calls the default implementations of the `GApplicationCommandLine.print_literal` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -57542,7 +57542,7 @@ func (cmdline *ApplicationCommandLineInstance) ParentPrintLiteral(message string
 	runtime.KeepAlive(message)
 }
 
-// ParentPrinterrLiteral calls the default implementations of the printerr_literal virtual method.
+// ParentPrinterrLiteral calls the default implementations of the `GApplicationCommandLine.printerr_literal` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -58940,7 +58940,7 @@ type FileEnumerator interface {
 
 	// chain up virtual methods:
 
-	// ParentCloseFinish calls the default implementations of the close_finish virtual method.
+	// ParentCloseFinish calls the default implementations of the `GFileEnumerator.close_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -58963,7 +58963,7 @@ type FileEnumerator interface {
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be set, and %FALSE will be
 	// returned.
 	ParentCloseFinish(result AsyncResult) (bool, error)
-	// ParentCloseFn calls the default implementations of the close_fn virtual method.
+	// ParentCloseFn calls the default implementations of the `GFileEnumerator.close_fn` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -58975,7 +58975,7 @@ type FileEnumerator interface {
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	ParentCloseFn(cancellable context.Context) (bool, error)
-	// ParentNextFile calls the default implementations of the next_file virtual method.
+	// ParentNextFile calls the default implementations of the `GFileEnumerator.next_file` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -58999,7 +58999,7 @@ type FileEnumerator interface {
 	// enumerator is at the end, %NULL will be returned and @error will
 	// be unset.
 	ParentNextFile(cancellable context.Context) (FileInfo, error)
-	// ParentNextFilesFinish calls the default implementations of the next_files_finish virtual method.
+	// ParentNextFilesFinish calls the default implementations of the `GFileEnumerator.next_files_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -59803,7 +59803,7 @@ func UnsafeApplyFileEnumeratorOverrides[Instance FileEnumerator](gclass unsafe.P
 	}
 }
 
-// ParentCloseFinish calls the default implementations of the close_finish virtual method.
+// ParentCloseFinish calls the default implementations of the `GFileEnumerator.close_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -59853,7 +59853,7 @@ func (enumerator *FileEnumeratorInstance) ParentCloseFinish(result AsyncResult) 
 	return goret, _goerr
 }
 
-// ParentCloseFn calls the default implementations of the close_fn virtual method.
+// ParentCloseFn calls the default implementations of the `GFileEnumerator.close_fn` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -59894,7 +59894,7 @@ func (enumerator *FileEnumeratorInstance) ParentCloseFn(cancellable context.Cont
 	return goret, _goerr
 }
 
-// ParentNextFile calls the default implementations of the next_file virtual method.
+// ParentNextFile calls the default implementations of the `GFileEnumerator.next_file` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -59947,7 +59947,7 @@ func (enumerator *FileEnumeratorInstance) ParentNextFile(cancellable context.Con
 	return goret, _goerr
 }
 
-// ParentNextFilesFinish calls the default implementations of the next_files_finish virtual method.
+// ParentNextFilesFinish calls the default implementations of the `GFileEnumerator.next_files_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -62631,7 +62631,7 @@ type FileMonitor interface {
 
 	// chain up virtual methods:
 
-	// ParentCancel calls the default implementations of the cancel virtual method.
+	// ParentCancel calls the default implementations of the `GFileMonitor.cancel` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -62640,7 +62640,7 @@ type FileMonitor interface {
 	//
 	// Cancels a file monitor.
 	ParentCancel() bool
-	// ParentChanged calls the default implementations of the changed virtual method.
+	// ParentChanged calls the default implementations of the `GFileMonitor.changed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -62914,7 +62914,7 @@ func UnsafeApplyFileMonitorOverrides[Instance FileMonitor](gclass unsafe.Pointer
 	}
 }
 
-// ParentCancel calls the default implementations of the cancel virtual method.
+// ParentCancel calls the default implementations of the `GFileMonitor.cancel` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -62942,7 +62942,7 @@ func (monitor *FileMonitorInstance) ParentCancel() bool {
 	return goret
 }
 
-// ParentChanged calls the default implementations of the changed virtual method.
+// ParentChanged calls the default implementations of the `GFileMonitor.changed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -63053,7 +63053,7 @@ type FilenameCompleter interface {
 
 	// chain up virtual methods:
 
-	// ParentGotCompletionData calls the default implementations of the got_completion_data virtual method.
+	// ParentGotCompletionData calls the default implementations of the `GFilenameCompleter.got_completion_data` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentGotCompletionData()
 }
@@ -63254,7 +63254,7 @@ func UnsafeApplyFilenameCompleterOverrides[Instance FilenameCompleter](gclass un
 	}
 }
 
-// ParentGotCompletionData calls the default implementations of the got_completion_data virtual method.
+// ParentGotCompletionData calls the default implementations of the `GFilenameCompleter.got_completion_data` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 func (filenameCompleter *FilenameCompleterInstance) ParentGotCompletionData() {
 	var carg0 *C.GFilenameCompleter
@@ -63504,7 +63504,7 @@ type IOStream interface {
 
 	// chain up virtual methods:
 
-	// ParentCloseFinish calls the default implementations of the close_finish virtual method.
+	// ParentCloseFinish calls the default implementations of the `GIOStream.close_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -63518,7 +63518,7 @@ type IOStream interface {
 	//
 	// Closes a stream.
 	ParentCloseFinish(result AsyncResult) (bool, error)
-	// ParentCloseFn calls the default implementations of the close_fn virtual method.
+	// ParentCloseFn calls the default implementations of the `GIOStream.close_fn` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -63530,7 +63530,7 @@ type IOStream interface {
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	ParentCloseFn(cancellable context.Context) (bool, error)
-	// ParentGetInputStream calls the default implementations of the get_input_stream virtual method.
+	// ParentGetInputStream calls the default implementations of the `GIOStream.get_input_stream` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -63540,7 +63540,7 @@ type IOStream interface {
 	// Gets the input stream for this object. This is used
 	// for reading.
 	ParentGetInputStream() InputStream
-	// ParentGetOutputStream calls the default implementations of the get_output_stream virtual method.
+	// ParentGetOutputStream calls the default implementations of the `GIOStream.get_output_stream` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -64131,7 +64131,7 @@ func UnsafeApplyIOStreamOverrides[Instance IOStream](gclass unsafe.Pointer, over
 	}
 }
 
-// ParentCloseFinish calls the default implementations of the close_finish virtual method.
+// ParentCloseFinish calls the default implementations of the `GIOStream.close_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -64172,7 +64172,7 @@ func (stream *IOStreamInstance) ParentCloseFinish(result AsyncResult) (bool, err
 	return goret, _goerr
 }
 
-// ParentCloseFn calls the default implementations of the close_fn virtual method.
+// ParentCloseFn calls the default implementations of the `GIOStream.close_fn` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -64213,7 +64213,7 @@ func (stream *IOStreamInstance) ParentCloseFn(cancellable context.Context) (bool
 	return goret, _goerr
 }
 
-// ParentGetInputStream calls the default implementations of the get_input_stream virtual method.
+// ParentGetInputStream calls the default implementations of the `GIOStream.get_input_stream` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -64240,7 +64240,7 @@ func (stream *IOStreamInstance) ParentGetInputStream() InputStream {
 	return goret
 }
 
-// ParentGetOutputStream calls the default implementations of the get_output_stream virtual method.
+// ParentGetOutputStream calls the default implementations of the `GIOStream.get_output_stream` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -64442,7 +64442,7 @@ type InetAddress interface {
 
 	// chain up virtual methods:
 
-	// ParentToString calls the default implementations of the to_string virtual method.
+	// ParentToString calls the default implementations of the `GInetAddress.to_string` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -64988,7 +64988,7 @@ func UnsafeApplyInetAddressOverrides[Instance InetAddress](gclass unsafe.Pointer
 	}
 }
 
-// ParentToString calls the default implementations of the to_string virtual method.
+// ParentToString calls the default implementations of the `GInetAddress.to_string` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -65885,7 +65885,7 @@ type InputStream interface {
 
 	// chain up virtual methods:
 
-	// ParentCloseFinish calls the default implementations of the close_finish virtual method.
+	// ParentCloseFinish calls the default implementations of the `GInputStream.close_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -65899,7 +65899,7 @@ type InputStream interface {
 	//
 	// Finishes closing a stream asynchronously, started from g_input_stream_close_async().
 	ParentCloseFinish(result AsyncResult) (bool, error)
-	// ParentCloseFn calls the default implementations of the close_fn virtual method.
+	// ParentCloseFn calls the default implementations of the `GInputStream.close_fn` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -65911,7 +65911,7 @@ type InputStream interface {
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	ParentCloseFn(cancellable context.Context) (bool, error)
-	// ParentReadFinish calls the default implementations of the read_finish virtual method.
+	// ParentReadFinish calls the default implementations of the `GInputStream.read_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -65925,7 +65925,7 @@ type InputStream interface {
 	//
 	// Finishes an asynchronous stream read operation.
 	ParentReadFinish(result AsyncResult) (int, error)
-	// ParentSkip calls the default implementations of the skip virtual method.
+	// ParentSkip calls the default implementations of the `GInputStream.skip` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -65953,7 +65953,7 @@ type InputStream interface {
 	// operation was partially finished when the operation was cancelled the
 	// partial result will be returned, without an error.
 	ParentSkip(cancellable context.Context, count uint) (int, error)
-	// ParentSkipFinish calls the default implementations of the skip_finish virtual method.
+	// ParentSkipFinish calls the default implementations of the `GInputStream.skip_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -67129,7 +67129,7 @@ func UnsafeApplyInputStreamOverrides[Instance InputStream](gclass unsafe.Pointer
 	}
 }
 
-// ParentCloseFinish calls the default implementations of the close_finish virtual method.
+// ParentCloseFinish calls the default implementations of the `GInputStream.close_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -67170,7 +67170,7 @@ func (stream *InputStreamInstance) ParentCloseFinish(result AsyncResult) (bool, 
 	return goret, _goerr
 }
 
-// ParentCloseFn calls the default implementations of the close_fn virtual method.
+// ParentCloseFn calls the default implementations of the `GInputStream.close_fn` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -67211,7 +67211,7 @@ func (stream *InputStreamInstance) ParentCloseFn(cancellable context.Context) (b
 	return goret, _goerr
 }
 
-// ParentReadFinish calls the default implementations of the read_finish virtual method.
+// ParentReadFinish calls the default implementations of the `GInputStream.read_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -67250,7 +67250,7 @@ func (stream *InputStreamInstance) ParentReadFinish(result AsyncResult) (int, er
 	return goret, _goerr
 }
 
-// ParentSkip calls the default implementations of the skip virtual method.
+// ParentSkip calls the default implementations of the `GInputStream.skip` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -67308,7 +67308,7 @@ func (stream *InputStreamInstance) ParentSkip(cancellable context.Context, count
 	return goret, _goerr
 }
 
-// ParentSkipFinish calls the default implementations of the skip_finish virtual method.
+// ParentSkipFinish calls the default implementations of the `GInputStream.skip_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -68608,7 +68608,7 @@ type MenuLinkIter interface {
 
 	// chain up virtual methods:
 
-	// ParentGetNext calls the default implementations of the get_next virtual method.
+	// ParentGetNext calls the default implementations of the `GMenuLinkIter.get_next` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -68876,7 +68876,7 @@ func UnsafeApplyMenuLinkIterOverrides[Instance MenuLinkIter](gclass unsafe.Point
 	}
 }
 
-// ParentGetNext calls the default implementations of the get_next virtual method.
+// ParentGetNext calls the default implementations of the `GMenuLinkIter.get_next` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -69200,7 +69200,7 @@ type MenuModel interface {
 
 	// chain up virtual methods:
 
-	// ParentGetItemLink calls the default implementations of the get_item_link virtual method.
+	// ParentGetItemLink calls the default implementations of the `GMenuModel.get_item_link` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -69218,7 +69218,7 @@ type MenuModel interface {
 	// If the link exists, the linked #GMenuModel is returned.  If the link
 	// does not exist, %NULL is returned.
 	ParentGetItemLink(itemIndex int32, link string) MenuModel
-	// ParentGetNItems calls the default implementations of the get_n_items virtual method.
+	// ParentGetNItems calls the default implementations of the `GMenuModel.get_n_items` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -69227,7 +69227,7 @@ type MenuModel interface {
 	//
 	// Query the number of items in @model.
 	ParentGetNItems() int32
-	// ParentIsMutable calls the default implementations of the is_mutable virtual method.
+	// ParentIsMutable calls the default implementations of the `GMenuModel.is_mutable` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -69239,7 +69239,7 @@ type MenuModel interface {
 	// An immutable #GMenuModel will never emit the #GMenuModel::items-changed
 	// signal. Consumers of the model may make optimisations accordingly.
 	ParentIsMutable() bool
-	// ParentIterateItemAttributes calls the default implementations of the iterate_item_attributes virtual method.
+	// ParentIterateItemAttributes calls the default implementations of the `GMenuModel.iterate_item_attributes` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -69255,7 +69255,7 @@ type MenuModel interface {
 	// 
 	// You must free the iterator with g_object_unref() when you are done.
 	ParentIterateItemAttributes(itemIndex int32) MenuAttributeIter
-	// ParentIterateItemLinks calls the default implementations of the iterate_item_links virtual method.
+	// ParentIterateItemLinks calls the default implementations of the `GMenuModel.iterate_item_links` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -69740,7 +69740,7 @@ func UnsafeApplyMenuModelOverrides[Instance MenuModel](gclass unsafe.Pointer, ov
 	}
 }
 
-// ParentGetItemLink calls the default implementations of the get_item_link virtual method.
+// ParentGetItemLink calls the default implementations of the `GMenuModel.get_item_link` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -69784,7 +69784,7 @@ func (model *MenuModelInstance) ParentGetItemLink(itemIndex int32, link string) 
 	return goret
 }
 
-// ParentGetNItems calls the default implementations of the get_n_items virtual method.
+// ParentGetNItems calls the default implementations of the `GMenuModel.get_n_items` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -69810,7 +69810,7 @@ func (model *MenuModelInstance) ParentGetNItems() int32 {
 	return goret
 }
 
-// ParentIsMutable calls the default implementations of the is_mutable virtual method.
+// ParentIsMutable calls the default implementations of the `GMenuModel.is_mutable` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -69841,7 +69841,7 @@ func (model *MenuModelInstance) ParentIsMutable() bool {
 	return goret
 }
 
-// ParentIterateItemAttributes calls the default implementations of the iterate_item_attributes virtual method.
+// ParentIterateItemAttributes calls the default implementations of the `GMenuModel.iterate_item_attributes` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -69877,7 +69877,7 @@ func (model *MenuModelInstance) ParentIterateItemAttributes(itemIndex int32) Men
 	return goret
 }
 
-// ParentIterateItemLinks calls the default implementations of the iterate_item_links virtual method.
+// ParentIterateItemLinks calls the default implementations of the `GMenuModel.iterate_item_links` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -70172,10 +70172,10 @@ type MountOperation interface {
 
 	// chain up virtual methods:
 
-	// ParentAborted calls the default implementations of the aborted virtual method.
+	// ParentAborted calls the default implementations of the `GMountOperation.aborted` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentAborted()
-	// ParentAskPassword calls the default implementations of the ask_password virtual method.
+	// ParentAskPassword calls the default implementations of the `GMountOperation.ask_password` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -70185,7 +70185,7 @@ type MountOperation interface {
 	// 	- defaultDomain string 
 	// 	- flags AskPasswordFlags 
 	ParentAskPassword(message string, defaultUser string, defaultDomain string, flags AskPasswordFlags)
-	// ParentAskQuestion calls the default implementations of the ask_question virtual method.
+	// ParentAskQuestion calls the default implementations of the `GMountOperation.ask_question` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -70196,7 +70196,7 @@ type MountOperation interface {
 	//
 	// Virtual implementation of #GMountOperation::ask-question.
 	ParentAskQuestion(message string, choices []string)
-	// ParentReply calls the default implementations of the reply virtual method.
+	// ParentReply calls the default implementations of the `GMountOperation.reply` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -70205,7 +70205,7 @@ type MountOperation interface {
 	//
 	// Emits the #GMountOperation::reply signal.
 	ParentReply(result MountOperationResult)
-	// ParentShowUnmountProgress calls the default implementations of the show_unmount_progress virtual method.
+	// ParentShowUnmountProgress calls the default implementations of the `GMountOperation.show_unmount_progress` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -70911,7 +70911,7 @@ func UnsafeApplyMountOperationOverrides[Instance MountOperation](gclass unsafe.P
 	}
 }
 
-// ParentAborted calls the default implementations of the aborted virtual method.
+// ParentAborted calls the default implementations of the `GMountOperation.aborted` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 func (op *MountOperationInstance) ParentAborted() {
 	var carg0 *C.GMountOperation
@@ -70924,7 +70924,7 @@ func (op *MountOperationInstance) ParentAborted() {
 	runtime.KeepAlive(op)
 }
 
-// ParentAskPassword calls the default implementations of the ask_password virtual method.
+// ParentAskPassword calls the default implementations of the `GMountOperation.ask_password` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -70959,7 +70959,7 @@ func (op *MountOperationInstance) ParentAskPassword(message string, defaultUser 
 	runtime.KeepAlive(flags)
 }
 
-// ParentAskQuestion calls the default implementations of the ask_question virtual method.
+// ParentAskQuestion calls the default implementations of the `GMountOperation.ask_question` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -70989,7 +70989,7 @@ func (op *MountOperationInstance) ParentAskQuestion(message string, choices []st
 	runtime.KeepAlive(choices)
 }
 
-// ParentReply calls the default implementations of the reply virtual method.
+// ParentReply calls the default implementations of the `GMountOperation.reply` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -71011,7 +71011,7 @@ func (op *MountOperationInstance) ParentReply(result MountOperationResult) {
 	runtime.KeepAlive(result)
 }
 
-// ParentShowUnmountProgress calls the default implementations of the show_unmount_progress virtual method.
+// ParentShowUnmountProgress calls the default implementations of the `GMountOperation.show_unmount_progress` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -72861,7 +72861,7 @@ type OutputStream interface {
 
 	// chain up virtual methods:
 
-	// ParentCloseFinish calls the default implementations of the close_finish virtual method.
+	// ParentCloseFinish calls the default implementations of the `GOutputStream.close_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -72875,7 +72875,7 @@ type OutputStream interface {
 	//
 	// Closes an output stream.
 	ParentCloseFinish(result AsyncResult) (bool, error)
-	// ParentCloseFn calls the default implementations of the close_fn virtual method.
+	// ParentCloseFn calls the default implementations of the `GOutputStream.close_fn` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -72887,7 +72887,7 @@ type OutputStream interface {
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	ParentCloseFn(cancellable context.Context) (bool, error)
-	// ParentFlush calls the default implementations of the flush virtual method.
+	// ParentFlush calls the default implementations of the `GOutputStream.flush` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -72909,7 +72909,7 @@ type OutputStream interface {
 	// triggering the cancellable object from another thread. If the operation
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 	ParentFlush(cancellable context.Context) (bool, error)
-	// ParentFlushFinish calls the default implementations of the flush_finish virtual method.
+	// ParentFlushFinish calls the default implementations of the `GOutputStream.flush_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -72923,7 +72923,7 @@ type OutputStream interface {
 	//
 	// Finishes flushing an output stream.
 	ParentFlushFinish(result AsyncResult) (bool, error)
-	// ParentSplice calls the default implementations of the splice virtual method.
+	// ParentSplice calls the default implementations of the `GOutputStream.splice` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -72939,7 +72939,7 @@ type OutputStream interface {
 	//
 	// Splices an input stream into an output stream.
 	ParentSplice(cancellable context.Context, source InputStream, flags OutputStreamSpliceFlags) (int, error)
-	// ParentSpliceFinish calls the default implementations of the splice_finish virtual method.
+	// ParentSpliceFinish calls the default implementations of the `GOutputStream.splice_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -72953,7 +72953,7 @@ type OutputStream interface {
 	//
 	// Finishes an asynchronous stream splice operation.
 	ParentSpliceFinish(result AsyncResult) (int, error)
-	// ParentWriteFinish calls the default implementations of the write_finish virtual method.
+	// ParentWriteFinish calls the default implementations of the `GOutputStream.write_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -72967,7 +72967,7 @@ type OutputStream interface {
 	//
 	// Finishes a stream write operation.
 	ParentWriteFinish(result AsyncResult) (int, error)
-	// ParentWriteFn calls the default implementations of the write_fn virtual method.
+	// ParentWriteFn calls the default implementations of the `GOutputStream.write_fn` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -73001,7 +73001,7 @@ type OutputStream interface {
 	// 
 	// On error -1 is returned and @error is set accordingly.
 	ParentWriteFn(cancellable context.Context, buffer []byte) (int, error)
-	// ParentWritevFinish calls the default implementations of the writev_finish virtual method.
+	// ParentWritevFinish calls the default implementations of the `GOutputStream.writev_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -73016,7 +73016,7 @@ type OutputStream interface {
 	//
 	// Finishes a stream writev operation.
 	ParentWritevFinish(result AsyncResult) (uint, bool, error)
-	// ParentWritevFn calls the default implementations of the writev_fn virtual method.
+	// ParentWritevFn calls the default implementations of the `GOutputStream.writev_fn` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -74976,7 +74976,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 	}
 }
 
-// ParentCloseFinish calls the default implementations of the close_finish virtual method.
+// ParentCloseFinish calls the default implementations of the `GOutputStream.close_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -75017,7 +75017,7 @@ func (stream *OutputStreamInstance) ParentCloseFinish(result AsyncResult) (bool,
 	return goret, _goerr
 }
 
-// ParentCloseFn calls the default implementations of the close_fn virtual method.
+// ParentCloseFn calls the default implementations of the `GOutputStream.close_fn` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -75058,7 +75058,7 @@ func (stream *OutputStreamInstance) ParentCloseFn(cancellable context.Context) (
 	return goret, _goerr
 }
 
-// ParentFlush calls the default implementations of the flush virtual method.
+// ParentFlush calls the default implementations of the `GOutputStream.flush` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -75109,7 +75109,7 @@ func (stream *OutputStreamInstance) ParentFlush(cancellable context.Context) (bo
 	return goret, _goerr
 }
 
-// ParentFlushFinish calls the default implementations of the flush_finish virtual method.
+// ParentFlushFinish calls the default implementations of the `GOutputStream.flush_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -75150,7 +75150,7 @@ func (stream *OutputStreamInstance) ParentFlushFinish(result AsyncResult) (bool,
 	return goret, _goerr
 }
 
-// ParentSplice calls the default implementations of the splice virtual method.
+// ParentSplice calls the default implementations of the `GOutputStream.splice` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -75199,7 +75199,7 @@ func (stream *OutputStreamInstance) ParentSplice(cancellable context.Context, so
 	return goret, _goerr
 }
 
-// ParentSpliceFinish calls the default implementations of the splice_finish virtual method.
+// ParentSpliceFinish calls the default implementations of the `GOutputStream.splice_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -75238,7 +75238,7 @@ func (stream *OutputStreamInstance) ParentSpliceFinish(result AsyncResult) (int,
 	return goret, _goerr
 }
 
-// ParentWriteFinish calls the default implementations of the write_finish virtual method.
+// ParentWriteFinish calls the default implementations of the `GOutputStream.write_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -75277,7 +75277,7 @@ func (stream *OutputStreamInstance) ParentWriteFinish(result AsyncResult) (int, 
 	return goret, _goerr
 }
 
-// ParentWriteFn calls the default implementations of the write_fn virtual method.
+// ParentWriteFn calls the default implementations of the `GOutputStream.write_fn` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -75345,7 +75345,7 @@ func (stream *OutputStreamInstance) ParentWriteFn(cancellable context.Context, b
 	return goret, _goerr
 }
 
-// ParentWritevFinish calls the default implementations of the writev_finish virtual method.
+// ParentWritevFinish calls the default implementations of the `GOutputStream.writev_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -75390,7 +75390,7 @@ func (stream *OutputStreamInstance) ParentWritevFinish(result AsyncResult) (uint
 	return bytesWritten, goret, _goerr
 }
 
-// ParentWritevFn calls the default implementations of the writev_fn virtual method.
+// ParentWritevFn calls the default implementations of the `GOutputStream.writev_fn` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -75682,7 +75682,7 @@ type Permission interface {
 
 	// chain up virtual methods:
 
-	// ParentAcquire calls the default implementations of the acquire virtual method.
+	// ParentAcquire calls the default implementations of the `GPermission.acquire` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -75710,7 +75710,7 @@ type Permission interface {
 	// user interaction is required).  See g_permission_acquire_async() for
 	// the non-blocking version.
 	ParentAcquire(cancellable context.Context) (bool, error)
-	// ParentAcquireFinish calls the default implementations of the acquire_finish virtual method.
+	// ParentAcquireFinish calls the default implementations of the `GPermission.acquire_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -75728,7 +75728,7 @@ type Permission interface {
 	// This is the second half of the asynchronous version of
 	// g_permission_acquire().
 	ParentAcquireFinish(result AsyncResult) (bool, error)
-	// ParentRelease calls the default implementations of the release virtual method.
+	// ParentRelease calls the default implementations of the `GPermission.release` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -75756,7 +75756,7 @@ type Permission interface {
 	// user interaction is required).  See g_permission_release_async() for
 	// the non-blocking version.
 	ParentRelease(cancellable context.Context) (bool, error)
-	// ParentReleaseFinish calls the default implementations of the release_finish virtual method.
+	// ParentReleaseFinish calls the default implementations of the `GPermission.release_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -76410,7 +76410,7 @@ func UnsafeApplyPermissionOverrides[Instance Permission](gclass unsafe.Pointer, 
 	}
 }
 
-// ParentAcquire calls the default implementations of the acquire virtual method.
+// ParentAcquire calls the default implementations of the `GPermission.acquire` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -76467,7 +76467,7 @@ func (permission *PermissionInstance) ParentAcquire(cancellable context.Context)
 	return goret, _goerr
 }
 
-// ParentAcquireFinish calls the default implementations of the acquire_finish virtual method.
+// ParentAcquireFinish calls the default implementations of the `GPermission.acquire_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -76512,7 +76512,7 @@ func (permission *PermissionInstance) ParentAcquireFinish(result AsyncResult) (b
 	return goret, _goerr
 }
 
-// ParentRelease calls the default implementations of the release virtual method.
+// ParentRelease calls the default implementations of the `GPermission.release` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -76569,7 +76569,7 @@ func (permission *PermissionInstance) ParentRelease(cancellable context.Context)
 	return goret, _goerr
 }
 
-// ParentReleaseFinish calls the default implementations of the release_finish virtual method.
+// ParentReleaseFinish calls the default implementations of the `GPermission.release_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -77076,7 +77076,7 @@ type Resolver interface {
 
 	// chain up virtual methods:
 
-	// ParentLookupByAddress calls the default implementations of the lookup_by_address virtual method.
+	// ParentLookupByAddress calls the default implementations of the `GResolver.lookup_by_address` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -77099,7 +77099,7 @@ type Resolver interface {
 	// operation, in which case @error (if non-%NULL) will be set to
 	// %G_IO_ERROR_CANCELLED.
 	ParentLookupByAddress(cancellable context.Context, address InetAddress) (string, error)
-	// ParentLookupByAddressFinish calls the default implementations of the lookup_by_address_finish virtual method.
+	// ParentLookupByAddressFinish calls the default implementations of the `GResolver.lookup_by_address_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -77118,7 +77118,7 @@ type Resolver interface {
 	// a value from #GResolverError. If the operation was cancelled,
 	// @error will be set to %G_IO_ERROR_CANCELLED.
 	ParentLookupByAddressFinish(result AsyncResult) (string, error)
-	// ParentLookupByName calls the default implementations of the lookup_by_name virtual method.
+	// ParentLookupByName calls the default implementations of the `GResolver.lookup_by_name` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -77155,7 +77155,7 @@ type Resolver interface {
 	// address, it may be easier to create a #GNetworkAddress and use its
 	// #GSocketConnectable interface.
 	ParentLookupByName(cancellable context.Context, hostname string) ([]InetAddress, error)
-	// ParentLookupByNameFinish calls the default implementations of the lookup_by_name_finish virtual method.
+	// ParentLookupByNameFinish calls the default implementations of the `GResolver.lookup_by_name_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -77174,7 +77174,7 @@ type Resolver interface {
 	// a value from #GResolverError. If the operation was cancelled,
 	// @error will be set to %G_IO_ERROR_CANCELLED.
 	ParentLookupByNameFinish(result AsyncResult) ([]InetAddress, error)
-	// ParentLookupByNameWithFlags calls the default implementations of the lookup_by_name_with_flags virtual method.
+	// ParentLookupByNameWithFlags calls the default implementations of the `GResolver.lookup_by_name_with_flags` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -77192,7 +77192,7 @@ type Resolver interface {
 	// the lookup behavior with @flags. For example this can be used to limit
 	// results with %G_RESOLVER_NAME_LOOKUP_FLAGS_IPV4_ONLY.
 	ParentLookupByNameWithFlags(cancellable context.Context, hostname string, flags ResolverNameLookupFlags) ([]InetAddress, error)
-	// ParentLookupByNameWithFlagsFinish calls the default implementations of the lookup_by_name_with_flags_finish virtual method.
+	// ParentLookupByNameWithFlagsFinish calls the default implementations of the `GResolver.lookup_by_name_with_flags_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -77211,7 +77211,7 @@ type Resolver interface {
 	// a value from #GResolverError. If the operation was cancelled,
 	// @error will be set to %G_IO_ERROR_CANCELLED.
 	ParentLookupByNameWithFlagsFinish(result AsyncResult) ([]InetAddress, error)
-	// ParentLookupServiceFinish calls the default implementations of the lookup_service_finish virtual method.
+	// ParentLookupServiceFinish calls the default implementations of the `GResolver.lookup_service_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -77230,7 +77230,7 @@ type Resolver interface {
 	// a value from #GResolverError. If the operation was cancelled,
 	// @error will be set to %G_IO_ERROR_CANCELLED.
 	ParentLookupServiceFinish(result AsyncResult) ([]*SrvTarget, error)
-	// ParentReload calls the default implementations of the reload virtual method.
+	// ParentReload calls the default implementations of the `GResolver.reload` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentReload()
 }
@@ -78393,7 +78393,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 	}
 }
 
-// ParentLookupByAddress calls the default implementations of the lookup_by_address virtual method.
+// ParentLookupByAddress calls the default implementations of the `GResolver.lookup_by_address` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -78447,7 +78447,7 @@ func (resolver *ResolverInstance) ParentLookupByAddress(cancellable context.Cont
 	return goret, _goerr
 }
 
-// ParentLookupByAddressFinish calls the default implementations of the lookup_by_address_finish virtual method.
+// ParentLookupByAddressFinish calls the default implementations of the `GResolver.lookup_by_address_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -78492,7 +78492,7 @@ func (resolver *ResolverInstance) ParentLookupByAddressFinish(result AsyncResult
 	return goret, _goerr
 }
 
-// ParentLookupByName calls the default implementations of the lookup_by_name virtual method.
+// ParentLookupByName calls the default implementations of the `GResolver.lookup_by_name` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -78567,7 +78567,7 @@ func (resolver *ResolverInstance) ParentLookupByName(cancellable context.Context
 	return goret, _goerr
 }
 
-// ParentLookupByNameFinish calls the default implementations of the lookup_by_name_finish virtual method.
+// ParentLookupByNameFinish calls the default implementations of the `GResolver.lookup_by_name_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -78618,7 +78618,7 @@ func (resolver *ResolverInstance) ParentLookupByNameFinish(result AsyncResult) (
 	return goret, _goerr
 }
 
-// ParentLookupByNameWithFlags calls the default implementations of the lookup_by_name_with_flags virtual method.
+// ParentLookupByNameWithFlags calls the default implementations of the `GResolver.lookup_by_name_with_flags` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -78677,7 +78677,7 @@ func (resolver *ResolverInstance) ParentLookupByNameWithFlags(cancellable contex
 	return goret, _goerr
 }
 
-// ParentLookupByNameWithFlagsFinish calls the default implementations of the lookup_by_name_with_flags_finish virtual method.
+// ParentLookupByNameWithFlagsFinish calls the default implementations of the `GResolver.lookup_by_name_with_flags_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -78728,7 +78728,7 @@ func (resolver *ResolverInstance) ParentLookupByNameWithFlagsFinish(result Async
 	return goret, _goerr
 }
 
-// ParentLookupServiceFinish calls the default implementations of the lookup_service_finish virtual method.
+// ParentLookupServiceFinish calls the default implementations of the `GResolver.lookup_service_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -78779,7 +78779,7 @@ func (resolver *ResolverInstance) ParentLookupServiceFinish(result AsyncResult) 
 	return goret, _goerr
 }
 
-// ParentReload calls the default implementations of the reload virtual method.
+// ParentReload calls the default implementations of the `GResolver.reload` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 func (resolver *ResolverInstance) ParentReload() {
 	var carg0 *C.GResolver
@@ -79799,7 +79799,7 @@ type Settings interface {
 
 	// chain up virtual methods:
 
-	// ParentChangeEvent calls the default implementations of the change_event virtual method.
+	// ParentChangeEvent calls the default implementations of the `GSettings.change_event` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -79811,14 +79811,14 @@ type Settings interface {
 	// 
 	// 	- goret bool 
 	ParentChangeEvent(keys *glib.Quark, nKeys int32) bool
-	// ParentChanged calls the default implementations of the changed virtual method.
+	// ParentChanged calls the default implementations of the `GSettings.changed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- key string 
 	ParentChanged(key string)
-	// ParentWritableChangeEvent calls the default implementations of the writable_change_event virtual method.
+	// ParentWritableChangeEvent calls the default implementations of the `GSettings.writable_change_event` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -79829,7 +79829,7 @@ type Settings interface {
 	// 
 	// 	- goret bool 
 	ParentWritableChangeEvent(key glib.Quark) bool
-	// ParentWritableChanged calls the default implementations of the writable_changed virtual method.
+	// ParentWritableChanged calls the default implementations of the `GSettings.writable_changed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -81353,7 +81353,7 @@ func UnsafeApplySettingsOverrides[Instance Settings](gclass unsafe.Pointer, over
 	}
 }
 
-// ParentChangeEvent calls the default implementations of the change_event virtual method.
+// ParentChangeEvent calls the default implementations of the `GSettings.change_event` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -81392,7 +81392,7 @@ func (settings *SettingsInstance) ParentChangeEvent(keys *glib.Quark, nKeys int3
 	return goret
 }
 
-// ParentChanged calls the default implementations of the changed virtual method.
+// ParentChanged calls the default implementations of the `GSettings.changed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -81413,7 +81413,7 @@ func (settings *SettingsInstance) ParentChanged(key string) {
 	runtime.KeepAlive(key)
 }
 
-// ParentWritableChangeEvent calls the default implementations of the writable_change_event virtual method.
+// ParentWritableChangeEvent calls the default implementations of the `GSettings.writable_change_event` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -81446,7 +81446,7 @@ func (settings *SettingsInstance) ParentWritableChangeEvent(key glib.Quark) bool
 	return goret
 }
 
-// ParentWritableChanged calls the default implementations of the writable_changed virtual method.
+// ParentWritableChanged calls the default implementations of the `GSettings.writable_changed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -87008,7 +87008,7 @@ type SocketAddress interface {
 
 	// chain up virtual methods:
 
-	// ParentGetFamily calls the default implementations of the get_family virtual method.
+	// ParentGetFamily calls the default implementations of the `GSocketAddress.get_family` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -87017,7 +87017,7 @@ type SocketAddress interface {
 	//
 	// Gets the socket family type of @address.
 	ParentGetFamily() SocketFamily
-	// ParentGetNativeSize calls the default implementations of the get_native_size virtual method.
+	// ParentGetNativeSize calls the default implementations of the `GSocketAddress.get_native_size` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -87200,7 +87200,7 @@ func UnsafeApplySocketAddressOverrides[Instance SocketAddress](gclass unsafe.Poi
 	}
 }
 
-// ParentGetFamily calls the default implementations of the get_family virtual method.
+// ParentGetFamily calls the default implementations of the `GSocketAddress.get_family` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -87226,7 +87226,7 @@ func (address *SocketAddressInstance) ParentGetFamily() SocketFamily {
 	return goret
 }
 
-// ParentGetNativeSize calls the default implementations of the get_native_size virtual method.
+// ParentGetNativeSize calls the default implementations of the `GSocketAddress.get_native_size` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -87367,7 +87367,7 @@ type SocketAddressEnumerator interface {
 
 	// chain up virtual methods:
 
-	// ParentNext calls the default implementations of the next virtual method.
+	// ParentNext calls the default implementations of the `GSocketAddressEnumerator.next` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -87393,7 +87393,7 @@ type SocketAddressEnumerator interface {
 	// internal errors (other than @cancellable being triggered) will be
 	// ignored.
 	ParentNext(cancellable context.Context) (SocketAddress, error)
-	// ParentNextFinish calls the default implementations of the next_finish virtual method.
+	// ParentNextFinish calls the default implementations of the `GSocketAddressEnumerator.next_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -87698,7 +87698,7 @@ func UnsafeApplySocketAddressEnumeratorOverrides[Instance SocketAddressEnumerato
 	}
 }
 
-// ParentNext calls the default implementations of the next virtual method.
+// ParentNext calls the default implementations of the `GSocketAddressEnumerator.next` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -87753,7 +87753,7 @@ func (enumerator *SocketAddressEnumeratorInstance) ParentNext(cancellable contex
 	return goret, _goerr
 }
 
-// ParentNextFinish calls the default implementations of the next_finish virtual method.
+// ParentNextFinish calls the default implementations of the `GSocketAddressEnumerator.next_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -88414,7 +88414,7 @@ type SocketClient interface {
 
 	// chain up virtual methods:
 
-	// ParentEvent calls the default implementations of the event virtual method.
+	// ParentEvent calls the default implementations of the `GSocketClient.event` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -89683,7 +89683,7 @@ func UnsafeApplySocketClientOverrides[Instance SocketClient](gclass unsafe.Point
 	}
 }
 
-// ParentEvent calls the default implementations of the event virtual method.
+// ParentEvent calls the default implementations of the `GSocketClient.event` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -90324,7 +90324,7 @@ type SocketControlMessage interface {
 
 	// chain up virtual methods:
 
-	// ParentGetLevel calls the default implementations of the get_level virtual method.
+	// ParentGetLevel calls the default implementations of the `GSocketControlMessage.get_level` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -90334,7 +90334,7 @@ type SocketControlMessage interface {
 	// Returns the "level" (i.e. the originating protocol) of the control message.
 	// This is often SOL_SOCKET.
 	ParentGetLevel() int32
-	// ParentGetSize calls the default implementations of the get_size virtual method.
+	// ParentGetSize calls the default implementations of the `GSocketControlMessage.get_size` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -90344,7 +90344,7 @@ type SocketControlMessage interface {
 	// Returns the space required for the control message, not including
 	// headers or alignment.
 	ParentGetSize() uint
-	// ParentGetType calls the default implementations of the get_type virtual method.
+	// ParentGetType calls the default implementations of the `GSocketControlMessage.get_type` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -90577,7 +90577,7 @@ func UnsafeApplySocketControlMessageOverrides[Instance SocketControlMessage](gcl
 	}
 }
 
-// ParentGetLevel calls the default implementations of the get_level virtual method.
+// ParentGetLevel calls the default implementations of the `GSocketControlMessage.get_level` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -90604,7 +90604,7 @@ func (message *SocketControlMessageInstance) ParentGetLevel() int32 {
 	return goret
 }
 
-// ParentGetSize calls the default implementations of the get_size virtual method.
+// ParentGetSize calls the default implementations of the `GSocketControlMessage.get_size` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -90631,7 +90631,7 @@ func (message *SocketControlMessageInstance) ParentGetSize() uint {
 	return goret
 }
 
-// ParentGetType calls the default implementations of the get_type virtual method.
+// ParentGetType calls the default implementations of the `GSocketControlMessage.get_type` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -90971,12 +90971,12 @@ type SocketListener interface {
 
 	// chain up virtual methods:
 
-	// ParentChanged calls the default implementations of the changed virtual method.
+	// ParentChanged calls the default implementations of the `GSocketListener.changed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// virtual method called when the set of socket listened to changes
 	ParentChanged()
-	// ParentEvent calls the default implementations of the event virtual method.
+	// ParentEvent calls the default implementations of the `GSocketListener.event` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -91674,7 +91674,7 @@ func UnsafeApplySocketListenerOverrides[Instance SocketListener](gclass unsafe.P
 	}
 }
 
-// ParentChanged calls the default implementations of the changed virtual method.
+// ParentChanged calls the default implementations of the `GSocketListener.changed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // virtual method called when the set of socket listened to changes
@@ -91689,7 +91689,7 @@ func (listener *SocketListenerInstance) ParentChanged() {
 	runtime.KeepAlive(listener)
 }
 
-// ParentEvent calls the default implementations of the event virtual method.
+// ParentEvent calls the default implementations of the `GSocketListener.event` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -91831,7 +91831,7 @@ type SocketService interface {
 
 	// chain up virtual methods:
 
-	// ParentIncoming calls the default implementations of the incoming virtual method.
+	// ParentIncoming calls the default implementations of the `GSocketService.incoming` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -92062,7 +92062,7 @@ func UnsafeApplySocketServiceOverrides[Instance SocketService](gclass unsafe.Poi
 	}
 }
 
-// ParentIncoming calls the default implementations of the incoming virtual method.
+// ParentIncoming calls the default implementations of the `GSocketService.incoming` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -94378,7 +94378,7 @@ type ThreadedSocketService interface {
 
 	// chain up virtual methods:
 
-	// ParentRun calls the default implementations of the run virtual method.
+	// ParentRun calls the default implementations of the `GThreadedSocketService.run` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -94536,7 +94536,7 @@ func UnsafeApplyThreadedSocketServiceOverrides[Instance ThreadedSocketService](g
 	}
 }
 
-// ParentRun calls the default implementations of the run virtual method.
+// ParentRun calls the default implementations of the `GThreadedSocketService.run` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -94706,7 +94706,7 @@ type TlsCertificate interface {
 
 	// chain up virtual methods:
 
-	// ParentVerify calls the default implementations of the verify virtual method.
+	// ParentVerify calls the default implementations of the `GTlsCertificate.verify` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -95436,7 +95436,7 @@ func UnsafeApplyTlsCertificateOverrides[Instance TlsCertificate](gclass unsafe.P
 	}
 }
 
-// ParentVerify calls the default implementations of the verify virtual method.
+// ParentVerify calls the default implementations of the `GTlsCertificate.verify` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -95949,7 +95949,7 @@ type TlsConnection interface {
 
 	// chain up virtual methods:
 
-	// ParentAcceptCertificate calls the default implementations of the accept_certificate virtual method.
+	// ParentAcceptCertificate calls the default implementations of the `GTlsConnection.accept_certificate` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -95963,7 +95963,7 @@ type TlsConnection interface {
 	//
 	// Check whether to accept a certificate.
 	ParentAcceptCertificate(peerCert TlsCertificate, errors TlsCertificateFlags) bool
-	// ParentGetNegotiatedProtocol calls the default implementations of the get_negotiated_protocol virtual method.
+	// ParentGetNegotiatedProtocol calls the default implementations of the `GTlsConnection.get_negotiated_protocol` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -95978,7 +95978,7 @@ type TlsConnection interface {
 	// does not support ALPN, then this will be %NULL. See
 	// g_tls_connection_set_advertised_protocols().
 	ParentGetNegotiatedProtocol() string
-	// ParentHandshake calls the default implementations of the handshake virtual method.
+	// ParentHandshake calls the default implementations of the `GTlsConnection.handshake` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -96022,7 +96022,7 @@ type TlsConnection interface {
 	// #GTlsConnection::accept_certificate may be emitted during the
 	// handshake.
 	ParentHandshake(cancellable context.Context) (bool, error)
-	// ParentHandshakeFinish calls the default implementations of the handshake_finish virtual method.
+	// ParentHandshakeFinish calls the default implementations of the `GTlsConnection.handshake_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -97052,7 +97052,7 @@ func UnsafeApplyTlsConnectionOverrides[Instance TlsConnection](gclass unsafe.Poi
 	}
 }
 
-// ParentAcceptCertificate calls the default implementations of the accept_certificate virtual method.
+// ParentAcceptCertificate calls the default implementations of the `GTlsConnection.accept_certificate` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -97091,7 +97091,7 @@ func (connection *TlsConnectionInstance) ParentAcceptCertificate(peerCert TlsCer
 	return goret
 }
 
-// ParentGetNegotiatedProtocol calls the default implementations of the get_negotiated_protocol virtual method.
+// ParentGetNegotiatedProtocol calls the default implementations of the `GTlsConnection.get_negotiated_protocol` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -97125,7 +97125,7 @@ func (conn *TlsConnectionInstance) ParentGetNegotiatedProtocol() string {
 	return goret
 }
 
-// ParentHandshake calls the default implementations of the handshake virtual method.
+// ParentHandshake calls the default implementations of the `GTlsConnection.handshake` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -97198,7 +97198,7 @@ func (conn *TlsConnectionInstance) ParentHandshake(cancellable context.Context) 
 	return goret, _goerr
 }
 
-// ParentHandshakeFinish calls the default implementations of the handshake_finish virtual method.
+// ParentHandshakeFinish calls the default implementations of the `GTlsConnection.handshake_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -97560,7 +97560,7 @@ type TlsDatabase interface {
 
 	// chain up virtual methods:
 
-	// ParentCreateCertificateHandle calls the default implementations of the create_certificate_handle virtual method.
+	// ParentCreateCertificateHandle calls the default implementations of the `GTlsDatabase.create_certificate_handle` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -97580,7 +97580,7 @@ type TlsDatabase interface {
 	// and between applications. If a certificate is modified in the database,
 	// then it is not guaranteed that this handle will continue to point to it.
 	ParentCreateCertificateHandle(certificate TlsCertificate) string
-	// ParentLookupCertificateForHandle calls the default implementations of the lookup_certificate_for_handle virtual method.
+	// ParentLookupCertificateForHandle calls the default implementations of the `GTlsDatabase.lookup_certificate_for_handle` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -97608,7 +97608,7 @@ type TlsDatabase interface {
 	// This function can block, use g_tls_database_lookup_certificate_for_handle_async() to perform
 	// the lookup operation asynchronously.
 	ParentLookupCertificateForHandle(cancellable context.Context, handle string, interaction TlsInteraction, flags TlsDatabaseLookupFlags) (TlsCertificate, error)
-	// ParentLookupCertificateForHandleFinish calls the default implementations of the lookup_certificate_for_handle_finish virtual method.
+	// ParentLookupCertificateForHandleFinish calls the default implementations of the `GTlsDatabase.lookup_certificate_for_handle_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -97626,7 +97626,7 @@ type TlsDatabase interface {
 	// If the handle is no longer valid, or does not point to a certificate in
 	// this database, then %NULL will be returned.
 	ParentLookupCertificateForHandleFinish(result AsyncResult) (TlsCertificate, error)
-	// ParentLookupCertificateIssuer calls the default implementations of the lookup_certificate_issuer virtual method.
+	// ParentLookupCertificateIssuer calls the default implementations of the `GTlsDatabase.lookup_certificate_issuer` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -97662,7 +97662,7 @@ type TlsDatabase interface {
 	// security-related decisions. Only GLib itself should make security
 	// decisions about TLS certificates.
 	ParentLookupCertificateIssuer(cancellable context.Context, certificate TlsCertificate, interaction TlsInteraction, flags TlsDatabaseLookupFlags) (TlsCertificate, error)
-	// ParentLookupCertificateIssuerFinish calls the default implementations of the lookup_certificate_issuer_finish virtual method.
+	// ParentLookupCertificateIssuerFinish calls the default implementations of the `GTlsDatabase.lookup_certificate_issuer_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -97677,7 +97677,7 @@ type TlsDatabase interface {
 	// Finish an asynchronous lookup issuer operation. See
 	// g_tls_database_lookup_certificate_issuer() for more information.
 	ParentLookupCertificateIssuerFinish(result AsyncResult) (TlsCertificate, error)
-	// ParentLookupCertificatesIssuedByFinish calls the default implementations of the lookup_certificates_issued_by_finish virtual method.
+	// ParentLookupCertificatesIssuedByFinish calls the default implementations of the `GTlsDatabase.lookup_certificates_issued_by_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -97692,7 +97692,7 @@ type TlsDatabase interface {
 	// Finish an asynchronous lookup of certificates. See
 	// g_tls_database_lookup_certificates_issued_by() for more information.
 	ParentLookupCertificatesIssuedByFinish(result AsyncResult) ([]TlsCertificate, error)
-	// ParentVerifyChain calls the default implementations of the verify_chain virtual method.
+	// ParentVerifyChain calls the default implementations of the `GTlsDatabase.verify_chain` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -97770,7 +97770,7 @@ type TlsDatabase interface {
 	// This function can block. Use g_tls_database_verify_chain_async() to
 	// perform the verification operation asynchronously.
 	ParentVerifyChain(cancellable context.Context, chain TlsCertificate, purpose string, identity SocketConnectable, interaction TlsInteraction, flags TlsDatabaseVerifyFlags) (TlsCertificateFlags, error)
-	// ParentVerifyChainFinish calls the default implementations of the verify_chain_finish virtual method.
+	// ParentVerifyChainFinish calls the default implementations of the `GTlsDatabase.verify_chain_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -98929,7 +98929,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 	}
 }
 
-// ParentCreateCertificateHandle calls the default implementations of the create_certificate_handle virtual method.
+// ParentCreateCertificateHandle calls the default implementations of the `GTlsDatabase.create_certificate_handle` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -98972,7 +98972,7 @@ func (self *TlsDatabaseInstance) ParentCreateCertificateHandle(certificate TlsCe
 	return goret
 }
 
-// ParentLookupCertificateForHandle calls the default implementations of the lookup_certificate_for_handle virtual method.
+// ParentLookupCertificateForHandle calls the default implementations of the `GTlsDatabase.lookup_certificate_for_handle` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -99041,7 +99041,7 @@ func (self *TlsDatabaseInstance) ParentLookupCertificateForHandle(cancellable co
 	return goret, _goerr
 }
 
-// ParentLookupCertificateForHandleFinish calls the default implementations of the lookup_certificate_for_handle_finish virtual method.
+// ParentLookupCertificateForHandleFinish calls the default implementations of the `GTlsDatabase.lookup_certificate_for_handle_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -99084,7 +99084,7 @@ func (self *TlsDatabaseInstance) ParentLookupCertificateForHandleFinish(result A
 	return goret, _goerr
 }
 
-// ParentLookupCertificateIssuer calls the default implementations of the lookup_certificate_issuer virtual method.
+// ParentLookupCertificateIssuer calls the default implementations of the `GTlsDatabase.lookup_certificate_issuer` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -99158,7 +99158,7 @@ func (self *TlsDatabaseInstance) ParentLookupCertificateIssuer(cancellable conte
 	return goret, _goerr
 }
 
-// ParentLookupCertificateIssuerFinish calls the default implementations of the lookup_certificate_issuer_finish virtual method.
+// ParentLookupCertificateIssuerFinish calls the default implementations of the `GTlsDatabase.lookup_certificate_issuer_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -99198,7 +99198,7 @@ func (self *TlsDatabaseInstance) ParentLookupCertificateIssuerFinish(result Asyn
 	return goret, _goerr
 }
 
-// ParentLookupCertificatesIssuedByFinish calls the default implementations of the lookup_certificates_issued_by_finish virtual method.
+// ParentLookupCertificatesIssuedByFinish calls the default implementations of the `GTlsDatabase.lookup_certificates_issued_by_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -99245,7 +99245,7 @@ func (self *TlsDatabaseInstance) ParentLookupCertificatesIssuedByFinish(result A
 	return goret, _goerr
 }
 
-// ParentVerifyChain calls the default implementations of the verify_chain virtual method.
+// ParentVerifyChain calls the default implementations of the `GTlsDatabase.verify_chain` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -99370,7 +99370,7 @@ func (self *TlsDatabaseInstance) ParentVerifyChain(cancellable context.Context, 
 	return goret, _goerr
 }
 
-// ParentVerifyChainFinish calls the default implementations of the verify_chain_finish virtual method.
+// ParentVerifyChainFinish calls the default implementations of the `GTlsDatabase.verify_chain_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -99689,7 +99689,7 @@ type TlsInteraction interface {
 
 	// chain up virtual methods:
 
-	// ParentAskPassword calls the default implementations of the ask_password virtual method.
+	// ParentAskPassword calls the default implementations of the `GTlsInteraction.ask_password` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -99716,7 +99716,7 @@ type TlsInteraction interface {
 	// contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 	// not support immediate cancellation.
 	ParentAskPassword(cancellable context.Context, password TlsPassword) (TlsInteractionResult, error)
-	// ParentAskPasswordFinish calls the default implementations of the ask_password_finish virtual method.
+	// ParentAskPasswordFinish calls the default implementations of the `GTlsInteraction.ask_password_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -99738,7 +99738,7 @@ type TlsInteraction interface {
 	// user then %G_TLS_INTERACTION_FAILED will be returned with an error that
 	// contains a %G_IO_ERROR_CANCELLED error code.
 	ParentAskPasswordFinish(result AsyncResult) (TlsInteractionResult, error)
-	// ParentRequestCertificate calls the default implementations of the request_certificate virtual method.
+	// ParentRequestCertificate calls the default implementations of the `GTlsInteraction.request_certificate` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -99769,7 +99769,7 @@ type TlsInteraction interface {
 	// contains a %G_IO_ERROR_CANCELLED error code. Certain implementations may
 	// not support immediate cancellation.
 	ParentRequestCertificate(cancellable context.Context, connection TlsConnection, flags TlsCertificateRequestFlags) (TlsInteractionResult, error)
-	// ParentRequestCertificateFinish calls the default implementations of the request_certificate_finish virtual method.
+	// ParentRequestCertificateFinish calls the default implementations of the `GTlsInteraction.request_certificate_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -100483,7 +100483,7 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 	}
 }
 
-// ParentAskPassword calls the default implementations of the ask_password virtual method.
+// ParentAskPassword calls the default implementations of the `GTlsInteraction.ask_password` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -100540,7 +100540,7 @@ func (interaction *TlsInteractionInstance) ParentAskPassword(cancellable context
 	return goret, _goerr
 }
 
-// ParentAskPasswordFinish calls the default implementations of the ask_password_finish virtual method.
+// ParentAskPasswordFinish calls the default implementations of the `GTlsInteraction.ask_password_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -100587,7 +100587,7 @@ func (interaction *TlsInteractionInstance) ParentAskPasswordFinish(result AsyncR
 	return goret, _goerr
 }
 
-// ParentRequestCertificate calls the default implementations of the request_certificate virtual method.
+// ParentRequestCertificate calls the default implementations of the `GTlsInteraction.request_certificate` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -100651,7 +100651,7 @@ func (interaction *TlsInteractionInstance) ParentRequestCertificate(cancellable 
 	return goret, _goerr
 }
 
-// ParentRequestCertificateFinish calls the default implementations of the request_certificate_finish virtual method.
+// ParentRequestCertificateFinish calls the default implementations of the `GTlsInteraction.request_certificate_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -100823,7 +100823,7 @@ type TlsPassword interface {
 
 	// chain up virtual methods:
 
-	// ParentGetDefaultWarning calls the default implementations of the get_default_warning virtual method.
+	// ParentGetDefaultWarning calls the default implementations of the `GTlsPassword.get_default_warning` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -100833,7 +100833,7 @@ type TlsPassword interface {
 	// virtual method for g_tls_password_get_warning() if no
 	//  value has been set using g_tls_password_set_warning()
 	ParentGetDefaultWarning() string
-	// ParentGetValue calls the default implementations of the get_value virtual method.
+	// ParentGetValue calls the default implementations of the `GTlsPassword.get_value` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -101210,7 +101210,7 @@ func UnsafeApplyTlsPasswordOverrides[Instance TlsPassword](gclass unsafe.Pointer
 	}
 }
 
-// ParentGetDefaultWarning calls the default implementations of the get_default_warning virtual method.
+// ParentGetDefaultWarning calls the default implementations of the `GTlsPassword.get_default_warning` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -101237,7 +101237,7 @@ func (password *TlsPasswordInstance) ParentGetDefaultWarning() string {
 	return goret
 }
 
-// ParentGetValue calls the default implementations of the get_value virtual method.
+// ParentGetValue calls the default implementations of the `GTlsPassword.get_value` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -101423,14 +101423,14 @@ type Vfs interface {
 
 	// chain up virtual methods:
 
-	// ParentAddWritableNamespaces calls the default implementations of the add_writable_namespaces virtual method.
+	// ParentAddWritableNamespaces calls the default implementations of the `GVfs.add_writable_namespaces` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- list *FileAttributeInfoList 
 	ParentAddWritableNamespaces(list *FileAttributeInfoList)
-	// ParentGetFileForPath calls the default implementations of the get_file_for_path virtual method.
+	// ParentGetFileForPath calls the default implementations of the `GVfs.get_file_for_path` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -101443,7 +101443,7 @@ type Vfs interface {
 	//
 	// Gets a #GFile for @path.
 	ParentGetFileForPath(path string) File
-	// ParentGetFileForURI calls the default implementations of the get_file_for_uri virtual method.
+	// ParentGetFileForURI calls the default implementations of the `GVfs.get_file_for_uri` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -101460,7 +101460,7 @@ type Vfs interface {
 	// might not support any I/O operation if the URI
 	// is malformed or if the URI scheme is not supported.
 	ParentGetFileForURI(uri string) File
-	// ParentGetSupportedURISchemes calls the default implementations of the get_supported_uri_schemes virtual method.
+	// ParentGetSupportedURISchemes calls the default implementations of the `GVfs.get_supported_uri_schemes` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -101469,7 +101469,7 @@ type Vfs interface {
 	//
 	// Gets a list of URI schemes supported by @vfs.
 	ParentGetSupportedURISchemes() []string
-	// ParentIsActive calls the default implementations of the is_active virtual method.
+	// ParentIsActive calls the default implementations of the `GVfs.is_active` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -101478,7 +101478,7 @@ type Vfs interface {
 	//
 	// Checks if the VFS is active.
 	ParentIsActive() bool
-	// ParentLocalFileMoved calls the default implementations of the local_file_moved virtual method.
+	// ParentLocalFileMoved calls the default implementations of the `GVfs.local_file_moved` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -101486,14 +101486,14 @@ type Vfs interface {
 	// 	- source string 
 	// 	- dest string 
 	ParentLocalFileMoved(source string, dest string)
-	// ParentLocalFileRemoved calls the default implementations of the local_file_removed virtual method.
+	// ParentLocalFileRemoved calls the default implementations of the `GVfs.local_file_removed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- filename string 
 	ParentLocalFileRemoved(filename string)
-	// ParentLocalFileSetAttributes calls the default implementations of the local_file_set_attributes virtual method.
+	// ParentLocalFileSetAttributes calls the default implementations of the `GVfs.local_file_set_attributes` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -101508,7 +101508,7 @@ type Vfs interface {
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	ParentLocalFileSetAttributes(cancellable context.Context, filename string, info FileInfo, flags FileQueryInfoFlags) (bool, error)
-	// ParentParseName calls the default implementations of the parse_name virtual method.
+	// ParentParseName calls the default implementations of the `GVfs.parse_name` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -102170,7 +102170,7 @@ func UnsafeApplyVfsOverrides[Instance Vfs](gclass unsafe.Pointer, overrides VfsO
 	}
 }
 
-// ParentAddWritableNamespaces calls the default implementations of the add_writable_namespaces virtual method.
+// ParentAddWritableNamespaces calls the default implementations of the `GVfs.add_writable_namespaces` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -102190,7 +102190,7 @@ func (vfs *VfsInstance) ParentAddWritableNamespaces(list *FileAttributeInfoList)
 	runtime.KeepAlive(list)
 }
 
-// ParentGetFileForPath calls the default implementations of the get_file_for_path virtual method.
+// ParentGetFileForPath calls the default implementations of the `GVfs.get_file_for_path` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -102224,7 +102224,7 @@ func (vfs *VfsInstance) ParentGetFileForPath(path string) File {
 	return goret
 }
 
-// ParentGetFileForURI calls the default implementations of the get_file_for_uri virtual method.
+// ParentGetFileForURI calls the default implementations of the `GVfs.get_file_for_uri` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -102262,7 +102262,7 @@ func (vfs *VfsInstance) ParentGetFileForURI(uri string) File {
 	return goret
 }
 
-// ParentGetSupportedURISchemes calls the default implementations of the get_supported_uri_schemes virtual method.
+// ParentGetSupportedURISchemes calls the default implementations of the `GVfs.get_supported_uri_schemes` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -102290,7 +102290,7 @@ func (vfs *VfsInstance) ParentGetSupportedURISchemes() []string {
 	return goret
 }
 
-// ParentIsActive calls the default implementations of the is_active virtual method.
+// ParentIsActive calls the default implementations of the `GVfs.is_active` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -102318,7 +102318,7 @@ func (vfs *VfsInstance) ParentIsActive() bool {
 	return goret
 }
 
-// ParentLocalFileMoved calls the default implementations of the local_file_moved virtual method.
+// ParentLocalFileMoved calls the default implementations of the `GVfs.local_file_moved` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -102344,7 +102344,7 @@ func (vfs *VfsInstance) ParentLocalFileMoved(source string, dest string) {
 	runtime.KeepAlive(dest)
 }
 
-// ParentLocalFileRemoved calls the default implementations of the local_file_removed virtual method.
+// ParentLocalFileRemoved calls the default implementations of the `GVfs.local_file_removed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -102365,7 +102365,7 @@ func (vfs *VfsInstance) ParentLocalFileRemoved(filename string) {
 	runtime.KeepAlive(filename)
 }
 
-// ParentLocalFileSetAttributes calls the default implementations of the local_file_set_attributes virtual method.
+// ParentLocalFileSetAttributes calls the default implementations of the `GVfs.local_file_set_attributes` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -102419,7 +102419,7 @@ func (vfs *VfsInstance) ParentLocalFileSetAttributes(cancellable context.Context
 	return goret, _goerr
 }
 
-// ParentParseName calls the default implementations of the parse_name virtual method.
+// ParentParseName calls the default implementations of the `GVfs.parse_name` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -102617,42 +102617,42 @@ type VolumeMonitor interface {
 
 	// chain up virtual methods:
 
-	// ParentDriveChanged calls the default implementations of the drive_changed virtual method.
+	// ParentDriveChanged calls the default implementations of the `GVolumeMonitor.drive_changed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- drive Drive 
 	ParentDriveChanged(drive Drive)
-	// ParentDriveConnected calls the default implementations of the drive_connected virtual method.
+	// ParentDriveConnected calls the default implementations of the `GVolumeMonitor.drive_connected` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- drive Drive 
 	ParentDriveConnected(drive Drive)
-	// ParentDriveDisconnected calls the default implementations of the drive_disconnected virtual method.
+	// ParentDriveDisconnected calls the default implementations of the `GVolumeMonitor.drive_disconnected` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- drive Drive 
 	ParentDriveDisconnected(drive Drive)
-	// ParentDriveEjectButton calls the default implementations of the drive_eject_button virtual method.
+	// ParentDriveEjectButton calls the default implementations of the `GVolumeMonitor.drive_eject_button` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- drive Drive 
 	ParentDriveEjectButton(drive Drive)
-	// ParentDriveStopButton calls the default implementations of the drive_stop_button virtual method.
+	// ParentDriveStopButton calls the default implementations of the `GVolumeMonitor.drive_stop_button` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- drive Drive 
 	ParentDriveStopButton(drive Drive)
-	// ParentGetConnectedDrives calls the default implementations of the get_connected_drives virtual method.
+	// ParentGetConnectedDrives calls the default implementations of the `GVolumeMonitor.get_connected_drives` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -102664,7 +102664,7 @@ type VolumeMonitor interface {
 	// The returned list should be freed with g_list_free(), after
 	// its elements have been unreffed with g_object_unref().
 	ParentGetConnectedDrives() []Drive
-	// ParentGetMountForUuid calls the default implementations of the get_mount_for_uuid virtual method.
+	// ParentGetMountForUuid calls the default implementations of the `GVolumeMonitor.get_mount_for_uuid` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -102677,7 +102677,7 @@ type VolumeMonitor interface {
 	//
 	// Finds a #GMount object by its UUID (see g_mount_get_uuid())
 	ParentGetMountForUuid(uuid string) Mount
-	// ParentGetMounts calls the default implementations of the get_mounts virtual method.
+	// ParentGetMounts calls the default implementations of the `GVolumeMonitor.get_mounts` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -102689,7 +102689,7 @@ type VolumeMonitor interface {
 	// The returned list should be freed with g_list_free(), after
 	// its elements have been unreffed with g_object_unref().
 	ParentGetMounts() []Mount
-	// ParentGetVolumeForUuid calls the default implementations of the get_volume_for_uuid virtual method.
+	// ParentGetVolumeForUuid calls the default implementations of the `GVolumeMonitor.get_volume_for_uuid` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -102702,7 +102702,7 @@ type VolumeMonitor interface {
 	//
 	// Finds a #GVolume object by its UUID (see g_volume_get_uuid())
 	ParentGetVolumeForUuid(uuid string) Volume
-	// ParentGetVolumes calls the default implementations of the get_volumes virtual method.
+	// ParentGetVolumes calls the default implementations of the `GVolumeMonitor.get_volumes` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -102714,49 +102714,49 @@ type VolumeMonitor interface {
 	// The returned list should be freed with g_list_free(), after
 	// its elements have been unreffed with g_object_unref().
 	ParentGetVolumes() []Volume
-	// ParentMountAdded calls the default implementations of the mount_added virtual method.
+	// ParentMountAdded calls the default implementations of the `GVolumeMonitor.mount_added` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- mount Mount 
 	ParentMountAdded(mount Mount)
-	// ParentMountChanged calls the default implementations of the mount_changed virtual method.
+	// ParentMountChanged calls the default implementations of the `GVolumeMonitor.mount_changed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- mount Mount 
 	ParentMountChanged(mount Mount)
-	// ParentMountPreUnmount calls the default implementations of the mount_pre_unmount virtual method.
+	// ParentMountPreUnmount calls the default implementations of the `GVolumeMonitor.mount_pre_unmount` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- mount Mount 
 	ParentMountPreUnmount(mount Mount)
-	// ParentMountRemoved calls the default implementations of the mount_removed virtual method.
+	// ParentMountRemoved calls the default implementations of the `GVolumeMonitor.mount_removed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- mount Mount 
 	ParentMountRemoved(mount Mount)
-	// ParentVolumeAdded calls the default implementations of the volume_added virtual method.
+	// ParentVolumeAdded calls the default implementations of the `GVolumeMonitor.volume_added` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- volume Volume 
 	ParentVolumeAdded(volume Volume)
-	// ParentVolumeChanged calls the default implementations of the volume_changed virtual method.
+	// ParentVolumeChanged calls the default implementations of the `GVolumeMonitor.volume_changed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- volume Volume 
 	ParentVolumeChanged(volume Volume)
-	// ParentVolumeRemoved calls the default implementations of the volume_removed virtual method.
+	// ParentVolumeRemoved calls the default implementations of the `GVolumeMonitor.volume_removed` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -103607,7 +103607,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 	}
 }
 
-// ParentDriveChanged calls the default implementations of the drive_changed virtual method.
+// ParentDriveChanged calls the default implementations of the `GVolumeMonitor.drive_changed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -103627,7 +103627,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentDriveChanged(drive Drive) {
 	runtime.KeepAlive(drive)
 }
 
-// ParentDriveConnected calls the default implementations of the drive_connected virtual method.
+// ParentDriveConnected calls the default implementations of the `GVolumeMonitor.drive_connected` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -103647,7 +103647,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentDriveConnected(drive Drive) {
 	runtime.KeepAlive(drive)
 }
 
-// ParentDriveDisconnected calls the default implementations of the drive_disconnected virtual method.
+// ParentDriveDisconnected calls the default implementations of the `GVolumeMonitor.drive_disconnected` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -103667,7 +103667,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentDriveDisconnected(drive Drive)
 	runtime.KeepAlive(drive)
 }
 
-// ParentDriveEjectButton calls the default implementations of the drive_eject_button virtual method.
+// ParentDriveEjectButton calls the default implementations of the `GVolumeMonitor.drive_eject_button` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -103687,7 +103687,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentDriveEjectButton(drive Drive) 
 	runtime.KeepAlive(drive)
 }
 
-// ParentDriveStopButton calls the default implementations of the drive_stop_button virtual method.
+// ParentDriveStopButton calls the default implementations of the `GVolumeMonitor.drive_stop_button` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -103707,7 +103707,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentDriveStopButton(drive Drive) {
 	runtime.KeepAlive(drive)
 }
 
-// ParentGetConnectedDrives calls the default implementations of the get_connected_drives virtual method.
+// ParentGetConnectedDrives calls the default implementations of the `GVolumeMonitor.get_connected_drives` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -103743,7 +103743,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentGetConnectedDrives() []Drive {
 	return goret
 }
 
-// ParentGetMountForUuid calls the default implementations of the get_mount_for_uuid virtual method.
+// ParentGetMountForUuid calls the default implementations of the `GVolumeMonitor.get_mount_for_uuid` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -103779,7 +103779,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentGetMountForUuid(uuid string) M
 	return goret
 }
 
-// ParentGetMounts calls the default implementations of the get_mounts virtual method.
+// ParentGetMounts calls the default implementations of the `GVolumeMonitor.get_mounts` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -103815,7 +103815,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentGetMounts() []Mount {
 	return goret
 }
 
-// ParentGetVolumeForUuid calls the default implementations of the get_volume_for_uuid virtual method.
+// ParentGetVolumeForUuid calls the default implementations of the `GVolumeMonitor.get_volume_for_uuid` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -103851,7 +103851,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentGetVolumeForUuid(uuid string) 
 	return goret
 }
 
-// ParentGetVolumes calls the default implementations of the get_volumes virtual method.
+// ParentGetVolumes calls the default implementations of the `GVolumeMonitor.get_volumes` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -103887,7 +103887,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentGetVolumes() []Volume {
 	return goret
 }
 
-// ParentMountAdded calls the default implementations of the mount_added virtual method.
+// ParentMountAdded calls the default implementations of the `GVolumeMonitor.mount_added` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -103907,7 +103907,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentMountAdded(mount Mount) {
 	runtime.KeepAlive(mount)
 }
 
-// ParentMountChanged calls the default implementations of the mount_changed virtual method.
+// ParentMountChanged calls the default implementations of the `GVolumeMonitor.mount_changed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -103927,7 +103927,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentMountChanged(mount Mount) {
 	runtime.KeepAlive(mount)
 }
 
-// ParentMountPreUnmount calls the default implementations of the mount_pre_unmount virtual method.
+// ParentMountPreUnmount calls the default implementations of the `GVolumeMonitor.mount_pre_unmount` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -103947,7 +103947,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentMountPreUnmount(mount Mount) {
 	runtime.KeepAlive(mount)
 }
 
-// ParentMountRemoved calls the default implementations of the mount_removed virtual method.
+// ParentMountRemoved calls the default implementations of the `GVolumeMonitor.mount_removed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -103967,7 +103967,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentMountRemoved(mount Mount) {
 	runtime.KeepAlive(mount)
 }
 
-// ParentVolumeAdded calls the default implementations of the volume_added virtual method.
+// ParentVolumeAdded calls the default implementations of the `GVolumeMonitor.volume_added` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -103987,7 +103987,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentVolumeAdded(volume Volume) {
 	runtime.KeepAlive(volume)
 }
 
-// ParentVolumeChanged calls the default implementations of the volume_changed virtual method.
+// ParentVolumeChanged calls the default implementations of the `GVolumeMonitor.volume_changed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -104007,7 +104007,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentVolumeChanged(volume Volume) {
 	runtime.KeepAlive(volume)
 }
 
-// ParentVolumeRemoved calls the default implementations of the volume_removed virtual method.
+// ParentVolumeRemoved calls the default implementations of the `GVolumeMonitor.volume_removed` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -104332,21 +104332,21 @@ type FileIOStream interface {
 
 	// chain up virtual methods:
 
-	// ParentCanSeek calls the default implementations of the can_seek virtual method.
+	// ParentCanSeek calls the default implementations of the `GFileIOStream.can_seek` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	ParentCanSeek() bool
-	// ParentCanTruncate calls the default implementations of the can_truncate virtual method.
+	// ParentCanTruncate calls the default implementations of the `GFileIOStream.can_truncate` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	ParentCanTruncate() bool
-	// ParentGetEtag calls the default implementations of the get_etag virtual method.
+	// ParentGetEtag calls the default implementations of the `GFileIOStream.get_etag` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -104357,7 +104357,7 @@ type FileIOStream interface {
 	// This must be called after the stream has been written
 	// and closed, as the etag can change while writing.
 	ParentGetEtag() string
-	// ParentQueryInfo calls the default implementations of the query_info virtual method.
+	// ParentQueryInfo calls the default implementations of the `GFileIOStream.query_info` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -104388,7 +104388,7 @@ type FileIOStream interface {
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be set, and %NULL will
 	// be returned.
 	ParentQueryInfo(cancellable context.Context, attributes string) (FileInfo, error)
-	// ParentQueryInfoFinish calls the default implementations of the query_info_finish virtual method.
+	// ParentQueryInfoFinish calls the default implementations of the `GFileIOStream.query_info_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -104403,7 +104403,7 @@ type FileIOStream interface {
 	// Finalizes the asynchronous query started
 	// by g_file_io_stream_query_info_async().
 	ParentQueryInfoFinish(result AsyncResult) (FileInfo, error)
-	// ParentSeek calls the default implementations of the seek virtual method.
+	// ParentSeek calls the default implementations of the `GFileIOStream.seek` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -104417,14 +104417,14 @@ type FileIOStream interface {
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	ParentSeek(cancellable context.Context, offset int64, typ glib.SeekType) (bool, error)
-	// ParentTell calls the default implementations of the tell virtual method.
+	// ParentTell calls the default implementations of the `GFileIOStream.tell` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int64 
 	ParentTell() int64
-	// ParentTruncateFn calls the default implementations of the truncate_fn virtual method.
+	// ParentTruncateFn calls the default implementations of the `GFileIOStream.truncate_fn` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -104974,7 +104974,7 @@ func UnsafeApplyFileIOStreamOverrides[Instance FileIOStream](gclass unsafe.Point
 	}
 }
 
-// ParentCanSeek calls the default implementations of the can_seek virtual method.
+// ParentCanSeek calls the default implementations of the `GFileIOStream.can_seek` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -105000,7 +105000,7 @@ func (stream *FileIOStreamInstance) ParentCanSeek() bool {
 	return goret
 }
 
-// ParentCanTruncate calls the default implementations of the can_truncate virtual method.
+// ParentCanTruncate calls the default implementations of the `GFileIOStream.can_truncate` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -105026,7 +105026,7 @@ func (stream *FileIOStreamInstance) ParentCanTruncate() bool {
 	return goret
 }
 
-// ParentGetEtag calls the default implementations of the get_etag virtual method.
+// ParentGetEtag calls the default implementations of the `GFileIOStream.get_etag` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -105057,7 +105057,7 @@ func (stream *FileIOStreamInstance) ParentGetEtag() string {
 	return goret
 }
 
-// ParentQueryInfo calls the default implementations of the query_info virtual method.
+// ParentQueryInfo calls the default implementations of the `GFileIOStream.query_info` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -105119,7 +105119,7 @@ func (stream *FileIOStreamInstance) ParentQueryInfo(cancellable context.Context,
 	return goret, _goerr
 }
 
-// ParentQueryInfoFinish calls the default implementations of the query_info_finish virtual method.
+// ParentQueryInfoFinish calls the default implementations of the `GFileIOStream.query_info_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -105159,7 +105159,7 @@ func (stream *FileIOStreamInstance) ParentQueryInfoFinish(result AsyncResult) (F
 	return goret, _goerr
 }
 
-// ParentSeek calls the default implementations of the seek virtual method.
+// ParentSeek calls the default implementations of the `GFileIOStream.seek` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -105208,7 +105208,7 @@ func (stream *FileIOStreamInstance) ParentSeek(cancellable context.Context, offs
 	return goret, _goerr
 }
 
-// ParentTell calls the default implementations of the tell virtual method.
+// ParentTell calls the default implementations of the `GFileIOStream.tell` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -105232,7 +105232,7 @@ func (stream *FileIOStreamInstance) ParentTell() int64 {
 	return goret
 }
 
-// ParentTruncateFn calls the default implementations of the truncate_fn virtual method.
+// ParentTruncateFn calls the default implementations of the `GFileIOStream.truncate_fn` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -105385,14 +105385,14 @@ type FileInputStream interface {
 
 	// chain up virtual methods:
 
-	// ParentCanSeek calls the default implementations of the can_seek virtual method.
+	// ParentCanSeek calls the default implementations of the `GFileInputStream.can_seek` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	ParentCanSeek() bool
-	// ParentQueryInfo calls the default implementations of the query_info virtual method.
+	// ParentQueryInfo calls the default implementations of the `GFileInputStream.query_info` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -105411,7 +105411,7 @@ type FileInputStream interface {
 	// stream is blocked, the stream will set the pending flag internally, and
 	// any other operations on the stream will fail with %G_IO_ERROR_PENDING.
 	ParentQueryInfo(cancellable context.Context, attributes string) (FileInfo, error)
-	// ParentQueryInfoFinish calls the default implementations of the query_info_finish virtual method.
+	// ParentQueryInfoFinish calls the default implementations of the `GFileInputStream.query_info_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -105425,7 +105425,7 @@ type FileInputStream interface {
 	//
 	// Finishes an asynchronous info query operation.
 	ParentQueryInfoFinish(result AsyncResult) (FileInfo, error)
-	// ParentSeek calls the default implementations of the seek virtual method.
+	// ParentSeek calls the default implementations of the `GFileInputStream.seek` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -105439,7 +105439,7 @@ type FileInputStream interface {
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	ParentSeek(cancellable context.Context, offset int64, typ glib.SeekType) (bool, error)
-	// ParentTell calls the default implementations of the tell virtual method.
+	// ParentTell calls the default implementations of the `GFileInputStream.tell` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -105831,7 +105831,7 @@ func UnsafeApplyFileInputStreamOverrides[Instance FileInputStream](gclass unsafe
 	}
 }
 
-// ParentCanSeek calls the default implementations of the can_seek virtual method.
+// ParentCanSeek calls the default implementations of the `GFileInputStream.can_seek` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -105857,7 +105857,7 @@ func (stream *FileInputStreamInstance) ParentCanSeek() bool {
 	return goret
 }
 
-// ParentQueryInfo calls the default implementations of the query_info virtual method.
+// ParentQueryInfo calls the default implementations of the `GFileInputStream.query_info` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -105907,7 +105907,7 @@ func (stream *FileInputStreamInstance) ParentQueryInfo(cancellable context.Conte
 	return goret, _goerr
 }
 
-// ParentQueryInfoFinish calls the default implementations of the query_info_finish virtual method.
+// ParentQueryInfoFinish calls the default implementations of the `GFileInputStream.query_info_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -105946,7 +105946,7 @@ func (stream *FileInputStreamInstance) ParentQueryInfoFinish(result AsyncResult)
 	return goret, _goerr
 }
 
-// ParentSeek calls the default implementations of the seek virtual method.
+// ParentSeek calls the default implementations of the `GFileInputStream.seek` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -105995,7 +105995,7 @@ func (stream *FileInputStreamInstance) ParentSeek(cancellable context.Context, o
 	return goret, _goerr
 }
 
-// ParentTell calls the default implementations of the tell virtual method.
+// ParentTell calls the default implementations of the `GFileInputStream.tell` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -106150,21 +106150,21 @@ type FileOutputStream interface {
 
 	// chain up virtual methods:
 
-	// ParentCanSeek calls the default implementations of the can_seek virtual method.
+	// ParentCanSeek calls the default implementations of the `GFileOutputStream.can_seek` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	ParentCanSeek() bool
-	// ParentCanTruncate calls the default implementations of the can_truncate virtual method.
+	// ParentCanTruncate calls the default implementations of the `GFileOutputStream.can_truncate` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	ParentCanTruncate() bool
-	// ParentGetEtag calls the default implementations of the get_etag virtual method.
+	// ParentGetEtag calls the default implementations of the `GFileOutputStream.get_etag` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
@@ -106175,7 +106175,7 @@ type FileOutputStream interface {
 	// This must be called after the stream has been written
 	// and closed, as the etag can change while writing.
 	ParentGetEtag() string
-	// ParentQueryInfo calls the default implementations of the query_info virtual method.
+	// ParentQueryInfo calls the default implementations of the `GFileOutputStream.query_info` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -106206,7 +106206,7 @@ type FileOutputStream interface {
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be set, and %NULL will
 	// be returned.
 	ParentQueryInfo(cancellable context.Context, attributes string) (FileInfo, error)
-	// ParentQueryInfoFinish calls the default implementations of the query_info_finish virtual method.
+	// ParentQueryInfoFinish calls the default implementations of the `GFileOutputStream.query_info_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -106221,7 +106221,7 @@ type FileOutputStream interface {
 	// Finalizes the asynchronous query started
 	// by g_file_output_stream_query_info_async().
 	ParentQueryInfoFinish(result AsyncResult) (FileInfo, error)
-	// ParentSeek calls the default implementations of the seek virtual method.
+	// ParentSeek calls the default implementations of the `GFileOutputStream.seek` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -106235,14 +106235,14 @@ type FileOutputStream interface {
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	ParentSeek(cancellable context.Context, offset int64, typ glib.SeekType) (bool, error)
-	// ParentTell calls the default implementations of the tell virtual method.
+	// ParentTell calls the default implementations of the `GFileOutputStream.tell` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int64 
 	ParentTell() int64
-	// ParentTruncateFn calls the default implementations of the truncate_fn virtual method.
+	// ParentTruncateFn calls the default implementations of the `GFileOutputStream.truncate_fn` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -106791,7 +106791,7 @@ func UnsafeApplyFileOutputStreamOverrides[Instance FileOutputStream](gclass unsa
 	}
 }
 
-// ParentCanSeek calls the default implementations of the can_seek virtual method.
+// ParentCanSeek calls the default implementations of the `GFileOutputStream.can_seek` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -106817,7 +106817,7 @@ func (stream *FileOutputStreamInstance) ParentCanSeek() bool {
 	return goret
 }
 
-// ParentCanTruncate calls the default implementations of the can_truncate virtual method.
+// ParentCanTruncate calls the default implementations of the `GFileOutputStream.can_truncate` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -106843,7 +106843,7 @@ func (stream *FileOutputStreamInstance) ParentCanTruncate() bool {
 	return goret
 }
 
-// ParentGetEtag calls the default implementations of the get_etag virtual method.
+// ParentGetEtag calls the default implementations of the `GFileOutputStream.get_etag` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -106874,7 +106874,7 @@ func (stream *FileOutputStreamInstance) ParentGetEtag() string {
 	return goret
 }
 
-// ParentQueryInfo calls the default implementations of the query_info virtual method.
+// ParentQueryInfo calls the default implementations of the `GFileOutputStream.query_info` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -106936,7 +106936,7 @@ func (stream *FileOutputStreamInstance) ParentQueryInfo(cancellable context.Cont
 	return goret, _goerr
 }
 
-// ParentQueryInfoFinish calls the default implementations of the query_info_finish virtual method.
+// ParentQueryInfoFinish calls the default implementations of the `GFileOutputStream.query_info_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -106976,7 +106976,7 @@ func (stream *FileOutputStreamInstance) ParentQueryInfoFinish(result AsyncResult
 	return goret, _goerr
 }
 
-// ParentSeek calls the default implementations of the seek virtual method.
+// ParentSeek calls the default implementations of the `GFileOutputStream.seek` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -107025,7 +107025,7 @@ func (stream *FileOutputStreamInstance) ParentSeek(cancellable context.Context, 
 	return goret, _goerr
 }
 
-// ParentTell calls the default implementations of the tell virtual method.
+// ParentTell calls the default implementations of the `GFileOutputStream.tell` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function returns the following values:
@@ -107049,7 +107049,7 @@ func (stream *FileOutputStreamInstance) ParentTell() int64 {
 	return goret
 }
 
-// ParentTruncateFn calls the default implementations of the truncate_fn virtual method.
+// ParentTruncateFn calls the default implementations of the `GFileOutputStream.truncate_fn` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -109735,7 +109735,7 @@ type BufferedInputStream interface {
 
 	// chain up virtual methods:
 
-	// ParentFill calls the default implementations of the fill virtual method.
+	// ParentFill calls the default implementations of the `GBufferedInputStream.fill` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -109774,7 +109774,7 @@ type BufferedInputStream interface {
 	// For the asynchronous, non-blocking, version of this function, see
 	// [method@Gio.BufferedInputStream.fill_async].
 	ParentFill(cancellable context.Context, count int) (int, error)
-	// ParentFillFinish calls the default implementations of the fill_finish virtual method.
+	// ParentFillFinish calls the default implementations of the `GBufferedInputStream.fill_finish` virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
 	// The function takes the following parameters:
@@ -110356,7 +110356,7 @@ func UnsafeApplyBufferedInputStreamOverrides[Instance BufferedInputStream](gclas
 	}
 }
 
-// ParentFill calls the default implementations of the fill virtual method.
+// ParentFill calls the default implementations of the `GBufferedInputStream.fill` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
@@ -110425,7 +110425,7 @@ func (stream *BufferedInputStreamInstance) ParentFill(cancellable context.Contex
 	return goret, _goerr
 }
 
-// ParentFillFinish calls the default implementations of the fill_finish virtual method.
+// ParentFillFinish calls the default implementations of the `GBufferedInputStream.fill_finish` virtual method.
 // This function's behavior is not defined when the parent does not implement the virtual method.
 // 
 // The function takes the following parameters:
