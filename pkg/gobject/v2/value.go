@@ -174,58 +174,14 @@ type GoValueInitializer interface {
 // InitGoValue sets the Go value of the GValue. The GValue MUST NOT HAVE BEEN
 // INITIALIZED ALREADY!
 func (v *Value) InitGoValue(goValue any) {
-	// check for overridden init first
-	if initter, ok := goValue.(GoValueInitializer); ok {
-		v.Init(initter.GoValueType())
-		return
-	}
-
-	if goValue == nil {
-		v.Init(TypePointer)
-		return
-	}
-
-	if initValuePrimitive(v, goValue) {
-		return
-	}
-
 	if goValue == InvalidValue {
 		v.Init(TypeInvalid)
 		return
 	}
 
-	// Try this since above doesn't catch constants under other types.
-	rval := reflect.Indirect(reflect.ValueOf(goValue))
+	if typ := valueType(goValue); typ != TypeInvalid {
+		v.Init(typ)
 
-	var ok bool
-	switch rval.Kind() {
-	case reflect.Bool:
-		ok = initValuePrimitive(v, rval.Bool())
-	case reflect.Int8:
-		ok = initValuePrimitive(v, int8(rval.Int()))
-	case reflect.Int32:
-		ok = initValuePrimitive(v, int32(rval.Int()))
-	case reflect.Int64:
-		ok = initValuePrimitive(v, int64(rval.Int()))
-	case reflect.Int:
-		ok = initValuePrimitive(v, int(rval.Int()))
-	case reflect.Uint8:
-		ok = initValuePrimitive(v, uint8(rval.Uint()))
-	case reflect.Uint32:
-		ok = initValuePrimitive(v, uint32(rval.Uint()))
-	case reflect.Uint64:
-		ok = initValuePrimitive(v, uint64(rval.Uint()))
-	case reflect.Uint:
-		ok = initValuePrimitive(v, uint(rval.Uint()))
-	case reflect.Float32:
-		ok = initValuePrimitive(v, float32(rval.Float()))
-	case reflect.Float64:
-		ok = initValuePrimitive(v, float64(rval.Float()))
-	case reflect.String:
-		ok = initValuePrimitive(v, rval.String())
-	}
-
-	if ok {
 		return
 	}
 
@@ -294,36 +250,91 @@ func (v *Value) SetGoValue(goValue any) {
 	log.Panicf("type %T not implemented", goValue)
 }
 
-func initValuePrimitive(val *Value, v interface{}) bool {
+// valueType returns the GType needed to initialize a GValue for the given value.
+func valueType(v any) Type {
+	if v == InvalidValue {
+		return TypeInvalid
+	}
+
+	// check for overridden init first
+	if initter, ok := v.(GoValueInitializer); ok {
+		return initter.GoValueType()
+	}
+
+	if v == nil {
+		return TypePointer
+	}
+
+	if valueTyp := valueTypeForPrimitive(v); valueTyp != TypeInvalid {
+		return valueTyp
+	}
+
+	return valueTypeForPrimitiveReflect(v)
+}
+
+func valueTypeForPrimitive(v interface{}) Type {
 	switch v.(type) {
 	case bool:
-		val.Init(TypeBoolean)
+		return TypeBoolean
 	case int8:
-		val.Init(TypeChar)
+		return TypeChar
 	case int32:
-		val.Init(TypeInt) // C int is 32-bit
+		return TypeInt // C int is 32-bit
 	case int64:
-		val.Init(TypeInt64)
+		return TypeInt64
 	case int:
-		val.Init(TypeInt64)
+		return TypeInt64
 	case uint8:
-		val.Init(TypeUchar)
+		return TypeUchar
 	case uint32:
-		val.Init(TypeUint)
+		return TypeUint
 	case uint64:
-		val.Init(TypeUint64)
+		return TypeUint64
 	case uint:
-		val.Init(TypeUint64)
+		return TypeUint64
 	case float32:
-		val.Init(TypeFloat)
+		return TypeFloat
 	case float64:
-		val.Init(TypeDouble)
+		return TypeDouble
 	case string:
-		val.Init(TypeString)
+		return TypeString
 	default:
-		return false
+		return TypeInvalid
 	}
-	return true
+}
+
+func valueTypeForPrimitiveReflect(goValue any) Type {
+	// Try this since above doesn't catch constants under other types.
+	rval := reflect.Indirect(reflect.ValueOf(goValue))
+
+	switch rval.Kind() {
+	case reflect.Bool:
+		return valueTypeForPrimitive(rval.Bool())
+	case reflect.Int8:
+		return valueTypeForPrimitive(int8(rval.Int()))
+	case reflect.Int32:
+		return valueTypeForPrimitive(int32(rval.Int()))
+	case reflect.Int64:
+		return valueTypeForPrimitive(int64(rval.Int()))
+	case reflect.Int:
+		return valueTypeForPrimitive(int(rval.Int()))
+	case reflect.Uint8:
+		return valueTypeForPrimitive(uint8(rval.Uint()))
+	case reflect.Uint32:
+		return valueTypeForPrimitive(uint32(rval.Uint()))
+	case reflect.Uint64:
+		return valueTypeForPrimitive(uint64(rval.Uint()))
+	case reflect.Uint:
+		return valueTypeForPrimitive(uint(rval.Uint()))
+	case reflect.Float32:
+		return valueTypeForPrimitive(float32(rval.Float()))
+	case reflect.Float64:
+		return valueTypeForPrimitive(float64(rval.Float()))
+	case reflect.String:
+		return valueTypeForPrimitive(rval.String())
+	}
+
+	return TypeInvalid
 }
 
 func setValuePrimitive(val *Value, v interface{}) bool {
@@ -583,19 +594,17 @@ func (v *Value) Type() (actual Type) {
 	return
 }
 
+// CanHold returns true if the Value can hold the given go value
+func (v *Value) CanHold(goValue any) bool {
+	valueType := valueType(goValue)
+
+	return valueType.IsA(v.Type())
+}
+
 func (v *Value) AssertCanHold(typ Type) {
-	valueType := v.Type()
-
-	if valueType == typ {
+	if v.CanHold(typ) {
 		return
 	}
 
-	valueFundamental := FundamentalType(valueType)
-	typFundamental := FundamentalType(typ)
-
-	if valueFundamental == typFundamental {
-		return
-	}
-
-	log.Panicf("gobject.Value type assertion failed: value is initialized for %s (%s) and not %s (%s)", valueType, valueFundamental, typ, typFundamental)
+	log.Panicf("gobject.Value type assertion failed: value is initialized for %s and not %s", valueType, typ)
 }

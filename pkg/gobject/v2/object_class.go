@@ -1,6 +1,7 @@
 package gobject
 
 import (
+	"fmt"
 	"runtime"
 	"unsafe"
 
@@ -168,11 +169,18 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				param = UnsafeParamSpecFromGlibNone(unsafe.Pointer(pspec))
 
-				v := overrides.GetProperty(obj, uint(id), param)
+				// adjust id to reverse the adjustment from InstallProperties
+				goValue := overrides.GetProperty(obj, uint(id)-1, param)
 
-				govalue := ValueFromNative(unsafe.Pointer(value))
+				v := ValueFromNative(unsafe.Pointer(value))
 
-				govalue.SetGoValue(v)
+				// SetGoValue will panic if not compatible, but the panic message is not very helpful,
+				// because the parameter and instance are missing there. We still panic, but with a more helpful message.
+				if !v.CanHold(goValue) {
+					panic(fmt.Sprintf("cannot return value of type %T in GValue of type %s as returned by GetProperty override for %T.%s", goValue, v.Type().Name(), obj, param.Name()))
+				}
+
+				v.SetGoValue(goValue)
 			},
 		)
 	}
@@ -191,7 +199,8 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 
 				v := ValueFromNative(unsafe.Pointer(value))
 
-				overrides.SetProperty(obj, uint(id), v.GoValue(), param)
+				// adjust id to reverse the adjustment from InstallProperties
+				overrides.SetProperty(obj, uint(id)-1, v.GoValue(), param)
 			},
 		)
 	}
