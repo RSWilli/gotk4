@@ -318,7 +318,7 @@ func NewCallableParameters(e *env, v *gir.CallableAttrs) (*Parameters, resolvedS
 			ns, t := e.findAnyType(paramType)
 
 			if t == nil {
-				e.logger.Warn("type not found", "ctype", debugCTypeFromAnytype(p.AnyType))
+				// e.logger.Warn("type not found", "ctype", debugCTypeFromAnytype(p.AnyType))
 				return nil, maybeResolvable
 			}
 
@@ -505,11 +505,13 @@ func NewCallableParameters(e *env, v *gir.CallableAttrs) (*Parameters, resolvedS
 
 	for _, p := range params.CParameters() {
 		if !p.valid(e) {
+			e.logger.Error("param not valid, can't be resolved", "param", p.CName)
 			return nil, notResolvable
 		}
 	}
 
 	if params.CReturn != nil && !params.CReturn.valid(e) {
+		e.logger.Error("return param not valid, can't be resolved")
 		return nil, notResolvable
 	}
 
