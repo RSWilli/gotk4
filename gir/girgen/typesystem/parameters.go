@@ -165,23 +165,42 @@ func (p *Parameters) CallableParameters() *Parameters {
 	return p
 }
 
-func (param *Param) valid(e *env) bool {
+// ParameterMode is used to determine what conversion is needed for an "in" or "out" parameter, because
+// they mean different things for a go->c call and a c->go call.
+type ParameterMode int
+
+const (
+	// ParameterModeCallable is used for functions and methods, aka go->c calls.
+	ParameterModeCallable ParameterMode = iota
+	// ParameterModeCallback is used for callbacks, aka c->go calls.
+	ParameterModeCallback
+)
+
+// validForCallable checks if the param is valid for a function or method, aka go->c call.
+func (param *Param) valid(e *env, mode ParameterMode) bool {
 	if param.Implicit || param.Skip {
 		return true
 	}
 
 	if conv, ok := param.Type.Type.(ConvertibleType); ok {
-		// FIXME: this is inverted for callbacks
 		switch param.Direction {
 		case "inout":
 			panic("should not be inout")
 		case "in":
-			if !conv.CanTransferToGlib(param.TransferOwnership) {
+			if mode == ParameterModeCallable && !conv.CanTransferToGlib(param.TransferOwnership) {
+				e.logger.Warn("transfer ownership not valid for type", "type", param.Type.Type.GIRName(), "transfer", param.TransferOwnership)
+				return false
+			}
+			if mode == ParameterModeCallback && !conv.CanTransferFromGlib(param.TransferOwnership) {
 				e.logger.Warn("transfer ownership not valid for type", "type", param.Type.Type.GIRName(), "transfer", param.TransferOwnership)
 				return false
 			}
 		case "out", "return":
-			if !conv.CanTransferFromGlib(param.TransferOwnership) {
+			if mode == ParameterModeCallable && !conv.CanTransferFromGlib(param.TransferOwnership) {
+				e.logger.Warn("transfer ownership not valid for type", "type", param.Type.Type.GIRName(), "transfer", param.TransferOwnership)
+				return false
+			}
+			if mode == ParameterModeCallback && !conv.CanTransferToGlib(param.TransferOwnership) {
 				e.logger.Warn("transfer ownership not valid for type", "type", param.Type.Type.GIRName(), "transfer", param.TransferOwnership)
 				return false
 			}
@@ -229,6 +248,14 @@ func (p *Parameters) CGoReturn() *Param {
 }
 
 func NewCallableParameters(e *env, v *gir.CallableAttrs) (*Parameters, resolvedState) {
+	return NewGenericParameters(e, v, ParameterModeCallable)
+}
+
+func NewCallbackParameters(e *env, v *gir.CallableAttrs) (*Parameters, resolvedState) {
+	return NewGenericParameters(e, v, ParameterModeCallback)
+}
+
+func NewGenericParameters(e *env, v *gir.CallableAttrs, mode ParameterMode) (*Parameters, resolvedState) {
 	params := &Parameters{
 		Doc: NewDoc(&v.InfoAttrs, &v.InfoElements),
 	}
@@ -504,13 +531,13 @@ func NewCallableParameters(e *env, v *gir.CallableAttrs) (*Parameters, resolvedS
 	}
 
 	for _, p := range params.CParameters() {
-		if !p.valid(e) {
+		if !p.valid(e, mode) {
 			e.logger.Error("param not valid, can't be resolved", "param", p.CName)
 			return nil, notResolvable
 		}
 	}
 
-	if params.CReturn != nil && !params.CReturn.valid(e) {
+	if params.CReturn != nil && !params.CReturn.valid(e, mode) {
 		e.logger.Error("return param not valid, can't be resolved")
 		return nil, notResolvable
 	}

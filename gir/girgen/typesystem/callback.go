@@ -52,7 +52,7 @@ func DeclareCallback(e *env, v *gir.Callback) *Callback {
 func (cb *Callback) resolveParameters(e *env) resolvedState {
 	e = e.sub("callback", cb.gir.CType)
 
-	params, state := NewCallableParameters(e, cb.gir.CallableAttrs)
+	params, state := NewCallbackParameters(e, cb.gir.CallableAttrs)
 
 	if state == notResolvable {
 		return notResolvable

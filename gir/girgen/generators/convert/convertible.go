@@ -19,9 +19,13 @@ func (c *CToGoConvertibleConverter) Convert(w file.File) {
 	fmt.Fprintf(w.Go(), "%s = %s(unsafe.Pointer(%s))\n", c.Param.GoName, c.ConvertFunc, c.Param.CName)
 
 	if c.Param.TransferOwnership == typesystem.TransferBorrow {
-		w.GoImport("runtime")
+		if c.Param.BorrowFrom != nil {
+			w.GoImport("runtime")
 
-		fmt.Fprintf(w.Go(), "runtime.AddCleanup(%s, func(_ *%s) {}, %s)\n", c.Param.GoName, c.Param.BorrowFrom.Type.NamespacedGoType(0), c.Param.BorrowFrom.GoName)
+			fmt.Fprintf(w.Go(), "runtime.AddCleanup(%s, func(_ *%s) {}, %s)\n", c.Param.GoName, c.Param.BorrowFrom.Type.NamespacedGoType(0), c.Param.BorrowFrom.GoName)
+		} else {
+			fmt.Fprintf(w.Go(), "// borrow not bound to another value, this requires correct handling by the user\n")
+		}
 	}
 }
 
