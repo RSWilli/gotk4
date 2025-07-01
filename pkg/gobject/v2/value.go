@@ -191,15 +191,15 @@ func (v *Value) InitGoValue(goValue any) {
 // SetGoValue sets the Go value of the GValue. The GValue MUST HAVE BEEN
 // INITIALIZED ALREADY!
 func (v *Value) SetGoValue(goValue any) {
+	v.AssertCanHold(goValue)
+
 	// check for overridden init first
 	if initter, ok := goValue.(GoValueInitializer); ok {
-		v.AssertCanHold(initter.GoValueType())
 		initter.SetGoValue(v)
 		return
 	}
 
 	if goValue == nil {
-		v.AssertCanHold(TypePointer)
 		v.SetPointer(nil)
 		return
 	}
@@ -340,40 +340,28 @@ func valueTypeForPrimitiveReflect(goValue any) Type {
 func setValuePrimitive(val *Value, v interface{}) bool {
 	switch e := v.(type) {
 	case bool:
-		val.AssertCanHold(TypeBoolean)
 		val.SetBool(e)
 	case int8:
-		val.AssertCanHold(TypeChar)
 		val.SetSchar(e)
 	case int32:
-		val.AssertCanHold(TypeInt)
 		val.SetInt(int(e))
 	case int64:
-		val.AssertCanHold(TypeInt64)
 		val.SetInt64(e)
 	case int:
-		val.AssertCanHold(TypeInt64)
 		val.SetInt64(int64(e))
 	case uint8:
-		val.AssertCanHold(TypeUchar)
 		val.SetUchar(e)
 	case uint32:
-		val.AssertCanHold(TypeUint)
 		val.SetUint(uint(e))
 	case uint64:
-		val.AssertCanHold(TypeUint64)
 		val.SetUint64(e)
 	case uint:
-		val.AssertCanHold(TypeUint64)
 		val.SetUint64(uint64(e))
 	case float32:
-		val.AssertCanHold(TypeFloat)
 		val.SetFloat(e)
 	case float64:
-		val.AssertCanHold(TypeDouble)
 		val.SetDouble(e)
 	case string:
-		val.AssertCanHold(TypeString)
 		val.SetString(e)
 	default:
 		return false
@@ -596,15 +584,20 @@ func (v *Value) Type() (actual Type) {
 
 // CanHold returns true if the Value can hold the given go value
 func (v *Value) CanHold(goValue any) bool {
-	valueType := valueType(goValue)
+	goValueType := valueType(goValue)
+	valueType := v.Type()
 
-	return valueType.IsA(v.Type())
+	if goValueType == valueType {
+		return true
+	}
+
+	return goValueType.IsA(valueType)
 }
 
-func (v *Value) AssertCanHold(typ Type) {
-	if v.CanHold(typ) {
+func (v *Value) AssertCanHold(goValue any) {
+	if v.CanHold(goValue) {
 		return
 	}
 
-	log.Panicf("gobject.Value type assertion failed: value is initialized for %s and not %s", valueType, typ)
+	log.Panicf("gobject.Value type assertion failed: value is initialized for %s and not %s", v.Type(), valueType(goValue))
 }
