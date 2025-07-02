@@ -7,6 +7,7 @@ import (
 	"strings"
 	"unsafe"
 
+	"github.com/diamondburned/gotk4/pkg/core/profile"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
 )
 
@@ -3530,7 +3531,7 @@ func init() {
 }
 
 func marshalBindingGroupInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapBindingGroup(ValueFromNative(p).Object()), nil
+	return ValueFromNative(p).Object(), nil
 }
 
 // UnsafeBindingGroupFromGlibNone is used to convert raw GBindingGroup pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
@@ -3618,7 +3619,7 @@ func init() {
 }
 
 func marshalInitiallyUnownedInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapInitiallyUnowned(ValueFromNative(p).Object()), nil
+	return ValueFromNative(p).Object(), nil
 }
 
 // UnsafeInitiallyUnownedFromGlibNone is used to convert raw GInitiallyUnowned pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
@@ -3711,10 +3712,12 @@ func UnsafeCClosureFromGlibBorrow(p unsafe.Pointer) *CClosure {
 func UnsafeCClosureFromGlibNone(p unsafe.Pointer) *CClosure {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeCClosureFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.cClosure)), 1)
 	runtime.SetFinalizer(
 		wrapped.cClosure,
 		func (intern *cClosure) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -3723,10 +3726,12 @@ func UnsafeCClosureFromGlibNone(p unsafe.Pointer) *CClosure {
 // UnsafeCClosureFromGlibFull is used to convert raw C.GCClosure pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeCClosureFromGlibFull(p unsafe.Pointer) *CClosure {
 	wrapped := UnsafeCClosureFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.cClosure)), 1)
 	runtime.SetFinalizer(
 		wrapped.cClosure,
 		func (intern *cClosure) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -3772,10 +3777,12 @@ func UnsafeClosureNotifyDataFromGlibBorrow(p unsafe.Pointer) *ClosureNotifyData 
 func UnsafeClosureNotifyDataFromGlibNone(p unsafe.Pointer) *ClosureNotifyData {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeClosureNotifyDataFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.closureNotifyData)), 1)
 	runtime.SetFinalizer(
 		wrapped.closureNotifyData,
 		func (intern *closureNotifyData) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -3784,10 +3791,12 @@ func UnsafeClosureNotifyDataFromGlibNone(p unsafe.Pointer) *ClosureNotifyData {
 // UnsafeClosureNotifyDataFromGlibFull is used to convert raw C.GClosureNotifyData pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeClosureNotifyDataFromGlibFull(p unsafe.Pointer) *ClosureNotifyData {
 	wrapped := UnsafeClosureNotifyDataFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.closureNotifyData)), 1)
 	runtime.SetFinalizer(
 		wrapped.closureNotifyData,
 		func (intern *closureNotifyData) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -3836,10 +3845,12 @@ func UnsafeEnumClassFromGlibBorrow(p unsafe.Pointer) *EnumClass {
 func UnsafeEnumClassFromGlibNone(p unsafe.Pointer) *EnumClass {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeEnumClassFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.enumClass)), 1)
 	runtime.SetFinalizer(
 		wrapped.enumClass,
 		func (intern *enumClass) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -3848,10 +3859,12 @@ func UnsafeEnumClassFromGlibNone(p unsafe.Pointer) *EnumClass {
 // UnsafeEnumClassFromGlibFull is used to convert raw C.GEnumClass pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeEnumClassFromGlibFull(p unsafe.Pointer) *EnumClass {
 	wrapped := UnsafeEnumClassFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.enumClass)), 1)
 	runtime.SetFinalizer(
 		wrapped.enumClass,
 		func (intern *enumClass) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -3900,10 +3913,12 @@ func UnsafeEnumValueFromGlibBorrow(p unsafe.Pointer) *EnumValue {
 func UnsafeEnumValueFromGlibNone(p unsafe.Pointer) *EnumValue {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeEnumValueFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.enumValue)), 1)
 	runtime.SetFinalizer(
 		wrapped.enumValue,
 		func (intern *enumValue) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -3912,10 +3927,12 @@ func UnsafeEnumValueFromGlibNone(p unsafe.Pointer) *EnumValue {
 // UnsafeEnumValueFromGlibFull is used to convert raw C.GEnumValue pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeEnumValueFromGlibFull(p unsafe.Pointer) *EnumValue {
 	wrapped := UnsafeEnumValueFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.enumValue)), 1)
 	runtime.SetFinalizer(
 		wrapped.enumValue,
 		func (intern *enumValue) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -3964,10 +3981,12 @@ func UnsafeFlagsClassFromGlibBorrow(p unsafe.Pointer) *FlagsClass {
 func UnsafeFlagsClassFromGlibNone(p unsafe.Pointer) *FlagsClass {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeFlagsClassFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.flagsClass)), 1)
 	runtime.SetFinalizer(
 		wrapped.flagsClass,
 		func (intern *flagsClass) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -3976,10 +3995,12 @@ func UnsafeFlagsClassFromGlibNone(p unsafe.Pointer) *FlagsClass {
 // UnsafeFlagsClassFromGlibFull is used to convert raw C.GFlagsClass pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeFlagsClassFromGlibFull(p unsafe.Pointer) *FlagsClass {
 	wrapped := UnsafeFlagsClassFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.flagsClass)), 1)
 	runtime.SetFinalizer(
 		wrapped.flagsClass,
 		func (intern *flagsClass) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4028,10 +4049,12 @@ func UnsafeFlagsValueFromGlibBorrow(p unsafe.Pointer) *FlagsValue {
 func UnsafeFlagsValueFromGlibNone(p unsafe.Pointer) *FlagsValue {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeFlagsValueFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.flagsValue)), 1)
 	runtime.SetFinalizer(
 		wrapped.flagsValue,
 		func (intern *flagsValue) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4040,10 +4063,12 @@ func UnsafeFlagsValueFromGlibNone(p unsafe.Pointer) *FlagsValue {
 // UnsafeFlagsValueFromGlibFull is used to convert raw C.GFlagsValue pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeFlagsValueFromGlibFull(p unsafe.Pointer) *FlagsValue {
 	wrapped := UnsafeFlagsValueFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.flagsValue)), 1)
 	runtime.SetFinalizer(
 		wrapped.flagsValue,
 		func (intern *flagsValue) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4132,10 +4157,12 @@ func UnsafeInterfaceInfoFromGlibBorrow(p unsafe.Pointer) *InterfaceInfo {
 func UnsafeInterfaceInfoFromGlibNone(p unsafe.Pointer) *InterfaceInfo {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeInterfaceInfoFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.interfaceInfo)), 1)
 	runtime.SetFinalizer(
 		wrapped.interfaceInfo,
 		func (intern *interfaceInfo) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4144,10 +4171,12 @@ func UnsafeInterfaceInfoFromGlibNone(p unsafe.Pointer) *InterfaceInfo {
 // UnsafeInterfaceInfoFromGlibFull is used to convert raw C.GInterfaceInfo pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeInterfaceInfoFromGlibFull(p unsafe.Pointer) *InterfaceInfo {
 	wrapped := UnsafeInterfaceInfoFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.interfaceInfo)), 1)
 	runtime.SetFinalizer(
 		wrapped.interfaceInfo,
 		func (intern *interfaceInfo) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4196,10 +4225,12 @@ func UnsafeObjectConstructParamFromGlibBorrow(p unsafe.Pointer) *ObjectConstruct
 func UnsafeObjectConstructParamFromGlibNone(p unsafe.Pointer) *ObjectConstructParam {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeObjectConstructParamFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.objectConstructParam)), 1)
 	runtime.SetFinalizer(
 		wrapped.objectConstructParam,
 		func (intern *objectConstructParam) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4208,10 +4239,12 @@ func UnsafeObjectConstructParamFromGlibNone(p unsafe.Pointer) *ObjectConstructPa
 // UnsafeObjectConstructParamFromGlibFull is used to convert raw C.GObjectConstructParam pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeObjectConstructParamFromGlibFull(p unsafe.Pointer) *ObjectConstructParam {
 	wrapped := UnsafeObjectConstructParamFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.objectConstructParam)), 1)
 	runtime.SetFinalizer(
 		wrapped.objectConstructParam,
 		func (intern *objectConstructParam) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4260,10 +4293,12 @@ func UnsafeSignalInvocationHintFromGlibBorrow(p unsafe.Pointer) *SignalInvocatio
 func UnsafeSignalInvocationHintFromGlibNone(p unsafe.Pointer) *SignalInvocationHint {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeSignalInvocationHintFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.signalInvocationHint)), 1)
 	runtime.SetFinalizer(
 		wrapped.signalInvocationHint,
 		func (intern *signalInvocationHint) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4272,10 +4307,12 @@ func UnsafeSignalInvocationHintFromGlibNone(p unsafe.Pointer) *SignalInvocationH
 // UnsafeSignalInvocationHintFromGlibFull is used to convert raw C.GSignalInvocationHint pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeSignalInvocationHintFromGlibFull(p unsafe.Pointer) *SignalInvocationHint {
 	wrapped := UnsafeSignalInvocationHintFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.signalInvocationHint)), 1)
 	runtime.SetFinalizer(
 		wrapped.signalInvocationHint,
 		func (intern *signalInvocationHint) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4324,10 +4361,12 @@ func UnsafeTypeFundamentalInfoFromGlibBorrow(p unsafe.Pointer) *TypeFundamentalI
 func UnsafeTypeFundamentalInfoFromGlibNone(p unsafe.Pointer) *TypeFundamentalInfo {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTypeFundamentalInfoFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.typeFundamentalInfo)), 1)
 	runtime.SetFinalizer(
 		wrapped.typeFundamentalInfo,
 		func (intern *typeFundamentalInfo) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4336,10 +4375,12 @@ func UnsafeTypeFundamentalInfoFromGlibNone(p unsafe.Pointer) *TypeFundamentalInf
 // UnsafeTypeFundamentalInfoFromGlibFull is used to convert raw C.GTypeFundamentalInfo pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTypeFundamentalInfoFromGlibFull(p unsafe.Pointer) *TypeFundamentalInfo {
 	wrapped := UnsafeTypeFundamentalInfoFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.typeFundamentalInfo)), 1)
 	runtime.SetFinalizer(
 		wrapped.typeFundamentalInfo,
 		func (intern *typeFundamentalInfo) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4395,10 +4436,12 @@ func UnsafeTypeInfoFromGlibBorrow(p unsafe.Pointer) *TypeInfo {
 func UnsafeTypeInfoFromGlibNone(p unsafe.Pointer) *TypeInfo {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTypeInfoFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.typeInfo)), 1)
 	runtime.SetFinalizer(
 		wrapped.typeInfo,
 		func (intern *typeInfo) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4407,10 +4450,12 @@ func UnsafeTypeInfoFromGlibNone(p unsafe.Pointer) *TypeInfo {
 // UnsafeTypeInfoFromGlibFull is used to convert raw C.GTypeInfo pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTypeInfoFromGlibFull(p unsafe.Pointer) *TypeInfo {
 	wrapped := UnsafeTypeInfoFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.typeInfo)), 1)
 	runtime.SetFinalizer(
 		wrapped.typeInfo,
 		func (intern *typeInfo) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4458,10 +4503,12 @@ func UnsafeTypeInstanceFromGlibBorrow(p unsafe.Pointer) *TypeInstance {
 func UnsafeTypeInstanceFromGlibNone(p unsafe.Pointer) *TypeInstance {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTypeInstanceFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.typeInstance)), 1)
 	runtime.SetFinalizer(
 		wrapped.typeInstance,
 		func (intern *typeInstance) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4470,10 +4517,12 @@ func UnsafeTypeInstanceFromGlibNone(p unsafe.Pointer) *TypeInstance {
 // UnsafeTypeInstanceFromGlibFull is used to convert raw C.GTypeInstance pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTypeInstanceFromGlibFull(p unsafe.Pointer) *TypeInstance {
 	wrapped := UnsafeTypeInstanceFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.typeInstance)), 1)
 	runtime.SetFinalizer(
 		wrapped.typeInstance,
 		func (intern *typeInstance) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4531,10 +4580,12 @@ func UnsafeTypeValueTableFromGlibBorrow(p unsafe.Pointer) *TypeValueTable {
 func UnsafeTypeValueTableFromGlibNone(p unsafe.Pointer) *TypeValueTable {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTypeValueTableFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.typeValueTable)), 1)
 	runtime.SetFinalizer(
 		wrapped.typeValueTable,
 		func (intern *typeValueTable) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4543,10 +4594,12 @@ func UnsafeTypeValueTableFromGlibNone(p unsafe.Pointer) *TypeValueTable {
 // UnsafeTypeValueTableFromGlibFull is used to convert raw C.GTypeValueTable pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTypeValueTableFromGlibFull(p unsafe.Pointer) *TypeValueTable {
 	wrapped := UnsafeTypeValueTableFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.typeValueTable)), 1)
 	runtime.SetFinalizer(
 		wrapped.typeValueTable,
 		func (intern *typeValueTable) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4617,10 +4670,12 @@ func UnsafeWeakRefFromGlibBorrow(p unsafe.Pointer) *WeakRef {
 func UnsafeWeakRefFromGlibNone(p unsafe.Pointer) *WeakRef {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeWeakRefFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.weakRef)), 1)
 	runtime.SetFinalizer(
 		wrapped.weakRef,
 		func (intern *weakRef) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -4629,10 +4684,12 @@ func UnsafeWeakRefFromGlibNone(p unsafe.Pointer) *WeakRef {
 // UnsafeWeakRefFromGlibFull is used to convert raw C.GWeakRef pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeWeakRefFromGlibFull(p unsafe.Pointer) *WeakRef {
 	wrapped := UnsafeWeakRefFromGlibBorrow(p)
+	profile.Track(uintptr(unsafe.Pointer(wrapped.weakRef)), 1)
 	runtime.SetFinalizer(
 		wrapped.weakRef,
 		func (intern *weakRef) {
 			C.free(unsafe.Pointer(intern.native))
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped

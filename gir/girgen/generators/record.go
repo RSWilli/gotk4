@@ -75,12 +75,17 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "}\n\n")
 
 	mkFinalizer := func() {
+		w.GoImportCore("profile")
 		w.Go().Indent()
+
+		fmt.Fprintf(w.Go(), "profile.Track(uintptr(unsafe.Pointer(wrapped.%s)), 1)\n", g.PrivateGoType)
+
 		fmt.Fprintf(w.Go(), "runtime.SetFinalizer(\n")
 		fmt.Fprintf(w.Go(), "\twrapped.%s,\n", g.PrivateGoType)
 		fmt.Fprintf(w.Go(), "\tfunc (intern *%s) {\n", g.PrivateGoType)
 		w.Go().Indent()
 		g.unrefCall(w.Go(), "intern")
+		fmt.Fprintf(w.Go(), "\tprofile.Untrack(uintptr(unsafe.Pointer(intern)))\n")
 		w.Go().Unindent()
 		fmt.Fprintf(w.Go(), "\t},\n")
 		fmt.Fprintf(w.Go(), ")\n")

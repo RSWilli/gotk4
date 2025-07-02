@@ -28,18 +28,18 @@ type SignalHandle uint
 // matching Go equivalent type for the C callback, or an interface type which
 // the value may be packed in. If the type is not suitable, a runtime panic will
 // occur when the signal is emitted.
-func (v *ObjectInstance) Connect(detailedSignal string, f interface{}) SignalHandle {
-	return v.connectClosure(false, detailedSignal, f)
+func (obj *ObjectInstance) Connect(detailedSignal string, f interface{}) SignalHandle {
+	return obj.connectClosure(false, detailedSignal, f)
 }
 
 // ConnectAfter is a wrapper around g_signal_connect_closure(). The difference
 // between Connect and ConnectAfter is that the latter will be invoked after the
 // default handler, not before. For more information, refer to Connect.
-func (v *ObjectInstance) ConnectAfter(detailedSignal string, f interface{}) SignalHandle {
-	return v.connectClosure(true, detailedSignal, f)
+func (obj *ObjectInstance) ConnectAfter(detailedSignal string, f interface{}) SignalHandle {
+	return obj.connectClosure(true, detailedSignal, f)
 }
 
-func (v *ObjectInstance) connectClosure(after bool, detailedSignal string, f interface{}) SignalHandle {
+func (obj *ObjectInstance) connectClosure(after bool, detailedSignal string, f interface{}) SignalHandle {
 	// TODO: check if the signal is valid and if the function signature is valid for the signal handler
 
 	fs := closure.NewFuncStack(f, 2)
@@ -52,7 +52,7 @@ func (v *ObjectInstance) connectClosure(after bool, detailedSignal string, f int
 
 	closure.Register(unsafe.Pointer(gclosure), fs)
 
-	c := C.g_signal_connect_closure(C.gpointer(v.unsafe()), (*C.gchar)(cstr), gclosure, gbool(after))
+	c := C.g_signal_connect_closure(C.gpointer(obj.unsafe()), (*C.gchar)(cstr), gclosure, gbool(after))
 
 	return SignalHandle(c)
 }

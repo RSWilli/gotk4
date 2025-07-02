@@ -206,7 +206,7 @@ func NewClassGenerator(c *typesystem.Class) *ClassGenerator {
 	var marshaler Generator
 
 	if c.GLibGetType() != "" {
-		marshaler = NewMarshalObjectGenerator(c, c.GoWrapBaseClassFunction)
+		marshaler = NewMarshalObjectGenerator(c)
 	}
 
 	g := &ClassGenerator{

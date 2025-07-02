@@ -149,7 +149,7 @@ func NewInterfaceGenerator(c *typesystem.Interface) *InterfaceGenerator {
 	var marshaler Generator
 
 	if c.GLibGetType() != "" {
-		marshaler = NewMarshalObjectGenerator(c, c.GoWrapBaseClassFunction)
+		marshaler = NewMarshalObjectGenerator(c)
 	}
 
 	g := &InterfaceGenerator{

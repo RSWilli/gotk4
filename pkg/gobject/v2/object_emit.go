@@ -23,11 +23,11 @@ import "C"
 // specified by the string s to an Object.  Arguments to callback
 // functions connected to this signal must be specified in args.  Emit()
 // returns an interface{} which contains the go equivalent of the C return value.
-func (v *ObjectInstance) Emit(s string, args ...any) any {
+func (obj *ObjectInstance) Emit(s string, args ...any) any {
 	cstr := C.CString(s)
 	defer C.free(unsafe.Pointer(cstr))
 
-	t := v.typeFromInstance()
+	t := obj.typeFromInstance()
 	id := C.g_signal_lookup((*C.gchar)(cstr), C.GType(t))
 
 	if id == 0 {
@@ -49,7 +49,7 @@ func (v *ObjectInstance) Emit(s string, args ...any) any {
 	instanceAndParams := C._alloc_gvalue_list(C.int(len(args)) + 1)
 
 	// Add args and valv
-	instanceValue := NewValue(v)
+	instanceValue := NewValue(obj)
 
 	C._val_list_insert(instanceAndParams, C.int(0), instanceValue.native())
 	defer runtime.KeepAlive(instanceValue) // keep the value alive until the signal has been emitted

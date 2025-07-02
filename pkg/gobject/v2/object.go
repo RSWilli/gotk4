@@ -3,6 +3,8 @@ package gobject
 import (
 	"runtime"
 	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/core/profile"
 )
 
 // #cgo pkg-config: gobject-2.0
@@ -71,7 +73,7 @@ func init() {
 // extending type
 func marshalObject(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_object((*C.GValue)(p))
-	return newObject(unsafe.Pointer(c), true), nil
+	return UnsafeObjectFromGlibNone(unsafe.Pointer(c)), nil
 }
 
 // UnsafeObjectFromGlibNone is used to convert raw C object pointers to go while taking a reference.
@@ -79,7 +81,11 @@ func marshalObject(p unsafe.Pointer) (interface{}, error) {
 //
 // This is used by the bindings internally.
 func UnsafeObjectFromGlibNone(p unsafe.Pointer) Object {
-	obj := newObject(p, true)
+	obj := wrapObjectFinalized(p)
+
+	// if the object was floating this removes the floating ref.
+	// if not, then this is equivalent to g_object_ref
+	C.g_object_ref_sink(C.gpointer(obj.unsafe()))
 
 	return obj.cast()
 }
@@ -97,7 +103,7 @@ func UnsafeObjectFromGlibBorrow(p unsafe.Pointer) Object {
 // UnsafeObjectFromGlibFull is used to convert raw C object pointers to go.
 // the returned Object is casted correctly and needs a manual cast by the user to the correct extending interface
 func UnsafeObjectFromGlibFull(p unsafe.Pointer) Object {
-	obj := newObject(p, false)
+	obj := wrapObjectFinalized(p)
 
 	return obj.cast()
 }
@@ -109,13 +115,10 @@ func UnsafeObjectToGlibNone(obj Object) unsafe.Pointer {
 	return base.unsafe()
 }
 
-// UnsafeObjectToGlibFull is used to convert the Object to C while removing the cleanup.
+// UnsafeObjectToGlibFull is used to convert the Object to C. Since we have a reference on the object this
+// will not clean up the finalizer, so this is equivalent to UnsafeObjectToGlibNone.
 func UnsafeObjectToGlibFull(obj Object) unsafe.Pointer {
-	base := obj.baseObject()
-
-	runtime.SetFinalizer(base.objectInstance, nil)
-
-	return base.unsafe()
+	return UnsafeObjectToGlibNone(obj)
 }
 
 func wrapObject(p unsafe.Pointer) *ObjectInstance {
@@ -126,20 +129,21 @@ func wrapObject(p unsafe.Pointer) *ObjectInstance {
 	}
 }
 
-// newObject returns a new object instance and attaches a cleanup to unref the c pointer on GC. if ref is true
+// wrapObjectFinalized returns a new object instance and attaches a cleanup to unref the c pointer on GC. if ref is true
 // then a reference will be taken on the object.
-func newObject(p unsafe.Pointer, ref bool) *ObjectInstance {
+//
+// this will also register the object in the profile for memory leak detection.
+func wrapObjectFinalized(p unsafe.Pointer) *ObjectInstance {
 	obj := wrapObject(p)
 
-	if ref {
-		// if the object was floating this removes the floating ref.
-		// if not, then this is equivalent to g_object_ref
-		C.g_object_ref_sink(C.gpointer(obj.unsafe()))
-	}
+	// track the private objectInstance because that is finalized
+	profile.Track(uintptr(unsafe.Pointer(obj.objectInstance)), 2)
 
 	runtime.SetFinalizer(
 		obj.objectInstance,
 		func(intern *objectInstance) {
+			profile.Untrack(uintptr(unsafe.Pointer(intern)))
+
 			C.g_object_unref(C.gpointer(intern.native))
 		},
 	)
@@ -157,14 +161,14 @@ type objectInstance struct {
 }
 
 // unsafeForceFloating implements Object.
-func (v *ObjectInstance) unsafeForceFloating() {
-	C.g_object_force_floating(v.native)
-	runtime.KeepAlive(v)
+func (obj *ObjectInstance) unsafeForceFloating() {
+	C.g_object_force_floating(obj.native)
+	runtime.KeepAlive(obj)
 }
 
 // isFloating implements Object.
-func (v *ObjectInstance) isFloating() bool {
-	return C.g_object_is_floating(C.gpointer(v.unsafe())) != 0
+func (obj *ObjectInstance) isFloating() bool {
+	return C.g_object_is_floating(C.gpointer(obj.unsafe())) != 0
 }
 
 // GoValueType implements GoValueInitializer.
@@ -179,58 +183,56 @@ func (obj *ObjectInstance) SetGoValue(v *Value) {
 	v.SetObject(obj)
 }
 
-func (v *ObjectInstance) unsafe() unsafe.Pointer {
-	if v == nil {
+func (obj *ObjectInstance) unsafe() unsafe.Pointer {
+	if obj == nil {
 		return nil
 	}
-	if v.objectInstance == nil {
+	if obj.objectInstance == nil {
 		panic("this Object is invalid")
 	}
 
-	return unsafe.Pointer(v.native)
+	return unsafe.Pointer(obj.native)
 }
 
-func (v *ObjectInstance) baseObject() *ObjectInstance {
-	return v
+func (obj *ObjectInstance) baseObject() *ObjectInstance {
+	return obj
 }
 
 // ObjectProperty is a wrapper around g_object_get_property(). If the property's
 // type cannot be resolved to a Go type, then InvalidValue is returned.
-func (v *ObjectInstance) ObjectProperty(name string) interface{} {
+func (obj *ObjectInstance) ObjectProperty(name string) interface{} {
 	cstr := C.CString(name)
 	defer C.free(unsafe.Pointer(cstr))
 
-	t := v.propertyType((*C.gchar)(cstr))
+	t := obj.propertyType((*C.gchar)(cstr))
 	if t == TypeInvalid {
 		return InvalidValue
 	}
 
 	p := InitValue(t)
 
-	C.g_object_get_property(v.native, (*C.gchar)(cstr), p.native())
-	runtime.KeepAlive(v)
+	C.g_object_get_property(obj.native, (*C.gchar)(cstr), p.native())
+	runtime.KeepAlive(obj)
 
 	return p.GoValue()
 }
 
 // SetObjectProperty is a wrapper around g_object_set_property().
-func (v *ObjectInstance) SetObjectProperty(name string, value interface{}) {
+func (obj *ObjectInstance) SetObjectProperty(name string, value interface{}) {
 	cstr := C.CString(name)
 	defer C.free(unsafe.Pointer(cstr))
 
-	p := allocateValue()
-	p.InitGoValue(value)
-	p.SetGoValue(value)
-	defer p.unset()
+	p := NewValue(value)
 
-	C.g_object_set_property(v.native, (*C.gchar)(cstr), p.native())
-	runtime.KeepAlive(v)
+	C.g_object_set_property(obj.native, (*C.gchar)(cstr), p.native())
+	runtime.KeepAlive(obj)
+	runtime.KeepAlive(p)
 }
 
 // NotifyProperty adds a handler that's called when the object's property is
 // updated.
-func (v *ObjectInstance) NotifyProperty(property string, f func()) SignalHandle {
-	return v.Connect("notify::"+property, f)
+func (obj *ObjectInstance) NotifyProperty(property string, f func()) SignalHandle {
+	return obj.Connect("notify::"+property, f)
 }
 
 // FreezeNotify increases the freeze count on object. If the freeze count is
@@ -241,9 +243,9 @@ func (v *ObjectInstance) NotifyProperty(property string, f func()) SignalHandle 
 //
 // This is necessary for accessors that modify multiple properties to prevent
 // premature notification while the object is still being modified.
-func (v *ObjectInstance) FreezeNotify() {
-	C.g_object_freeze_notify(v.native)
-	runtime.KeepAlive(v)
+func (obj *ObjectInstance) FreezeNotify() {
+	C.g_object_freeze_notify(obj.native)
+	runtime.KeepAlive(obj)
 }
 
 // ThawNotify reverts the effect of a previous call to g_object_freeze_notify().
@@ -255,51 +257,51 @@ func (v *ObjectInstance) FreezeNotify() {
 // which they have been queued.
 //
 // It is an error to call this function when the freeze count is zero.
-func (v *ObjectInstance) ThawNotify() {
-	C.g_object_thaw_notify(v.native)
-	runtime.KeepAlive(v)
+func (obj *ObjectInstance) ThawNotify() {
+	C.g_object_thaw_notify(obj.native)
+	runtime.KeepAlive(obj)
 }
 
 // HandlerBlock is a wrapper around g_signal_handler_block().
-func (v *ObjectInstance) HandlerBlock(handle SignalHandle) {
-	C.g_signal_handler_block(C.gpointer(v.unsafe()), C.gulong(handle))
-	runtime.KeepAlive(v)
+func (obj *ObjectInstance) HandlerBlock(handle SignalHandle) {
+	C.g_signal_handler_block(C.gpointer(obj.unsafe()), C.gulong(handle))
+	runtime.KeepAlive(obj)
 }
 
 // HandlerUnblock is a wrapper around g_signal_handler_unblock().
-func (v *ObjectInstance) HandlerUnblock(handle SignalHandle) {
-	C.g_signal_handler_unblock(C.gpointer(v.unsafe()), C.gulong(handle))
-	runtime.KeepAlive(v)
+func (obj *ObjectInstance) HandlerUnblock(handle SignalHandle) {
+	C.g_signal_handler_unblock(C.gpointer(obj.unsafe()), C.gulong(handle))
+	runtime.KeepAlive(obj)
 }
 
 // HandlerDisconnect is a wrapper around g_signal_handler_disconnect().
-func (v *ObjectInstance) HandlerDisconnect(handle SignalHandle) {
-	C.g_signal_handler_disconnect(C.gpointer(v.unsafe()), C.gulong(handle))
-	runtime.KeepAlive(v)
+func (obj *ObjectInstance) HandlerDisconnect(handle SignalHandle) {
+	C.g_signal_handler_disconnect(C.gpointer(obj.unsafe()), C.gulong(handle))
+	runtime.KeepAlive(obj)
 }
 
 // StopEmission stops a signal’s current emission. It is a wrapper around
 // g_signal_stop_emission_by_name().
-func (v *ObjectInstance) StopEmission(s string) {
+func (obj *ObjectInstance) StopEmission(s string) {
 	cstr := C.CString(s)
 	defer C.free(unsafe.Pointer(cstr))
 
-	C.g_signal_stop_emission_by_name(C.gpointer(v.unsafe()), (*C.gchar)(cstr))
-	runtime.KeepAlive(v)
+	C.g_signal_stop_emission_by_name(C.gpointer(obj.unsafe()), (*C.gchar)(cstr))
+	runtime.KeepAlive(obj)
 }
 
 // PropertyType returns the Type of a property of the underlying GObject. If the
 // property is missing, it will return TypeInvalid.
-func (v *ObjectInstance) PropertyType(name string) Type {
+func (obj *ObjectInstance) PropertyType(name string) Type {
 	cstr := C.CString(name)
 	defer C.free(unsafe.Pointer(cstr))
 
-	return v.propertyType(cstr)
+	return obj.propertyType(cstr)
 }
 
-func (v *ObjectInstance) propertyType(cstr *C.gchar) Type {
-	paramSpec := C.g_object_class_find_property(C._g_object_get_class(v.native), (*C.gchar)(cstr))
-	runtime.KeepAlive(v)
+func (obj *ObjectInstance) propertyType(cstr *C.gchar) Type {
+	paramSpec := C.g_object_class_find_property(C._g_object_get_class(obj.native), (*C.gchar)(cstr))
+	runtime.KeepAlive(obj)
 
 	if paramSpec == nil {
 		return TypeInvalid
@@ -308,15 +310,15 @@ func (v *ObjectInstance) propertyType(cstr *C.gchar) Type {
 	return Type(paramSpec.value_type)
 }
 
-func (v *ObjectInstance) unsafePrivateData() unsafe.Pointer {
-	private := C.g_type_instance_get_private((*C.GTypeInstance)(v.unsafe()), C.GType(v.typeFromInstance()))
+func (obj *ObjectInstance) unsafePrivateData() unsafe.Pointer {
+	private := C.g_type_instance_get_private((*C.GTypeInstance)(obj.unsafe()), C.GType(obj.typeFromInstance()))
 
 	return unsafe.Pointer(private)
 }
 
 // TypeFromInstance is a wrapper around g_type_from_instance().
-func (v *ObjectInstance) typeFromInstance() Type {
-	return unsafeTypeFromObject(v.unsafe())
+func (obj *ObjectInstance) typeFromInstance() Type {
+	return unsafeTypeFromObject(obj.unsafe())
 }
 
 func unsafeTypeFromObject(instance unsafe.Pointer) Type {
@@ -325,8 +327,8 @@ func unsafeTypeFromObject(instance unsafe.Pointer) Type {
 }
 
 // cast casts v to the concrete Go type (e.g. *Object to *gtk.Entry).
-func (v *ObjectInstance) cast() Object {
-	if v.unsafe() == nil {
+func (obj *ObjectInstance) cast() Object {
+	if obj.unsafe() == nil {
 		// nil-typed interface != non-nil-typed nil-value interface
 		return nil
 	}
@@ -341,7 +343,7 @@ func (v *ObjectInstance) cast() Object {
 	//
 	// we KISS here: just don't touch the reference at all!
 
-	typeFromInstance := v.typeFromInstance()
+	typeFromInstance := obj.typeFromInstance()
 
 	for {
 		objectCastingsLock.RLock()
@@ -349,7 +351,7 @@ func (v *ObjectInstance) cast() Object {
 		objectCastingsLock.RUnlock()
 
 		if exists {
-			return castFunc(v)
+			return castFunc(obj)
 		}
 
 		if typeFromInstance == TypeObject {

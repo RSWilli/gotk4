@@ -5,6 +5,8 @@ import (
 	"reflect"
 	"runtime"
 	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/core/profile"
 )
 
 // #cgo pkg-config: gobject-2.0
@@ -29,10 +31,9 @@ func marshalValue(p unsafe.Pointer) (interface{}, error) {
 		return nil, nil
 	}
 
-	v := &value{(*C.GValue)(unsafe.Pointer(c))}
-	runtime.SetFinalizer(v, (*value).unset)
+	v := wrapValueFinalized(unsafe.Pointer(c))
 
-	return &Value{v}, nil
+	return v, nil
 }
 
 type invalidValueType struct{}
@@ -77,8 +78,27 @@ var (
 	never    bool
 )
 
-// allocateValue does not attach a finalizer.
-func allocateValue() *Value {
+func wrapValueFinalized(v unsafe.Pointer) *Value {
+	gvalue := ValueFromNative(v)
+
+	// track the internal value because that is finalized
+	profile.Track(uintptr(unsafe.Pointer(gvalue.value)), 1)
+
+	//An allocated GValue is not guaranteed to hold a value that can be unset
+	//We need to double check before unsetting, to prevent:
+	//`g_value_unset: assertion 'G_IS_VALUE (value)' failed`
+	runtime.SetFinalizer(gvalue.value, func(value *value) {
+		value.unset()
+		profile.Untrack(uintptr(unsafe.Pointer(value)))
+	})
+
+	return gvalue
+}
+
+// AllocateValue allocates a Value but does not initialize it. It sets a
+// runtime finalizer to call g_value_unset() on the underlying GValue after
+// leaving scope.
+func AllocateValue() *Value {
 	gvalue := new(C.GValue)
 	if never {
 		// Force the value to be on the Go heap, because we don't want it on the
@@ -87,22 +107,7 @@ func allocateValue() *Value {
 		mustHeap = gvalue
 	}
 
-	v := &value{gvalue}
-	return &Value{v}
-}
-
-// AllocateValue allocates a Value but does not initialize it. It sets a
-// runtime finalizer to call g_value_unset() on the underlying GValue after
-// leaving scope.
-func AllocateValue() *Value {
-	v := allocateValue()
-
-	//An allocated GValue is not guaranteed to hold a value that can be unset
-	//We need to double check before unsetting, to prevent:
-	//`g_value_unset: assertion 'G_IS_VALUE (value)' failed`
-	runtime.SetFinalizer(v.value, (*value).unset)
-
-	return v
+	return wrapValueFinalized(unsafe.Pointer(gvalue))
 }
 
 // InitValue is a wrapper around g_value_init() and allocates and initializes a
@@ -505,14 +510,11 @@ func (v *Value) SetBoxed(p unsafe.Pointer) {
 	runtime.KeepAlive(v)
 }
 
-// Object is a wrapper around g_value_get_object(). The returned object is taken
-// its own reference. This is called by the marshalers for Object types.
-// The marshaler is responsible for wrapping the returned object in the correct type.
-func (v *Value) Object() *ObjectInstance {
+// Object is a wrapper around g_value_get_object(). The returned Object is already wrapped
+// in a appropriate extending type, if it was registered before with [RegisterObjectCasting]
+func (v *Value) Object() Object {
 	p := unsafe.Pointer(C.g_value_get_object(v.native()))
-	o := newObject(unsafe.Pointer(p), true)
-	runtime.KeepAlive(v)
-	return o
+	return UnsafeObjectFromGlibNone(unsafe.Pointer(p))
 }
 
 // Enum is a wrapper around g_value_get_enum().

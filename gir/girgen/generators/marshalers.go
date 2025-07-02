@@ -21,7 +21,11 @@ func (g *MarshalGenerator) Generate(w *file.Package) {
 	w.GoImportNamespace(g.Type.Value().Namespace)
 
 	fmt.Fprintf(w.Go(), "func marshal%s(p unsafe.Pointer) (any, error) {\n", g.Type.GoType(0))
-	fmt.Fprintf(w.Go(), "\treturn %s(%s(p).%s()), nil\n", g.WrapFunction, g.Type.Value().WithForeignNamespace(g.Type.Value().Type.FromGlibBorrowFunction), g.ValueFunction)
+	if g.WrapFunction != "" {
+		fmt.Fprintf(w.Go(), "\treturn %s(%s(p).%s()), nil\n", g.WrapFunction, g.Type.Value().WithForeignNamespace(g.Type.Value().Type.FromGlibBorrowFunction), g.ValueFunction)
+	} else {
+		fmt.Fprintf(w.Go(), "\treturn %s(p).%s(), nil\n", g.Type.Value().WithForeignNamespace(g.Type.Value().Type.FromGlibBorrowFunction), g.ValueFunction)
+	}
 	fmt.Fprintf(w.Go(), "}\n")
 }
 
@@ -41,10 +45,10 @@ func NewMarshalBifieldGenerator(typ typesystem.Marshalable) *MarshalGenerator {
 	}
 }
 
-func NewMarshalObjectGenerator(typ typesystem.Marshalable, wrapCoreObjectName string) *MarshalGenerator {
+func NewMarshalObjectGenerator(typ typesystem.Marshalable) *MarshalGenerator {
 	return &MarshalGenerator{
 		Type:          typ,
-		WrapFunction:  wrapCoreObjectName,
+		WrapFunction:  "",
 		ValueFunction: "Object",
 	}
 }
