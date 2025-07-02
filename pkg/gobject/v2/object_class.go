@@ -133,7 +133,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 			func(carg0 *C.GObject) {
 				var obj Instance // go GObject subclass
 
-				obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).UnsafeLoadInstanceFromPrivateData().(Instance)
 
 				overrides.Constructed(obj)
 
@@ -150,7 +150,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 			func(carg0 *C.GObject) {
 				var obj Instance // go GObject subclass
 
-				obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).UnsafeLoadInstanceFromPrivateData().(Instance)
 
 				overrides.Dispose(obj)
 			},
@@ -166,7 +166,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var obj Instance // go GObject subclass
 				var param *ParamSpec
 
-				obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).UnsafeLoadInstanceFromPrivateData().(Instance)
 				param = UnsafeParamSpecFromGlibNone(unsafe.Pointer(pspec))
 
 				// adjust id to reverse the adjustment from InstallProperties
@@ -194,7 +194,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var obj Instance // go GObject subclass
 				var param *ParamSpec
 
-				obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).UnsafeLoadInstanceFromPrivateData().(Instance)
 				param = UnsafeParamSpecFromGlibNone(unsafe.Pointer(pspec))
 
 				v := ValueFromNative(unsafe.Pointer(value))
@@ -213,7 +213,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 		func(carg0 *C.GObject) {
 			var obj Instance // go GObject subclass
 
-			obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+			obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).UnsafeLoadInstanceFromPrivateData().(Instance)
 
 			if overrides.Finalize != nil {
 				// call the user's finalize first if set.

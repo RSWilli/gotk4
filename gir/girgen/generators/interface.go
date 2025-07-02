@@ -141,7 +141,7 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 		w,
 		g.SubGenerators,
 		g.Methods,
-		g.Overrides,
+		// g.Overrides,
 	)
 }
 
@@ -157,7 +157,7 @@ func NewInterfaceGenerator(c *typesystem.Interface) *InterfaceGenerator {
 		Interface: c,
 		Marshaler: marshaler,
 
-		Overrides: NewGoOverridesGenerator(c),
+		// Overrides: NewGoOverridesGenerator(c),
 	}
 
 	for _, fn := range c.Functions {

@@ -290,8 +290,8 @@ func (vf *VirtualMethodGenerator) generateTrampoline(w file.File, genericType, g
 
 	w.Go().NewSection()
 
-	// convert the instanceparam manually here, because we need another cast:
-	fmt.Fprintf(w.Go(), "%s = %s(unsafe.Pointer(%s)).(%s)\n", vf.InstanceParam.GoName, vf.Parent.GoUnsafeFromGlibBorrowFunction(), vf.InstanceParam.CName, genericType)
+	// the instanceparam needs to be borrowed and converted to the instance data
+	fmt.Fprintf(w.Go(), "%s = %s(unsafe.Pointer(%s)).UnsafeLoadInstanceFromPrivateData().(%s)\n", vf.InstanceParam.GoName, vf.Parent.GoUnsafeFromGlibBorrowFunction(), vf.InstanceParam.CName, genericType)
 
 	for _, c := range vf.VirtualParamConverters {
 		c.Convert(w)

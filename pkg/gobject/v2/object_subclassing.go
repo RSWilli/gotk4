@@ -178,21 +178,13 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT any, OverridesT ObjectOverr
 
 	t := Type(gtype)
 
-	// the key to make signals and object casting work is to register a GValueMarshaler:
-	RegisterGValueMarshaler(t, func(p unsafe.Pointer) (any, error) {
-		obj := ValueFromNative(p).Object()
-
-		instance := loadInstanceFromPrivateData(obj)
-
-		return instance, nil
-	})
-
-	RegisterObjectCasting(
-		t,
-		func(inst *ObjectInstance) Object {
-			return loadInstanceFromPrivateData(inst)
-		},
-	)
+	// FIXME: we should register the casting method, but this creates ref counting issues
+	// RegisterObjectCasting(
+	// 	t,
+	// 	func(inst *ObjectInstance) Object {
+	// 		return loadInstanceFromPrivateData(inst)
+	// 	},
+	// )
 
 	return t
 }

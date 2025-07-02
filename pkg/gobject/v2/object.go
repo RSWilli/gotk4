@@ -49,7 +49,10 @@ type Object interface {
 
 	isFloating() bool
 
-	unsafeForceFloating()
+	// UnsafeLoadInstanceFromPrivateData is used internally by the subclassing code to load the instance from the private data
+	// of the object. This is used to implement the virtual methods in the generated code.
+	// This should not be called by user code.
+	UnsafeLoadInstanceFromPrivateData() Object
 
 	baseObject() *ObjectInstance
 }
@@ -158,12 +161,6 @@ type ObjectInstance struct {
 // objectInstance is the object that is finalized
 type objectInstance struct {
 	native *C.GObject
-}
-
-// unsafeForceFloating implements Object.
-func (obj *ObjectInstance) unsafeForceFloating() {
-	C.g_object_force_floating(obj.native)
-	runtime.KeepAlive(obj)
 }
 
 // isFloating implements Object.
