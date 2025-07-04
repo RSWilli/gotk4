@@ -100,6 +100,10 @@ func removeInstanceFromPrivateData(obj Object) {
 
 	private := (*uint64)(privatePtr)
 
+	if _, ok := activeInstances[*private]; !ok {
+		panic("tried to remove instance that does not exist")
+	}
+
 	delete(activeInstances, *private)
 
 	profile.Untrack(uintptr(*private))

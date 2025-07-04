@@ -211,20 +211,27 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 		unsafe.Pointer(pclass),
 		"_gotk4_gobject2_Object_finalize",
 		func(carg0 *C.GObject) {
-			var obj Instance // go GObject subclass
+			// object and subclass are the same GObject, but we need to be careful with refs here, so we keep both.
+			// we have ref=0 here so not all methods are available
 
-			obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).UnsafeLoadInstanceFromPrivateData().(Instance)
+			// don't borrow because we don't need the cast
+			obj := wrapObject(unsafe.Pointer(carg0))
+
+			subclass := obj.UnsafeLoadInstanceFromPrivateData().(Instance)
 
 			if overrides.Finalize != nil {
 				// call the user's finalize first if set.
 				// this allows the user to block the finalization of the instance
 				// by blocking this call.
-				overrides.Finalize(obj)
+				overrides.Finalize(subclass)
 			}
 
-			removeInstanceFromPrivateData(obj)
+			removeInstanceFromPrivateData(subclass)
 
 			obj.ParentFinalize()
+
+			runtime.KeepAlive(subclass)
+			runtime.KeepAlive(obj)
 		},
 	)
 }
