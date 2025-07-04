@@ -3,6 +3,7 @@
 package profile
 
 import (
+	"io"
 	"runtime/pprof"
 	"sync"
 )
@@ -60,4 +61,24 @@ func Untrack(ptr uintptr) {
 	}
 
 	prof.Remove(ptr)
+}
+
+// Count returns [pprof.Profile.Count]
+func Count() int {
+	initProfile()
+	if prof == nil {
+		return 0
+	}
+
+	return prof.Count()
+}
+
+// WriteTo writes the profile to w
+func WriteTo(w io.Writer, debug int) error {
+	initProfile()
+	if prof == nil {
+		return nil
+	}
+
+	return prof.WriteTo(w, debug)
 }
