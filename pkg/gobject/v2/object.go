@@ -49,9 +49,6 @@ type Object interface {
 
 	isFloating() bool
 
-	// BorrowFrom is used to keep other alive until the object is finalized.
-	BorrowFrom(other any)
-
 	// UnsafeLoadInstanceFromPrivateData is used internally by the subclassing code to load the instance from the private data
 	// of the object. This is used to implement the virtual methods in the generated code.
 	// This should not be called by user code.
@@ -196,13 +193,6 @@ func (obj *ObjectInstance) unsafe() unsafe.Pointer {
 
 func (obj *ObjectInstance) baseObject() *ObjectInstance {
 	return obj
-}
-
-// BorrowFrom is used to keep other alive until the object is finalized.
-func (obj *ObjectInstance) BorrowFrom(other any) {
-	runtime.AddCleanup(obj.objectInstance, func(_ struct{}) {
-		runtime.KeepAlive(other)
-	}, struct{}{})
 }
 
 // ObjectProperty is a wrapper around g_object_get_property(). If the property's
