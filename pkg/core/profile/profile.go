@@ -4,6 +4,7 @@ package profile
 
 import (
 	"io"
+	"runtime"
 	"runtime/pprof"
 	"sync"
 )
@@ -50,6 +51,8 @@ func Track(ptr uintptr, skip int) {
 	}
 
 	prof.Add(ptr, 1+skip)
+
+	debugTrack(ptr)
 }
 
 // Untrack removes an uintpr to a go object that wraps a C type from the
@@ -61,6 +64,8 @@ func Untrack(ptr uintptr) {
 	}
 
 	prof.Remove(ptr)
+
+	debugUntrack(ptr)
 }
 
 // Count returns [pprof.Profile.Count]
@@ -81,4 +86,63 @@ func WriteTo(w io.Writer, debug int) error {
 	}
 
 	return prof.WriteTo(w, debug)
+}
+
+var (
+	debugMutex       sync.Mutex
+	debuggingEnabled bool
+	// debugStackTraces storesthe pc values of the stack trace
+	debugStackTraces map[uintptr][]uintptr
+)
+
+// EnableDebugging enables a secondary tracking of objects for debugging purposes.
+func EnableDebugging() {
+	debuggingEnabled = true
+
+	debugStackTraces = make(map[uintptr][]uintptr)
+}
+
+// debugTrack adds the stack trace of the current goroutine to the debug tracking map.
+// This is only used if debugging is enabled.
+func debugTrack(ptr uintptr) {
+	if !debuggingEnabled {
+		return
+	}
+
+	debugMutex.Lock()
+	defer debugMutex.Unlock()
+
+	var stack [10]uintptr
+	n := runtime.Callers(2, stack[:])
+	debugStackTraces[ptr] = stack[:n]
+}
+
+// debugUntrack remove and logs the stack trace for the given pointer.
+func debugUntrack(ptr uintptr) {
+	if !debuggingEnabled {
+		return
+	}
+
+	debugMutex.Lock()
+	defer debugMutex.Unlock()
+
+	stack := debugStackTraces[ptr]
+
+	delete(debugStackTraces, ptr)
+
+	frames := runtime.CallersFrames(stack)
+
+	println("untracking object tracked at")
+
+	for {
+		frame, more := frames.Next()
+		if frame.Function == "" {
+			break
+		}
+
+		println("  ", frame.Function, "at", frame.File, ":", frame.Line)
+		if !more {
+			break
+		}
+	}
 }
