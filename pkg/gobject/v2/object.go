@@ -118,9 +118,12 @@ func UnsafeObjectToGlibNone(obj Object) unsafe.Pointer {
 	return base.unsafe()
 }
 
-// UnsafeObjectToGlibFull is used to convert the Object to C. Since we have a reference on the object this
-// will not clean up the finalizer, so this is equivalent to UnsafeObjectToGlibNone.
+// UnsafeObjectToGlibFull is used to convert the Object to C. This is used for cases where the receiver will not call ref but
+// will call unref when the object is no longer needed. This means that we need to take another reference on the object
+// to prevent memory corruption.
 func UnsafeObjectToGlibFull(obj Object) unsafe.Pointer {
+	C.g_object_ref(C.gpointer(obj.baseObject().unsafe()))
+
 	return UnsafeObjectToGlibNone(obj)
 }
 
