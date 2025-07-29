@@ -86,6 +86,10 @@ func marshalObject(p unsafe.Pointer) (interface{}, error) {
 func UnsafeObjectFromGlibNone(p unsafe.Pointer) Object {
 	obj := wrapObjectFinalized(p)
 
+	if obj == nil {
+		return nil
+	}
+
 	// if the object was floating this removes the floating ref.
 	// if not, then this is equivalent to g_object_ref
 	C.g_object_ref_sink(C.gpointer(obj.unsafe()))
@@ -100,6 +104,10 @@ func UnsafeObjectFromGlibNone(p unsafe.Pointer) Object {
 func UnsafeObjectFromGlibBorrow(p unsafe.Pointer) Object {
 	obj := wrapObject(p)
 
+	if obj == nil {
+		return nil
+	}
+
 	return obj.cast()
 }
 
@@ -108,11 +116,19 @@ func UnsafeObjectFromGlibBorrow(p unsafe.Pointer) Object {
 func UnsafeObjectFromGlibFull(p unsafe.Pointer) Object {
 	obj := wrapObjectFinalized(p)
 
+	if obj == nil {
+		return nil
+	}
+
 	return obj.cast()
 }
 
 // UnsafeObjectToGlibNone is used to convert the Object to C.
 func UnsafeObjectToGlibNone(obj Object) unsafe.Pointer {
+	if obj == nil {
+		return nil
+	}
+
 	base := obj.baseObject()
 
 	return base.unsafe()
@@ -122,12 +138,19 @@ func UnsafeObjectToGlibNone(obj Object) unsafe.Pointer {
 // will call unref when the object is no longer needed. This means that we need to take another reference on the object
 // to prevent memory corruption.
 func UnsafeObjectToGlibFull(obj Object) unsafe.Pointer {
+	if obj == nil {
+		return nil
+	}
+
 	C.g_object_ref(C.gpointer(obj.baseObject().unsafe()))
 
 	return UnsafeObjectToGlibNone(obj)
 }
 
 func wrapObject(p unsafe.Pointer) *ObjectInstance {
+	if p == nil {
+		return nil
+	}
 	return &ObjectInstance{
 		objectInstance: &objectInstance{
 			native: (*C.GObject)(p),
@@ -141,6 +164,9 @@ func wrapObject(p unsafe.Pointer) *ObjectInstance {
 // this will also register the object in the profile for memory leak detection.
 func wrapObjectFinalized(p unsafe.Pointer) *ObjectInstance {
 	obj := wrapObject(p)
+	if obj == nil {
+		return nil
+	}
 
 	// track the private objectInstance because that is finalized
 	profile.Track(uintptr(unsafe.Pointer(obj.objectInstance)), 2)

@@ -467,7 +467,7 @@ func (v *Value) SetInstance(instance unsafe.Pointer) {
 // SetObject is a wrapper around g_value_set_object().
 func (v *Value) SetObject(obj Object) {
 	baseObject := obj.baseObject()
-	C.g_value_set_object(v.native(), C.gpointer(baseObject.native))
+	C.g_value_set_object(v.native(), C.gpointer(baseObject.unsafe()))
 	runtime.KeepAlive(v)
 	runtime.KeepAlive(obj)
 }

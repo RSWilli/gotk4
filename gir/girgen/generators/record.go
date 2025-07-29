@@ -46,6 +46,17 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "\tnative *%s\n", g.CGoType(0))
 	fmt.Fprintf(w.Go(), "}\n\n")
 
+	// instance method for returning the c pointer
+	fmt.Fprintf(w.Go(), "// %s returns the underlying C pointer. This is used by the bindings internally.\n", g.ToGlibNoneFunction)
+	fmt.Fprintf(w.Go(), "func (%s *%s) instance() %s {\n", g.ReceiverName, g.GoType(0), g.CGoType(1))
+	w.Go().Indent()
+	fmt.Fprintf(w.Go(), "if %s == nil {\n", g.ReceiverName)
+	fmt.Fprintf(w.Go(), "\treturn nil\n")
+	fmt.Fprintf(w.Go(), "}\n")
+	fmt.Fprintf(w.Go(), "return %s.native\n", g.ReceiverName)
+	w.Go().Unindent()
+	fmt.Fprintf(w.Go(), "}\n\n")
+
 	if g.GenerateMarshaler {
 		// GoValueInitializer assertion:
 		fmt.Fprintf(w.Go(), "var _ %s = (*%s)(nil)\n\n", g.Value().WithForeignNamespace("GoValueInitializer"), g.GoType(0))
@@ -64,13 +75,16 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 
 		fmt.Fprintf(w.Go(), "func (r *%s) SetGoValue(v *%s) {\n", g.GoType(0), g.Value().NamespacedGoType(0))
 		w.Go().Indent()
-		fmt.Fprintf(w.Go(), "v.SetBoxed(unsafe.Pointer(r.native))\n")
+		fmt.Fprintf(w.Go(), "v.SetBoxed(unsafe.Pointer(r.instance()))\n")
 		w.Go().Unindent()
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
 	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go. This is used by the bindings internally.\n", g.GoUnsafeFromGlibBorrowFunction(), g.CGoType(0))
 	fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibBorrowFunction(), g.GoType(0))
+	fmt.Fprintf(w.Go(), "\tif p == nil {\n")
+	fmt.Fprintf(w.Go(), "\t\treturn nil\n")
+	fmt.Fprintf(w.Go(), "\t}\n")
 	fmt.Fprintf(w.Go(), "\treturn &%s{&%s{(*%s)(p)}}\n", g.GoType(0), g.PrivateGoType, g.CGoType(0))
 	fmt.Fprintf(w.Go(), "}\n\n")
 
@@ -102,6 +116,9 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 			fmt.Fprintf(w.Go(), "\t// FIXME: this has no ref function, what should we do here?\n")
 		}
 		fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeFromGlibBorrowFunction())
+		fmt.Fprintf(w.Go(), "\tif wrapped == nil {\n")
+		fmt.Fprintf(w.Go(), "\t\treturn nil\n")
+		fmt.Fprintf(w.Go(), "\t}\n")
 		mkFinalizer()
 		fmt.Fprintf(w.Go(), "\treturn wrapped\n")
 		fmt.Fprintf(w.Go(), "}\n\n")
@@ -111,6 +128,9 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 		fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking ownership. This is used by the bindings internally.\n", g.GoUnsafeFromGlibFullFunction(), g.CGoType(0))
 		fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibFullFunction(), g.GoType(0))
 		fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeFromGlibBorrowFunction())
+		fmt.Fprintf(w.Go(), "\tif wrapped == nil {\n")
+		fmt.Fprintf(w.Go(), "\t\treturn nil\n")
+		fmt.Fprintf(w.Go(), "\t}\n")
 		mkFinalizer()
 		fmt.Fprintf(w.Go(), "\treturn wrapped\n")
 		fmt.Fprintf(w.Go(), "}\n\n")
@@ -134,6 +154,9 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 
 	fmt.Fprintf(w.Go(), "// %s returns the underlying C pointer. This is used by the bindings internally.\n", g.GoUnsafeToGlibNoneFunction())
 	fmt.Fprintf(w.Go(), "func %s(%s *%s) unsafe.Pointer {\n", g.GoUnsafeToGlibNoneFunction(), g.ReceiverName, g.GoType(0))
+	fmt.Fprintf(w.Go(), "\tif %s == nil {\n", g.ReceiverName)
+	fmt.Fprintf(w.Go(), "\t\treturn nil\n")
+	fmt.Fprintf(w.Go(), "\t}\n")
 	fmt.Fprintf(w.Go(), "\treturn unsafe.Pointer(%s.native)\n", g.ReceiverName)
 	fmt.Fprintf(w.Go(), "}\n\n")
 
@@ -141,6 +164,9 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 		fmt.Fprintf(w.Go(), "// %s returns the underlying C pointer and gives up ownership.\n", g.GoUnsafeToGlibFullFunction())
 		fmt.Fprintf(w.Go(), "// This is used by the bindings internally.\n")
 		fmt.Fprintf(w.Go(), "func %s(%s *%s) unsafe.Pointer {\n", g.GoUnsafeToGlibFullFunction(), g.ReceiverName, g.GoType(0))
+		fmt.Fprintf(w.Go(), "\tif %s == nil {\n", g.ReceiverName)
+		fmt.Fprintf(w.Go(), "\t\treturn nil\n")
+		fmt.Fprintf(w.Go(), "\t}\n")
 		fmt.Fprintf(w.Go(), "\truntime.SetFinalizer(%s.%s, nil)\n", g.ReceiverName, g.PrivateGoType)
 		fmt.Fprintf(w.Go(), "\t_p := unsafe.Pointer(%s.native)\n", g.ReceiverName)
 		fmt.Fprintf(w.Go(), "\t%s.native = nil // %s is invalid from here on\n", g.ReceiverName, g.GoType(0))
