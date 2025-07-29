@@ -53,7 +53,7 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 		w.RegisterGType(g.Record)
 		fmt.Fprintf(w.Go(), "func marshal%s(p unsafe.Pointer) (interface{}, error) {\n", g.GoType(0))
 		fmt.Fprintf(w.Go(), "\tb := %s(p).Boxed()\n", g.Value().WithForeignNamespace(g.Value().Type.FromGlibBorrowFunction))
-		fmt.Fprintf(w.Go(), "\treturn %s(b), nil\n", g.GoUnsafeFromGlibBorrowFunction())
+		fmt.Fprintf(w.Go(), "\treturn %s(b), nil\n", g.GoUnsafeFromGlibNoneFunction())
 		fmt.Fprintf(w.Go(), "}\n\n")
 
 		fmt.Fprintf(w.Go(), "func (r *%s) GoValueType() %s {\n", g.GoType(0), g.Type().NamespacedGoType(0))
