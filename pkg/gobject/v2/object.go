@@ -3,8 +3,6 @@ package gobject
 import (
 	"runtime"
 	"unsafe"
-
-	"github.com/diamondburned/gotk4/pkg/core/profile"
 )
 
 // #cgo pkg-config: gobject-2.0
@@ -160,22 +158,15 @@ func wrapObject(p unsafe.Pointer) *ObjectInstance {
 
 // wrapObjectFinalized returns a new object instance and attaches a cleanup to unref the c pointer on GC. if ref is true
 // then a reference will be taken on the object.
-//
-// this will also register the object in the profile for memory leak detection.
 func wrapObjectFinalized(p unsafe.Pointer) *ObjectInstance {
 	obj := wrapObject(p)
 	if obj == nil {
 		return nil
 	}
 
-	// track the private objectInstance because that is finalized
-	profile.Track(uintptr(unsafe.Pointer(obj.objectInstance)), 2)
-
 	runtime.SetFinalizer(
 		obj.objectInstance,
 		func(intern *objectInstance) {
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
-
 			C.g_object_unref(C.gpointer(intern.native))
 		},
 	)

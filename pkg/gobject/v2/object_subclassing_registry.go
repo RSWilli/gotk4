@@ -3,8 +3,6 @@ package gobject
 import (
 	"sync"
 	"unsafe"
-
-	"github.com/diamondburned/gotk4/pkg/core/profile"
 )
 
 var registryLock sync.Mutex
@@ -58,8 +56,6 @@ func saveInstanceInPrivateData(obj Object) {
 
 	*private = instanceID
 	activeInstances[instanceID] = obj
-
-	profile.Track(uintptr(instanceID), 1)
 }
 
 // UnsafeLoadInstanceFromPrivateData loads the instance from the private data of the given object.
@@ -105,6 +101,4 @@ func removeInstanceFromPrivateData(obj Object) {
 	}
 
 	delete(activeInstances, *private)
-
-	profile.Untrack(uintptr(*private))
 }

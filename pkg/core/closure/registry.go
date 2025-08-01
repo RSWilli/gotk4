@@ -3,8 +3,6 @@ package closure
 import (
 	"sync"
 	"unsafe"
-
-	"github.com/diamondburned/gotk4/pkg/core/profile"
 )
 
 var closureRegistry sync.Map // unsafe.Pointer(*C.GClosure) -> *FuncStack
@@ -18,7 +16,7 @@ func Register(gclosure unsafe.Pointer, callback *FuncStack) {
 
 	closureRegistry.Store(gclosure, callback)
 
-	profile.Track(uintptr(gclosure), 1)
+	profile.Add(uintptr(gclosure), 2)
 }
 
 func Load(gclosure unsafe.Pointer) *FuncStack {
@@ -36,5 +34,5 @@ func Delete(gclosure unsafe.Pointer) {
 		panic("closure not registered")
 	}
 	closureRegistry.Delete(gclosure)
-	profile.Untrack(uintptr(gclosure))
+	profile.Remove(uintptr(gclosure))
 }

@@ -5,8 +5,6 @@ import (
 	"reflect"
 	"runtime"
 	"unsafe"
-
-	"github.com/diamondburned/gotk4/pkg/core/profile"
 )
 
 // #cgo pkg-config: gobject-2.0
@@ -81,15 +79,11 @@ var (
 func wrapValueFinalized(v unsafe.Pointer) *Value {
 	gvalue := ValueFromNative(v)
 
-	// track the internal value because that is finalized
-	profile.Track(uintptr(unsafe.Pointer(gvalue.value)), 1)
-
 	//An allocated GValue is not guaranteed to hold a value that can be unset
 	//We need to double check before unsetting, to prevent:
 	//`g_value_unset: assertion 'G_IS_VALUE (value)' failed`
 	runtime.SetFinalizer(gvalue.value, func(value *value) {
 		value.unset()
-		profile.Untrack(uintptr(unsafe.Pointer(value)))
 	})
 
 	return gvalue

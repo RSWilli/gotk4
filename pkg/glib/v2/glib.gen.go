@@ -8,7 +8,6 @@ import (
 	"strings"
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/profile"
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
 )
 
@@ -17904,12 +17903,10 @@ func UnsafeAsyncQueueFromGlibNone(p unsafe.Pointer) *AsyncQueue {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.asyncQueue)), 1)
 	runtime.SetFinalizer(
 		wrapped.asyncQueue,
 		func (intern *asyncQueue) {
 			C.g_async_queue_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -17921,12 +17918,10 @@ func UnsafeAsyncQueueFromGlibFull(p unsafe.Pointer) *AsyncQueue {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.asyncQueue)), 1)
 	runtime.SetFinalizer(
 		wrapped.asyncQueue,
 		func (intern *asyncQueue) {
 			C.g_async_queue_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -18154,12 +18149,10 @@ func UnsafeBookmarkFileFromGlibNone(p unsafe.Pointer) *BookmarkFile {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.bookmarkFile)), 1)
 	runtime.SetFinalizer(
 		wrapped.bookmarkFile,
 		func (intern *bookmarkFile) {
 			C.g_bookmark_file_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -18171,12 +18164,10 @@ func UnsafeBookmarkFileFromGlibFull(p unsafe.Pointer) *BookmarkFile {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.bookmarkFile)), 1)
 	runtime.SetFinalizer(
 		wrapped.bookmarkFile,
 		func (intern *bookmarkFile) {
 			C.g_bookmark_file_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -19483,12 +19474,10 @@ func UnsafeByteArrayFromGlibNone(p unsafe.Pointer) *ByteArray {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.byteArray)), 1)
 	runtime.SetFinalizer(
 		wrapped.byteArray,
 		func (intern *byteArray) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -19500,12 +19489,10 @@ func UnsafeByteArrayFromGlibFull(p unsafe.Pointer) *ByteArray {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.byteArray)), 1)
 	runtime.SetFinalizer(
 		wrapped.byteArray,
 		func (intern *byteArray) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -19599,12 +19586,10 @@ func UnsafeBytesFromGlibNone(p unsafe.Pointer) *Bytes {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.bytes)), 1)
 	runtime.SetFinalizer(
 		wrapped.bytes,
 		func (intern *bytes) {
 			C.g_bytes_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -19616,12 +19601,10 @@ func UnsafeBytesFromGlibFull(p unsafe.Pointer) *Bytes {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.bytes)), 1)
 	runtime.SetFinalizer(
 		wrapped.bytes,
 		func (intern *bytes) {
 			C.g_bytes_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -19781,12 +19764,10 @@ func UnsafeChecksumFromGlibNone(p unsafe.Pointer) *Checksum {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.checksum)), 1)
 	runtime.SetFinalizer(
 		wrapped.checksum,
 		func (intern *checksum) {
 			C.g_checksum_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -19798,12 +19779,10 @@ func UnsafeChecksumFromGlibFull(p unsafe.Pointer) *Checksum {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.checksum)), 1)
 	runtime.SetFinalizer(
 		wrapped.checksum,
 		func (intern *checksum) {
 			C.g_checksum_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -20093,12 +20072,10 @@ func UnsafeCondFromGlibNone(p unsafe.Pointer) *Cond {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.cond)), 1)
 	runtime.SetFinalizer(
 		wrapped.cond,
 		func (intern *cond) {
 			C.g_cond_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -20110,12 +20087,10 @@ func UnsafeCondFromGlibFull(p unsafe.Pointer) *Cond {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.cond)), 1)
 	runtime.SetFinalizer(
 		wrapped.cond,
 		func (intern *cond) {
 			C.g_cond_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -20255,12 +20230,10 @@ func UnsafeDataFromGlibNone(p unsafe.Pointer) *Data {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.data)), 1)
 	runtime.SetFinalizer(
 		wrapped.data,
 		func (intern *data) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -20272,12 +20245,10 @@ func UnsafeDataFromGlibFull(p unsafe.Pointer) *Data {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.data)), 1)
 	runtime.SetFinalizer(
 		wrapped.data,
 		func (intern *data) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -20346,12 +20317,10 @@ func UnsafeDebugKeyFromGlibNone(p unsafe.Pointer) *DebugKey {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.debugKey)), 1)
 	runtime.SetFinalizer(
 		wrapped.debugKey,
 		func (intern *debugKey) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -20363,12 +20332,10 @@ func UnsafeDebugKeyFromGlibFull(p unsafe.Pointer) *DebugKey {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.debugKey)), 1)
 	runtime.SetFinalizer(
 		wrapped.debugKey,
 		func (intern *debugKey) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -20436,12 +20403,10 @@ func UnsafeDirFromGlibNone(p unsafe.Pointer) *Dir {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.dir)), 1)
 	runtime.SetFinalizer(
 		wrapped.dir,
 		func (intern *dir) {
 			C.g_dir_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -20453,12 +20418,10 @@ func UnsafeDirFromGlibFull(p unsafe.Pointer) *Dir {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.dir)), 1)
 	runtime.SetFinalizer(
 		wrapped.dir,
 		func (intern *dir) {
 			C.g_dir_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -20695,12 +20658,10 @@ func UnsafeHashTableIterFromGlibNone(p unsafe.Pointer) *HashTableIter {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.hashTableIter)), 1)
 	runtime.SetFinalizer(
 		wrapped.hashTableIter,
 		func (intern *hashTableIter) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -20712,12 +20673,10 @@ func UnsafeHashTableIterFromGlibFull(p unsafe.Pointer) *HashTableIter {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.hashTableIter)), 1)
 	runtime.SetFinalizer(
 		wrapped.hashTableIter,
 		func (intern *hashTableIter) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -20844,12 +20803,10 @@ func UnsafeHmacFromGlibNone(p unsafe.Pointer) *Hmac {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.hmac)), 1)
 	runtime.SetFinalizer(
 		wrapped.hmac,
 		func (intern *hmac) {
 			C.g_hmac_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -20861,12 +20818,10 @@ func UnsafeHmacFromGlibFull(p unsafe.Pointer) *Hmac {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.hmac)), 1)
 	runtime.SetFinalizer(
 		wrapped.hmac,
 		func (intern *hmac) {
 			C.g_hmac_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -21072,12 +21027,10 @@ func UnsafeHookFromGlibNone(p unsafe.Pointer) *Hook {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.hook)), 1)
 	runtime.SetFinalizer(
 		wrapped.hook,
 		func (intern *hook) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -21089,12 +21042,10 @@ func UnsafeHookFromGlibFull(p unsafe.Pointer) *Hook {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.hook)), 1)
 	runtime.SetFinalizer(
 		wrapped.hook,
 		func (intern *hook) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -21336,12 +21287,10 @@ func UnsafeHookListFromGlibNone(p unsafe.Pointer) *HookList {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.hookList)), 1)
 	runtime.SetFinalizer(
 		wrapped.hookList,
 		func (intern *hookList) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -21353,12 +21302,10 @@ func UnsafeHookListFromGlibFull(p unsafe.Pointer) *HookList {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.hookList)), 1)
 	runtime.SetFinalizer(
 		wrapped.hookList,
 		func (intern *hookList) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -21541,12 +21488,10 @@ func UnsafeIOChannelFromGlibNone(p unsafe.Pointer) *IOChannel {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.iOChannel)), 1)
 	runtime.SetFinalizer(
 		wrapped.iOChannel,
 		func (intern *iOChannel) {
 			C.g_io_channel_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -21558,12 +21503,10 @@ func UnsafeIOChannelFromGlibFull(p unsafe.Pointer) *IOChannel {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.iOChannel)), 1)
 	runtime.SetFinalizer(
 		wrapped.iOChannel,
 		func (intern *iOChannel) {
 			C.g_io_channel_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -22428,12 +22371,10 @@ func UnsafeIOFuncsFromGlibNone(p unsafe.Pointer) *IOFuncs {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.iOFuncs)), 1)
 	runtime.SetFinalizer(
 		wrapped.iOFuncs,
 		func (intern *iOFuncs) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -22445,12 +22386,10 @@ func UnsafeIOFuncsFromGlibFull(p unsafe.Pointer) *IOFuncs {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.iOFuncs)), 1)
 	runtime.SetFinalizer(
 		wrapped.iOFuncs,
 		func (intern *iOFuncs) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -22650,12 +22589,10 @@ func UnsafeKeyFileFromGlibNone(p unsafe.Pointer) *KeyFile {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.keyFile)), 1)
 	runtime.SetFinalizer(
 		wrapped.keyFile,
 		func (intern *keyFile) {
 			C.g_key_file_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -22667,12 +22604,10 @@ func UnsafeKeyFileFromGlibFull(p unsafe.Pointer) *KeyFile {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.keyFile)), 1)
 	runtime.SetFinalizer(
 		wrapped.keyFile,
 		func (intern *keyFile) {
 			C.g_key_file_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -24759,12 +24694,10 @@ func UnsafeLogFieldFromGlibNone(p unsafe.Pointer) *LogField {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.logField)), 1)
 	runtime.SetFinalizer(
 		wrapped.logField,
 		func (intern *logField) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -24776,12 +24709,10 @@ func UnsafeLogFieldFromGlibFull(p unsafe.Pointer) *LogField {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.logField)), 1)
 	runtime.SetFinalizer(
 		wrapped.logField,
 		func (intern *logField) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -24850,12 +24781,10 @@ func UnsafeMainContextFromGlibNone(p unsafe.Pointer) *MainContext {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.mainContext)), 1)
 	runtime.SetFinalizer(
 		wrapped.mainContext,
 		func (intern *mainContext) {
 			C.g_main_context_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -24867,12 +24796,10 @@ func UnsafeMainContextFromGlibFull(p unsafe.Pointer) *MainContext {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.mainContext)), 1)
 	runtime.SetFinalizer(
 		wrapped.mainContext,
 		func (intern *mainContext) {
 			C.g_main_context_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -25515,12 +25442,10 @@ func UnsafeMainLoopFromGlibNone(p unsafe.Pointer) *MainLoop {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.mainLoop)), 1)
 	runtime.SetFinalizer(
 		wrapped.mainLoop,
 		func (intern *mainLoop) {
 			C.g_main_loop_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -25532,12 +25457,10 @@ func UnsafeMainLoopFromGlibFull(p unsafe.Pointer) *MainLoop {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.mainLoop)), 1)
 	runtime.SetFinalizer(
 		wrapped.mainLoop,
 		func (intern *mainLoop) {
 			C.g_main_loop_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -25732,12 +25655,10 @@ func UnsafeMappedFileFromGlibNone(p unsafe.Pointer) *MappedFile {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.mappedFile)), 1)
 	runtime.SetFinalizer(
 		wrapped.mappedFile,
 		func (intern *mappedFile) {
 			C.g_mapped_file_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -25749,12 +25670,10 @@ func UnsafeMappedFileFromGlibFull(p unsafe.Pointer) *MappedFile {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.mappedFile)), 1)
 	runtime.SetFinalizer(
 		wrapped.mappedFile,
 		func (intern *mappedFile) {
 			C.g_mapped_file_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -26016,12 +25935,10 @@ func UnsafeMarkupParseContextFromGlibNone(p unsafe.Pointer) *MarkupParseContext 
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.markupParseContext)), 1)
 	runtime.SetFinalizer(
 		wrapped.markupParseContext,
 		func (intern *markupParseContext) {
 			C.g_markup_parse_context_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -26033,12 +25950,10 @@ func UnsafeMarkupParseContextFromGlibFull(p unsafe.Pointer) *MarkupParseContext 
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.markupParseContext)), 1)
 	runtime.SetFinalizer(
 		wrapped.markupParseContext,
 		func (intern *markupParseContext) {
 			C.g_markup_parse_context_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -26307,12 +26222,10 @@ func UnsafeMarkupParserFromGlibNone(p unsafe.Pointer) *MarkupParser {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.markupParser)), 1)
 	runtime.SetFinalizer(
 		wrapped.markupParser,
 		func (intern *markupParser) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -26324,12 +26237,10 @@ func UnsafeMarkupParserFromGlibFull(p unsafe.Pointer) *MarkupParser {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.markupParser)), 1)
 	runtime.SetFinalizer(
 		wrapped.markupParser,
 		func (intern *markupParser) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -26398,12 +26309,10 @@ func UnsafeMatchInfoFromGlibNone(p unsafe.Pointer) *MatchInfo {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.matchInfo)), 1)
 	runtime.SetFinalizer(
 		wrapped.matchInfo,
 		func (intern *matchInfo) {
 			C.g_match_info_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -26415,12 +26324,10 @@ func UnsafeMatchInfoFromGlibFull(p unsafe.Pointer) *MatchInfo {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.matchInfo)), 1)
 	runtime.SetFinalizer(
 		wrapped.matchInfo,
 		func (intern *matchInfo) {
 			C.g_match_info_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -27176,12 +27083,10 @@ func UnsafeMemVTableFromGlibNone(p unsafe.Pointer) *MemVTable {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.memVTable)), 1)
 	runtime.SetFinalizer(
 		wrapped.memVTable,
 		func (intern *memVTable) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -27193,12 +27098,10 @@ func UnsafeMemVTableFromGlibFull(p unsafe.Pointer) *MemVTable {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.memVTable)), 1)
 	runtime.SetFinalizer(
 		wrapped.memVTable,
 		func (intern *memVTable) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -27266,12 +27169,10 @@ func UnsafeNodeFromGlibNone(p unsafe.Pointer) *Node {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.node)), 1)
 	runtime.SetFinalizer(
 		wrapped.node,
 		func (intern *node) {
 			C.g_node_destroy(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -27283,12 +27184,10 @@ func UnsafeNodeFromGlibFull(p unsafe.Pointer) *Node {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.node)), 1)
 	runtime.SetFinalizer(
 		wrapped.node,
 		func (intern *node) {
 			C.g_node_destroy(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -27556,12 +27455,10 @@ func UnsafeOnceFromGlibNone(p unsafe.Pointer) *Once {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.once)), 1)
 	runtime.SetFinalizer(
 		wrapped.once,
 		func (intern *once) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -27573,12 +27470,10 @@ func UnsafeOnceFromGlibFull(p unsafe.Pointer) *Once {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.once)), 1)
 	runtime.SetFinalizer(
 		wrapped.once,
 		func (intern *once) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -27677,12 +27572,10 @@ func UnsafeOptionContextFromGlibNone(p unsafe.Pointer) *OptionContext {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.optionContext)), 1)
 	runtime.SetFinalizer(
 		wrapped.optionContext,
 		func (intern *optionContext) {
 			C.g_option_context_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -27694,12 +27587,10 @@ func UnsafeOptionContextFromGlibFull(p unsafe.Pointer) *OptionContext {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.optionContext)), 1)
 	runtime.SetFinalizer(
 		wrapped.optionContext,
 		func (intern *optionContext) {
 			C.g_option_context_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -28221,12 +28112,10 @@ func UnsafeOptionEntryFromGlibNone(p unsafe.Pointer) *OptionEntry {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.optionEntry)), 1)
 	runtime.SetFinalizer(
 		wrapped.optionEntry,
 		func (intern *optionEntry) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -28238,12 +28127,10 @@ func UnsafeOptionEntryFromGlibFull(p unsafe.Pointer) *OptionEntry {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.optionEntry)), 1)
 	runtime.SetFinalizer(
 		wrapped.optionEntry,
 		func (intern *optionEntry) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -28317,12 +28204,10 @@ func UnsafeOptionGroupFromGlibNone(p unsafe.Pointer) *OptionGroup {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.optionGroup)), 1)
 	runtime.SetFinalizer(
 		wrapped.optionGroup,
 		func (intern *optionGroup) {
 			C.g_option_group_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -28334,12 +28219,10 @@ func UnsafeOptionGroupFromGlibFull(p unsafe.Pointer) *OptionGroup {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.optionGroup)), 1)
 	runtime.SetFinalizer(
 		wrapped.optionGroup,
 		func (intern *optionGroup) {
 			C.g_option_group_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -28485,12 +28368,10 @@ func UnsafePathBufFromGlibNone(p unsafe.Pointer) *PathBuf {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.pathBuf)), 1)
 	runtime.SetFinalizer(
 		wrapped.pathBuf,
 		func (intern *pathBuf) {
 			C.g_path_buf_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -28502,12 +28383,10 @@ func UnsafePathBufFromGlibFull(p unsafe.Pointer) *PathBuf {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.pathBuf)), 1)
 	runtime.SetFinalizer(
 		wrapped.pathBuf,
 		func (intern *pathBuf) {
 			C.g_path_buf_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -28960,12 +28839,10 @@ func UnsafePatternSpecFromGlibNone(p unsafe.Pointer) *PatternSpec {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.patternSpec)), 1)
 	runtime.SetFinalizer(
 		wrapped.patternSpec,
 		func (intern *patternSpec) {
 			C.g_pattern_spec_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -28977,12 +28854,10 @@ func UnsafePatternSpecFromGlibFull(p unsafe.Pointer) *PatternSpec {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.patternSpec)), 1)
 	runtime.SetFinalizer(
 		wrapped.patternSpec,
 		func (intern *patternSpec) {
 			C.g_pattern_spec_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -29235,12 +29110,10 @@ func UnsafePollFDFromGlibNone(p unsafe.Pointer) *PollFD {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.pollFD)), 1)
 	runtime.SetFinalizer(
 		wrapped.pollFD,
 		func (intern *pollFD) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -29252,12 +29125,10 @@ func UnsafePollFDFromGlibFull(p unsafe.Pointer) *PollFD {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.pollFD)), 1)
 	runtime.SetFinalizer(
 		wrapped.pollFD,
 		func (intern *pollFD) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -29387,12 +29258,10 @@ func UnsafeRWLockFromGlibNone(p unsafe.Pointer) *RWLock {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.rWLock)), 1)
 	runtime.SetFinalizer(
 		wrapped.rWLock,
 		func (intern *rWLock) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -29404,12 +29273,10 @@ func UnsafeRWLockFromGlibFull(p unsafe.Pointer) *RWLock {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.rWLock)), 1)
 	runtime.SetFinalizer(
 		wrapped.rWLock,
 		func (intern *rWLock) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -29659,12 +29526,10 @@ func UnsafeRandFromGlibNone(p unsafe.Pointer) *Rand {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.rand)), 1)
 	runtime.SetFinalizer(
 		wrapped.rand,
 		func (intern *rand) {
 			C.g_rand_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -29676,12 +29541,10 @@ func UnsafeRandFromGlibFull(p unsafe.Pointer) *Rand {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.rand)), 1)
 	runtime.SetFinalizer(
 		wrapped.rand,
 		func (intern *rand) {
 			C.g_rand_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -30035,12 +29898,10 @@ func UnsafeRecMutexFromGlibNone(p unsafe.Pointer) *RecMutex {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.recMutex)), 1)
 	runtime.SetFinalizer(
 		wrapped.recMutex,
 		func (intern *recMutex) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -30052,12 +29913,10 @@ func UnsafeRecMutexFromGlibFull(p unsafe.Pointer) *RecMutex {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.recMutex)), 1)
 	runtime.SetFinalizer(
 		wrapped.recMutex,
 		func (intern *recMutex) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -30369,12 +30228,10 @@ func UnsafeRegexFromGlibNone(p unsafe.Pointer) *Regex {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.regex)), 1)
 	runtime.SetFinalizer(
 		wrapped.regex,
 		func (intern *regex) {
 			C.g_regex_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -30386,12 +30243,10 @@ func UnsafeRegexFromGlibFull(p unsafe.Pointer) *Regex {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.regex)), 1)
 	runtime.SetFinalizer(
 		wrapped.regex,
 		func (intern *regex) {
 			C.g_regex_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -31593,12 +31448,10 @@ func UnsafeScannerFromGlibNone(p unsafe.Pointer) *Scanner {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.scanner)), 1)
 	runtime.SetFinalizer(
 		wrapped.scanner,
 		func (intern *scanner) {
 			C.g_scanner_destroy(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -31610,12 +31463,10 @@ func UnsafeScannerFromGlibFull(p unsafe.Pointer) *Scanner {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.scanner)), 1)
 	runtime.SetFinalizer(
 		wrapped.scanner,
 		func (intern *scanner) {
 			C.g_scanner_destroy(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -32014,12 +31865,10 @@ func UnsafeScannerConfigFromGlibNone(p unsafe.Pointer) *ScannerConfig {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.scannerConfig)), 1)
 	runtime.SetFinalizer(
 		wrapped.scannerConfig,
 		func (intern *scannerConfig) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -32031,12 +31880,10 @@ func UnsafeScannerConfigFromGlibFull(p unsafe.Pointer) *ScannerConfig {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.scannerConfig)), 1)
 	runtime.SetFinalizer(
 		wrapped.scannerConfig,
 		func (intern *scannerConfig) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -32105,12 +31952,10 @@ func UnsafeSequenceFromGlibNone(p unsafe.Pointer) *Sequence {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.sequence)), 1)
 	runtime.SetFinalizer(
 		wrapped.sequence,
 		func (intern *sequence) {
 			C.g_sequence_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -32122,12 +31967,10 @@ func UnsafeSequenceFromGlibFull(p unsafe.Pointer) *Sequence {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.sequence)), 1)
 	runtime.SetFinalizer(
 		wrapped.sequence,
 		func (intern *sequence) {
 			C.g_sequence_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -32482,12 +32325,10 @@ func UnsafeSequenceIterFromGlibNone(p unsafe.Pointer) *SequenceIter {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.sequenceIter)), 1)
 	runtime.SetFinalizer(
 		wrapped.sequenceIter,
 		func (intern *sequenceIter) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -32499,12 +32340,10 @@ func UnsafeSequenceIterFromGlibFull(p unsafe.Pointer) *SequenceIter {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.sequenceIter)), 1)
 	runtime.SetFinalizer(
 		wrapped.sequenceIter,
 		func (intern *sequenceIter) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -32784,12 +32623,10 @@ func UnsafeSourceCallbackFuncsFromGlibNone(p unsafe.Pointer) *SourceCallbackFunc
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.sourceCallbackFuncs)), 1)
 	runtime.SetFinalizer(
 		wrapped.sourceCallbackFuncs,
 		func (intern *sourceCallbackFuncs) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -32801,12 +32638,10 @@ func UnsafeSourceCallbackFuncsFromGlibFull(p unsafe.Pointer) *SourceCallbackFunc
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.sourceCallbackFuncs)), 1)
 	runtime.SetFinalizer(
 		wrapped.sourceCallbackFuncs,
 		func (intern *sourceCallbackFuncs) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -32893,12 +32728,10 @@ func UnsafeSourceFuncsFromGlibNone(p unsafe.Pointer) *SourceFuncs {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.sourceFuncs)), 1)
 	runtime.SetFinalizer(
 		wrapped.sourceFuncs,
 		func (intern *sourceFuncs) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -32910,12 +32743,10 @@ func UnsafeSourceFuncsFromGlibFull(p unsafe.Pointer) *SourceFuncs {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.sourceFuncs)), 1)
 	runtime.SetFinalizer(
 		wrapped.sourceFuncs,
 		func (intern *sourceFuncs) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -33005,12 +32836,10 @@ func UnsafeStringChunkFromGlibNone(p unsafe.Pointer) *StringChunk {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.stringChunk)), 1)
 	runtime.SetFinalizer(
 		wrapped.stringChunk,
 		func (intern *stringChunk) {
 			C.g_string_chunk_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -33022,12 +32851,10 @@ func UnsafeStringChunkFromGlibFull(p unsafe.Pointer) *StringChunk {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.stringChunk)), 1)
 	runtime.SetFinalizer(
 		wrapped.stringChunk,
 		func (intern *stringChunk) {
 			C.g_string_chunk_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -33252,12 +33079,10 @@ func UnsafeStrvBuilderFromGlibNone(p unsafe.Pointer) *StrvBuilder {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.strvBuilder)), 1)
 	runtime.SetFinalizer(
 		wrapped.strvBuilder,
 		func (intern *strvBuilder) {
 			C.g_strv_builder_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -33269,12 +33094,10 @@ func UnsafeStrvBuilderFromGlibFull(p unsafe.Pointer) *StrvBuilder {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.strvBuilder)), 1)
 	runtime.SetFinalizer(
 		wrapped.strvBuilder,
 		func (intern *strvBuilder) {
 			C.g_strv_builder_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -33437,12 +33260,10 @@ func UnsafeTestCaseFromGlibNone(p unsafe.Pointer) *TestCase {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.testCase)), 1)
 	runtime.SetFinalizer(
 		wrapped.testCase,
 		func (intern *testCase) {
 			C.g_test_case_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -33454,12 +33275,10 @@ func UnsafeTestCaseFromGlibFull(p unsafe.Pointer) *TestCase {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.testCase)), 1)
 	runtime.SetFinalizer(
 		wrapped.testCase,
 		func (intern *testCase) {
 			C.g_test_case_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -33525,12 +33344,10 @@ func UnsafeTestConfigFromGlibNone(p unsafe.Pointer) *TestConfig {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.testConfig)), 1)
 	runtime.SetFinalizer(
 		wrapped.testConfig,
 		func (intern *testConfig) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -33542,12 +33359,10 @@ func UnsafeTestConfigFromGlibFull(p unsafe.Pointer) *TestConfig {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.testConfig)), 1)
 	runtime.SetFinalizer(
 		wrapped.testConfig,
 		func (intern *testConfig) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -33613,12 +33428,10 @@ func UnsafeTestLogBufferFromGlibNone(p unsafe.Pointer) *TestLogBuffer {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.testLogBuffer)), 1)
 	runtime.SetFinalizer(
 		wrapped.testLogBuffer,
 		func (intern *testLogBuffer) {
 			C.g_test_log_buffer_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -33630,12 +33443,10 @@ func UnsafeTestLogBufferFromGlibFull(p unsafe.Pointer) *TestLogBuffer {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.testLogBuffer)), 1)
 	runtime.SetFinalizer(
 		wrapped.testLogBuffer,
 		func (intern *testLogBuffer) {
 			C.g_test_log_buffer_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -33728,12 +33539,10 @@ func UnsafeTestSuiteFromGlibNone(p unsafe.Pointer) *TestSuite {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.testSuite)), 1)
 	runtime.SetFinalizer(
 		wrapped.testSuite,
 		func (intern *testSuite) {
 			C.g_test_suite_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -33745,12 +33554,10 @@ func UnsafeTestSuiteFromGlibFull(p unsafe.Pointer) *TestSuite {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.testSuite)), 1)
 	runtime.SetFinalizer(
 		wrapped.testSuite,
 		func (intern *testSuite) {
 			C.g_test_suite_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -33868,12 +33675,10 @@ func UnsafeThreadFromGlibNone(p unsafe.Pointer) *Thread {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.thread)), 1)
 	runtime.SetFinalizer(
 		wrapped.thread,
 		func (intern *thread) {
 			C.g_thread_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -33885,12 +33690,10 @@ func UnsafeThreadFromGlibFull(p unsafe.Pointer) *Thread {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.thread)), 1)
 	runtime.SetFinalizer(
 		wrapped.thread,
 		func (intern *thread) {
 			C.g_thread_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -34070,12 +33873,10 @@ func UnsafeTimeZoneFromGlibNone(p unsafe.Pointer) *TimeZone {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.timeZone)), 1)
 	runtime.SetFinalizer(
 		wrapped.timeZone,
 		func (intern *timeZone) {
 			C.g_time_zone_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -34087,12 +33888,10 @@ func UnsafeTimeZoneFromGlibFull(p unsafe.Pointer) *TimeZone {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.timeZone)), 1)
 	runtime.SetFinalizer(
 		wrapped.timeZone,
 		func (intern *timeZone) {
 			C.g_time_zone_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -34539,12 +34338,10 @@ func UnsafeTimerFromGlibNone(p unsafe.Pointer) *Timer {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.timer)), 1)
 	runtime.SetFinalizer(
 		wrapped.timer,
 		func (intern *timer) {
 			C.g_timer_destroy(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -34556,12 +34353,10 @@ func UnsafeTimerFromGlibFull(p unsafe.Pointer) *Timer {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.timer)), 1)
 	runtime.SetFinalizer(
 		wrapped.timer,
 		func (intern *timer) {
 			C.g_timer_destroy(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -34749,12 +34544,10 @@ func UnsafeTreeNodeFromGlibNone(p unsafe.Pointer) *TreeNode {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.treeNode)), 1)
 	runtime.SetFinalizer(
 		wrapped.treeNode,
 		func (intern *treeNode) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -34766,12 +34559,10 @@ func UnsafeTreeNodeFromGlibFull(p unsafe.Pointer) *TreeNode {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.treeNode)), 1)
 	runtime.SetFinalizer(
 		wrapped.treeNode,
 		func (intern *treeNode) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -35051,12 +34842,10 @@ func UnsafeUriFromGlibNone(p unsafe.Pointer) *Uri {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.uri)), 1)
 	runtime.SetFinalizer(
 		wrapped.uri,
 		func (intern *uri) {
 			C.g_uri_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -35068,12 +34857,10 @@ func UnsafeUriFromGlibFull(p unsafe.Pointer) *Uri {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.uri)), 1)
 	runtime.SetFinalizer(
 		wrapped.uri,
 		func (intern *uri) {
 			C.g_uri_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -36716,12 +36503,10 @@ func UnsafeUriParamsIterFromGlibNone(p unsafe.Pointer) *UriParamsIter {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.uriParamsIter)), 1)
 	runtime.SetFinalizer(
 		wrapped.uriParamsIter,
 		func (intern *uriParamsIter) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -36733,12 +36518,10 @@ func UnsafeUriParamsIterFromGlibFull(p unsafe.Pointer) *UriParamsIter {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.uriParamsIter)), 1)
 	runtime.SetFinalizer(
 		wrapped.uriParamsIter,
 		func (intern *uriParamsIter) {
 			C.free(unsafe.Pointer(intern.native))
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -36937,12 +36720,10 @@ func UnsafeVariantBuilderFromGlibNone(p unsafe.Pointer) *VariantBuilder {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.variantBuilder)), 1)
 	runtime.SetFinalizer(
 		wrapped.variantBuilder,
 		func (intern *variantBuilder) {
 			C.g_variant_builder_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -36954,12 +36735,10 @@ func UnsafeVariantBuilderFromGlibFull(p unsafe.Pointer) *VariantBuilder {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.variantBuilder)), 1)
 	runtime.SetFinalizer(
 		wrapped.variantBuilder,
 		func (intern *variantBuilder) {
 			C.g_variant_builder_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -37228,12 +37007,10 @@ func UnsafeVariantDictFromGlibNone(p unsafe.Pointer) *VariantDict {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.variantDict)), 1)
 	runtime.SetFinalizer(
 		wrapped.variantDict,
 		func (intern *variantDict) {
 			C.g_variant_dict_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -37245,12 +37022,10 @@ func UnsafeVariantDictFromGlibFull(p unsafe.Pointer) *VariantDict {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.variantDict)), 1)
 	runtime.SetFinalizer(
 		wrapped.variantDict,
 		func (intern *variantDict) {
 			C.g_variant_dict_unref(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -37579,12 +37354,10 @@ func UnsafeVariantTypeFromGlibNone(p unsafe.Pointer) *VariantType {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.variantType)), 1)
 	runtime.SetFinalizer(
 		wrapped.variantType,
 		func (intern *variantType) {
 			C.g_variant_type_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
@@ -37596,12 +37369,10 @@ func UnsafeVariantTypeFromGlibFull(p unsafe.Pointer) *VariantType {
 	if wrapped == nil {
 		return nil
 	}
-	profile.Track(uintptr(unsafe.Pointer(wrapped.variantType)), 1)
 	runtime.SetFinalizer(
 		wrapped.variantType,
 		func (intern *variantType) {
 			C.g_variant_type_free(intern.native)
-			profile.Untrack(uintptr(unsafe.Pointer(intern)))
 		},
 	)
 	return wrapped
