@@ -282,7 +282,7 @@ func valueTypeForPrimitive(v interface{}) Type {
 	case int64:
 		return TypeInt64
 	case int:
-		return TypeInt64
+		return TypeInt // C int is 32-bit
 	case uint8:
 		return TypeUchar
 	case uint32:
@@ -290,7 +290,7 @@ func valueTypeForPrimitive(v interface{}) Type {
 	case uint64:
 		return TypeUint64
 	case uint:
-		return TypeUint64
+		return TypeUint // C uint is 32-bit
 	case float32:
 		return TypeFloat
 	case float64:
@@ -347,7 +347,7 @@ func setValuePrimitive(val *Value, v interface{}) bool {
 	case int64:
 		val.SetInt64(e)
 	case int:
-		val.SetInt64(int64(e))
+		val.SetInt(int(e))
 	case uint8:
 		val.SetUchar(e)
 	case uint32:
@@ -355,7 +355,7 @@ func setValuePrimitive(val *Value, v interface{}) bool {
 	case uint64:
 		val.SetUint64(e)
 	case uint:
-		val.SetUint64(uint64(e))
+		val.SetUint(uint(e))
 	case float32:
 		val.SetFloat(e)
 	case float64:

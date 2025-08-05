@@ -283,7 +283,7 @@ func marshalInt(p unsafe.Pointer) (interface{}, error) {
 
 func marshalLong(p unsafe.Pointer) (interface{}, error) {
 	c := C.g_value_get_long((*C.GValue)(unsafe.Pointer(p)))
-	return int(c), nil
+	return int64(c), nil
 }
 
 func marshalEnum(p unsafe.Pointer) (interface{}, error) {
