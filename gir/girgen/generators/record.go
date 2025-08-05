@@ -197,7 +197,7 @@ func (g *RecordGenerator) transferNoneFunction(w *file.Package) {
 		w.GoImport("log")
 		fmt.Fprintf(w.Go(), "log.Println(\"WARNING: not attaching a finalizer to %s because no cgo ref function or copy method is available. This may leak memory. Please file an issue\")\n", g.GoType(0))
 		fmt.Fprintf(w.Go(), "return wrapped\n")
-	} else if g.GoCopyMethod != nil {
+	} else if g.CgoRefFunction == "" && g.GoCopyMethod != nil {
 		// the copy method already attaches a finalizer
 		fmt.Fprintf(w.Go(), "return wrapped.%s() // create an owned copy\n\n", g.GoCopyMethod.GoIndentifier())
 	} else {

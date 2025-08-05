@@ -20773,8 +20773,13 @@ func UnsafeHmacFromGlibNone(p unsafe.Pointer) *Hmac {
 		return nil
 	}
 
-	return wrapped.Copy() // create an owned copy
-
+	runtime.SetFinalizer(
+		wrapped.hmac,
+		func (intern *hmac) {
+			C.g_hmac_unref(intern.native)
+		},
+	)
+	return wrapped
 }
 
 // UnsafeHmacFromGlibFull is used to convert raw C.GHmac pointers to go while taking ownership. This is used by the bindings internally.
