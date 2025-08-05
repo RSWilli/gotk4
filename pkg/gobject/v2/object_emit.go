@@ -42,6 +42,8 @@ func (obj *ObjectInstance) Emit(s string, args ...any) any {
 		panic(fmt.Sprintf("signal %s has %d parameters, but %d were passed", s, q.n_params, len(args)))
 	}
 
+	signalArgTypes := unsafe.Slice(q.param_types, q.n_params)
+
 	// get the return type, remove the static scope flag first
 	return_type := Type(q.return_type &^ C.G_SIGNAL_TYPE_STATIC_SCOPE)
 
@@ -55,6 +57,14 @@ func (obj *ObjectInstance) Emit(s string, args ...any) any {
 	defer runtime.KeepAlive(instanceValue) // keep the value alive until the signal has been emitted
 
 	for i := range args {
+		// check the value type
+		argType := valueType(args[i])
+		requestedType := Type(signalArgTypes[i])
+
+		if argType != requestedType && !argType.IsA(requestedType) {
+			panic(fmt.Sprintf("signal emit argument %d has wrong type, expected %s (%s), got %s (%s)", i, requestedType.Name(), FundamentalType(requestedType).Name(), argType.Name(), FundamentalType(argType).Name()))
+		}
+
 		valueArg := NewValue(args[i])
 		C._val_list_insert(instanceAndParams, C.int(i+1), valueArg.native())
 		defer runtime.KeepAlive(valueArg) // keep the value alive until the signal has been emitted
@@ -62,21 +72,6 @@ func (obj *ObjectInstance) Emit(s string, args ...any) any {
 
 	// free the valv array after the values have been freed
 	defer C.g_free(C.gpointer(instanceAndParams))
-
-	// check the values types against the signal's types
-	values := unsafe.Slice(instanceAndParams, len(args)+1)
-	signalArgTypes := unsafe.Slice(q.param_types, q.n_params)
-	for i := range len(args) {
-		v := ValueFromNative(unsafe.Pointer(&values[i+1]))
-
-		actual := v.Type()
-		fundamental := FundamentalType(actual)
-		requestedType := Type(signalArgTypes[i])
-
-		if actual != requestedType && fundamental != requestedType {
-			panic(fmt.Sprintf("signal emit argument %d has wrong type, expected %s, got %s (%s)", i, requestedType.Name(), actual.Name(), fundamental.Name()))
-		}
-	}
 
 	if return_type != TypeInvalid && return_type != TypeNone {
 		// the return value must have the correct type set
