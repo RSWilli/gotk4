@@ -108,13 +108,21 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 		if g.CgoRefFunction != "" {
 			// from none only refs if reffing is possible: TODO: this can produce bugs because we are borrowing otherwise
 			fmt.Fprintf(w.Go(), "\t%s((*%s)(p))\n", g.CgoRefFunction, g.CGoType(0))
-		} else {
-			fmt.Fprintf(w.Go(), "\t// FIXME: this has no ref function, what should we do here?\n")
 		}
+
+		if g.CgoRefFunction == "" && g.GoCopyMethod == nil {
+			fmt.Fprintf(w.Go(), "\t// FIXME: this has no ref or copy function, what should we do here?\n")
+		}
+
 		fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeFromGlibBorrowFunction())
 		fmt.Fprintf(w.Go(), "\tif wrapped == nil {\n")
 		fmt.Fprintf(w.Go(), "\t\treturn nil\n")
-		fmt.Fprintf(w.Go(), "\t}\n")
+		fmt.Fprintf(w.Go(), "\t}\n\n")
+
+		if g.GoCopyMethod != nil {
+			fmt.Fprintf(w.Go(), "\twrapped = wrapped.%s() // create an owned copy\n\n", g.GoCopyMethod.GoIndentifier())
+		}
+
 		mkFinalizer()
 		fmt.Fprintf(w.Go(), "\treturn wrapped\n")
 		fmt.Fprintf(w.Go(), "}\n\n")

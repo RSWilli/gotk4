@@ -3720,11 +3720,12 @@ func UnsafeCClosureFromGlibBorrow(p unsafe.Pointer) *CClosure {
 
 // UnsafeCClosureFromGlibNone is used to convert raw C.GCClosure pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeCClosureFromGlibNone(p unsafe.Pointer) *CClosure {
-	// FIXME: this has no ref function, what should we do here?
+	// FIXME: this has no ref or copy function, what should we do here?
 	wrapped := UnsafeCClosureFromGlibBorrow(p)
 	if wrapped == nil {
 		return nil
 	}
+
 	runtime.SetFinalizer(
 		wrapped.cClosure,
 		func (intern *cClosure) {
@@ -3804,11 +3805,12 @@ func UnsafeClosureNotifyDataFromGlibBorrow(p unsafe.Pointer) *ClosureNotifyData 
 
 // UnsafeClosureNotifyDataFromGlibNone is used to convert raw C.GClosureNotifyData pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeClosureNotifyDataFromGlibNone(p unsafe.Pointer) *ClosureNotifyData {
-	// FIXME: this has no ref function, what should we do here?
+	// FIXME: this has no ref or copy function, what should we do here?
 	wrapped := UnsafeClosureNotifyDataFromGlibBorrow(p)
 	if wrapped == nil {
 		return nil
 	}
+
 	runtime.SetFinalizer(
 		wrapped.closureNotifyData,
 		func (intern *closureNotifyData) {
@@ -3891,11 +3893,12 @@ func UnsafeEnumClassFromGlibBorrow(p unsafe.Pointer) *EnumClass {
 
 // UnsafeEnumClassFromGlibNone is used to convert raw C.GEnumClass pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeEnumClassFromGlibNone(p unsafe.Pointer) *EnumClass {
-	// FIXME: this has no ref function, what should we do here?
+	// FIXME: this has no ref or copy function, what should we do here?
 	wrapped := UnsafeEnumClassFromGlibBorrow(p)
 	if wrapped == nil {
 		return nil
 	}
+
 	runtime.SetFinalizer(
 		wrapped.enumClass,
 		func (intern *enumClass) {
@@ -3978,11 +3981,12 @@ func UnsafeEnumValueFromGlibBorrow(p unsafe.Pointer) *EnumValue {
 
 // UnsafeEnumValueFromGlibNone is used to convert raw C.GEnumValue pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeEnumValueFromGlibNone(p unsafe.Pointer) *EnumValue {
-	// FIXME: this has no ref function, what should we do here?
+	// FIXME: this has no ref or copy function, what should we do here?
 	wrapped := UnsafeEnumValueFromGlibBorrow(p)
 	if wrapped == nil {
 		return nil
 	}
+
 	runtime.SetFinalizer(
 		wrapped.enumValue,
 		func (intern *enumValue) {
@@ -4065,11 +4069,12 @@ func UnsafeFlagsClassFromGlibBorrow(p unsafe.Pointer) *FlagsClass {
 
 // UnsafeFlagsClassFromGlibNone is used to convert raw C.GFlagsClass pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeFlagsClassFromGlibNone(p unsafe.Pointer) *FlagsClass {
-	// FIXME: this has no ref function, what should we do here?
+	// FIXME: this has no ref or copy function, what should we do here?
 	wrapped := UnsafeFlagsClassFromGlibBorrow(p)
 	if wrapped == nil {
 		return nil
 	}
+
 	runtime.SetFinalizer(
 		wrapped.flagsClass,
 		func (intern *flagsClass) {
@@ -4152,11 +4157,12 @@ func UnsafeFlagsValueFromGlibBorrow(p unsafe.Pointer) *FlagsValue {
 
 // UnsafeFlagsValueFromGlibNone is used to convert raw C.GFlagsValue pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeFlagsValueFromGlibNone(p unsafe.Pointer) *FlagsValue {
-	// FIXME: this has no ref function, what should we do here?
+	// FIXME: this has no ref or copy function, what should we do here?
 	wrapped := UnsafeFlagsValueFromGlibBorrow(p)
 	if wrapped == nil {
 		return nil
 	}
+
 	runtime.SetFinalizer(
 		wrapped.flagsValue,
 		func (intern *flagsValue) {
@@ -4293,11 +4299,12 @@ func UnsafeInterfaceInfoFromGlibBorrow(p unsafe.Pointer) *InterfaceInfo {
 
 // UnsafeInterfaceInfoFromGlibNone is used to convert raw C.GInterfaceInfo pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeInterfaceInfoFromGlibNone(p unsafe.Pointer) *InterfaceInfo {
-	// FIXME: this has no ref function, what should we do here?
+	// FIXME: this has no ref or copy function, what should we do here?
 	wrapped := UnsafeInterfaceInfoFromGlibBorrow(p)
 	if wrapped == nil {
 		return nil
 	}
+
 	runtime.SetFinalizer(
 		wrapped.interfaceInfo,
 		func (intern *interfaceInfo) {
@@ -4380,11 +4387,12 @@ func UnsafeObjectConstructParamFromGlibBorrow(p unsafe.Pointer) *ObjectConstruct
 
 // UnsafeObjectConstructParamFromGlibNone is used to convert raw C.GObjectConstructParam pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeObjectConstructParamFromGlibNone(p unsafe.Pointer) *ObjectConstructParam {
-	// FIXME: this has no ref function, what should we do here?
+	// FIXME: this has no ref or copy function, what should we do here?
 	wrapped := UnsafeObjectConstructParamFromGlibBorrow(p)
 	if wrapped == nil {
 		return nil
 	}
+
 	runtime.SetFinalizer(
 		wrapped.objectConstructParam,
 		func (intern *objectConstructParam) {
@@ -4467,11 +4475,12 @@ func UnsafeSignalInvocationHintFromGlibBorrow(p unsafe.Pointer) *SignalInvocatio
 
 // UnsafeSignalInvocationHintFromGlibNone is used to convert raw C.GSignalInvocationHint pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeSignalInvocationHintFromGlibNone(p unsafe.Pointer) *SignalInvocationHint {
-	// FIXME: this has no ref function, what should we do here?
+	// FIXME: this has no ref or copy function, what should we do here?
 	wrapped := UnsafeSignalInvocationHintFromGlibBorrow(p)
 	if wrapped == nil {
 		return nil
 	}
+
 	runtime.SetFinalizer(
 		wrapped.signalInvocationHint,
 		func (intern *signalInvocationHint) {
@@ -4554,11 +4563,12 @@ func UnsafeTypeFundamentalInfoFromGlibBorrow(p unsafe.Pointer) *TypeFundamentalI
 
 // UnsafeTypeFundamentalInfoFromGlibNone is used to convert raw C.GTypeFundamentalInfo pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTypeFundamentalInfoFromGlibNone(p unsafe.Pointer) *TypeFundamentalInfo {
-	// FIXME: this has no ref function, what should we do here?
+	// FIXME: this has no ref or copy function, what should we do here?
 	wrapped := UnsafeTypeFundamentalInfoFromGlibBorrow(p)
 	if wrapped == nil {
 		return nil
 	}
+
 	runtime.SetFinalizer(
 		wrapped.typeFundamentalInfo,
 		func (intern *typeFundamentalInfo) {
@@ -4648,11 +4658,12 @@ func UnsafeTypeInfoFromGlibBorrow(p unsafe.Pointer) *TypeInfo {
 
 // UnsafeTypeInfoFromGlibNone is used to convert raw C.GTypeInfo pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTypeInfoFromGlibNone(p unsafe.Pointer) *TypeInfo {
-	// FIXME: this has no ref function, what should we do here?
+	// FIXME: this has no ref or copy function, what should we do here?
 	wrapped := UnsafeTypeInfoFromGlibBorrow(p)
 	if wrapped == nil {
 		return nil
 	}
+
 	runtime.SetFinalizer(
 		wrapped.typeInfo,
 		func (intern *typeInfo) {
@@ -4734,11 +4745,12 @@ func UnsafeTypeInstanceFromGlibBorrow(p unsafe.Pointer) *TypeInstance {
 
 // UnsafeTypeInstanceFromGlibNone is used to convert raw C.GTypeInstance pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTypeInstanceFromGlibNone(p unsafe.Pointer) *TypeInstance {
-	// FIXME: this has no ref function, what should we do here?
+	// FIXME: this has no ref or copy function, what should we do here?
 	wrapped := UnsafeTypeInstanceFromGlibBorrow(p)
 	if wrapped == nil {
 		return nil
 	}
+
 	runtime.SetFinalizer(
 		wrapped.typeInstance,
 		func (intern *typeInstance) {
@@ -4830,11 +4842,12 @@ func UnsafeTypeValueTableFromGlibBorrow(p unsafe.Pointer) *TypeValueTable {
 
 // UnsafeTypeValueTableFromGlibNone is used to convert raw C.GTypeValueTable pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTypeValueTableFromGlibNone(p unsafe.Pointer) *TypeValueTable {
-	// FIXME: this has no ref function, what should we do here?
+	// FIXME: this has no ref or copy function, what should we do here?
 	wrapped := UnsafeTypeValueTableFromGlibBorrow(p)
 	if wrapped == nil {
 		return nil
 	}
+
 	runtime.SetFinalizer(
 		wrapped.typeValueTable,
 		func (intern *typeValueTable) {
@@ -4939,11 +4952,12 @@ func UnsafeWeakRefFromGlibBorrow(p unsafe.Pointer) *WeakRef {
 
 // UnsafeWeakRefFromGlibNone is used to convert raw C.GWeakRef pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeWeakRefFromGlibNone(p unsafe.Pointer) *WeakRef {
-	// FIXME: this has no ref function, what should we do here?
+	// FIXME: this has no ref or copy function, what should we do here?
 	wrapped := UnsafeWeakRefFromGlibBorrow(p)
 	if wrapped == nil {
 		return nil
 	}
+
 	runtime.SetFinalizer(
 		wrapped.weakRef,
 		func (intern *weakRef) {

@@ -25,6 +25,10 @@ type Record struct {
 	GoUnsafeRefFunction string
 	CgoRefFunction      string
 
+	// GoCopyMethod is the go method that copies the record. It takes the struct pointer as an argument and
+	// returns a new struct pointer. This is needed for transfer:none
+	GoCopyMethod *CallableSignature
+
 	GoUnsafeUnrefFunction   string
 	CgoUnrefFunction        string
 	CgoUnrefNeedsUnsafeCast bool
@@ -146,20 +150,18 @@ func (r *Record) declareNested(e *env) {
 			continue
 		}
 
-		if v.Name == "copy" {
-			// r.GoUnsafeRefFunction = "UnsafeCopy"
-			// TODO: how to handle this? Maybe add a "ref mode" to the struct?
-			// continue
-		}
-
-		if v.Name == "copy_into" {
-			// TODO: how to handle this? It sounds like we need to allocate a copy struct before
-			// beeing able to copy into it
-			// continue
-		}
-
 		if t := DeclareMethod(e, r, v); t != nil {
 			r.Methods = append(r.Methods, t)
+
+			if t.GoIndentifier() == "Copy" &&
+				len(t.GoParameters) == 0 &&
+				t.InstanceParam != nil && t.InstanceParam.Type.Type == r &&
+				len(t.GoReturns) == 1 && t.GoReturns[0].TransferOwnership == TransferFull && t.GoReturns[0].Type.Type == r {
+
+				r.GoCopyMethod = t
+			}
+
+			// TODO: copy_into method
 		}
 	}
 
