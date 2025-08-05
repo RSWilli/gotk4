@@ -88,55 +88,21 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "\treturn &%s{&%s{(*%s)(p)}}\n", g.GoType(0), g.PrivateGoType, g.CGoType(0))
 	fmt.Fprintf(w.Go(), "}\n\n")
 
-	mkFinalizer := func() {
-		w.Go().Indent()
-
-		fmt.Fprintf(w.Go(), "runtime.SetFinalizer(\n")
-		fmt.Fprintf(w.Go(), "\twrapped.%s,\n", g.PrivateGoType)
-		fmt.Fprintf(w.Go(), "\tfunc (intern *%s) {\n", g.PrivateGoType)
-		w.Go().Indent()
-		g.unrefCall(w.Go(), "intern")
-		w.Go().Unindent()
-		fmt.Fprintf(w.Go(), "\t},\n")
-		fmt.Fprintf(w.Go(), ")\n")
-		w.Go().Unindent()
-	}
-
 	if g.GoUnsafeFromGlibNoneFunction() != "" {
-		fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go without transferring ownership. This is used by the bindings internally.\n", g.GoUnsafeFromGlibNoneFunction(), g.CGoType(0))
-		fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibNoneFunction(), g.GoType(0))
-		if g.CgoRefFunction != "" {
-			// from none only refs if reffing is possible: TODO: this can produce bugs because we are borrowing otherwise
-			fmt.Fprintf(w.Go(), "\t%s((*%s)(p))\n", g.CgoRefFunction, g.CGoType(0))
-		}
-
-		if g.CgoRefFunction == "" && g.GoCopyMethod == nil {
-			fmt.Fprintf(w.Go(), "\t// FIXME: this has no ref or copy function, what should we do here?\n")
-		}
-
-		fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeFromGlibBorrowFunction())
-		fmt.Fprintf(w.Go(), "\tif wrapped == nil {\n")
-		fmt.Fprintf(w.Go(), "\t\treturn nil\n")
-		fmt.Fprintf(w.Go(), "\t}\n\n")
-
-		if g.GoCopyMethod != nil {
-			fmt.Fprintf(w.Go(), "\twrapped = wrapped.%s() // create an owned copy\n\n", g.GoCopyMethod.GoIndentifier())
-		}
-
-		mkFinalizer()
-		fmt.Fprintf(w.Go(), "\treturn wrapped\n")
-		fmt.Fprintf(w.Go(), "}\n\n")
+		g.transferNoneFunction(w)
 	}
 
 	if g.GoUnsafeFromGlibFullFunction() != "" {
 		fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while taking ownership. This is used by the bindings internally.\n", g.GoUnsafeFromGlibFullFunction(), g.CGoType(0))
 		fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibFullFunction(), g.GoType(0))
-		fmt.Fprintf(w.Go(), "\twrapped := %s(p)\n", g.GoUnsafeFromGlibBorrowFunction())
-		fmt.Fprintf(w.Go(), "\tif wrapped == nil {\n")
-		fmt.Fprintf(w.Go(), "\t\treturn nil\n")
-		fmt.Fprintf(w.Go(), "\t}\n")
-		mkFinalizer()
-		fmt.Fprintf(w.Go(), "\treturn wrapped\n")
+		w.Go().Indent()
+		fmt.Fprintf(w.Go(), "wrapped := %s(p)\n", g.GoUnsafeFromGlibBorrowFunction())
+		fmt.Fprintf(w.Go(), "if wrapped == nil {\n")
+		fmt.Fprintf(w.Go(), "\treturn nil\n")
+		fmt.Fprintf(w.Go(), "}\n")
+		g.mkFinalizer(w)
+		fmt.Fprintf(w.Go(), "return wrapped\n")
+		w.Go().Unindent()
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
@@ -168,13 +134,15 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 		fmt.Fprintf(w.Go(), "// %s returns the underlying C pointer and gives up ownership.\n", g.GoUnsafeToGlibFullFunction())
 		fmt.Fprintf(w.Go(), "// This is used by the bindings internally.\n")
 		fmt.Fprintf(w.Go(), "func %s(%s *%s) unsafe.Pointer {\n", g.GoUnsafeToGlibFullFunction(), g.ReceiverName, g.GoType(0))
-		fmt.Fprintf(w.Go(), "\tif %s == nil {\n", g.ReceiverName)
-		fmt.Fprintf(w.Go(), "\t\treturn nil\n")
-		fmt.Fprintf(w.Go(), "\t}\n")
-		fmt.Fprintf(w.Go(), "\truntime.SetFinalizer(%s.%s, nil)\n", g.ReceiverName, g.PrivateGoType)
-		fmt.Fprintf(w.Go(), "\t_p := unsafe.Pointer(%s.native)\n", g.ReceiverName)
-		fmt.Fprintf(w.Go(), "\t%s.native = nil // %s is invalid from here on\n", g.ReceiverName, g.GoType(0))
-		fmt.Fprintf(w.Go(), "\treturn _p\n")
+		w.Go().Indent()
+		fmt.Fprintf(w.Go(), "if %s == nil {\n", g.ReceiverName)
+		fmt.Fprintf(w.Go(), "\treturn nil\n")
+		fmt.Fprintf(w.Go(), "}\n")
+		fmt.Fprintf(w.Go(), "runtime.SetFinalizer(%s.%s, nil)\n", g.ReceiverName, g.PrivateGoType)
+		fmt.Fprintf(w.Go(), "_p := unsafe.Pointer(%s.native)\n", g.ReceiverName)
+		fmt.Fprintf(w.Go(), "%s.native = nil // %s is invalid from here on\n", g.ReceiverName, g.GoType(0))
+		fmt.Fprintf(w.Go(), "return _p\n")
+		w.Go().Unindent()
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
@@ -197,6 +165,48 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 		w,
 		g.SubGenerators,
 	)
+}
+
+// mkFinalizer prints the finalizer code for the record generator. The finalized variable must be called "wrapped".
+func (g *RecordGenerator) mkFinalizer(w *file.Package) {
+	fmt.Fprintf(w.Go(), "runtime.SetFinalizer(\n")
+	fmt.Fprintf(w.Go(), "\twrapped.%s,\n", g.PrivateGoType)
+	fmt.Fprintf(w.Go(), "\tfunc (intern *%s) {\n", g.PrivateGoType)
+	w.Go().Indent()
+	g.unrefCall(w.Go(), "intern")
+	w.Go().Unindent()
+	fmt.Fprintf(w.Go(), "\t},\n")
+	fmt.Fprintf(w.Go(), ")\n")
+}
+
+func (g *RecordGenerator) transferNoneFunction(w *file.Package) {
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go without transferring ownership. This is used by the bindings internally.\n", g.GoUnsafeFromGlibNoneFunction(), g.CGoType(0))
+	fmt.Fprintf(w.Go(), "func %s(p unsafe.Pointer) *%s {\n", g.GoUnsafeFromGlibNoneFunction(), g.GoType(0))
+	w.Go().Indent()
+	if g.CgoRefFunction != "" {
+		// from none only refs if reffing is possible: TODO: this can produce bugs because we are borrowing otherwise
+		fmt.Fprintf(w.Go(), "%s((*%s)(p))\n", g.CgoRefFunction, g.CGoType(0))
+	}
+
+	fmt.Fprintf(w.Go(), "wrapped := %s(p)\n", g.GoUnsafeFromGlibBorrowFunction())
+	fmt.Fprintf(w.Go(), "if wrapped == nil {\n")
+	fmt.Fprintf(w.Go(), "\treturn nil\n")
+	fmt.Fprintf(w.Go(), "}\n\n")
+
+	if g.CgoRefFunction == "" && g.GoCopyMethod == nil {
+		w.GoImport("log")
+		fmt.Fprintf(w.Go(), "log.Println(\"WARNING: not attaching a finalizer to %s because no cgo ref function or copy method is available. This may leak memory. Please file an issue\")\n", g.GoType(0))
+		fmt.Fprintf(w.Go(), "return wrapped\n")
+	} else if g.GoCopyMethod != nil {
+		// the copy method already attaches a finalizer
+		fmt.Fprintf(w.Go(), "return wrapped.%s() // create an owned copy\n\n", g.GoCopyMethod.GoIndentifier())
+	} else {
+		g.mkFinalizer(w)
+		fmt.Fprintf(w.Go(), "return wrapped\n")
+	}
+	w.Go().Unindent()
+
+	fmt.Fprintf(w.Go(), "}\n\n")
 }
 
 func (g *RecordGenerator) unrefCall(w file.CodeWriter, variable string) {
