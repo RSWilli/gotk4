@@ -10,6 +10,18 @@ import (
 // #include <glib-object.h>
 import "C"
 
+func init() {
+	RegisterGValueMarshalers([]TypeMarshaler{
+		TypeMarshaler{T: TypeParam, F: marshalParamSpec},
+	})
+}
+
+func marshalParamSpec(p unsafe.Pointer) (any, error) {
+	native := ValueFromNative(p).Param()
+
+	return UnsafeParamSpecFromGlibNone(native), nil
+}
+
 // ParamSpec is a go representation of a C GParamSpec
 type ParamSpec struct{ *paramSpec }
 
@@ -35,7 +47,7 @@ func UnsafeParamSpecFromGlibFull(p unsafe.Pointer) *ParamSpec {
 }
 
 func UnsafeParamSpecFromGlibNone(p unsafe.Pointer) *ParamSpec {
-	pspec := UnsafeParamSpecFromGlibFull(p)
+	pspec := UnsafeParamSpecFromGlibBorrow(p)
 
 	C.g_param_spec_ref(pspec.native)
 

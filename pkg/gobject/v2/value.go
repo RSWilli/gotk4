@@ -518,6 +518,13 @@ func (v *Value) Enum() int {
 	return i
 }
 
+// Param is a wrapper around g_value_get_param().
+func (v *Value) Param() unsafe.Pointer {
+	p := unsafe.Pointer(C.g_value_get_param(v.native()))
+	runtime.KeepAlive(v)
+	return p
+}
+
 // Flags is a wrapper around g_value_get_flags().
 func (v *Value) Flags() uint {
 	u := uint(C.g_value_get_flags(v.native()))
