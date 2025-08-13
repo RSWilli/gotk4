@@ -1,9 +1,15 @@
 package gobject
 
-import "github.com/diamondburned/gotk4/pkg/glib/v2"
+import (
+	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/core/closure"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
+	"github.com/diamondburned/gotk4/pkg/glib/v2"
+)
 
 // #include <glib-object.h>
-// extern void _gotk4InterfaceInit(gpointer instance, gpointer ifaceData);
+// extern void _gotk4_signalAccumulator(GSignalInvocationHint*, GValue*, GValue*, gpointer);
 import "C"
 
 func (s *SignalInvocationHint) SignalID() uint {
@@ -26,7 +32,8 @@ type Signal struct {
 	signalId C.guint
 }
 
-// NewSignal Creates a new signal. (This is usually done in the class initializer.) this is a wrapper around g_signal_newv
+// NewSignal creates a new signal. This can either be directly called in class initializer of a new subclass, or by the bindings when registering a new signal
+// through the signal map while adding a new subclass. this is a wrapper around g_signal_newv
 func NewSignal(
 	name string,
 	_type Type,
@@ -36,5 +43,47 @@ func NewSignal(
 	param_types []Type,
 	return_type Type,
 ) *Signal {
-	panic("unimplemented")
+	cname := C.CString(name)
+	defer C.free(unsafe.Pointer(cname))
+
+	cparams := make([]C.GType, 0, len(param_types))
+
+	for _, t := range param_types {
+		cparams = append(cparams, C.GType(t))
+	}
+
+	var classHandler *C.GClosure
+
+	if handler != nil {
+		classHandler := closureNew()
+		fs := closure.NewFuncStack(handler, 2)
+
+		closure.Register(unsafe.Pointer(classHandler), fs)
+
+		defer C.g_closure_unref(classHandler)
+	}
+
+	var accudata C.gpointer
+	var cAccumulator C.GSignalAccumulator
+
+	if accumulator != nil {
+		accudata = C.gpointer(userdata.Register(accumulator))
+
+		cAccumulator = (C.GSignalAccumulator)((*[0]byte)(C._gotk4_signalAccumulator))
+	}
+
+	signalID := C.g_signal_newv(
+		cname,
+		C.GType(_type),
+		C.GSignalFlags(flags),
+		classHandler,
+		cAccumulator,
+		accudata,
+		nil, // no marshaller needed
+		C.GType(return_type),
+		C.uint(len(cparams)),
+		unsafe.SliceData(cparams),
+	)
+
+	return &Signal{name: name, signalId: signalID}
 }
