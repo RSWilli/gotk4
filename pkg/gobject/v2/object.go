@@ -31,9 +31,10 @@ type Object interface {
 	HandlerUnblock(SignalHandle)
 	HandlerDisconnect(SignalHandle)
 
-	NotifyProperty(string, func()) SignalHandle
+	NotifyProperty(string, func(Object, *ParamSpec)) SignalHandle
 	ObjectProperty(string) interface{}
 	SetObjectProperty(string, interface{})
+	SetObjectProperties(props map[string]any)
 	FreezeNotify()
 	ThawNotify()
 	StopEmission(string)
@@ -246,9 +247,19 @@ func (obj *ObjectInstance) SetObjectProperty(name string, value interface{}) {
 	runtime.KeepAlive(p)
 }
 
+// SetObjectProperties is a convinience function to set multiple properties at once.
+func (obj *ObjectInstance) SetObjectProperties(props map[string]any) {
+	for p, v := range props {
+		obj.SetObjectProperty(p, v)
+		runtime.KeepAlive(obj)
+		runtime.KeepAlive(v)
+	}
+	runtime.KeepAlive(obj)
+}
+
 // NotifyProperty adds a handler that's called when the object's property is
 // updated.
-func (obj *ObjectInstance) NotifyProperty(property string, f func()) SignalHandle {
+func (obj *ObjectInstance) NotifyProperty(property string, f func(Object, *ParamSpec)) SignalHandle {
 	return obj.Connect("notify::"+property, f)
 }
 
