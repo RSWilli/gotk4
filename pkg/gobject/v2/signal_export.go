@@ -3,7 +3,7 @@ package gobject
 import (
 	"unsafe"
 
-	gopointer "github.com/go-gst/go-pointer"
+	"github.com/diamondburned/gotk4/pkg/core/userdata"
 )
 
 // #include <glib-object.h>
@@ -16,7 +16,7 @@ func _gotk4_signalAccumulator(
 	handler_return *C.GValue,
 	data C.gpointer,
 ) C.gboolean {
-	goAccuI := gopointer.Restore(unsafe.Pointer(data))
+	goAccuI := userdata.Load(unsafe.Pointer(data))
 
 	goAccu := goAccuI.(SignalAccumulator)
 
